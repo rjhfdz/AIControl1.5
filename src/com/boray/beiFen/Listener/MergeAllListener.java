@@ -43,15 +43,15 @@ public class MergeAllListener implements ActionListener{
 			File file = fileChooser.getSelectedFile();
 			Data.file = file;
 			Data.saveCtrlFilePath = file.getParent();
-			/*File file2 = new File(Data.saveCtrlFilePath+"/ç¯åº“.dat");
-			File file3 = new File(Data.saveCtrlFilePath+"/åœºæ™¯.dat");
-			File file4 = new File(Data.saveCtrlFilePath+"/é›¾æœºæ¨¡å¼.dat");
-			File file5 = new File(Data.saveCtrlFilePath+"/æ‘‡éº¦å€’å–å½©æ¨¡å¼.dat");
-			File file6 = new File(Data.saveCtrlFilePath+"/å£°æ§æ¨¡å¼.dat");
-			File file7 = new File(Data.saveCtrlFilePath+"/å£°æ§å¤šç¯æ¨¡å¼.dat");
-			File file8 = new File(Data.saveCtrlFilePath+"/ç³»ç»Ÿé…ç½®æ•°æ®.dat");
-			File file9 = new File(Data.saveCtrlFilePath+"/å£°æ§ç¯å¢ƒç¯æ¨¡å¼.dat");
-			File file88 = new File(Data.saveCtrlFilePath+"/12ç‚¹åœ°å€.dat");*/
+			/*File file2 = new File(Data.saveCtrlFilePath+"/µÆ¿â.dat");
+			File file3 = new File(Data.saveCtrlFilePath+"/³¡¾°.dat");
+			File file4 = new File(Data.saveCtrlFilePath+"/Îí»úÄ£Ê½.dat");
+			File file5 = new File(Data.saveCtrlFilePath+"/Ò¡Âóµ¹ºÈ²ÊÄ£Ê½.dat");
+			File file6 = new File(Data.saveCtrlFilePath+"/Éù¿ØÄ£Ê½.dat");
+			File file7 = new File(Data.saveCtrlFilePath+"/Éù¿Ø¶àµÆÄ£Ê½.dat");
+			File file8 = new File(Data.saveCtrlFilePath+"/ÏµÍ³ÅäÖÃÊı¾İ.dat");
+			File file9 = new File(Data.saveCtrlFilePath+"/Éù¿Ø»·¾³µÆÄ£Ê½.dat");
+			File file88 = new File(Data.saveCtrlFilePath+"/12µãµØÖ·.dat");*/
 			//File file10 = new File(Data.saveCtrlFilePath+"/F0.dat");
 			try {
 				//OutputStream os = new FileOutputStream(file);
@@ -82,31 +82,31 @@ public class MergeAllListener implements ActionListener{
 				os5.close();os6.close();os7.close();
 				os8.close();os9.close();os88.close();*/
 				//////////////////////
-				//ç³»ç»Ÿè®¾ç½®
+				//ÏµÍ³ÉèÖÃ
 				systemSet(os10);
-				//çº¢å¤–ç©ºè°ƒ
+				//ºìÍâ¿Õµ÷
 				byte[] b1 = new byte[4096];
 				for (int i = 0; i < 64; i++) {
 					os10.write(b1);
 				}
-				//ç¯åº“
+				//µÆ¿â
 				writeFile2(os10);
 				byte[] b2 = new byte[4092];
 				os10.write(b2);
-				//12 ç‚¹æ•°æ®åœ°å€åˆ†é…æ•°æ®ï¼ˆ80-85SECï¼‰6
+				//12 µãÊı¾İµØÖ··ÖÅäÊı¾İ£¨80-85SEC£©6
 				actionTuXing(os10);
 				os10.write(new byte[3146]);
-				//å½•åˆ¶æŠ½æ ·æ•°æ®ï¼ˆ86-109SECï¼‰24
+				//Â¼ÖÆ³éÑùÊı¾İ£¨86-109SEC£©24
 				for (int i = 0; i < 24; i++) {
 					os10.write(b1);
 				}
-				//æŒ‰æ­¥ç¼–ç¨‹ï¼ˆå€’å½©&å–å½©&æ‘‡éº¦-110-127SECï¼‰
+				//°´²½±à³Ì£¨µ¹²Ê&ºÈ²Ê&Ò¡Âó-110-127SEC£©
 				writeHeCaiYaoMai(os10);
 				writeWuJiModelData(os10);
 				//4060-548
 				byte[] b3 = new byte[3512];
 				os10.write(b3);
-				////å½•åˆ¶æ•°æ®ï¼ˆ128-4127SEï¼‰
+				////Â¼ÖÆÊı¾İ£¨128-4127SE£©
 				byte[] b_FF = new byte[4096];
 				for (int i = 0; i < b_FF.length; i++) {
 					b_FF[i] = (byte)0xFF;
@@ -114,15 +114,15 @@ public class MergeAllListener implements ActionListener{
 				for (int i = 0; i < 4000; i++) {
 					os10.write(b_FF);
 				}
-				////åœºæ™¯æ•ˆæœç¯æ•°æ®ï¼ˆåŠ¨æ€ç©ºé—´,èµ·å§‹ 4128SECï¼‰
+				////³¡¾°Ğ§¹ûµÆÊı¾İ£¨¶¯Ì¬¿Õ¼ä,ÆğÊ¼ 4128SEC£©
 				for (int i = 1; i < 25; i++) {
 					writeFile(os10,i);
 				}
-				////å£°æ§æ•ˆæœç¯æ•°æ®ï¼ˆåŠ¨æ€ç©ºé—´ï¼‰
+				////Éù¿ØĞ§¹ûµÆÊı¾İ£¨¶¯Ì¬¿Õ¼ä£©
 				for (int i = 1; i < 17; i++) {
 					writeShengKon(os10,i);
 				}
-				////å¤šç¯æ•°æ®åŒº-16 ä¸ªå£°æ§æ¨¡å¼
+				////¶àµÆÊı¾İÇø-16 ¸öÉù¿ØÄ£Ê½
 				shengKonMoreLigthData(os10);
 				//////////////////////
 				os10.flush();
@@ -137,7 +137,7 @@ public class MergeAllListener implements ActionListener{
 				os10.close();
 				
 				JFrame frame = (JFrame)MainUi.map.get("frame");
-				JOptionPane.showMessageDialog(frame, "ç”Ÿæˆç¯æ§æ–‡ä»¶æˆåŠŸ!", "æç¤º", JOptionPane.PLAIN_MESSAGE);
+				JOptionPane.showMessageDialog(frame, "Éú³ÉµÆ¿ØÎÄ¼ş³É¹¦!", "ÌáÊ¾", JOptionPane.PLAIN_MESSAGE);
 			}catch(Exception e2){
 				e2.printStackTrace();
 			}
@@ -145,10 +145,10 @@ public class MergeAllListener implements ActionListener{
 	}
 	
 	/*
-	 * ç¯åº“æ¨¡å—
+	 * µÆ¿âÄ£¿é
 	 */
 	private void writeFile2(OutputStream os) throws Exception{
-		//ç¯åº“
+		//µÆ¿â
 		NewJTable table = (NewJTable)MainUi.map.get("table_DkGl");
 		byte[][] t1 = new byte[20][68];
 		byte[][] t2 = new byte[20][37];
@@ -179,14 +179,14 @@ public class MergeAllListener implements ActionListener{
 			dengKuData.setNo(selected);
 			dengKuData.setVersion((int)(Double.valueOf(Data.DengKuVersionList.get(selected).toString())*100));
 			System.arraycopy(dengKuData.getbytes(), 7, t1[selected], 0,68);
-			//ç†„ç¯é€Ÿåº¦é€šé“
+			//Ï¨µÆËÙ¶ÈÍ¨µÀ
 			System.arraycopy(getCC(selected), 7, t2[selected], 0,37);
 		}
 		
-		//ç¯å…·
+		//µÆ¾ß
 		byte[][] t3 = new byte[50][23];
 		table = (NewJTable)MainUi.map.get("table_dengJu");
-		//{"å¯ç”¨","ID","ç¯å…·åç§°","å‹å·","åº“ç‰ˆæœ¬","DMXèµ·å§‹åœ°å€","å ç”¨é€šé“æ•°"};
+		//{"ÆôÓÃ","ID","µÆ¾ßÃû³Æ","ĞÍºÅ","¿â°æ±¾","DMXÆğÊ¼µØÖ·","Õ¼ÓÃÍ¨µÀÊı"};
 		int add = 0;
 		for (int i = 0; i < 50; i++) {
 			if (i < table.getRowCount()) {
@@ -195,30 +195,30 @@ public class MergeAllListener implements ActionListener{
 				if (b) {
 					t3[i][1] = 1;
 				}
-				//åœ°å€
+				//µØÖ·
 				add = Integer.valueOf((String)(table.getValueAt(i, 5))).intValue();
 				t3[i][2] = (byte)(add/256);
 				t3[i][3] = (byte)(add%256);
-				//å ç”¨é€šé“æ•°
+				//Õ¼ÓÃÍ¨µÀÊı
 				add = Integer.valueOf((String)(table.getValueAt(i, 6))).intValue();
 				t3[i][4] = (byte)add;
-				//ç¯å…·åç§°
+				//µÆ¾ßÃû³Æ
 				String s = (String)(table.getValueAt(i, 2));
 				t3[i][5] = (byte)s.getBytes().length;
 				for (int j = 0; j < s.getBytes().length; j++) {
 					t3[i][6+j] = s.getBytes()[j];
 				}
-				//å…³è”ç¯åº“ç¼–å·
+				//¹ØÁªµÆ¿â±àºÅ
 				s = (String)(table.getValueAt(i, 3));
 				s = s.split("#")[0].substring(2);
 				t3[i][22] = (byte)Integer.valueOf(s).intValue();
 			}
 		}
-		//ç¯å…·åˆ†ç»„
+		//µÆ¾ß·Ö×é
 		byte[][] t4 = new byte[30][28];
 		table = (NewJTable)MainUi.map.get("GroupTable");
 		int q,p;
-		//{"å¯ç”¨","ID","ç»„åˆ«åç§°"};
+		//{"ÆôÓÃ","ID","×é±ğÃû³Æ"};
 		for (int i = 0; i < 30; i++) {
 			if (i < table.getRowCount()) {
 				t4[i][1] = (byte)(i+1);
@@ -226,7 +226,7 @@ public class MergeAllListener implements ActionListener{
 				if (b) {
 					t4[i][2] = 1;
 				}
-				//å…³è”ç¯å…·ç¼–å·
+				//¹ØÁªµÆ¾ß±àºÅ
 				TreeSet treeSet = (TreeSet)Data.GroupOfLightList.get(i);
 				if (treeSet.size() > 0) {
 					Iterator iterator = treeSet.iterator();
@@ -237,7 +237,7 @@ public class MergeAllListener implements ActionListener{
 						t4[i][3+p] = (byte)(Byte.toUnsignedInt(t4[i][3+p])+ (1 << q));
 					}
 				}
-				//åˆ†ç»„åç§°
+				//·Ö×éÃû³Æ
 				String s = (String)table.getValueAt(i, 2);
 				t4[i][10] = (byte)s.getBytes().length;
 				for (int j = 0; j < s.getBytes().length; j++) {
@@ -246,7 +246,7 @@ public class MergeAllListener implements ActionListener{
 			}
 		}
 		
-		//å†™å…¥æ–‡ä»¶
+		//Ğ´ÈëÎÄ¼ş
 		for (int i = 0; i < 20; i++) {
 			os.write(t1[i]);
 		}
@@ -281,9 +281,9 @@ public class MergeAllListener implements ActionListener{
 			BlackOutEntity blackOutEntity = (BlackOutEntity)map2.get("blackOutEntity");
 			SpeedEntity speedEntity = (SpeedEntity)map2.get("speedEntity");
 			for (int i = 0; i < 4; i++) {
-				if (blackOutEntity.getC(i)[0].equals("æ‰€æœ‰")) {
+				if (blackOutEntity.getC(i)[0].equals("ËùÓĞ")) {
 					cc[8+i*4] = (byte)0xFF;
-				} else if (blackOutEntity.getC(i)[0].equals("æ— ")) {
+				} else if (blackOutEntity.getC(i)[0].equals("ÎŞ")) {
 					cc[8+i*4] = 0;
 				} else {
 					cc[8+i*4] = (byte)Integer.valueOf(blackOutEntity.getC(i)[0]).intValue();
@@ -292,14 +292,14 @@ public class MergeAllListener implements ActionListener{
 				cc[10+i*4] = (byte)Integer.valueOf(blackOutEntity.getC(i)[2]).intValue();
 			}
 			for (int i = 0; i < 3; i++) {
-				if (speedEntity.getS(i)[0].equals("æ— ")) {
+				if (speedEntity.getS(i)[0].equals("ÎŞ")) {
 					cc[28+i*4] = (byte)0;
 				} else {
 					cc[28+i*4] = (byte)Integer.valueOf(speedEntity.getS(i)[0]).intValue();
 				}
 				cc[29+i*4] = (byte)Integer.valueOf(speedEntity.getS(i)[1]).intValue();
 				cc[30+i*4] = (byte)Integer.valueOf(speedEntity.getS(i)[2]).intValue();
-				if (speedEntity.getS(i)[3].equals("æ­£å‘")) {
+				if (speedEntity.getS(i)[3].equals("ÕıÏò")) {
 					cc[31+i*4] = (byte)0;
 				} else {
 					cc[31+i*4] = (byte)1;
@@ -310,12 +310,12 @@ public class MergeAllListener implements ActionListener{
 	}
 	
 	/*
-	 * åœºæ™¯æ¨¡å—
-	 * sc åœºæ™¯å·
+	 * ³¡¾°Ä£¿é
+	 * sc ³¡¾°ºÅ
 	 */
 	private void writeFile(OutputStream os,int sc) throws Exception{
 		byte[] t1 = new byte[2560];
-		setT1(t1,sc);//å¼•å¯¼æ•°æ®
+		setT1(t1,sc);//Òıµ¼Êı¾İ
 		os.write(t1);
 		
 		Object[][] objects = new Object[30][20];
@@ -331,7 +331,7 @@ public class MergeAllListener implements ActionListener{
 				} else {
 					t3 = new byte[64];
 				}
-				//System.out.println("ç»„ï¼š"+i+"å—ï¼š"+j+"###"+t2[i][j].length+"//"+t3.length);
+				//System.out.println("×é£º"+i+"¿é£º"+j+"###"+t2[i][j].length+"//"+t3.length);
 				os.write(t3);
 			}
 		}
@@ -360,13 +360,13 @@ public class MergeAllListener implements ActionListener{
 		}
 	}
 	
-	/* å¼•å¯¼æ•°æ®
-	 * scåœºæ™¯å·
+	/* Òıµ¼Êı¾İ
+	 * sc³¡¾°ºÅ
 	 */
 	private void setT1(byte[] temp,int sc){
 		temp[0] = 0x55;
 		temp[1] = (byte)0xAA;
-		short[][] a = new short[20][4];//åœºæ™¯å¯ç”¨
+		short[][] a = new short[20][4];//³¡¾°ÆôÓÃ
 
 		JPanel[] timeBlockPanels = (JPanel[])MainUi.map.get("timeBlockPanels_group"+sc);
 		int j = 0,yu = 0;
@@ -378,7 +378,7 @@ public class MergeAllListener implements ActionListener{
 				if (timeBlockPanels[k].isVisible()) {
 					if (timeBlockPanels[k].getComponentCount() > i) {
 						DefineJLable lable = (DefineJLable)timeBlockPanels[k].getComponent(i);
-						if (lable.getText().contains("âˆš")) {
+						if (lable.getText().contains("¡Ì")) {
 							tp6 = (lable.getX()+lable.getWidth())/5;
 							if (tp6 > maxTime) {
 								maxTime = tp6;
@@ -410,11 +410,11 @@ public class MergeAllListener implements ActionListener{
 		
 	}
 	
-	/* æ—¶é—´å—æ•°æ®
-	 * scåœºæ™¯å·
-	 * objects ç¼–è¾‘æ•°æ®
-	 * zdyObjects  è‡ªå®šä¹‰åŠ¨ä½œæ•°æ®
-	 * gxObjects åœºæ™¯å‹¾é€‰æ•°æ®
+	/* Ê±¼ä¿éÊı¾İ
+	 * sc³¡¾°ºÅ
+	 * objects ±à¼­Êı¾İ
+	 * zdyObjects  ×Ô¶¨Òå¶¯×÷Êı¾İ
+	 * gxObjects ³¡¾°¹´Ñ¡Êı¾İ
 	 */
 	private byte[][][] timeBlockData(int sc,Object[][] objects,Object[][] zdyObjects,Object[][] gxObjects){
 		HashMap hashMap = null;
@@ -422,7 +422,7 @@ public class MergeAllListener implements ActionListener{
 		//Object[][] objects = new Object[30][20];
 		JPanel[] timeBlockPanels = (JPanel[])MainUi.map.get("timeBlockPanels_group"+sc);
 
-		NewJTable table3 = (NewJTable)MainUi.map.get("table_dengJu");//æ‰€æœ‰ç¯å…·
+		NewJTable table3 = (NewJTable)MainUi.map.get("table_dengJu");//ËùÓĞµÆ¾ß
 		
 		for (int i = 0; i < 30; i++) {
 			int number = Integer.valueOf(timeBlockPanels[i+1].getName()).intValue();
@@ -442,7 +442,7 @@ public class MergeAllListener implements ActionListener{
 				hashMap = (HashMap)Data.XiaoGuoDengObjects[sc-1][i][j];
 				byte[] bTp = new byte[(tt+2)*32];
 				if (hashMap != null) {
-					//åŠ¨ä½œå›¾å½¢
+					//¶¯×÷Í¼ĞÎ
 					Map map = (Map)hashMap.get("actionXiaoGuoData");
 					List list = null;
 					boolean bb = false;
@@ -455,10 +455,10 @@ public class MergeAllListener implements ActionListener{
 							selected = selected - 1;
 						}
 						T1[i][j][0] = (byte)selected;
-						//è¿è¡Œé€Ÿåº¦
+						//ÔËĞĞËÙ¶È
 						int yunXinSpeed = Integer.valueOf((String)map.get("3"));
 						T1[i][j][1] = (byte)yunXinSpeed;
-						//ä½¿ç”¨å¼€å…³ 1å¯ç”¨/0å…³
+						//Ê¹ÓÃ¿ª¹Ø 1ÆôÓÃ/0¹Ø
 						String ss = (String)map.get("0");
 						if (ss!=null && "true".equals(ss)) {
 							T1[i][j][2] = (byte)1;
@@ -470,35 +470,35 @@ public class MergeAllListener implements ActionListener{
 								T1[i][j][2] = (byte)1;
 							}
 						}*/
-						//æ‹†åˆ†    ä¸æ‹†åˆ†01/ä¸­é—´æ‹†åˆ†02/ä¸¤ç«¯æ‹†åˆ†03
+						//²ğ·Ö    ²»²ğ·Ö01/ÖĞ¼ä²ğ·Ö02/Á½¶Ë²ğ·Ö03
 						String[] tp1 = (String[])map.get("4");
 						int cc = Integer.valueOf(tp1[0])+1;
 						T1[i][j][3] = (byte)cc;
 						
-						//æ‹†åˆ†åå‘
+						//²ğ·Ö·´Ïò
 
-						//Xè½´åå‘    æ˜¯1/å¦0
+						//XÖá·´Ïò    ÊÇ1/·ñ0
 						if ("true".equals(tp1[1])) {
 							a = 1;
 						} else {
 							a = 0;
 						}
 						T1[i][j][5] = (byte)a;
-						//XåŠ
+						//X°ë
 						if ("true".equals(tp1[2])) {
 							a = 1;
 						} else {
 							a = 0;
 						}
 						T1[i][j][6] = (byte)a;
-						//Yè½´åå‘
+						//YÖá·´Ïò
 						if ("true".equals(tp1[3])) {
 							a = 1;
 						} else {
 							a = 0;
 						}
 						T1[i][j][7] = (byte)a;
-						//YåŠ
+						//Y°ë
 						if ("true".equals(tp1[4])) {
 							a = 1;
 						} else {
@@ -507,12 +507,12 @@ public class MergeAllListener implements ActionListener{
 						T1[i][j][8] = (byte)a;
 						
 						
-						//æ—¶é—´A_L	æ—¶é—´B_H
+						//Ê±¼äA_L	Ê±¼äB_H
 						a = Integer.valueOf(tp1[5]).intValue()*10;
 						T1[i][j][9] = (byte)(a%256);
 						T1[i][j][10] = (byte)(a/256);
 						
-						///////////////è‡ªå®šä¹‰åŠ¨ä½œæ•°æ®
+						///////////////×Ô¶¨Òå¶¯×÷Êı¾İ
 						String[] values = (String[])map.get("1");
 						byte[] bt1 = new byte[5];
 						if (values != null) {
@@ -535,28 +535,28 @@ public class MergeAllListener implements ActionListener{
 					boolean[] bs = null;
 					String b = "";
 					if (list!=null) {
-						//çº¢è‰²
+						//ºìÉ«
 						tp2 = (String[])list.get(1);
 						a = Integer.valueOf(tp2[0]).intValue();
 						T1[i][j][11] = (byte)a;
-						//ç»¿è‰²
+						//ÂÌÉ«
 						a = Integer.valueOf(tp2[1]).intValue();
 						T1[i][j][12] = (byte)a;
-						//è“è‰²
+						//À¶É«
 						a = Integer.valueOf(tp2[2]).intValue();
 						T1[i][j][13] = (byte)a;
-						//æ¸å˜ç±»å‹
+						//½¥±äÀàĞÍ
 						b = (String)list.get(4);
 						a = Integer.valueOf(b).intValue();
 						T1[i][j][14] = (byte)a;
-						//æ¸å˜
+						//½¥±ä
 						bb = (boolean)list.get(5);
 						a = 0;
 						if (bb) {
 							a = 1;
 						}
 						T1[i][j][15] = (byte)a;
-						//å‚ä¸æ¸å˜å‹¾é€‰
+						//²ÎÓë½¥±ä¹´Ñ¡
 						bs = (boolean[])list.get(2);
 						a = 0;
 						if (bs[0]) {
@@ -569,30 +569,30 @@ public class MergeAllListener implements ActionListener{
 							a = a + 32;
 						}
 						T1[i][j][16] = (byte)a;
-						//æ¸å˜é€Ÿåº¦
+						//½¥±äËÙ¶È
 						b = (String)list.get(6);
 						a = Integer.valueOf(b).intValue();
 						T1[i][j][17] = (byte)a;
-						//ä½¿ç”¨å¼€å…³
+						//Ê¹ÓÃ¿ª¹Ø
 						bb = (boolean)list.get(0);
 						a = 0;
 						if (bb) {
 							a = 1;
 						}
 						T1[i][j][18] = (byte)a;
-						//æ‹†åˆ†
+						//²ğ·Ö
 						b = (String)list.get(7);
 						a = Integer.valueOf(b).intValue()+1;
 						T1[i][j][19] = (byte)a;
 						
-						//æ‹†åˆ†åå‘
+						//²ğ·Ö·´Ïò
 						bb = (boolean)list.get(8);
 						a = 0;
 						if (bb) {
 							a = 1;
 						}
 						T1[i][j][20] = (byte)a;
-						//æ—¶é—´A_L	æ—¶é—´B_H
+						//Ê±¼äA_L	Ê±¼äB_H
 						a = Integer.valueOf((String)list.get(9)).intValue()*10;
 						T1[i][j][21] = (byte)(a%256);
 						T1[i][j][22] = (byte)(a/256);
@@ -601,28 +601,28 @@ public class MergeAllListener implements ActionListener{
 					//RGB2
 					list = (List)hashMap.get("rgb2Data");
 					if (list != null) {
-						//çº¢è‰²
+						//ºìÉ«
 						tp2 = (String[])list.get(1);
 						a = Integer.valueOf(tp2[0]).intValue();
 						T1[i][j][23] = (byte)a;
-						//ç»¿è‰²
+						//ÂÌÉ«
 						a = Integer.valueOf(tp2[1]).intValue();
 						T1[i][j][24] = (byte)a;
-						//è“è‰²
+						//À¶É«
 						a = Integer.valueOf(tp2[2]).intValue();
 						T1[i][j][25] = (byte)a;
-						//æ¸å˜ç±»å‹
+						//½¥±äÀàĞÍ
 						b = (String)list.get(4);
 						a = Integer.valueOf(b).intValue();
 						T1[i][j][26] = (byte)a;
-						//æ¸å˜
+						//½¥±ä
 						bb = (boolean)list.get(5);
 						a = 0;
 						if (bb) {
 							a = 1;
 						}
 						T1[i][j][27] = (byte)a;
-						//å‚ä¸æ¸å˜å‹¾é€‰
+						//²ÎÓë½¥±ä¹´Ñ¡
 						bs = (boolean[])list.get(2);
 						a = 0;
 						if (bs[0]) {
@@ -635,30 +635,30 @@ public class MergeAllListener implements ActionListener{
 							a = a + 32;
 						}
 						T1[i][j][28] = (byte)a;
-						//æ¸å˜é€Ÿåº¦
+						//½¥±äËÙ¶È
 						b = (String)list.get(6);
 						a = Integer.valueOf(b).intValue();
 						T1[i][j][29] = (byte)a;
-						//ä½¿ç”¨å¼€å…³
+						//Ê¹ÓÃ¿ª¹Ø
 						bb = (boolean)list.get(0);
 						a = 0;
 						if (bb) {
 							a = 1;
 						}
 						T1[i][j][30] = (byte)a;
-						//æ‹†åˆ†
+						//²ğ·Ö
 						b = (String)list.get(7);
 						a = Integer.valueOf(b).intValue()+1;
 						T1[i][j][31] = (byte)a;
 						
-						//æ‹†åˆ†åå‘
+						//²ğ·Ö·´Ïò
 						bb = (boolean)list.get(8);
 						a = 0;
 						if (bb) {
 							a = 1;
 						}
 						T1[i][j][32] = (byte)a;
-						//æ—¶é—´A_L	æ—¶é—´B_H
+						//Ê±¼äA_L	Ê±¼äB_H
 						a = Integer.valueOf((String)list.get(9)).intValue()*10;
 						T1[i][j][33] = (byte)(a%256);
 						T1[i][j][34] = (byte)(a/256);
@@ -667,28 +667,28 @@ public class MergeAllListener implements ActionListener{
 					//RGB3
 					list = (List)hashMap.get("rgb3Data");
 					if (list != null) {
-						//çº¢è‰²
+						//ºìÉ«
 						tp2 = (String[])list.get(1);
 						a = Integer.valueOf(tp2[0]).intValue();
 						T1[i][j][35] = (byte)a;
-						//ç»¿è‰²
+						//ÂÌÉ«
 						a = Integer.valueOf(tp2[1]).intValue();
 						T1[i][j][36] = (byte)a;
-						//è“è‰²
+						//À¶É«
 						a = Integer.valueOf(tp2[2]).intValue();
 						T1[i][j][37] = (byte)a;
-						//æ¸å˜ç±»å‹
+						//½¥±äÀàĞÍ
 						b = (String)list.get(4);
 						a = Integer.valueOf(b).intValue();
 						T1[i][j][38] = (byte)a;
-						//æ¸å˜
+						//½¥±ä
 						bb = (boolean)list.get(5);
 						a = 0;
 						if (bb) {
 							a = 1;
 						}
 						T1[i][j][39] = (byte)a;
-						//å‚ä¸æ¸å˜å‹¾é€‰
+						//²ÎÓë½¥±ä¹´Ñ¡
 						bs = (boolean[])list.get(2);
 						a = 0;
 						if (bs[0]) {
@@ -701,41 +701,41 @@ public class MergeAllListener implements ActionListener{
 							a = a + 32;
 						}
 						T1[i][j][40] = (byte)a;
-						//æ¸å˜é€Ÿåº¦
+						//½¥±äËÙ¶È
 						b = (String)list.get(6);
 						a = Integer.valueOf(b).intValue();
 						T1[i][j][41] = (byte)a;
-						//ä½¿ç”¨å¼€å…³
+						//Ê¹ÓÃ¿ª¹Ø
 						bb = (boolean)list.get(0);
 						a = 0;
 						if (bb) {
 							a = 1;
 						}
 						T1[i][j][42] = (byte)a;
-						//æ‹†åˆ†
+						//²ğ·Ö
 						b = (String)list.get(7);
 						a = Integer.valueOf(b).intValue()+1;
 						T1[i][j][43] = (byte)a;
 						
-						//æ‹†åˆ†åå‘
+						//²ğ·Ö·´Ïò
 						bb = (boolean)list.get(8);
 						a = 0;
 						if (bb) {
 							a = 1;
 						}
 						T1[i][j][44] = (byte)a;
-						//æ—¶é—´A_L	æ—¶é—´B_H
+						//Ê±¼äA_L	Ê±¼äB_H
 						a = Integer.valueOf((String)list.get(9)).intValue()*10;
 						T1[i][j][45] = (byte)(a%256);
 						T1[i][j][46] = (byte)(a/256);
 					}
 					
 					
-					/////æ‰‹åŠ¨ç¼–ç¨‹é…ç½®
+					/////ÊÖ¶¯±à³ÌÅäÖÃ
 					List list66 = (List)hashMap.get("channelData");
 					Vector vector88 = null;
 					if (list66!=null) {
-						//////////å‹¾é€‰
+						//////////¹´Ñ¡
 						int r=0,yu=0;
 						int[] bp1 = new int[4];
 						boolean[] bn = (boolean[])list66.get(1);
@@ -765,19 +765,19 @@ public class MergeAllListener implements ActionListener{
 						if (vector88!=null) {
 							a = vector88.size();
 						}
-						//æ€»å¸§æ•°	
+						//×ÜÖ¡Êı	
 						T1[i][j][47] = (byte)a;
-						//æ‰‹åŠ¨ç¼–ç¨‹å¯ç”¨	
+						//ÊÖ¶¯±à³ÌÆôÓÃ	
 						T1[i][j][48] = (byte)1;
 						
-						//æ—¶å·®A_L	æ—¶å·®B_H	
+						//Ê±²îA_L	Ê±²îB_H	
 						a = Integer.valueOf(ddTemp[2]).intValue();
 						T1[i][j][49] = (byte)(a % 256);
 						T1[i][j][50] = (byte)(a / 256);
-						//æ‹†åˆ†	
+						//²ğ·Ö	
 						a = Integer.valueOf(ddTemp[0]).intValue()+1;
 						T1[i][j][51] = (byte)a;
-						//æ‹†åˆ†åå‘
+						//²ğ·Ö·´Ïò
 						a = 0;
 						if (!ddTemp[1].equals("0")) {
 							a = 1;
@@ -810,7 +810,7 @@ public class MergeAllListener implements ActionListener{
 	}
 	
 	/*
-	 * åœºæ™¯æ¨¡å— --é›¾æœºæ¨¡å¼æ•°æ®
+	 * ³¡¾°Ä£¿é --Îí»úÄ£Ê½Êı¾İ
 	 */
 	private void writeWuJiModelData(OutputStream os) throws Exception{
 		List allList = null;
@@ -822,25 +822,25 @@ public class MergeAllListener implements ActionListener{
 			x = Integer.valueOf(tkp2[0]);
 			y = Integer.valueOf(tkp2[1]);
 		}
-		byte[][][] b1 = new byte[4][5][13];//å¯åŠ¨
-		byte[][][] b2 = new byte[4][5][13];//è¿è¡Œ
-		byte[][] b3 = new byte[4][7];//é…ç½®
+		byte[][][] b1 = new byte[4][5][13];//Æô¶¯
+		byte[][][] b2 = new byte[4][5][13];//ÔËĞĞ
+		byte[][] b3 = new byte[4][7];//ÅäÖÃ
 		for (int i = 1; i < 5; i++) {
 			allList = (List)Data.wuJiMap.get(""+i);
 			if (allList != null) {
-				Vector vector88 = (Vector)allList.get(0);//å¯åŠ¨
-				Vector vector99 = (Vector)allList.get(1);//è¿è¡Œ
+				Vector vector88 = (Vector)allList.get(0);//Æô¶¯
+				Vector vector99 = (Vector)allList.get(1);//ÔËĞĞ
 				String[] tkp = (String[])allList.get(2);
-				if (tkp[0].equals("true")) {//é›¾æœºçŠ¶æ€
+				if (tkp[0].equals("true")) {//Îí»ú×´Ì¬
 					b3[i-1][0] = 1;
 				}
-				//åœ°å€
+				//µØÖ·
 				b3[i-1][1] = (byte)(x/256);
 				b3[i-1][2] = (byte)(x%256);
-				//é€šé“æ•°
+				//Í¨µÀÊı
 				b3[i-1][3] = (byte)y;
 				
-				if (tkp[2].equals("true")) {//è¿è¡Œæ¨¡å¼
+				if (tkp[2].equals("true")) {//ÔËĞĞÄ£Ê½
 					b3[i-1][4] = 1;
 				} else {
 					b3[i-1][4] = 2;
@@ -891,18 +891,18 @@ public class MergeAllListener implements ActionListener{
 	}
 
 	/*
-	 * åœºæ™¯æ¨¡å—--æ‘‡éº¦ä¸å€’å–å½©æ¨¡å¼æ•°æ®
+	 * ³¡¾°Ä£¿é--Ò¡ÂóÓëµ¹ºÈ²ÊÄ£Ê½Êı¾İ
 	 */
 	private void writeHeCaiYaoMai(OutputStream os) throws Exception{
-		///æ‘‡éº¦
+		///Ò¡Âó
 		Vector[] vectors = null;
 		boolean[][] tbs = null;
 		String[] setValue = null;
 		byte[][][] b1 = new byte[2][16][512];
 		byte[][][] b2 = new byte[2][16][512];
 		byte[][][] b3 = new byte[2][2][512];
-		byte[][][] steps1 = new byte[2][2][1];//å¯ç”¨ã€è¿è¡Œ æ­¥æ•°
-		byte[][] set1 = new byte[2][7];//å…¨å±€è®¾ç½®
+		byte[][][] steps1 = new byte[2][2][1];//ÆôÓÃ¡¢ÔËĞĞ ²½Êı
+		byte[][] set1 = new byte[2][7];//È«¾ÖÉèÖÃ
 		int a = 0,size8 = 0;
 		Vector vector99 = null,tp = null;
 		for (int n = 1; n < 3; n++) {
@@ -910,7 +910,7 @@ public class MergeAllListener implements ActionListener{
 			vectors = (Vector[])Data.YaoMaiMap.get("TableData"+n);
 			tbs = (boolean[][])Data.YaoMaiMap.get("GouXuanValue"+n);
 			if (vectors!=null) {
-				vector99 = vectors[0];//å¯åŠ¨é˜¶æ®µ
+				vector99 = vectors[0];//Æô¶¯½×¶Î
 				if (vector99!=null) {
 					size8 = vector99.size();
 					steps1[n-1][0][0] = (byte)size8;
@@ -926,7 +926,7 @@ public class MergeAllListener implements ActionListener{
 					}
 				}
 				
-				vector99 = vectors[1];//è¿è¡Œé˜¶æ®µ
+				vector99 = vectors[1];//ÔËĞĞ½×¶Î
 				if (vector99!=null) {
 					size8 = vector99.size();
 					steps1[n-1][1][0] = (byte)size8;
@@ -942,7 +942,7 @@ public class MergeAllListener implements ActionListener{
 					}
 				}
 			}
-			//å‹¾é€‰
+			//¹´Ñ¡
 			if (tbs != null) {
 				for (int i = 0; i < 2; i++) {
 					for (int j = 0; j < 510; j++) {
@@ -952,9 +952,9 @@ public class MergeAllListener implements ActionListener{
 					}
 				}
 			}
-			//å…¨å±€è®¾ç½®
+			//È«¾ÖÉèÖÃ
 			setValue = (String[])Data.YaoMaiMap.get("YaoMaiSet"+n);
-			set1[n-1][0] = 1;//å¯ç”¨
+			set1[n-1][0] = 1;//ÆôÓÃ
 			if (setValue != null) {
 				if (Boolean.valueOf(setValue[1])) {
 					set1[n-1][1] = 1;
@@ -965,19 +965,19 @@ public class MergeAllListener implements ActionListener{
 			}
 		}
 		///////////////////////////
-		///////////å€’å–å½©
+		///////////µ¹ºÈ²Ê
 		byte[][][] b1_2 = new byte[2][16][512];
 		byte[][][] b2_2 = new byte[2][16][512];
 		byte[][][] b3_2 = new byte[2][2][512];
-		byte[][][] steps1_2 = new byte[2][2][1];//å¯ç”¨ã€è¿è¡Œ æ­¥æ•°
-		byte[][] set1_2 = new byte[2][7];//å…¨å±€è®¾ç½®
-		String[] s = {"æ•ˆæœç¯å€’å½©æ¨¡å¼","æ•ˆæœç¯å–å½©æ¨¡å¼"};
+		byte[][][] steps1_2 = new byte[2][2][1];//ÆôÓÃ¡¢ÔËĞĞ ²½Êı
+		byte[][] set1_2 = new byte[2][7];//È«¾ÖÉèÖÃ
+		String[] s = {"Ğ§¹ûµÆµ¹²ÊÄ£Ê½","Ğ§¹ûµÆºÈ²ÊÄ£Ê½"};
 		for (int n = 1; n < 3; n++) {
 			size8 = 0;
 			vectors = (Vector[])Data.DaoHeCaiMap.get("TableData"+s[n-1]);
 			tbs = (boolean[][])Data.DaoHeCaiMap.get("GouXuanValue"+s[n-1]);
 			if (vectors != null) {
-				vector99 = vectors[0];//å¯åŠ¨é˜¶æ®µ
+				vector99 = vectors[0];//Æô¶¯½×¶Î
 				if (vector99!=null) {
 					size8 = vector99.size();
 					steps1_2[n-1][0][0] = (byte)size8;
@@ -993,7 +993,7 @@ public class MergeAllListener implements ActionListener{
 					}
 				}
 				
-				vector99 = vectors[1];//è¿è¡Œé˜¶æ®µ
+				vector99 = vectors[1];//ÔËĞĞ½×¶Î
 				if (vector99!=null) {
 					size8 = vector99.size();
 					steps1_2[n-1][1][0] = (byte)size8;
@@ -1008,7 +1008,7 @@ public class MergeAllListener implements ActionListener{
 						}
 					}
 				}
-				//å‹¾é€‰
+				//¹´Ñ¡
 				if (tbs != null) {
 					for (int i = 0; i < 2; i++) {
 						for (int j = 0; j < 510; j++) {
@@ -1018,9 +1018,9 @@ public class MergeAllListener implements ActionListener{
 						}
 					}
 				}
-				//å…¨å±€è®¾ç½®
+				//È«¾ÖÉèÖÃ
 				setValue = (String[])Data.DaoHeCaiMap.get("DaoHeCaiSet"+s[n-1]);
-				set1_2[n-1][0] = 1;//å¯ç”¨
+				set1_2[n-1][0] = 1;//ÆôÓÃ
 				if (setValue != null) {
 					if (Boolean.valueOf(setValue[1])) {
 						set1_2[n-1][1] = 1;
@@ -1034,21 +1034,21 @@ public class MergeAllListener implements ActionListener{
 		////////////////////////////
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 16; j++) {
-				os.write(b1[i][j]);//æ‘‡éº¦å¯åŠ¨
+				os.write(b1[i][j]);//Ò¡ÂóÆô¶¯
 			}
 			for (int j = 0; j < 16; j++) {
-				os.write(b2[i][j]);//æ‘‡éº¦è¿è¡Œ
+				os.write(b2[i][j]);//Ò¡ÂóÔËĞĞ
 			}
 		}
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 16; j++) {
-				os.write(b1_2[i][j]);//å€’å–å½©å¯åŠ¨
+				os.write(b1_2[i][j]);//µ¹ºÈ²ÊÆô¶¯
 			}
 			for (int j = 0; j < 16; j++) {
-				os.write(b2_2[i][j]);//å€’å–å½©è¿è¡Œ
+				os.write(b2_2[i][j]);//µ¹ºÈ²ÊÔËĞĞ
 			}
 		}
-		//å‹¾é€‰
+		//¹´Ñ¡
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 2; j++) {
 				os.write(b3[i][j]);
@@ -1059,7 +1059,7 @@ public class MergeAllListener implements ActionListener{
 				os.write(b3_2[i][j]);
 			}
 		}
-		//æ€»æ­¥æ•°
+		//×Ü²½Êı
 		for (int i = 0; i < 2; i++) {
 			for (int j = 0; j < 2; j++) {
 				os.write(steps1[i][j]);
@@ -1070,7 +1070,7 @@ public class MergeAllListener implements ActionListener{
 				os.write(steps1_2[i][j]);
 			}
 		}
-		//å…¨å±€è®¾ç½®
+		//È«¾ÖÉèÖÃ
 		for (int i = 0; i < 2; i++) {
 			os.write(set1[i]);
 		}
@@ -1086,16 +1086,16 @@ public class MergeAllListener implements ActionListener{
 		//shengKonMoreLigthData(os);
 	}
 	/*
-	 * å£°æ§æ—¶é—´å—æ•°æ®
+	 * Éù¿ØÊ±¼ä¿éÊı¾İ
 	 */
 	private void ShengKonData(int scN,OutputStream os) throws Exception{
 		byte[] b1 = new byte[1374];
 		b1[0] = 0x55;b1[1] = (byte)0xAA;b1[2] = 0x00;
 		JPanel[] timeBlockPanels  = (JPanel[])MainUi.map.get("timeBlockPanels"+scN);
 		int j = 0,yu = 0;
-		short[][] a = new short[10][4];//åœºæ™¯å¯ç”¨
-		for (int i = 0; i < 10; i++) {//å—
-			for (int k = 1; k < 31; k++) {//ç»„åˆ«
+		short[][] a = new short[10][4];//³¡¾°ÆôÓÃ
+		for (int i = 0; i < 10; i++) {//¿é
+			for (int k = 1; k < 31; k++) {//×é±ğ
 				j = (k-1) / 8;
 				yu = 7 - ((k-1) % 8);
 				if (timeBlockPanels[k].isVisible()) {
@@ -1111,7 +1111,7 @@ public class MergeAllListener implements ActionListener{
 				b1[3+i*4+k] = (byte)a[i][k];
 			}
 		}
-		//å…¨å±€è®¾ç½®
+		//È«¾ÖÉèÖÃ
 		List list = (List)Data.ShengKonModelSet.get(""+scN);
 		if (list != null) {
 			int time = Integer.valueOf((String)(list.get(0))).intValue();
@@ -1124,12 +1124,12 @@ public class MergeAllListener implements ActionListener{
 			b1[89] = (byte)(time / 256);
 		}
 		
-		//ä½é¢‘æŒç»­ç»„  [2][67 + 32];
+		//µÍÆµ³ÖĞø×é  [2][67 + 32];
 		int[][] DataSetInts = null;
 		for (int i = 0; i < 10; i++) {
 			DataSetInts = (int[][])Data.ShengKonShiXuSetObjects[scN-1][i];
 			if (DataSetInts!=null) {
-				////////////ä½é¢‘æŒç»­ç»„
+				////////////µÍÆµ³ÖĞø×é
 				if (DataSetInts[0][64] == 1) {
 					b1[90+7*i] = (byte)128;
 				}
@@ -1155,13 +1155,13 @@ public class MergeAllListener implements ActionListener{
 				b1[95+7*i] = (byte)(DataSetInts[0][65]+1);
 				b1[96+7*i] = (byte)(DataSetInts[0][66]+1);
 				//////////////////
-				///////ä½é¢‘ç­ç¯æ¨¡å¼
+				///////µÍÆµÃğµÆÄ£Ê½
 				if (DataSetInts[0][0] == 0) {
 					b1[204+i] = (byte)(16);
 				} else if (DataSetInts[0][0] == 1) {
 					b1[204+i] = (byte)(32+DataSetInts[0][1]+1);
 				}
-				//////ä½é¢‘å£°æ§é¡ºåºè®¾ç½®
+				//////µÍÆµÉù¿ØË³ĞòÉèÖÃ
 				NewJTable table = (NewJTable)MainUi.map.get("GroupTable");
 				int sl = 0;
 				for (int n = 0; n < table.getRowCount(); n++) {
@@ -1182,7 +1182,7 @@ public class MergeAllListener implements ActionListener{
 						}
 					}
 				}
-				///////////////////é«˜é¢‘æŒç»­ç»„
+				///////////////////¸ßÆµ³ÖĞø×é
 				if (DataSetInts[1][64] == 1) {
 					b1[864+7*i] = (byte)128;
 				}
@@ -1208,14 +1208,14 @@ public class MergeAllListener implements ActionListener{
 				b1[869+7*i] = (byte)(DataSetInts[1][65]+1);
 				b1[869+7*i] = (byte)(DataSetInts[1][66]+1);
 				//////////////////
-				///////////é«˜é¢‘ç­ç¯æ¨¡å¼
+				///////////¸ßÆµÃğµÆÄ£Ê½
 				if (DataSetInts[1][0] == 0) {
 					b1[854+i] = (byte)(16);
 				} else if (DataSetInts[1][0] == 1) {
 					b1[854+i] = (byte)(32+DataSetInts[1][1]+1);
 				}
 				//////////////////
-				////////////////é«˜é¢‘å£°æ§é¡ºåºè®¾ç½®
+				////////////////¸ßÆµÉù¿ØË³ĞòÉèÖÃ
 				sl = 0;
 				for (int n = 0; n < table.getRowCount(); n++) {
 					boolean b = (boolean)table.getValueAt(n, 0);
@@ -1238,7 +1238,7 @@ public class MergeAllListener implements ActionListener{
 				/////////////////
 			}
 		}
-		//æ—¶é—´ç‰‡è®¾ç½®
+		//Ê±¼äÆ¬ÉèÖÃ
 		int timeCount = timeBlockPanels[0].getComponentCount();
 		int timeWidth = 0;
 		b1[160] = (byte)timeCount;
@@ -1251,7 +1251,7 @@ public class MergeAllListener implements ActionListener{
 		}
 		os.write(b1);
 		
-		//å—æ•°æ®
+		//¿éÊı¾İ
 		byte[][][] b2 = new byte[30][10][61];
 		Map map = null;
 		Vector vector88 = null;
@@ -1283,14 +1283,14 @@ public class MergeAllListener implements ActionListener{
 					}
 					al = (int[])map.get("2");
 					if (al!=null) {
-						if (al[0] == 0) {//0è¡¨ç¤ºç‹¬ç«‹
+						if (al[0] == 0) {//0±íÊ¾¶ÀÁ¢
 							b2[i][k][38] = 2;
 						} else {
 							b2[i][k][38] = 1;
 						}
-						//å¤šç¯æ§åˆ¶
+						//¶àµÆ¿ØÖÆ
 						b2[i][k][44] = (byte)al[10];
-						//åŠ é€Ÿåº¦
+						//¼ÓËÙ¶È
 						if (al[1] == 0) {
 							b2[i][k][46] = 1;
 						}
@@ -1309,18 +1309,18 @@ public class MergeAllListener implements ActionListener{
 					}
 				}
 				
-				//æ­¥æ•°æ®
-				int cnt = 0;//ç¯å…·æ•°é‡
-				int channelCount = 0;//é€šé“æ•°
+				//²½Êı¾İ
+				int cnt = 0;//µÆ¾ßÊıÁ¿
+				int channelCount = 0;//Í¨µÀÊı
 				String typeString = "";
 				//int number = Integer.valueOf(""+(i+1)).intValue();
 				if (Data.GroupOfLightList.size() > i) {
 					TreeSet treeSet = (TreeSet)Data.GroupOfLightList.get(i);
 					cnt = treeSet.size();
 					if (cnt > 0) {
-						NewJTable table3 = (NewJTable)MainUi.map.get("table_dengJu");//æ‰€æœ‰ç¯å…·
+						NewJTable table3 = (NewJTable)MainUi.map.get("table_dengJu");//ËùÓĞµÆ¾ß
 						int v = (int) treeSet.first();
-						typeString = table3.getValueAt(v, 3).toString();//ç¯å…·å‹å·
+						typeString = table3.getValueAt(v, 3).toString();//µÆ¾ßĞÍºÅ
 					}
 				}
 				if (!typeString.equals("")) {
@@ -1358,23 +1358,23 @@ public class MergeAllListener implements ActionListener{
 	}
 
 	/*
-	 * å£°æ§å¤šç¯æ¨¡å¼æ•°æ®
+	 * Éù¿Ø¶àµÆÄ£Ê½Êı¾İ
 	 */
 	private void shengKonMoreLigthData(OutputStream os) throws Exception{
 		int size = 0,a=0;
-		byte[][][] steps = new byte[16][2][1];//æ€»æ­¥æ•°
+		byte[][][] steps = new byte[16][2][1];//×Ü²½Êı
 		Vector tp = null,vector99 = null;
-		byte[][][][] b1 = new byte[16][2][32][512];//æ­¥ç¼–è¾‘æ•°æ®
+		byte[][][][] b1 = new byte[16][2][32][512];//²½±à¼­Êı¾İ
 		String[] sets = null;
 		boolean[] tbs = null;
-		byte[][][] channalGouXuan = new byte[16][2][64];//é€šé“å‹¾é€‰
-		byte[][][] globalSet = new byte[16][2][7];//å…¨å±€è®¾ç½®
+		byte[][][] channalGouXuan = new byte[16][2][64];//Í¨µÀ¹´Ñ¡
+		byte[][][] globalSet = new byte[16][2][7];//È«¾ÖÉèÖÃ
 		int r=0 , yu=0;
 		for (int scN = 1; scN < 17; scN++) {
 			for (int setNo = 1; setNo < 3; setNo++) {
 				vector99 = (Vector)Data.ShengKonModelDmxMap.get("TableData"+scN+""+setNo);
 				sets = (String[])Data.ShengKonModelDmxMap.get("YaoMaiSet"+scN+""+setNo);
-				tbs = (boolean[])Data.ShengKonModelDmxMap.get("GouXuanValue"+scN+""+setNo);//å‹¾é€‰
+				tbs = (boolean[])Data.ShengKonModelDmxMap.get("GouXuanValue"+scN+""+setNo);//¹´Ñ¡
 				if (vector99 != null) {
 					size = vector99.size();
 					steps[scN-1][setNo-1][0] = (byte)size;
@@ -1403,7 +1403,7 @@ public class MergeAllListener implements ActionListener{
 				}
 			}
 		}
-		//æ­¥ç¼–è¾‘æ•°æ®
+		//²½±à¼­Êı¾İ
 		for (int i = 0; i < 16; i++) {
 			for (int j = 0; j < 2; j++) {
 				for (int j2 = 0; j2 < 32; j2++) {
@@ -1411,19 +1411,19 @@ public class MergeAllListener implements ActionListener{
 				}
 			}
 		}
-		//å‹¾é€‰æ•°æ®
+		//¹´Ñ¡Êı¾İ
 		for (int i = 0; i < 16; i++) {
 			for (int j = 0; j < 2; j++) {
 				os.write(channalGouXuan[i][j]);
 			}
 		}
-		//æ€»æ­¥æ•°
+		//×Ü²½Êı
 		for (int i = 0; i < 16; i++) {
 			for (int j = 0; j < 2; j++) {
 				os.write(steps[i][j]);
 			}
 		}
-		//å…¨å±€è®¾ç½®
+		//È«¾ÖÉèÖÃ
 		for (int i = 0; i < 16; i++) {
 			for (int j = 0; j < 2; j++) {
 				os.write(globalSet[i][j]);
@@ -1432,7 +1432,7 @@ public class MergeAllListener implements ActionListener{
 	}
 
 	/*
-	 * å£°æ§ç¯å¢ƒç¯æ¨¡å¼æ•°æ®
+	 * Éù¿Ø»·¾³µÆÄ£Ê½Êı¾İ
 	 */
 	private void shengKonEnvironmentData(OutputStream os) throws Exception{
 		byte[][][] b1 = new byte[18][20][41];
@@ -1481,10 +1481,10 @@ public class MergeAllListener implements ActionListener{
 	}
 	
 	/*
-	 * 12ç‚¹åæ ‡
+	 * 12µã×ø±ê
 	 */
 	private void actionTuXing(OutputStream os) throws Exception{
-		//é¢œè‰²å›¾å½¢
+		//ÑÕÉ«Í¼ĞÎ
 		byte[][] t1 = new byte[255][42];
 		String[] s = null;
 		String[] tps = (String[])bezier.Data.itemMap.get("1");
@@ -1507,7 +1507,7 @@ public class MergeAllListener implements ActionListener{
 				}
 			}
 		}
-		//åŠ¨ä½œå›¾å½¢
+		//¶¯×÷Í¼ĞÎ
 		byte[][] t2 = new byte[255][42];
 		String[] s2 = null;
 		String[] tps2 = (String[])bezier.Data.itemMap.get("0");
@@ -1540,7 +1540,7 @@ public class MergeAllListener implements ActionListener{
 	}
 	
 	/*
-	 * ç³»ç»Ÿé…ç½®æ•°æ®
+	 * ÏµÍ³ÅäÖÃÊı¾İ
 	 */
 	private void systemSet(OutputStream os) throws Exception{
 		new DataActionListener().actionPerformed(os);
