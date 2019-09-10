@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="src/lib/comm.jar"/>
+	<classpathentry kind="lib" path="src/lib/commons-lang3-3.2.1.jar"/>
+	<classpathentry kind="lib" path="src/lib/libusb4java-1.2.0-linux-arm.jar"/>
+	<classpathentry kind="lib" path="src/lib/libusb4java-1.2.0-linux-x86_64.jar"/>
+	<classpathentry kind="lib" path="src/lib/libusb4java-1.2.0-linux-x86.jar"/>
+	<classpathentry kind="lib" path="src/lib/libusb4java-1.2.0-osx-x86_64.jar"/>
+	<classpathentry kind="lib" path="src/lib/libusb4java-1.2.0-osx-x86.jar"/>
+	<classpathentry kind="lib" path="src/lib/libusb4java-1.2.0-windows-x86_64.jar"/>
+	<classpathentry kind="lib" path="src/lib/libusb4java-1.2.0-windows-x86.jar"/>
+	<classpathentry kind="lib" path="src/lib/quaqua.jar"/>
+	<classpathentry kind="lib" path="src/lib/usb-api-1.0.2.jar"/>
+	<classpathentry kind="lib" path="src/lib/usb4java-1.2.0.jar"/>
+	<classpathentry kind="lib" path="src/lib/usb4java-javax-1.2.0.jar"/>
+	<classpathentry kind="lib" path="src/lib/usbJava.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
