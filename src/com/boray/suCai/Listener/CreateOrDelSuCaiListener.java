@@ -9,15 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JToggleButton;
+import javax.swing.*;
 
 import com.boray.Data.Data;
 import com.boray.mainUi.MainUi;
@@ -76,6 +68,11 @@ public class CreateOrDelSuCaiListener implements ActionListener{
 									cnt = cnt + abc.size();
 								}
 							}
+						}
+						if(cnt==30){
+							JFrame frame = (JFrame)MainUi.map.get("frame");
+							JOptionPane.showMessageDialog(frame, "最多只能创建30个素材！", "提示", JOptionPane.ERROR_MESSAGE);
+							return;
 						}
 						String suCaiNameAndNumber = field.getText()+"--->"+(cnt+1);
 						//////////////////

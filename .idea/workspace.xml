@@ -6,10 +6,13 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="文件编码格式修改">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/MergeAllListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/MergeAllListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/MergeAllListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/MergeAllListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/Listener/CreateOrDelSuCaiListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/Listener/CreateOrDelSuCaiListener.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +36,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ArtNetGUI" />
+    <property name="last_opened_file_path" value="D:/Utiltool/全部项目源代码/智能锁生产录入软件/LockProduce" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -95,8 +98,25 @@
       <workItem from="1567728153768" duration="19792000" />
       <workItem from="1567814571067" duration="21505000" />
       <workItem from="1567986548988" duration="24168000" />
-      <workItem from="1568072995099" duration="6079000" />
+      <workItem from="1568072995099" duration="17643000" />
+      <workItem from="1568099095999" duration="1970000" />
+      <workItem from="1568101331393" duration="6649000" />
+      <workItem from="1568159811977" duration="21656000" />
+      <workItem from="1568191722969" duration="103000" />
+      <workItem from="1568248824797" duration="2927000" />
+      <workItem from="1568275080302" duration="1212000" />
+      <workItem from="1568276718097" duration="3220000" />
+      <workItem from="1568505632342" duration="26716000" />
+      <workItem from="1568591247327" duration="10340000" />
     </task>
+    <task id="LOCAL-00001" summary="文件编码格式修改">
+      <created>1568079566279</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1568079566279</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,11 +127,17 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="文件编码格式修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="文件编码格式修改" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
