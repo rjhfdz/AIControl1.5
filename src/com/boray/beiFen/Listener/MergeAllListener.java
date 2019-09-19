@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.*;
 
@@ -21,7 +22,9 @@ import com.boray.shengKon.UI.DefineJLable_shengKon2;
 import com.boray.xiaoGuoDeng.UI.DefineJLable;
 
 public class MergeAllListener implements ActionListener {
-    public void actionPerformed(ActionEvent e) {
+
+    //地址空间-数据区（9系列-在线版本数据空间，供参考-20190904）
+    public void actionPerformed2(ActionEvent e) {
         JFileChooser fileChooser = new JFileChooser();
         if (!Data.saveCtrlFilePath.equals("")) {
             fileChooser.setCurrentDirectory(new File(Data.saveCtrlFilePath));
@@ -134,6 +137,142 @@ public class MergeAllListener implements ActionListener {
                 e2.printStackTrace();
             }
         }
+    }
+
+    //地址空间-数据区（素材版本）
+    public void actionPerformed(ActionEvent e) {
+        JFileChooser fileChooser = new JFileChooser();
+        if (!Data.saveCtrlFilePath.equals("")) {
+            fileChooser.setCurrentDirectory(new File(Data.saveCtrlFilePath));
+        }
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fileChooser.setSelectedFile(new File("F0.DAT"));
+        int returnVal = fileChooser.showSaveDialog((JFrame) MainUi.map.get("frame"));
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            Data.file = file;
+            Data.saveCtrlFilePath = file.getParent();
+            try {
+                OutputStream os10 = new FileOutputStream(file);
+                //////////////////////
+                //系统设置(00-13SEC)14
+                systemSet(os10);
+
+                os10.flush();
+                System.out.println("系统设置："+file.length());
+
+                //灯库(14-15SEC)2
+                writeFile2(os10);
+                byte[] b2 = new byte[4092];
+                os10.write(b2);
+
+                os10.flush();
+                System.out.println("灯库："+file.length());
+
+                //按步编程（倒彩&喝彩&摇麦-16-33SEC）18
+                writeHeCaiYaoMai(os10);
+
+                repairData(139264,os10,file);
+
+                os10.flush();
+                System.out.println("按步编程："+file.length());
+
+
+                writeWuJiModelData(os10);//雾机编程(34SEC)
+
+                repairData(143360,os10,file);
+
+                os10.flush();
+                System.out.println("雾机编程："+file.length());
+
+
+                ////效果灯素材数据（35-228SEC）192
+                writeFile3(os10);
+
+                os10.flush();
+                System.out.println("效果灯素材："+file.length());
+
+                ////场景效果灯数据（229-258SEC）30
+                for (int i = 1; i < 25; i++) {
+                    writeFile(os10, i);
+                }
+
+                os10.flush();
+                System.out.println("场景效果灯："+file.length());
+
+                ////多灯数据区-16 个声控模式(259-387SEC)129
+                shengKonMoreLigthData(os10);
+
+                os10.flush();
+                System.out.println("多灯数据区-16："+file.length());
+
+                ////声控效果灯数据（动态空间）
+                for (int i = 1; i < 17; i++) {
+                    writeShengKon(os10, i);
+                }
+
+                os10.flush();
+                System.out.println("声控效果灯数据："+file.length());
+
+                //对中间部分进行补零操作
+                repairData(16379904,os10,file);
+                //录制抽样数据（4000-4023SEC）24
+                byte[] b5 = new byte[4096];
+                for (int i = 0; i < 24; i++) {
+                    os10.write(b5);
+                }
+
+                os10.flush();
+                System.out.println("录制抽样数据："+file.length());
+
+                ////录制数据（4024-8023SEC）
+                byte[] b_FF = new byte[4096];
+                for (int i = 0; i < b_FF.length; i++) {
+                    b_FF[i] = (byte) 0xFF;
+                }
+                for (int i = 0; i < 4000; i++) {
+                    os10.write(b_FF);
+                }
+
+                os10.flush();
+                System.out.println("录制数据："+file.length());
+
+                //红外空调(8024-8087SEC)
+                byte[] b1 = new byte[4096];
+                for (int i = 0; i < 64; i++) {
+                    os10.write(b1);
+                }
+
+                os10.flush();
+                System.out.println("红外空调："+file.length());
+
+                //////////////////////
+                repairData(33554432,os10,file);
+                os10.flush();
+                os10.close();
+
+                JFrame frame = (JFrame) MainUi.map.get("frame");
+                JOptionPane.showMessageDialog(frame, "生成灯控文件成功!", "提示", JOptionPane.PLAIN_MESSAGE);
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 对数据空间不足的进行补完
+     * @param length
+     * @param outputStream
+     * @param file
+     */
+    private void repairData(long length,OutputStream outputStream,File file) throws IOException {
+        outputStream.flush();
+        int sy = (int) (length - file.length());
+        byte[] cc = new byte[sy];
+        for (int i = 0; i < sy; i++) {
+            cc[i] = (byte) 0XFF;
+        }
+        outputStream.write(cc);
     }
 
     /*
@@ -348,10 +487,12 @@ public class MergeAllListener implements ActionListener {
             Map nameMap = (Map) Data.suCaiNameMap.get(dengKuName);
             JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
             int cnt = 0;
-            for (int k = 0; k < btns.length; k++) {
-                List nameList = (List) nameMap.get("" + i);
-                cnt = cnt + nameList.size();
-            }
+            if (null != nameMap)
+                for (int k = 0; k < btns.length; k++) {
+                    if (null != nameMap.get("" + k)) {
+                        cnt = cnt + ((List) nameMap.get("" + k)).size();
+                    }
+                }
             for (int j = 0; j < cnt; j++) {
 //                    int suCaiObjectId = Integer.parseInt(((String) nameList.get(j)).split(">")[1]);
                 hashMap = (HashMap) Data.SuCaiObjects[dengKuId - 1][j];

@@ -160,10 +160,10 @@ public class TimeBlockEditUI {
 		int grpN = Integer.valueOf(groupNum).intValue()-1;
 		int denKuNum = Integer.parseInt(getxiaoGuoDengDengKuName());
 		int suCaiNum = block;
-		hashMap = (HashMap)Data.SuCaiObjects[denKuNum-1][suCaiNum];
+		hashMap = (HashMap)Data.SuCaiObjects[denKuNum-1][suCaiNum-1];
 		if (hashMap == null) {
 			hashMap = new HashMap<>();
-			Data.SuCaiObjects[denKuNum][suCaiNum] = hashMap;
+			Data.SuCaiObjects[denKuNum-1][suCaiNum-1] = hashMap;
 		}
 //		hashMap = (HashMap)Data.XiaoGuoDengObjects[model][grpN][blkN];
 //		if (hashMap == null) {

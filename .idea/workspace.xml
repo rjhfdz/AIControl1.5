@@ -6,13 +6,17 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="文件编码格式修改">
+    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/MergeAllListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/MergeAllListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/MergeAllListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/MergeAllListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/Listener/CreateOrDelSuCaiListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/Listener/CreateOrDelSuCaiListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/UI/SuCaiEditUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/UI/SuCaiEditUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -107,7 +111,19 @@
       <workItem from="1568275080302" duration="1212000" />
       <workItem from="1568276718097" duration="3220000" />
       <workItem from="1568505632342" duration="26716000" />
-      <workItem from="1568591247327" duration="10340000" />
+      <workItem from="1568591247327" duration="13247000" />
+      <workItem from="1568622256088" duration="76000" />
+      <workItem from="1568622706886" duration="536000" />
+      <workItem from="1568623464947" duration="1941000" />
+      <workItem from="1568678197231" duration="1231000" />
+      <workItem from="1568707518058" duration="3554000" />
+      <workItem from="1568764373076" duration="5949000" />
+      <workItem from="1568774334480" duration="1078000" />
+      <workItem from="1568778349567" duration="8881000" />
+      <workItem from="1568851170905" duration="8769000" />
+      <workItem from="1568860851609" duration="195000" />
+      <workItem from="1568861077057" duration="11947000" />
+      <workItem from="1568879714628" duration="6136000" />
     </task>
     <task id="LOCAL-00001" summary="文件编码格式修改">
       <created>1568079566279</created>
@@ -116,7 +132,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568079566279</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="修改数据打包格式中的素材管理以及效果灯管理">
+      <created>1568606077472</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1568606077472</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -137,7 +160,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="文件编码格式修改" />
-    <option name="LAST_COMMIT_MESSAGE" value="文件编码格式修改" />
+    <MESSAGE value="修改数据打包格式中的素材管理以及效果灯管理" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改数据打包格式中的素材管理以及效果灯管理" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -146,11 +170,6 @@
           <url>file://$PROJECT_DIR$/src/com/boray/dengKu/UI/FenZhuUI.java</url>
           <line>60</line>
           <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/boray/beiFen/Listener/ProjectCreateFileOfCloseFrame.java</url>
-          <line>47</line>
-          <option name="timeStamp" value="32" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

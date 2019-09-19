@@ -142,10 +142,10 @@ public class SuCaiEditUI {
 		int grpN = Integer.valueOf(groupNum).intValue()-1;
 		int blkN = block-1;
 		hashMap = (HashMap)Data.XiaoGuoDengObjects[model][grpN][blkN];*/
-		hashMap = (HashMap)Data.SuCaiObjects[denKuNum][suCaiNum];
+		hashMap = (HashMap)Data.SuCaiObjects[denKuNum][suCaiNum-1];
 		if (hashMap == null) {
 			hashMap = new HashMap<>();
-			Data.SuCaiObjects[denKuNum][suCaiNum] = hashMap;
+			Data.SuCaiObjects[denKuNum][suCaiNum-1] = hashMap;
 		}
 		List list66 = (List)hashMap.get("channelData");
 		if (list66 != null) {
