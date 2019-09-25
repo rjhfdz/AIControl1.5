@@ -166,6 +166,24 @@ public class SuCaiEditUI {
 		//TreeSet treeSet = (TreeSet)Data.GroupOfLightList.get(number-1);
 		//cnt = treeSet.size();
 
+		//获得DMX起始地址
+		List<Integer> list = new ArrayList<Integer>();
+		NewJTable table = (NewJTable)MainUi.map.get("table_dengJu");//所有灯具
+		for(int i =0;i<table.getRowCount();i++){
+			String str = table.getValueAt(i,3).toString();
+			int index = Integer.parseInt(str.substring(2,str.indexOf("#")))-1;
+			if(index==denKuNum){
+				int address = Integer.parseInt(table.getValueAt(i,5).toString());
+				list.add(address);
+			}
+		}
+		startAddress = new int[list.size()];
+		for (int i =0;i<list.size();i++){
+			startAddress[i] = list.get(i);
+		}
+
+
+
 		rgb1 = false;
 		rgb2 = false;
 		rgb3 = false;

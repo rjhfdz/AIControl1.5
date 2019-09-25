@@ -188,6 +188,8 @@ public class MergeAllListener implements ActionListener {
 
                 ////效果灯素材数据（35-228SEC）192
                 writeFile3(os10);
+                //对数据进行补完
+                repairData(937984,os10,file);
 
                 os10.flush();
                 System.out.println("效果灯素材："+file.length());
@@ -871,14 +873,16 @@ public class MergeAllListener implements ActionListener {
                 for (int k = 0; k < 32; k++) {//32数据通道
                     os.write(objects[i][j][k]);
                 }
-                if (null == zdyObjects[i][j])//自定义动作数据
+                if (null == zdyObjects[i][j]) {//自定义动作数据
                     os.write(new byte[5]);
-                else
+                }else {
                     os.write((byte[]) zdyObjects[i][j]);
-                if (null == gxObjects[i][j])//勾选数据
+                }
+                if (null == gxObjects[i][j]) {//勾选数据
                     os.write(new byte[4]);
-                else
+                }else {
                     os.write((byte[]) gxObjects[i][j]);
+                }
                 for (int k = 0; k < 4; k++) {//贝塞尔曲线
                     os.write(new byte[1]);
                     os.write(actAndRGB[i][j][k]);
@@ -1015,8 +1019,8 @@ public class MergeAllListener implements ActionListener {
                 if (!treeSet.isEmpty()) {
                     a = (int) treeSet.first();
                     String typeString = table3.getValueAt(a, 3).toString();
-                    int dengKuNumber = Integer.valueOf(typeString.split("#")[0].substring(2)).intValue() - 1;
-                    tt = Integer.valueOf((String) Data.DengKuChannelCountList.get(dengKuNumber)).intValue();
+                    tt = Integer.valueOf(typeString.split("#")[0].substring(2)).intValue();
+//                    tt = Integer.valueOf((String) Data.DengKuChannelCountList.get(dengKuNumber)).intValue();
                 }
             }
             for (int j = 0; j < 20; j++) {

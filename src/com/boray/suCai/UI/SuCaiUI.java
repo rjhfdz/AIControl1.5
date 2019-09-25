@@ -32,6 +32,7 @@ import com.boray.mainUi.MainUi;
 import com.boray.suCai.Listener.CreateOrDelSuCaiListener;
 import com.boray.suCai.Listener.EditListener;
 import com.boray.suCai.Listener.SuCaiTypeListener;
+import com.boray.suCai.Listener.UpLoadOrLoadSuCaiMouseListener;
 
 public class SuCaiUI {
 	public void show(JPanel pane) {
@@ -118,6 +119,10 @@ public class SuCaiUI {
 		bottomPanel.add(editBtn);bottomPanel.add(reNameBtn);
 		bottomPanel.add(upLoadBtn);
 		p3.add(bottomPanel);
+
+		//Ìí¼ÓÓÒ¼ü²Ëµ¥
+        UpLoadOrLoadSuCaiMouseListener mouseListener = new UpLoadOrLoadSuCaiMouseListener();
+        list.addMouseListener(mouseListener);
 	}
 	private void setP1(JScrollPane scrollPane){
 		final JList list = new JList();
