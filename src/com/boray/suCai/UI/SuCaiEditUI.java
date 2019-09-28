@@ -2384,4 +2384,59 @@ public class SuCaiEditUI {
 			}
 		}
 	}
+
+	//预览
+	private void outPreview(){
+		if (Data.serialPort != null&&hashMap!=null){
+			List<Byte> buff = new ArrayList<Byte>();
+			Map map = (Map) hashMap.get("actionXiaoGuoData");//动作图形
+			if(map!=null){
+				String[] values = (String[]) map.get("1");
+				byte[] bt1 = new byte[5];
+				if (values != null) {
+					if (values[0].equals("true")) {
+						bt1[0] = 1;
+					}
+					for (int l = 1; l < bt1.length; l++) {
+						bt1[l] = (byte) Integer.valueOf(values[l]).intValue();
+					}
+				}
+				addData(buff,bt1);
+			}else{
+
+			}
+			List list66 = (List) hashMap.get("channelData");//手动编程配置
+			if (list66 != null) {
+				//////////勾选
+				int r = 0, yu = 0;
+				int[] bp1 = new int[4];
+				boolean[] bn = (boolean[]) list66.get(1);
+				for (int l = 0; l < bn.length; l++) {
+					r = l / 8;
+					yu = l % 8;
+					if (bn[l]) {
+						bp1[r] = bp1[r] + (1 << yu);
+					}
+				}
+				for (int l = bn.length; l < 32; l++) {
+					r = l / 8;
+					yu = l % 8;
+					bp1[r] = bp1[r] + (1 << yu);
+				}
+				byte[] bp2 = new byte[4];
+				for (int l = 0; l < bp1.length; l++) {
+					bp2[l] = (byte) bp1[l];
+				}
+				addData(buff,bp2);
+			}
+		}
+	}
+
+	public List<Byte> addData(List<Byte> buff,byte[] bytes){
+		for (int i = 0;i<bytes.length;i++){
+			buff.add(bytes[i]);
+		}
+		return buff;
+	}
+
 }

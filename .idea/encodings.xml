@@ -4,6 +4,7 @@
     <file url="file://$PROJECT_DIR$/src/com/boray/beiFen/Listener/MergeAllListener.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/boray/changJing/Listener/CopyToCurrent.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/boray/dengKu/UI/RdmPaneUI.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/com/boray/fileCompare/Compare.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/Listener/CreateTimeBlockListener.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/Listener/TimeBlockActionListener.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/DefineJLable.java" charset="GBK" />

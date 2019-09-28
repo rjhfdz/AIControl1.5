@@ -156,7 +156,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
                         }
                         String suCaiNameAndNumber = field.getText() + "--->" + (cnt + 1);
 
-                        Data.SuCaiObjects[list.getSelectedIndex()][cnt] = o;
+                        Data.SuCaiObjects[suCaiLightType.getSelectedIndex()][cnt] = o;
 
                         if (model == null) {
                             model = new DefaultListModel();

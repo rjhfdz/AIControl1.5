@@ -1111,20 +1111,20 @@ public class TimeBlockEditUI {
 						try {
 							button.setEnabled(false);
 							save();
-							if (Data.serialPort != null) {
-								if (Data.file!=null) {
-									new Compare().saveTemp();
-									Compare.compareFile();
-									ReviewUtils.sendReviewCode();
-									//模式  组号  时间块号
-									int[] tt = {XiaoGuoDengModel.model,group_N,blockNum};
-									ReviewUtils.reviewOrder(3, tt);
-									///
-								} else {
-									JOptionPane.showMessageDialog(dialog, "请先生成初始版本的控制器文件导入到控制器，再进行预览！", "提示", JOptionPane.ERROR_MESSAGE);
-								}
-							}
-							//timeBlockReviewActionListener.actionPerformed();
+//							if (Data.serialPort != null) {
+//								if (Data.file!=null) {
+//									new Compare().saveTemp();
+//									Compare.compareFile();
+//									ReviewUtils.sendReviewCode();
+//									//模式  组号  时间块号
+//									int[] tt = {XiaoGuoDengModel.model,group_N,blockNum};
+//									ReviewUtils.reviewOrder(3, tt);
+//									///
+//								} else {
+//									JOptionPane.showMessageDialog(dialog, "请先生成初始版本的控制器文件导入到控制器，再进行预览！", "提示", JOptionPane.ERROR_MESSAGE);
+//								}
+//							}
+							timeBlockReviewActionListener.actionPerformed();
 						} catch (Exception e2) {
 							e2.printStackTrace();
 						} finally {
@@ -1428,20 +1428,20 @@ public class TimeBlockEditUI {
 						try {
 							button.setEnabled(false);
 							save();
-							if (Data.serialPort != null) {
-								if (Data.file!=null) {
-									new Compare().saveTemp();
-									Compare.compareFile();
-									ReviewUtils.sendReviewCode();
-									//模式  组号  时间块号
-									int[] tt = {XiaoGuoDengModel.model,group_N,blockNum};
-									ReviewUtils.reviewOrder(2, tt);
-									///
-								} else {
-									JOptionPane.showMessageDialog(dialog, "请先生成初始版本的控制器文件导入到控制器，再进行预览！", "提示", JOptionPane.ERROR_MESSAGE);
-								}
-							}
-							//timeBlockReviewActionListener.actionPerformed();
+//							if (Data.serialPort != null) {
+//								if (Data.file!=null) {
+//									new Compare().saveTemp();
+//									Compare.compareFile();
+//									ReviewUtils.sendReviewCode();
+//									//模式  组号  时间块号
+//									int[] tt = {XiaoGuoDengModel.model,group_N,blockNum};
+//									ReviewUtils.reviewOrder(2, tt);
+//									///
+//								} else {
+//									JOptionPane.showMessageDialog(dialog, "请先生成初始版本的控制器文件导入到控制器，再进行预览！", "提示", JOptionPane.ERROR_MESSAGE);
+//								}
+//							}
+							timeBlockReviewActionListener.actionPerformed();
 						} catch (Exception e2) {
 							e2.printStackTrace();
 						} finally {
@@ -1745,20 +1745,20 @@ public class TimeBlockEditUI {
 						try {
 							button.setEnabled(false);
 							save();
-							if (Data.serialPort != null) {
-								if (Data.file!=null) {
-									new Compare().saveTemp();
-									Compare.compareFile();
-									ReviewUtils.sendReviewCode();
-									//模式  组号  时间块号
-									int[] tt = {XiaoGuoDengModel.model,group_N,blockNum};
-									ReviewUtils.reviewOrder(1, tt);
-									///
-								} else {
-									JOptionPane.showMessageDialog(dialog, "请先生成初始版本的控制器文件导入到控制器，再进行预览！", "提示", JOptionPane.ERROR_MESSAGE);
-								}
-							}
-							//timeBlockReviewActionListener.actionPerformed();
+//							if (Data.serialPort != null) {
+//								if (Data.file!=null) {
+//									new Compare().saveTemp();
+//									Compare.compareFile();
+//									ReviewUtils.sendReviewCode();
+//									//模式  组号  时间块号
+//									int[] tt = {XiaoGuoDengModel.model,group_N,blockNum};
+//									ReviewUtils.reviewOrder(1, tt);
+//									///
+//								} else {
+//									JOptionPane.showMessageDialog(dialog, "请先生成初始版本的控制器文件导入到控制器，再进行预览！", "提示", JOptionPane.ERROR_MESSAGE);
+//								}
+//							}
+							timeBlockReviewActionListener.actionPerformed();
 						} catch (Exception e2) {
 							e2.printStackTrace();
 						} finally {
@@ -2183,19 +2183,20 @@ public class TimeBlockEditUI {
 						try {
 							button3.setEnabled(false);
 							save();
-							if (Data.serialPort != null) {
-								if (Data.file!=null) {
-									new Compare().saveTemp();
-									Compare.compareFile();
-									ReviewUtils.sendReviewCode();
-									//模式  组号  时间块号
-									int[] tt = {XiaoGuoDengModel.model,group_N,blockNum};
-									ReviewUtils.reviewOrder(4, tt);
-									///
-								} else {
-									JOptionPane.showMessageDialog(dialog, "请先生成初始版本的控制器文件导入到控制器，再进行预览！", "提示", JOptionPane.ERROR_MESSAGE);
-								}
-							}
+							timeBlockReviewActionListener.actionPerformed();
+//							if (Data.serialPort != null) {
+//								if (Data.file!=null) {
+//									new Compare().saveTemp();
+//									Compare.compareFile();
+//									ReviewUtils.sendReviewCode();
+//									//模式  组号  时间块号
+//									int[] tt = {XiaoGuoDengModel.model,group_N,blockNum};
+//									ReviewUtils.reviewOrder(4, tt);
+//									///
+//								} else {
+//									JOptionPane.showMessageDialog(dialog, "请先生成初始版本的控制器文件导入到控制器，再进行预览！", "提示", JOptionPane.ERROR_MESSAGE);
+//								}
+//							}
 						} catch (Exception e2) {
 							e2.printStackTrace();
 						} finally {
