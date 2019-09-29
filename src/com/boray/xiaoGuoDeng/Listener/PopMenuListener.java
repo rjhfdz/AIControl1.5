@@ -24,7 +24,7 @@ public class PopMenuListener implements ActionListener{
 	}
 	public void actionPerformed(ActionEvent e) {
 		if ("¡¡±à¼­".equals(e.getActionCommand())) {
-			new TimeBlockEditUI().show(Integer.parseInt(ss.substring(ss.indexOf("(")+1,ss.indexOf(")"))),pane.getName());
+			new TimeBlockEditUI().show(Integer.parseInt(ss.substring(ss.indexOf("(")+1,ss.indexOf(")"))),pane.getName(),ss.substring(0,ss.indexOf("(")));
 		} else if ("¡¡É¾³ý".equals(e.getActionCommand())) {
 			if (blockNum == pane.getComponentCount()) {
 				int model = Integer.valueOf(XiaoGuoDengModel.model)-1;

@@ -65,10 +65,10 @@ public class SelectSuCaiUI {
                 HashMap hashMap = null;
                 Integer denKuNum = Integer.parseInt(getxiaoGuoDengDengKuName())-1;
                 Integer suCaiNum = Integer.parseInt(list.getSelectedValue().toString().split(">")[1]);
-                hashMap = (HashMap) Data.SuCaiObjects[denKuNum][suCaiNum];
+                hashMap = (HashMap) Data.SuCaiObjects[denKuNum][suCaiNum-1];
                 if(hashMap==null){
                     hashMap = new HashMap<>();
-                    Data.SuCaiObjects[denKuNum][suCaiNum] = hashMap;
+                    Data.SuCaiObjects[denKuNum][suCaiNum-1] = hashMap;
                 }
 //                Data.XiaoGuoDengObjects[model][grpN][blkN] = hashMap;
                 ////////////////

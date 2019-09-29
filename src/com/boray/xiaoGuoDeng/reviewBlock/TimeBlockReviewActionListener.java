@@ -7,41 +7,34 @@ import java.io.OutputStream;
 import com.boray.Data.Data;
 
 public class TimeBlockReviewActionListener {
-	private int sc,group,block;
-	public TimeBlockReviewActionListener(int sc,int group,int block){
+	private int sc,group,block,index;
+	public TimeBlockReviewActionListener(int sc,int group,int block,int index){
 		this.sc = sc;
 		this.block = block;
 		this.group = group;
+		this.index = index;
 	}
 	public void actionPerformed() {
 		if (Data.serialPort != null) {
 			try {
-				//分组
-				byte[] b = TimeBlockReviewData.getGroupOfLights();
+
+				//灯具数据
+				byte[] b = TimeBlockReviewData.getInfOfLight();
 				OutputStream os = Data.serialPort.getOutputStream();
 				os.write(b);
 				os.flush();
-				
+
 				Thread.sleep(200);
-				
-				//灯具数据
-				b = TimeBlockReviewData.getInfOfLight();
+
+				//分组
+				b = TimeBlockReviewData.getGroupOfLights();
 				os.write(b);
 				os.flush();
 				
 				Thread.sleep(200);
 				
-				//灯库
-				b = TimeBlockReviewData.getlibOfLights()[0];
-				os.write(b);
-				os.flush();
-				Thread.sleep(200);
-				b = TimeBlockReviewData.getlibOfLights()[1];
-				os.write(b);
-				os.flush();
-				
+
 				//熄灯+加速度
-				Thread.sleep(200);
 				b = TimeBlockReviewData.getOffLights()[0];
 				os.write(b);
 				os.flush();
@@ -50,10 +43,20 @@ public class TimeBlockReviewActionListener {
 				b = TimeBlockReviewData.getOffLights()[1];
 				os.write(b);
 				os.flush();
+
+				//灯库
+				Thread.sleep(200);
+				b = TimeBlockReviewData.getlibOfLights()[0];
+				os.write(b);
+				os.flush();
+				Thread.sleep(200);
+				b = TimeBlockReviewData.getlibOfLights()[1];
+				os.write(b);
+				os.flush();
 				
 				//效果灯时间块数据
 				Thread.sleep(200);
-				Object[] objects = TimeBlockReviewData.getEffectLight(sc-1,group-1, block-1);
+				Object[] objects = TimeBlockReviewData.getEffectLight(sc-1,group, block,index);
 				for (int i = 0; i < objects.length; i++) {
 					b = (byte[])objects[i];
 					os.write(b);
