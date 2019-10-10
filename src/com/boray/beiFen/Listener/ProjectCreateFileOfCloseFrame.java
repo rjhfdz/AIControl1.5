@@ -182,6 +182,7 @@ public class ProjectCreateFileOfCloseFrame{
 			xmlEncoder.writeObject(Data.suCaiMap);
 			xmlEncoder.writeObject(Data.SuCaiObjects);
 			xmlEncoder.writeObject(Data.suCaiNameMap);
+			xmlEncoder.writeObject(Data.AddSuCaiOrder);
 			///////////////////////////////////////////
 			/////////////效果灯编程-雾机//////////////////
 			xmlEncoder.writeObject(Data.wuJiMap);

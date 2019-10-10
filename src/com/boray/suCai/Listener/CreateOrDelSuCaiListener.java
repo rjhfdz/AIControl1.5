@@ -97,6 +97,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                             return;
                         }
                         String suCaiNameAndNumber = field.getText() + "--->" + (cnt + 1);
+                        Data.AddSuCaiOrder.add((suCaiLightType.getSelectedIndex()) + "#" + cnt);
                         //////////////////
 
                         if (model == null) {
@@ -166,8 +167,8 @@ public class CreateOrDelSuCaiListener implements ActionListener {
         Boolean flag = false;
         NewJTable table = (NewJTable) MainUi.map.get("GroupTable");//获得分组列表
         for (int i = 0; i < 24; i++) {//循环所有效果灯模式
-            for(int j = 0;j<table.getRowCount();j++){
-                MainUi.map.get("timeBlockPanels_group"+j);
+            for (int j = 0; j < table.getRowCount(); j++) {
+                MainUi.map.get("timeBlockPanels_group" + j);
             }
         }
         return flag;

@@ -51,7 +51,7 @@ public class DefineJLable extends JLabel{
 		super(s+"°Ã",SwingConstants.CENTER);
 		p = new Point(0,0);
 		this.pane = pane;
-		blockNum = Integer.valueOf(s.substring(0,1)).intValue();
+		blockNum = Integer.valueOf(s.substring(0,s.indexOf("("))).intValue();
 
 		popupMenu = new JPopupMenu();
 		menuItem = new JCheckBoxMenuItem("°°∆Ù”√",true);

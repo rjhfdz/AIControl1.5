@@ -57,6 +57,7 @@ public class RightMainUI {
 				new Thread(new Runnable() {
 					public void run() {
 						button.setEnabled(false);
+						ReviewUtils.sceneReview();
 						if (Data.serialPort != null) {
 							if (Data.file!=null) {
 								new Compare().saveTemp();
