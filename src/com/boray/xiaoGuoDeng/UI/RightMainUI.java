@@ -32,6 +32,7 @@ import com.boray.fileCompare.Compare;
 import com.boray.mainUi.MainUi;
 import com.boray.xiaoGuoDeng.Listener.CreateTimeBlockListener;
 import com.boray.xiaoGuoDeng.Listener.ModelCopyActionListener;
+import com.boray.xiaoGuoDeng.reviewBlock.ReviewBlock;
 import com.boray.xiaoGuoDeng.reviewCode.ReviewUtils;
 
 public class RightMainUI {
@@ -57,17 +58,20 @@ public class RightMainUI {
 				new Thread(new Runnable() {
 					public void run() {
 						button.setEnabled(false);
-						ReviewUtils.sceneReview();
+//						ReviewUtils.sceneReview(XiaoGuoDengModel.model);
 						if (Data.serialPort != null) {
-							if (Data.file!=null) {
-								new Compare().saveTemp();
-								Compare.compareFile();
-								ReviewUtils.sendReviewCode();
-								ReviewUtils.modeReviewOrder(XiaoGuoDengModel.model);
-							} else {
-								JFrame frame = (JFrame)MainUi.map.get("frame");
-								JOptionPane.showMessageDialog(frame, "请先生成初始版本的控制器文件导入到控制器，再进行预览！", "提示", JOptionPane.ERROR_MESSAGE);
-							}
+//							if (Data.file!=null) {
+//								new Compare().saveTemp();
+//								Compare.compareFile();
+//								ReviewUtils.sendReviewCode();
+//								ReviewUtils.modeReviewOrder(XiaoGuoDengModel.model);
+								ReviewBlock.review(XiaoGuoDengModel.model);
+//							} else {
+//								JFrame frame = (JFrame)MainUi.map.get("frame");
+//								JOptionPane.showMessageDialog(frame, "请先生成初始版本的控制器文件导入到控制器，再进行预览！", "提示", JOptionPane.ERROR_MESSAGE);
+//							}
+						}else{
+							ReviewBlock.saveFile(XiaoGuoDengModel.model);
 						}
 						button.setEnabled(true);
 					}

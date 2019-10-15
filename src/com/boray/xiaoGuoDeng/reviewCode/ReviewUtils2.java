@@ -1,17 +1,14 @@
 package com.boray.xiaoGuoDeng.reviewCode;
 
-import java.io.OutputStream;
-import java.util.*;
-
 import com.boray.Data.Data;
 import com.boray.Data.ZhiLingJi;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
-import com.boray.xiaoGuoDeng.UI.DefineJLable;
 
-import javax.swing.*;
+import java.io.OutputStream;
+import java.util.*;
 
-public class ReviewUtils {
+public class ReviewUtils2 {
 
     /*
      * 声控预览模式指令
@@ -176,60 +173,11 @@ public class ReviewUtils {
     }
     //FA 20 61 B6 31 02 00 01 01 01 00 00 FF FF FF 01 01 E0 32 01 01 00 00 00 00 00 00 00 00 00 00 7A
 
-    //场景预览 素材
-    public static byte[] sceneSuCaiReview(int model) {
-        NewJTable table = (NewJTable) MainUi.map.get("table_DkGl");
-        JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
-        int size = 0;//素材总数
-        for (int i = 0; i < table.getRowCount(); i++) {
-            Map map = (Map) Data.suCaiMap.get(table.getValueAt(i, 1));
-            if (map != null) {
-                for (int j = 0; j < btns.length; j++) {
-                    List abc = (List) map.get("" + j);
-                    if (abc != null) {
-                        size += abc.size();
-                    }
-                }
-            }
-        }
-        List<String> str = new ArrayList<>();
-        for (int i = 0; i < table.getRowCount(); i++) {
-            Map map = (Map) Data.suCaiMap.get(table.getValueAt(i, 1));
-            if (map != null) {
-                int count = 0;
-                for (int j = 0; j < btns.length; j++) {
-                    List abc = (List) map.get("" + j);
-                    if (abc != null) {
-                        count += abc.size();
-                    }
-                }
-                for (int j = 0; j < count; j++) {
-                    str.add(i + "#" + j);
-                }
-            }
-        }
-
-        byte[] dengKuTonDao = dengKuTonDao();//灯库通道定义
-        byte[] xiaoGuoDengSuCaiLianBiao = xiaoGuoDengSuCaiLianBiao(size, str);//效果灯素材联表区
-        byte[] suCaiData = suCaiQuData(str);//素材区数据
-        byte[] bytes = new byte[dengKuTonDao.length + xiaoGuoDengSuCaiLianBiao.length + suCaiData.length];
-        for (int i = 0; i < dengKuTonDao.length; i++) {
-            bytes[i] = dengKuTonDao[i];
-        }
-        for (int i = 0; i < xiaoGuoDengSuCaiLianBiao.length; i++) {
-            bytes[dengKuTonDao.length + i] = xiaoGuoDengSuCaiLianBiao[i];
-        }
-        for (int i = 0; i < suCaiData.length; i++) {
-            bytes[dengKuTonDao.length + xiaoGuoDengSuCaiLianBiao.length + i] = suCaiData[i];
-        }
-
-        return bytes;
-    }
-
     //场景预览
-    public static byte[] sceneChangJingReview(int model) {
-        byte[] xiaoGuoDengChangJing = xiaoGuoDengChangJing(model);//效果灯场景
-        return xiaoGuoDengChangJing;
+    public static void sceneReview() {
+        byte[] dengKuTonDao = dengKuTonDao();//灯库通道定义
+        byte[] xiaoGuoDengSuCaiLianBiao = xiaoGuoDengSuCaiLianBiao();//效果灯素材联表区
+        byte[] suCaiData = suCaiQuData();//素材区数据
     }
 
     //灯库通道定义
@@ -247,27 +195,27 @@ public class ReviewUtils {
     }
 
     //效果灯素材联表区
-    public static byte[] xiaoGuoDengSuCaiLianBiao(int size, List<String> str) {
-        byte[] buff = new byte[8 + size * 3];
+    public static byte[] xiaoGuoDengSuCaiLianBiao() {
+        byte[] buff = new byte[8 + Data.AddSuCaiOrder.size() * 3];
         buff[0] = 0x55;
         buff[1] = (byte) 0xAA;
-        buff[6] = (byte) (size % 256);
-        buff[7] = (byte) (size / 256);//引导区
+        buff[6] = (byte) (Data.AddSuCaiOrder.size() % 256);
+        buff[7] = (byte) (Data.AddSuCaiOrder.size() / 256);//引导区
         //素材关联、素材步数
-        for (int i = 0; i < str.size(); i++) {
-            int denKuNum = Integer.parseInt(str.get(i).split("#")[0]);
-            int suCaiNum = Integer.parseInt(str.get(i).split("#")[1]);
+        for (int i = 0; i < Data.AddSuCaiOrder.size(); i++) {
+            int denKuNum = Integer.parseInt(Data.AddSuCaiOrder.get(i).split("#")[0]);
+            int suCaiNum = Integer.parseInt(Data.AddSuCaiOrder.get(i).split("#")[1]);
             buff[8 + i * 2] = (byte) (denKuNum + 1);
             buff[9 + i * 2] = (byte) (suCaiNum + 1);
             HashMap hashMap = (HashMap) Data.SuCaiObjects[denKuNum][suCaiNum];
-            buff[8 + i + (size * 2)] = 1;//默认一条通道
+            buff[8 + i + (Data.AddSuCaiOrder.size() * 2)] = 1;//默认一条通道
             if (hashMap != null) {
                 List list66 = (List) hashMap.get("channelData");
                 Vector vector88 = null;
                 if (list66 != null) {
                     vector88 = (Vector) list66.get(0);
                     if (vector88 != null)
-                        buff[8 + i + (size * 2)] = (byte) vector88.size();
+                        buff[8 + i + (Data.AddSuCaiOrder.size() * 2)] = (byte) vector88.size();
                 }
             }
         }
@@ -275,11 +223,11 @@ public class ReviewUtils {
     }
 
     //素材区数据
-    public static byte[] suCaiQuData(List<String> str) {
+    public static byte[] suCaiQuData() {
         List<Byte> list = new ArrayList<>();
-        for (int i = 0; i < str.size(); i++) {
-            int denKuNum = Integer.parseInt(str.get(i).split("#")[0]);
-            int suCaiNum = Integer.parseInt(str.get(i).split("#")[1]);
+        for (int i = 0; i < Data.AddSuCaiOrder.size(); i++) {
+            int denKuNum = Integer.parseInt(Data.AddSuCaiOrder.get(i).split("#")[0]);
+            int suCaiNum = Integer.parseInt(Data.AddSuCaiOrder.get(i).split("#")[1]);
             HashMap hashMap = (HashMap) Data.SuCaiObjects[denKuNum][suCaiNum];
             //素材通道数
             int suCaiTonDaoShu = Integer.parseInt(Data.DengKuChannelCountList.get(denKuNum).toString());
@@ -321,8 +269,8 @@ public class ReviewUtils {
                         }
                     }
                     beiSaiEr[0] = (byte) selected;
-                    for (int j = 0; j < 24; j++) {
-                        beiSaiEr[j + 1] = (byte) p1[j];
+                    for (int j = 1; j < 24; j++) {
+                        beiSaiEr[j] = (byte) p1[i];
                     }
                     //运行速度
                     int yunXinSpeed = Integer.valueOf((String) map.get("3"));
@@ -665,99 +613,6 @@ public class ReviewUtils {
         }
         byte[] buff = new byte[list.size()];
         for (int i = 0; i < list.size(); i++) {
-            buff[i] = list.get(i);
-        }
-        return buff;
-    }
-
-    //效果灯场景
-    public static byte[] xiaoGuoDengChangJing(int sc) {
-        //引导区
-        byte[] temp = new byte[2560];
-        temp[0] = 0x55;
-        temp[1] = (byte) 0xAA;
-        short[][] a = new short[20][4];//场景启用
-        JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels_group" + sc);
-        int j = 0, yu = 0;
-        int maxTime = 0, tp6 = 0;
-        for (int i = 0; i < 20; i++) {
-            for (int k = 1; k < 31; k++) {
-                j = (k - 1) / 8;
-                yu = 7 - ((k - 1) % 8);
-                if (timeBlockPanels[k].isVisible()) {
-                    if (timeBlockPanels[k].getComponentCount() > i) {
-                        DefineJLable lable = (DefineJLable) timeBlockPanels[k].getComponent(i);
-                        if (lable.getText().contains("√")) {
-                            tp6 = (lable.getX() + lable.getWidth()) / 5;
-                            if (tp6 > maxTime) {
-                                maxTime = tp6;
-                            }
-                            a[i][j] = (short) (a[i][j] + (1 << yu));
-                        }
-                    }
-                }
-            }
-            for (int k = 0; k < 4; k++) {
-                temp[20 + (i * 4) + k] = (byte) a[i][k];
-            }
-        }
-        temp[3] = (byte) (maxTime % 256);
-        temp[4] = (byte) (maxTime / 256);
-        for (int k = 1; k < 31; k++) {
-            temp[100 + (k - 1) * 81] = (byte) timeBlockPanels[k].getComponentCount();
-            for (int n = 0; n < timeBlockPanels[k].getComponentCount(); n++) {
-                DefineJLable lable = (DefineJLable) timeBlockPanels[k].getComponent(n);
-                int start = lable.getX() / 5;
-                int end = (lable.getX() + lable.getWidth()) / 5;
-                temp[100 + (k - 1) * 81 + 1 + n * 4] = (byte) (start % 256);
-                temp[100 + (k - 1) * 81 + 2 + n * 4] = (byte) (start / 256);
-
-                temp[100 + (k - 1) * 81 + 3 + n * 4] = (byte) (end % 256);
-                temp[100 + (k - 1) * 81 + 4 + n * 4] = (byte) (end / 256);
-            }
-        }
-        //数据
-        byte[][][] t2 = new byte[30][20][4];
-        NewJTable table3 = (NewJTable) MainUi.map.get("table_dengJu");//所有灯具
-        for (int i = 0; i < 30; i++) {
-            //获得灯库id
-            int number = Integer.valueOf(timeBlockPanels[i + 1].getName()).intValue();
-            int tt = 0, b = 0;
-            if (number - 1 < Data.GroupOfLightList.size()) {
-                TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(number - 1);
-                if (!treeSet.isEmpty()) {
-                    b = (int) treeSet.first();
-                    String typeString = table3.getValueAt(b, 3).toString();
-                    tt = Integer.valueOf(typeString.split("#")[0].substring(2)).intValue();
-                }
-            }
-            for (int k = 0; k < 20; k++) {
-                if (timeBlockPanels[i + 1].isVisible()) {
-                    if (timeBlockPanels[i + 1].getComponentCount() > k) {
-                        DefineJLable lable = (DefineJLable) timeBlockPanels[i + 1].getComponent(k);
-                        String s = lable.getText().substring(lable.getText().indexOf("(") + 1, lable.getText().indexOf(")"));
-                        int integer = Integer.parseInt(s);
-                        t2[i][k][0] = (byte) tt;
-                        t2[i][k][1] = (byte) integer;
-                    }
-                }
-
-            }
-        }
-        List<Byte> list = new ArrayList<>();
-        for (int i = 0; i < temp.length; i++) {
-            list.add(temp[i]);
-        }
-        for (int i = 0; i < 30; i++) {
-            for (int k = 0; k < 20; k++) {
-                list.add(t2[i][j][0]);
-                list.add(t2[i][j][1]);
-                list.add(t2[i][j][2]);
-                list.add(t2[i][j][3]);
-            }
-        }
-        byte[] buff = new byte[list.size()];
-        for (int i = 0; i < buff.length; i++) {
             buff[i] = list.get(i);
         }
         return buff;

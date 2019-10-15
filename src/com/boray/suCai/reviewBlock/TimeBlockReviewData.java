@@ -1,16 +1,4 @@
-package com.boray.xiaoGuoDeng.reviewBlock;
-
-import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
-import java.util.Vector;
-
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+package com.boray.suCai.reviewBlock;
 
 import com.boray.Data.Data;
 import com.boray.Data.GetChannelNumber;
@@ -20,7 +8,9 @@ import com.boray.dengKu.Entity.SpeedEntity;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
 import com.boray.xiaoGuoDeng.UI.DefineJLable;
-import com.boray.xiaoGuoDeng.reviewCode.ReviewUtils;
+
+import javax.swing.*;
+import java.util.*;
 
 public class TimeBlockReviewData {
 
@@ -282,20 +272,6 @@ public class TimeBlockReviewData {
         temp[14] = ZhiLingJi.getJiaoYan(temp);
         return temp;
     }
-    //∆Ù∂Ø‘§¿¿
-    public static byte[] getStarReview2(int sc) {
-        byte[] temp = new byte[15];
-        temp[0] = (byte) 0xBB;
-        temp[1] = (byte) 0x55;
-        temp[2] = (byte) ((15) / 256);
-        temp[3] = (byte) ((15) % 256);
-        temp[4] = (byte) 0x87;
-        temp[5] = (byte) 0x01;
-        temp[6] = (byte) 0xF1;
-        temp[7] = (byte) sc;
-        temp[14] = ZhiLingJi.getJiaoYan(temp);
-        return temp;
-    }
 
     public static Object[] getEffectLight(int sc, int group, int block,int index) {
         byte[] b = getEffectLightToOne2(sc, group, block,index);
@@ -324,48 +300,6 @@ public class TimeBlockReviewData {
                 tp2[3] = (byte) ((lastSize + 9) % 256);
                 tp2[4] = (byte) 0x85;
                 tp2[5] = (byte) 0x11;
-                tp2[6] = (byte) ((i + 1) / 256);
-                tp2[7] = (byte) ((i + 1) % 256);
-                System.arraycopy(b, 8 + i * 512, tp2, 8, lastSize);
-                tp2[lastSize + 8] = ZhiLingJi.getJiaoYan(tp2);
-                temp[i] = tp2;
-            }
-        }
-        return temp;
-    }
-
-    public static Object[] getEffectLight3(int model,int type){
-        byte[] b = null;
-        if(type==14){
-            b = ReviewUtils.sceneSuCaiReview(model);
-        }else if(type==15){
-            b = ReviewUtils.sceneChangJingReview(model);
-        }
-        int packet = (b.length - 9) / 512 + 1;
-        int lastSize = (b.length - 9) % 512;
-        Object[] temp = new Object[packet];
-        for (int i = 0; i < packet; i++) {
-            if (i != (packet - 1)) {
-                byte[] tp1 = new byte[521];
-                tp1[0] = (byte) 0xBB;
-                tp1[1] = (byte) 0x55;
-                tp1[2] = (byte) (521 / 256);
-                tp1[3] = (byte) (521 % 256);
-                tp1[4] = (byte) 0x85;
-                tp1[5] = (byte) type;
-                tp1[6] = (byte) ((i + 1) / 256);
-                tp1[7] = (byte) ((i + 1) % 256);
-                System.arraycopy(b, 8 + i * 512, tp1, 8, 512);
-                tp1[520] = ZhiLingJi.getJiaoYan(tp1);
-                temp[i] = tp1;
-            } else {
-                byte[] tp2 = new byte[lastSize + 9];
-                tp2[0] = (byte) 0xBB;
-                tp2[1] = (byte) 0x55;
-                tp2[2] = (byte) ((lastSize + 9) / 256);
-                tp2[3] = (byte) ((lastSize + 9) % 256);
-                tp2[4] = (byte) 0x85;
-                tp2[5] = (byte) type;
                 tp2[6] = (byte) ((i + 1) / 256);
                 tp2[7] = (byte) ((i + 1) % 256);
                 System.arraycopy(b, 8 + i * 512, tp2, 8, lastSize);

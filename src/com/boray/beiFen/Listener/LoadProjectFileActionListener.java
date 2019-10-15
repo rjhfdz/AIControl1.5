@@ -318,7 +318,7 @@ public class LoadProjectFileActionListener implements ActionListener{
 				Data.suCaiMap = (Map) xmlDecoder.readObject();
 				Data.SuCaiObjects = (Object[][]) xmlDecoder.readObject();
 				Data.suCaiNameMap = (Map) xmlDecoder.readObject();
-				Data.AddSuCaiOrder = (List<String>) xmlDecoder.readObject();
+//				Data.AddSuCaiOrder = (List<String>) xmlDecoder.readObject();
 				JList suCaiList = (JList) MainUi.map.get("suCaiLightType");
 				if(suCaiList.getSelectedValue()!=null){
 					{

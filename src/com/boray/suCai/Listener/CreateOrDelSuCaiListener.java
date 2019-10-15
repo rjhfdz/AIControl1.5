@@ -97,7 +97,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                             return;
                         }
                         String suCaiNameAndNumber = field.getText() + "--->" + (cnt + 1);
-                        Data.AddSuCaiOrder.add((suCaiLightType.getSelectedIndex()) + "#" + cnt);
+//                        Data.AddSuCaiOrder.add((suCaiLightType.getSelectedIndex()) + "#" + cnt);
                         //////////////////
 
                         if (model == null) {
