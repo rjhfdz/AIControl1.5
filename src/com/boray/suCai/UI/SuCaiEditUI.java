@@ -53,7 +53,9 @@ import com.boray.xiaoGuoDeng.reviewCode.ReviewUtils;
 
 public class SuCaiEditUI {
 	private JDialog dialog;
-	private JCheckBox[] checkBoxs;
+	private JCheckBox[] checkBoxs;//勾选
+	private JCheckBox[] checkBoxs2;//备用
+    private JTextField dengJuNunber;//灯具数量
 	private int dengKuNumber;//灯库位置
 	private NewJTable table = null;
 	private JSlider[] sliders;
@@ -125,11 +127,12 @@ public class SuCaiEditUI {
 		JTextField field2 = new JTextField(8);
 		p1.add(field2);
 		p1.add(new JLabel("灯具数量"));
-		JTextField field3 = new JTextField(8);
-		p1.add(field3);
+        dengJuNunber = new JTextField(8);
+		p1.add(dengJuNunber);
+		MainUi.map.put("suCaiDengJuNunber",dengJuNunber);
 		field.setEnabled(false);
 		field2.setEnabled(false);
-		field3.setEnabled(true);
+        dengJuNunber.setEnabled(true);
 		field4.setEnabled(false);
 		///////////////
 		JTabbedPane tabbedPane = new JTabbedPane();
@@ -257,14 +260,13 @@ public class SuCaiEditUI {
 			tabbedPane.add("RGB色彩3", RGBcolor3);
 		}
 	/////////////////////////////////////////////////////
-		List<String> jTextFieldLists = (List<String>) hashMap.get("TopDengJuNumber");
-		MainUi.map.put("TopDengJuNumber",field3);
+		List<String> jTextFieldLists = (List<String>) hashMap.get("suCaiDengJuNunber");
 		field.setText("");
 		field2.setText(typeString);
 		if (jTextFieldLists!=null&&jTextFieldLists.size()>0)
-			field3.setText(jTextFieldLists.get(0));
+            dengJuNunber.setText(jTextFieldLists.get(0));
 		else
-			field3.setText(cnt+"");
+            dengJuNunber.setText(cnt+"");
 		JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
 		for (int i = 0; i < btns.length; i++){
 			if(btns[i].isSelected())
@@ -285,11 +287,22 @@ public class SuCaiEditUI {
 			return;
 		}
 
+		List list2 = new ArrayList();
+        int c = table.getColumnCount() - 2;
+        boolean[] f = new boolean[c];
+        for (int i = 0; i < c; i++) {
+            f[i] = checkBoxs2[i].isSelected();
+        }
+        list2.add(f);
+        hashMap.put("beiyong",list2);
+
+//		hashMap.put("suCaiDengJuNumber",)
+
 		//////////顶部输入框//////////
-		JTextField TopDengJuNumber = (JTextField) MainUi.map.get("TopDengJuNumber");
+		JTextField TopDengJuNumber = (JTextField) MainUi.map.get("suCaiDengJuNunber");
 		List<String> jTextFieldLists = new ArrayList<>();
 		jTextFieldLists.add(TopDengJuNumber.getText());
-		hashMap.put("TopDengJuNumber",jTextFieldLists);
+		hashMap.put("suCaiDengJuNunber",jTextFieldLists);
 
 		//////////步骤//////////
 		List allList = new ArrayList();
@@ -567,6 +580,7 @@ public class SuCaiEditUI {
 		textFields = new JTextField[count];
 		sliders = new JSlider[count];
 		checkBoxs = new JCheckBox[count];
+        checkBoxs2 = new JCheckBox[count];
 		names = new JLabel[count];
 		final JLabel[] DmxValues = new JLabel[count];
 		

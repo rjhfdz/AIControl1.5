@@ -282,6 +282,7 @@ public class TimeBlockReviewData {
         temp[14] = ZhiLingJi.getJiaoYan(temp);
         return temp;
     }
+
     //启动预览
     public static byte[] getStarReview2(int sc) {
         byte[] temp = new byte[15];
@@ -297,8 +298,8 @@ public class TimeBlockReviewData {
         return temp;
     }
 
-    public static Object[] getEffectLight(int sc, int group, int block,int index) {
-        byte[] b = getEffectLightToOne2(sc, group, block,index);
+    public static Object[] getEffectLight(int sc, int group, int block, int index) {
+        byte[] b = getEffectLightToOne2(sc, group, block, index);
         int packet = (b.length - 9) / 512 + 1;
         int lastSize = (b.length - 9) % 512;
         Object[] temp = new Object[packet];
@@ -334,11 +335,62 @@ public class TimeBlockReviewData {
         return temp;
     }
 
-    public static Object[] getEffectLight3(int model,int type){
+    public static Object[] getEffectLight4(int length, int model, int type) {
         byte[] b = null;
-        if(type==14){
+        if (type == 14) {
             b = ReviewUtils.sceneSuCaiReview(model);
-        }else if(type==15){
+        } else if (type == 15) {
+            b = ReviewUtils.sceneChangJingReview(model);
+        }
+        int packet = (b.length - 9) / length + 1;
+        int lastSize = (b.length - 9) % length;
+        int dataLength = length + 9;
+        Object[] temp = new Object[packet];
+        for (int i = 0; i < packet; i++) {
+            if (i != (packet - 1)) {
+                byte[] tp1 = new byte[dataLength];
+                tp1[0] = (byte) 0xBB;
+                tp1[1] = (byte) 0x58;
+                tp1[2] = (byte) (dataLength / 256);
+                tp1[3] = (byte) (dataLength % 256);
+                tp1[4] = (byte) 0x85;
+                if (type == 14) {
+                    tp1[5] = (byte) 0x14;
+                } else if (type == 15) {
+                    tp1[5] = (byte) 0x15;
+                }
+                tp1[6] = (byte) ((i + 1) / 256);
+                tp1[7] = (byte) ((i + 1) % 256);
+                System.arraycopy(b, i * length, tp1, 8, length);
+                tp1[dataLength - 1] = ZhiLingJi.getJiaoYan(tp1);
+                temp[i] = tp1;
+            } else {
+                byte[] tp2 = new byte[dataLength];
+                tp2[0] = (byte) 0xBB;
+                tp2[1] = (byte) 0x58;
+                tp2[2] = (byte) ((lastSize + 9) / 256);
+                tp2[3] = (byte) ((lastSize + 9) % 256);
+                tp2[4] = (byte) 0x85;
+                if (type == 14) {
+                    tp2[5] = (byte) 0x14;
+                } else if (type == 15) {
+                    tp2[5] = (byte) 0x15;
+                }
+                tp2[6] = (byte) ((i + 1) / 256);
+                tp2[7] = (byte) ((i + 1) % 256);
+                System.arraycopy(b, i * length, tp2, 8, lastSize);
+                tp2[dataLength - 1] = ZhiLingJi.getJiaoYan(tp2);
+                temp[i] = tp2;
+            }
+        }
+        return temp;
+    }
+
+    public static Object[] getEffectLight3(int model, int type) {
+        byte[] b = null;
+        if (type == 14) {
+            b = ReviewUtils.sceneSuCaiReview(model);
+        } else if (type == 15) {
             b = ReviewUtils.sceneChangJingReview(model);
         }
         int packet = (b.length - 9) / 512 + 1;
@@ -352,7 +404,11 @@ public class TimeBlockReviewData {
                 tp1[2] = (byte) (521 / 256);
                 tp1[3] = (byte) (521 % 256);
                 tp1[4] = (byte) 0x85;
-                tp1[5] = (byte) type;
+                if (type == 14) {
+                    tp1[5] = (byte) 0x14;
+                } else if (type == 15) {
+                    tp1[5] = (byte) 0x15;
+                }
                 tp1[6] = (byte) ((i + 1) / 256);
                 tp1[7] = (byte) ((i + 1) % 256);
                 System.arraycopy(b, 8 + i * 512, tp1, 8, 512);
@@ -365,7 +421,11 @@ public class TimeBlockReviewData {
                 tp2[2] = (byte) ((lastSize + 9) / 256);
                 tp2[3] = (byte) ((lastSize + 9) % 256);
                 tp2[4] = (byte) 0x85;
-                tp2[5] = (byte) type;
+                if (type == 14) {
+                    tp2[5] = (byte) 0x14;
+                } else if (type == 15) {
+                    tp2[5] = (byte) 0x15;
+                }
                 tp2[6] = (byte) ((i + 1) / 256);
                 tp2[7] = (byte) ((i + 1) % 256);
                 System.arraycopy(b, 8 + i * 512, tp2, 8, lastSize);
@@ -376,7 +436,7 @@ public class TimeBlockReviewData {
         return temp;
     }
 
-    public static byte[] getEffectLightToOne2(int sc,int group, int block,int index) {
+    public static byte[] getEffectLightToOne2(int sc, int group, int block, int index) {
         byte[] temp = null;
         int denKuNum = Integer.parseInt(getxiaoGuoDengDengKuName(group));
         int suCaiNum = block;
@@ -738,137 +798,137 @@ public class TimeBlockReviewData {
             }
         }
 
-		int length = 62 + bTp.length + 118;
-		temp = new byte[length];
-		temp[0] = (byte) 0xBB;
-		temp[1] = (byte) 0x55;
-		temp[2] = (byte) (length / 256);
-		temp[3] = (byte) (length % 256);
-		temp[4] = (byte) 0x85;
-		temp[5] = (byte) 0x11;
-		temp[6] = (byte) 0x00;
-		temp[7] = (byte) 0x01;
+        int length = 62 + bTp.length + 118;
+        temp = new byte[length];
+        temp[0] = (byte) 0xBB;
+        temp[1] = (byte) 0x55;
+        temp[2] = (byte) (length / 256);
+        temp[3] = (byte) (length % 256);
+        temp[4] = (byte) 0x85;
+        temp[5] = (byte) 0x11;
+        temp[6] = (byte) 0x00;
+        temp[7] = (byte) 0x01;
 
-		//自定义动作
-		for (int i = 0; i < 5; i++) {
-			temp[i + 8] = zdyObjects[i];
-		}
-		//勾选数据
-		for (int i = 0; i < 4; i++) {
-			temp[i + 13] = gxObjects[i];
-		}
-		//时间块长度
-		byte[] b3 = new byte[4];
-		JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels_group" + (sc + 1));
-		DefineJLable lable = (DefineJLable) timeBlockPanels[group].getComponent(index - 1);
-		int start = lable.getX() / 5;
-		int end = (lable.getX() + lable.getWidth()) / 5;
-		b3[0] = (byte) (start % 256);
-		b3[1] = (byte) (start / 256);
+        //自定义动作
+        for (int i = 0; i < 5; i++) {
+            temp[i + 8] = zdyObjects[i];
+        }
+        //勾选数据
+        for (int i = 0; i < 4; i++) {
+            temp[i + 13] = gxObjects[i];
+        }
+        //时间块长度
+        byte[] b3 = new byte[4];
+        JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels_group" + (sc + 1));
+        DefineJLable lable = (DefineJLable) timeBlockPanels[group].getComponent(index - 1);
+        int start = lable.getX() / 5;
+        int end = (lable.getX() + lable.getWidth()) / 5;
+        b3[0] = (byte) (start % 256);
+        b3[1] = (byte) (start / 256);
 
-		b3[2] = (byte) (end % 256);
-		b3[3] = (byte) (end / 256);
-		for (int i = 0; i < 4; i++) {
-			temp[i + 17] = b3[i];
-		}
-		//动作12点数据
-		int[] p1 = null;
-		int action = Byte.toUnsignedInt(T1[0]);
-		if (action == 0) {
-			p1 = bezier.Data.ZB[1];
-		} else if (action == 1) {
-			p1 = bezier.Data.ZB[0];
-		} else if (action > 1 && action < 48) {
-			p1 = bezier.Data.ZB[action];
-		} else if (action >= 48) {
-			String[] s = (String[]) bezier.Data.map.get("" + action);
-			if (s != null) {
-				p1 = new int[24];
-				for (int i = 0; i < s.length; i++) {
-					p1[i] = Integer.valueOf(s[i]);
-				}
-			} else {
-				p1 = bezier.Data.ZB[0];
-			}
-		}
-		temp[26] = (byte) action;
-		for (int i = 0; i < 24; i++) {
-			temp[27 + i] = (byte) p1[i];
-		}
-		//rgb1 12点数据
-		int[] p2 = null;
-		int rgb1 = Byte.toUnsignedInt(T1[14]);
-		if (rgb1 <= 10) {
-			p2 = new int[24];
-		} else if (rgb1 > 10 && rgb1 < 52) {
-			p2 = bezier.Data.ZBcolor[rgb1 - 11];
-		} else if (rgb1 > 51) {
-			String[] s = (String[]) bezier.Data.map.get("color" + rgb1);
-			if (s != null) {
-				p2 = new int[24];
-				for (int i = 0; i < s.length; i++) {
-					p2[i] = Integer.valueOf(s[i]);
-				}
-			} else {
-				p2 = bezier.Data.ZB[0];
-			}
-		}
-		temp[51] = (byte) rgb1;
-		for (int i = 0; i < 24; i++) {
-			temp[52 + i] = (byte) p2[i];
-		}
-		//rgb2 12点数据
-		int[] p3 = null;
-		int rgb2 = Byte.toUnsignedInt(T1[26]);
-		if (rgb2 <= 10) {
-			p3 = new int[24];
-		} else if (rgb2 > 10 && rgb2 < 52) {
-			p3 = bezier.Data.ZBcolor[rgb2 - 11];
-		} else if (rgb2 > 51) {
-			String[] s = (String[]) bezier.Data.map.get("color" + rgb2);
-			if (s != null) {
-				p3 = new int[24];
-				for (int i = 0; i < s.length; i++) {
-					p3[i] = Integer.valueOf(s[i]);
-				}
-			} else {
-				p3 = bezier.Data.ZB[0];
-			}
-		}
-		temp[76] = (byte) rgb2;
-		for (int i = 0; i < 24; i++) {
-			temp[77 + i] = (byte) p3[i];
-		}
-		//rgb3 12点数据
-		int[] p4 = null;
-		int rgb3 = Byte.toUnsignedInt(T1[38]);
-		if (rgb3 <= 10) {
-			p4 = new int[24];
-		} else if (rgb3 > 10 && rgb3 < 52) {
-			p4 = bezier.Data.ZBcolor[rgb3 - 11];
-		} else if (rgb3 > 51) {
-			String[] s = (String[]) bezier.Data.map.get("color" + rgb3);
-			if (s != null) {
-				p4 = new int[24];
-				for (int i = 0; i < s.length; i++) {
-					p4[i] = Integer.valueOf(s[i]);
-				}
-			} else {
-				p4 = bezier.Data.ZB[0];
-			}
-		}
-		temp[101] = (byte) rgb3;
-		for (int i = 0; i < 24; i++) {
-			temp[102 + i] = (byte) p4[i];
-		}
-		//其他数据
-		for (int i = 0; i < 53; i++) {
-			temp[i + 126] = T1[i];
-		}
-		for (int i = 179; i < length - 1; i++) {
-			temp[i] = bTp[i - 179];
-		}
-		temp[length - 1] = ZhiLingJi.getJiaoYan(temp);
+        b3[2] = (byte) (end % 256);
+        b3[3] = (byte) (end / 256);
+        for (int i = 0; i < 4; i++) {
+            temp[i + 17] = b3[i];
+        }
+        //动作12点数据
+        int[] p1 = null;
+        int action = Byte.toUnsignedInt(T1[0]);
+        if (action == 0) {
+            p1 = bezier.Data.ZB[1];
+        } else if (action == 1) {
+            p1 = bezier.Data.ZB[0];
+        } else if (action > 1 && action < 48) {
+            p1 = bezier.Data.ZB[action];
+        } else if (action >= 48) {
+            String[] s = (String[]) bezier.Data.map.get("" + action);
+            if (s != null) {
+                p1 = new int[24];
+                for (int i = 0; i < s.length; i++) {
+                    p1[i] = Integer.valueOf(s[i]);
+                }
+            } else {
+                p1 = bezier.Data.ZB[0];
+            }
+        }
+        temp[26] = (byte) action;
+        for (int i = 0; i < 24; i++) {
+            temp[27 + i] = (byte) p1[i];
+        }
+        //rgb1 12点数据
+        int[] p2 = null;
+        int rgb1 = Byte.toUnsignedInt(T1[14]);
+        if (rgb1 <= 10) {
+            p2 = new int[24];
+        } else if (rgb1 > 10 && rgb1 < 52) {
+            p2 = bezier.Data.ZBcolor[rgb1 - 11];
+        } else if (rgb1 > 51) {
+            String[] s = (String[]) bezier.Data.map.get("color" + rgb1);
+            if (s != null) {
+                p2 = new int[24];
+                for (int i = 0; i < s.length; i++) {
+                    p2[i] = Integer.valueOf(s[i]);
+                }
+            } else {
+                p2 = bezier.Data.ZB[0];
+            }
+        }
+        temp[51] = (byte) rgb1;
+        for (int i = 0; i < 24; i++) {
+            temp[52 + i] = (byte) p2[i];
+        }
+        //rgb2 12点数据
+        int[] p3 = null;
+        int rgb2 = Byte.toUnsignedInt(T1[26]);
+        if (rgb2 <= 10) {
+            p3 = new int[24];
+        } else if (rgb2 > 10 && rgb2 < 52) {
+            p3 = bezier.Data.ZBcolor[rgb2 - 11];
+        } else if (rgb2 > 51) {
+            String[] s = (String[]) bezier.Data.map.get("color" + rgb2);
+            if (s != null) {
+                p3 = new int[24];
+                for (int i = 0; i < s.length; i++) {
+                    p3[i] = Integer.valueOf(s[i]);
+                }
+            } else {
+                p3 = bezier.Data.ZB[0];
+            }
+        }
+        temp[76] = (byte) rgb2;
+        for (int i = 0; i < 24; i++) {
+            temp[77 + i] = (byte) p3[i];
+        }
+        //rgb3 12点数据
+        int[] p4 = null;
+        int rgb3 = Byte.toUnsignedInt(T1[38]);
+        if (rgb3 <= 10) {
+            p4 = new int[24];
+        } else if (rgb3 > 10 && rgb3 < 52) {
+            p4 = bezier.Data.ZBcolor[rgb3 - 11];
+        } else if (rgb3 > 51) {
+            String[] s = (String[]) bezier.Data.map.get("color" + rgb3);
+            if (s != null) {
+                p4 = new int[24];
+                for (int i = 0; i < s.length; i++) {
+                    p4[i] = Integer.valueOf(s[i]);
+                }
+            } else {
+                p4 = bezier.Data.ZB[0];
+            }
+        }
+        temp[101] = (byte) rgb3;
+        for (int i = 0; i < 24; i++) {
+            temp[102 + i] = (byte) p4[i];
+        }
+        //其他数据
+        for (int i = 0; i < 53; i++) {
+            temp[i + 126] = T1[i];
+        }
+        for (int i = 179; i < length - 1; i++) {
+            temp[i] = bTp[i - 179];
+        }
+        temp[length - 1] = ZhiLingJi.getJiaoYan(temp);
         return temp;
     }
 

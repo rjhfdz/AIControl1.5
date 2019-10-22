@@ -2,6 +2,7 @@ package com.boray.suCai.Listener;
 
 import com.boray.Data.Data;
 import com.boray.mainUi.MainUi;
+import com.boray.suCai.UI.SuCaiUI;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -73,6 +74,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
                     break;
                 }
             }
+            xmlEncoder.writeObject(encode("Boray"));//加入标识
             xmlEncoder.writeObject(type);//写入素材类型
             xmlEncoder.writeObject(suCaiName);//写入素材名称
             xmlEncoder.writeObject(Data.SuCaiObjects[dengKuIndex][suCaiIndex]);//写入素材数据
@@ -95,10 +97,38 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
 
             InputStream is = new FileInputStream(file);
             XMLDecoder xmlDecoder = new XMLDecoder(is);
-            String type = (String) xmlDecoder.readObject();//读取素材类型
-            String suCaiName = (String) xmlDecoder.readObject();//读取素材名称
-            Object o = xmlDecoder.readObject();//读取素材数据
+            String type = null;
+            String suCaiName = null;
+            Object o = null;
+            try {
+                String logo = (String) xmlDecoder.readObject();//标识
+                if(!"Boray".equals(decode(logo))){
+                    JFrame frame = (JFrame) MainUi.map.get("frame");
+                    JOptionPane.showMessageDialog(frame, "素材导入失败，该文件不是素材！", "提示", JOptionPane.PLAIN_MESSAGE);
+                    return;
+                }
+                type = (String) xmlDecoder.readObject();//读取素材类型
+                suCaiName = (String) xmlDecoder.readObject();//读取素材名称
+                o = xmlDecoder.readObject();//读取素材数据
+            }catch (Exception e){
+                JFrame frame = (JFrame) MainUi.map.get("frame");
+                JOptionPane.showMessageDialog(frame, "素材导入失败，该文件不是素材！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
 
+            JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");//类型列表
+            String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
+            String str = null;
+            for (int i = 0;i<btns.length;i++){
+                if(btns[i].isSelected()){
+                    str = name[i];
+                }
+            }
+            if(!str.equals(type)){
+                JFrame frame = (JFrame) MainUi.map.get("frame");
+                JOptionPane.showMessageDialog(frame, "素材导入失败，导入类型与选中的类型不一致！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
             //弹出界面
             JFrame f = (JFrame) MainUi.map.get("frame");
             JDialog dialog = new JDialog(f, true);
@@ -195,6 +225,17 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
                                 map.put("" + i, tmp);
                             }
                         }
+
+                        SuCaiUI suCaiUI = new SuCaiUI();
+
+                        String aloneCount = suCaiUI.getAlone(suCaiLightType.getSelectedValue().toString());//当前灯库的素材数量
+                        JLabel alone = (JLabel) MainUi.map.get("alone");
+                        alone.setText(aloneCount);
+
+                        String count = suCaiUI.getCount();//所有灯库的素材数量
+                        JLabel countLabel = (JLabel) MainUi.map.get("count");
+                        countLabel.setText(count);
+
                         dialog.dispose();
                     }
                 }
@@ -234,5 +275,22 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
         String suCaiSelect = suCai_list.getSelectedValue().toString();
         fileName = list.getSelectedValue().toString() + "----" + type + "----" + suCaiSelect.substring(0, suCaiSelect.indexOf("-")) + ".xml";
         return fileName;
+    }
+
+    //加密
+    public String encode(String str){
+        return new sun.misc.BASE64Encoder().encode(str.getBytes());
+    }
+
+    //解密
+    public String decode(String s){
+        String str = null;
+        try {
+            sun.misc.BASE64Decoder decode = new sun.misc.BASE64Decoder();
+            str = new String(decode.decodeBuffer(s));
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return str;
     }
 }

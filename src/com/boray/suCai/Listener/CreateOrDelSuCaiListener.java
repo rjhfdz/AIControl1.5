@@ -11,6 +11,7 @@ import javax.swing.*;
 import com.boray.Data.Data;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
+import com.boray.suCai.UI.SuCaiUI;
 
 public class CreateOrDelSuCaiListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
@@ -140,6 +141,17 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                                 map.put("" + i, tmp);
                             }
                         }
+
+                        SuCaiUI suCaiUI = new SuCaiUI();
+
+                        String aloneCount = suCaiUI.getAlone(suCaiLightType.getSelectedValue().toString());//当前灯库的素材数量
+                        JLabel alone = (JLabel) MainUi.map.get("alone");
+                        alone.setText(aloneCount);
+
+                        String count = suCaiUI.getCount();//所有灯库的素材数量
+                        JLabel countLabel = (JLabel) MainUi.map.get("count");
+                        countLabel.setText(count);
+
                         dialog.dispose();
                     }
                 }

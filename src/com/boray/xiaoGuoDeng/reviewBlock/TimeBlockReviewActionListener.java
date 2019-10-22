@@ -24,14 +24,14 @@ public class TimeBlockReviewActionListener {
 				os.write(b);
 				os.flush();
 
-				Thread.sleep(40);
+				Thread.sleep(200);
 
 				//分组
 				b = TimeBlockReviewData.getGroupOfLights();
 				os.write(b);
 				os.flush();
 				
-				Thread.sleep(40);
+				Thread.sleep(200);
 				
 
 				//熄灯+加速度
@@ -39,33 +39,33 @@ public class TimeBlockReviewActionListener {
 				os.write(b);
 				os.flush();
 				
-				Thread.sleep(40);
+				Thread.sleep(200);
 				b = TimeBlockReviewData.getOffLights()[1];
 				os.write(b);
 				os.flush();
 
 				//灯库
-				Thread.sleep(40);
+				Thread.sleep(200);
 				b = TimeBlockReviewData.getlibOfLights()[0];
 				os.write(b);
 				os.flush();
-				Thread.sleep(40);
+				Thread.sleep(200);
 				b = TimeBlockReviewData.getlibOfLights()[1];
 				os.write(b);
 				os.flush();
 				
 				//效果灯时间块数据
-				Thread.sleep(40);
+				Thread.sleep(200);
 				Object[] objects = TimeBlockReviewData.getEffectLight(sc-1,group, block,index);
 				for (int i = 0; i < objects.length; i++) {
 					b = (byte[])objects[i];
 					os.write(b);
 					os.flush();
-					Thread.sleep(40);
+					Thread.sleep(200);
 				}
 				
 				//启动预览
-				//Thread.sleep(200);
+				Thread.sleep(200);
 				b = TimeBlockReviewData.getStarReview(sc, group, block);
 				os.write(b);
 				os.flush();

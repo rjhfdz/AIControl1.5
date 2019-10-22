@@ -291,7 +291,7 @@ public class ReviewUtils {
                 int a = 0;
                 byte[] dongZuoTuXing = new byte[11];
                 byte[] ziDingYi = new byte[5];
-                byte[] beiSaiEr = new byte[42];
+                byte[] beiSaiEr = new byte[25];
                 if (map != null) {
                     int selected = Integer.valueOf((String) map.get("2"));
                     if (selected == 1) {
@@ -750,10 +750,10 @@ public class ReviewUtils {
         }
         for (int i = 0; i < 30; i++) {
             for (int k = 0; k < 20; k++) {
-                list.add(t2[i][j][0]);
-                list.add(t2[i][j][1]);
-                list.add(t2[i][j][2]);
-                list.add(t2[i][j][3]);
+                list.add(t2[i][k][0]);
+                list.add(t2[i][k][1]);
+                list.add(t2[i][k][2]);
+                list.add(t2[i][k][3]);
             }
         }
         byte[] buff = new byte[list.size()];

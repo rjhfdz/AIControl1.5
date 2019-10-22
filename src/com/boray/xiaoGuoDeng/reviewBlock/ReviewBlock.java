@@ -9,7 +9,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 
 public class ReviewBlock {
-    public static void review(int model){
+    public static void review(int model) {
         if (Data.serialPort != null) {
             try {
 
@@ -19,14 +19,14 @@ public class ReviewBlock {
                 os.write(b);
                 os.flush();
 
-                Thread.sleep(40);
+                Thread.sleep(300);
 
                 //分组
                 b = TimeBlockReviewData.getGroupOfLights();
                 os.write(b);
                 os.flush();
 
-                Thread.sleep(40);
+                Thread.sleep(300);
 
 
                 //熄灯+加速度
@@ -34,43 +34,43 @@ public class ReviewBlock {
                 os.write(b);
                 os.flush();
 
-                Thread.sleep(40);
+                Thread.sleep(300);
                 b = TimeBlockReviewData.getOffLights()[1];
                 os.write(b);
                 os.flush();
 
                 //灯库
-                Thread.sleep(40);
+                Thread.sleep(300);
                 b = TimeBlockReviewData.getlibOfLights()[0];
                 os.write(b);
                 os.flush();
-                Thread.sleep(40);
+                Thread.sleep(300);
                 b = TimeBlockReviewData.getlibOfLights()[1];
                 os.write(b);
                 os.flush();
 
                 //素材数据区
-                Thread.sleep(40);
-                Object[] objects = TimeBlockReviewData.getEffectLight3(model,14);
+                Thread.sleep(500);
+                Object[] objects = TimeBlockReviewData.getEffectLight4(4096, model, 14);
                 for (int i = 0; i < objects.length; i++) {
-                    b = (byte[])objects[i];
+                    b = (byte[]) objects[i];
                     os.write(b);
                     os.flush();
-                    Thread.sleep(40);
+                    Thread.sleep(500);
                 }
 
                 //场景
-                Thread.sleep(40);
-                objects = TimeBlockReviewData.getEffectLight3(model,15);
+                Thread.sleep(500);
+                objects = TimeBlockReviewData.getEffectLight4(4096, model, 15);
                 for (int i = 0; i < objects.length; i++) {
-                    b = (byte[])objects[i];
+                    b = (byte[]) objects[i];
                     os.write(b);
                     os.flush();
-                    Thread.sleep(40);
+                    Thread.sleep(500);
                 }
 
                 //启动预览
-                Thread.sleep(200);
+                Thread.sleep(300);
                 b = TimeBlockReviewData.getStarReview2(model);
                 os.write(b);
                 os.flush();
@@ -83,7 +83,7 @@ public class ReviewBlock {
         }
     }
 
-    public static void saveFile(int model){
+    public static void saveFile(int model) {
         JFileChooser fileChooser = new JFileChooser();
         if (!Data.saveCtrlFilePath.equals("")) {
             fileChooser.setCurrentDirectory(new File(Data.saveCtrlFilePath));
@@ -120,16 +120,16 @@ public class ReviewBlock {
                 os.write(b);
 
                 //素材数据区
-                Object[] objects = TimeBlockReviewData.getEffectLight3(model,14);
+                Object[] objects = TimeBlockReviewData.getEffectLight4(4096, model, 14);
                 for (int i = 0; i < objects.length; i++) {
-                    b = (byte[])objects[i];
+                    b = (byte[]) objects[i];
                     os.write(b);
                 }
 
                 //场景
-                objects = TimeBlockReviewData.getEffectLight3(model,15);
+                objects = TimeBlockReviewData.getEffectLight4(4096, model, 15);
                 for (int i = 0; i < objects.length; i++) {
-                    b = (byte[])objects[i];
+                    b = (byte[]) objects[i];
                     os.write(b);
                 }
 
@@ -143,7 +143,7 @@ public class ReviewBlock {
                 JFrame frame = (JFrame) MainUi.map.get("frame");
                 JOptionPane.showMessageDialog(frame, "场景预览测试文件成功!", "提示", JOptionPane.PLAIN_MESSAGE);
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
