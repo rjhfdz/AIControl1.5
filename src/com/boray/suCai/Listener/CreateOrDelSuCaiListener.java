@@ -53,7 +53,7 @@ public class CreateOrDelSuCaiListener implements ActionListener{
 		JPanel p2 = new JPanel();
 		JButton btn1 = new JButton("确定");
 		JButton btn2 = new JButton("取消");
-		
+		 
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if ("取消".equals(e.getActionCommand())) {

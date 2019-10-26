@@ -35,6 +35,7 @@ import javax.usb.UsbPipe;
 
 import bezier.BezierDialog;
 
+import com.alibaba.fastjson.JSON;
 import com.boray.Data.ChannelName;
 import com.boray.Data.Data;
 import com.boray.Data.TuXingAction;
@@ -52,6 +53,8 @@ import com.boray.xiaoGuoDeng.reviewByPc.TimeBlockReviewByPc;
 import com.boray.xiaoGuoDeng.reviewCode.ReviewUtils;
 
 public class SuCaiEditUI {
+	
+	
 	private JDialog dialog;
 	private JCheckBox[] checkBoxs;
 	private int dengKuNumber;//µ∆ø‚Œª÷√
@@ -89,6 +92,7 @@ public class SuCaiEditUI {
 	public void show(String suCaiName,int suCaiNum,int denKuNum){
 		dialog = new JDialog();
 		JFrame f = (JFrame)MainUi.map.get("frame");
+		
 		dialog = new JDialog(f,true);
 		dialog.setResizable(false);
 		actionCompontList = new ArrayList<>();
@@ -142,12 +146,15 @@ public class SuCaiEditUI {
 		int grpN = Integer.valueOf(groupNum).intValue()-1;
 		int blkN = block-1;
 		hashMap = (HashMap)Data.XiaoGuoDengObjects[model][grpN][blkN];*/
+	
 		hashMap = (HashMap)Data.SuCaiObjects[denKuNum][suCaiNum];
+		System.out.println(JSON.toJSON(Data.SuCaiObjects));
 		if (hashMap == null) {
 			hashMap = new HashMap<>();
 			Data.SuCaiObjects[denKuNum][suCaiNum] = hashMap;
 		}
 		List list66 = (List)hashMap.get("channelData");
+	
 		if (list66 != null) {
 			vector88 = (Vector)list66.get(0);
 			bn = (boolean[])list66.get(1);

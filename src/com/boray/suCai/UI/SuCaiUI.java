@@ -15,9 +15,12 @@ import javax.swing.ButtonGroup;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
@@ -31,9 +34,13 @@ import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
 import com.boray.suCai.Listener.CreateOrDelSuCaiListener;
 import com.boray.suCai.Listener.EditListener;
+import com.boray.suCai.Listener.LoginListener;
+import com.boray.suCai.Listener.ShangchuanListener;
 import com.boray.suCai.Listener.SuCaiTypeListener;
 
 public class SuCaiUI {
+	JTextField username;
+	private JPasswordField password;
 	public void show(JPanel pane) {
 		pane.setBorder(new LineBorder(Color.black));
 		pane.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -67,7 +74,29 @@ public class SuCaiUI {
 	}
 	private void setP4(JPanel pane){
 		
+		FlowLayout flowLayout2 = new FlowLayout(FlowLayout.CENTER);
+		
+		pane.setLayout(flowLayout2);
+		JLabel a1 =new JLabel("");
+		a1.setPreferredSize(new Dimension(250,150));
+		pane.add(a1);
+		JLabel a =new JLabel("用户名:");
+		pane.add(a);
+	 username = new JTextField();
+	 username.setPreferredSize(new Dimension(200,30));
+	 pane.add(username);
+	 pane.add(new JLabel("密 码 :"));
+	 
+	 password = new JPasswordField();
+	 password.setPreferredSize(new Dimension(200,30));
+	 pane.add(password);
+	 JButton login = new JButton("登录");
+	 pane.add(login);
+	 login.addActionListener(new LoginListener(password,username,pane));
+	
 	}
+	
+
 	private void setP3(JPanel p3){
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setPreferredSize(new Dimension(270,520));
@@ -105,9 +134,11 @@ public class SuCaiUI {
 		JButton upLoadBtn = new JButton("上传");
 		CreateOrDelSuCaiListener listener = new CreateOrDelSuCaiListener();
 		EditListener listener2 = new EditListener();
+		ShangchuanListener listener3 = new ShangchuanListener();
 		editBtn.addActionListener(listener2);
 		newBtn.addActionListener(listener);
 		delBtn.addActionListener(listener);
+		upLoadBtn.addActionListener(listener3);
 		Dimension dimension = new Dimension(55,34);
 		newBtn.setPreferredSize(dimension);
 		delBtn.setPreferredSize(dimension);
@@ -130,6 +161,7 @@ public class SuCaiUI {
 		list.addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent listSelectionEvent) {
 				if (list.getSelectedValue()!=null) {
+					
 					Map map = (Map)Data.suCaiMap.get(list.getSelectedValue().toString());
 					JToggleButton[] btns = (JToggleButton[])MainUi.map.get("suCaiTypeBtns");
 					String[] name = {"动感","慢摇","抒情","柔和","浪漫","温馨","炫丽","梦幻","其他"};
@@ -201,3 +233,4 @@ public class SuCaiUI {
 		btns[0].setSelected(true);
 	}
 }
+ 
