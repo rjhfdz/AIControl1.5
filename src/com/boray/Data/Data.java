@@ -164,4 +164,6 @@ public class Data {
 	//素材管理的变量
 	public static Map suCaiMap = new HashMap();
 	public static Map suCaiNameMap = new HashMap();
+	//云端素材
+	public static Map yunSuCaiMap = new HashMap();
 }
