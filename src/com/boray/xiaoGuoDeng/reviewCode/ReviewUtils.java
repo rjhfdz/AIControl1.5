@@ -210,17 +210,65 @@ public class ReviewUtils {
         }
 
         byte[] dengKuTonDao = dengKuTonDao();//灯库通道定义
-        byte[] xiaoGuoDengSuCaiLianBiao = xiaoGuoDengSuCaiLianBiao(size, str);//效果灯素材联表区
-        byte[] suCaiData = suCaiQuData(str);//素材区数据
-        byte[] bytes = new byte[dengKuTonDao.length + xiaoGuoDengSuCaiLianBiao.length + suCaiData.length];
+
+        byte[] dengKuMieZu = new byte[30];//灯库每组数量区
+        JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels_group" + model);//时间轴
+        NewJTable table3 = (NewJTable) MainUi.map.get("table_dengJu");//所有灯具
+        Map<Integer, TreeSet<Integer>> map = new HashMap<>();
+        List<Integer> listDengKu = new ArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            //获得灯库id
+            int number = Integer.valueOf(timeBlockPanels[i + 1].getName()).intValue();
+            int tt = 0, a = 0;
+            if (number - 1 < Data.GroupOfLightList.size()) {
+                TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(number - 1);
+                if (!treeSet.isEmpty()) {
+                    a = (int) treeSet.first();
+                    String typeString = table3.getValueAt(a, 3).toString();
+                    tt = Integer.valueOf(typeString.split("#")[0].substring(2)).intValue();
+                }
+            }
+            if (timeBlockPanels[i + 1].isVisible()) {
+                if (!map.containsKey(tt)) {
+                    TreeSet<Integer> set = new TreeSet<>();
+                    map.put(tt, set);
+                    listDengKu.add(tt);
+                }
+            }
+            int count = 0;
+            for (int j = 0; j < 20; j++) {
+                if (timeBlockPanels[i + 1].isVisible()) {
+                    if (timeBlockPanels[i + 1].getComponentCount() > j) {
+                        DefineJLable lable = (DefineJLable) timeBlockPanels[i + 1].getComponent(j);
+                        if (lable.getText().contains("√")) {
+                            String s = lable.getText().substring(lable.getText().indexOf("(") + 1, lable.getText().indexOf(")"));
+                            int integer = Integer.parseInt(s);
+                            TreeSet<Integer> set = map.get(tt);
+                            set.add(integer);
+                            count++;
+                        }
+                    }
+                }
+            }
+            dengKuMieZu[i] = (byte) count;
+        }
+
+        List<String> list = getdengKuSuCai(map, listDengKu);
+
+        byte[] xiaoGuoDengSuCaiLianBiao = xiaoGuoDengSuCaiLianBiao(list);//效果灯素材联表区
+        byte[] suCaiData = suCaiQuData(list);//素材区数据
+        byte[] bytes = new byte[dengKuTonDao.length + dengKuMieZu.length + xiaoGuoDengSuCaiLianBiao.length + suCaiData.length];
         for (int i = 0; i < dengKuTonDao.length; i++) {
             bytes[i] = dengKuTonDao[i];
         }
+        for (int i = 0; i < dengKuMieZu.length; i++) {
+            bytes[dengKuTonDao.length + i] = dengKuMieZu[i];
+        }
         for (int i = 0; i < xiaoGuoDengSuCaiLianBiao.length; i++) {
-            bytes[dengKuTonDao.length + i] = xiaoGuoDengSuCaiLianBiao[i];
+            bytes[dengKuTonDao.length + dengKuMieZu.length + i] = xiaoGuoDengSuCaiLianBiao[i];
         }
         for (int i = 0; i < suCaiData.length; i++) {
-            bytes[dengKuTonDao.length + xiaoGuoDengSuCaiLianBiao.length + i] = suCaiData[i];
+            bytes[dengKuTonDao.length + dengKuMieZu.length + xiaoGuoDengSuCaiLianBiao.length + i] = suCaiData[i];
         }
 
         return bytes;
@@ -247,12 +295,12 @@ public class ReviewUtils {
     }
 
     //效果灯素材联表区
-    public static byte[] xiaoGuoDengSuCaiLianBiao(int size, List<String> str) {
-        byte[] buff = new byte[8 + size * 3];
+    public static byte[] xiaoGuoDengSuCaiLianBiao(List<String> str) {
+        byte[] buff = new byte[8 + str.size() * 3];
         buff[0] = 0x55;
         buff[1] = (byte) 0xAA;
-        buff[6] = (byte) (size % 256);
-        buff[7] = (byte) (size / 256);//引导区
+        buff[6] = (byte) (str.size() % 256);
+        buff[7] = (byte) (str.size() / 256);//引导区
         //素材关联、素材步数
         for (int i = 0; i < str.size(); i++) {
             int denKuNum = Integer.parseInt(str.get(i).split("#")[0]);
@@ -260,14 +308,14 @@ public class ReviewUtils {
             buff[8 + i * 2] = (byte) (denKuNum + 1);
             buff[9 + i * 2] = (byte) (suCaiNum + 1);
             HashMap hashMap = (HashMap) Data.SuCaiObjects[denKuNum][suCaiNum];
-            buff[8 + i + (size * 2)] = 1;//默认一条通道
+            buff[8 + i + (str.size() * 2)] = 1;//默认一条通道
             if (hashMap != null) {
                 List list66 = (List) hashMap.get("channelData");
                 Vector vector88 = null;
                 if (list66 != null) {
                     vector88 = (Vector) list66.get(0);
                     if (vector88 != null)
-                        buff[8 + i + (size * 2)] = (byte) vector88.size();
+                        buff[8 + i + (str.size() * 2)] = (byte) vector88.size();
                 }
             }
         }
@@ -735,13 +783,14 @@ public class ReviewUtils {
                 if (timeBlockPanels[i + 1].isVisible()) {
                     if (timeBlockPanels[i + 1].getComponentCount() > k) {
                         DefineJLable lable = (DefineJLable) timeBlockPanels[i + 1].getComponent(k);
-                        String s = lable.getText().substring(lable.getText().indexOf("(") + 1, lable.getText().indexOf(")"));
-                        int integer = Integer.parseInt(s);
-                        t2[i][k][0] = (byte) tt;
-                        t2[i][k][1] = (byte) integer;
+                        if (lable.getText().contains("√")) {
+                            String s = lable.getText().substring(lable.getText().indexOf("(") + 1, lable.getText().indexOf(")"));
+                            int integer = Integer.parseInt(s);
+                            t2[i][k][0] = (byte) tt;
+                            t2[i][k][1] = (byte) integer;
+                        }
                     }
                 }
-
             }
         }
         List<Byte> list = new ArrayList<>();
@@ -776,4 +825,14 @@ public class ReviewUtils {
         }
     }
 
+    public static List<String> getdengKuSuCai(Map<Integer, TreeSet<Integer>> map, List<Integer> dengKu) {
+        List<String> list = new ArrayList<>();
+        for (Integer key : dengKu) {
+            TreeSet<Integer> set = map.get(key);
+            for (Integer value : set) {
+                list.add((key - 1) + "#" + (value - 1));
+            }
+        }
+        return list;
+    }
 }

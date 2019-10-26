@@ -291,7 +291,7 @@ public class SuCaiEditUI {
         int c = table.getColumnCount() - 2;
         boolean[] f = new boolean[c];
         for (int i = 0; i < c; i++) {
-            f[i] = checkBoxs2[i].isSelected();
+            f[i] = false;
         }
         list2.add(f);
         hashMap.put("beiyong",list2);

@@ -13,13 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 import com.boray.Data.Data;
@@ -102,7 +96,7 @@ public class MainUi {
 		tabbedPane.setFocusable(false);
 		//tabbedPane.setUI((TabbedPaneUI)BasicTabbedPaneUI.createUI(tabbedPane));
 		JPanel lightPane = new JPanel();
-		lightPane.setPreferredSize(new Dimension(1020,100));
+		lightPane.setPreferredSize(new Dimension(1020,110));
 		TitledBorder tb = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "-", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
 		lightPane.setBorder(tb);
 		//lightPane.setBorder(new LineBorder(Color.gray));
@@ -116,7 +110,6 @@ public class MainUi {
 		//bodyPane.setBorder(new LineBorder(Color.gray));
 		bodyPane.setPreferredSize(new Dimension(1020,600));
 		new BodyPane().show(bodyPane);
-		
 		frame.add(lightPane);
 		frame.add(bodyPane);
 	}

@@ -17,7 +17,7 @@ import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
 
 public class SwitchListener implements ActionListener{
-	private static String selected = "1";
+	private static String selected = "10";
 	public void actionPerformed(ActionEvent e) {
 		CardLayout cardLayout = (CardLayout)MainUi.map.get("titileCard");
 		JPanel parentPane = (JPanel)MainUi.map.get("titilePane");
@@ -127,6 +127,9 @@ public class SwitchListener implements ActionListener{
 			if (s.length > 0) {
 				list.setSelectedIndex(0);
 			}
+		}
+		if(btn.getName().equals("10")){
+
 		}
 		selected = btn.getName();
 		cardLayout.show(parentPane, btn.getName());

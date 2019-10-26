@@ -19,14 +19,14 @@ public class ReviewBlock {
                 os.write(b);
                 os.flush();
 
-                Thread.sleep(300);
+                Thread.sleep(200);
 
                 //分组
                 b = TimeBlockReviewData.getGroupOfLights();
                 os.write(b);
                 os.flush();
 
-                Thread.sleep(300);
+                Thread.sleep(200);
 
 
                 //熄灯+加速度
@@ -34,43 +34,43 @@ public class ReviewBlock {
                 os.write(b);
                 os.flush();
 
-                Thread.sleep(300);
+                Thread.sleep(200);
                 b = TimeBlockReviewData.getOffLights()[1];
                 os.write(b);
                 os.flush();
 
                 //灯库
-                Thread.sleep(300);
+                Thread.sleep(200);
                 b = TimeBlockReviewData.getlibOfLights()[0];
                 os.write(b);
                 os.flush();
-                Thread.sleep(300);
+                Thread.sleep(200);
                 b = TimeBlockReviewData.getlibOfLights()[1];
                 os.write(b);
                 os.flush();
 
                 //素材数据区
-                Thread.sleep(500);
+                Thread.sleep(200);
                 Object[] objects = TimeBlockReviewData.getEffectLight4(4096, model, 14);
                 for (int i = 0; i < objects.length; i++) {
                     b = (byte[]) objects[i];
                     os.write(b);
                     os.flush();
-                    Thread.sleep(500);
+                    Thread.sleep(200);
                 }
 
                 //场景
-                Thread.sleep(500);
+                Thread.sleep(230);
                 objects = TimeBlockReviewData.getEffectLight4(4096, model, 15);
                 for (int i = 0; i < objects.length; i++) {
                     b = (byte[]) objects[i];
                     os.write(b);
                     os.flush();
-                    Thread.sleep(500);
+                    Thread.sleep(230);
                 }
 
                 //启动预览
-                Thread.sleep(300);
+                Thread.sleep(200);
                 b = TimeBlockReviewData.getStarReview2(model);
                 os.write(b);
                 os.flush();

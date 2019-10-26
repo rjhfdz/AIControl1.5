@@ -16,19 +16,7 @@ import java.util.TimerTask;
 
 import javax.comm.CommPortIdentifier;
 import javax.comm.SerialPort;
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JSlider;
-import javax.swing.JTextField;
-import javax.swing.JToggleButton;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
@@ -49,6 +37,7 @@ public class LightBtnPane implements ActionListener{
 		flowLayout.setVgap(0);
 		flowLayout.setHgap(-2);
 		pane.setLayout(flowLayout);
+		JToggleButton btn10 = new JToggleButton("÷˜¥∞ø⁄");
 		JToggleButton btn1 = new JToggleButton("≥°æ∞≈‰÷√");
 		JToggleButton btn2 = new JToggleButton("µ∆ø‚≈‰÷√");
 		JToggleButton btn2_2 = new JToggleButton("Àÿ≤ƒπ‹¿Ì");
@@ -65,12 +54,14 @@ public class LightBtnPane implements ActionListener{
 		btn3.setName("3");btn4.setName("4");
 		btn5.setName("5");btn6.setName("6");
 		btn7.setName("7");btn8.setName("8");
-		btn1.setSelected(true);
+		btn10.setName("10");
+		btn10.setSelected(true);
 		SwitchListener listener = new SwitchListener();
 		btn1.addActionListener(listener);btn2.addActionListener(listener);btn2_2.addActionListener(listener);
 		btn3.addActionListener(listener);btn4.addActionListener(listener);
 		btn5.addActionListener(listener);btn6.addActionListener(listener);
 		btn7.addActionListener(listener);btn8.addActionListener(listener);
+		btn10.addActionListener(listener);
 		ImageIcon icon = new ImageIcon(getClass().getResource("/icon/1.png"));
 		ImageIcon icon2 = new ImageIcon(getClass().getResource("/icon/2.png"));
 		ImageIcon icon3 = new ImageIcon(getClass().getResource("/icon/3.png"));
@@ -84,7 +75,8 @@ public class LightBtnPane implements ActionListener{
 		btn3.setIcon(icon3);
 		btn4.setIcon(icon4);btn5.setIcon(icon5);btn6.setIcon(icon6);
 		btn7.setIcon(icon7);btn8.setIcon(icon8);
-		int width = 66,height = 66;
+		btn10.setIcon(icon8);
+		int width = 60,height = 60;
 		btn1.setPreferredSize(new Dimension(width,height));
 		btn2.setPreferredSize(new Dimension(width,height));
 		btn3.setPreferredSize(new Dimension(width,height));
@@ -94,16 +86,19 @@ public class LightBtnPane implements ActionListener{
 		btn7.setPreferredSize(new Dimension(width,height));
 		btn8.setPreferredSize(new Dimension(width,height));
 		btn2_2.setPreferredSize(new Dimension(width,height));
+		btn10.setPreferredSize(new Dimension(width,height));
 		btn1.setMargin(new Insets(0,-10,0,-10));btn2.setMargin(new Insets(-10,-10,-10,-10));
 		btn2_2.setMargin(new Insets(-10,-10,-10,-10));
 		btn3.setMargin(new Insets(0,-10,0,-10));btn4.setMargin(new Insets(0,-10,0,-10));
 		btn5.setMargin(new Insets(0,-10,0,-10));btn6.setMargin(new Insets(0,-10,0,-10));
 		btn7.setMargin(new Insets(0,-10,0,-10));btn8.setMargin(new Insets(0,-10,0,-10));
+		btn10.setMargin(new Insets(0,-10,0,-10));
 		btn1.setFocusable(false);btn2.setFocusable(false);
 		btn3.setFocusable(false);btn4.setFocusable(false);
 		btn5.setFocusable(false);btn6.setFocusable(false);
 		btn7.setFocusable(false);btn8.setFocusable(false);
 		btn2_2.setFocusable(false);
+		btn10.setFocusPainted(false);
 		
 		btn1.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btn1.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -121,11 +116,15 @@ public class LightBtnPane implements ActionListener{
 		btn7.setHorizontalTextPosition(SwingConstants.CENTER);
 		btn8.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btn8.setHorizontalTextPosition(SwingConstants.CENTER);
+
+		btn10.setVerticalTextPosition(SwingConstants.BOTTOM);
+		btn10.setHorizontalTextPosition(SwingConstants.CENTER);
 		
 		btn2_2.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btn2_2.setHorizontalTextPosition(SwingConstants.CENTER);
 		
 		ButtonGroup group = new ButtonGroup();
+		group.add(btn10);
 		group.add(btn1);
 		group.add(btn2);group.add(btn2_2);
 		group.add(btn3);
@@ -134,16 +133,37 @@ public class LightBtnPane implements ActionListener{
 		group.add(btn6);
 		group.add(btn7);
 		group.add(btn8);
-		
-		pane.add(btn1);
-		pane.add(btn2);pane.add(btn2_2);
-		pane.add(btn3);
-		pane.add(btn4);
-		pane.add(btn5);
-		pane.add(btn6);
-		pane.add(btn7);
-		pane.add(btn8);
-		
+
+		JPanel jPanel = new JPanel();
+		jPanel.setPreferredSize(new Dimension(650,60));
+
+		jPanel.add(btn10);
+		jPanel.add(btn1);
+		jPanel.add(btn2);jPanel.add(btn2_2);
+		jPanel.add(btn3);
+		jPanel.add(btn4);
+		jPanel.add(btn5);
+		jPanel.add(btn6);
+		jPanel.add(btn7);
+		jPanel.add(btn8);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setPreferredSize(new Dimension(550,80));
+		scrollPane.setBorder(BorderFactory.createMatteBorder(0,0,0,0,Color.gray));
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane.setViewportView(jPanel);
+
+		pane.add(scrollPane);
+//		pane.add(btn10);
+//		pane.add(btn1);
+//		pane.add(btn2);pane.add(btn2_2);
+//		pane.add(btn3);
+//		pane.add(btn4);
+//		pane.add(btn5);
+//		pane.add(btn6);
+//		pane.add(btn7);
+//		pane.add(btn8);
+
 		JPanel N1 = new JPanel();
 		FlowLayout flowLayout3 = new FlowLayout(FlowLayout.CENTER);
 		flowLayout3.setVgap(-2);

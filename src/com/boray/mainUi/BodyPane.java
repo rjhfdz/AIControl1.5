@@ -2,12 +2,13 @@ package com.boray.mainUi;
 
 import java.awt.CardLayout;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import com.boray.beiFen.UI.BeiFenUI;
 import com.boray.changJing.UI.ChangJinUI;
 import com.boray.dengKu.UI.DengKuUI;
 import com.boray.kongTiao.UI.KongTiaoUI;
+import com.boray.main.UI.BorayMainUI;
 import com.boray.quanJu.UI.QuanJuUI;
 import com.boray.shengKon.UI.ShengKonUI;
 import com.boray.suCai.UI.SuCaiUI;
@@ -28,9 +29,11 @@ public class BodyPane {
 		JPanel zhongKonPane = new JPanel();
 		JPanel quanJuPane = new JPanel();
 		JPanel beiFenPane = new JPanel();
-		
 		JPanel suCaiPane = new JPanel();
-		
+
+		JPanel mainPane = new JPanel();
+
+		new BorayMainUI().show(mainPane);
 		new ChangJinUI().show(changJinPane);
 		new DengKuUI().show(dengKuPane);
 		new XiaoGuoDengUI().show(xiaoGuoPane);
@@ -40,7 +43,9 @@ public class BodyPane {
 		new QuanJuUI().show(quanJuPane);
 		new BeiFenUI().show(beiFenPane);
 		new SuCaiUI().show(suCaiPane);
-		
+
+		pane.add("10",mainPane);
+
 		pane.add("1", changJinPane);
 		pane.add("2", dengKuPane);
 		pane.add("3", xiaoGuoPane);
@@ -50,5 +55,6 @@ public class BodyPane {
 		pane.add("7", quanJuPane);
 		pane.add("8", beiFenPane);
 		pane.add("9",suCaiPane);
+
 	}
 }
