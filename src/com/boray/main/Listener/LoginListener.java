@@ -1,5 +1,8 @@
 package com.boray.main.Listener;
 
+import com.alibaba.fastjson.JSON;
+import com.boray.Utils.HttpClientUtil;
+import com.boray.entity.Users;
 import com.boray.main.UI.CompanyUI;
 import com.boray.main.UI.LocalUI;
 import com.boray.main.UI.MineUI;
@@ -10,6 +13,8 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginListener implements ActionListener {
 
@@ -17,6 +22,7 @@ public class LoginListener implements ActionListener {
 
     private CardLayout card;
     private JPanel rightPane;
+    private JFrame frame;
 
     public LoginListener(JPanel panel) {
         this.panel = panel;
@@ -25,10 +31,10 @@ public class LoginListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton) e.getSource();
-        JFrame frame = (JFrame) MainUi.map.get("frame");
+        frame = (JFrame) MainUi.map.get("frame");
         if ("登录".equals(button.getText())) {
             String username = ((JTextField) MainUi.map.get("username")).getText();
-            String password = ((JPasswordField) MainUi.map.get("password")).getPassword().toString();
+            String password = new String(((JPasswordField) MainUi.map.get("password")).getPassword());
             if (username == null || username == "") {
                 JOptionPane.showMessageDialog(frame, "登录失败，用户名不能为空！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
@@ -37,12 +43,28 @@ public class LoginListener implements ActionListener {
                 JOptionPane.showMessageDialog(frame, "登录失败，密码不能为空！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
             }
-            init();
+            login(username, password);
+//            init();
         } else {
             JTextField username = (JTextField) MainUi.map.get("username");
             JPasswordField password = (JPasswordField) MainUi.map.get("password");
             username.setText("");
             password.setText("");
+        }
+    }
+
+    private void login(String username, String password) {
+        Map<String, String> param = new HashMap<>();
+        param.put("username", username);
+        param.put("userpassword", password);
+        String request = HttpClientUtil.doGet("http://128.8.3.48:8778/login", param);
+        Users users = JSON.parseObject(request, Users.class);
+        if (users != null && !users.getLoginstatus().equals(0)) {
+            MainUi.map.put("Users", users);
+            init();
+        } else {
+            JOptionPane.showMessageDialog(frame, "登录失败，用户名或密码不正确！", "提示", JOptionPane.PLAIN_MESSAGE);
+            return;
         }
     }
 

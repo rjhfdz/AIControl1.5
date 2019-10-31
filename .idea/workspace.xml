@@ -6,9 +6,49 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="">
+    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="添加主窗口界面，我的项目、公司项目、本地项目，修改文件夹文件的显示图标。&#10;备份界面添加U盘导入导出功能。">
+      <change afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/USBFlashDiskListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/boray/entity/FileOrFolder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/boray/main/TreeUtil/CustomTreeCellRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resource/FileIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resource/Resources.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resource/prfrs_32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resource/prfs_32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/resource/product_32.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AIControl1.5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AIControl1.5.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/Data/ZhiLingJi.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/Data/ZhiLingJi.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/Listener/SwitchListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/Listener/SwitchListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/MergeAllListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/MergeAllListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/UI/BeiFenUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/UI/BeiFenUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/mainUi/LightBtnPane$3$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/mainUi/LightBtnPane$3$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/mainUi/LightBtnPane$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/mainUi/LightBtnPane$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/mainUi/LightBtnPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/mainUi/LightBtnPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/reviewCode/ReviewUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/reviewCode/ReviewUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/Data/ZhiLingJi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Data/ZhiLingJi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/Listener/SwitchListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Listener/SwitchListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/Utils/HttpClientUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Utils/HttpClientUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/MergeAllListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/MergeAllListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/UI/BeiFenUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/UI/BeiFenUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/entity/Users.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/entity/Users.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/main/Listener/LoginListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/LoginListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/CompanyUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/CompanyUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/MineUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/MineUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/mainUi/LightBtnPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/mainUi/LightBtnPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/returnListener/ComReturnListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/returnListener/ComReturnListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/Listener/EditListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/Listener/EditListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/reviewCode/ReviewUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/reviewCode/ReviewUtils.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,19 +70,21 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/boray/suCai" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/resource" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="settings.github" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.boray.xiaoGuoDeng.reviewCode" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\BorayWork\AIControl1.5\src\resource" />
       <recent name="D:\BorayWork\AIControl1.5\src\com\boray\suCai" />
       <recent name="D:\BorayWork\AIControl1.5\src\lib" />
     </key>
@@ -153,6 +195,22 @@
       <workItem from="1571443371658" duration="13570000" />
       <workItem from="1571615458884" duration="16860000" />
       <workItem from="1571701442365" duration="2775000" />
+      <workItem from="1572078785356" duration="317000" />
+      <workItem from="1572079128801" duration="175000" />
+      <workItem from="1572079708664" duration="1414000" />
+      <workItem from="1572081151779" duration="293000" />
+      <workItem from="1572081469699" duration="789000" />
+      <workItem from="1572221245354" duration="9605000" />
+      <workItem from="1572235206718" duration="6147000" />
+      <workItem from="1572253686145" duration="945000" />
+      <workItem from="1572254797913" duration="1164000" />
+      <workItem from="1572307160838" duration="23529000" />
+      <workItem from="1572400822427" duration="9522000" />
+      <workItem from="1572415412570" duration="126000" />
+      <workItem from="1572416106905" duration="7066000" />
+      <workItem from="1572425755381" duration="2039000" />
+      <workItem from="1572429926322" duration="1223000" />
+      <workItem from="1572479950369" duration="15143000" />
     </task>
     <task id="LOCAL-00001" summary="文件编码格式修改">
       <created>1568079566279</created>
@@ -210,7 +268,21 @@
       <option name="project" value="LOCAL" />
       <updated>1571098085814</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="效果灯界面完善预览功能，以及发包格式">
+      <created>1572078052594</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1572078052594</updated>
+    </task>
+    <task id="LOCAL-00010" summary="idea编译后的class文件">
+      <created>1572078258153</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1572078258153</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -237,17 +309,8 @@
     <MESSAGE value="效果灯界面修改预览功能，素材界面添加导入导出功能" />
     <MESSAGE value="效果灯界面完善预览功能，以及发包格式，工程文件存储格式以及读取进行修改，data文件添加新的变量（记录素材界面新建素材的顺序）" />
     <MESSAGE value="效果灯界面完善预览功能，以及发包格式" />
-    <option name="LAST_COMMIT_MESSAGE" value="效果灯界面完善预览功能，以及发包格式" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/boray/dengKu/UI/FenZhuUI.java</url>
-          <line>60</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="idea编译后的class文件" />
+    <MESSAGE value="添加主窗口界面，我的项目、公司项目、本地项目，修改文件夹文件的显示图标。&#10;备份界面添加U盘导入导出功能。" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加主窗口界面，我的项目、公司项目、本地项目，修改文件夹文件的显示图标。&#10;备份界面添加U盘导入导出功能。" />
   </component>
 </project>

@@ -160,7 +160,7 @@ public class TimeBlockEditUI {
         //////获取当前时间块参数
         int model = Integer.valueOf(XiaoGuoDengModel.model) - 1;
         int grpN = Integer.valueOf(groupNum).intValue() - 1;
-        int denKuNum = Integer.parseInt(getxiaoGuoDengDengKuName());
+        int denKuNum = getxiaoGuoDengDengKuName();
         int suCaiNum = block;
         hashMap = (HashMap) Data.SuCaiObjects[denKuNum - 1][suCaiNum - 1];
         if (hashMap == null) {
@@ -2503,7 +2503,7 @@ public class TimeBlockEditUI {
         }
     }
 
-    public String getxiaoGuoDengDengKuName() {
+    public Integer getxiaoGuoDengDengKuName() {
         NewJTable table3 = (NewJTable) MainUi.map.get("allLightTable");//所有灯具
         Integer name = group_N;
         TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(name - 1);
@@ -2518,6 +2518,6 @@ public class TimeBlockEditUI {
                 s2 = ((String) table_dengJu.getValueAt(s1 - 1, 3)).substring(2, 3);//灯库名称
             }
         }
-        return s2;
+        return Integer.parseInt(s2);
     }
 }

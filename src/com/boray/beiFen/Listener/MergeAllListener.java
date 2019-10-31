@@ -186,7 +186,7 @@ public class MergeAllListener implements ActionListener {
                 System.out.println("雾机编程："+file.length());
 
 
-                ////效果灯素材数据（35-228SEC）192
+                ////效果灯素材数据（35-228SEC）194
                 writeFile3(os10);
                 //对数据进行补完
                 repairData(937984,os10,file);
@@ -198,13 +198,15 @@ public class MergeAllListener implements ActionListener {
                 for (int i = 1; i < 25; i++) {
                     writeFile(os10, i);
                 }
-
+                //对数据进行补完
+                repairData(1060864,os10,file);
                 os10.flush();
                 System.out.println("场景效果灯："+file.length());
 
                 ////多灯数据区-16 个声控模式(259-387SEC)129
                 shengKonMoreLigthData(os10);
-
+                //对数据进行补完
+                repairData(1589248,os10,file);
                 os10.flush();
                 System.out.println("多灯数据区-16："+file.length());
 

@@ -312,7 +312,7 @@ public class LightBtnPane implements ActionListener{
 								OutputStream os = Data.serialPort.getOutputStream();
 								os.write(ZhiLingJi.link());
 								os.flush();
-								
+
 								new Timer().schedule(new TimerTask() {
 									public void run() {
 										thread2.stop();
@@ -341,7 +341,6 @@ public class LightBtnPane implements ActionListener{
 											} catch (Exception e2) {
 												e2.printStackTrace();
 											}
-											
 											(Data.thread = new Thread(new ComReturnListener())).start();
 										}
 									}

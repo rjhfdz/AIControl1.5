@@ -595,7 +595,38 @@ public class ZhiLingJi {
 		b[19] = getJiaoYan(b);
 		return b;
 	}
-	
+
+	/**
+	 * U盘文件导入导出操作
+	 * @return
+	 */
+	public static byte[] USBFlashDiskImportAndExport(String str){
+		byte[] buff = new byte[20];
+		buff[0] = (byte)0xFA;buff[1] = 0x14;
+		buff[2] = (byte)0x64;buff[3] = (byte)TYPE;
+		buff[4] = (byte)0x0F;
+		if(str.equals("导入")){
+			buff[5] = (byte)0x01;
+		}else{
+			buff[5] = (byte)0x02;
+		}
+		buff[19] = getJiaoYan(buff);
+		return buff;
+	}
+
+	/**
+	 * 查询U盘状态
+	 * @return
+	 */
+	public static byte[] queryUSBFlashDiskState(){
+		byte[] buff = new byte[20];
+		buff[0] = (byte)0xFA;buff[1] = 0x14;
+		buff[2] = (byte)0x64;buff[3] = (byte)TYPE;
+		buff[4] = (byte)0x0F;
+		buff[19] = getJiaoYan(buff);
+		return buff;
+	}
+
 	/*
 	 * 校验和
 	 */

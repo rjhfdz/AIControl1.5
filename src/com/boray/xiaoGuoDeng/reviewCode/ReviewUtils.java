@@ -216,6 +216,7 @@ public class ReviewUtils {
         NewJTable table3 = (NewJTable) MainUi.map.get("table_dengJu");//所有灯具
         Map<Integer, TreeSet<Integer>> map = new HashMap<>();
         List<Integer> listDengKu = new ArrayList<>();
+        List<String> suCai = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
             //获得灯库id
             int number = Integer.valueOf(timeBlockPanels[i + 1].getName()).intValue();
@@ -243,6 +244,7 @@ public class ReviewUtils {
                         if (lable.getText().contains("√")) {
                             String s = lable.getText().substring(lable.getText().indexOf("(") + 1, lable.getText().indexOf(")"));
                             int integer = Integer.parseInt(s);
+                            suCai.add((tt - 1) + "#" + (integer - 1));
                             TreeSet<Integer> set = map.get(tt);
                             set.add(integer);
                             count++;
@@ -253,10 +255,10 @@ public class ReviewUtils {
             dengKuMieZu[i] = (byte) count;
         }
 
-        List<String> list = getdengKuSuCai(map, listDengKu);
+//        List<String> list = getdengKuSuCai(map, listDengKu);
 
-        byte[] xiaoGuoDengSuCaiLianBiao = xiaoGuoDengSuCaiLianBiao(list);//效果灯素材联表区
-        byte[] suCaiData = suCaiQuData(list);//素材区数据
+        byte[] xiaoGuoDengSuCaiLianBiao = xiaoGuoDengSuCaiLianBiao(suCai);//效果灯素材联表区
+        byte[] suCaiData = suCaiQuData(suCai);//素材区数据
         byte[] bytes = new byte[dengKuTonDao.length + dengKuMieZu.length + xiaoGuoDengSuCaiLianBiao.length + suCaiData.length];
         for (int i = 0; i < dengKuTonDao.length; i++) {
             bytes[i] = dengKuTonDao[i];
