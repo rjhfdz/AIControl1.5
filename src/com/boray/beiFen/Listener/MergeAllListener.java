@@ -95,7 +95,7 @@ public class MergeAllListener implements ActionListener {
                 }
                 //°´²½±à³Ì£¨µ¹²Ê&ºÈ²Ê&Ò¡Âó-110-127SEC£©
                 writeHeCaiYaoMai(os10);
-                writeWuJiModelData(os10);
+                writeWuJiModelData(os10);//Îí»ú
                 //4060-548
                 byte[] b3 = new byte[3512];
                 os10.write(b3);

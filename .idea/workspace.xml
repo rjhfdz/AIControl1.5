@@ -7,20 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/boray/entity/Message.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/boray/entity/ProjectFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/CompanyListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/LocalListenter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/MineButtonListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/boray/main/Util/CustomTreeNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/boray/main/Util/IpConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/boray/main/Util/TreeUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/Listener/DMXAndModelListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/Listener/TranscribeListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/ipConfig.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/MidType.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AIControl1.5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AIControl1.5.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/Data/Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/Data/Data.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/MergeAllListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/MergeAllListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$1.class" afterDir="false" />
@@ -40,16 +27,7 @@
       <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/Data/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Data/Data.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/MergeAllListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/MergeAllListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/Listener/LoginListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/LoginListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/TreeUtil/CustomTreeCellRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Util/CustomTreeCellRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/CompanyUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/CompanyUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/LocalUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/LocalUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/MineUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/MineUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/returnListener/ComReturnListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/returnListener/ComReturnListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/RightMainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/RightMainUI.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -233,7 +211,7 @@
       <workItem from="1573118063876" duration="8000" />
       <workItem from="1573118668846" duration="6856000" />
       <workItem from="1573171174465" duration="6058000" />
-      <workItem from="1573177630819" duration="3182000" />
+      <workItem from="1573177630819" duration="4779000" />
     </task>
     <task id="LOCAL-00001" summary="文件编码格式修改">
       <created>1568079566279</created>
@@ -312,7 +290,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572503560690</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="主窗口界面个人项目公司项目添加按钮功能实现、效果灯界面添加录制功能。&#10;主窗口界面接口ip地址以及端口实现配置">
+      <created>1573181019015</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1573181019015</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -341,6 +326,7 @@
     <MESSAGE value="效果灯界面完善预览功能，以及发包格式" />
     <MESSAGE value="idea编译后的class文件" />
     <MESSAGE value="添加主窗口界面，我的项目、公司项目、本地项目，修改文件夹文件的显示图标。&#10;备份界面添加U盘导入导出功能。" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加主窗口界面，我的项目、公司项目、本地项目，修改文件夹文件的显示图标。&#10;备份界面添加U盘导入导出功能。" />
+    <MESSAGE value="主窗口界面个人项目公司项目添加按钮功能实现、效果灯界面添加录制功能。&#10;主窗口界面接口ip地址以及端口实现配置" />
+    <option name="LAST_COMMIT_MESSAGE" value="主窗口界面个人项目公司项目添加按钮功能实现、效果灯界面添加录制功能。&#10;主窗口界面接口ip地址以及端口实现配置" />
   </component>
 </project>
