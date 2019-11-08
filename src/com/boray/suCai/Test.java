@@ -22,8 +22,8 @@ import com.boray.Utils.HttpClientUtil;
 
 public abstract class Test {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
 		/*Map<String, Object> map =new HashMap<String, Object>();
 		List listchan = new ArrayList<>();
 		List listtopDengJuNumber = new ArrayList<>();
@@ -104,9 +104,9 @@ public abstract class Test {
 	}
     
     System.out.println(JSON.toJSON(map));*/
-		test();
-	}
-	
+        test();
+    }
+
 //	 public static final String HTTp_URL="https://yqfile.alicdn.com/541d2074f3ee5857196427f0663df967aadf823a.png";
 //     public static void main(String[] args) {
 //             Dol();
@@ -147,20 +147,21 @@ public abstract class Test {
 //     }
 // }
 
-	
-	public  static void test() {
-		HttpClientUtil httpsUtils = new HttpClientUtil();  
-	        //要上传的文件的路径    
-	        String filePath = "E:\\statr.txt";    
-	        String postUrl  = "http://localhost:8778/FileUploadServletgc";  
-	        Map<String,String> postParam = new HashMap<String,String>();  
-	        postParam.put("xmid", "11122");  
-	        postParam.put("gcname", "aa.txt");
-	        postParam.put("username", "system");
-	        postParam.put("i", "0");
-	        File postFile = new File(filePath);  
-	        Map<String,Object> resultMap = httpsUtils.uploadFileByHTTP(postFile,postUrl,postParam);  
-	        System.out.println(resultMap);  
-	}
+
+    public static void test() {
+//        HttpClientUtil httpsUtils = new HttpClientUtil();
+//        //要上传的文件的路径
+//        String filePath = "E:\\statr.txt";
+//        String postUrl = "http://localhost:8778/FileUploadServletgc";
+//        Map<String, String> postParam = new HashMap<String, String>();
+//        postParam.put("xmid", "11122");
+//        postParam.put("gcname", "aa.txt");
+//        postParam.put("username", "system");
+//        postParam.put("i", "0");
+//        File postFile = new File(filePath);
+//        Map<String, Object> resultMap = httpsUtils.uploadFileByHTTP(postFile, postUrl, postParam);
+//        System.out.println(resultMap);
+
+    }
 
 }

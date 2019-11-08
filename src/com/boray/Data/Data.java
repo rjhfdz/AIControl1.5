@@ -1,11 +1,9 @@
 package com.boray.Data;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.comm.SerialPort;
 
@@ -145,6 +143,9 @@ public class Data {
 	//public static String dataMergePath = "";
 	
 	public static String projectFilePath = "";
+
+	//云端添加工程
+	public static String yunProjectFilePath = "";
 	
 	//灯具变更
 	public static boolean dengJu_change = false;
@@ -166,4 +167,6 @@ public class Data {
 	public static Map suCaiNameMap = new HashMap();
 	//云端素材
 	public static Map yunSuCaiMap = new HashMap();
+
+	public static String ipPort;
 }

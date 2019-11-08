@@ -1,12 +1,14 @@
-package com.boray.main.TreeUtil;
+package com.boray.main.Util;
 
 import com.boray.entity.FileOrFolder;
+import com.boray.entity.ProjectFile;
 import resource.Resources;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import java.awt.*;
+import java.io.File;
 
 public class CustomTreeCellRenderer extends DefaultTreeCellRenderer {
 
@@ -18,6 +20,7 @@ public class CustomTreeCellRenderer extends DefaultTreeCellRenderer {
     private static final ImageIcon root = (ImageIcon) Resources.getInstance().createIcon(Resources.getInstance().createImage("product_32.png"), 16, 16);
     private static final ImageIcon main = (ImageIcon) Resources.getInstance().createIcon(Resources.getInstance().createImage("prfs_32.png"), 16, 16);
     private static final ImageIcon company = (ImageIcon) Resources.getInstance().createIcon(Resources.getInstance().createImage("prfrs_32.png"), 16, 16);
+    private static final ImageIcon local = (ImageIcon) Resources.getInstance().createIcon(Resources.getInstance().createImage("MidType.png"), 16, 16);
     private static final ImageIcon file = (ImageIcon) Resources.getInstance().createIcon(Resources.getInstance().createImage("FileIcon.png"), 16, 16);
 
     @Override
@@ -27,14 +30,32 @@ public class CustomTreeCellRenderer extends DefaultTreeCellRenderer {
         Object obj = node.getUserObject();
         if (node.isRoot()) {
             setIcon(root);
+            if(obj != null && obj instanceof File){
+                File obj1 = (File) obj;
+                String[] strings = obj1.getAbsolutePath().split("\\\\");
+                setText(strings[strings.length - 1]);
+            }
         } else if (obj != null && obj instanceof FileOrFolder) {
             FileOrFolder folder = (FileOrFolder) obj;
-            if(folder.getXmtype()==1){
+            if (folder.getXmtype() == 1) {
                 setIcon(company);
-            }else if(folder.getXmtype()==0){
+            } else if (folder.getXmtype() == 0) {
                 setIcon(main);
             }
             setText(folder.getXmname());
+        } else if (obj != null && obj instanceof ProjectFile) {
+            ProjectFile folder = (ProjectFile) obj;
+            setIcon(file);
+            setText(folder.getGcname());
+        } else if (obj != null && obj instanceof File) {
+            File obj1 = (File) obj;
+            if (obj1.isDirectory()) {
+                setIcon(local);
+            } else if (obj1.isFile()) {
+                setIcon(file);
+            }
+            String[] strings = obj1.getAbsolutePath().split("\\\\");
+            setText(strings[strings.length - 1]);
         }
         return this;
     }

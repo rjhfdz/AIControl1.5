@@ -1,11 +1,13 @@
 package com.boray.main.Listener;
 
 import com.alibaba.fastjson.JSON;
+import com.boray.Data.Data;
 import com.boray.Utils.HttpClientUtil;
 import com.boray.entity.Users;
 import com.boray.main.UI.CompanyUI;
 import com.boray.main.UI.LocalUI;
 import com.boray.main.UI.MineUI;
+import com.boray.main.Util.IpConfig;
 import com.boray.mainUi.MainUi;
 
 import javax.swing.*;
@@ -19,7 +21,6 @@ import java.util.Map;
 public class LoginListener implements ActionListener {
 
     private JPanel panel;
-
     private CardLayout card;
     private JPanel rightPane;
     private JFrame frame;
@@ -44,7 +45,6 @@ public class LoginListener implements ActionListener {
                 return;
             }
             login(username, password);
-//            init();
         } else {
             JTextField username = (JTextField) MainUi.map.get("username");
             JPasswordField password = (JPasswordField) MainUi.map.get("password");
@@ -54,17 +54,23 @@ public class LoginListener implements ActionListener {
     }
 
     private void login(String username, String password) {
-        Map<String, String> param = new HashMap<>();
-        param.put("username", username);
-        param.put("userpassword", password);
-        String request = HttpClientUtil.doGet("http://128.8.3.48:8778/login", param);
-        Users users = JSON.parseObject(request, Users.class);
-        if (users != null && !users.getLoginstatus().equals(0)) {
-            MainUi.map.put("Users", users);
-            init();
-        } else {
-            JOptionPane.showMessageDialog(frame, "登录失败，用户名或密码不正确！", "提示", JOptionPane.PLAIN_MESSAGE);
-            return;
+        try {
+            IpConfig config = new IpConfig();
+            config.getIpConfig();
+            Map<String, String> param = new HashMap<>();
+            param.put("username", username);
+            param.put("userpassword", password);
+            String request = HttpClientUtil.doGet(Data.ipPort + "login", param);
+            Users users = JSON.parseObject(request, Users.class);
+            if (users != null && !users.getLoginstatus().equals(0)) {
+                MainUi.map.put("Users", users);
+                init();
+            } else {
+                JOptionPane.showMessageDialog(frame, "登录失败，用户名或密码不正确！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(frame, "登录失败，网络错误！", "提示", JOptionPane.PLAIN_MESSAGE);
         }
     }
 

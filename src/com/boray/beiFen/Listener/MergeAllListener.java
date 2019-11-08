@@ -152,13 +152,18 @@ public class MergeAllListener implements ActionListener {
             File file = fileChooser.getSelectedFile();
             Data.file = file;
             Data.saveCtrlFilePath = file.getParent();
+            File file1 = new File(Data.saveCtrlFilePath+"\\K0.DAT");
             try {
+                file1.createNewFile();
+                OutputStream stream = new FileOutputStream(file1);
                 OutputStream os10 = new FileOutputStream(file);
                 //////////////////////
                 //系统设置(00-13SEC)14
                 systemSet(os10);
+                systemSet(stream);
 
                 os10.flush();
+                stream.flush();
                 System.out.println("系统设置："+file.length());
 
                 //灯库(14-15SEC)2
@@ -166,57 +171,80 @@ public class MergeAllListener implements ActionListener {
                 byte[] b2 = new byte[4092];
                 os10.write(b2);
 
+                writeFile2(stream);
+                stream.write(b2);
+
                 os10.flush();
+                stream.flush();
                 System.out.println("灯库："+file.length());
 
                 //按步编程（倒彩&喝彩&摇麦-16-33SEC）18
                 writeHeCaiYaoMai(os10);
+                writeHeCaiYaoMai(stream);
 
                 repairData(139264,os10,file);
+                repairData(139264,stream,file1);
 
                 os10.flush();
+                stream.flush();
                 System.out.println("按步编程："+file.length());
 
 
                 writeWuJiModelData(os10);//雾机编程(34SEC)
+                writeWuJiModelData(stream);
 
                 repairData(143360,os10,file);
+                repairData(143360,stream,file1);
 
                 os10.flush();
+                stream.flush();
                 System.out.println("雾机编程："+file.length());
 
 
                 ////效果灯素材数据（35-228SEC）194
                 writeFile3(os10);
+                writeFile3(stream);
                 //对数据进行补完
                 repairData(937984,os10,file);
+                repairData(937984,stream,file1);
 
                 os10.flush();
+                stream.flush();
                 System.out.println("效果灯素材："+file.length());
 
                 ////场景效果灯数据（229-258SEC）30
                 for (int i = 1; i < 25; i++) {
                     writeFile(os10, i);
+                    writeFile(stream, i);
                 }
                 //对数据进行补完
                 repairData(1060864,os10,file);
+                repairData(1060864,stream,file1);
                 os10.flush();
+                stream.flush();
                 System.out.println("场景效果灯："+file.length());
 
                 ////多灯数据区-16 个声控模式(259-387SEC)129
                 shengKonMoreLigthData(os10);
+                shengKonMoreLigthData(stream);
                 //对数据进行补完
                 repairData(1589248,os10,file);
+                repairData(1589248,stream,file1);
                 os10.flush();
+                stream.flush();
                 System.out.println("多灯数据区-16："+file.length());
 
                 ////声控效果灯数据（动态空间）
                 for (int i = 1; i < 17; i++) {
                     writeShengKon(os10, i);
+                    writeShengKon(stream, i);
                 }
 
                 os10.flush();
+                stream.flush();
                 System.out.println("声控效果灯数据："+file.length());
+
+                stream.close();
 
                 //对中间部分进行补零操作
                 repairData(16379904,os10,file);

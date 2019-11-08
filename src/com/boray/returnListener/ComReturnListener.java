@@ -36,6 +36,7 @@ import com.boray.dengKu.UI.NewJTable;
 import com.boray.dengKu.UI.RdmPaneUI;
 import com.boray.mainUi.MainUi;
 import com.boray.usb.UsbUtil;
+import com.boray.xiaoGuoDeng.Listener.TranscribeListener;
 import com.boray.zhongKon.Listener.WriteActionListener;
 import sun.applet.Main;
 
@@ -544,6 +545,44 @@ public class ComReturnListener implements Runnable {
                                     }
                                 }, 2000);
                             }
+                        }
+                    } else if (hex0.equals("fd") && secHex.equals("14") && hex1.equals("61")) {
+                        byte[] buff = new byte[20];
+                        for (int i = 0; i < 20; i++) {
+                            buff[i] = temp[i];
+                        }
+                        String code = Integer.toHexString(buff[4] & 0XFF);
+                        String str = Integer.toHexString(buff[5] & 0XFF);
+                        String model = Integer.toHexString(buff[7] & 0XFF);
+                        if (code.equals("a4")) {
+                            try {
+                                Object[] options = {"否", "是"};
+                                int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "数据擦除完成，开始录制数据？", "提示",
+                                        JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                                        null, options, options[1]);
+                                if (yes == 1) {
+                                    JButton startDMX = (JButton) MainUi.map.get("startDMX" + model);
+                                    startDMX.doClick();
+                                }
+                            } catch (Exception e2) {
+                                e2.printStackTrace();
+                            }
+
+                        }
+                        if (code.equals("a5")) {
+                            JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "数据录制成功！", "提示", JOptionPane.PLAIN_MESSAGE);
+                            JProgressBar bar = (JProgressBar) MainUi.map.get("DMXBarTwo" + model);
+                            JLabel DMXsec = (JLabel) MainUi.map.get("DMXsec" + model);
+                            DMXsec.setText("0秒");
+                            bar.setValue(0);
+                        }
+                        if (str.equals("9d")) {
+                            String hexString = Integer.toHexString(buff[11] & 0XFF);
+                            Integer value = Math.toIntExact(Long.parseLong(hexString.toUpperCase(), 16));
+                            JProgressBar bar = (JProgressBar) MainUi.map.get("DMXBarTwo" + model);
+                            JLabel DMXsec = (JLabel) MainUi.map.get("DMXsec" + model);
+                            DMXsec.setText(value + "秒");
+                            bar.setValue(value);
                         }
                     }
 					/*else if (hex0.equals("fd") && hex1.equals("db")) {

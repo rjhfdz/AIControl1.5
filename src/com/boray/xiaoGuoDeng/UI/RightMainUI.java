@@ -31,6 +31,7 @@ import com.boray.Data.XiaoGuoDengModel;
 import com.boray.fileCompare.Compare;
 import com.boray.mainUi.MainUi;
 import com.boray.xiaoGuoDeng.Listener.CreateTimeBlockListener;
+import com.boray.xiaoGuoDeng.Listener.DMXAndModelListener;
 import com.boray.xiaoGuoDeng.Listener.ModelCopyActionListener;
 import com.boray.xiaoGuoDeng.reviewBlock.ReviewBlock;
 import com.boray.xiaoGuoDeng.reviewCode.ReviewUtils;
@@ -180,6 +181,8 @@ public class RightMainUI {
 		for (int i = 0; i < labels.length; i++) {
 			if (i == 0) {
 				labels[i] = new JLabel("DMXÂ¼ÖÆ");
+				DMXAndModelListener listener = new DMXAndModelListener(Number+"");
+				labels[i].addMouseListener(listener);
 			} else {
 				labels[i] = new JLabel("×é"+i);
 			}
