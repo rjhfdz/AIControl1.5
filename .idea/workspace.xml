@@ -6,12 +6,8 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
-    <list id="8e2f3826-f652-4540-934c-0fbbebdda1b0" name="Revert: " comment="">
-      <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/Listener/DialogListener.java" beforeDir="false" />
-    </list>
+    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="" />
+    <list id="8e2f3826-f652-4540-934c-0fbbebdda1b0" name="Revert: " comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,7 +60,7 @@
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="vcs.Subversion.SSH" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -122,24 +118,6 @@
   <component name="SvnConfiguration" cleanupOnStartRun="true">
     <configuration>C:\Users\Administrator\AppData\Roaming\Subversion</configuration>
     <supportedVersion>125</supportedVersion>
-  </component>
-  <component name="SvnFileUrlMappingImpl">
-    <option name="myMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="D:\BorayWork\myRepositories\kzq\AIControl1.5" />
-          <option name="myCopyRoot" value="D:\BorayWork\myRepositories\kzq\AIControl1.5" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
-    <option name="myMoreRealMappingRoots">
-      <list>
-        <SvnCopyRootSimple>
-          <option name="myVcsRoot" value="D:\BorayWork\myRepositories\kzq\AIControl1.5" />
-          <option name="myCopyRoot" value="D:\BorayWork\myRepositories\kzq\AIControl1.5" />
-        </SvnCopyRootSimple>
-      </list>
-    </option>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -334,7 +312,7 @@
       <workItem from="1578960106155" duration="28731000" />
       <workItem from="1579046725249" duration="4388000" />
       <workItem from="1579051506746" duration="22325000" />
-      <workItem from="1579133335712" duration="9171000" />
+      <workItem from="1579133335712" duration="9508000" />
     </task>
     <task id="LOCAL-00002" summary="修改数据打包格式中的素材管理以及效果灯管理">
       <created>1568606077472</created>
