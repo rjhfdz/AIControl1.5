@@ -1,9 +1,8 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="AIControl1.5:jar">
-    <output-path>$PROJECT_DIR$/classes/artifacts/AIControl1.5</output-path>
+  <artifact type="jar" name="AIControl1.5.jar">
+    <output-path>$PROJECT_DIR$/classes/artifacts</output-path>
     <root id="archive" name="AIControl1.5.jar">
       <element id="module-output" name="AIControl1.5" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/comm.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/quaqua.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/commons-lang3-3.2.1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/libusb4java-1.2.0-linux-arm.jar" path-in-jar="/" />
@@ -17,6 +16,15 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/usb4java-javax-1.2.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/usb-api-1.0.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/usbJava.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/comm.jar" path-in-jar="/" />
+      <element id="library" level="project" name="httpmime-4.1.1-sources" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/beautyeye_lnf.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/httpclient-4.5.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/substance.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/httpmime-4.3.5.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/httpcore-4.4.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/fastjson-1.2.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/commons-logging-1.2.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>

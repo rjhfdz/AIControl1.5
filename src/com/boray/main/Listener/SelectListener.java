@@ -10,7 +10,7 @@ public class SelectListener implements ItemListener {
     private CardLayout card;
     private JPanel rightPane;
 
-    public SelectListener(CardLayout card,JPanel rightPane) {
+    public SelectListener(CardLayout card, JPanel rightPane) {
         this.card = card;
         this.rightPane = rightPane;
     }
@@ -19,12 +19,14 @@ public class SelectListener implements ItemListener {
     public void itemStateChanged(ItemEvent e) {
         JToggleButton btn = (JToggleButton) e.getSource();
         if (e.getStateChange() == ItemEvent.SELECTED) {
-            if ("我的项目".equals(btn.getText())) {
-                card.show(rightPane,"1");
-            }else if("公司项目".equals(btn.getText())){
-                card.show(rightPane,"2");
-            }else if("本地项目".equals(btn.getText())){
-                card.show(rightPane,"3");
+            if ("共享平台".equals(btn.getText())) {
+                card.show(rightPane, "1");
+            } else if ("项目管理".equals(btn.getText())) {
+                card.show(rightPane, "2");
+            } else if ("本地项目".equals(btn.getText())) {
+                card.show(rightPane, "3");
+            } else if ("官方发布".equals(btn.getText())) {
+                card.show(rightPane, "4");
             }
         }
     }

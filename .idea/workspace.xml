@@ -2,32 +2,15 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="AIControl1.5:jar" />
+      <artifact name="AIControl1.5.jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/Data/Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/Data/Data.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/MergeAllListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/MergeAllListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/MergeAllListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/MergeAllListener.java" afterDir="false" />
+    </list>
+    <list id="8e2f3826-f652-4540-934c-0fbbebdda1b0" name="Revert: " comment="">
+      <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/Listener/DialogListener.java" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,6 +21,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -48,29 +32,59 @@
   <component name="ProjectId" id="1QJahLxkYXKvrdaUTwGxh0NeUzI" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4" value="4" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder5" value="5" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="308" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="308" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="308" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="308" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4" value="308" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5" value="308" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4" value="4" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5" value="5" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0" value="308" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1" value="308" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="308" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3" value="308" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="308" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth5" value="308" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../myRepositories/GamBlingManagerSys" />
-    <property name="project.structure.last.edited" value="Problems" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/icon" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="vcs.Subversion" />
+    <property name="settings.editor.selected.configurable" value="vcs.Subversion.SSH" />
   </component>
   <component name="RecentsManager">
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="com.boray.Utils" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5\src\icon" />
+      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5\src\lib" />
+      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5\src\com\boray\shengKon\Listener" />
+      <recent name="D:\BorayWork\AIControl1.5\src\resource" />
+      <recent name="D:\BorayWork\AIControl1.5\src\icon" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.boray.xiaoGuoDeng.UI" />
+      <recent name="com.boray.shengKon.UI" />
+      <recent name="com.boray.xiaoGuoDeng.reviewCode" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\BorayWork\AIControl1.5\src" />
       <recent name="D:\BorayWork\AIControl1.5\src\com\boray\Data" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.boray.xiaoGuoDeng.reviewCode" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\BorayWork\AIControl1.5\src\resource" />
-      <recent name="D:\BorayWork\AIControl1.5\src\icon" />
-      <recent name="D:\BorayWork\AIControl1.5\src\com\boray\suCai" />
-      <recent name="D:\BorayWork\AIControl1.5\src\lib" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -105,12 +119,32 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SvnConfiguration">
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
     <configuration>C:\Users\Administrator\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="D:\BorayWork\myRepositories\kzq\AIControl1.5" />
+          <option name="myCopyRoot" value="D:\BorayWork\myRepositories\kzq\AIControl1.5" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="D:\BorayWork\myRepositories\kzq\AIControl1.5" />
+          <option name="myCopyRoot" value="D:\BorayWork\myRepositories\kzq\AIControl1.5" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="" />
+      <changelist id="8e2f3826-f652-4540-934c-0fbbebdda1b0" name="Revert: " comment="" />
       <created>1567491270520</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -212,13 +246,95 @@
       <workItem from="1573118668846" duration="6856000" />
       <workItem from="1573171174465" duration="6058000" />
       <workItem from="1573177630819" duration="4779000" />
-    </task>
-    <task id="LOCAL-00001" summary="文件编码格式修改">
-      <created>1568079566279</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1568079566279</updated>
+      <workItem from="1573195209538" duration="630000" />
+      <workItem from="1573195908112" duration="5842000" />
+      <workItem from="1573257606341" duration="14621000" />
+      <workItem from="1573282014123" duration="4451000" />
+      <workItem from="1573450507339" duration="8070000" />
+      <workItem from="1573516405165" duration="20960000" />
+      <workItem from="1573602950268" duration="5599000" />
+      <workItem from="1573614382697" duration="13222000" />
+      <workItem from="1573689139310" duration="17382000" />
+      <workItem from="1573775684920" duration="22921000" />
+      <workItem from="1573861956140" duration="7522000" />
+      <workItem from="1573883324844" duration="8267000" />
+      <workItem from="1574034824923" duration="16336000" />
+      <workItem from="1574121473119" duration="21367000" />
+      <workItem from="1574207717972" duration="24968000" />
+      <workItem from="1574294282954" duration="1038000" />
+      <workItem from="1574295964553" duration="23626000" />
+      <workItem from="1574380626541" duration="19520000" />
+      <workItem from="1574419608924" duration="636000" />
+      <workItem from="1574466916840" duration="78000" />
+      <workItem from="1574488065112" duration="3282000" />
+      <workItem from="1574493875507" duration="3730000" />
+      <workItem from="1574639944846" duration="4445000" />
+      <workItem from="1574653485011" duration="2819000" />
+      <workItem from="1574665994532" duration="2442000" />
+      <workItem from="1574670962437" duration="1956000" />
+      <workItem from="1574813117371" duration="8903000" />
+      <workItem from="1574824427677" duration="9526000" />
+      <workItem from="1574899235441" duration="30131000" />
+      <workItem from="1574985428790" duration="3122000" />
+      <workItem from="1574989678214" duration="21549000" />
+      <workItem from="1575076280392" duration="428000" />
+      <workItem from="1575076845045" duration="899000" />
+      <workItem from="1575331187401" duration="6063000" />
+      <workItem from="1575339050348" duration="3551000" />
+      <workItem from="1575343160224" duration="8634000" />
+      <workItem from="1575503774336" duration="25211000" />
+      <workItem from="1575590574462" duration="18670000" />
+      <workItem from="1575676990216" duration="16294000" />
+      <workItem from="1575704326340" duration="6100000" />
+      <workItem from="1575849717918" duration="1553000" />
+      <workItem from="1575852535230" duration="348000" />
+      <workItem from="1575853275096" duration="17194000" />
+      <workItem from="1575878335948" duration="9218000" />
+      <workItem from="1575936196416" duration="31704000" />
+      <workItem from="1576022576638" duration="2681000" />
+      <workItem from="1576028069098" duration="19226000" />
+      <workItem from="1576109035735" duration="12408000" />
+      <workItem from="1576195329768" duration="22528000" />
+      <workItem from="1576281839566" duration="18415000" />
+      <workItem from="1576308406040" duration="4987000" />
+      <workItem from="1576315369273" duration="444000" />
+      <workItem from="1576454462184" duration="7165000" />
+      <workItem from="1576475222450" duration="14251000" />
+      <workItem from="1576540776525" duration="25926000" />
+      <workItem from="1576627274681" duration="21575000" />
+      <workItem from="1576660643471" duration="974000" />
+      <workItem from="1576713909565" duration="28604000" />
+      <workItem from="1576803457018" duration="4238000" />
+      <workItem from="1576807811008" duration="27087000" />
+      <workItem from="1576886643447" duration="24839000" />
+      <workItem from="1577059451193" duration="29046000" />
+      <workItem from="1577145755091" duration="31306000" />
+      <workItem from="1577318602474" duration="25691000" />
+      <workItem from="1577404837664" duration="28329000" />
+      <workItem from="1577491283289" duration="25585000" />
+      <workItem from="1577577777164" duration="26459000" />
+      <workItem from="1577664204522" duration="27020000" />
+      <workItem from="1577750632240" duration="19498000" />
+      <workItem from="1577778067619" duration="2813000" />
+      <workItem from="1577781700598" duration="2915000" />
+      <workItem from="1577923431169" duration="24995000" />
+      <workItem from="1578009851468" duration="23303000" />
+      <workItem from="1578039849683" duration="9127000" />
+      <workItem from="1578096141859" duration="10020000" />
+      <workItem from="1578269085670" duration="26599000" />
+      <workItem from="1578355542484" duration="25038000" />
+      <workItem from="1578441862931" duration="14823000" />
+      <workItem from="1578463388938" duration="23752000" />
+      <workItem from="1578528162688" duration="27505000" />
+      <workItem from="1578569392694" duration="6416000" />
+      <workItem from="1578614638802" duration="32363000" />
+      <workItem from="1578700920652" duration="23996000" />
+      <workItem from="1578787324439" duration="24702000" />
+      <workItem from="1578873739319" duration="28740000" />
+      <workItem from="1578960106155" duration="28731000" />
+      <workItem from="1579046725249" duration="4388000" />
+      <workItem from="1579051506746" duration="22325000" />
+      <workItem from="1579133335712" duration="9171000" />
     </task>
     <task id="LOCAL-00002" summary="修改数据打包格式中的素材管理以及效果灯管理">
       <created>1568606077472</created>
@@ -297,7 +413,273 @@
       <option name="project" value="LOCAL" />
       <updated>1573181019015</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="修改录制数据格式">
+      <created>1573195785608</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1573195785608</updated>
+    </task>
+    <task id="LOCAL-00014" summary="修改录制数据格式">
+      <created>1573196294640</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1573196294640</updated>
+    </task>
+    <task id="LOCAL-00015" summary="修改录制数据格式">
+      <created>1573204150800</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1573204150800</updated>
+    </task>
+    <task id="LOCAL-00016" summary="弃置旧方法倒彩喝彩摇麦写入文件格式，添加新方法（暂未调用）">
+      <created>1573280046673</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1573280046673</updated>
+    </task>
+    <task id="LOCAL-00017" summary="调用倒彩喝彩摇麦写入文件">
+      <created>1573459169781</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1573459169781</updated>
+    </task>
+    <task id="LOCAL-00018" summary="修改声控多灯的数据写入">
+      <created>1573538852525</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1573538852525</updated>
+    </task>
+    <task id="LOCAL-00019" summary="添加声控素材界面，新建、编辑功能、数量统计、导入导出等&#10;声控编程界面关联素材界面数据、修改右键菜单">
+      <created>1574386603041</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1574386603041</updated>
+    </task>
+    <task id="LOCAL-00020" summary="声控素材导入、新建异常修改&#10;主窗口界面ip地址修改，线上服务器调试异常处理">
+      <created>1574391125516</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1574391125516</updated>
+    </task>
+    <task id="LOCAL-00021" summary="主窗口界面联调测试服务器">
+      <created>1574494315935</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1574494315935</updated>
+    </task>
+    <task id="LOCAL-00022" summary="声控界面逻辑异常处理&#10;控制器生成文件添加声控素材，以及修改声控数据空间格式修改&#10;加载工程，导入工程格式修改">
+      <created>1574932218989</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1574932218990</updated>
+    </task>
+    <task id="LOCAL-00023" summary="格式调整">
+      <created>1574937916736</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1574937916736</updated>
+    </task>
+    <task id="LOCAL-00024" summary="控制文件打包异常处理，灯库配置界面添加雾机控制模式">
+      <created>1574997276774</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1574997276775</updated>
+    </task>
+    <task id="LOCAL-00025" summary="声控编程界面逻辑调整，灯库配置添加雾机模式，生成控制文件天机雾机模式数据。">
+      <created>1575019602174</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1575019602174</updated>
+    </task>
+    <task id="LOCAL-00026" summary="声控效果区数据打包异常处理&#10;声控素材编辑页面步骤异常处理&#10;顶部菜单栏，修改到左边侧边栏">
+      <created>1575505147723</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1575505147723</updated>
+    </task>
+    <task id="LOCAL-00027" summary="主窗口界面调整，本地项目不用登陆就可以查看&#10;我的项目以及公司项目，需要登陆才能查看">
+      <created>1575525566704</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1575525566705</updated>
+    </task>
+    <task id="LOCAL-00028" summary="效果素材右键菜单导入添加标识、并添加导入覆盖选项，以及重命名功能&#10;声控素材右键菜单添加覆盖选项功能，以及重命名功能&#10;效果素材打包格式修改&#10;主窗口界面调整，保存按钮修改为上传">
+      <created>1575689245559</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1575689245560</updated>
+    </task>
+    <task id="LOCAL-00029" summary="版本号修改">
+      <created>1575689287088</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1575689287088</updated>
+    </task>
+    <task id="LOCAL-00030" summary="外观更换为BeautyEye（只做备用）">
+      <created>1575879148266</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1575879148266</updated>
+    </task>
+    <task id="LOCAL-00031" summary="界面调优，主界面登录设计，菜单栏图标样式格式调整（备份）">
+      <created>1576129610246</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1576129610246</updated>
+    </task>
+    <task id="LOCAL-00032" summary="图片">
+      <created>1576131503630</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1576131503630</updated>
+    </task>
+    <task id="LOCAL-00033" summary="场景配置界面重新规划，以及逻辑修改">
+      <created>1576289515235</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1576289515235</updated>
+    </task>
+    <task id="LOCAL-00034" summary="生成控制文件格式修改，简易灯控数据中加入动态数据索引表">
+      <created>1576308079470</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1576308079470</updated>
+    </task>
+    <task id="LOCAL-00035" summary="控制文件格式修改，右侧添加数据写入功能">
+      <created>1576493551639</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1576493551639</updated>
+    </task>
+    <task id="LOCAL-00036" summary="效果灯素材打包异常修改，主窗口界面逻辑修改（暂未完成），右侧网络连接UDP发送数据">
+      <created>1576719708233</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1576719708233</updated>
+    </task>
+    <task id="LOCAL-00037" summary="摇麦数据打包异常，数据存储格式修改为40场景31字符，灯库通道异常导致的步数异常，灯库新建、导入异常。&#10;效果灯界面预览功能添加网络发送">
+      <created>1576915945847</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1576915945847</updated>
+    </task>
+    <task id="LOCAL-00038" summary="素材以及效果灯编辑界面添加渐变勾选框，&#10;数据压缩以及效果灯预览功能数据格式修改，&#10;网络模式下写入数据不再黑屏，&#10;主窗口界面本地项目功能完善，&#10;声控异常修复">
+      <created>1577349288303</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1577349288303</updated>
+    </task>
+    <task id="LOCAL-00039" summary="素材编辑界面通道、渐变修改，以及显示问题调整">
+      <created>1577432145898</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1577432145899</updated>
+    </task>
+    <task id="LOCAL-00040" summary="素材管理编辑界面添加预览功能（串口与网络）&#10;效果灯编辑界面预览功能添加网络格式发送数据&#10;空调设置界面功能原有基础上添加网络格式发送数据">
+      <created>1577602134353</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1577602134353</updated>
+    </task>
+    <task id="LOCAL-00041" summary="中控设置添加网络格式发送">
+      <created>1577696021845</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1577696021845</updated>
+    </task>
+    <task id="LOCAL-00042" summary="备份界面加载数据添加网络发送&#10;场景配置界面调优">
+      <created>1577784009424</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1577784009424</updated>
+    </task>
+    <task id="LOCAL-00043" summary="录制数据界面删除添加清除功能，以及网络格式发码。界面调整。DMX录制数据长度显示问题。&#10;本地项目添加右键菜单加载工程。">
+      <created>1578299657539</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1578299657539</updated>
+    </task>
+    <task id="LOCAL-00044" summary="录制界面调整、效果灯预览格式修改、主窗口界面修改界面逻辑">
+      <created>1578462510674</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1578462510674</updated>
+    </task>
+    <task id="LOCAL-00045" summary="打包异常处理。&#10;data增加下载ip地址。&#10;网络连接以及串口连接添加限制，不能同时连接，以及显示异常处理。&#10;主窗口逻辑修改，接口对接。&#10;新增官方共享，平台共享。&#10;新增云端场景素材，以及声控场景素材。&#10;声控编程源场景复制异常修复。&#10;顶部图标显示更换。&#10;修复备份界面网络格式加载数据进度显示问题。&#10;U盘导入导出添加网络格式。">
+      <created>1578646763756</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1578646763756</updated>
+    </task>
+    <task id="LOCAL-00046" summary="图标更换">
+      <created>1578646867949</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1578646867949</updated>
+    </task>
+    <task id="LOCAL-00047" summary="更换机型显示">
+      <created>1578794976041</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1578794976041</updated>
+    </task>
+    <task id="LOCAL-00048" summary="场景可调界面添加网络或串口发送、效果灯预览块数据添加渐变勾选数据发送、素材导入导出，文件名修改、录制数据界面调整">
+      <created>1579000152458</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1579000152458</updated>
+    </task>
+    <task id="LOCAL-00049" summary="网络连接添加端口占用提示&#10;场景预览修改渐变传数据格式&#10;添加记住密码功能&#10;网络连接以及串口连接界面调整">
+      <created>1579073814589</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1579073814589</updated>
+    </task>
+    <task id="LOCAL-00050" summary="右侧侧边栏界面细节调整">
+      <created>1579144701225</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1579144701226</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -317,16 +699,31 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="文件编码格式修改" />
-    <MESSAGE value="修改数据打包格式中的素材管理以及效果灯管理" />
-    <MESSAGE value="修改生成控制器文件的打包格式" />
-    <MESSAGE value="打包格式修改，效果灯界面添加复制功能，素材管理界面添加导入导出功能" />
-    <MESSAGE value="效果灯界面修改预览功能，素材界面添加导入导出功能" />
-    <MESSAGE value="效果灯界面完善预览功能，以及发包格式，工程文件存储格式以及读取进行修改，data文件添加新的变量（记录素材界面新建素材的顺序）" />
-    <MESSAGE value="效果灯界面完善预览功能，以及发包格式" />
-    <MESSAGE value="idea编译后的class文件" />
-    <MESSAGE value="添加主窗口界面，我的项目、公司项目、本地项目，修改文件夹文件的显示图标。&#10;备份界面添加U盘导入导出功能。" />
-    <MESSAGE value="主窗口界面个人项目公司项目添加按钮功能实现、效果灯界面添加录制功能。&#10;主窗口界面接口ip地址以及端口实现配置" />
-    <option name="LAST_COMMIT_MESSAGE" value="主窗口界面个人项目公司项目添加按钮功能实现、效果灯界面添加录制功能。&#10;主窗口界面接口ip地址以及端口实现配置" />
+    <MESSAGE value="效果素材右键菜单导入添加标识、并添加导入覆盖选项，以及重命名功能&#10;声控素材右键菜单添加覆盖选项功能，以及重命名功能&#10;效果素材打包格式修改&#10;主窗口界面调整，保存按钮修改为上传" />
+    <MESSAGE value="版本号修改" />
+    <MESSAGE value="外观更换为BeautyEye（只做备用）" />
+    <MESSAGE value="界面调优，主界面登录，背景图设置，菜单栏图标设计调整，页面整改。（备份）" />
+    <MESSAGE value="界面调优，主界面登录设计，菜单栏图标样式格式调整（备份）" />
+    <MESSAGE value="添加图片" />
+    <MESSAGE value="图片" />
+    <MESSAGE value="场景配置界面重新规划，以及逻辑修改" />
+    <MESSAGE value="生成控制文件格式修改，简易灯控数据中加入动态数据索引表" />
+    <MESSAGE value="控制文件格式修改，右侧添加数据写入功能" />
+    <MESSAGE value="效果灯素材打包异常修改，主窗口界面逻辑修改（暂未完成），右侧网络连接UDP发送数据" />
+    <MESSAGE value="摇麦数据打包异常，数据存储格式修改为40场景31字符，灯库通道异常导致的步数异常，灯库新建、导入异常。&#10;效果灯界面预览功能添加网络发送" />
+    <MESSAGE value="素材以及效果灯编辑界面添加渐变勾选框，&#10;数据压缩以及效果灯预览功能数据格式修改，&#10;网络模式下写入数据不再黑屏，&#10;主窗口界面本地项目功能完善，&#10;声控异常修复" />
+    <MESSAGE value="素材编辑界面通道、渐变修改，以及显示问题调整" />
+    <MESSAGE value="素材管理编辑界面添加预览功能（串口与网络）&#10;效果灯编辑界面预览功能添加网络格式发送数据&#10;空调设置界面功能原有基础上添加网络格式发送数据" />
+    <MESSAGE value="中控设置添加网络格式发送" />
+    <MESSAGE value="备份界面加载数据添加网络发送&#10;场景配置界面调优" />
+    <MESSAGE value="录制数据界面删除添加清除功能，以及网络格式发码。界面调整。DMX录制数据长度显示问题。&#10;本地项目添加右键菜单加载工程。" />
+    <MESSAGE value="录制界面调整、效果灯预览格式修改、主窗口界面修改界面逻辑" />
+    <MESSAGE value="打包异常处理。&#10;data增加下载ip地址。&#10;网络连接以及串口连接添加限制，不能同时连接，以及显示异常处理。&#10;主窗口逻辑修改，接口对接。&#10;新增官方共享，平台共享。&#10;新增云端场景素材，以及声控场景素材。&#10;声控编程源场景复制异常修复。&#10;顶部图标显示更换。&#10;修复备份界面网络格式加载数据进度显示问题。&#10;U盘导入导出添加网络格式。" />
+    <MESSAGE value="图标更换" />
+    <MESSAGE value="更换机型显示" />
+    <MESSAGE value="场景可调界面添加网络或串口发送、效果灯预览块数据添加渐变勾选数据发送、素材导入导出，文件名修改、录制数据界面调整" />
+    <MESSAGE value="网络连接添加端口占用提示&#10;场景预览修改渐变传数据格式&#10;添加记住密码功能&#10;网络连接以及串口连接界面调整" />
+    <MESSAGE value="右侧侧边栏界面细节调整" />
+    <option name="LAST_COMMIT_MESSAGE" value="右侧侧边栏界面细节调整" />
   </component>
 </project>

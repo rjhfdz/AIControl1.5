@@ -1,5 +1,6 @@
 package com.boray.returnListener;
 
+import java.awt.*;
 import java.awt.event.ItemListener;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -10,17 +11,7 @@ import java.util.TimerTask;
 
 import javax.comm.CommPortIdentifier;
 import javax.comm.SerialPort;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JProgressBar;
-import javax.swing.JRadioButton;
-import javax.swing.JSlider;
-import javax.swing.JTextField;
-import javax.swing.JToggleButton;
+import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
 import javax.usb.UsbPipe;
@@ -28,6 +19,7 @@ import javax.usb.UsbPipe;
 import com.boray.Data.Data;
 import com.boray.Data.RdmData;
 import com.boray.Data.ZhiLingJi;
+import com.boray.Utils.Socket;
 import com.boray.beiFen.Listener.BackupActionListener;
 import com.boray.beiFen.Listener.LoadDMXactionListener;
 import com.boray.beiFen.Listener.LoadToDeviceActionListener;
@@ -36,7 +28,9 @@ import com.boray.dengKu.UI.NewJTable;
 import com.boray.dengKu.UI.RdmPaneUI;
 import com.boray.mainUi.MainUi;
 import com.boray.usb.UsbUtil;
+import com.boray.xiaoGuoDeng.Listener.DMXModelListener;
 import com.boray.xiaoGuoDeng.Listener.TranscribeListener;
+import com.boray.xiaoGuoDeng.UI.DefineJLable2;
 import com.boray.zhongKon.Listener.WriteActionListener;
 import sun.applet.Main;
 
@@ -553,7 +547,8 @@ public class ComReturnListener implements Runnable {
                         }
                         String code = Integer.toHexString(buff[4] & 0XFF);
                         String str = Integer.toHexString(buff[5] & 0XFF);
-                        String model = Integer.toHexString(buff[7] & 0XFF);
+                        String model = Integer.toHexString(buff[6] & 0XFF);
+                        Integer modelInt = Math.toIntExact(Long.parseLong(model.toUpperCase(), 16));
                         if (code.equals("a4")) {
                             try {
                                 Object[] options = {"否", "是"};
@@ -561,8 +556,7 @@ public class ComReturnListener implements Runnable {
                                         JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                                         null, options, options[1]);
                                 if (yes == 1) {
-                                    JButton startDMX = (JButton) MainUi.map.get("startDMX" + model);
-                                    startDMX.doClick();
+                                    transcribeStart(modelInt, buff[3]);
                                 }
                             } catch (Exception e2) {
                                 e2.printStackTrace();
@@ -571,19 +565,29 @@ public class ComReturnListener implements Runnable {
                         }
                         if (code.equals("a5")) {
                             JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "数据录制成功！", "提示", JOptionPane.PLAIN_MESSAGE);
-                            JProgressBar bar = (JProgressBar) MainUi.map.get("DMXBarTwo" + model);
-                            JLabel DMXsec = (JLabel) MainUi.map.get("DMXsec" + model);
+                            JProgressBar bar = (JProgressBar) MainUi.map.get("DMXBarTwo" + modelInt);
+                            JLabel DMXsec = (JLabel) MainUi.map.get("DMXsec" + modelInt);
                             DMXsec.setText("0秒");
                             bar.setValue(0);
+                            DMXModelListener listener = new DMXModelListener();
+                            Socket.SerialPortSendData(listener.queryLuZhi());
                         }
                         if (str.equals("9d")) {
+                            String model2 = Integer.toHexString(buff[7] & 0XFF);
+                            Integer integer = Math.toIntExact(Long.parseLong(model2.toUpperCase(), 16));
                             String hexString = Integer.toHexString(buff[11] & 0XFF);
                             Integer value = Math.toIntExact(Long.parseLong(hexString.toUpperCase(), 16));
-                            JProgressBar bar = (JProgressBar) MainUi.map.get("DMXBarTwo" + model);
-                            JLabel DMXsec = (JLabel) MainUi.map.get("DMXsec" + model);
+                            JProgressBar bar = (JProgressBar) MainUi.map.get("DMXBarTwo" + integer);
+                            JLabel DMXsec = (JLabel) MainUi.map.get("DMXsec" + integer);
                             DMXsec.setText(value + "秒");
                             bar.setValue(value);
                         }
+                    } else if (hex0.equals("fd") && hex1.equals("61") && hex3.equals("91")) {
+                        byte[] bytes = new byte[80];
+                        for (int i = 0; i < 80; i++) {
+                            bytes[i] = temp[i];
+                        }
+                        setLuZhiData(bytes);
                     }
 					/*else if (hex0.equals("fd") && hex1.equals("db")) {
 						int size = 180;
@@ -611,6 +615,54 @@ public class ComReturnListener implements Runnable {
 					}*/
                 }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 展示录制数据
+     *
+     * @param data
+     */
+    public void setLuZhiData(byte[] data) {
+        int sc = Byte.toUnsignedInt(data[7]);
+        JPanel timeBlockPanels = ((JPanel[]) MainUi.map.get("timeBlockPanels_group" + sc))[0];
+        if (Byte.toUnsignedInt(data[9]) == 1) {
+            timeBlockPanels.removeAll();
+            int start = Byte.toUnsignedInt(data[11]) * 256 + Byte.toUnsignedInt(data[10]);
+            int end = Byte.toUnsignedInt(data[13]) * 256 + Byte.toUnsignedInt(data[12]);
+            int sumTime = Byte.toUnsignedInt(data[51]) * 256 + Byte.toUnsignedInt(data[50]);
+            DefineJLable2 lable2 = new DefineJLable2(start + "", end + "", (timeBlockPanels.getComponentCount() + 1), sumTime, timeBlockPanels);
+            lable2.setSize((end - start) * 5, 29);
+            if (Integer.toHexString(data[52] & 0xFF).equals("80"))
+                lable2.setBackground(Color.green);
+            else
+                lable2.setBackground(Color.red);
+            timeBlockPanels.add(lable2);
+            timeBlockPanels.updateUI();
+        }
+    }
+
+    /**
+     * 录制数据发送开始录制指令
+     *
+     * @param model
+     */
+    private void transcribeStart(int model, byte type) {
+        byte[] buff = new byte[20];
+        buff[0] = (byte) 0xFA;
+        buff[1] = (byte) 0x14;
+        buff[2] = (byte) 0x61;
+        buff[3] = type;
+        buff[5] = (byte) 0x9E;
+        buff[7] = (byte) model;
+        buff[10] = (byte) 0x04;
+        buff[19] = ZhiLingJi.getJiaoYan(buff);
+        try {
+            OutputStream os = Data.serialPort.getOutputStream();
+            os.write(buff);
+            os.flush();
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -92,7 +92,7 @@ public class dkCreateDialog implements ActionListener{
 	}
 	public void actionPerformed(ActionEvent e) {
 		if ("确定".equals(e.getActionCommand())) {
-			if (table.getRowCount() == 20) {
+			if (table.getRowCount() >= 20) {
 				JFrame frame = (JFrame)MainUi.map.get("frame");
 				JOptionPane.showMessageDialog(frame, "最多只能创建20个灯库！", "提示", JOptionPane.ERROR_MESSAGE);
 				return;

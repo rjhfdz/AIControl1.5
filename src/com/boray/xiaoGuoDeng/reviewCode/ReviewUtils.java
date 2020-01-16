@@ -632,6 +632,7 @@ public class ReviewUtils {
                 //通道控制配置数据
                 byte[] tonDaoKonZhi = new byte[6];
                 byte[] gouXuan = new byte[4];
+                byte[] gouXuan2 = new byte[4];
                 List<Byte> tonDaoBu = new ArrayList<>();
                 for (int l = 0; l < suCaiTonDaoShu + 2; l++) {
                     tonDaoBu.add((byte) 0);
@@ -655,6 +656,24 @@ public class ReviewUtils {
                     }
                     for (int l = 0; l < bp1.length; l++) {
                         gouXuan[l] = (byte) bp1[l];
+                    }
+                    //第二排勾选
+                    bp1 = new int[4];
+                    bn = (boolean[]) list66.get(3);
+                    for (int l = 0; l < bn.length; l++) {
+                        r = l / 8;
+                        yu = l % 8;
+                        if (bn[l]) {
+                            bp1[r] = bp1[r] + (1 << yu);
+                        }
+                    }
+                    for (int l = bn.length; l < 32; l++) {
+                        r = l / 8;
+                        yu = l % 8;
+                        bp1[r] = bp1[r] + (1 << yu);
+                    }
+                    for (int l = 0; l < bp1.length; l++) {
+                        gouXuan2[l] = (byte) bp1[l];
                     }
 
                     String[] ddTemp = (String[]) list66.get(2);
@@ -707,8 +726,10 @@ public class ReviewUtils {
                 integrate(list, ziDingYi);//自定义数据
                 integrate(list, gouXuan);//勾选数据
                 integrate(list, beiSaiEr);//贝塞尔曲线
+                integrate(list, gouXuan2);//渐变勾选 4
+                integrate(list, new byte[2]);//备用 2
             } else {
-                for (int j = 0; j < 146 + suCaiTonDaoShu; j++) {//没有数据默认补零，一个通道
+                for (int j = 0; j < 95 + suCaiTonDaoShu; j++) {//没有数据默认补零，一个通道
                     list.add((byte) 00);
                 }
             }

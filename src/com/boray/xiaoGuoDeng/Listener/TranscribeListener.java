@@ -1,7 +1,9 @@
 package com.boray.xiaoGuoDeng.Listener;
 
 import com.boray.Data.Data;
+import com.boray.Data.XiaoGuoDengModel;
 import com.boray.Data.ZhiLingJi;
+import com.boray.Utils.Socket;
 import com.boray.mainUi.MainUi;
 
 import javax.swing.*;
@@ -21,7 +23,10 @@ public class TranscribeListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String code = ((JButton) e.getSource()).getText();
-        boolean flag = Data.serialPort != null;
+        boolean flag = false;
+        if (Data.serialPort != null || Data.socket != null) {
+            flag = true;
+        }
         if (code.equals("播放")) {
             play(flag);
         } else if (code.equals("停止")) {
@@ -34,7 +39,7 @@ public class TranscribeListener implements ActionListener {
                 int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "进入学习将覆盖原有录制数据，是否继续？", "警告",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                         null, options, options[1]);
-                if(yes==1){
+                if (yes == 1) {
                     transcribeStart(flag);
                     first = false;
                 }
@@ -62,12 +67,16 @@ public class TranscribeListener implements ActionListener {
             buff[7] = (byte) Integer.parseInt(model);
             buff[10] = (byte) 0x04;
             buff[19] = ZhiLingJi.getJiaoYan(buff);
-            try {
-                OutputStream os = Data.serialPort.getOutputStream();
-                os.write(buff);
-                os.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (Data.serialPort != null) {
+                try {
+                    OutputStream os = Data.serialPort.getOutputStream();
+                    os.write(buff);
+                    os.flush();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (Data.socket != null) {
+                Socket.UDPSendData(buff);
             }
         }
     }
@@ -88,12 +97,16 @@ public class TranscribeListener implements ActionListener {
             buff[7] = (byte) Integer.parseInt(model);
             buff[10] = (byte) 0x04;
             buff[19] = ZhiLingJi.getJiaoYan(buff);
-            try {
-                OutputStream os = Data.serialPort.getOutputStream();
-                os.write(buff);
-                os.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (Data.serialPort != null) {
+                try {
+                    OutputStream os = Data.serialPort.getOutputStream();
+                    os.write(buff);
+                    os.flush();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (Data.socket != null) {
+                Socket.UDPSendData(buff);
             }
         }
     }
@@ -114,13 +127,20 @@ public class TranscribeListener implements ActionListener {
             buff[7] = (byte) Integer.parseInt(model);
             buff[10] = (byte) 0x04;
             buff[19] = ZhiLingJi.getJiaoYan(buff);
-            try {
-                OutputStream os = Data.serialPort.getOutputStream();
-                os.write(buff);
-                os.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (Data.serialPort != null) {
+                try {
+                    OutputStream os = Data.serialPort.getOutputStream();
+                    os.write(buff);
+                    os.flush();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (Data.socket != null) {
+                Socket.UDPSendData(buff);
             }
+            //清除录制后的数据
+            JPanel timeBlockPanels = ((JPanel[]) MainUi.map.get("timeBlockPanels_group" + model))[0];
+            timeBlockPanels.removeAll();
         }
     }
 
@@ -140,12 +160,16 @@ public class TranscribeListener implements ActionListener {
             buff[7] = (byte) Integer.parseInt(model);
             buff[10] = (byte) 0x04;
             buff[19] = ZhiLingJi.getJiaoYan(buff);
-            try {
-                OutputStream os = Data.serialPort.getOutputStream();
-                os.write(buff);
-                os.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (Data.serialPort != null) {
+                try {
+                    OutputStream os = Data.serialPort.getOutputStream();
+                    os.write(buff);
+                    os.flush();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (Data.socket != null) {
+                Socket.UDPSendData(buff);
             }
         }
     }
@@ -166,12 +190,16 @@ public class TranscribeListener implements ActionListener {
             buff[7] = (byte) Integer.parseInt(model);
             buff[10] = (byte) 0x04;
             buff[19] = ZhiLingJi.getJiaoYan(buff);
-            try {
-                OutputStream os = Data.serialPort.getOutputStream();
-                os.write(buff);
-                os.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (Data.serialPort != null) {
+                try {
+                    OutputStream os = Data.serialPort.getOutputStream();
+                    os.write(buff);
+                    os.flush();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else if (Data.socket != null) {
+                Socket.UDPSendData(buff);
             }
         }
     }

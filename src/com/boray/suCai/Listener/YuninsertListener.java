@@ -22,6 +22,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.boray.Data.Data;
 import com.boray.Utils.HttpClientUtil;
+import com.boray.entity.Users;
 import com.boray.mainUi.MainUi;
 
 public class YuninsertListener implements ActionListener {
@@ -63,17 +64,13 @@ public class YuninsertListener implements ActionListener {
 		JList suCaiLightType = (JList)MainUi.map.get("yunsuCaiLightType");
 		
 		String field=yunsc.getSelectedValue().toString();
-		
-		String jsonstr =HttpClientUtil.doGet("http://localhost:8778/getscxx?username=1&kuname="+suCaiLightType.getSelectedValue().toString()+"&sctype="+j+"&filename="+field+"");
-		
-		
+		  Users users = (Users) MainUi.map.get("Users");
+		String jsonstr =HttpClientUtil.doGet(Data.ipPort+"/getscxx?username="+users.getUsername()+"&kuname="+suCaiLightType.getSelectedValue().toString()+"&sctype="+j+"&filename="+field+"");
 		
 		
-	
 	
 		try {
 			if(jsonstr!=null&& !jsonstr.equals("")) {
-				System.out.println(jsonstr+"zheng");
 				JSONObject json =JSON.parseObject(jsonstr);
 				
 				StringBufferDemo(json.getString("filejson"));
@@ -106,7 +103,7 @@ public class YuninsertListener implements ActionListener {
 					}
 				}
 			}
-			Data.SuCaiObjects[suCaiLightType.getSelectedIndex()][cnt+1]=(Map)d.readObject();
+			Data.SuCaiObjects[suCaiLightType.getSelectedIndex()][cnt]=(Map)d.readObject();
 			String suCaiNameAndNumber = field+"--->"+(cnt+1);
 			//////////////////
 			

@@ -1,6 +1,6 @@
 package com.boray.Listener;
 
-import java.awt.CardLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.OutputStream;
@@ -14,12 +14,15 @@ import javax.swing.JToggleButton;
 
 import com.boray.Data.Data;
 import com.boray.Data.ZhiLingJi;
+import com.boray.Utils.JPressButton;
+import com.boray.Utils.Socket;
 import com.boray.beiFen.Listener.DataActionListener;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
+import com.boray.xiaoGuoDeng.Listener.DMXModelListener;
 
 public class SwitchListener implements ActionListener {
-    private static String selected = "10";
+    private static String selected = "1";
 
     public void actionPerformed(ActionEvent e) {
         CardLayout cardLayout = (CardLayout) MainUi.map.get("titileCard");
@@ -55,6 +58,18 @@ public class SwitchListener implements ActionListener {
                         labels[j + 1].setVisible(false);
                     }
                 }
+            }
+            DMXModelListener listener = new DMXModelListener();
+            if (Data.serialPort != null) {
+                try {
+                    OutputStream os = Data.serialPort.getOutputStream();
+                    os.write(listener.queryLuZhi());
+                    os.flush();
+                }catch (Exception e1){
+                    e1.printStackTrace();
+                }
+            } else if (Data.socket != null) {
+                Socket.UDPSendData(listener.queryLuZhi());
             }
         } else if (btn.getName().equals("4")) {
 
@@ -131,6 +146,21 @@ public class SwitchListener implements ActionListener {
                 list.setSelectedIndex(0);
             }
         }
+        if (btn.getName().equals("11")) {
+            JList list = (JList) MainUi.map.get("shengKonSuCaiLightType");
+            NewJTable table = (NewJTable) MainUi.map.get("GroupTable");
+            String[] s = {};
+            if (table.getRowCount() != 0) {
+                s = new String[table.getRowCount()];
+                for (int i = 0; i < s.length; i++) {
+                    s[i] = table.getValueAt(i, 2).toString();
+                }
+            }
+            list.setListData(s);
+            if (s.length > 0) {
+                list.setSelectedIndex(0);
+            }
+        }
         if (btn.getName().equals("10")) {
 
         }
@@ -141,9 +171,22 @@ public class SwitchListener implements ActionListener {
                     OutputStream os = Data.serialPort.getOutputStream();
                     os.write(ZhiLingJi.queryUSBFlashDiskState());
                     os.flush();
+                }else if(Data.socket !=null){
+                    Socket.UDPSendData(ZhiLingJi.queryUSBFlashDiskState());
                 }
             } catch (Exception e1) {
                 e1.printStackTrace();
+            }
+        }
+        JPanel MenuButtonPanel = (JPanel) MainUi.map.get("MenuButtonPanel");
+        for (int i = 0; i < MenuButtonPanel.getComponentCount(); i++) {
+            if(MenuButtonPanel.getComponent(i) instanceof JPressButton) {
+                JPressButton button = (JPressButton) MenuButtonPanel.getComponent(i);
+                if (button.isSelected()) {
+                    button.setForeground(Color.black);
+                } else {
+                    button.setForeground(Color.WHITE);
+                }
             }
         }
         selected = btn.getName();

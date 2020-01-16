@@ -71,6 +71,8 @@ public class QuanJuUI implements ActionListener{
 			box3.addItem(String.valueOf(i));
 			box4.addItem(String.valueOf(i));
 		}
+		box3.setSelectedIndex(85);
+		box4.setSelectedIndex(13);
 		box3.addItemListener(listener);box4.addItemListener(listener);
 		p3.add(box3);p3.add(new JLabel("(Î¢Ãë)    "));
 		p3.add(new JLabel("Ö¡°ü¼ä¸ô:"));

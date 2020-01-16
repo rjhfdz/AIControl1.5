@@ -16,5 +16,7 @@ public class IpConfig {
             e.printStackTrace();
         }
         Data.ipPort = "http://" + properties.getProperty("ip") + ":" + properties.getProperty("port") + "/";
+        Data.ip = "http://" + properties.getProperty("ip") + "/";
+        Data.downloadIp = "http://"+ properties.getProperty("ip") + ":8080/";
     }
 }

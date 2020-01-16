@@ -1,5 +1,7 @@
 package com.boray.Data;
 
+import java.io.OutputStream;
+
 public class ZhiLingJi {
 	
 	public static byte TYPE;//»úÐÍ
@@ -637,4 +639,5 @@ public class ZhiLingJi {
 		}
 		return (byte)all;
 	}
+
 }

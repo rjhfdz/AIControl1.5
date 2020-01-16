@@ -5,7 +5,6 @@ public class FileOrFolder {
     private String createdate;//创建时间  时间戳
     private Integer id;
     private String xmname;//项目名
-    private Integer xmtype;//类型 0：个人 1：公司
 
     public String getCreateby() {
         return createby;
@@ -39,11 +38,4 @@ public class FileOrFolder {
         this.xmname = xmname;
     }
 
-    public Integer getXmtype() {
-        return xmtype;
-    }
-
-    public void setXmtype(Integer xmtype) {
-        this.xmtype = xmtype;
-    }
 }

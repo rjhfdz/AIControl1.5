@@ -1,5 +1,7 @@
 package com.boray.main.UI;
 
+import com.boray.Utils.Util;
+import com.boray.beiFen.Listener.LoadProjectFileActionListener;
 import com.boray.main.Listener.LocalListenter;
 import com.boray.main.Util.CustomTreeCellRenderer;
 import com.boray.main.Util.CustomTreeNode;
@@ -10,12 +12,20 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 
-public class LocalUI {
+public class LocalUI implements ActionListener {
+
+    private JPopupMenu popupMenu;
+    private JMenuItem menuItem;
 
     public void show(JPanel panel) {
         FlowLayout flowLayout6 = new FlowLayout(FlowLayout.LEFT);
@@ -45,6 +55,13 @@ public class LocalUI {
         deleteFile.addActionListener(listenter);
         refresh.addActionListener(listenter);
 
+        popupMenu = new JPopupMenu();
+        menuItem = new JMenuItem("加载工程");
+        menuItem.addActionListener(this);
+        ButtonGroup group = new ButtonGroup();
+        group.add(menuItem);
+        popupMenu.add(menuItem);
+
         buttonPanel.add(addFolder);
         buttonPanel.add(updateFolder);
         buttonPanel.add(deleteFolder);
@@ -67,7 +84,7 @@ public class LocalUI {
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(new LineBorder(Color.gray));
-        panel.setPreferredSize(new Dimension(250, 550));
+        panel.setPreferredSize(new Dimension(300, 550));
 
         File file = new File("C://Boray");
         if (!file.exists()) {//判断该文件夹是否存在 并创建
@@ -75,26 +92,13 @@ public class LocalUI {
         }
 
         // 创建根节点
-        CustomTreeNode rootNode = new CustomTreeNode(file);
-        rootNode.setLevel(0);
-        DefaultTreeModel model = new DefaultTreeModel(rootNode);
+        DefaultMutableTreeNode rootNode = Util.traverseFolder(file);
 
         // 使用根节点创建树组件
-        JTree tree = new JTree(model);
+        final JTree tree = new JTree(rootNode);
 
         //设置图标样式
         tree.setCellRenderer(new CustomTreeCellRenderer());
-
-        for (File list : file.listFiles()) {
-            CustomTreeNode node = new CustomTreeNode(list);
-            node.setLevel(1);
-            for (File file1 : list.listFiles()) {
-                CustomTreeNode fileNode = new CustomTreeNode(file1);
-                fileNode.setLevel(2);
-                node.add(fileNode);
-            }
-            rootNode.add(node);
-        }
 
         // 设置树显示根节点句柄
         tree.setShowsRootHandles(true);
@@ -104,6 +108,23 @@ public class LocalUI {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
                 System.out.println("当前被选中的节点: " + e.getPath());
+            }
+        });
+        tree.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                TreePath path = tree.getPathForLocation(e.getX(), e.getY());
+                if (path == null) {  //JTree上没有任何项被选中
+                    return;
+                } else {
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+                    File file1 = (File) node.getUserObject();
+                    if (file1.isFile()) {
+                        tree.setSelectionPath(path);
+                        if (e.getButton() == 3) {
+                            popupMenu.show(tree, e.getX(), e.getY());
+                        }
+                    }
+                }
             }
         });
 
@@ -120,5 +141,16 @@ public class LocalUI {
         MainUi.map.put("LocalTree", tree);
 
         pane.add(panel);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JTree tree = (JTree) MainUi.map.get("LocalTree");
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+        File file1 = (File) node.getUserObject();
+        if (file1.exists()) {
+            LoadProjectFileActionListener listener = new LoadProjectFileActionListener();
+            listener.tt(file1, 1);
+        }
     }
 }

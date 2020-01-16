@@ -335,6 +335,43 @@ public class TimeBlockReviewData {
         return temp;
     }
 
+    public static Object[] getEffectLightObjects(int denKuNum, int suCaiNum) {
+        byte[] b = getEffectLightToOne2Bytes(denKuNum, suCaiNum);
+        int packet = (b.length - 9) / 512 + 1;
+        int lastSize = (b.length - 9) % 512;
+        Object[] temp = new Object[packet];
+        for (int i = 0; i < packet; i++) {
+            if (i != (packet - 1)) {
+                byte[] tp1 = new byte[521];
+                tp1[0] = (byte) 0xBB;
+                tp1[1] = (byte) 0x55;
+                tp1[2] = (byte) (521 / 256);
+                tp1[3] = (byte) (521 % 256);
+                tp1[4] = (byte) 0x85;
+                tp1[5] = (byte) 0x11;
+                tp1[6] = (byte) ((i + 1) / 256);
+                tp1[7] = (byte) ((i + 1) % 256);
+                System.arraycopy(b, 8 + i * 512, tp1, 8, 512);
+                tp1[520] = ZhiLingJi.getJiaoYan(tp1);
+                temp[i] = tp1;
+            } else {
+                byte[] tp2 = new byte[lastSize + 9];
+                tp2[0] = (byte) 0xBB;
+                tp2[1] = (byte) 0x55;
+                tp2[2] = (byte) ((lastSize + 9) / 256);
+                tp2[3] = (byte) ((lastSize + 9) % 256);
+                tp2[4] = (byte) 0x85;
+                tp2[5] = (byte) 0x11;
+                tp2[6] = (byte) ((i + 1) / 256);
+                tp2[7] = (byte) ((i + 1) % 256);
+                System.arraycopy(b, 8 + i * 512, tp2, 8, lastSize);
+                tp2[lastSize + 8] = ZhiLingJi.getJiaoYan(tp2);
+                temp[i] = tp2;
+            }
+        }
+        return temp;
+    }
+
     public static Object[] getEffectLight4(int length, int model, int type) {
         byte[] b = null;
         if (type == 14) {
@@ -342,8 +379,8 @@ public class TimeBlockReviewData {
         } else if (type == 15) {
             b = ReviewUtils.sceneChangJingReview(model);
         }
-        int packet = (b.length - 9) / length + 1;
-        int lastSize = (b.length - 9) % length;
+        int packet = b.length / length + 1;
+        int lastSize = b.length % length;
         int dataLength = length + 9;
         Object[] temp = new Object[packet];
         for (int i = 0; i < packet; i++) {
@@ -436,6 +473,29 @@ public class TimeBlockReviewData {
         return temp;
     }
 
+    public static byte[] getGouXuan(boolean[] bn){
+        int r = 0, yu = 0;
+        int[] bp1 = new int[4];
+        for (int k = 0; k < bn.length; k++) {
+            r = k / 8;
+            //yu = 7 - (k % 8);
+            yu = k % 8;
+            if (bn[k]) {
+                bp1[r] = bp1[r] + (1 << yu);
+            }
+        }
+        for (int k = bn.length; k < 32; k++) {
+            r = k / 8;
+            yu = k % 8;
+            bp1[r] = bp1[r] + (1 << yu);
+        }
+        byte[] bp2 = new byte[4];
+        for (int k = 0; k < bp1.length; k++) {
+            bp2[k] = (byte) bp1[k];
+        }
+        return bp2;
+    }
+
     public static byte[] getEffectLightToOne2(int sc, int group, int block, int index) {
         byte[] temp = null;
         int denKuNum = Integer.parseInt(getxiaoGuoDengDengKuName(group));
@@ -445,6 +505,7 @@ public class TimeBlockReviewData {
         byte[] T1 = new byte[53];
         byte[] zdyObjects = new byte[5];
         byte[] gxObjects = new byte[4];
+        byte[] gxObjects2 = new byte[4];
         byte[] bTp = new byte[(tt + 2) * 32];
         if (hashMap != null) {
             //动作图形
@@ -731,27 +792,10 @@ public class TimeBlockReviewData {
             Vector vector88 = null;
             if (list66 != null) {
                 //////////勾选
-                int r = 0, yu = 0;
-                int[] bp1 = new int[4];
                 boolean[] bn = (boolean[]) list66.get(1);
-                for (int k = 0; k < bn.length; k++) {
-                    r = k / 8;
-                    //yu = 7 - (k % 8);
-                    yu = k % 8;
-                    if (bn[k]) {
-                        bp1[r] = bp1[r] + (1 << yu);
-                    }
-                }
-                for (int k = bn.length; k < 32; k++) {
-                    r = k / 8;
-                    yu = k % 8;
-                    bp1[r] = bp1[r] + (1 << yu);
-                }
-                byte[] bp2 = new byte[4];
-                for (int k = 0; k < bp1.length; k++) {
-                    bp2[k] = (byte) bp1[k];
-                }
-                gxObjects = bp2;
+                gxObjects = getGouXuan(bn);
+                bn = (boolean[]) list66.get(3);
+                gxObjects2 = getGouXuan(bn);
                 //////////////
 
                 String[] ddTemp = (String[]) list66.get(2);
@@ -798,7 +842,7 @@ public class TimeBlockReviewData {
             }
         }
 
-        int length = 62 + bTp.length + 118;
+        int length = 62 + bTp.length + 118 + 12;
         temp = new byte[length];
         temp[0] = (byte) 0xBB;
         temp[1] = (byte) 0x55;
@@ -921,12 +965,500 @@ public class TimeBlockReviewData {
         for (int i = 0; i < 24; i++) {
             temp[102 + i] = (byte) p4[i];
         }
+        for (int i = 0; i < 4; i++) {
+            temp[i + 126] = gxObjects2[i];
+        }
+        for (int i = 0; i < 8; i++) {
+            temp[i + 130] = 0;
+        }
         //其他数据
         for (int i = 0; i < 53; i++) {
-            temp[i + 126] = T1[i];
+            temp[i + 138] = T1[i];
         }
-        for (int i = 179; i < length - 1; i++) {
-            temp[i] = bTp[i - 179];
+        for (int i = 191; i < length - 1; i++) {
+            temp[i] = bTp[i - 191];
+        }
+        temp[length - 1] = ZhiLingJi.getJiaoYan(temp);
+        return temp;
+    }
+
+    public static byte[] getEffectLightToOne2Bytes(int denKuNum, int suCaiNum) {
+        byte[] temp = null;
+        int tt = Integer.valueOf((String) Data.DengKuChannelCountList.get(denKuNum)).intValue();
+        HashMap hashMap = (HashMap) Data.SuCaiObjects[denKuNum][suCaiNum];
+        byte[] T1 = new byte[53];
+        byte[] zdyObjects = new byte[5];
+        byte[] gxObjects = new byte[4];
+        byte[] gxObjects2 = new byte[4];
+        byte[] bTp = new byte[(tt + 2) * 32];
+        if (hashMap != null) {
+            //动作图形
+            Map map = (Map) hashMap.get("actionXiaoGuoData");
+            List list = null;
+            boolean bb = false;
+            int a = 0;
+            if (map != null) {
+                int selected = Integer.valueOf((String) map.get("2"));
+                if (selected == 1) {
+                    selected = 255;
+                } else if (selected > 1) {
+                    selected = selected - 1;
+                }
+                T1[0] = (byte) selected;
+                //运行速度
+                int yunXinSpeed = Integer.valueOf((String) map.get("3"));
+                T1[1] = (byte) yunXinSpeed;
+                //使用开关 1启用/0关
+                String ss = (String) map.get("0");
+                if (ss != null && "true".equals(ss)) {
+                    T1[2] = (byte) 1;
+                }
+                //拆分    不拆分01/中间拆分02/两端拆分03
+                String[] tp1 = (String[]) map.get("4");
+                int cc = Integer.valueOf(tp1[0]) + 1;
+                T1[3] = (byte) cc;
+
+                //拆分反向
+
+                //X轴反向    是1/否0
+                if ("true".equals(tp1[1])) {
+                    a = 1;
+                } else {
+                    a = 0;
+                }
+                T1[5] = (byte) a;
+                //X半
+                if ("true".equals(tp1[2])) {
+                    a = 1;
+                } else {
+                    a = 0;
+                }
+                T1[6] = (byte) a;
+                //Y轴反向
+                if ("true".equals(tp1[3])) {
+                    a = 1;
+                } else {
+                    a = 0;
+                }
+                T1[7] = (byte) a;
+                //Y半
+                if ("true".equals(tp1[4])) {
+                    a = 1;
+                } else {
+                    a = 0;
+                }
+                T1[8] = (byte) a;
+
+
+                //时间A_L	时间B_H
+                a = Integer.valueOf(tp1[5]).intValue() * 10;
+                T1[9] = (byte) (a % 256);
+                T1[10] = (byte) (a / 256);
+
+                ///////////////自定义动作数据
+                String[] values = (String[]) map.get("1");
+                byte[] bt1 = new byte[5];
+                if (values != null) {
+                    if (values[0].equals("true")) {
+                        bt1[0] = 1;
+                    }
+                    for (int k = 1; k < bt1.length; k++) {
+                        bt1[k] = (byte) Integer.valueOf(values[k]).intValue();
+                    }
+                }
+                zdyObjects = bt1;
+            }
+
+            //RGB1
+            list = (List) hashMap.get("rgb1Data");
+            String[] tp2 = null;
+            boolean[] bs = null;
+            String b = "";
+            if (list != null) {
+                //红色
+                tp2 = (String[]) list.get(1);
+                a = Integer.valueOf(tp2[0]).intValue();
+                T1[11] = (byte) a;
+                //绿色
+                a = Integer.valueOf(tp2[1]).intValue();
+                T1[12] = (byte) a;
+                //蓝色
+                a = Integer.valueOf(tp2[2]).intValue();
+                T1[13] = (byte) a;
+                //渐变类型
+                b = (String) list.get(4);
+                a = Integer.valueOf(b).intValue();
+                T1[14] = (byte) a;
+                //渐变
+                bb = (boolean) list.get(5);
+                a = 0;
+                if (bb) {
+                    a = 1;
+                }
+                T1[15] = (byte) a;
+                //参与渐变勾选
+                bs = (boolean[]) list.get(2);
+                a = 0;
+                if (bs[0]) {
+                    a = 128;
+                }
+                if (bs[1]) {
+                    a = a + 64;
+                }
+                if (bs[2]) {
+                    a = a + 32;
+                }
+                T1[16] = (byte) a;
+                //渐变速度
+                b = (String) list.get(6);
+                a = Integer.valueOf(b).intValue();
+                T1[17] = (byte) a;
+                //使用开关
+                bb = (boolean) list.get(0);
+                a = 0;
+                if (bb) {
+                    a = 1;
+                }
+                T1[18] = (byte) a;
+                //拆分
+                b = (String) list.get(7);
+                a = Integer.valueOf(b).intValue() + 1;
+                T1[19] = (byte) a;
+
+                //拆分反向
+                bb = (boolean) list.get(8);
+                a = 0;
+                if (bb) {
+                    a = 1;
+                }
+                T1[20] = (byte) a;
+                //时间A_L	时间B_H
+                a = Integer.valueOf((String) list.get(9)).intValue() * 10;
+                T1[21] = (byte) (a % 256);
+                T1[22] = (byte) (a / 256);
+            }
+
+            //RGB2
+            list = (List) hashMap.get("rgb2Data");
+            if (list != null) {
+                //红色
+                tp2 = (String[]) list.get(1);
+                a = Integer.valueOf(tp2[0]).intValue();
+                T1[23] = (byte) a;
+                //绿色
+                a = Integer.valueOf(tp2[1]).intValue();
+                T1[24] = (byte) a;
+                //蓝色
+                a = Integer.valueOf(tp2[2]).intValue();
+                T1[25] = (byte) a;
+                //渐变类型
+                b = (String) list.get(4);
+                a = Integer.valueOf(b).intValue();
+                T1[26] = (byte) a;
+                //渐变
+                bb = (boolean) list.get(5);
+                a = 0;
+                if (bb) {
+                    a = 1;
+                }
+                T1[27] = (byte) a;
+                //参与渐变勾选
+                bs = (boolean[]) list.get(2);
+                a = 0;
+                if (bs[0]) {
+                    a = 128;
+                }
+                if (bs[1]) {
+                    a = a + 64;
+                }
+                if (bs[2]) {
+                    a = a + 32;
+                }
+                T1[28] = (byte) a;
+                //渐变速度
+                b = (String) list.get(6);
+                a = Integer.valueOf(b).intValue();
+                T1[29] = (byte) a;
+                //使用开关
+                bb = (boolean) list.get(0);
+                a = 0;
+                if (bb) {
+                    a = 1;
+                }
+                T1[30] = (byte) a;
+                //拆分
+                b = (String) list.get(7);
+                a = Integer.valueOf(b).intValue() + 1;
+                T1[31] = (byte) a;
+
+                //拆分反向
+                bb = (boolean) list.get(8);
+                a = 0;
+                if (bb) {
+                    a = 1;
+                }
+                T1[32] = (byte) a;
+                //时间A_L	时间B_H
+                a = Integer.valueOf((String) list.get(9)).intValue() * 10;
+                T1[33] = (byte) (a % 256);
+                T1[34] = (byte) (a / 256);
+            }
+
+            //RGB3
+            list = (List) hashMap.get("rgb3Data");
+            if (list != null) {
+                //红色
+                tp2 = (String[]) list.get(1);
+                a = Integer.valueOf(tp2[0]).intValue();
+                T1[35] = (byte) a;
+                //绿色
+                a = Integer.valueOf(tp2[1]).intValue();
+                T1[36] = (byte) a;
+                //蓝色
+                a = Integer.valueOf(tp2[2]).intValue();
+                T1[37] = (byte) a;
+                //渐变类型
+                b = (String) list.get(4);
+                a = Integer.valueOf(b).intValue();
+                T1[38] = (byte) a;
+                //渐变
+                bb = (boolean) list.get(5);
+                a = 0;
+                if (bb) {
+                    a = 1;
+                }
+                T1[39] = (byte) a;
+                //参与渐变勾选
+                bs = (boolean[]) list.get(2);
+                a = 0;
+                if (bs[0]) {
+                    a = 128;
+                }
+                if (bs[1]) {
+                    a = a + 64;
+                }
+                if (bs[2]) {
+                    a = a + 32;
+                }
+                T1[40] = (byte) a;
+                //渐变速度
+                b = (String) list.get(6);
+                a = Integer.valueOf(b).intValue();
+                T1[41] = (byte) a;
+                //使用开关
+                bb = (boolean) list.get(0);
+                a = 0;
+                if (bb) {
+                    a = 1;
+                }
+                T1[42] = (byte) a;
+                //拆分
+                b = (String) list.get(7);
+                a = Integer.valueOf(b).intValue() + 1;
+                T1[43] = (byte) a;
+
+                //拆分反向
+                bb = (boolean) list.get(8);
+                a = 0;
+                if (bb) {
+                    a = 1;
+                }
+                T1[44] = (byte) a;
+                //时间A_L	时间B_H
+                a = Integer.valueOf((String) list.get(9)).intValue() * 10;
+                T1[45] = (byte) (a % 256);
+                T1[46] = (byte) (a / 256);
+            }
+
+
+            /////手动编程配置
+            List list66 = (List) hashMap.get("channelData");
+            Vector vector88 = null;
+            if (list66 != null) {
+                //////////勾选
+                boolean[] bn = (boolean[]) list66.get(1);
+                gxObjects = getGouXuan(bn);
+                bn = (boolean[]) list66.get(3);
+                gxObjects2 = getGouXuan(bn);
+                //////////////
+
+                String[] ddTemp = (String[]) list66.get(2);
+                a = 0;
+                vector88 = (Vector) list66.get(0);
+                if (vector88 != null) {
+                    a = vector88.size();
+                }
+                //总帧数
+                T1[47] = (byte) a;
+                //手动编程启用
+                T1[48] = (byte) 1;
+
+                //时差A_L	时差B_H
+                a = Integer.valueOf(ddTemp[2]).intValue();
+                T1[49] = (byte) (a % 256);
+                T1[50] = (byte) (a / 256);
+                //拆分
+                a = Integer.valueOf(ddTemp[0]).intValue() + 1;
+                T1[51] = (byte) a;
+                //拆分反向
+                a = 0;
+                if (!ddTemp[1].equals("0")) {
+                    a = 1;
+                }
+                T1[52] = (byte) a;
+
+                Vector tpe = null;
+                int lenght = tt + 2;
+                if (vector88 != null) {
+                    for (int n = 0; n < vector88.size(); n++) {
+                        tpe = (Vector) vector88.get(n);
+                        int timeTp = Integer.valueOf(tpe.get(1).toString()).intValue();
+                        bTp[(tt + 2) * n] = (byte) (timeTp % 256);
+                        bTp[(tt + 2) * n + 1] = (byte) (timeTp / 256);
+                        if (lenght > tpe.size()) {
+                            lenght = tpe.size();
+                        }
+                        for (int k = 2; k < lenght; k++) {
+                            bTp[(tt + 2) * n + k] = Integer.valueOf(tpe.get(k).toString()).byteValue();
+                        }
+                    }
+                }
+            }
+        }
+
+        int length = 62 + bTp.length + 118 + 12;
+        temp = new byte[length];
+        temp[0] = (byte) 0xBB;
+        temp[1] = (byte) 0x55;
+        temp[2] = (byte) (length / 256);
+        temp[3] = (byte) (length % 256);
+        temp[4] = (byte) 0x85;
+        temp[5] = (byte) 0x11;
+        temp[6] = (byte) 0x00;
+        temp[7] = (byte) 0x01;
+
+        //自定义动作
+        for (int i = 0; i < 5; i++) {
+            temp[i + 8] = zdyObjects[i];
+        }
+        //勾选数据
+        for (int i = 0; i < 4; i++) {
+            temp[i + 13] = gxObjects[i];
+        }
+        //时间块长度
+        byte[] b3 = new byte[4];
+        int start = 0 / 5;
+        int end = (0 + 150) / 5;
+        b3[0] = (byte) (start % 256);
+        b3[1] = (byte) (start / 256);
+
+        b3[2] = (byte) (end % 256);
+        b3[3] = (byte) (end / 256);
+        for (int i = 0; i < 4; i++) {
+            temp[i + 17] = b3[i];
+        }
+        //动作12点数据
+        int[] p1 = null;
+        int action = Byte.toUnsignedInt(T1[0]);
+        if (action == 0) {
+            p1 = bezier.Data.ZB[1];
+        } else if (action == 1) {
+            p1 = bezier.Data.ZB[0];
+        } else if (action > 1 && action < 48) {
+            p1 = bezier.Data.ZB[action];
+        } else if (action >= 48) {
+            String[] s = (String[]) bezier.Data.map.get("" + action);
+            if (s != null) {
+                p1 = new int[24];
+                for (int i = 0; i < s.length; i++) {
+                    p1[i] = Integer.valueOf(s[i]);
+                }
+            } else {
+                p1 = bezier.Data.ZB[0];
+            }
+        }
+        temp[26] = (byte) action;
+        for (int i = 0; i < 24; i++) {
+            temp[27 + i] = (byte) p1[i];
+        }
+        //rgb1 12点数据
+        int[] p2 = null;
+        int rgb1 = Byte.toUnsignedInt(T1[14]);
+        if (rgb1 <= 10) {
+            p2 = new int[24];
+        } else if (rgb1 > 10 && rgb1 < 52) {
+            p2 = bezier.Data.ZBcolor[rgb1 - 11];
+        } else if (rgb1 > 51) {
+            String[] s = (String[]) bezier.Data.map.get("color" + rgb1);
+            if (s != null) {
+                p2 = new int[24];
+                for (int i = 0; i < s.length; i++) {
+                    p2[i] = Integer.valueOf(s[i]);
+                }
+            } else {
+                p2 = bezier.Data.ZB[0];
+            }
+        }
+        temp[51] = (byte) rgb1;
+        for (int i = 0; i < 24; i++) {
+            temp[52 + i] = (byte) p2[i];
+        }
+        //rgb2 12点数据
+        int[] p3 = null;
+        int rgb2 = Byte.toUnsignedInt(T1[26]);
+        if (rgb2 <= 10) {
+            p3 = new int[24];
+        } else if (rgb2 > 10 && rgb2 < 52) {
+            p3 = bezier.Data.ZBcolor[rgb2 - 11];
+        } else if (rgb2 > 51) {
+            String[] s = (String[]) bezier.Data.map.get("color" + rgb2);
+            if (s != null) {
+                p3 = new int[24];
+                for (int i = 0; i < s.length; i++) {
+                    p3[i] = Integer.valueOf(s[i]);
+                }
+            } else {
+                p3 = bezier.Data.ZB[0];
+            }
+        }
+        temp[76] = (byte) rgb2;
+        for (int i = 0; i < 24; i++) {
+            temp[77 + i] = (byte) p3[i];
+        }
+        //rgb3 12点数据
+        int[] p4 = null;
+        int rgb3 = Byte.toUnsignedInt(T1[38]);
+        if (rgb3 <= 10) {
+            p4 = new int[24];
+        } else if (rgb3 > 10 && rgb3 < 52) {
+            p4 = bezier.Data.ZBcolor[rgb3 - 11];
+        } else if (rgb3 > 51) {
+            String[] s = (String[]) bezier.Data.map.get("color" + rgb3);
+            if (s != null) {
+                p4 = new int[24];
+                for (int i = 0; i < s.length; i++) {
+                    p4[i] = Integer.valueOf(s[i]);
+                }
+            } else {
+                p4 = bezier.Data.ZB[0];
+            }
+        }
+        temp[101] = (byte) rgb3;
+        for (int i = 0; i < 24; i++) {
+            temp[102 + i] = (byte) p4[i];
+        }
+        for (int i = 0; i < 4; i++) {
+            temp[i + 126] = gxObjects2[i];
+        }
+        for (int i = 0; i < 8; i++) {
+            temp[i + 130] = 0;
+        }
+        //其他数据
+        for (int i = 0; i < 53; i++) {
+            temp[i + 138] = T1[i];
+        }
+        for (int i = 191; i < length - 1; i++) {
+            temp[i] = bTp[i - 191];
         }
         temp[length - 1] = ZhiLingJi.getJiaoYan(temp);
         return temp;
@@ -944,7 +1476,7 @@ public class TimeBlockReviewData {
                 String s = table3.getValueAt(a, 0).toString();
                 Integer s1 = Integer.parseInt(s.split("#")[0].substring(2));//组内灯具的灯具id
                 NewJTable table_dengJu = (NewJTable) MainUi.map.get("table_dengJu");//灯具配置
-                s2 = ((String) table_dengJu.getValueAt(s1 - 1, 3)).substring(2, 3);//灯库名称
+                s2 = ((String) table_dengJu.getValueAt(s1 - 1, 3)).split("#")[0].substring(2);//灯库名称
             }
         }
         return s2;

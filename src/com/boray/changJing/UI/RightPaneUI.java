@@ -210,8 +210,8 @@ public class RightPaneUI {
 		TitledBorder tb3 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "复制", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
 		panel3.setBorder(tb3);
 		//panel3.setPreferredSize(new Dimension(600,62));
-		panel3.setPreferredSize(new Dimension(600,70));
-		
+		panel3.setPreferredSize(new Dimension(290,70));
+
 		JPanel P3 = new JPanel();
 		P3.setPreferredSize(new Dimension(598,460));
 		P3.setBorder(BorderFactory.createEmptyBorder(-10,0,0,0));
@@ -241,13 +241,14 @@ public class RightPaneUI {
 		T6(panel6);
 		TitledBorder tb6 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "雾机控制模式", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
 		panel6.setBorder(tb6);
-		panel6.setPreferredSize(new Dimension(600,64));
+		panel6.setPreferredSize(new Dimension(295,70));
 		
 		pane.add(panel,BorderLayout.NORTH);
 		pane.add(P1);
 		P1.add(panel2,BorderLayout.NORTH);
 		P1.add(P2);
 		P2.add(panel3,BorderLayout.NORTH);
+		P2.add(panel6,BorderLayout.NORTH);
 		P2.add(P3);
 		P3.add(panel4,BorderLayout.NORTH);
 		P3.add(P4);
@@ -271,6 +272,7 @@ public class RightPaneUI {
 		MainUi.map.put("wuJiModelBox", box);
 		box.setPreferredSize(new Dimension(78,30));
 		box.addItem("关");
+        box.addItem("保持");
 		for (int i = 1; i < 5; i++) {
 			box.addItem(String.valueOf(i));
 		}
@@ -512,7 +514,7 @@ public class RightPaneUI {
 		chdPane.add(label);
 		JComboBox box = new JComboBox();
 		MainUi.map.put("copyBox", box);
-		box.setPreferredSize(new Dimension(110,28));
+		box.setPreferredSize(new Dimension(55,28));
 		for (int i = 0; i < 37; i++) {
 			box.addItem(String.valueOf(i));
 		}

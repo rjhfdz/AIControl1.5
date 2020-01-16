@@ -19,8 +19,8 @@ public class Test {
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		
-		System.out.println(Data.yunSuCaiMap.get("dasdd"));
+
+		System.out.println(new File("").getAbsolutePath());
 		
 	}
 

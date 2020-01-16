@@ -619,13 +619,13 @@ public class CopyOfDataActionListener_20181124 implements ActionListener{
 		} else {
 			list.add(String.valueOf(0));
 		}
-		
+
 		//摇麦模式
 		JComboBox box3 = (JComboBox)MainUi.map.get("yaoMaiModelBox");
 		list.add(String.valueOf(box3.getSelectedIndex()));
 		
 		//摇麦触发间隔
-		/*JComboBox box2 = (JComboBox)MainUi.map.get("yaoMaiJianGeBox");
+		JComboBox box2 = (JComboBox)MainUi.map.get("yaoMaiJianGeBox");
 		list.add(String.valueOf(box2.getSelectedIndex()));
 		
 		//摇麦延续开关
@@ -634,7 +634,11 @@ public class CopyOfDataActionListener_20181124 implements ActionListener{
 			list.add(String.valueOf(1));
 		} else {
 			list.add(String.valueOf(0));
-		}*/
+		}
+
+		//雾机模式
+		JComboBox boxes = (JComboBox) MainUi.map.get("wuJiModelBox");
+		list.add(String.valueOf(boxes.getSelectedIndex()));
 	}
 
 	public void saveZhongKongData(){

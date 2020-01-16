@@ -623,7 +623,7 @@ public class DataActionListener2 {
 		list.add(String.valueOf(box3.getSelectedIndex()));
 		
 		//摇麦触发间隔
-		/*JComboBox box2 = (JComboBox)MainUi.map.get("yaoMaiJianGeBox");
+		JComboBox box2 = (JComboBox)MainUi.map.get("yaoMaiJianGeBox");
 		list.add(String.valueOf(box2.getSelectedIndex()));
 		
 		//摇麦延续开关
@@ -632,7 +632,11 @@ public class DataActionListener2 {
 			list.add(String.valueOf(1));
 		} else {
 			list.add(String.valueOf(0));
-		}*/
+		}
+
+		//雾机模式
+		JComboBox boxes = (JComboBox) MainUi.map.get("wuJiModelBox");
+		list.add(String.valueOf(boxes.getSelectedIndex()));
 	}
 
 	private void saveZhongKongData(){

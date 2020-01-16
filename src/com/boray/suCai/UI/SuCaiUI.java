@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -21,8 +23,10 @@ import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
 import com.boray.suCai.Listener.CreateOrDelSuCaiListener;
 import com.boray.suCai.Listener.EditListener;
+import com.boray.suCai.Listener.ShangchuanListener;
 import com.boray.suCai.Listener.SuCaiTypeListener;
 import com.boray.suCai.Listener.UpLoadOrLoadSuCaiMouseListener;
+import com.boray.suCai.Listener.YundelListener;
 
 public class SuCaiUI {
     public void show(JPanel pane) {
@@ -45,20 +49,24 @@ public class SuCaiUI {
         p3.setPreferredSize(new Dimension(280, 594));
         setP3(p3);
 
-        JPanel p4 = new JPanel();
-        TitledBorder tb = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "ÔÆ¶ËËØ²Ä", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
-        p4.setBorder(tb);
-        p4.setPreferredSize(new Dimension(280, 592));
-        setP4(p4);
+//        JPanel p4 = new JPanel();
+//        TitledBorder tb = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "ÔÆ¶ËËØ²Ä", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
+//        p4.setBorder(tb);
+//        p4.setPreferredSize(new Dimension(280, 592));
+//        setP4(p4);
 
         pane.add(p1);
         pane.add(p2);
         pane.add(p3);
-        pane.add(p4);
+//        pane.add(p4);
     }
 
     private void setP4(JPanel pane) {
-
+    	 JButton newBtn = new JButton("ÔÆ¶ËËØ²Ä");
+    	 
+    	 newBtn.addActionListener(new YundelListener());
+    	 
+    	 pane.add(newBtn);
     }
 
     private void setP3(JPanel p3) {
@@ -85,30 +93,29 @@ public class SuCaiUI {
         p3.add(scrollPane);
 
         JPanel bottomPanel = new JPanel();
-        bottomPanel.setPreferredSize(new Dimension(280, 40));
+        bottomPanel.setPreferredSize(new Dimension(230, 40));
         //bottomPanel.setBorder(new LineBorder(Color.black));
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
         flowLayout.setVgap(-2);
         flowLayout.setHgap(-2);
         bottomPanel.setLayout(flowLayout);
         JButton newBtn = new JButton("ÐÂ½¨");
-        JButton delBtn = new JButton("É¾³ý");
         JButton editBtn = new JButton("±à¼­");
         JButton reNameBtn = new JButton("ÖØÃüÃû");
-        JButton upLoadBtn = new JButton("ÉÏ´«");
+        JButton upLoadBtn = new JButton("ÔÆ¶Ë");
         CreateOrDelSuCaiListener listener = new CreateOrDelSuCaiListener();
         EditListener listener2 = new EditListener();
         editBtn.addActionListener(listener2);
         newBtn.addActionListener(listener);
-        delBtn.addActionListener(listener);
+        reNameBtn.addActionListener(listener);
+//        ShangchuanListener shangchuang = new ShangchuanListener();
+        upLoadBtn.addActionListener(listener);
         Dimension dimension = new Dimension(55, 34);
         newBtn.setPreferredSize(dimension);
-        delBtn.setPreferredSize(dimension);
         editBtn.setPreferredSize(dimension);
         reNameBtn.setPreferredSize(new Dimension(68, 34));
         upLoadBtn.setPreferredSize(dimension);
         bottomPanel.add(newBtn);
-        bottomPanel.add(delBtn);
         bottomPanel.add(editBtn);
         bottomPanel.add(reNameBtn);
         bottomPanel.add(upLoadBtn);

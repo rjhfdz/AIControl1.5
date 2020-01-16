@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.boray.Data.Data;
 import com.boray.Utils.HttpClientUtil;
+import com.boray.entity.Users;
 import com.boray.mainUi.MainUi;
 
 public class YunSuCaiTypeListener implements ActionListener {
@@ -26,8 +27,8 @@ public class YunSuCaiTypeListener implements ActionListener {
 				JList list = (JList)MainUi.map.get("yunsc");
 				DefaultListModel  model = (DefaultListModel)list.getModel();
 				model.removeAllElements();
-				
-				String str =HttpClientUtil.doGet("http://localhost:8778/getsc?username=1&kuname="+suCaiLightType.getSelectedValue().toString()+"&sctype="+btn.getName()+"");
+				Users users = (Users) MainUi.map.get("Users");
+				String str =HttpClientUtil.doGet(Data.ipPort+"/getsc?username="+users.getUsername()+"&kuname="+suCaiLightType.getSelectedValue().toString()+"&sctype="+btn.getName()+"");
 				System.out.println(suCaiLightType.getSelectedValue().toString()+btn.getName());
 				if(str!=null&&!str.equals("")) {
 					JSONArray j = JSONArray.parseArray(str);

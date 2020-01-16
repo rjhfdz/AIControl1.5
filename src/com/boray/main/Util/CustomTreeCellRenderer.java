@@ -37,11 +37,7 @@ public class CustomTreeCellRenderer extends DefaultTreeCellRenderer {
             }
         } else if (obj != null && obj instanceof FileOrFolder) {
             FileOrFolder folder = (FileOrFolder) obj;
-            if (folder.getXmtype() == 1) {
-                setIcon(company);
-            } else if (folder.getXmtype() == 0) {
-                setIcon(main);
-            }
+            setIcon(company);
             setText(folder.getXmname());
         } else if (obj != null && obj instanceof ProjectFile) {
             ProjectFile folder = (ProjectFile) obj;

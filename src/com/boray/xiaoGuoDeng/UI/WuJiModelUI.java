@@ -811,12 +811,13 @@ public class WuJiModelUI {
 		ButtonGroup group = new ButtonGroup();
 		group.add(radioButton);
 		group.add(radioButton2);
-		radioButton.setSelected(true);
+		radioButton2.setSelected(true);
 		box88 = new JComboBox();
 		wuJiComponList.add(box88);
 		for (int i = 1; i < 513; i++) {
 			box88.addItem(String.valueOf(i));
 		}
+		box88.setSelectedIndex(499);
 		pane.add(radioButton);pane.add(radioButton2);
 		pane.add(new JLabel("            DMX512µØÖ·:"));pane.add(box88);
 		pane.add(new JLabel("                       "));

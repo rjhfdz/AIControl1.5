@@ -63,6 +63,7 @@ import com.boray.Data.Data;
 import com.boray.Data.TuXingAction;
 import com.boray.Data.XiaoGuoDengModel;
 import com.boray.Data.ZhiLingJi;
+import com.boray.Utils.Socket;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.fileCompare.Compare;
 import com.boray.mainUi.MainUi;
@@ -77,6 +78,7 @@ import com.boray.xiaoGuoDeng.reviewCode.ReviewUtils;
 public class TimeBlockEditUI {
     private JDialog dialog;
     private JCheckBox[] checkBoxs;
+    private JCheckBox[] checkBoxs2;//备用
     private int dengKuNumber;//灯库位置
     private NewJTable table = null;
     private JSlider[] sliders;
@@ -90,6 +92,7 @@ public class TimeBlockEditUI {
     boolean xy = false;
     Vector vector88 = null;
     boolean[] bn = null;
+    boolean[] bn2 = null;
     String[] ddTemp = null;
     private HashMap hashMap = null;
     private List actionCompontList = null;
@@ -121,18 +124,18 @@ public class TimeBlockEditUI {
         rgb1CompontList3 = new ArrayList<>();
         blockNum = block;
         group_N = Integer.valueOf(groupNum).intValue();
-		index_N = Integer.valueOf(index).intValue();
+        index_N = Integer.valueOf(index).intValue();
         dialog.setTitle("场景编程-模式" + XiaoGuoDengModel.model + "-时间块" + block);
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         //flowLayout.setVgap(2);
         dialog.getContentPane().setLayout(flowLayout);
-        int width = 720, height = 620;
+        int width = 740, height = 670;
         dialog.setSize(width, height);
         dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - width / 2, f.getLocation().y + f.getSize().height / 2 - height / 2);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
-        timeBlockReviewActionListener = new TimeBlockReviewActionListener(XiaoGuoDengModel.model, group_N, blockNum,index_N);
-        timeBlockStopReviewActionListener = new TimeBlockStopReviewActionListener(XiaoGuoDengModel.model, group_N, blockNum);
+        timeBlockReviewActionListener = new TimeBlockReviewActionListener(XiaoGuoDengModel.model, group_N, blockNum, index_N);
+        timeBlockStopReviewActionListener = new TimeBlockStopReviewActionListener(XiaoGuoDengModel.model, group_N, index_N);
         ///////////////
         JPanel p1 = new JPanel();
         p1.setPreferredSize(new Dimension(700, 38));
@@ -155,7 +158,7 @@ public class TimeBlockEditUI {
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         tabbedPane.setFocusable(false);
-        tabbedPane.setPreferredSize(new Dimension(700, 540));
+        tabbedPane.setPreferredSize(new Dimension(700, 570));
 
         //////获取当前时间块参数
         int model = Integer.valueOf(XiaoGuoDengModel.model) - 1;
@@ -177,6 +180,7 @@ public class TimeBlockEditUI {
             vector88 = (Vector) list66.get(0);
             bn = (boolean[]) list66.get(1);
             ddTemp = (String[]) list66.get(2);
+            bn2 = (boolean[]) list66.get(3);
         }
         //获取动作效果数据
         //Map map77 = (Map)hashMap.get("actionXiaoGuoData");
@@ -316,8 +320,10 @@ public class TimeBlockEditUI {
         /////////勾选/////////
         int a = table.getColumnCount() - 2;
         boolean[] b = new boolean[a];
+        boolean[] b2 = new boolean[a];
         for (int i = 0; i < a; i++) {
             b[i] = checkBoxs[i].isSelected();
+            b2[i] = checkBoxs2[i].isSelected();
         }
         allList.add(b);
 
@@ -331,6 +337,7 @@ public class TimeBlockEditUI {
         }
         s[2] = slider2.getValue() + "";//时差
         allList.add(s);
+        allList.add(b2);
         hashMap.put("channelData", allList);
 
         if (xy) {
@@ -536,26 +543,26 @@ public class TimeBlockEditUI {
         HashMap map = (HashMap) Data.DengKuList.get(dengKuNumber);
         tt = Integer.valueOf((String) Data.DengKuChannelCountList.get(dengKuNumber)).intValue();
 
-        scrollPane.setPreferredSize(new Dimension(680, 220));
+        scrollPane.setPreferredSize(new Dimension(680, 250));
         scrollPane.setBorder(new LineBorder(Color.gray));
 
         JPanel pane = new JPanel();
         FlowLayout flowLayout2 = new FlowLayout(FlowLayout.LEFT);
         flowLayout2.setHgap(0);
         pane.setLayout(flowLayout2);
-        pane.setPreferredSize(new Dimension(1360, 196));
+        pane.setPreferredSize(new Dimension(1360, 225));
         //TitledBorder tb = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "调光通道", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
         //tgPane.setBorder(tb);
         JPanel lefPane = new JPanel();
         //lefPane.setBorder(new LineBorder(Color.black));
         //lefPane.setBorder(BorderFactory.createEmptyBorder(0,0,0,-4));
-        lefPane.setPreferredSize(new Dimension(26, 196));
+        lefPane.setPreferredSize(new Dimension(60, 225));
         lefPane.setLayout(new FlowLayout(FlowLayout.CENTER));
         JPanel nullPane = new JPanel();
-        nullPane.setPreferredSize(new Dimension(20, 156));
+        nullPane.setPreferredSize(new Dimension(60, 160));
         lefPane.add(nullPane);
-        JLabel huaBuJLabel = new JLabel("<html>全选</html>");
-        huaBuJLabel.setPreferredSize(new Dimension(32, 24));
+        JLabel huaBuJLabel = new JLabel("<html>通道全选</html>");
+        huaBuJLabel.setPreferredSize(new Dimension(60, 24));
         huaBuJLabel.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
                 JLabel label = (JLabel) e.getSource();
@@ -572,6 +579,24 @@ public class TimeBlockEditUI {
             }
         });
         lefPane.add(huaBuJLabel);
+        JLabel huaBuJLabel2 = new JLabel("<html>渐变全选</html>");
+        huaBuJLabel2.setPreferredSize(new Dimension(60, 24));
+        huaBuJLabel2.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                JLabel label = (JLabel) e.getSource();
+                label.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+
+            public void mouseReleased(MouseEvent e) {
+                boolean b = checkBoxs2[0].isSelected();
+                for (int i = 0; i < checkBoxs2.length; i++) {
+                    if (checkBoxs2[i].isEnabled()) {
+                        checkBoxs2[i].setSelected(!b);
+                    }
+                }
+            }
+        });
+        lefPane.add(huaBuJLabel2);
         //lefPane.add(new JLabel("DMX"));
         pane.add(lefPane);
 
@@ -581,6 +606,7 @@ public class TimeBlockEditUI {
         textFields = new JTextField[count];
         sliders = new JSlider[count];
         checkBoxs = new JCheckBox[count];
+        checkBoxs2 = new JCheckBox[count];
         names = new JLabel[count];
         final JLabel[] DmxValues = new JLabel[count];
 
@@ -591,7 +617,7 @@ public class TimeBlockEditUI {
             flowLayout.setVgap(0);
             itemPanes[i].setLayout(flowLayout);
             //itemPanes[i].setBorder(new LineBorder(Color.black));
-            itemPanes[i].setPreferredSize(new Dimension(41, 196));
+            itemPanes[i].setPreferredSize(new Dimension(41, 210));
             if (i > 8) {
                 labels[i] = new JLabel((i + 1) + "");
             } else {
@@ -617,9 +643,16 @@ public class TimeBlockEditUI {
             sliders[i].setPreferredSize(new Dimension(18, 88));
             checkBoxs[i] = new JCheckBox();
             checkBoxs[i].setName("" + i);
+            checkBoxs2[i] = new JCheckBox();
+            checkBoxs2[i].setName("" + i);
             if (bn != null) {
                 if (i < bn.length) {
                     checkBoxs[i].setSelected(bn[i]);
+                }
+            }
+            if (bn2 != null) {
+                if (i < bn2.length) {
+                    checkBoxs2[i].setSelected(bn2[i]);
                 }
             }
             names[i] = new JLabel("<html>未知<br><br></html>", JLabel.CENTER);
@@ -656,6 +689,8 @@ public class TimeBlockEditUI {
             if (i > tt - 1) {
                 checkBoxs[i].setEnabled(false);
                 checkBoxs[i].setSelected(false);
+                checkBoxs2[i].setEnabled(false);
+                checkBoxs2[i].setSelected(false);
                 sliders[i].setEnabled(false);
                 textFields[i].setEnabled(false);
                 names[i].setEnabled(false);
@@ -672,6 +707,7 @@ public class TimeBlockEditUI {
             itemPanes[i].add(sliders[i]);
             itemPanes[i].add(names[i]);
             itemPanes[i].add(checkBoxs[i]);
+            itemPanes[i].add(checkBoxs2[i]);
             //itemPanes[i].add(DmxValues[i]);
             pane.add(itemPanes[i]);
         }
@@ -981,7 +1017,9 @@ public class TimeBlockEditUI {
         final JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem menuItem = new JMenuItem("　复制　　　　　");
         JMenuItem menuItem1 = new JMenuItem("　粘贴　　　　　");
-        CopyToTimeBlockEdit copyListener = new CopyToTimeBlockEdit(table);
+        int size = table.getRowCount();
+        stepLabel = new JLabel("总步数:" + size);
+        CopyToTimeBlockEdit copyListener = new CopyToTimeBlockEdit(table, stepLabel);
         menuItem.addActionListener(copyListener);
         menuItem1.addActionListener(copyListener);
         popupMenu.add(menuItem);
@@ -1059,14 +1097,33 @@ public class TimeBlockEditUI {
                 stepLabel.setText("总步数:" + size);
             }
         });
+        final JButton button1 = new JButton("预览");
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            button1.setEnabled(false);
+                            save();
+                            timeBlockReviewActionListener.actionPerformed();
+                        } catch (Exception e2) {
+                            e2.printStackTrace();
+                        } finally {
+                            button1.setEnabled(true);
+                        }
+                    }
+                }).start();
+            }
+        });
+        JButton button3 = new JButton("停止预览");
+        button3.addActionListener(timeBlockStopReviewActionListener);
         p5.add(btn);
         p5.add(btn2);
-        p5.add(new JLabel("                        " +
-                "                                  " +
-                "                                  " +
-                "                "));
-        int size = table.getRowCount();
-        stepLabel = new JLabel("总步数:" + size);
+        p5.add(new JLabel("                              "));
+        p5.add(button1);
+        p5.add(button3);
+        p5.add(new JLabel("                                     "));
         p5.add(stepLabel);
         pane.add(p5);
     }
@@ -2445,28 +2502,26 @@ public class TimeBlockEditUI {
     private void outDevice() {
         int[] slt = table.getSelectedRows();
         int value = 0;
-        if (Data.serialPort != null && slt.length != 0) {
-            try {
-                OutputStream os = Data.serialPort.getOutputStream();
-                byte[] buff = new byte[512 + 8];
-                buff[0] = (byte) 0xBB;
-                buff[1] = (byte) 0x55;
-                buff[2] = (byte) (520 / 256);
-                buff[3] = (byte) (520 % 256);
-                buff[4] = (byte) 0x80;
-                buff[5] = (byte) 0x01;
-                buff[6] = (byte) 0xFF;
-                for (int j = 2; j < table.getColumnCount(); j++) {
-                    value = Integer.valueOf(table.getValueAt(slt[0], j).toString()).intValue();
-                    for (int i = 0; i < startAddress.length; i++) {
-                        buff[j - 3 + startAddress[i] + 7] = (byte) value;
-                    }
+        if (slt.length != 0) {
+            byte[] buff = new byte[512 + 8];
+            buff[0] = (byte) 0xBB;
+            buff[1] = (byte) 0x55;
+            buff[2] = (byte) (520 / 256);
+            buff[3] = (byte) (520 % 256);
+            buff[4] = (byte) 0x80;
+            buff[5] = (byte) 0x01;
+            buff[6] = (byte) 0xFF;
+            for (int j = 2; j < table.getColumnCount(); j++) {
+                value = Integer.valueOf(table.getValueAt(slt[0], j).toString()).intValue();
+                for (int i = 0; i < startAddress.length; i++) {
+                    buff[j - 3 + startAddress[i] + 7] = (byte) value;
                 }
-                buff[519] = ZhiLingJi.getJiaoYan(buff);
-                os.write(buff);
-                os.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
+            }
+            buff[519] = ZhiLingJi.getJiaoYan(buff);
+            if (Data.serialPort != null) {
+                Socket.SerialPortSendData(buff);
+            } else if (Data.socket != null) {
+                Socket.UDPSendData(buff);
             }
         }
     }
@@ -2515,7 +2570,7 @@ public class TimeBlockEditUI {
                 String s = table3.getValueAt(a, 0).toString();
                 Integer s1 = Integer.parseInt(s.split("#")[0].substring(2));//组内灯具的灯具id
                 NewJTable table_dengJu = (NewJTable) MainUi.map.get("table_dengJu");//灯具配置
-                s2 = ((String) table_dengJu.getValueAt(s1 - 1, 3)).substring(2, 3);//灯库名称
+                s2 = ((String) table_dengJu.getValueAt(s1 - 1, 3)).split("#")[0].substring(2);//灯库名称
             }
         }
         return Integer.parseInt(s2);

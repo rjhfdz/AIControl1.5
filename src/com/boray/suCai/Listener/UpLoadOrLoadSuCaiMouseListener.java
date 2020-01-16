@@ -20,14 +20,18 @@ public class UpLoadOrLoadSuCaiMouseListener implements MouseListener {
             JPopupMenu popupMenu = new JPopupMenu();
             JMenuItem export = new JMenuItem("　导出");
             JMenuItem lead = new JMenuItem("　导入");
-//            if(list.getSelectedValue()!=null){//选中
-//                lead.setEnabled(false);
-//            }
+            JMenuItem coverage = new JMenuItem("　导入覆盖");
+            coverage.setEnabled(false);
+            if(list.getSelectedValue()!=null){//选中
+                coverage.setEnabled(true);
+            }
             UpLoadOrLoadSuCaiListener listener = new UpLoadOrLoadSuCaiListener();
             export.addActionListener(listener);
             lead.addActionListener(listener);
+            coverage.addActionListener(listener);
             popupMenu.add(export);
             popupMenu.add(lead);
+            popupMenu.add(coverage);
             popupMenu.show(list,e.getX(),e.getY());
         }
     }

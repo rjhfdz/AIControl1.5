@@ -16,11 +16,18 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +42,7 @@ public class CompanyListener implements ActionListener {
         JButton button = (JButton) e.getSource();
         frame = (JFrame) MainUi.map.get("frame");
         tree = (JTree) MainUi.map.get("CompanyTree");
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+
         if (button.getText().equals("新建项目")) {
             JDialog dialog = new JDialog(frame, true);
             dialog.setResizable(false);
@@ -48,6 +55,11 @@ public class CompanyListener implements ActionListener {
             addItem(dialog);
             dialog.setVisible(true);
         } else if (button.getText().equals("项目重命名")) {
+            if (null == tree.getSelectionPath().getLastPathComponent()) {
+                JOptionPane.showMessageDialog(frame, "请选择项目！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
             if (node.getUserObject() instanceof FileOrFolder) {
                 JDialog dialog = new JDialog(frame, true);
                 dialog.setResizable(false);
@@ -63,6 +75,11 @@ public class CompanyListener implements ActionListener {
                 JOptionPane.showMessageDialog(frame, "请选择项目！", "提示", JOptionPane.PLAIN_MESSAGE);
             }
         } else if (button.getText().equals("删除项目")) {
+            if (null == tree.getSelectionPath().getLastPathComponent()) {
+                JOptionPane.showMessageDialog(frame, "请选择项目！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
             if (node.getUserObject() instanceof FileOrFolder) {
                 FileOrFolder folder = (FileOrFolder) node.getUserObject();
                 Users users = (Users) MainUi.map.get("Users");
@@ -76,7 +93,13 @@ public class CompanyListener implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(frame, "请选择项目！", "提示", JOptionPane.PLAIN_MESSAGE);
             }
-        } else if (button.getText().equals("添加工程")) {
+        } else if (button.getText().equals("上传工程")) {
+            if (null == tree.getSelectionPath().getLastPathComponent()) {
+                JOptionPane.showMessageDialog(frame, "请选择项目！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+            UIManager.put("FileChooser.saveButtonText", "上传");
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
             if (node.getUserObject() instanceof FileOrFolder) {
                 JFileChooser fileChooser = new JFileChooser();
                 try {
@@ -100,10 +123,16 @@ public class CompanyListener implements ActionListener {
                         e2.printStackTrace();
                     }
                 }
+                UIManager.put("FileChooser.saveButtonText", "保存");
             } else {
                 JOptionPane.showMessageDialog(frame, "请选择项目！", "提示", JOptionPane.PLAIN_MESSAGE);
             }
         } else if (button.getText().equals("工程重命名")) {
+            if (null == tree.getSelectionPath().getLastPathComponent()) {
+                JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
             if (node.getUserObject() instanceof ProjectFile) {
                 JDialog dialog = new JDialog(frame, true);
                 dialog.setResizable(false);
@@ -119,11 +148,15 @@ public class CompanyListener implements ActionListener {
                 JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
             }
         } else if (button.getText().equals("删除工程")) {
-            JTree tree = (JTree) MainUi.map.get("CompanyTree");
+            if (null == tree.getSelectionPath().getLastPathComponent()) {
+                JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
             if (node.getUserObject() instanceof ProjectFile) {
                 ProjectFile file = (ProjectFile) node.getUserObject();
                 Map<String, String> map = new HashMap<>();
-                map.put("id", file.getXmid() + "");
+                map.put("id", file.getId() + "");
                 String request = HttpClientUtil.doGet(Data.ipPort + "deletegc", map);
                 Message message = JSON.parseObject(request, Message.class);
                 JOptionPane.showMessageDialog(frame, message.getCode(), "提示", JOptionPane.PLAIN_MESSAGE);
@@ -131,8 +164,70 @@ public class CompanyListener implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
             }
+        } else if (button.getText().equals("下载工程")) {
+            if (null == tree.getSelectionPath().getLastPathComponent()) {
+                JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+            if (node.getUserObject() instanceof ProjectFile) {
+                //根据选中的工程文件获得父级文件夹
+                ProjectFile file = (ProjectFile) node.getUserObject();
+                CustomTreeNode folder = (CustomTreeNode) node.getParent();
+                FileOrFolder fileOrFolder = (FileOrFolder) folder.getUserObject();
+                String path = "C://Boray" + "//" + fileOrFolder.getXmname();
+                File file1 = new File(path);
+                if (!file1.exists()) {//判断文件夹是否存在
+                    file1.mkdirs();
+                }
+                try {
+                    File selectedFile = new File(path + "//" + file.getGcname() + ".xml");
+                    URL url = new URL(HttpClientUtil.URLEncode(Data.downloadIp + file.getGcurl()));
+                    HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
+                    urlCon.setConnectTimeout(6000);
+                    urlCon.setReadTimeout(6000);
+                    int code = urlCon.getResponseCode();
+                    if (code != HttpURLConnection.HTTP_OK) {
+                        JOptionPane.showMessageDialog(frame, "文件下载失败！", "提示", JOptionPane.PLAIN_MESSAGE);
+                        return;
+                    }
+                    DataInputStream in = new DataInputStream(urlCon.getInputStream());
+                    DataOutputStream out = new DataOutputStream(new FileOutputStream(selectedFile.getAbsoluteFile()));
+                    byte[] buffer = new byte[2048];
+                    int count = 0;
+                    while ((count = in.read(buffer)) > 0) {
+                        out.write(buffer, 0, count);
+                    }
+                    if (out != null) {
+                        out.close();
+                    }
+                    if (in != null) {
+                        in.close();
+                    }
+                    JOptionPane.showMessageDialog(frame, "文件下载完成！", "提示", JOptionPane.PLAIN_MESSAGE);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(frame, "文件下载失败！", "提示", JOptionPane.PLAIN_MESSAGE);
+                    ex.printStackTrace();
+                }
+            }
         } else if (button.getText().equals("刷新")) {
             refresh();
+        } else if (button.getText().equals("提交审核")) {
+            if (null == tree.getSelectionPath().getLastPathComponent()) {
+                JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+            if (node.getUserObject() instanceof ProjectFile) {
+                ProjectFile file = (ProjectFile) node.getUserObject();
+                Users users = (Users) MainUi.map.get("Users");
+                Map<String, String> param = new HashMap<>();
+                param.put("id", file.getId() + "");
+                param.put("username", users.getUsername());
+                String request = HttpClientUtil.doGet(Data.ipPort + "insertgx", param);
+                Message message = JSON.parseObject(request, Message.class);
+                JOptionPane.showMessageDialog(frame, message.getCode(), "提示", JOptionPane.PLAIN_MESSAGE);
+            }
         }
     }
 
@@ -158,7 +253,7 @@ public class CompanyListener implements ActionListener {
                     Map<String, String> param = new HashMap<>();
                     param.put("xmname", field.getText());
                     param.put("createby", users.getUsername());
-                    param.put("xmtype", "0");
+//                    param.put("xmtype", "1");
                     Message(dialog, "xmcreategs", param);
                     refresh();
                 }
@@ -230,7 +325,7 @@ public class CompanyListener implements ActionListener {
         FileOrFolder folder = (FileOrFolder) node.getUserObject();
         Users users = (Users) MainUi.map.get("Users");
         Map<String, String> param = new HashMap<>();
-        param.put("gcname", file.getName());
+        param.put("gcname", file.getName().substring(0, file.getName().indexOf(".")));
         param.put("username", users.getUsername());
         param.put("xmid", folder.getId() + "");
         param.put("i", "0");
@@ -249,7 +344,7 @@ public class CompanyListener implements ActionListener {
      */
     private void renamePrject(final JDialog dialog, final DefaultMutableTreeNode node) {
         JPanel p1 = new JPanel();
-        p1.add(new JLabel("项目名称："));
+        p1.add(new JLabel("工程名称："));
         final JTextField field = new JTextField(15);
         p1.add(field);
         JPanel p2 = new JPanel();
@@ -287,7 +382,7 @@ public class CompanyListener implements ActionListener {
      */
     private void refresh() {
         tree.removeAll();
-        CustomTreeNode root = new CustomTreeNode("我的项目");
+        CustomTreeNode root = new CustomTreeNode("Boray");
         root.setLevel(0);
         DefaultTreeModel model = new DefaultTreeModel(root);
         tree.setModel(model);
@@ -295,7 +390,7 @@ public class CompanyListener implements ActionListener {
         Users users = (Users) MainUi.map.get("Users");
         Map<String, String> param = new HashMap<>();
         param.put("createby", users.getUsername());
-        String request = HttpClientUtil.doGet(Data.ipPort + "findallxminfogr", param);
+        String request = HttpClientUtil.doGet(Data.ipPort + "findallxminfogs", param);
         List<FileOrFolder> list = JSON.parseArray(request, FileOrFolder.class);
         for (FileOrFolder folder : list) {
             CustomTreeNode node = new CustomTreeNode(folder);

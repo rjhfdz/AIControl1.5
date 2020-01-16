@@ -3,10 +3,9 @@ package com.boray.main.Listener;
 import com.alibaba.fastjson.JSON;
 import com.boray.Data.Data;
 import com.boray.Utils.HttpClientUtil;
+import com.boray.Utils.Util;
 import com.boray.entity.Users;
-import com.boray.main.UI.CompanyUI;
-import com.boray.main.UI.LocalUI;
-import com.boray.main.UI.MineUI;
+import com.boray.main.UI.*;
 import com.boray.main.Util.IpConfig;
 import com.boray.mainUi.MainUi;
 
@@ -33,9 +32,21 @@ public class LoginListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JButton button = (JButton) e.getSource();
         frame = (JFrame) MainUi.map.get("frame");
+        String str = button.getName();
         if ("登录".equals(button.getText())) {
-            String username = ((JTextField) MainUi.map.get("username")).getText();
-            String password = new String(((JPasswordField) MainUi.map.get("password")).getPassword());
+            String username = "";
+            String password = "";
+            if (str.equals("Company")) {
+                username = ((JTextField) MainUi.map.get("CompanyUsername")).getText();
+                password = new String(((JPasswordField) MainUi.map.get("CompanyPassword")).getPassword());
+            } else if (str.equals("Share")) {
+                username = ((JTextField) MainUi.map.get("ShareUsername")).getText();
+                password = new String(((JPasswordField) MainUi.map.get("SharePassword")).getPassword());
+            } else if (str.equals("Uccn")) {
+                username = ((JTextField) MainUi.map.get("UccnUsername")).getText();
+                password = new String(((JPasswordField) MainUi.map.get("UccnPassword")).getPassword());
+            }
+
             if (username == null || username == "") {
                 JOptionPane.showMessageDialog(frame, "登录失败，用户名不能为空！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
@@ -46,10 +57,16 @@ public class LoginListener implements ActionListener {
             }
             login(username, password);
         } else {
-            JTextField username = (JTextField) MainUi.map.get("username");
-            JPasswordField password = (JPasswordField) MainUi.map.get("password");
-            username.setText("");
-            password.setText("");
+            if (str.equals("Company")) {
+                ((JTextField) MainUi.map.get("CompanyUsername")).setText("");
+                ((JPasswordField) MainUi.map.get("CompanyPassword")).setText("");
+            } else if (str.equals("Share")) {
+                ((JTextField) MainUi.map.get("ShareUsername")).setText("");
+                ((JPasswordField) MainUi.map.get("SharePassword")).setText("");
+            } else if (str.equals("Uccn")) {
+                ((JTextField) MainUi.map.get("UccnUsername")).setText("");
+                ((JPasswordField) MainUi.map.get("UccnPassword")).setText("");
+            }
         }
     }
 
@@ -60,11 +77,22 @@ public class LoginListener implements ActionListener {
             Map<String, String> param = new HashMap<>();
             param.put("username", username);
             param.put("userpassword", password);
-            String request = HttpClientUtil.doGet(Data.ipPort + "login", param);
+            String request = HttpClientUtil.doGet(Data.ipPort + "logindl", param);
             Users users = JSON.parseObject(request, Users.class);
             if (users != null && !users.getLoginstatus().equals(0)) {
+                if (Data.RememberPassword) {
+                    Data.userLogin.put(Util.encode(username), Util.encode(password));
+                }
                 MainUi.map.put("Users", users);
-                init();
+//                init();
+//                JPanel minePanel = (JPanel) MainUi.map.get("MinePanel");
+//                new MineUI().show(minePanel);
+                JPanel sharePanel = (JPanel) MainUi.map.get("SharePanel");
+                new ShareUI().show(sharePanel);
+                JPanel CompanyPanel = (JPanel) MainUi.map.get("CompanyPanel");
+                new CompanyUI().show(CompanyPanel);
+                JPanel uccnPanel = (JPanel) MainUi.map.get("UccnPanel");
+                new UccnUI().show(uccnPanel);
             } else {
                 JOptionPane.showMessageDialog(frame, "登录失败，用户名或密码不正确！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
@@ -108,8 +136,8 @@ public class LoginListener implements ActionListener {
         btn2.addItemListener(listener);
         btn3.addItemListener(listener);
 
-        JPanel minePanel = new JPanel();//我的项目
-        new MineUI().show(minePanel);
+//        JPanel minePanel = new JPanel();//我的项目
+//        new MineUI().show(minePanel);
 
         JPanel CompanyPanel = new JPanel();//公司项目
         new CompanyUI().show(CompanyPanel);
@@ -117,7 +145,7 @@ public class LoginListener implements ActionListener {
         JPanel LocalPanel = new JPanel();//本地项目
         new LocalUI().show(LocalPanel);
 
-        rightPane.add(minePanel, "1");
+//        rightPane.add(minePanel, "1");
         rightPane.add(CompanyPanel, "2");
         rightPane.add(LocalPanel, "3");
 

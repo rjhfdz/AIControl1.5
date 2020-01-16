@@ -91,7 +91,7 @@ public class Right3 {
 		for (int i = 1; i < 25; i++) {
 			box3.addItem(""+i);
 		}
-		radioButton.setSelected(true);
+		radioButton2.setSelected(true);
 		box3.setSelectedIndex(0);
 		List list = new ArrayList();
 		list.add(radioButton);

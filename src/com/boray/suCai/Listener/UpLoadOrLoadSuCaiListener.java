@@ -52,8 +52,151 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
                 Data.projectFilePath = file.getParent();
                 loadData(file);
             }
+        } else if ("　导入覆盖".equals(e.getActionCommand())) {
+            Object[] options = {"否", "是"};
+            int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "是否覆盖选中数据？", "警告",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                    null, options, options[1]);
+            if (yes == 1) {
+                JFileChooser fileChooser = new JFileChooser();
+                try {
+                    if (!"".equals(Data.projectFilePath)) {
+                        fileChooser.setCurrentDirectory(new File(Data.projectFilePath));
+                    }
+                } catch (Exception e2) {
+                    e2.printStackTrace();
+                }
+                String[] houZhui = {"xml"};
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("*.xml", houZhui);
+                fileChooser.setFileFilter(filter);
+                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                int returnVal = fileChooser.showOpenDialog((JFrame) MainUi.map.get("frame"));
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    File file = fileChooser.getSelectedFile();
+                    Data.projectFilePath = file.getParent();
+                    loadDataCoverage(file);
+                }
+            }
         }
     }
+
+    public void loadDataCoverage(File file) {
+        try {
+            InputStream is = new FileInputStream(file);
+            XMLDecoder xmlDecoder = new XMLDecoder(is);
+            String type = null;
+            String suCaiName = null;
+            Object o = null;
+            try {
+                String logo = (String) xmlDecoder.readObject();//标识
+                if (!"Boray".equals(decode(logo))) {
+                    JFrame frame = (JFrame) MainUi.map.get("frame");
+                    JOptionPane.showMessageDialog(frame, "素材导入失败，该文件不是素材！", "提示", JOptionPane.PLAIN_MESSAGE);
+                    return;
+                }
+                String suCaiType = (String) xmlDecoder.readObject();//声控素材
+                if (!"xiaoGuoDeng".equals(decode(suCaiType))) {
+                    JFrame frame = (JFrame) MainUi.map.get("frame");
+                    JOptionPane.showMessageDialog(frame, "素材导入失败，该文件不是效果灯素材！", "提示", JOptionPane.PLAIN_MESSAGE);
+                    return;
+                }
+                type = (String) xmlDecoder.readObject();//读取素材类型
+                suCaiName = (String) xmlDecoder.readObject();//读取素材名称
+                o = xmlDecoder.readObject();//读取素材数据
+            } catch (Exception e) {
+                JFrame frame = (JFrame) MainUi.map.get("frame");
+                JOptionPane.showMessageDialog(frame, "素材导入失败，该文件不是素材！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+
+            JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");//类型列表
+            String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
+            String str = null;
+            for (int i = 0; i < btns.length; i++) {
+                if (btns[i].isSelected()) {
+                    str = name[i];
+                }
+            }
+            if (!str.equals(type)) {
+                JFrame frame = (JFrame) MainUi.map.get("frame");
+                JOptionPane.showMessageDialog(frame, "素材导入失败，导入类型与选中的类型不一致！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+            //弹出界面
+            JFrame f = (JFrame) MainUi.map.get("frame");
+            JDialog dialog = new JDialog(f, true);
+            dialog.setResizable(false);
+            dialog.setTitle("导入素材");
+            int w = 380, h = 180;
+            dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - w / 2, f.getLocation().y + f.getSize().height / 2 - h / 2);
+            dialog.setSize(w, h);
+            dialog.setLayout(new FlowLayout(FlowLayout.CENTER));
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            init2(dialog, type, suCaiName, o);
+            dialog.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void init2(final JDialog dialog, final String type, final String suCaiName, final Object o) {
+        JPanel p1 = new JPanel();
+        p1.add(new JLabel("素材名称："));
+        final JTextField field = new JTextField(15);
+        field.setText(suCaiName);
+        p1.add(field);
+        JPanel p2 = new JPanel();
+        JButton btn1 = new JButton("确定");
+        JButton btn2 = new JButton("取消");
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if ("取消".equals(e.getActionCommand())) {
+                    dialog.dispose();
+                } else {
+                    if (!"".equals(field.getText().trim())) {
+                        JList dengkuList = (JList) MainUi.map.get("suCaiLightType");//灯库列表
+                        JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
+                        JList suCaiList = (JList) MainUi.map.get("suCai_list");//素材列表
+                        Map nameMap = (Map) Data.suCaiNameMap.get(dengkuList.getSelectedValue().toString());
+                        int number = Integer.parseInt(suCaiList.getSelectedValue().toString().split("--->")[1]);//获得对应素材的编号
+                        int index = suCaiList.getSelectedIndex();//获得对应下标
+                        int btnIndex = 0;
+                        for (int i = 0; i < btns.length; i++) {
+                            if (btns[i].isSelected()) {
+                                btnIndex = i;
+                                break;
+                            }
+                        }
+                        List nameList = (List) nameMap.get("" + btnIndex);
+                        nameList.set(index, field.getText() + "--->" + number);
+                        suCaiList.removeAll();
+                        DefaultListModel model = new DefaultListModel();
+                        for (int i = 0; i < nameList.size(); i++) {
+                            model.addElement(nameList.get(i));
+                        }
+                        suCaiList.setModel(model);
+                        suCaiList.setSelectedIndex(0);
+                        Data.SuCaiObjects[dengkuList.getSelectedIndex()][number - 1] = o;
+                        JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "导入成功！", "提示", JOptionPane.ERROR_MESSAGE);
+                        dialog.dispose();
+                    }
+                }
+            }
+        };
+        btn1.addActionListener(listener);
+        btn2.addActionListener(listener);
+        p2.add(btn1);
+        p2.add(new JLabel("     "));
+        p2.add(btn2);
+
+        JPanel n1 = new JPanel();
+        n1.setPreferredSize(new Dimension(350, 20));
+        dialog.add(n1);
+        dialog.add(p1);
+        dialog.add(p2);
+    }
+
 
     public void saveData(File file) {
         try {
@@ -75,6 +218,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
                 }
             }
             xmlEncoder.writeObject(encode("Boray"));//加入标识
+            xmlEncoder.writeObject(encode("xiaoGuoDeng"));//效果灯素材
             xmlEncoder.writeObject(type);//写入素材类型
             xmlEncoder.writeObject(suCaiName);//写入素材名称
             xmlEncoder.writeObject(Data.SuCaiObjects[dengKuIndex][suCaiIndex]);//写入素材数据
@@ -91,10 +235,6 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
 
     public void loadData(File file) {
         try {
-            JList list = (JList) MainUi.map.get("suCaiLightType");//灯库列表
-            JList suCai_list = (JList) MainUi.map.get("suCai_list");//素材列表
-            int dengKuSelect = list.getSelectedIndex();
-
             InputStream is = new FileInputStream(file);
             XMLDecoder xmlDecoder = new XMLDecoder(is);
             String type = null;
@@ -102,15 +242,21 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
             Object o = null;
             try {
                 String logo = (String) xmlDecoder.readObject();//标识
-                if(!"Boray".equals(decode(logo))){
+                if (!"Boray".equals(decode(logo))) {
                     JFrame frame = (JFrame) MainUi.map.get("frame");
                     JOptionPane.showMessageDialog(frame, "素材导入失败，该文件不是素材！", "提示", JOptionPane.PLAIN_MESSAGE);
+                    return;
+                }
+                String suCaiType = (String) xmlDecoder.readObject();//声控素材
+                if (!"xiaoGuoDeng".equals(decode(suCaiType))) {
+                    JFrame frame = (JFrame) MainUi.map.get("frame");
+                    JOptionPane.showMessageDialog(frame, "素材导入失败，该文件不是效果灯素材！", "提示", JOptionPane.PLAIN_MESSAGE);
                     return;
                 }
                 type = (String) xmlDecoder.readObject();//读取素材类型
                 suCaiName = (String) xmlDecoder.readObject();//读取素材名称
                 o = xmlDecoder.readObject();//读取素材数据
-            }catch (Exception e){
+            } catch (Exception e) {
                 JFrame frame = (JFrame) MainUi.map.get("frame");
                 JOptionPane.showMessageDialog(frame, "素材导入失败，该文件不是素材！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
@@ -119,12 +265,12 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
             JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");//类型列表
             String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
             String str = null;
-            for (int i = 0;i<btns.length;i++){
-                if(btns[i].isSelected()){
+            for (int i = 0; i < btns.length; i++) {
+                if (btns[i].isSelected()) {
                     str = name[i];
                 }
             }
-            if(!str.equals(type)){
+            if (!str.equals(type)) {
                 JFrame frame = (JFrame) MainUi.map.get("frame");
                 JOptionPane.showMessageDialog(frame, "素材导入失败，导入类型与选中的类型不一致！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
@@ -235,7 +381,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
                         String count = suCaiUI.getCount();//所有灯库的素材数量
                         JLabel countLabel = (JLabel) MainUi.map.get("count");
                         countLabel.setText(count);
-
+                        JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "导入成功！", "提示", JOptionPane.ERROR_MESSAGE);
                         dialog.dispose();
                     }
                 }
@@ -273,22 +419,22 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
             }
         }
         String suCaiSelect = suCai_list.getSelectedValue().toString();
-        fileName = list.getSelectedValue().toString() + "----" + type + "----" + suCaiSelect.substring(0, suCaiSelect.indexOf("-")) + ".xml";
+        fileName = "场景素材----"+list.getSelectedValue().toString() + "----" + type + "----" + suCaiSelect.split("--->")[0] + ".xml";
         return fileName;
     }
 
     //加密
-    public String encode(String str){
+    public String encode(String str) {
         return new sun.misc.BASE64Encoder().encode(str.getBytes());
     }
 
     //解密
-    public String decode(String s){
+    public String decode(String s) {
         String str = null;
         try {
             sun.misc.BASE64Decoder decode = new sun.misc.BASE64Decoder();
             str = new String(decode.decodeBuffer(s));
-        }catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return str;

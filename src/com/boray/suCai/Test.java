@@ -161,7 +161,8 @@ public abstract class Test {
 //        File postFile = new File(filePath);
 //        Map<String, Object> resultMap = httpsUtils.uploadFileByHTTP(postFile, postUrl, postParam);
 //        System.out.println(resultMap);
-
+        String folder=System.getProperty("java.io.tmpdir");
+        System.out.println(folder);
     }
 
 }

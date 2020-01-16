@@ -10,8 +10,10 @@ import javax.swing.*;
 
 import com.boray.Data.Data;
 import com.boray.dengKu.UI.NewJTable;
+import com.boray.entity.Users;
 import com.boray.mainUi.MainUi;
 import com.boray.suCai.UI.SuCaiUI;
+import com.boray.suCai.UI.YunChangJingSuCaiDialog;
 
 public class CreateOrDelSuCaiListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
@@ -30,7 +32,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                 init(dialog);
                 dialog.setVisible(true);
             }
-        } else {
+        } else if ("删除".equals(e.getActionCommand())) {
             JList dengkuList = (JList) MainUi.map.get("suCaiLightType");//灯库列表
             JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
             JList suCaiList = (JList) MainUi.map.get("suCai_list");//素材列表
@@ -56,8 +58,97 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                 JOptionPane.showMessageDialog(frame, "您未选中数据！", "提示", JOptionPane.ERROR_MESSAGE);
             }
             System.out.println("删除");
+        } else if ("重命名".equals(e.getActionCommand())) {
+            JList suCaiList = (JList) MainUi.map.get("suCai_list");//素材列表
+            String name = suCaiList.getSelectedValue().toString().split("--->")[0];
+            JFrame f = (JFrame) MainUi.map.get("frame");
+            JDialog dialog = new JDialog(f, true);
+            dialog.setResizable(false);
+            dialog.setTitle("重命名");
+            int w = 380, h = 180;
+            dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - w / 2, f.getLocation().y + f.getSize().height / 2 - h / 2);
+            dialog.setSize(w, h);
+            dialog.setLayout(new FlowLayout(FlowLayout.CENTER));
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            reName(dialog, name);
+            dialog.setVisible(true);
+        }else if("云端".equals(e.getActionCommand())){
+            Users users = (Users) MainUi.map.get("Users");
+            if (users != null && users.getLoginstatus() != 0) {
+                JFrame f = (JFrame) MainUi.map.get("frame");
+                JDialog dialog = new JDialog(f, true);
+                dialog.setTitle("云端素材");
+                dialog.setResizable(false);
+                int width = 720, height = 620;
+                dialog.setSize(width, height);
+                dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - width / 2, f.getLocation().y + f.getSize().height / 2 - height / 2);
+                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                JPanel p = new JPanel();
+                new YunChangJingSuCaiDialog().show(p);
+                dialog.getContentPane().add(p);
+                dialog.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "请登录", "警告", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
         }
+    }
 
+    private void reName(final JDialog dialog, final String name) {
+        JPanel p1 = new JPanel();
+        p1.add(new JLabel("素材名称："));
+        final JTextField field = new JTextField(15);
+        field.setText(name);
+        p1.add(field);
+        JPanel p2 = new JPanel();
+        JButton btn1 = new JButton("确定");
+        JButton btn2 = new JButton("取消");
+
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if ("取消".equals(e.getActionCommand())) {
+                    dialog.dispose();
+                } else {
+                    JList dengkuList = (JList) MainUi.map.get("suCaiLightType");//灯库列表
+                    JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
+                    JList suCaiList = (JList) MainUi.map.get("suCai_list");//素材列表
+                    Map nameMap = (Map) Data.suCaiNameMap.get(dengkuList.getSelectedValue().toString());
+                    int number = Integer.parseInt(suCaiList.getSelectedValue().toString().split("--->")[1]);//获得对应素材的编号
+                    int index = suCaiList.getSelectedIndex();//获得对应下标
+                    int btnIndex = 0;
+                    for (int i = 0; i < btns.length; i++) {
+                        if (btns[i].isSelected()) {
+                            btnIndex = i;
+                            break;
+                        }
+                    }
+                    List nameList = (List) nameMap.get("" + btnIndex);
+                    nameList.set(index, field.getText() + "--->" + number);
+                    suCaiList.removeAll();
+                    DefaultListModel model = new DefaultListModel();
+                    for (int i = 0; i < nameList.size(); i++) {
+                        model.addElement(nameList.get(i));
+                    }
+                    suCaiList.setModel(model);
+                    suCaiList.setSelectedIndex(0);
+                    dialog.dispose();
+                }
+            }
+        };
+
+        btn1.addActionListener(listener);
+        btn2.addActionListener(listener);
+
+        p2.add(btn1);
+        p2.add(new JLabel("     "));
+        p2.add(btn2);
+
+        JPanel n1 = new JPanel();
+        n1.setPreferredSize(new Dimension(350, 20));
+        dialog.add(n1);
+        dialog.add(p1);
+        dialog.add(p2);
     }
 
     private void init(final JDialog dialog) {

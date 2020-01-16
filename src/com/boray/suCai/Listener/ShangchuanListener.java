@@ -25,12 +25,22 @@ import com.alibaba.fastjson.JSON;
 import com.boray.Data.Data;
 import com.boray.Utils.DbHelp;
 import com.boray.Utils.HttpClientUtil;
+import com.boray.entity.Users;
 import com.boray.mainUi.MainUi;
 
 public class ShangchuanListener implements ActionListener {
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		 Users users = (Users) MainUi.map.get("Users");
+		  
+		  if(users!=null&&users.getLoginstatus()!=0) {
+			  
+		  }else {
+			  JOptionPane.showMessageDialog( null, "ÇëµÇÂ¼", "¾¯¸æ",JOptionPane.WARNING_MESSAGE);  
+		  return ;
+		  }
 	
 		String filename="";
 		System.out.println(filename);
@@ -50,7 +60,7 @@ public class ShangchuanListener implements ActionListener {
 		
 		int denKuNum = suCaiLightType.getSelectedIndex();
 		int suCaiNum = Integer.valueOf(suCaiName.split("--->")[1]).intValue();
-		Map hashMap = (HashMap)Data.SuCaiObjects[denKuNum][suCaiNum];
+		Map hashMap = (HashMap)Data.SuCaiObjects[denKuNum][suCaiNum-1];
 		
 		XMLEncoder xml;
 		try {
@@ -70,7 +80,8 @@ public class ShangchuanListener implements ActionListener {
 		param.put("filename", array1[0]);
 		DbHelp db = new DbHelp();
 		String i="";
-		String sql = "insert shucai (filejson,filename,username,kuname,sctype) values('"+readToString("D:\\Test.xml")+"','"+array1[0]+"','1','"+suCaiLightType.getSelectedValue().toString()+"','"+j+"')";
+		
+		String sql = "insert shucai (filejson,filename,username,kuname,sctype) values('"+readToString("D:\\Test.xml")+"','"+array1[0]+"','"+users.getUsername()+"','"+suCaiLightType.getSelectedValue().toString()+"','"+j+"')";
 		try {
 			i = db.insert(sql)+"";
 		} catch (Exception e1) {

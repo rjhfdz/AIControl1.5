@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.text.DecimalFormat;
 import java.util.*;
 
 import javax.swing.*;
@@ -19,6 +20,7 @@ import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
 import com.boray.shengKon.UI.DefineJLable_shengKon;
 import com.boray.shengKon.UI.DefineJLable_shengKon2;
+import com.boray.shengKonSuCai.UI.ShengKonSuCaiUI;
 import com.boray.xiaoGuoDeng.UI.DefineJLable;
 
 public class MergeAllListener implements ActionListener {
@@ -139,6 +141,172 @@ public class MergeAllListener implements ActionListener {
         }
     }
 
+    //地址空间-数据区（素材版本）（供参考-2019年12月14日）
+    public void actionPerformed3(ActionEvent e) {
+        JFileChooser fileChooser = new JFileChooser();
+        if (!Data.saveCtrlFilePath.equals("")) {
+            fileChooser.setCurrentDirectory(new File(Data.saveCtrlFilePath));
+        }
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fileChooser.setSelectedFile(new File("F0.DAT"));
+        int returnVal = fileChooser.showSaveDialog((JFrame) MainUi.map.get("frame"));
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            Data.file = file;
+            Data.saveCtrlFilePath = file.getParent();
+            File file1 = new File(Data.saveCtrlFilePath + "\\K0.DAT");
+            try {
+                file1.createNewFile();
+                OutputStream stream = new FileOutputStream(file1);
+                OutputStream os10 = new FileOutputStream(file);
+                //////////////////////
+                //系统设置(00-13SEC)14
+                systemSet(os10);
+                systemSet(stream);
+
+                os10.flush();
+                stream.flush();
+                System.out.println("系统设置：" + file.length());
+
+                //灯库(14-15SEC)2
+                writeFile2(os10);
+                byte[] b2 = new byte[4092];
+                os10.write(b2);
+
+                writeFile2(stream);
+                stream.write(b2);
+
+                os10.flush();
+                stream.flush();
+                System.out.println("灯库：" + file.length());
+
+                //按步编程（倒彩&喝彩&摇麦-16-33SEC）18
+//                writeHeCaiYaoMai(os10);
+//                writeHeCaiYaoMai(stream);
+                writeHeCaiDaoCaiYaoMai(os10);
+                writeHeCaiDaoCaiYaoMai(stream);
+
+                repairData(139264, os10, file);
+                repairData(139264, stream, file1);
+
+                os10.flush();
+                stream.flush();
+                System.out.println("按步编程：" + file.length());
+
+
+                writeWuJiModelData(os10);//雾机编程(34SEC)
+                writeWuJiModelData(stream);
+
+                repairData(143360, os10, file);
+                repairData(143360, stream, file1);
+
+                os10.flush();
+                stream.flush();
+                System.out.println("雾机编程：" + file.length());
+
+
+                ////效果灯素材数据（35-228SEC）194
+//                writeFile3(os10);
+//                writeFile3(stream);
+                writeFile4(os10);
+                writeFile4(stream);
+                //对数据进行补完
+                repairData(937984, os10, file);
+                repairData(937984, stream, file1);
+
+                os10.flush();
+                stream.flush();
+                System.out.println("效果灯素材：" + file.length());
+
+                ////场景效果灯数据（229-258SEC）30
+                for (int i = 1; i < 25; i++) {
+                    writeFile(os10, i);
+                    writeFile(stream, i);
+                }
+                //对数据进行补完
+                repairData(1060864, os10, file);
+                repairData(1060864, stream, file1);
+                os10.flush();
+                stream.flush();
+                System.out.println("场景效果灯：" + file.length());
+
+                ////多灯数据区-16 个声控模式(259-387SEC)129
+//                shengKonMoreLigthData(os10);
+//                shengKonMoreLigthData(stream);
+
+                shengKonMoreLigthDatatest(os10);
+                shengKonMoreLigthDatatest(stream);
+                //对数据进行补完
+                repairData(1589248, os10, file);
+                repairData(1589248, stream, file1);
+                os10.flush();
+                stream.flush();
+                System.out.println("多灯数据区-16：" + file.length());
+
+                writeShengKonSucai(os10);//声控素材数据
+                writeShengKonSucai(stream);
+
+                os10.flush();
+                stream.flush();
+                System.out.println("声控素材数据：" + file.length());
+
+                ////声控效果灯数据（动态空间）
+                for (int i = 1; i < 17; i++) {
+                    writeShengKon(os10, i);
+                    writeShengKon(stream, i);
+                }
+
+                os10.flush();
+                stream.flush();
+                System.out.println("声控效果灯数据：" + file.length());
+
+                stream.close();
+
+                //对中间部分进行补零操作
+                repairData(16379904, os10, file);
+                //录制抽样数据（4000-4023SEC）24
+                byte[] b5 = new byte[4096];
+                for (int i = 0; i < 24; i++) {
+                    os10.write(b5);
+                }
+
+                os10.flush();
+                System.out.println("录制抽样数据：" + file.length());
+
+                ////录制数据（4024-8023SEC）
+                byte[] b_FF = new byte[4096];
+                for (int i = 0; i < b_FF.length; i++) {
+                    b_FF[i] = (byte) 0xFF;
+                }
+                for (int i = 0; i < 4000; i++) {
+                    os10.write(b_FF);
+                }
+
+                os10.flush();
+                System.out.println("录制数据：" + file.length());
+
+                //红外空调(8024-8087SEC)
+                byte[] b1 = new byte[4096];
+                for (int i = 0; i < 64; i++) {
+                    os10.write(b1);
+                }
+
+                os10.flush();
+                System.out.println("红外空调：" + file.length());
+
+                //////////////////////
+                repairData(33554432, os10, file);
+                os10.flush();
+                os10.close();
+
+                JFrame frame = (JFrame) MainUi.map.get("frame");
+                JOptionPane.showMessageDialog(frame, "生成灯控文件成功!", "提示", JOptionPane.PLAIN_MESSAGE);
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+    }
+
     //地址空间-数据区（素材版本）
     public void actionPerformed(ActionEvent e) {
         JFileChooser fileChooser = new JFileChooser();
@@ -152,136 +320,78 @@ public class MergeAllListener implements ActionListener {
             File file = fileChooser.getSelectedFile();
             Data.file = file;
             Data.saveCtrlFilePath = file.getParent();
-            File file1 = new File(Data.saveCtrlFilePath+"\\K0.DAT");
+            File file1 = new File(Data.saveCtrlFilePath + "\\K0.DAT");
             try {
                 file1.createNewFile();
                 OutputStream stream = new FileOutputStream(file1);
                 OutputStream os10 = new FileOutputStream(file);
+
                 //////////////////////
                 //系统设置(00-13SEC)14
                 systemSet(os10);
-                systemSet(stream);
-
                 os10.flush();
-                stream.flush();
-                System.out.println("系统设置："+file.length());
+                System.out.println("系统设置：" + file.length());
 
                 //灯库(14-15SEC)2
                 writeFile2(os10);
-                byte[] b2 = new byte[4092];
-                os10.write(b2);
-
-                writeFile2(stream);
-                stream.write(b2);
-
+                repairData(62464, os10, file);
+                P1(file1, stream, os10);//写入动态空间索引表
+                repairData(65536, os10, file);
                 os10.flush();
-                stream.flush();
-                System.out.println("灯库："+file.length());
+                System.out.println("灯库：" + file.length());
 
                 //按步编程（倒彩&喝彩&摇麦-16-33SEC）18
-                writeHeCaiYaoMai(os10);
-                writeHeCaiYaoMai(stream);
-
-                repairData(139264,os10,file);
-                repairData(139264,stream,file1);
-
+                writeHeCaiDaoCaiYaoMai(os10);
+//                repairData(139264, os10, file);
                 os10.flush();
-                stream.flush();
-                System.out.println("按步编程："+file.length());
+                System.out.println("按步编程：" + file.length());
 
-
-                writeWuJiModelData(os10);//雾机编程(34SEC)
-                writeWuJiModelData(stream);
-
-                repairData(143360,os10,file);
-                repairData(143360,stream,file1);
-
+                //雾机编程(34SEC)
+                writeWuJiModelData(os10);
+//                repairData(143360, os10, file);
+                for (int i = 0; i < 3548; i++) {
+                    os10.write(new byte[1]);
+                }
                 os10.flush();
-                stream.flush();
-                System.out.println("雾机编程："+file.length());
+                System.out.println("雾机编程：" + file.length());
 
 
                 ////效果灯素材数据（35-228SEC）194
-                writeFile3(os10);
-                writeFile3(stream);
-                //对数据进行补完
-                repairData(937984,os10,file);
-                repairData(937984,stream,file1);
-
+                writeFile4(os10);
+//                repairData(937984, os10, file);
                 os10.flush();
-                stream.flush();
-                System.out.println("效果灯素材："+file.length());
+                System.out.println("效果灯素材：" + file.length());
 
                 ////场景效果灯数据（229-258SEC）30
                 for (int i = 1; i < 25; i++) {
                     writeFile(os10, i);
-                    writeFile(stream, i);
                 }
-                //对数据进行补完
-                repairData(1060864,os10,file);
-                repairData(1060864,stream,file1);
+//                repairData(1060864, os10, file);
                 os10.flush();
-                stream.flush();
-                System.out.println("场景效果灯："+file.length());
+                System.out.println("场景效果灯：" + file.length());
 
                 ////多灯数据区-16 个声控模式(259-387SEC)129
-                shengKonMoreLigthData(os10);
-                shengKonMoreLigthData(stream);
-                //对数据进行补完
-                repairData(1589248,os10,file);
-                repairData(1589248,stream,file1);
+                shengKonMoreLigthDatatest(os10);
+//                repairData(1589248, os10, file);
                 os10.flush();
-                stream.flush();
-                System.out.println("多灯数据区-16："+file.length());
+                System.out.println("多灯数据区-16：" + file.length());
+
+                //声控素材数据
+                writeShengKonSucai(os10);
+                os10.flush();
+                System.out.println("声控素材数据：" + file.length());
 
                 ////声控效果灯数据（动态空间）
                 for (int i = 1; i < 17; i++) {
                     writeShengKon(os10, i);
-                    writeShengKon(stream, i);
                 }
 
                 os10.flush();
-                stream.flush();
-                System.out.println("声控效果灯数据："+file.length());
+                System.out.println("声控效果灯数据：" + file.length());
 
-                stream.close();
-
-                //对中间部分进行补零操作
-                repairData(16379904,os10,file);
-                //录制抽样数据（4000-4023SEC）24
-                byte[] b5 = new byte[4096];
-                for (int i = 0; i < 24; i++) {
-                    os10.write(b5);
-                }
-
-                os10.flush();
-                System.out.println("录制抽样数据："+file.length());
-
-                ////录制数据（4024-8023SEC）
-                byte[] b_FF = new byte[4096];
-                for (int i = 0; i < b_FF.length; i++) {
-                    b_FF[i] = (byte) 0xFF;
-                }
-                for (int i = 0; i < 4000; i++) {
-                    os10.write(b_FF);
-                }
-
-                os10.flush();
-                System.out.println("录制数据："+file.length());
-
-                //红外空调(8024-8087SEC)
-                byte[] b1 = new byte[4096];
-                for (int i = 0; i < 64; i++) {
-                    os10.write(b1);
-                }
-
-                os10.flush();
-                System.out.println("红外空调："+file.length());
-
-                //////////////////////
-                repairData(33554432,os10,file);
-                os10.flush();
                 os10.close();
+
+                file1.delete();//删除计算用的K0文件
 
                 JFrame frame = (JFrame) MainUi.map.get("frame");
                 JOptionPane.showMessageDialog(frame, "生成灯控文件成功!", "提示", JOptionPane.PLAIN_MESSAGE);
@@ -291,13 +401,194 @@ public class MergeAllListener implements ActionListener {
         }
     }
 
+    private void P1(File file1, OutputStream stream, OutputStream os10) {
+        try {
+            repairData(65536, stream, file1);//补足前面的数据
+            List<Long> longs = new ArrayList<>();
+            //按步编程（倒彩&喝彩&摇麦-16-33SEC）18
+            writeHeCaiDaoCaiYaoMai(stream);
+            longs.add(file1.length());
+            stream.flush();
+
+            //雾机编程(34SEC)
+            writeWuJiModelData(stream);
+            for (int i = 0; i < 3548; i++) {
+                stream.write(new byte[1]);
+            }
+            longs.add(file1.length());
+            stream.flush();
+
+            ////效果灯素材数据（35-228SEC）194
+            writeFile4(stream);
+            longs.add(file1.length());
+            stream.flush();
+
+            ////场景效果灯数据（229-258SEC）30
+            for (int i = 1; i < 25; i++) {
+                writeFile(stream, i);
+            }
+            longs.add(file1.length());
+            stream.flush();
+
+            ////多灯数据区-16 个声控模式(259-387SEC)129
+            shengKonMoreLigthDatatest(stream);
+            longs.add(file1.length());
+            stream.flush();
+
+            //声控素材数据
+            writeShengKonSucai(stream);
+            longs.add(file1.length());
+            stream.flush();
+
+            ////声控效果灯数据（动态空间）
+            for (int i = 1; i < 17; i++) {
+                writeShengKon(stream, i);
+            }
+            longs.add(file1.length());
+            stream.flush();
+            stream.close();
+
+            dongTaiKonJianTable(longs, os10);//写入动态空间索引表
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 动态空间索引表
+     *
+     * @param longs
+     * @param os
+     */
+    private void dongTaiKonJianTable(List<Long> longs, OutputStream os) throws IOException {
+        byte[][] bytes = new byte[8][8];
+        //总容量. 索引表
+        bytes[0][0] = (byte) 0xA1;//固定码
+        bytes[0][1] = (byte) 0x1A;
+        bytes[0][2] = (byte) 0xA3;
+        bytes[0][3] = (byte) 0x3A;
+        String count = addZeroForNum(Long.toHexString(longs.get(longs.size() - 1) - 65536));
+        bytes[0][4] = (byte) Integer.parseInt(count.substring(0, 2), 16);
+        bytes[0][5] = (byte) Integer.parseInt(count.substring(2, 4), 16);
+        bytes[0][6] = (byte) Integer.parseInt(count.substring(4, 6), 16);
+        bytes[0][7] = (byte) Integer.parseInt(count.substring(6), 16);
+        //按步编程. 索引表
+        //起始地址
+        String str = addZeroForNum(Long.toHexString(65536));
+        bytes[1][0] = (byte) Integer.parseInt(str.substring(0, 2), 16);
+        bytes[1][1] = (byte) Integer.parseInt(str.substring(2, 4), 16);
+        bytes[1][2] = (byte) Integer.parseInt(str.substring(4, 6), 16);
+        bytes[1][3] = (byte) Integer.parseInt(str.substring(6), 16);
+        str = addZeroForNum(Long.toHexString(longs.get(0) - 65536));//数据容量
+        bytes[1][4] = (byte) Integer.parseInt(str.substring(0, 2), 16);
+        bytes[1][5] = (byte) Integer.parseInt(str.substring(2, 4), 16);
+        bytes[1][6] = (byte) Integer.parseInt(str.substring(4, 6), 16);
+        bytes[1][7] = (byte) Integer.parseInt(str.substring(6), 16);
+        //雾机数据 . 索引表
+        //起始地址
+        str = addZeroForNum(Long.toHexString(longs.get(0)));
+        bytes[2][0] = (byte) Integer.parseInt(str.substring(0, 2), 16);
+        bytes[2][1] = (byte) Integer.parseInt(str.substring(2, 4), 16);
+        bytes[2][2] = (byte) Integer.parseInt(str.substring(4, 6), 16);
+        bytes[2][3] = (byte) Integer.parseInt(str.substring(6), 16);
+        str = addZeroForNum(Long.toHexString(longs.get(1) - longs.get(0)));//数据容量
+        bytes[2][4] = (byte) Integer.parseInt(str.substring(0, 2), 16);
+        bytes[2][5] = (byte) Integer.parseInt(str.substring(2, 4), 16);
+        bytes[2][6] = (byte) Integer.parseInt(str.substring(4, 6), 16);
+        bytes[2][7] = (byte) Integer.parseInt(str.substring(6), 16);
+        //效果灯素材空间数据材 . 索引表
+        //起始地址
+        str = addZeroForNum(Long.toHexString(longs.get(1)));
+        bytes[3][0] = (byte) Integer.parseInt(str.substring(0, 2), 16);
+        bytes[3][1] = (byte) Integer.parseInt(str.substring(2, 4), 16);
+        bytes[3][2] = (byte) Integer.parseInt(str.substring(4, 6), 16);
+        bytes[3][3] = (byte) Integer.parseInt(str.substring(6), 16);
+        str = addZeroForNum(Long.toHexString(longs.get(2) - longs.get(1)));//数据容量
+        bytes[3][4] = (byte) Integer.parseInt(str.substring(0, 2), 16);
+        bytes[3][5] = (byte) Integer.parseInt(str.substring(2, 4), 16);
+        bytes[3][6] = (byte) Integer.parseInt(str.substring(4, 6), 16);
+        bytes[3][7] = (byte) Integer.parseInt(str.substring(6), 16);
+        //场景素材调用数据 . 索引表
+        //起始地址
+        str = addZeroForNum(Long.toHexString(longs.get(2)));
+        bytes[4][0] = (byte) Integer.parseInt(str.substring(0, 2), 16);
+        bytes[4][1] = (byte) Integer.parseInt(str.substring(2, 4), 16);
+        bytes[4][2] = (byte) Integer.parseInt(str.substring(4, 6), 16);
+        bytes[4][3] = (byte) Integer.parseInt(str.substring(6), 16);
+        str = addZeroForNum(Long.toHexString(longs.get(3) - longs.get(2)));//数据容量
+        bytes[4][4] = (byte) Integer.parseInt(str.substring(0, 2), 16);
+        bytes[4][5] = (byte) Integer.parseInt(str.substring(2, 4), 16);
+        bytes[4][6] = (byte) Integer.parseInt(str.substring(4, 6), 16);
+        bytes[4][7] = (byte) Integer.parseInt(str.substring(6), 16);
+        //多灯数据区声控模式 . 索引表
+        //起始地址
+        str = addZeroForNum(Long.toHexString(longs.get(3)));
+        bytes[5][0] = (byte) Integer.parseInt(str.substring(0, 2), 16);
+        bytes[5][1] = (byte) Integer.parseInt(str.substring(2, 4), 16);
+        bytes[5][2] = (byte) Integer.parseInt(str.substring(4, 6), 16);
+        bytes[5][3] = (byte) Integer.parseInt(str.substring(6), 16);
+        str = addZeroForNum(Long.toHexString(longs.get(4) - longs.get(3)));//数据容量
+        bytes[5][4] = (byte) Integer.parseInt(str.substring(0, 2), 16);
+        bytes[5][5] = (byte) Integer.parseInt(str.substring(2, 4), 16);
+        bytes[5][6] = (byte) Integer.parseInt(str.substring(4, 6), 16);
+        bytes[5][7] = (byte) Integer.parseInt(str.substring(6), 16);
+        //声控素材区 . 索引表
+        //起始地址
+        str = addZeroForNum(Long.toHexString(longs.get(4)));
+        bytes[6][0] = (byte) Integer.parseInt(str.substring(0, 2), 16);
+        bytes[6][1] = (byte) Integer.parseInt(str.substring(2, 4), 16);
+        bytes[6][2] = (byte) Integer.parseInt(str.substring(4, 6), 16);
+        bytes[6][3] = (byte) Integer.parseInt(str.substring(6), 16);
+        str = addZeroForNum(Long.toHexString(longs.get(5) - longs.get(4)));//数据容量
+        bytes[6][4] = (byte) Integer.parseInt(str.substring(0, 2), 16);
+        bytes[6][5] = (byte) Integer.parseInt(str.substring(2, 4), 16);
+        bytes[6][6] = (byte) Integer.parseInt(str.substring(4, 6), 16);
+        bytes[6][7] = (byte) Integer.parseInt(str.substring(6), 16);
+        //声控素材调用数据. 索引表
+        //起始地址
+        str = addZeroForNum(Long.toHexString(longs.get(5)));
+        bytes[7][0] = (byte) Integer.parseInt(str.substring(0, 2), 16);
+        bytes[7][1] = (byte) Integer.parseInt(str.substring(2, 4), 16);
+        bytes[7][2] = (byte) Integer.parseInt(str.substring(4, 6), 16);
+        bytes[7][3] = (byte) Integer.parseInt(str.substring(6), 16);
+        str = addZeroForNum(Long.toHexString(longs.get(6) - longs.get(5)));//数据容量
+        bytes[7][4] = (byte) Integer.parseInt(str.substring(0, 2), 16);
+        bytes[7][5] = (byte) Integer.parseInt(str.substring(2, 4), 16);
+        bytes[7][6] = (byte) Integer.parseInt(str.substring(4, 6), 16);
+        bytes[7][7] = (byte) Integer.parseInt(str.substring(6), 16);
+        for (int i = 0; i < 8; i++) {
+            os.write(bytes[i]);
+        }
+    }
+
+    /*
+     *数字不足位数左补0
+     *
+     * @param str
+     * @param strLength
+     */
+    public String addZeroForNum(String str) {
+        int strLen = str.length();
+        if (strLen < 8) {
+            while (strLen < 8) {
+                StringBuffer sb = new StringBuffer();
+                sb.append("0").append(str);//左补0
+                str = sb.toString();
+                strLen = str.length();
+            }
+        }
+        return str;
+    }
+
     /**
      * 对数据空间不足的进行补完
+     *
      * @param length
      * @param outputStream
      * @param file
      */
-    private void repairData(long length,OutputStream outputStream,File file) throws IOException {
+    private void repairData(long length, OutputStream outputStream, File file) throws IOException {
         outputStream.flush();
         int sy = (int) (length - file.length());
         byte[] cc = new byte[sy];
@@ -473,6 +764,541 @@ public class MergeAllListener implements ActionListener {
         return cc;
     }
 
+    /**
+     * 效果灯素材打包
+     *
+     * @throws Exception
+     */
+    private void writeFile4(OutputStream os) throws Exception {
+
+        NewJTable table = (NewJTable) MainUi.map.get("table_DkGl");
+
+        byte[] dengKuTonDao = new byte[23];//灯库通道定义
+        byte[] dengKuMeiZuShuLiang = new byte[30];//灯库每组数量
+        //固定头
+        dengKuTonDao[0] = 0x55;
+        dengKuTonDao[1] = (byte) 0xAA;
+        dengKuTonDao[2] = (byte) ((byte) table.getRowCount() == 0 ? 0x00 : table.getRowCount());//灯库总数
+        int count = 0;
+        for (int i = 0; i < table.getRowCount(); i++) {
+            String dengKuId = (String) table.getValueAt(i, 0);
+            //素材通道数
+            int suCaiTonDaoShu = Integer.parseInt(Data.DengKuChannelCountList.get(Integer.parseInt(dengKuId) - 1).toString());
+            dengKuTonDao[3 + i] = (byte) suCaiTonDaoShu;
+
+            //素材个数
+            String dengKuName = (String) table.getValueAt(i, 1);
+            Map map2 = (Map) Data.suCaiMap.get(dengKuName);
+            JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
+            int cnt = 0;
+            if (map2 != null) {
+                for (int j = 0; j < btns.length; j++) {
+                    List abc = (List) map2.get("" + j);
+                    if (abc != null) {
+                        cnt = cnt + abc.size();
+                    }
+                }
+            }
+            dengKuMeiZuShuLiang[i] = (byte) cnt;
+            count = count + cnt;
+        }
+        List<Byte> xiaoGuoDengGuanLian = new ArrayList<>();//效果灯关联区
+        xiaoGuoDengGuanLian.add((byte) 0x55);//引导区
+        xiaoGuoDengGuanLian.add((byte) 0xAA);
+        xiaoGuoDengGuanLian.add((byte) 0x00);
+        xiaoGuoDengGuanLian.add((byte) 0x00);//素材起始地址
+        xiaoGuoDengGuanLian.add((byte) 0x00);
+        xiaoGuoDengGuanLian.add((byte) 0x00);
+        xiaoGuoDengGuanLian.add((byte) (count % 256));//素材总数
+        xiaoGuoDengGuanLian.add((byte) (count / 256));
+        List<String> str = new ArrayList<>();//记录素材关联
+        for (int i = 0; i < table.getRowCount(); i++) {
+            //素材个数
+            String dengKuId = (String) table.getValueAt(i, 0);
+            String dengKuName = (String) table.getValueAt(i, 1);
+            Map map2 = (Map) Data.suCaiMap.get(dengKuName);
+            JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
+            int cnt = 0;
+            if (map2 != null) {
+                for (int j = 0; j < btns.length; j++) {
+                    List abc = (List) map2.get("" + j);
+                    if (abc != null) {
+                        cnt = cnt + abc.size();
+                    }
+                }
+            }
+            for (int j = 0; j < cnt; j++) {
+                str.add((Integer.parseInt(dengKuId) - 1) + "#" + j);
+                xiaoGuoDengGuanLian.add((byte) Integer.parseInt(dengKuId));//素材关联
+                xiaoGuoDengGuanLian.add((byte) (j + 1));
+            }
+        }
+        for (int i = 0; i < str.size(); i++) {
+            int denKuNum = Integer.parseInt(str.get(i).split("#")[0]);
+            int suCaiNum = Integer.parseInt(str.get(i).split("#")[1]);
+            HashMap hashMap = (HashMap) Data.SuCaiObjects[denKuNum][suCaiNum];
+            if (hashMap != null) {
+                List list66 = (List) hashMap.get("channelData");
+                Vector vector88 = null;
+                if (list66 != null) {
+                    vector88 = (Vector) list66.get(0);
+                    if (vector88 != null)
+                        xiaoGuoDengGuanLian.add((byte) vector88.size());
+                    else
+                        xiaoGuoDengGuanLian.add((byte) 1);//默认一条通道
+                } else {
+                    xiaoGuoDengGuanLian.add((byte) 1);//默认一条通道
+                }
+            } else {
+                xiaoGuoDengGuanLian.add((byte) 1);//默认一条通道
+            }
+        }
+        byte[] suCaiData = suCaiQuData(str);//素材区数据
+
+        os.write(dengKuTonDao);
+        os.write(dengKuMeiZuShuLiang);
+        for (int i = 0; i < xiaoGuoDengGuanLian.size(); i++) {
+            os.write(xiaoGuoDengGuanLian.get(i));
+        }
+        os.write(suCaiData);
+    }
+
+    //素材区数据
+    public byte[] suCaiQuData(List<String> str) {
+        List<Byte> list = new ArrayList<>();
+        for (int i = 0; i < str.size(); i++) {
+            int denKuNum = Integer.parseInt(str.get(i).split("#")[0]);
+            int suCaiNum = Integer.parseInt(str.get(i).split("#")[1]);
+            HashMap hashMap = (HashMap) Data.SuCaiObjects[denKuNum][suCaiNum];
+            //素材通道数
+            int suCaiTonDaoShu = Integer.parseInt(Data.DengKuChannelCountList.get(denKuNum).toString());
+            if (hashMap != null) {
+                //动作图形
+                Map map = (Map) hashMap.get("actionXiaoGuoData");
+                List list2 = null;
+                boolean bb = false;
+                int a = 0;
+                byte[] dongZuoTuXing = new byte[11];
+                byte[] ziDingYi = new byte[5];
+                byte[] beiSaiEr = new byte[25];
+                if (map != null) {
+                    int selected = Integer.valueOf((String) map.get("2"));
+                    if (selected == 1) {
+                        selected = 255;
+                    } else if (selected > 1) {
+                        selected = selected - 1;
+                    }
+                    dongZuoTuXing[0] = (byte) selected;
+                    ////动作12点数据
+                    int action = selected;
+                    int[] p1 = null;
+                    if (action == 0) {
+                        p1 = bezier.Data.ZB[1];
+                    } else if (action == 1) {
+                        p1 = bezier.Data.ZB[0];
+                    } else if (action > 1 && action < 48) {
+                        p1 = bezier.Data.ZB[action];
+                    } else if (action >= 48) {
+                        String[] s = (String[]) bezier.Data.map.get("" + action);
+                        if (s != null) {
+                            p1 = new int[24];
+                            for (int j = 0; j < s.length; j++) {
+                                p1[j] = Integer.valueOf(s[j]);
+                            }
+                        } else {
+                            p1 = bezier.Data.ZB[0];
+                        }
+                    }
+                    beiSaiEr[0] = (byte) selected;
+                    for (int j = 0; j < 24; j++) {
+                        beiSaiEr[j + 1] = (byte) p1[j];
+                    }
+                    //运行速度
+                    int yunXinSpeed = Integer.valueOf((String) map.get("3"));
+                    dongZuoTuXing[1] = (byte) yunXinSpeed;
+                    //使用开关 1启用/0关
+                    String ss = (String) map.get("0");
+                    if (ss != null && "true".equals(ss)) {
+                        dongZuoTuXing[2] = (byte) 1;
+                    }
+                    //拆分    不拆分01/中间拆分02/两端拆分03
+                    String[] tp1 = (String[]) map.get("4");
+                    int cc = Integer.valueOf(tp1[0]) + 1;
+                    dongZuoTuXing[3] = (byte) cc;
+                    //拆分反向
+                    //X轴反向    是1/否0
+                    if ("true".equals(tp1[1])) {
+                        a = 1;
+                    } else {
+                        a = 0;
+                    }
+                    dongZuoTuXing[5] = (byte) a;
+                    //X半
+                    if ("true".equals(tp1[2])) {
+                        a = 1;
+                    } else {
+                        a = 0;
+                    }
+                    dongZuoTuXing[6] = (byte) a;
+                    //Y轴反向
+                    if ("true".equals(tp1[3])) {
+                        a = 1;
+                    } else {
+                        a = 0;
+                    }
+                    dongZuoTuXing[7] = (byte) a;
+                    //Y半
+                    if ("true".equals(tp1[4])) {
+                        a = 1;
+                    } else {
+                        a = 0;
+                    }
+                    dongZuoTuXing[8] = (byte) a;
+                    //时间A_L	时间B_H
+                    a = Integer.valueOf(tp1[5]).intValue() * 10;
+                    dongZuoTuXing[9] = (byte) (a % 256);
+                    dongZuoTuXing[10] = (byte) (a / 256);
+                    ///////////////自定义动作数据
+                    String[] values = (String[]) map.get("1");
+                    if (values != null) {
+                        if (values[0].equals("true")) {
+                            ziDingYi[0] = 1;
+                        }
+                        for (int l = 1; l < ziDingYi.length; l++) {
+                            ziDingYi[l] = (byte) Integer.valueOf(values[l]).intValue();
+                        }
+                    }
+                }
+                byte[] rgb = new byte[36];
+                //RGB1
+                list2 = (List) hashMap.get("rgb1Data");
+                String[] tp2 = null;
+                boolean[] bs = null;
+                String b = "";
+                if (list2 != null) {
+                    //红色
+                    tp2 = (String[]) list2.get(1);
+                    a = Integer.valueOf(tp2[0]).intValue();
+                    rgb[0] = (byte) a;
+                    //绿色
+                    a = Integer.valueOf(tp2[1]).intValue();
+                    rgb[1] = (byte) a;
+                    //蓝色
+                    a = Integer.valueOf(tp2[2]).intValue();
+                    rgb[2] = (byte) a;
+                    //渐变类型
+                    b = (String) list2.get(4);
+                    a = Integer.valueOf(b).intValue();
+                    rgb[3] = (byte) a;
+                    //渐变
+                    bb = (boolean) list2.get(5);
+                    a = 0;
+                    if (bb) {
+                        a = 1;
+                    }
+                    rgb[4] = (byte) a;
+                    //参与渐变勾选
+                    bs = (boolean[]) list2.get(2);
+                    a = 0;
+                    if (bs[0]) {
+                        a = 128;
+                    }
+                    if (bs[1]) {
+                        a = a + 64;
+                    }
+                    if (bs[2]) {
+                        a = a + 32;
+                    }
+                    rgb[5] = (byte) a;
+                    //渐变速度
+                    b = (String) list2.get(6);
+                    a = Integer.valueOf(b).intValue();
+                    rgb[6] = (byte) a;
+                    //使用开关
+                    bb = (boolean) list2.get(0);
+                    a = 0;
+                    if (bb) {
+                        a = 1;
+                    }
+                    rgb[7] = (byte) a;
+                    //拆分
+                    b = (String) list2.get(7);
+                    a = Integer.valueOf(b).intValue() + 1;
+                    rgb[8] = (byte) a;
+                    //拆分反向
+                    bb = (boolean) list2.get(8);
+                    a = 0;
+                    if (bb) {
+                        a = 1;
+                    }
+                    rgb[9] = (byte) a;
+                    //时间A_L	时间B_H
+                    a = Integer.valueOf((String) list2.get(9)).intValue() * 10;
+                    rgb[10] = (byte) (a % 256);
+                    rgb[11] = (byte) (a / 256);
+                }
+                //RGB2
+                list2 = (List) hashMap.get("rgb2Data");
+                if (list2 != null) {
+                    //红色
+                    tp2 = (String[]) list2.get(1);
+                    a = Integer.valueOf(tp2[0]).intValue();
+                    rgb[12] = (byte) a;
+                    //绿色
+                    a = Integer.valueOf(tp2[1]).intValue();
+                    rgb[13] = (byte) a;
+                    //蓝色
+                    a = Integer.valueOf(tp2[2]).intValue();
+                    rgb[14] = (byte) a;
+                    //渐变类型
+                    b = (String) list2.get(4);
+                    a = Integer.valueOf(b).intValue();
+                    rgb[15] = (byte) a;
+                    //渐变
+                    bb = (boolean) list2.get(5);
+                    a = 0;
+                    if (bb) {
+                        a = 1;
+                    }
+                    rgb[16] = (byte) a;
+                    //参与渐变勾选
+                    bs = (boolean[]) list2.get(2);
+                    a = 0;
+                    if (bs[0]) {
+                        a = 128;
+                    }
+                    if (bs[1]) {
+                        a = a + 64;
+                    }
+                    if (bs[2]) {
+                        a = a + 32;
+                    }
+                    rgb[17] = (byte) a;
+                    //渐变速度
+                    b = (String) list2.get(6);
+                    a = Integer.valueOf(b).intValue();
+                    rgb[18] = (byte) a;
+                    //使用开关
+                    bb = (boolean) list2.get(0);
+                    a = 0;
+                    if (bb) {
+                        a = 1;
+                    }
+                    rgb[19] = (byte) a;
+                    //拆分
+                    b = (String) list2.get(7);
+                    a = Integer.valueOf(b).intValue() + 1;
+                    rgb[20] = (byte) a;
+                    //拆分反向
+                    bb = (boolean) list2.get(8);
+                    a = 0;
+                    if (bb) {
+                        a = 1;
+                    }
+                    rgb[21] = (byte) a;
+                    //时间A_L	时间B_H
+                    a = Integer.valueOf((String) list2.get(9)).intValue() * 10;
+                    rgb[22] = (byte) (a % 256);
+                    rgb[23] = (byte) (a / 256);
+                }
+                //RGB3
+                list2 = (List) hashMap.get("rgb3Data");
+                if (list2 != null) {
+                    //红色
+                    tp2 = (String[]) list2.get(1);
+                    a = Integer.valueOf(tp2[0]).intValue();
+                    rgb[24] = (byte) a;
+                    //绿色
+                    a = Integer.valueOf(tp2[1]).intValue();
+                    rgb[25] = (byte) a;
+                    //蓝色
+                    a = Integer.valueOf(tp2[2]).intValue();
+                    rgb[26] = (byte) a;
+                    //渐变类型
+                    b = (String) list2.get(4);
+                    a = Integer.valueOf(b).intValue();
+                    rgb[27] = (byte) a;
+                    //渐变
+                    bb = (boolean) list2.get(5);
+                    a = 0;
+                    if (bb) {
+                        a = 1;
+                    }
+                    rgb[28] = (byte) a;
+                    //参与渐变勾选
+                    bs = (boolean[]) list2.get(2);
+                    a = 0;
+                    if (bs[0]) {
+                        a = 128;
+                    }
+                    if (bs[1]) {
+                        a = a + 64;
+                    }
+                    if (bs[2]) {
+                        a = a + 32;
+                    }
+                    rgb[29] = (byte) a;
+                    //渐变速度
+                    b = (String) list2.get(6);
+                    a = Integer.valueOf(b).intValue();
+                    rgb[30] = (byte) a;
+                    //使用开关
+                    bb = (boolean) list2.get(0);
+                    a = 0;
+                    if (bb) {
+                        a = 1;
+                    }
+                    rgb[31] = (byte) a;
+                    //拆分
+                    b = (String) list2.get(7);
+                    a = Integer.valueOf(b).intValue() + 1;
+                    rgb[32] = (byte) a;
+
+                    //拆分反向
+                    bb = (boolean) list2.get(8);
+                    a = 0;
+                    if (bb) {
+                        a = 1;
+                    }
+                    rgb[33] = (byte) a;
+                    //时间A_L	时间B_H
+                    a = Integer.valueOf((String) list2.get(9)).intValue() * 10;
+                    rgb[34] = (byte) (a % 256);
+                    rgb[35] = (byte) (a / 256);
+                }
+                List list66 = (List) hashMap.get("channelData");
+                Vector vector88 = null;
+                //通道控制配置数据
+                byte[] tonDaoKonZhi = new byte[6];
+                byte[] gouXuan = new byte[4];
+                byte[] gouXuan2 = new byte[4];
+                List<Byte> tonDaoBu = new ArrayList<>();
+                for (int k = 0; k < suCaiTonDaoShu + 2; k++) {
+                    tonDaoBu.add((byte) 00);
+                }
+                if (list66 != null) {
+                    //////////勾选
+                    int r = 0, yu = 0;
+                    int[] bp1 = new int[4];
+                    boolean[] bn = (boolean[]) list66.get(1);
+                    for (int l = 0; l < bn.length; l++) {
+                        r = l / 8;
+                        yu = l % 8;
+                        if (bn[l]) {
+                            bp1[r] = bp1[r] + (1 << yu);
+                        }
+                    }
+                    for (int l = bn.length; l < 32; l++) {
+                        r = l / 8;
+                        yu = l % 8;
+                        bp1[r] = bp1[r] + (1 << yu);
+                    }
+                    for (int l = 0; l < bp1.length; l++) {
+                        gouXuan[l] = (byte) bp1[l];
+                    }
+                    //第二排勾选
+                    bp1 = new int[4];
+                    bn = (boolean[]) list66.get(3);
+                    for (int l = 0; l < bn.length; l++) {
+                        r = l / 8;
+                        yu = l % 8;
+                        if (bn[l]) {
+                            bp1[r] = bp1[r] + (1 << yu);
+                        }
+                    }
+                    for (int l = bn.length; l < 32; l++) {
+                        r = l / 8;
+                        yu = l % 8;
+                        bp1[r] = bp1[r] + (1 << yu);
+                    }
+                    for (int l = 0; l < bp1.length; l++) {
+                        gouXuan2[l] = (byte) bp1[l];
+                    }
+
+                    String[] ddTemp = (String[]) list66.get(2);
+                    a = 0;
+                    vector88 = (Vector) list66.get(0);
+                    if (vector88 != null) {
+                        a = vector88.size();
+                    }
+                    //总帧数
+                    tonDaoKonZhi[0] = (byte) a;
+                    //手动编程启用
+                    tonDaoKonZhi[1] = (byte) 1;
+
+                    //时差A_L	时差B_H
+                    a = Integer.valueOf(ddTemp[2]).intValue();
+                    tonDaoKonZhi[2] = (byte) (a % 256);
+                    tonDaoKonZhi[3] = (byte) (a / 256);
+                    //拆分
+                    a = Integer.valueOf(ddTemp[0]).intValue() + 1;
+                    tonDaoKonZhi[4] = (byte) a;
+                    //拆分反向
+                    a = 0;
+                    if (!ddTemp[1].equals("0")) {
+                        a = 1;
+                    }
+                    tonDaoKonZhi[5] = (byte) a;
+                    //通道步XX编程
+                    Vector tpe = null;
+                    int lenght = suCaiTonDaoShu + 2;
+                    if (vector88 != null) {
+                        tonDaoBu.clear();
+                        for (int n = 0; n < vector88.size(); n++) {
+                            tpe = (Vector) vector88.get(n);
+                            int timeTp = Integer.valueOf(tpe.get(1).toString()).intValue();
+                            if (lenght > tpe.size()) {
+                                lenght = tpe.size();
+                            }
+                            tonDaoBu.add((byte) (timeTp % 256));
+                            tonDaoBu.add((byte) (timeTp / 256));
+                            for (int l = 2; l < lenght; l++) {
+                                tonDaoBu.add(Integer.valueOf(tpe.get(l).toString()).byteValue());
+                            }
+                        }
+                    }
+                }
+                integrate(list, dongZuoTuXing);//自定义动作 11
+                integrate(list, rgb);//3RGB 36
+                integrate(list, tonDaoKonZhi);//手动配置 6
+                integrate2(list, tonDaoBu);//通道步数 2
+                integrate(list, ziDingYi);//自定义数据 5
+                integrate(list, gouXuan);//勾选数据 4
+                integrate(list, beiSaiEr);//贝塞尔曲线 25
+                integrate(list, gouXuan2);//渐变勾选 4
+                integrate(list, new byte[2]);//备用 2
+            } else {
+                for (int j = 0; j < 95 + suCaiTonDaoShu; j++) {//没有数据默认补零，一个通道
+                    list.add((byte) 00);
+                }
+            }
+        }
+        byte[] buff = new byte[list.size()];
+        for (int i = 0; i < list.size(); i++) {
+            buff[i] = list.get(i);
+        }
+        return buff;
+    }
+
+    //数据整合
+    public static void integrate(List<Byte> list, byte[] buff) {
+        for (int i = 0; i < buff.length; i++) {
+            list.add(buff[i]);
+        }
+    }
+
+    public static void integrate2(List<Byte> list, List<Byte> tonDaoBu) {
+        for (int i = 0; i < tonDaoBu.size(); i++) {
+            list.add(tonDaoBu.get(i));
+        }
+    }
+
+    /**
+     * 效果灯素材打包格式，弃用——2019年12月7日08:27:10
+     *
+     * @param os
+     * @throws Exception
+     */
     private void writeFile3(OutputStream os) throws Exception {
         //素材引导区
         byte[] bytes = new byte[120];
@@ -905,12 +1731,12 @@ public class MergeAllListener implements ActionListener {
                 }
                 if (null == zdyObjects[i][j]) {//自定义动作数据
                     os.write(new byte[5]);
-                }else {
+                } else {
                     os.write((byte[]) zdyObjects[i][j]);
                 }
                 if (null == gxObjects[i][j]) {//勾选数据
                     os.write(new byte[4]);
-                }else {
+                } else {
                     os.write((byte[]) gxObjects[i][j]);
                 }
                 for (int k = 0; k < 4; k++) {//贝塞尔曲线
@@ -1050,7 +1876,6 @@ public class MergeAllListener implements ActionListener {
                     a = (int) treeSet.first();
                     String typeString = table3.getValueAt(a, 3).toString();
                     tt = Integer.valueOf(typeString.split("#")[0].substring(2)).intValue();
-//                    tt = Integer.valueOf((String) Data.DengKuChannelCountList.get(dengKuNumber)).intValue();
                 }
             }
             for (int j = 0; j < 20; j++) {
@@ -1548,8 +2373,201 @@ public class MergeAllListener implements ActionListener {
         }
     }
 
+    /**
+     * 文件写入倒彩喝彩摇麦数据
+     *
+     * @param os
+     */
+    private void writeHeCaiDaoCaiYaoMai(OutputStream os) throws IOException {
+
+        ///摇麦
+        Vector[] vectors = null;
+        boolean[][] tbs = null;
+        String[] setValue = null;
+        List<Byte> bytes = new ArrayList<>();//摇麦 启动阶段、运行阶段 步编辑数据
+        byte[][][] b3 = new byte[2][2][512];//通道勾选
+        byte[][][] steps1 = new byte[2][2][1];//启用、运行 步数
+        byte[][] set1 = new byte[2][7];//全局设置
+        int a = 0, size8 = 0;
+        Vector vector99 = null, tp = null;
+        for (int n = 1; n < 3; n++) {
+            size8 = 0;
+            vectors = (Vector[]) Data.YaoMaiMap.get("TableData" + n);
+            tbs = (boolean[][]) Data.YaoMaiMap.get("GouXuanValue" + n);
+            if (vectors != null) {
+                vector99 = vectors[0];//启动阶段
+                if (vector99 != null) {
+                    size8 = vector99.size();
+                    steps1[n - 1][0][0] = (byte) size8;
+                    for (int i = 0; i < size8; i++) {
+                        tp = (Vector) vector99.get(i);
+                        a = Integer.valueOf((String) (tp.get(1)));
+                        bytes.add((byte) (a % 256));
+                        bytes.add((byte) (a / 256));
+                        for (int j = 2; j < 512; j++) {
+                            a = Integer.valueOf((String) (tp.get(j)));
+                            bytes.add((byte) a);
+                        }
+                    }
+                }
+
+                vector99 = vectors[1];//运行阶段
+                if (vector99 != null) {
+                    size8 = vector99.size();
+                    steps1[n - 1][1][0] = (byte) size8;
+                    for (int i = 0; i < size8; i++) {
+                        tp = (Vector) vector99.get(i);
+                        a = Integer.valueOf((String) (tp.get(1)));
+                        bytes.add((byte) (a % 256));
+                        bytes.add((byte) (a / 256));
+                        for (int j = 2; j < 512; j++) {
+                            a = Integer.valueOf((String) (tp.get(j)));
+                            bytes.add((byte) a);
+                        }
+                    }
+                }
+            }
+            //勾选
+            if (tbs != null) {
+                for (int i = 0; i < 2; i++) {
+                    for (int j = 0; j < 510; j++) {
+                        if (tbs[i][j]) {
+                            b3[n - 1][i][j + 2] = 1;
+                        }
+                    }
+                }
+            }
+            //全局设置
+            setValue = (String[]) Data.YaoMaiMap.get("YaoMaiSet" + n);
+            set1[n - 1][0] = 1;//启用
+            if (setValue != null) {
+                if (Boolean.valueOf(setValue[1])) {
+                    set1[n - 1][1] = 1;
+                } else {
+                    set1[n - 1][1] = 2;
+                }
+                set1[n - 1][2] = (byte) Integer.valueOf(setValue[2]).intValue();
+            }
+        }
+
+        ///////////倒喝彩
+        byte[][][] b3_2 = new byte[2][2][512];
+        byte[][][] steps1_2 = new byte[2][2][1];//启用、运行 步数
+        byte[][] set1_2 = new byte[2][7];//全局设置
+        String[] s = {"效果灯倒彩模式", "效果灯喝彩模式"};
+        for (int n = 1; n < 3; n++) {
+            size8 = 0;
+            vectors = (Vector[]) Data.DaoHeCaiMap.get("TableData" + s[n - 1]);
+            tbs = (boolean[][]) Data.DaoHeCaiMap.get("GouXuanValue" + s[n - 1]);
+            if (vectors != null) {
+                vector99 = vectors[0];//启动阶段
+                if (vector99 != null) {
+                    size8 = vector99.size();
+                    steps1_2[n - 1][0][0] = (byte) size8;
+                    for (int i = 0; i < size8; i++) {
+                        tp = (Vector) vector99.get(i);
+                        a = Integer.valueOf((String) (tp.get(1)));
+                        bytes.add((byte) (a % 256));
+                        bytes.add((byte) (a / 256));
+                        for (int j = 2; j < 512; j++) {
+                            a = Integer.valueOf((String) (tp.get(j)));
+                            bytes.add((byte) a);
+                        }
+                    }
+                }
+
+                vector99 = vectors[1];//运行阶段
+                if (vector99 != null) {
+                    size8 = vector99.size();
+                    steps1_2[n - 1][1][0] = (byte) size8;
+                    for (int i = 0; i < size8; i++) {
+                        tp = (Vector) vector99.get(i);
+                        a = Integer.valueOf((String) (tp.get(1)));
+                        bytes.add((byte) (a % 256));
+                        bytes.add((byte) (a / 256));
+                        for (int j = 2; j < 512; j++) {
+                            a = Integer.valueOf((String) (tp.get(j)));
+                            bytes.add((byte) a);
+                        }
+                    }
+                }
+                //勾选
+                if (tbs != null) {
+                    for (int i = 0; i < 2; i++) {
+                        for (int j = 0; j < 510; j++) {
+                            if (tbs[i][j]) {
+                                b3_2[n - 1][i][j + 2] = 1;
+                            }
+                        }
+                    }
+                }
+                //全局设置
+                setValue = (String[]) Data.DaoHeCaiMap.get("DaoHeCaiSet" + s[n - 1]);
+                set1_2[n - 1][0] = 1;//启用
+                if (setValue != null) {
+                    if (Boolean.valueOf(setValue[1])) {
+                        set1_2[n - 1][1] = 1;
+                    } else {
+                        set1_2[n - 1][1] = 2;
+                    }
+                    set1_2[n - 1][2] = (byte) Integer.valueOf(setValue[2]).intValue();
+                }
+            }
+        }
+        byte[] b = new byte[1];
+        List<Byte> list = new ArrayList<>();
+        list.add((byte) 0xFE);//引导码
+        list.add((byte) 0xA0);
+        for (int i = 0; i < 4; i++) {//添加备用地址
+            list.add(b[0]);
+        }
+        //总步数
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                list.add(steps1[i][j][0]);
+            }
+        }
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                list.add(steps1_2[i][j][0]);
+            }
+        }
+        //全局设置
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 7; j++) {
+                list.add(set1[i][j]);
+            }
+        }
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 7; j++) {
+                list.add(set1_2[i][j]);
+            }
+        }
+        //通道勾选
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                for (int k = 0; k < 512; k++) {
+                    list.add(b3[i][j][k]);
+                }
+            }
+        }
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                for (int k = 0; k < 512; k++) {
+                    list.add(b3_2[i][j][k]);
+                }
+            }
+        }
+        for (int i = 0; i < list.size(); i++) {
+            os.write(list.get(i));
+        }
+        for (int i = 0; i < bytes.size(); i++) {
+            os.write(bytes.get(i));
+        }
+    }
+
     /*
-     * 场景模块--摇麦与倒喝彩模式数据
+     * 场景模块--摇麦与倒喝彩模式数据   旧方法弃置2019-11-9 10:25:38
      */
     private void writeHeCaiYaoMai(OutputStream os) throws Exception {
         ///摇麦
@@ -1737,6 +2755,196 @@ public class MergeAllListener implements ActionListener {
         }
     }
 
+    /**
+     * 声控素材数据写入
+     *
+     * @param os
+     * @throws Exception
+     */
+    private void writeShengKonSucai(OutputStream os) throws Exception {
+        byte[][] yinDaoA = new byte[30][6];//引导区A
+        NewJTable table = (NewJTable) MainUi.map.get("GroupTable");
+        for (int i = 0; i < 30; i++) {
+            yinDaoA[i][0] = (byte) 0xFE;
+            yinDaoA[i][1] = (byte) 0xB0;
+            yinDaoA[i][4] = (byte) 0x01;
+        }
+        ShengKonSuCaiUI suCaiUI = new ShengKonSuCaiUI();
+        for (int i = 0; i < table.getRowCount(); i++) {
+            String dengZuName = table.getValueAt(i, 2).toString();//灯组名称
+            int dengZuNumber = Integer.parseInt(table.getValueAt(i, 1).toString());//灯组序号
+            int number = Integer.parseInt(suCaiUI.getAlone(dengZuName));//当前灯组素材总数
+            int tonDaoNumber = 0;
+            TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(dengZuNumber - 1);
+            if (treeSet.size() > 0) {
+                NewJTable table3 = (NewJTable) MainUi.map.get("table_dengJu");//所有灯具
+                String typeString = table3.getValueAt((int) treeSet.first(), 3).toString();//灯具型号
+                tonDaoNumber = Integer.valueOf((String) Data.DengKuChannelCountList.get(Integer.valueOf(typeString.split("#")[0].substring(2)).intValue() - 1)).intValue();//通道数
+            }
+            yinDaoA[i][2] = (byte) number;
+            yinDaoA[i][3] = (byte) tonDaoNumber;
+        }
+        List<Byte> yinDaoB = new ArrayList<>();//引导区B
+        yinDaoB.add((byte) 0XFE);
+        yinDaoB.add((byte) 0XB1);
+        yinDaoB.add((byte) table.getRowCount());//编程组数
+        yinDaoB.add((byte) (Integer.parseInt(suCaiUI.getCount()) % 256));//素材总数
+        yinDaoB.add((byte) (Integer.parseInt(suCaiUI.getCount()) / 256));//素材总数
+        for (int i = 0; i < table.getRowCount(); i++) {//各素材总步数
+            String dengZuName = table.getValueAt(i, 2).toString();//灯组名称
+            int number = Integer.parseInt(suCaiUI.getAlone(dengZuName));//当前灯组素材总数
+            for (int j = 0; j < number; j++) {
+                if (Data.ShengKonSuCai[i][j] != null) {
+                    Map map = (Map) Data.ShengKonSuCai[i][j];
+                    Vector vector88 = (Vector) map.get("0");
+                    if (vector88 != null)
+                        yinDaoB.add((byte) vector88.size());
+                    else
+                        yinDaoB.add((byte) 0X01);//默认一步
+                } else {
+                    yinDaoB.add((byte) 0X01);//默认一步
+                }
+            }
+        }
+        List<Byte> shengKonSuCaiBanBen = new ArrayList<>();//声音素材版本格式
+        for (int i = 0; i < table.getRowCount(); i++) {
+            String dengZuName = table.getValueAt(i, 2).toString();//灯组名称
+            int number = Integer.parseInt(suCaiUI.getAlone(dengZuName));//当前灯组素材总数
+            for (int j = 0; j < number; j++) {
+                byte[] b2 = new byte[61];
+                if (Data.ShengKonSuCai[i][j] != null) {
+                    Map map = (Map) Data.ShengKonSuCai[i][j];
+                    int size = 0;
+                    boolean[][] gouXuanValus = null;
+                    int j2, yu2;
+                    int[] al;
+                    Vector vector88 = null;
+                    if (map != null) {
+                        vector88 = (Vector) map.get("0");
+                        if (vector88 != null) {
+                            size = vector88.size();
+                            b2[0] = (byte) (size % 256);
+                            b2[1] = (byte) (size / 256);
+                        }
+                        gouXuanValus = (boolean[][]) map.get("1");
+                        if (gouXuanValus != null) {
+                            for (int k2 = 0; k2 < gouXuanValus.length; k2++) {
+                                for (int l = 0; l < gouXuanValus[0].length; l++) {
+                                    j2 = l / 8;
+                                    yu2 = 7 - (l % 8);
+                                    if (gouXuanValus[k2][l]) {
+                                        b2[2 + k2 * 4 + j2] = (byte) (Byte.toUnsignedInt(b2[2 + k2 * 4 + j2]) + (1 << yu2));
+                                    }
+                                }
+                            }
+                        }
+                        al = (int[]) map.get("2");
+                        if (al != null) {
+                            if (al[0] == 0) {//0表示独立
+                                b2[38] = 2;
+                            } else {
+                                b2[38] = 1;
+                            }
+                            //多灯控制
+                            b2[44] = (byte) al[10];
+                            //加速度
+                            if (al[1] == 0) {
+                                b2[46] = 1;
+                            }
+                            if (al[2] == 1) {
+                                b2[48] = 1;
+                            }
+                            b2[49] = (byte) al[3];
+
+                            b2[51] = (byte) al[4];
+                            b2[52] = (byte) al[6];
+                            b2[53] = (byte) al[8];
+
+                            b2[54] = (byte) al[5];
+                            b2[55] = (byte) al[7];
+                            b2[56] = (byte) al[9];
+                        }
+                    }
+                    for (int k = 0; k < b2.length; k++) {//素材版本
+                        shengKonSuCaiBanBen.add(b2[k]);
+                    }
+                    //步数据
+                    int cnt = 0;//灯具数量
+                    int channelCount = 0;//通道数
+                    String typeString = "";
+                    if (Data.GroupOfLightList.size() > i) {
+                        TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(i);
+                        cnt = treeSet.size();
+                        if (cnt > 0) {
+                            NewJTable table3 = (NewJTable) MainUi.map.get("table_dengJu");//所有灯具
+                            int v = (int) treeSet.first();
+                            typeString = table3.getValueAt(v, 3).toString();//灯具型号
+                        }
+                    }
+                    if (!typeString.equals("")) {
+                        int dengKuNumber = Integer.valueOf(typeString.split("#")[0].substring(2)).intValue() - 1;
+                        channelCount = Integer.valueOf((String) Data.DengKuChannelCountList.get(dengKuNumber)).intValue();
+                    }
+                    int stepWidth = channelCount * cnt;
+                    int runTime = 0, lgth = 0;
+                    if (vector88 != null) {
+                        Vector tp = null;
+                        for (int r = 0; r < vector88.size(); r++) {
+                            tp = (Vector) vector88.get(r);
+                            runTime = Integer.valueOf(tp.get(1).toString());
+                            shengKonSuCaiBanBen.add((byte) (runTime % 256));
+                            shengKonSuCaiBanBen.add((byte) (runTime / 256));
+                            if (tp.size() - 2 >= stepWidth) {
+                                lgth = stepWidth + 2;
+                            } else {
+                                lgth = tp.size();
+                            }
+                            for (int l = 2; l < lgth; l++) {
+                                shengKonSuCaiBanBen.add(Integer.valueOf(tp.get(l).toString()).byteValue());
+                            }
+                        }
+                        vector88 = null;
+                    }
+                } else {
+                    for (int k = 0; k < b2.length; k++) {//素材版本
+                        shengKonSuCaiBanBen.add(b2[k]);
+                    }
+                    //步数据
+                    int cnt = 0;//灯具数量
+                    int channelCount = 0;//通道数
+                    String typeString = "";
+                    if (Data.GroupOfLightList.size() > i) {
+                        TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(i);
+                        cnt = treeSet.size();
+                        if (cnt > 0) {
+                            NewJTable table3 = (NewJTable) MainUi.map.get("table_dengJu");//所有灯具
+                            int v = (int) treeSet.first();
+                            typeString = table3.getValueAt(v, 3).toString();//灯具型号
+                        }
+                    }
+                    if (!typeString.equals("")) {
+                        int dengKuNumber = Integer.valueOf(typeString.split("#")[0].substring(2)).intValue() - 1;
+                        channelCount = Integer.valueOf((String) Data.DengKuChannelCountList.get(dengKuNumber)).intValue();
+                    }
+                    int stepWidth = channelCount * cnt;
+                    byte[] b3 = new byte[stepWidth + 2];
+                    for (int k = 0; k < b3.length; k++) {
+                        shengKonSuCaiBanBen.add(b3[k]);
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < yinDaoA.length; i++) {//引导区A写入
+            os.write(yinDaoA[i]);
+        }
+        for (int i = 0; i < yinDaoB.size(); i++) {//引导区B写入
+            os.write(yinDaoB.get(i));
+        }
+        for (int i = 0; i < shengKonSuCaiBanBen.size(); i++) {//声控素材版本以及步数写入
+            os.write(shengKonSuCaiBanBen.get(i));
+        }
+    }
+
     private void writeShengKon(OutputStream os, int sc) throws Exception {
 
         ShengKonData(sc, os);
@@ -1834,9 +3042,9 @@ public class MergeAllListener implements ActionListener {
                 for (int k = 0; k < 10; k++) {
                     b1[254 + k * 6 + 60 * i] = (byte) DataSetInts[0][4 + k * 6];
                     for (int k2 = 0; k2 < 5; k2++) {
-                        if (sl + 2 == DataSetInts[0][5 + k2 + k * 6]) {
+                        if (sl + 1 == DataSetInts[0][5 + k2 + k * 6]) {
                             b1[255 + 60 * i + k * 6 + k2] = (byte) 31;
-                        } else if (sl + 3 == DataSetInts[0][5 + k2 + k * 6]) {
+                        } else if (sl + 2 == DataSetInts[0][5 + k2 + k * 6]) {
                             b1[255 + 60 * i + k * 6 + k2] = (byte) 32;
                         } else if (sl >= DataSetInts[0][5 + k2 + k * 6]) {
                             b1[255 + 60 * i + k * 6 + k2] = (byte) DataSetInts[0][5 + k2 + k * 6];
@@ -1914,110 +3122,210 @@ public class MergeAllListener implements ActionListener {
         }
         os.write(b1);
 
-        //块数据
-        byte[][][] b2 = new byte[30][10][61];
-        Map map = null;
-        Vector vector88 = null;
-        int size = 0;
-        boolean[][] gouXuanValus = null;
-        int j2, yu2;
-        int[] al;
+        //块数据  改素材调用，暂时注释
+//        byte[][][] b2 = new byte[30][10][61];
+//        Map map = null;
+//        Vector vector88 = null;
+//        int size = 0;
+//        boolean[][] gouXuanValus = null;
+//        int j2, yu2;
+//        int[] al;
+//        for (int i = 0; i < 30; i++) {
+//            for (int k = 0; k < 10; k++) {
+//                map = (Map) Data.ShengKonEditObjects[scN - 1][i][k];
+//                if (map != null) {
+//                    vector88 = (Vector) map.get("0");
+//                    if (vector88 != null) {
+//                        size = vector88.size();
+//                        b2[i][k][0] = (byte) (size % 256);
+//                        b2[i][k][1] = (byte) (size / 256);
+//                    }
+//                    gouXuanValus = (boolean[][]) map.get("1");
+//                    if (gouXuanValus != null) {
+//                        for (int k2 = 0; k2 < gouXuanValus.length; k2++) {
+//                            for (int l = 0; l < gouXuanValus[0].length; l++) {
+//                                j2 = l / 8;
+//                                yu2 = 7 - (l % 8);
+//                                if (gouXuanValus[k2][l]) {
+//                                    b2[i][k][2 + k2 * 4 + j2] = (byte) (Byte.toUnsignedInt(b2[i][k][2 + k2 * 4 + j2]) + (1 << yu2));
+//                                }
+//                            }
+//                        }
+//                    }
+//                    al = (int[]) map.get("2");
+//                    if (al != null) {
+//                        if (al[0] == 0) {//0表示独立
+//                            b2[i][k][38] = 2;
+//                        } else {
+//                            b2[i][k][38] = 1;
+//                        }
+//                        //多灯控制
+//                        b2[i][k][44] = (byte) al[10];
+//                        //加速度
+//                        if (al[1] == 0) {
+//                            b2[i][k][46] = 1;
+//                        }
+//                        if (al[2] == 1) {
+//                            b2[i][k][48] = 1;
+//                        }
+//                        b2[i][k][49] = (byte) al[3];
+//
+//                        b2[i][k][51] = (byte) al[4];
+//                        b2[i][k][52] = (byte) al[6];
+//                        b2[i][k][53] = (byte) al[8];
+//
+//                        b2[i][k][54] = (byte) al[5];
+//                        b2[i][k][55] = (byte) al[7];
+//                        b2[i][k][56] = (byte) al[9];
+//                    }
+//                }
+//
+//                //步数据
+//                int cnt = 0;//灯具数量
+//                int channelCount = 0;//通道数
+//                String typeString = "";
+//                //int number = Integer.valueOf(""+(i+1)).intValue();
+//                if (Data.GroupOfLightList.size() > i) {
+//                    TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(i);
+//                    cnt = treeSet.size();
+//                    if (cnt > 0) {
+//                        NewJTable table3 = (NewJTable) MainUi.map.get("table_dengJu");//所有灯具
+//                        int v = (int) treeSet.first();
+//                        typeString = table3.getValueAt(v, 3).toString();//灯具型号
+//                    }
+//                }
+//                if (!typeString.equals("")) {
+//                    int dengKuNumber = Integer.valueOf(typeString.split("#")[0].substring(2)).intValue() - 1;
+//                    channelCount = Integer.valueOf((String) Data.DengKuChannelCountList.get(dengKuNumber)).intValue();
+//                }
+//                int stepWidth = channelCount * cnt;
+//                int runTime = 0, lgth = 0;
+//                byte[][] b3 = new byte[32][stepWidth + 2];
+//                if (vector88 != null) {
+//                    Vector tp = null;
+//                    for (int r = 0; r < vector88.size(); r++) {
+//                        tp = (Vector) vector88.get(r);
+//                        runTime = Integer.valueOf(tp.get(1).toString());
+//                        b3[r][0] = (byte) (runTime % 256);
+//                        b3[r][1] = (byte) (runTime / 256);
+//                        if (tp.size() - 2 >= stepWidth) {
+//                            lgth = stepWidth + 2;
+//                        } else {
+//                            lgth = tp.size();
+//                        }
+//                        for (int l = 2; l < lgth; l++) {
+//                            b3[r][l] = Integer.valueOf(tp.get(l).toString()).byteValue();
+//                        }
+//                    }
+//                    vector88 = null;
+//                }
+//                os.write(b2[i][k]);
+//                for (int l = 0; l < 32; l++) {
+//                    os.write(b3[l]);
+//                }
+//            }
+//        }
+
+        byte[][][] buff = new byte[30][10][2];//场景声控块区数据
+        for (int i = 0; i < 30; i++) {
+            if (timeBlockPanels[i + 1].isVisible()) {
+                for (int k = 0; k < timeBlockPanels[i + 1].getComponentCount(); k++) {
+                    DefineJLable_shengKon2 lable = (DefineJLable_shengKon2) timeBlockPanels[i + 1].getComponent(k);
+                    if (lable.getBackground().getGreen() == 255) {
+                        buff[i][k][0] = (byte) (i + 1);
+                        String str = lable.getText().substring(lable.getText().indexOf("(") + 1, lable.getText().indexOf(")"));
+                        buff[i][k][1] = (byte) Integer.parseInt(str);
+                    }
+                }
+            }
+        }
         for (int i = 0; i < 30; i++) {
             for (int k = 0; k < 10; k++) {
-                map = (Map) Data.ShengKonEditObjects[scN - 1][i][k];
-                if (map != null) {
-                    vector88 = (Vector) map.get("0");
-                    if (vector88 != null) {
-                        size = vector88.size();
-                        b2[i][k][0] = (byte) (size % 256);
-                        b2[i][k][1] = (byte) (size / 256);
-                    }
-                    gouXuanValus = (boolean[][]) map.get("1");
-                    if (gouXuanValus != null) {
-                        for (int k2 = 0; k2 < gouXuanValus.length; k2++) {
-                            for (int l = 0; l < gouXuanValus[0].length; l++) {
-                                j2 = l / 8;
-                                yu2 = 7 - (l % 8);
-                                if (gouXuanValus[k2][l]) {
-                                    b2[i][k][2 + k2 * 4 + j2] = (byte) (Byte.toUnsignedInt(b2[i][k][2 + k2 * 4 + j2]) + (1 << yu2));
-                                }
-                            }
-                        }
-                    }
-                    al = (int[]) map.get("2");
-                    if (al != null) {
-                        if (al[0] == 0) {//0表示独立
-                            b2[i][k][38] = 2;
-                        } else {
-                            b2[i][k][38] = 1;
-                        }
-                        //多灯控制
-                        b2[i][k][44] = (byte) al[10];
-                        //加速度
-                        if (al[1] == 0) {
-                            b2[i][k][46] = 1;
-                        }
-                        if (al[2] == 1) {
-                            b2[i][k][48] = 1;
-                        }
-                        b2[i][k][49] = (byte) al[3];
+                os.write(buff[i][k]);
+            }
+        }
+    }
 
-                        b2[i][k][51] = (byte) al[4];
-                        b2[i][k][52] = (byte) al[6];
-                        b2[i][k][53] = (byte) al[8];
+    private void shengKonMoreLigthDatatest(OutputStream os) throws Exception {
 
-                        b2[i][k][54] = (byte) al[5];
-                        b2[i][k][55] = (byte) al[7];
-                        b2[i][k][56] = (byte) al[9];
-                    }
-                }
+        int size = 0, a = 0;
+        byte[] steps = new byte[38];//总步数
+        steps[0] = (byte) 0XFE;
+        steps[1] = (byte) 0XA2;
 
-                //步数据
-                int cnt = 0;//灯具数量
-                int channelCount = 0;//通道数
-                String typeString = "";
-                //int number = Integer.valueOf(""+(i+1)).intValue();
-                if (Data.GroupOfLightList.size() > i) {
-                    TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(i);
-                    cnt = treeSet.size();
-                    if (cnt > 0) {
-                        NewJTable table3 = (NewJTable) MainUi.map.get("table_dengJu");//所有灯具
-                        int v = (int) treeSet.first();
-                        typeString = table3.getValueAt(v, 3).toString();//灯具型号
-                    }
-                }
-                if (!typeString.equals("")) {
-                    int dengKuNumber = Integer.valueOf(typeString.split("#")[0].substring(2)).intValue() - 1;
-                    channelCount = Integer.valueOf((String) Data.DengKuChannelCountList.get(dengKuNumber)).intValue();
-                }
-                int stepWidth = channelCount * cnt;
-                int runTime = 0, lgth = 0;
-                byte[][] b3 = new byte[32][stepWidth + 2];
-                if (vector88 != null) {
-                    Vector tp = null;
-                    for (int r = 0; r < vector88.size(); r++) {
-                        tp = (Vector) vector88.get(r);
-                        runTime = Integer.valueOf(tp.get(1).toString());
-                        b3[r][0] = (byte) (runTime % 256);
-                        b3[r][1] = (byte) (runTime / 256);
-                        if (tp.size() - 2 >= stepWidth) {
-                            lgth = stepWidth + 2;
-                        } else {
-                            lgth = tp.size();
-                        }
-                        for (int l = 2; l < lgth; l++) {
-                            b3[r][l] = Integer.valueOf(tp.get(l).toString()).byteValue();
+        Vector tp = null, vector99 = null;
+        byte[][][][] b1 = new byte[16][2][32][512];//步编辑数据 new byte[16][2][32][512]
+
+        //List<List<List<List<Byte>>>> b1 = new ArrayList<>();
+        String[] sets = null;
+        boolean[] tbs = null;
+        byte[][][] channalGouXuan = new byte[16][2][64];//通道勾选
+        byte[][][] globalSet = new byte[16][2][7];//全局设置
+        int r = 0, yu = 0;
+        for (int scN = 1; scN < 17; scN++) {
+            for (int setNo = 1; setNo < 3; setNo++) {
+                vector99 = (Vector) Data.ShengKonModelDmxMap.get("TableData" + scN + "" + setNo);
+                sets = (String[]) Data.ShengKonModelDmxMap.get("YaoMaiSet" + scN + "" + setNo);
+                tbs = (boolean[]) Data.ShengKonModelDmxMap.get("GouXuanValue" + scN + "" + setNo);//勾选
+                if (vector99 != null) {
+                    size = vector99.size();
+                    steps[(scN - 1) * 2 + setNo + 5] = (byte) size;//个数
+                    for (int i = 0; i < size; i++) {
+                        tp = (Vector) vector99.get(i);
+                        a = Integer.valueOf((String) (tp.get(1)));
+                        b1[scN - 1][setNo - 1][i][0] = (byte) (a % 256);
+                        b1[scN - 1][setNo - 1][i][1] = (byte) (a / 256);
+                        for (int j = 2; j < 512; j++) {
+                            a = Integer.valueOf((String) (tp.get(j)));
+                            b1[scN - 1][setNo - 1][i][j] = (byte) a;
                         }
                     }
-                    vector88 = null;
                 }
-                os.write(b2[i][k]);
-                for (int l = 0; l < 32; l++) {
-                    os.write(b3[l]);
+                if (sets != null) {
+                    globalSet[scN - 1][setNo - 1][2] = Integer.valueOf(sets[0]).byteValue();
+                }
+                if (tbs != null) {
+                    for (int k = 0; k < tbs.length; k++) {
+                        r = k / 8;
+                        yu = 7 - (k % 8);
+                        if (tbs[k]) {
+                            channalGouXuan[scN - 1][setNo - 1][r] = (byte) (Byte.toUnsignedInt(channalGouXuan[scN - 1][setNo - 1][r]) + (1 << yu));
+                        }
+                    }
                 }
             }
         }
 
+        //总步数
+        for (int i = 0; i < 38; i++) {
+
+            os.write(steps[i]);
+
+        }
+
+        //全局设置
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 2; j++) {
+                os.write(globalSet[i][j]);
+            }
+        }
+
+        //勾选数据
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 2; j++) {
+                os.write(channalGouXuan[i][j]);
+            }
+        }
+
+
+        //步编辑数据
+        for (int i = 0; i < 16; i++) {
+            for (int j = 0; j < 2; j++) {
+                for (int j2 = 0; j2 < (int) steps[i * 2 + j + 6]; j2++) {
+                    os.write(b1[i][j][j2]);
+                }
+            }
+        }
     }
 
     /*

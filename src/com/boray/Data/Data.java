@@ -3,6 +3,9 @@ package com.boray.Data;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.DatagramSocket;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.*;
 
 import javax.comm.SerialPort;
@@ -48,11 +51,19 @@ public class Data {
 	public static int baud;
 	//com口
 	public static String comKou;
-	
+
+	//UDP连接
+	public static DatagramSocket socket;
+
+	public static InetSocketAddress address;
+
+	//端口
+	public static int port = 8089;
+
 	public static boolean deviceShow = false;
 	
 	//记录选择场景模式
-	public static int changJingModel = -1;
+	public static int changJingModel = 0;
 	
 	//场景的模式切换
 	public static boolean changJin_change = false;
@@ -167,6 +178,16 @@ public class Data {
 	public static Map suCaiNameMap = new HashMap();
 	//云端素材
 	public static Map yunSuCaiMap = new HashMap();
+	//声控素材
+	public static Map shengKonSuCaiMap = new HashMap();
+	public static Map shengKonSuCaiNameMap = new HashMap();
+	//声控素材数据 30表示30个灯组，30表示30个素材
+	public static Object[][] ShengKonSuCai = new Object[30][30];
 
 	public static String ipPort;
+	public static String ip;
+	public static String downloadIp;
+
+	public static Map<String,String> userLogin = new HashMap<>();//记录用户登录的信息
+	public static Boolean RememberPassword = false;
 }

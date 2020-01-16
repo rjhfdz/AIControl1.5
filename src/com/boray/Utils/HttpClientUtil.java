@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -207,5 +208,34 @@ public class HttpClientUtil {
         }
 
         return resultMap;
+    }
+
+    public static String URLEncode(String url) {
+        String resultURL = "";
+        for (int i = 0; i < url.length(); i++) {
+            try {
+                char charAt = url.charAt(i);
+                //只对汉字处理
+                if (isChineseChar(charAt)) {
+                    String encode = URLEncoder.encode(charAt + "", "UTF-8");
+                    resultURL += encode;
+                } else {
+                    resultURL += charAt;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return resultURL;
+    }
+
+    public static boolean isChineseChar(char c) {
+        boolean flag = false;
+        if (String.valueOf(c).matches("[\uff08]") || String.valueOf(c).matches("[\uff09]")) {
+            flag = true;
+        } else if (String.valueOf(c).matches("[\u4e00-\u9fa5]")) {
+            flag = true;
+        }
+        return flag;
     }
 }

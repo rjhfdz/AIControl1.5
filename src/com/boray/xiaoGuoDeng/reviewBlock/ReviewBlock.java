@@ -1,6 +1,7 @@
 package com.boray.xiaoGuoDeng.reviewBlock;
 
 import com.boray.Data.Data;
+import com.boray.Utils.Socket;
 import com.boray.mainUi.MainUi;
 
 import javax.swing.*;
@@ -9,7 +10,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 
 public class ReviewBlock {
-    public static void review(int model) {
+    public static void serialPortReview(int model) {
         if (Data.serialPort != null) {
             try {
 
@@ -74,6 +75,68 @@ public class ReviewBlock {
                 b = TimeBlockReviewData.getStarReview2(model);
                 os.write(b);
                 os.flush();
+
+
+                //os.close();
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+    }
+
+    public static void socketReview(int model) {
+        if (Data.socket != null) {
+            try {
+
+                //灯具数据
+                byte[] b = TimeBlockReviewData.getInfOfLight();
+                Socket.UDPSendData(b);
+                Thread.sleep(200);
+
+                //分组
+                b = TimeBlockReviewData.getGroupOfLights();
+                Socket.UDPSendData(b);
+                Thread.sleep(200);
+
+
+                //熄灯+加速度
+                b = TimeBlockReviewData.getOffLights()[0];
+                Socket.UDPSendData(b);
+                Thread.sleep(200);
+
+                b = TimeBlockReviewData.getOffLights()[1];
+                Socket.UDPSendData(b);
+
+                //灯库
+                Thread.sleep(200);
+                b = TimeBlockReviewData.getlibOfLights()[0];
+                Socket.UDPSendData(b);
+                Thread.sleep(200);
+                b = TimeBlockReviewData.getlibOfLights()[1];
+                Socket.UDPSendData(b);
+
+                //素材数据区
+                Thread.sleep(200);
+                Object[] objects = TimeBlockReviewData.getEffectLight4(1280, model, 14);
+                for (int i = 0; i < objects.length; i++) {
+                    b = (byte[]) objects[i];
+                    Socket.UDPSendData(b);
+                    Thread.sleep(200);
+                }
+
+                //场景
+                Thread.sleep(230);
+                objects = TimeBlockReviewData.getEffectLight4(1280, model, 15);
+                for (int i = 0; i < objects.length; i++) {
+                    b = (byte[]) objects[i];
+                    Socket.UDPSendData(b);
+                    Thread.sleep(230);
+                }
+
+                //启动预览
+                Thread.sleep(200);
+                b = TimeBlockReviewData.getStarReview2(model);
+                Socket.UDPSendData(b);
 
 
                 //os.close();
