@@ -75,13 +75,16 @@ public class ShareUI {
             buttonPanel.setPreferredSize(new Dimension(900, 35));
             JButton downloadFile = new JButton("下载工程");
             JButton refresh = new JButton("刷新");
+            JButton copy = new JButton("复制");
 
             ShareListener listener = new ShareListener();
             downloadFile.addActionListener(listener);
             refresh.addActionListener(listener);
+            copy.addActionListener(listener);
 
             buttonPanel.add(downloadFile);
             buttonPanel.add(refresh);
+            buttonPanel.add(copy);
 
             panel.add(buttonPanel);
 

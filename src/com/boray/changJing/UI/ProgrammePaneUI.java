@@ -35,10 +35,10 @@ public class ProgrammePaneUI {
         FlowLayout flowLayout5 = new FlowLayout(FlowLayout.LEFT);
         flowLayout5.setVgap(0);
         flowLayout5.setHgap(0);
-        pane.setPreferredSize(new Dimension(1010,700));
+        pane.setPreferredSize(new Dimension(1010, 700));
         pane.setLayout(flowLayout5);
         JPanel changJing = new JPanel();
-        changJing.setPreferredSize(new Dimension(1010,40));
+        changJing.setPreferredSize(new Dimension(1010, 40));
         JLabel dengGuangLabel = new JLabel("灯光场景:");
         JLabel gonNengLabel = new JLabel("功能场景:");
         JComboBox dengGuangBoxs = new JComboBox();
@@ -50,6 +50,9 @@ public class ProgrammePaneUI {
             gonNengBoxs.addItem(ChangJinData.T1()[i + 32]);
         }
         changJing.setBorder(new LineBorder(Color.gray));
+        JLabel label = new JLabel();
+        MainUi.map.put("changJingBianChengLabel", label);
+        changJing.add(label);
         changJing.add(dengGuangLabel);
         changJing.add(dengGuangBoxs);
         changJing.add(gonNengLabel);
@@ -59,11 +62,12 @@ public class ProgrammePaneUI {
 
         dengGuangBoxs.addItemListener(changJingSelectItemListener);
         gonNengBoxs.addItemListener(changJingSelectItemListener);
+        label.setText("正在编辑：" + dengGuangBoxs.getSelectedItem());
 
         DengJuKaiGuangItemListener itemListener = new DengJuKaiGuangItemListener();
 
         JPanel p9 = new JPanel();
-        TitledBorder tb1 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "开关设置", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
+        TitledBorder tb1 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "开关设置", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         p9.setBorder(tb1);
         FlowLayout flowLayout2 = new FlowLayout(FlowLayout.CENTER);
         flowLayout2.setVgap(-2);
@@ -72,7 +76,7 @@ public class ProgrammePaneUI {
         flowLayout7.setVgap(-8);
         flowLayout7.setHgap(4);
         p9.setLayout(flowLayout7);
-        p9.setPreferredSize(new Dimension(1010,75));
+        p9.setPreferredSize(new Dimension(1010, 75));
 //        panel.add(p9,BorderLayout.NORTH);
 
         JPanel[] panels8 = new JPanel[8];
@@ -80,25 +84,25 @@ public class ProgrammePaneUI {
         JComboBox[] boxs8 = new JComboBox[8];
         MainUi.map.put("kaiGuangBox_BuKeTiao", boxs8);
         for (int i = 0; i < boxs8.length; i++) {
-            labels8[i] = new JLabel("灯"+(i+1));
+            labels8[i] = new JLabel("灯" + (i + 1));
             boxs8[i] = new JComboBox();
-            boxs8[i].setBorder(BorderFactory.createEmptyBorder(-2,0,-2,0));
+            boxs8[i].setBorder(BorderFactory.createEmptyBorder(-2, 0, -2, 0));
             boxs8[i].addItem("开");
             boxs8[i].addItem("关");
             boxs8[i].addItem("保持");
             boxs8[i].addItemListener(itemListener);
-            boxs8[i].setPreferredSize(new Dimension(90,30));
+            boxs8[i].setPreferredSize(new Dimension(90, 30));
             panels8[i] = new JPanel();
-            panels8[i].setPreferredSize(new Dimension(100,160));
+            panels8[i].setPreferredSize(new Dimension(100, 160));
             panels8[i].setLayout(flowLayout2);
             panels8[i].add(labels8[i]);
             panels8[i].add(boxs8[i]);
             p9.add(panels8[i]);
         }
         JPanel p10 = new JPanel();
-        TitledBorder tb8 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "可调设置", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
+        TitledBorder tb8 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "可调设置", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         p10.setBorder(tb8);
-        p10.setPreferredSize(new Dimension(440,160));
+        p10.setPreferredSize(new Dimension(440, 160));
         p10.setLayout(flowLayout5);
 //        panel.add(p10);
 
@@ -112,24 +116,24 @@ public class ProgrammePaneUI {
         MainUi.map.put("liangDuBoxs", boxs2);
         for (int i = 0; i < boxs2.length; i++) {
             final int a = i;
-            labels[i] = new JLabel("灯"+(i+1));
-            labels[i].setBorder(BorderFactory.createEmptyBorder(-2,0,-2,0));
+            labels[i] = new JLabel("灯" + (i + 1));
+            labels[i].setBorder(BorderFactory.createEmptyBorder(-2, 0, -2, 0));
             //labels[i].setBorder(new LineBorder(Color.black));
             boxs1[i] = new JComboBox();
-            boxs1[i].setBorder(BorderFactory.createEmptyBorder(-2,0,-2,0));
+            boxs1[i].setBorder(BorderFactory.createEmptyBorder(-2, 0, -2, 0));
             boxs1[i].addItem("开");
             boxs1[i].addItem("关");
             boxs1[i].addItem("保持");
             boxs1[i].addItemListener(itemListener);
-            boxs1[i].setPreferredSize(new Dimension(90,24));
-            sliders[i] = new JSlider(0,100,0);
+            boxs1[i].setPreferredSize(new Dimension(90, 24));
+            sliders[i] = new JSlider(0, 100, 0);
             sliders[i].setMinorTickSpacing(2);
             sliders[i].setOrientation(SwingConstants.VERTICAL);
-            sliders[i].setPreferredSize(new Dimension(30,70));
+            sliders[i].setPreferredSize(new Dimension(30, 70));
             sliders[i].addChangeListener(new ChangeListener() {
                 public void stateChanged(ChangeEvent e) {
                     if (sliders[a].getValue() % 2 != 0) {
-                        sliders[a].setValue(sliders[a].getValue()+1);
+                        sliders[a].setValue(sliders[a].getValue() + 1);
                     }
                     itemListener.sendData();
                     ItemListener listener = boxs2[a].getItemListeners()[0];
@@ -158,8 +162,8 @@ public class ProgrammePaneUI {
                 }
             });
             boxs2[i] = new JComboBox();
-            boxs2[i].setPreferredSize(new Dimension(90,24));
-            boxs2[i].setBorder(BorderFactory.createEmptyBorder(-2,0,-2,0));
+            boxs2[i].setPreferredSize(new Dimension(90, 24));
+            boxs2[i].setBorder(BorderFactory.createEmptyBorder(-2, 0, -2, 0));
             boxs2[i].addItemListener(new ItemListener() {
                 public void itemStateChanged(ItemEvent e) {
                     if (ItemEvent.SELECTED == e.getStateChange()) {
@@ -178,56 +182,58 @@ public class ProgrammePaneUI {
                 }
             });
             for (int j = 0; j <= 100; j++) {
-                if (j%2 == 0) {
+                if (j % 2 == 0) {
                     boxs2[i].addItem(String.valueOf(j));
                 }
             }
         }
         for (int i = 0; i < panels.length; i++) {
             panels[i] = new JPanel();
-            panels[i].setPreferredSize(new Dimension(95,160));
+            panels[i].setPreferredSize(new Dimension(95, 160));
             panels[i].setLayout(flowLayout2);
-            panels[i].add(labels[i]);panels[i].add(boxs1[i]);
-            panels[i].add(sliders[i]);panels[i].add(boxs2[i]);
+            panels[i].add(labels[i]);
+            panels[i].add(boxs1[i]);
+            panels[i].add(sliders[i]);
+            panels[i].add(boxs2[i]);
             p10.add(panels[i]);
         }
 
         JPanel panel3 = new JPanel();
         T3(panel3);
-        TitledBorder tb3 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "复制", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
+        TitledBorder tb3 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "复制", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         panel3.setBorder(tb3);
-        panel3.setPreferredSize(new Dimension(560,75));
+        panel3.setPreferredSize(new Dimension(560, 75));
 
         JPanel panel6 = new JPanel();
         T6(panel6);
-        TitledBorder tb6 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "雾机控制模式", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
+        TitledBorder tb6 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "雾机控制模式", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         panel6.setBorder(tb6);
-        panel6.setPreferredSize(new Dimension(560,75));
+        panel6.setPreferredSize(new Dimension(560, 75));
 
         JPanel panel2 = new JPanel();
         T2(panel2);
-        TitledBorder tb2 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "全局控制", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
+        TitledBorder tb2 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "全局控制", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         panel2.setBorder(tb2);
-        panel2.setPreferredSize(new Dimension(1010,70));
+        panel2.setPreferredSize(new Dimension(1010, 70));
 
         JPanel panel4 = new JPanel();
         T4(panel4);
-        TitledBorder tb4 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "效果灯模式设置", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
+        TitledBorder tb4 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "效果灯模式设置", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         panel4.setBorder(tb4);
-        panel4.setPreferredSize(new Dimension(1010,80));
+        panel4.setPreferredSize(new Dimension(1010, 80));
 
         JPanel panel5 = new JPanel();
         T5(panel5);
-        TitledBorder tb5 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "摇麦设置", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
+        TitledBorder tb5 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "摇麦设置", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         panel5.setBorder(tb5);
-        panel5.setPreferredSize(new Dimension(1010,80));
+        panel5.setPreferredSize(new Dimension(1010, 80));
 
         JPanel jPanel = new JPanel();
-        jPanel.setPreferredSize(new Dimension(1010,165));
+        jPanel.setPreferredSize(new Dimension(1010, 165));
         jPanel.setLayout(flowLayout5);
         jPanel.add(p10);
         JPanel jPanel1 = new JPanel();
-        jPanel1.setPreferredSize(new Dimension(570,165));
+        jPanel1.setPreferredSize(new Dimension(570, 165));
         jPanel1.add(panel3);
         jPanel1.add(panel6);
         jPanel.add(jPanel1);
@@ -243,24 +249,24 @@ public class ProgrammePaneUI {
     private void T2(JPanel pane) {
         pane.setLayout(new BorderLayout());
         JPanel chdPane = new JPanel();
-        chdPane.setBorder(BorderFactory.createEmptyBorder(-5,0,0,0));
+        chdPane.setBorder(BorderFactory.createEmptyBorder(-5, 0, 0, 0));
         chdPane.setLayout(new FlowLayout(FlowLayout.LEFT));
         pane.add(chdPane);
 
         JLabel label = new JLabel("全局亮度:");
         chdPane.add(label);
-        final JSlider slider = new JSlider(0,100,0);
+        final JSlider slider = new JSlider(0, 100, 0);
         MainUi.map.put("quanJuLiangDuSlider", slider);
 
         chdPane.add(slider);
         //slider.setOrientation(SwingConstants.HORIZONTAL);
-        slider.setPreferredSize(new Dimension(99,24));
+        slider.setPreferredSize(new Dimension(99, 24));
         final JComboBox box = new JComboBox();
         MainUi.map.put("quanJuLiangDuBox", box);
         slider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 if (slider.getValue() % 2 != 0) {
-                    slider.setValue(slider.getValue()+1);
+                    slider.setValue(slider.getValue() + 1);
                 }
                 ItemListener listener = box.getItemListeners()[0];
                 box.removeItemListener(listener);
@@ -287,7 +293,7 @@ public class ProgrammePaneUI {
                 }
             }
         });
-        box.setPreferredSize(new Dimension(60,28));
+        box.setPreferredSize(new Dimension(60, 28));
         box.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (ItemEvent.SELECTED == e.getStateChange()) {
@@ -306,7 +312,7 @@ public class ProgrammePaneUI {
             }
         });
         for (int i = 0; i <= 100; i++) {
-            if (i%2 == 0) {
+            if (i % 2 == 0) {
                 box.addItem(String.valueOf(i));
             }
         }
@@ -344,12 +350,13 @@ public class ProgrammePaneUI {
 
     /**
      * 摇麦设置面板
+     *
      * @param pane
      */
     private void T5(JPanel pane) {
         pane.setLayout(new BorderLayout());
         JPanel chdPane = new JPanel();
-        chdPane.setBorder(BorderFactory.createEmptyBorder(-5,0,0,0));
+        chdPane.setBorder(BorderFactory.createEmptyBorder(-5, 0, 0, 0));
         chdPane.setLayout(new FlowLayout(FlowLayout.LEFT));
         pane.add(chdPane);
 
@@ -387,12 +394,13 @@ public class ProgrammePaneUI {
 
     /**
      * 效果灯设置面板
+     *
      * @param pane
      */
     private void T4(JPanel pane) {
         pane.setLayout(new BorderLayout());
         JPanel chdPane = new JPanel();
-        chdPane.setBorder(BorderFactory.createEmptyBorder(-5,0,0,0));
+        chdPane.setBorder(BorderFactory.createEmptyBorder(-5, 0, 0, 0));
         chdPane.setLayout(new FlowLayout(FlowLayout.LEFT));
         pane.add(chdPane);
 
@@ -440,8 +448,8 @@ public class ProgrammePaneUI {
             chdPane.add(boxs2[i]);
         }
         JPanel endPane = new JPanel();
-        endPane.setBorder(BorderFactory.createEmptyBorder(-9,-6,0,-4));
-        endPane.setPreferredSize(new Dimension(164,44));
+        endPane.setBorder(BorderFactory.createEmptyBorder(-9, -6, 0, -4));
+        endPane.setPreferredSize(new Dimension(164, 44));
         endPane.add(new JLabel("运行模式"));
         JRadioButton radioButton = new JRadioButton("顺序");
         JRadioButton radioButton2 = new JRadioButton("随机");
@@ -461,7 +469,7 @@ public class ProgrammePaneUI {
     private void T6(JPanel pane) {
         pane.setLayout(new BorderLayout());
         JPanel chdPane = new JPanel();
-        chdPane.setBorder(BorderFactory.createEmptyBorder(-5,0,0,0));
+        chdPane.setBorder(BorderFactory.createEmptyBorder(-5, 0, 0, 0));
         chdPane.setLayout(new FlowLayout(FlowLayout.LEFT));
         pane.add(chdPane);
 
@@ -469,7 +477,7 @@ public class ProgrammePaneUI {
         JComboBox box = new JComboBox();
         box.addItemListener(itemListener8);
         MainUi.map.put("wuJiModelBox", box);
-        box.setPreferredSize(new Dimension(100,40));
+        box.setPreferredSize(new Dimension(100, 40));
         box.addItem("关");
         box.addItem("保持");
         for (int i = 1; i < 5; i++) {
@@ -480,12 +488,13 @@ public class ProgrammePaneUI {
 
     /**
      * 复制面板
+     *
      * @param pane
      */
     private void T3(JPanel pane) {
         pane.setLayout(new BorderLayout());
         JPanel chdPane = new JPanel();
-        chdPane.setBorder(BorderFactory.createEmptyBorder(-5,0,0,0));
+        chdPane.setBorder(BorderFactory.createEmptyBorder(-5, 0, 0, 0));
         chdPane.setLayout(new FlowLayout(FlowLayout.LEFT));
         pane.add(chdPane);
 
@@ -493,7 +502,7 @@ public class ProgrammePaneUI {
         chdPane.add(label);
         JComboBox box = new JComboBox();
         MainUi.map.put("copyBox", box);
-        box.setPreferredSize(new Dimension(100,40));
+        box.setPreferredSize(new Dimension(100, 40));
         for (int i = 0; i < 37; i++) {
             box.addItem(String.valueOf(i));
         }

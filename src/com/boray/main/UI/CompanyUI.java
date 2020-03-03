@@ -3,6 +3,9 @@ package com.boray.main.UI;
 import com.alibaba.fastjson.JSON;
 import com.boray.Data.Data;
 import com.boray.Utils.HttpClientUtil;
+import com.boray.addJCheckBox.CWCheckBoxRenderer;
+import com.boray.addJCheckBox.CheckBoxCellEditor;
+import com.boray.dengKu.UI.NewJTable;
 import com.boray.entity.FileOrFolder;
 import com.boray.entity.ProjectFile;
 import com.boray.entity.Users;
@@ -17,6 +20,10 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
+import javax.swing.plaf.basic.BasicTableHeaderUI;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.*;
@@ -71,16 +78,20 @@ public class CompanyUI {
             JPanel buttonPanel = new JPanel();//顶部的按钮
             buttonPanel.setLayout(flowLayout6);
             buttonPanel.setBorder(new LineBorder(Color.gray));
-            buttonPanel.setPreferredSize(new Dimension(900, 35));
+            buttonPanel.setPreferredSize(new Dimension(900, 60));
             JButton addFolder = new JButton("新建项目");
             JButton updateFolder = new JButton("项目重命名");
             JButton deleteFolder = new JButton("删除项目");
             JButton addFile = new JButton("上传工程");
-            JButton updateFile = new JButton("工程重命名");
+            JButton updateFile = new JButton("重命名");
             JButton deleteFile = new JButton("删除工程");
             JButton downloadFile = new JButton("下载工程");
             JButton refresh = new JButton("刷新");
             JButton audit = new JButton("提交审核");
+            JButton copy = new JButton("复制");
+            JButton paste = new JButton("粘贴");
+            JButton enableEdit = new JButton("开启编辑");
+            JButton cancelEdit = new JButton("取消编辑");
 
             CompanyListener listener = new CompanyListener();
             addFolder.addActionListener(listener);
@@ -92,6 +103,10 @@ public class CompanyUI {
             downloadFile.addActionListener(listener);
             refresh.addActionListener(listener);
             audit.addActionListener(listener);
+            copy.addActionListener(listener);
+            paste.addActionListener(listener);
+            enableEdit.addActionListener(listener);
+            cancelEdit.addActionListener(listener);
 
             buttonPanel.add(addFolder);
             buttonPanel.add(updateFolder);
@@ -102,7 +117,13 @@ public class CompanyUI {
             buttonPanel.add(downloadFile);
             buttonPanel.add(refresh);
             buttonPanel.add(audit);
-
+            buttonPanel.add(copy);
+            buttonPanel.add(paste);
+            buttonPanel.add(enableEdit);
+            buttonPanel.add(cancelEdit);
+            JLabel editLabel = new JLabel();
+            MainUi.map.put("editLabel", editLabel);
+            buttonPanel.add(editLabel);
             panel.add(buttonPanel);
 
             init(panel);
@@ -124,7 +145,7 @@ public class CompanyUI {
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(new LineBorder(Color.gray));
-        panel.setPreferredSize(new Dimension(300, 550));
+        panel.setPreferredSize(new Dimension(300, 525));
 
         // 创建根节点
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Boray");
@@ -177,5 +198,54 @@ public class CompanyUI {
         MainUi.map.put("CompanyTree", tree);
 
         pane.add(panel);
+        JScrollPane bodyPane = new JScrollPane();
+        setTable(bodyPane);
+        pane.add(bodyPane);
+    }
+
+    private void setTable(JScrollPane pane) {
+        Object[][] data = {};
+        String[] title = {"灯具名称", "型号", "DMX起始地址", "占用通道数"};
+        DefaultTableModel model = new DefaultTableModel(data, title);
+        NewJTable table = new NewJTable(model, 9);
+        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
+            public Component getTableCellRendererComponent(JTable table,
+                                                           Object value, boolean isSelected, boolean hasFocus,
+                                                           int row, int column) {
+                Component cell = super.getTableCellRendererComponent(table, value,
+                        isSelected, hasFocus, row, column);
+                if (!isSelected) {
+                    if (row % 2 == 0) {
+                        cell.setBackground(new Color(237, 243, 254));
+                        cell.setForeground(Color.black);
+                    } else {
+                        cell.setBackground(Color.white); //设置偶数行底色
+                        cell.setForeground(Color.black);
+                    }
+                } else {
+                    cell.setBackground(new Color(85, 160, 255));
+                    cell.setForeground(Color.white);
+                }
+                return cell;
+            }
+        };
+        for (int i = 0; i < title.length; i++) {
+            table.getColumn(table.getColumnName(i)).setCellRenderer(cellRenderer);
+        }
+        table.setSelectionBackground(new Color(56, 117, 215));
+        table.getTableHeader().setUI(new BasicTableHeaderUI());
+        table.getTableHeader().setReorderingAllowed(false);
+        table.setOpaque(false);
+        table.setFont(new Font(Font.SERIF, Font.BOLD, 14));
+        table.getColumnModel().getColumn(0).setPreferredWidth(120);
+        table.getColumnModel().getColumn(1).setPreferredWidth(80);
+        table.getColumnModel().getColumn(2).setPreferredWidth(80);
+        table.getColumnModel().getColumn(3).setPreferredWidth(80);
+        table.setRowHeight(28);
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumn Column0 = table.getColumnModel().getColumn(0);
+        Column0.setCellEditor(new CheckBoxCellEditor());
+        Column0.setCellRenderer(new CWCheckBoxRenderer());
+        pane.setViewportView(table);
     }
 }

@@ -50,7 +50,7 @@ public class ChangJinUI implements ActionListener {
         ProgramToTestListener listener = new ProgramToTestListener(card, rightPane);
         radioButton.addActionListener(listener);
         radioButton2.addActionListener(listener);
-        radioButton.setSelected(true);
+        radioButton2.setSelected(true);
         JButton btn = new JButton("全开");
         JButton btn2 = new JButton("全关");
         btn.addActionListener(this);
@@ -108,8 +108,8 @@ public class ChangJinUI implements ActionListener {
 //		new LeftPaneUI().show(leftPane);
 //		new RightPaneUI().show(rightPane);
 
-        rightPane.add(programme, "场景编程");
         rightPane.add(test, "场景测试");
+        rightPane.add(programme, "场景编程");
 
         pane.add(topPane);
         pane.add(rightPane);
@@ -140,14 +140,7 @@ public class ChangJinUI implements ActionListener {
             b[2] = (byte) 0xB0;
         }
         if (Data.serialPort != null) {
-            try {
-                OutputStream os = Data.serialPort.getOutputStream();
-                os.write(b);
-                os.flush();
-                os.close();
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
+            Socket.SerialPortSendData(b);
         } else if (Data.socket != null) {
             Socket.UDPSendData(b);
         }

@@ -1,8 +1,14 @@
 package com.boray.Utils;
 
+import com.boray.Data.Data;
+import com.boray.Data.ZhiLingJi;
+import com.boray.mainUi.MainUi;
+
+import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class Util {
     static DefaultMutableTreeNode temp;
@@ -53,4 +59,43 @@ public class Util {
         }
         return str;
     }
+
+
+    //web 下载临时文件 用作 自动保存
+    public static boolean downloadTemp() {
+        boolean flag = true;
+        try {
+            String path = System.getProperty("java.io.tmpdir");
+            File selectedFile = new File(path + "//" + Data.tempWebFile.getGcname() + ".xml");
+            URL url = new URL(HttpClientUtil.URLEncode(Data.downloadIp + Data.tempWebFile.getGcurl()));
+            HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
+            urlCon.setConnectTimeout(6000);
+            urlCon.setReadTimeout(6000);
+            int code = urlCon.getResponseCode();
+            if (code != HttpURLConnection.HTTP_OK) {
+                JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "开启编辑失败！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return false;
+            }
+            DataInputStream in = new DataInputStream(urlCon.getInputStream());
+            DataOutputStream out = new DataOutputStream(new FileOutputStream(selectedFile.getAbsoluteFile()));
+            byte[] buffer = new byte[2048];
+            int count = 0;
+            while ((count = in.read(buffer)) > 0) {
+                out.write(buffer, 0, count);
+            }
+            if (out != null) {
+                out.close();
+            }
+            if (in != null) {
+                in.close();
+            }
+            Data.tempEditWebFile = selectedFile;
+        }catch (Exception e){
+            JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "开启编辑失败！", "提示", JOptionPane.PLAIN_MESSAGE);
+            flag = false;
+        }
+        return flag;
+    }
+
+
 }

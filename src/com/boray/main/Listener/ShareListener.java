@@ -82,6 +82,15 @@ public class ShareListener implements ActionListener {
             }
         } else if (button.getText().equals("刷新")) {
             refresh();
+        } else if (button.getText().equals("复制")) {
+            if (null == tree.getSelectionPath().getLastPathComponent()) {
+                JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+            if (node.getUserObject() instanceof ProjectFile) {
+                Data.tempProjectFile = (ProjectFile) node.getUserObject();
+            }
         }
     }
 

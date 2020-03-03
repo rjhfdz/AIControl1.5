@@ -3,7 +3,6 @@ package com.boray.mainUi;
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.XMLDecoder;
-import java.beans.XMLEncoder;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,11 +14,8 @@ import javax.swing.border.TitledBorder;
 import com.boray.Data.Data;
 import com.boray.Data.ZhiLingJi;
 import com.boray.Listener.MainLoginUIListener;
-import com.boray.Utils.MenuJPanel;
 import com.boray.Utils.Socket;
-import com.boray.Utils.Util;
 import com.boray.beiFen.Listener.ProjectCreateFileOfCloseFrame;
-import com.boray.changJing.Data.DataOfChangJing;
 
 public class MainUi {
     public static Map map;
@@ -51,6 +47,8 @@ public class MainUi {
         int screenHeight = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().height);
         int frameWidth = 1250;
         int frameHeight = 760;
+
+
         frame.setSize(frameWidth, frameHeight);
         frame.setLocation(screenWidth / 2 - frameWidth / 2, screenHeight / 2 - frameHeight / 2);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

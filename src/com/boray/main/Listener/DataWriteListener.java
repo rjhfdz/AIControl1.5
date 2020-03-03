@@ -142,6 +142,7 @@ public class DataWriteListener implements ActionListener {
      * @return
      */
     public byte[] readFileData() throws IOException {
+//        if(Data.file==null)
         long fileSize = Data.file.length();
         FileInputStream stream = new FileInputStream(Data.file);
         byte[] buff = new byte[(int) fileSize];

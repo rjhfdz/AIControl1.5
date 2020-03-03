@@ -15,6 +15,8 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Enumeration;
@@ -89,7 +91,8 @@ public class RightPane implements ActionListener {
         TitledBorder tb1 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "设备连接", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         pane2.setBorder(tb1);
         pane2.setPreferredSize(new Dimension(150, 100));
-        pane2.add(new JLabel("端口:"));
+        JLabel COMLabel = new JLabel("端口:");
+        pane2.add(COMLabel);
         comCheckBox = new JComboBox();
         comCheckBox.setFocusable(false);
         comCheckBox.setPreferredSize(new Dimension(80, 30));
@@ -101,6 +104,21 @@ public class RightPane implements ActionListener {
                 comCheckBox.addItem(cpid.getName());
             }
         }
+        COMLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                CommPortIdentifier cpid;
+                Enumeration enumeration = CommPortIdentifier.getPortIdentifiers();
+                comCheckBox.removeAllItems();
+                while (enumeration.hasMoreElements()) {
+                    cpid = (CommPortIdentifier) enumeration.nextElement();
+                    if (cpid.getPortType() == CommPortIdentifier.PORT_SERIAL) {
+                        comCheckBox.addItem(cpid.getName());
+                    }
+                }
+            }
+        });
         pane2.add(comCheckBox);
         button = new JToggleButton("连接");
         button2 = new JToggleButton("断开");
@@ -134,6 +152,11 @@ public class RightPane implements ActionListener {
                     } catch (Exception e2) {
                         e2.printStackTrace();
                     }
+                    Data.thread.interrupt();
+                    Data.thread = null;
+                    Data.serialPort.close();
+                    Data.serialPort = null;
+                    button2.setSelected(true);
                 } else if (Data.socket != null) {
                     byte[] b = new byte[8];
                     b[0] = (byte) 0xFA;
@@ -142,7 +165,13 @@ public class RightPane implements ActionListener {
                     b[3] = (byte) ZhiLingJi.TYPE;
                     b[7] = (byte) ZhiLingJi.getJiaoYan(b);
                     Socket.UDPSendData(b);
+                    Data.thread.stop();
+                    Data.thread = null;
+                    Data.socket.close();
+                    Data.socket = null;
+                    IpOff.setSelected(true);
                 }
+                field.setText("");
             }
         });
         restartBtn.setFocusable(false);
@@ -150,6 +179,7 @@ public class RightPane implements ActionListener {
         pane.add(pane2);
         pane.add(panel);
         pane.add(restartBtn);
+
     }
 
     @Override

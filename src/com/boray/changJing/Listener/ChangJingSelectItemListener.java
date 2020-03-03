@@ -16,7 +16,7 @@ public class ChangJingSelectItemListener implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent e) {
         JComboBox box = (JComboBox) e.getSource();
-        if(e.getStateChange() == ItemEvent.SELECTED) {
+        if (e.getStateChange() == ItemEvent.SELECTED) {
             int n = -1;
             if (box.getItemCount() == 32) {
                 int i = box.getSelectedIndex();
@@ -45,6 +45,8 @@ public class ChangJingSelectItemListener implements ItemListener {
                     n = 28;
                 }
             }
+            JLabel label = (JLabel) MainUi.map.get("changJingBianChengLabel");
+            label.setText("正在编辑：" + box.getSelectedItem());
             //保存前一个场景数据
             if (Data.changJingModel != -1) {
                 List list = (List) DataOfChangJing.map.get("" + Data.changJingModel);
@@ -231,16 +233,16 @@ public class ChangJingSelectItemListener implements ItemListener {
         list.add(String.valueOf(box3.getSelectedIndex()));
 
         //摇麦触发间隔
-		JComboBox box2 = (JComboBox)MainUi.map.get("yaoMaiJianGeBox");
-		list.add(String.valueOf(box2.getSelectedIndex()));
+        JComboBox box2 = (JComboBox) MainUi.map.get("yaoMaiJianGeBox");
+        list.add(String.valueOf(box2.getSelectedIndex()));
 
-		//摇麦延续开关
-		JRadioButton radioButton4 = (JRadioButton)MainUi.map.get("yaoMaiKaiGuangBtn1");
-		if (radioButton4.isSelected()) {
-			list.add(String.valueOf(1));
-		} else {
-			list.add(String.valueOf(0));
-		}
+        //摇麦延续开关
+        JRadioButton radioButton4 = (JRadioButton) MainUi.map.get("yaoMaiKaiGuangBtn1");
+        if (radioButton4.isSelected()) {
+            list.add(String.valueOf(1));
+        } else {
+            list.add(String.valueOf(0));
+        }
 
         //雾机模式
         JComboBox boxes = (JComboBox) MainUi.map.get("wuJiModelBox");

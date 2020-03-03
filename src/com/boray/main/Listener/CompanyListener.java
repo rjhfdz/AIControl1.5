@@ -3,6 +3,8 @@ package com.boray.main.Listener;
 import com.alibaba.fastjson.JSON;
 import com.boray.Data.Data;
 import com.boray.Utils.HttpClientUtil;
+import com.boray.Utils.Util;
+import com.boray.beiFen.Listener.LoadProjectFileActionListener;
 import com.boray.entity.FileOrFolder;
 import com.boray.entity.Message;
 import com.boray.entity.ProjectFile;
@@ -10,6 +12,7 @@ import com.boray.entity.Users;
 import com.boray.main.Util.CustomTreeCellRenderer;
 import com.boray.main.Util.CustomTreeNode;
 import com.boray.main.Util.TreeUtil;
+import com.boray.main.Util.selfMotionSave;
 import com.boray.mainUi.MainUi;
 
 import javax.swing.*;
@@ -228,6 +231,61 @@ public class CompanyListener implements ActionListener {
                 Message message = JSON.parseObject(request, Message.class);
                 JOptionPane.showMessageDialog(frame, message.getCode(), "提示", JOptionPane.PLAIN_MESSAGE);
             }
+        } else if (button.getText().equals("复制")) {
+            if (null == tree.getSelectionPath().getLastPathComponent()) {
+                JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+            if (node.getUserObject() instanceof ProjectFile) {
+                Data.tempProjectFile = (ProjectFile) node.getUserObject();
+            }
+        } else if (button.getText().equals("粘贴")) {
+            if (null == tree.getSelectionPath().getLastPathComponent()) {
+                JOptionPane.showMessageDialog(frame, "请选择项目！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+            if (node.getUserObject() instanceof FileOrFolder) {
+                FileOrFolder folder = (FileOrFolder) node.getUserObject();
+                Users users = (Users) MainUi.map.get("Users");
+                Map<String, String> param = new HashMap<>();
+                param.put("gcname", Data.tempProjectFile.getGcname());
+                param.put("gcurl", Data.tempProjectFile.getGcurl());
+                param.put("xmid", folder.getId().toString());
+                param.put("createby", users.getId());
+                String request = HttpClientUtil.doGet(Data.ipPort + "copygc", param);
+//                Message message = JSON.parseObject(request, Message.class);
+                JOptionPane.showMessageDialog(frame, request, "提示", JOptionPane.PLAIN_MESSAGE);
+                refresh();
+            }
+        } else if (button.getText().equals("开启编辑")) {
+            if (null == tree.getSelectionPath().getLastPathComponent()) {
+                JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+            if (node.getUserObject() instanceof ProjectFile) {
+                ProjectFile file = (ProjectFile) node.getUserObject();
+                DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) node.getParent();
+                FileOrFolder folder = (FileOrFolder) treeNode.getUserObject();
+                Data.tempWebFolder = folder;
+                Data.tempWebFile = file;
+                if (!Util.downloadTemp())
+                    return;
+                LoadProjectFileActionListener listener = new LoadProjectFileActionListener();
+                listener.tt(Data.tempEditWebFile, 1);
+                JLabel editLabel = (JLabel) MainUi.map.get("editLabel");
+                editLabel.setText("正在编辑："+Data.tempWebFolder.getXmname() + " / " + Data.tempWebFile.getGcname());
+                selfMotionSave.autoSave();
+            }
+        } else if (button.getText().equals("取消编辑")) {
+            Data.tempWebFolder = null;
+            Data.tempWebFile = null;
+            Data.tempEditWebFile = null;
+            JLabel editLabel = (JLabel) MainUi.map.get("editLabel");
+            editLabel.setText("");
+            Data.tempFileAutoSaveTimer = null;
         }
     }
 

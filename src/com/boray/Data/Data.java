@@ -1,11 +1,12 @@
 package com.boray.Data;
 
+import com.boray.entity.FileOrFolder;
+import com.boray.entity.ProjectFile;
+
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.util.*;
 
 import javax.comm.SerialPort;
@@ -190,4 +191,11 @@ public class Data {
 
 	public static Map<String,String> userLogin = new HashMap<>();//记录用户登录的信息
 	public static Boolean RememberPassword = false;
+
+	public static ProjectFile tempProjectFile;//临时工程
+
+	public static FileOrFolder tempWebFolder;//临时文件夹
+	public static ProjectFile tempWebFile;//临时文件
+	public static Timer tempFileAutoSaveTimer;//自动保存定时器
+    public static File tempEditWebFile;
 }

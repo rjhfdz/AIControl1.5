@@ -45,7 +45,7 @@ public class ProjectCreateFileOfCloseFrame {
         }
     }
 
-    void tt(File file) {
+    public void tt(File file) {
         new DataActionListener().saveChangJingData().saveZhongKongData();
         try {
             OutputStream os = new FileOutputStream(file);

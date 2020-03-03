@@ -2,9 +2,7 @@ package com.boray.Listener;
 
 import com.alibaba.fastjson.JSON;
 import com.boray.Data.Data;
-import com.boray.Utils.HttpClientUtil;
-import com.boray.Utils.MenuJPanel;
-import com.boray.Utils.Util;
+import com.boray.Utils.*;
 import com.boray.entity.Users;
 import com.boray.main.Util.IpConfig;
 import com.boray.mainUi.*;
@@ -30,7 +28,7 @@ public class MainLoginUIListener implements ActionListener {
 //        if (box.isSelected())
 //            Data.RememberPassword = true;
         if ("登录".equals(button.getText())) {
-            String username = ((JComboBox) MainUi.map.get("MainUsername")).getSelectedItem().toString();
+            String username = ((JTextField) MainUi.map.get("MainUsername")).getText();
             String password = new String(((JPasswordField) MainUi.map.get("MainPassword")).getPassword());
             if (username == null || username == "") {
                 JOptionPane.showMessageDialog(frame, "登录失败，用户名不能为空！", "提示", JOptionPane.PLAIN_MESSAGE);
@@ -57,6 +55,12 @@ public class MainLoginUIListener implements ActionListener {
     }
 
     private void login(String username, String password) {
+        InfiniteProgressPanel glasspane = new InfiniteProgressPanel();
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        glasspane.setBounds(100, 100, (dimension.width) / 2, (dimension.height) / 2);
+        frame.setGlassPane(glasspane);
+        glasspane.start();//开始动画加载效果
+        frame.setVisible(true);
         try {
             IpConfig config = new IpConfig();
             config.getIpConfig();
@@ -76,11 +80,14 @@ public class MainLoginUIListener implements ActionListener {
                 frame.getContentPane().repaint();
 //                frame.setVisible(false);
                 init();
+                glasspane.stop();
             } else {
+                glasspane.stop();
                 JOptionPane.showMessageDialog(frame, "登录失败，用户名或密码不正确！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
             }
         } catch (Exception e) {
+            glasspane.stop();
             e.printStackTrace();
 //            JOptionPane.showMessageDialog(frame, "登录失败，网络错误！", "提示", JOptionPane.PLAIN_MESSAGE);
         }
