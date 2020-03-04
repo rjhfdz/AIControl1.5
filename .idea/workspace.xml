@@ -6,40 +6,28 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="更改项目提交方式">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/swingx_core_1_6_5_1.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/boray/Utils/AnimatedPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/boray/Utils/InfiniteProgressPanel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/boray/main/Util/selfMotionSave.java" afterDir="false" />
+    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/com/boray/entity/ProjectFileInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/boray/main/Util/MainUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AIControl1.5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AIControl1.5.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/Data/Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/Data/Data.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/ProjectCreateFileOfCloseFrame.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/ProjectCreateFileOfCloseFrame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/changJing/UI/ChangJinUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/changJing/UI/ChangJinUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/DengJuSetDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/DengJuSetDialog$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/DengJuSetDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/DengJuSetDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/FenZhuUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/FenZhuUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/mainUi/MainUi$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/mainUi/MainUi$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/mainUi/MainUi$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/mainUi/MainUi$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/mainUi/MainUi.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/mainUi/MainUi.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/MergeAllListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/MergeAllListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/Listener/LightGroupsActionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/Listener/LightGroupsActionListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/DengJuChangeDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/DengJuChangeDialog$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/DengJuChangeDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/DengJuChangeDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/SelectSuCaiUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/SelectSuCaiUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/SelectSuCaiUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/SelectSuCaiUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/SelectSuCaiUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/SelectSuCaiUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/artifacts/AIControl1.5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/AIControl1.5.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/Data/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Data/Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/Listener/MainLoginUIListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Listener/MainLoginUIListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/Utils/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Utils/Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/ProjectCreateFileOfCloseFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/ProjectCreateFileOfCloseFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/changJing/Listener/ChangJingSelectItemListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/changJing/Listener/ChangJingSelectItemListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/changJing/UI/ChangJinUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/changJing/UI/ChangJinUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/changJing/UI/ProgrammePaneUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/changJing/UI/ProgrammePaneUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/dengKu/UI/DengJuSetDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/dengKu/UI/DengJuSetDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/MergeAllListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/MergeAllListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/dengKu/Listener/LightGroupsActionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/dengKu/Listener/LightGroupsActionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/dengKu/UI/DengJuChangeDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/dengKu/UI/DengJuChangeDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/entity/ProjectFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/entity/ProjectFile.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/main/Listener/CompanyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/CompanyListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/main/Listener/DataWriteListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/DataWriteListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/Listener/ShareListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/ShareListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/Listener/UccnListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/UccnListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/CompanyUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/CompanyUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/ShareUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/ShareUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/UccnUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/UccnUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/mainUi/MainUi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/mainUi/MainUi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/mainUi/RightPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/mainUi/RightPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKon/UI/SelectShengKonSuCaiUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKon/UI/SelectShengKonSuCaiUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/SelectSuCaiUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/SelectSuCaiUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ipConfig.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/ipConfig.properties" afterDir="false" />
     </list>
     <list id="8e2f3826-f652-4540-934c-0fbbebdda1b0" name="Revert: " comment="" />
@@ -352,14 +340,8 @@
       <workItem from="1583107176522" duration="29294000" />
       <workItem from="1583193482513" duration="354000" />
       <workItem from="1583194210950" duration="25479000" />
-      <workItem from="1583228854531" duration="3624000" />
-    </task>
-    <task id="LOCAL-00003" summary="修改生成控制器文件的打包格式">
-      <created>1568886535969</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1568886535969</updated>
+      <workItem from="1583228854531" duration="4517000" />
+      <workItem from="1583280335031" duration="36510000" />
     </task>
     <task id="LOCAL-00004" summary="打包格式修改，效果灯界面添加复制功能，素材管理界面添加导入导出功能">
       <created>1569369790753</created>
@@ -697,7 +679,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579145406619</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="重启机制逻辑（提示：硬件重启后，管理软件会自动断开，要重新连接。）&#10;在线管理的自动保存功能。&#10;PC主动获取新串口端号。&#10;新建灯具时，灯库型号，默认为操作选中的最后一个。&#10;编程&lt;灯光场景&gt;与《功能场景》的区别显示">
+      <created>1583233087428</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1583233087429</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -717,7 +706,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="版本号修改" />
     <MESSAGE value="外观更换为BeautyEye（只做备用）" />
     <MESSAGE value="界面调优，主界面登录，背景图设置，菜单栏图标设计调整，页面整改。（备份）" />
     <MESSAGE value="界面调优，主界面登录设计，菜单栏图标样式格式调整（备份）" />
@@ -742,6 +730,7 @@
     <MESSAGE value="网络连接添加端口占用提示&#10;场景预览修改渐变传数据格式&#10;添加记住密码功能&#10;网络连接以及串口连接界面调整" />
     <MESSAGE value="右侧侧边栏界面细节调整" />
     <MESSAGE value="更改项目提交方式" />
-    <option name="LAST_COMMIT_MESSAGE" value="更改项目提交方式" />
+    <MESSAGE value="重启机制逻辑（提示：硬件重启后，管理软件会自动断开，要重新连接。）&#10;在线管理的自动保存功能。&#10;PC主动获取新串口端号。&#10;新建灯具时，灯库型号，默认为操作选中的最后一个。&#10;编程&lt;灯光场景&gt;与《功能场景》的区别显示" />
+    <option name="LAST_COMMIT_MESSAGE" value="重启机制逻辑（提示：硬件重启后，管理软件会自动断开，要重新连接。）&#10;在线管理的自动保存功能。&#10;PC主动获取新串口端号。&#10;新建灯具时，灯库型号，默认为操作选中的最后一个。&#10;编程&lt;灯光场景&gt;与《功能场景》的区别显示" />
   </component>
 </project>

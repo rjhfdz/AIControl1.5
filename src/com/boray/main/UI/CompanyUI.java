@@ -8,6 +8,7 @@ import com.boray.addJCheckBox.CheckBoxCellEditor;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.entity.FileOrFolder;
 import com.boray.entity.ProjectFile;
+import com.boray.entity.ProjectFileInfo;
 import com.boray.entity.Users;
 import com.boray.main.Listener.CompanyListener;
 import com.boray.main.Listener.LoginListener;
@@ -151,7 +152,7 @@ public class CompanyUI {
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Boray");
 
         // 使用根节点创建树组件
-        JTree tree = new JTree(rootNode);
+        final JTree tree = new JTree(rootNode);
 
         //设置图标样式
         tree.setCellRenderer(new CustomTreeCellRenderer());
@@ -182,6 +183,15 @@ public class CompanyUI {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
                 System.out.println("当前被选中的节点: " + e.getPath());
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+                if (node.getUserObject() instanceof ProjectFile) {
+                    ProjectFile file = (ProjectFile) node.getUserObject();
+                    Map<String, String> map = new HashMap<>();
+                    map.put("gcinfoid",file.getId()+"");
+                    String str = HttpClientUtil.doGet(Data.ipPort + "findalldj", map);
+                    List<ProjectFileInfo> infos = JSON.parseArray(str, ProjectFileInfo.class);
+                    System.out.println(str);
+                }
             }
         });
 

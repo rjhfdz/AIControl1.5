@@ -321,83 +321,86 @@ public class MergeAllListener implements ActionListener {
             Data.file = file;
             Data.saveCtrlFilePath = file.getParent();
             File file1 = new File(Data.saveCtrlFilePath + "\\K0.DAT");
-            try {
-                file1.createNewFile();
-                OutputStream stream = new FileOutputStream(file1);
-                OutputStream os10 = new FileOutputStream(file);
+            DataWrite(file, file1);//写入数据
+            JFrame frame = (JFrame) MainUi.map.get("frame");
+            JOptionPane.showMessageDialog(frame, "生成灯控文件成功!", "提示", JOptionPane.PLAIN_MESSAGE);
+        }
+    }
 
-                //////////////////////
-                //系统设置(00-13SEC)14
-                systemSet(os10);
-                os10.flush();
-                System.out.println("系统设置：" + file.length());
+    public void DataWrite(File file, File file1) {
+        try {
+            file1.createNewFile();
+            OutputStream stream = new FileOutputStream(file1);
+            OutputStream os10 = new FileOutputStream(file);
 
-                //灯库(14-15SEC)2
-                writeFile2(os10);
-                repairData(62464, os10, file);
-                P1(file1, stream, os10);//写入动态空间索引表
-                repairData(65536, os10, file);
-                os10.flush();
-                System.out.println("灯库：" + file.length());
+            //////////////////////
+            //系统设置(00-13SEC)14
+            systemSet(os10);
+            os10.flush();
+            System.out.println("系统设置：" + file.length());
 
-                //按步编程（倒彩&喝彩&摇麦-16-33SEC）18
-                writeHeCaiDaoCaiYaoMai(os10);
+            //灯库(14-15SEC)2
+            writeFile2(os10);
+            repairData(62464, os10, file);
+            P1(file1, stream, os10);//写入动态空间索引表
+            repairData(65536, os10, file);
+            os10.flush();
+            System.out.println("灯库：" + file.length());
+
+            //按步编程（倒彩&喝彩&摇麦-16-33SEC）18
+            writeHeCaiDaoCaiYaoMai(os10);
 //                repairData(139264, os10, file);
-                os10.flush();
-                System.out.println("按步编程：" + file.length());
+            os10.flush();
+            System.out.println("按步编程：" + file.length());
 
-                //雾机编程(34SEC)
-                writeWuJiModelData(os10);
+            //雾机编程(34SEC)
+            writeWuJiModelData(os10);
 //                repairData(143360, os10, file);
-                for (int i = 0; i < 3548; i++) {
-                    os10.write(new byte[1]);
-                }
-                os10.flush();
-                System.out.println("雾机编程：" + file.length());
-
-
-                ////效果灯素材数据（35-228SEC）194
-                writeFile4(os10);
-//                repairData(937984, os10, file);
-                os10.flush();
-                System.out.println("效果灯素材：" + file.length());
-
-                ////场景效果灯数据（229-258SEC）30
-                for (int i = 1; i < 25; i++) {
-                    writeFile(os10, i);
-                }
-//                repairData(1060864, os10, file);
-                os10.flush();
-                System.out.println("场景效果灯：" + file.length());
-
-                ////多灯数据区-16 个声控模式(259-387SEC)129
-                shengKonMoreLigthDatatest(os10);
-//                repairData(1589248, os10, file);
-                os10.flush();
-                System.out.println("多灯数据区-16：" + file.length());
-
-                //声控素材数据
-                writeShengKonSucai(os10);
-                os10.flush();
-                System.out.println("声控素材数据：" + file.length());
-
-                ////声控效果灯数据（动态空间）
-                for (int i = 1; i < 17; i++) {
-                    writeShengKon(os10, i);
-                }
-
-                os10.flush();
-                System.out.println("声控效果灯数据：" + file.length());
-
-                os10.close();
-
-                file1.delete();//删除计算用的K0文件
-
-                JFrame frame = (JFrame) MainUi.map.get("frame");
-                JOptionPane.showMessageDialog(frame, "生成灯控文件成功!", "提示", JOptionPane.PLAIN_MESSAGE);
-            } catch (Exception e2) {
-                e2.printStackTrace();
+            for (int i = 0; i < 3548; i++) {
+                os10.write(new byte[1]);
             }
+            os10.flush();
+            System.out.println("雾机编程：" + file.length());
+
+
+            ////效果灯素材数据（35-228SEC）194
+            writeFile4(os10);
+//                repairData(937984, os10, file);
+            os10.flush();
+            System.out.println("效果灯素材：" + file.length());
+
+            ////场景效果灯数据（229-258SEC）30
+            for (int i = 1; i < 25; i++) {
+                writeFile(os10, i);
+            }
+//                repairData(1060864, os10, file);
+            os10.flush();
+            System.out.println("场景效果灯：" + file.length());
+
+            ////多灯数据区-16 个声控模式(259-387SEC)129
+            shengKonMoreLigthDatatest(os10);
+//                repairData(1589248, os10, file);
+            os10.flush();
+            System.out.println("多灯数据区-16：" + file.length());
+
+            //声控素材数据
+            writeShengKonSucai(os10);
+            os10.flush();
+            System.out.println("声控素材数据：" + file.length());
+
+            ////声控效果灯数据（动态空间）
+            for (int i = 1; i < 17; i++) {
+                writeShengKon(os10, i);
+            }
+
+            os10.flush();
+            System.out.println("声控效果灯数据：" + file.length());
+
+            os10.close();
+
+            file1.delete();//删除计算用的K0文件
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

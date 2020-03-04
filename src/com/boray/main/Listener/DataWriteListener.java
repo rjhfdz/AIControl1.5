@@ -3,11 +3,14 @@ package com.boray.main.Listener;
 import com.boray.Data.Data;
 import com.boray.Data.ZhiLingJi;
 import com.boray.Utils.Socket;
+import com.boray.beiFen.Listener.MergeAllListener;
+import com.boray.beiFen.Listener.ProjectCreateFileOfCloseFrame;
 import com.boray.mainUi.MainUi;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -142,7 +145,16 @@ public class DataWriteListener implements ActionListener {
      * @return
      */
     public byte[] readFileData() throws IOException {
-//        if(Data.file==null)
+        if (Data.file == null) {
+            String path = System.getProperty("user.dir");//获得程序当前文件夹目录
+            File file = new File(path + "\\F0.DAT");
+            File file1 = new File(path + "\\K0.DAT");
+            Data.file = file;
+            MergeAllListener listener = new MergeAllListener();
+            listener.DataWrite(file, file1);
+            ProjectCreateFileOfCloseFrame fileOfCloseFrame = new ProjectCreateFileOfCloseFrame();
+            fileOfCloseFrame.tt(new File(path + "\\project.xml"));
+        }
         long fileSize = Data.file.length();
         FileInputStream stream = new FileInputStream(Data.file);
         byte[] buff = new byte[(int) fileSize];

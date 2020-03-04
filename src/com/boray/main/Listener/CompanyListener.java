@@ -1,18 +1,13 @@
 package com.boray.main.Listener;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.boray.Data.Data;
 import com.boray.Utils.HttpClientUtil;
 import com.boray.Utils.Util;
 import com.boray.beiFen.Listener.LoadProjectFileActionListener;
-import com.boray.entity.FileOrFolder;
-import com.boray.entity.Message;
-import com.boray.entity.ProjectFile;
-import com.boray.entity.Users;
-import com.boray.main.Util.CustomTreeCellRenderer;
-import com.boray.main.Util.CustomTreeNode;
-import com.boray.main.Util.TreeUtil;
-import com.boray.main.Util.selfMotionSave;
+import com.boray.entity.*;
+import com.boray.main.Util.*;
 import com.boray.mainUi.MainUi;
 
 import javax.swing.*;
@@ -276,7 +271,7 @@ public class CompanyListener implements ActionListener {
                 LoadProjectFileActionListener listener = new LoadProjectFileActionListener();
                 listener.tt(Data.tempEditWebFile, 1);
                 JLabel editLabel = (JLabel) MainUi.map.get("editLabel");
-                editLabel.setText("正在编辑："+Data.tempWebFolder.getXmname() + " / " + Data.tempWebFile.getGcname());
+                editLabel.setText("正在编辑：" + Data.tempWebFolder.getXmname() + " / " + Data.tempWebFile.getGcname());
                 selfMotionSave.autoSave();
             }
         } else if (button.getText().equals("取消编辑")) {
@@ -379,6 +374,9 @@ public class CompanyListener implements ActionListener {
      * @param file
      */
     private void addProject(DefaultMutableTreeNode node, File file) {
+        MainUtil util = new MainUtil();
+        List<ProjectFileInfo> infos = util.tt(file, 1);
+        String str = JSONArray.toJSONString(infos);
         HttpClientUtil httpsUtils = new HttpClientUtil();
         FileOrFolder folder = (FileOrFolder) node.getUserObject();
         Users users = (Users) MainUi.map.get("Users");
@@ -387,6 +385,7 @@ public class CompanyListener implements ActionListener {
         param.put("username", users.getUsername());
         param.put("xmid", folder.getId() + "");
         param.put("i", "0");
+        param.put("str", str);
         Map<String, Object> resultMap = httpsUtils.uploadFileByHTTP(file, Data.ipPort + "fileUploadServletgc", param);
         Message message = JSON.parseObject(resultMap.get("data").toString(), Message.class);
         JOptionPane.showMessageDialog(frame, message.getCode(), "提示", JOptionPane.PLAIN_MESSAGE);

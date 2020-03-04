@@ -7,6 +7,8 @@ public class ProjectFile {
     private String createby;//创建人
     private String gcurl;//工程路径
 
+    private String str;
+
     public int getId() {
         return id;
     }

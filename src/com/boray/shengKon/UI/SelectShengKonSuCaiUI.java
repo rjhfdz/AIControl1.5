@@ -4,17 +4,23 @@ import com.boray.Data.Data;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
 import com.boray.shengKon.Listener.shengKonTypeListener;
+import com.boray.shengKonSuCai.UI.ShengKonSuCaiEditUI;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class SelectShengKonSuCaiUI {
     private JDialog dialog;
+    private Map map;
+    private Map nameMap;
+    private String dengZu;
+    private int groupNum;
 
     public void show(JPanel pane, String text) {
         JFrame f = (JFrame) MainUi.map.get("frame");
@@ -32,9 +38,9 @@ public class SelectShengKonSuCaiUI {
 
     private void init(final String text, final JPanel pane) {
         String str = pane.getName();
-        int groupNum = Integer.parseInt(str);
+        groupNum = Integer.parseInt(str);
         NewJTable table = (NewJTable) MainUi.map.get("GroupTable");
-        String dengZu = (String) table.getValueAt(groupNum - 1, 2);
+        dengZu = (String) table.getValueAt(groupNum - 1, 2);
 
         //左边效果按钮
         JPanel pane2 = new JPanel();
@@ -57,7 +63,7 @@ public class SelectShengKonSuCaiUI {
                 }
                 DefineJLable_shengKon2 label = (DefineJLable_shengKon2) pane.getComponent(i - 1);
                 JList list = (JList) MainUi.map.get("shengKon_list");
-                label.setText(i+"(" + list.getSelectedValue().toString().split(">")[1] + ")");
+                label.setText(i + "(" + list.getSelectedValue().toString().split(">")[1] + ")");
                 label.updateUI();
                 dialog.dispose();
             }
@@ -70,10 +76,119 @@ public class SelectShengKonSuCaiUI {
             }
         });
 
+        JButton createBtn = new JButton("新建素材");
+        createBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFrame f = (JFrame) MainUi.map.get("frame");
+                JDialog dialog = new JDialog(f, true);
+                dialog.setResizable(false);
+                dialog.setTitle("新建素材");
+                int w = 380, h = 180;
+                dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - w / 2, f.getLocation().y + f.getSize().height / 2 - h / 2);
+                dialog.setSize(w, h);
+                dialog.setLayout(new FlowLayout(FlowLayout.CENTER));
+                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                init(dialog);
+                dialog.setVisible(true);
+            }
+        });
+
         dialog.add(pane2);
         dialog.add(p3);
         dialog.add(sureBtn);
         dialog.add(canceBtn);
+        dialog.add(createBtn);
+    }
+
+    public void init(final JDialog dialog) {
+        JPanel p1 = new JPanel();
+        p1.add(new JLabel("素材名称："));
+        final JTextField field = new JTextField(15);
+        p1.add(field);
+        JPanel p2 = new JPanel();
+        JButton btn1 = new JButton("确定");
+        JButton btn2 = new JButton("取消");
+
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if ("取消".equals(e.getActionCommand())) {
+                    dialog.dispose();
+                } else {
+                    if (!"".equals(field.getText().trim())) {
+                        JList list = (JList) MainUi.map.get("shengKon_list");
+                        DefaultListModel model = (DefaultListModel) list.getModel();
+                        JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("shengKonTypeBtns");
+                        String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
+                        int cnt = 0;
+                        if (map != null) {
+                            for (int i = 0; i < btns.length; i++) {
+                                List abc = (List) map.get("" + i);
+                                if (abc != null) {
+                                    cnt = cnt + abc.size();
+                                }
+                            }
+                        }
+                        if (cnt == 30) {
+                            JFrame frame = (JFrame) MainUi.map.get("frame");
+                            JOptionPane.showMessageDialog(frame, "最多只能创建30个素材！", "提示", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                        String suCaiNameAndNumber = field.getText() + "--->" + (cnt + 1);
+                        if (model == null) {
+                            model = new DefaultListModel();
+                            model.addElement(suCaiNameAndNumber);
+                            list.setModel(model);
+                        } else {
+                            model.addElement(suCaiNameAndNumber);
+                        }
+                        list.setSelectedIndex(model.getSize() - 1);
+                        if (map == null) {
+                            map = new HashMap<>();
+                            Data.shengKonSuCaiMap.put(dengZu, map);
+                        }
+                        if (nameMap == null) {
+                            nameMap = new HashMap<>();
+                            Data.shengKonSuCaiNameMap.put(dengZu, nameMap);
+                        }
+                        for (int i = 0; i < btns.length; i++) {
+                            if (btns[i].isSelected()) {
+                                List tmp = (List) map.get("" + i);
+                                List nameList = (List) nameMap.get("" + i);
+                                if (nameList != null) {
+                                    nameList.add(suCaiNameAndNumber);
+                                } else {
+                                    nameList = new ArrayList<>();
+                                    nameList.add(suCaiNameAndNumber);
+                                    nameMap.put("" + i, nameList);
+                                }
+                                if (tmp == null) {
+                                    tmp = new ArrayList<>();
+                                }
+                                tmp.add(new HashMap<>());
+                                btns[i].setText(name[i] + "(" + tmp.size() + ")");
+                                map.put("" + i, tmp);
+                            }
+                        }
+                        dialog.dispose();
+                    }
+                }
+            }
+        };
+
+        btn1.addActionListener(listener);
+        btn2.addActionListener(listener);
+
+        p2.add(btn1);
+        p2.add(new JLabel("     "));
+        p2.add(btn2);
+
+        JPanel n1 = new JPanel();
+        n1.setPreferredSize(new Dimension(350, 20));
+        dialog.add(n1);
+        dialog.add(p1);
+        dialog.add(p2);
     }
 
     public void setP1(JPanel pane, String dengZu) {
@@ -93,7 +208,7 @@ public class SelectShengKonSuCaiUI {
             pane.add(btns[i]);
         }
         btns[0].setSelected(true);
-        Map map = (Map) Data.shengKonSuCaiMap.get(dengZu);
+        map = (Map) Data.shengKonSuCaiMap.get(dengZu);
         if (map != null) {
             for (int i = 0; i < btns.length; i++) {
                 List abc = (List) map.get("" + i);
@@ -122,9 +237,20 @@ public class SelectShengKonSuCaiUI {
         renderer.setHorizontalAlignment(SwingConstants.CENTER);
         list.setCellRenderer(renderer);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        list.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                String suCaiName = list.getSelectedValue().toString();
+                int denKuNum = groupNum - 1;
+                int suCaiNum = Integer.valueOf(suCaiName.split("--->")[1]).intValue();
+                System.out.println(suCaiName + "" + suCaiNum + "" + denKuNum);
+                new ShengKonSuCaiEditUI().show(suCaiName, suCaiNum, denKuNum);
+            }
+        });
         DefaultListModel model = new DefaultListModel();
 
-        Map nameMap = (Map) Data.shengKonSuCaiNameMap.get(dengZu);
+        nameMap = (Map) Data.shengKonSuCaiNameMap.get(dengZu);
 
         JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("shengKonTypeBtns");
         int selected = 0;
