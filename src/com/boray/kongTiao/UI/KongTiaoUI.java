@@ -227,6 +227,7 @@ public class KongTiaoUI implements ActionListener {
         group.add(radioButton);
         group.add(radioButton2);
         group.add(radioButton3);
+        radioButton.setSelected(true);
         p1.add(radioButton);
         p1.add(radioButton2);
         p1.add(radioButton3);
@@ -253,6 +254,7 @@ public class KongTiaoUI implements ActionListener {
         group2.add(radioButton6);
         group2.add(radioButton7);
         group2.add(radioButton8);
+        radioButton4.setSelected(true);
         p2.add(radioButton4);
         p2.add(radioButton5);
         p2.add(radioButton6);
@@ -264,6 +266,7 @@ public class KongTiaoUI implements ActionListener {
         for (int i = 12; i < 37; i++) {
             box.addItem("" + i);
         }
+        box.setSelectedItem("18");
         box.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (ItemEvent.SELECTED == e.getStateChange()) {
@@ -291,7 +294,7 @@ public class KongTiaoUI implements ActionListener {
         });
         p2.add(box);
         p2.add(new JLabel("µ±Ç°ÎÂ¶È"));
-        JLabel label = new JLabel("12");
+        JLabel label = new JLabel("18");
         p2.add(label);
 
 
@@ -313,6 +316,7 @@ public class KongTiaoUI implements ActionListener {
         ButtonGroup group3 = new ButtonGroup();
         group3.add(radioButton9);
         group3.add(radioButton10);
+        radioButton9.setSelected(true);
         pane2.add(radioButton9);
         pane2.add(radioButton10);
 

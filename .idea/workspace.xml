@@ -7,19 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/boray/Utils/WinRegistry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AIControl1.5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AIControl1.5.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/Data/Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/Data/Data.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadProjectFileActionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadProjectFileActionListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/FenZhuUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/FenZhuUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/AIControl1.5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/AIControl1.5.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/Data/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Data/Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/Listener/IpConnectAndOffListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Listener/IpConnectAndOffListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/LoadProjectFileActionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/LoadProjectFileActionListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/mainUi/RightPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/mainUi/RightPane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/returnListener/ComReturnListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/returnListener/ComReturnListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/kongTiao/UI/KongTiaoUI$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/kongTiao/UI/KongTiaoUI$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/kongTiao/UI/KongTiaoUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/kongTiao/UI/KongTiaoUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/kongTiao/UI/KongTiaoUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/kongTiao/UI/KongTiaoUI$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/kongTiao/UI/KongTiaoUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/kongTiao/UI/KongTiaoUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/Utils/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Utils/Util.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/kongTiao/UI/KongTiaoUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/kongTiao/UI/KongTiaoUI.java" afterDir="false" />
     </list>
     <list id="8e2f3826-f652-4540-934c-0fbbebdda1b0" name="Revert: " comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -74,7 +68,7 @@
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -334,14 +328,7 @@
       <workItem from="1583228854531" duration="4517000" />
       <workItem from="1583280335031" duration="37234000" />
       <workItem from="1583366604420" duration="23212000" />
-      <workItem from="1583453075531" duration="20886000" />
-    </task>
-    <task id="LOCAL-00006" summary="效果灯界面完善预览功能，以及发包格式">
-      <created>1569748061740</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1569748061740</updated>
+      <workItem from="1583453075531" duration="23769000" />
     </task>
     <task id="LOCAL-00007" summary="效果灯界面完善预览功能，以及发包格式，工程文件存储格式以及读取进行修改，data文件添加新的变量（记录素材界面新建素材的顺序）">
       <created>1570671295013</created>
@@ -679,7 +666,14 @@
       <option name="project" value="LOCAL" />
       <updated>1583463511354</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="写入控制器，防错机制bug修复&#10;添加WinRegistry工具类，实现串口热拔功能">
+      <created>1583482203619</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1583482203619</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -699,7 +693,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="界面调优，主界面登录设计，菜单栏图标样式格式调整（备份）" />
     <MESSAGE value="添加图片" />
     <MESSAGE value="图片" />
     <MESSAGE value="场景配置界面重新规划，以及逻辑修改" />
@@ -724,7 +717,8 @@
     <MESSAGE value="重启机制逻辑（提示：硬件重启后，管理软件会自动断开，要重新连接。）&#10;在线管理的自动保存功能。&#10;PC主动获取新串口端号。&#10;新建灯具时，灯库型号，默认为操作选中的最后一个。&#10;编程&lt;灯光场景&gt;与《功能场景》的区别显示" />
     <MESSAGE value="效果灯编程以及声控编程界面选择素材界面添加创建素材功能，以及双击打开&#10;主窗口界面添加正在编辑功能（自动保存）" />
     <MESSAGE value="写入控制器功能添加防错机制(收到反馈才会发送下一包，未收到重复发送三次)&#10;主窗口本地管理添加复制粘贴功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="写入控制器功能添加防错机制(收到反馈才会发送下一包，未收到重复发送三次)&#10;主窗口本地管理添加复制粘贴功能" />
+    <MESSAGE value="写入控制器，防错机制bug修复&#10;添加WinRegistry工具类，实现串口热拔功能" />
+    <option name="LAST_COMMIT_MESSAGE" value="写入控制器，防错机制bug修复&#10;添加WinRegistry工具类，实现串口热拔功能" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
