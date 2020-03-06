@@ -198,4 +198,10 @@ public class Data {
 	public static ProjectFile tempWebFile;//临时文件
 	public static Timer tempFileAutoSaveTimer;//自动保存定时器
     public static File tempEditWebFile;
+    public static File tempLocalFile;//本地临时文件 用于复制 粘贴
+
+    public static Object[] dataWrite;//写入数据
+	public static int sendDataCount = 0;//重发数据次数
+	public static Timer againSendDataTimer;//重发数据定时器
+	public static int sendDataSum;//记录发包
 }

@@ -183,14 +183,28 @@ public class CompanyUI {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
                 System.out.println("当前被选中的节点: " + e.getPath());
-                DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
-                if (node.getUserObject() instanceof ProjectFile) {
-                    ProjectFile file = (ProjectFile) node.getUserObject();
-                    Map<String, String> map = new HashMap<>();
-                    map.put("gcinfoid",file.getId()+"");
-                    String str = HttpClientUtil.doGet(Data.ipPort + "findalldj", map);
-                    List<ProjectFileInfo> infos = JSON.parseArray(str, ProjectFileInfo.class);
-                    System.out.println(str);
+                if (tree.getSelectionPath() != null) {
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+                    if (node.getUserObject() instanceof ProjectFile) {
+                        ProjectFile file = (ProjectFile) node.getUserObject();
+                        Map<String, String> map = new HashMap<>();
+                        map.put("gcinfoid", file.getId() + "");
+                        String str = HttpClientUtil.doGet(Data.ipPort + "findalldj", map);
+                        List<ProjectFileInfo> infos = JSON.parseArray(str, ProjectFileInfo.class);
+                        NewJTable table = (NewJTable) MainUi.map.get("CompanyTable");
+                        DefaultTableModel model = (DefaultTableModel) table.getModel();
+                        for (int i = table.getRowCount() - 1; i >= 0; i--) {
+                            model.removeRow(i);
+                        }
+                        String[][] data = new String[4][infos.size()];
+                        for (int i = 0; i < infos.size(); i++) {
+                            data[i][0] = infos.get(i).getDjname();
+                            data[i][1] = infos.get(i).getDjtype();
+                            data[i][2] = infos.get(i).getDmxstr();
+                            data[i][3] = infos.get(i).getZytd();
+                            model.addRow(data[i]);
+                        }
+                    }
                 }
             }
         });
@@ -217,7 +231,8 @@ public class CompanyUI {
         Object[][] data = {};
         String[] title = {"灯具名称", "型号", "DMX起始地址", "占用通道数"};
         DefaultTableModel model = new DefaultTableModel(data, title);
-        NewJTable table = new NewJTable(model, 9);
+        NewJTable table = new NewJTable(model, 0);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(JTable table,
                                                            Object value, boolean isSelected, boolean hasFocus,
@@ -226,7 +241,7 @@ public class CompanyUI {
                         isSelected, hasFocus, row, column);
                 if (!isSelected) {
                     if (row % 2 == 0) {
-                        cell.setBackground(new Color(237, 243, 254));
+                        cell.setBackground(Color.white);
                         cell.setForeground(Color.black);
                     } else {
                         cell.setBackground(Color.white); //设置偶数行底色
@@ -248,14 +263,12 @@ public class CompanyUI {
         table.setOpaque(false);
         table.setFont(new Font(Font.SERIF, Font.BOLD, 14));
         table.getColumnModel().getColumn(0).setPreferredWidth(120);
-        table.getColumnModel().getColumn(1).setPreferredWidth(80);
+        table.getColumnModel().getColumn(1).setPreferredWidth(150);
         table.getColumnModel().getColumn(2).setPreferredWidth(80);
         table.getColumnModel().getColumn(3).setPreferredWidth(80);
         table.setRowHeight(28);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        TableColumn Column0 = table.getColumnModel().getColumn(0);
-        Column0.setCellEditor(new CheckBoxCellEditor());
-        Column0.setCellRenderer(new CWCheckBoxRenderer());
+        MainUi.map.put("CompanyTable", table);
         pane.setViewportView(table);
     }
 }

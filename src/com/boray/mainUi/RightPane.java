@@ -69,6 +69,7 @@ public class RightPane implements ActionListener {
         button3.setFocusable(false);
         N1.add(new JLabel("                   "));
         dataWrite = new JButton("Ð´Èë¿ØÖÆÆ÷");
+        MainUi.map.put("comAndWifiDataWrite", dataWrite);
         DataWriteListener dataWriteListener = new DataWriteListener(dataWrite);
         dataWrite.addActionListener(dataWriteListener);
         N1.add(dataWrite);

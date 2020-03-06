@@ -9,6 +9,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Util {
     static DefaultMutableTreeNode temp;
@@ -90,12 +92,36 @@ public class Util {
                 in.close();
             }
             Data.tempEditWebFile = selectedFile;
-        }catch (Exception e){
+        } catch (Exception e) {
             JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "开启编辑失败！", "提示", JOptionPane.PLAIN_MESSAGE);
             flag = false;
         }
         return flag;
     }
 
+    public static void againSendData() {
+        Data.againSendDataTimer = new Timer();
+        Data.againSendDataTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                JButton dataWrite = (JButton) MainUi.map.get("comAndWifiDataWrite");
+                if (Data.sendDataCount > 3) {
+                    Data.sendDataCount = 0;
+                    dataWrite.setText("写入控制器");
+                    Data.againSendDataTimer.cancel();
+                } else {
+                    if (Data.serialPort != null) {
+                        Socket.SerialPortSendData((byte[]) Data.dataWrite[Data.sendDataSum]);
+                        dataWrite.setText("重发" + (Data.sendDataCount + 1) + ":" + (Data.sendDataSum + 1) + "/" + Data.dataWrite.length);
+                        Data.sendDataCount += 1;
+                    } else if (Data.socket != null) {
+                        Socket.UDPSendData((byte[]) Data.dataWrite[Data.sendDataSum]);
+                        dataWrite.setText("重发" + (Data.sendDataCount + 1) + ":" + (Data.sendDataSum + 1) + "/" + Data.dataWrite.length);
+                        Data.sendDataCount += 1;
+                    }
+                }
+            }
+        }, 3000, 3000);
+    }
 
 }

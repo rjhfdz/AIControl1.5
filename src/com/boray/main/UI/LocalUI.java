@@ -45,6 +45,8 @@ public class LocalUI implements ActionListener {
         JButton updateFile = new JButton("工程重命名");
         JButton deleteFile = new JButton("删除工程");
         JButton refresh = new JButton("刷新");
+        JButton copy = new JButton("复制");
+        JButton paste = new JButton("粘贴");
 
         LocalListenter listenter = new LocalListenter();
         addFolder.addActionListener(listenter);
@@ -54,6 +56,8 @@ public class LocalUI implements ActionListener {
         updateFile.addActionListener(listenter);
         deleteFile.addActionListener(listenter);
         refresh.addActionListener(listenter);
+        copy.addActionListener(listenter);
+        paste.addActionListener(listenter);
 
         popupMenu = new JPopupMenu();
         menuItem = new JMenuItem("加载工程");
@@ -69,6 +73,8 @@ public class LocalUI implements ActionListener {
         buttonPanel.add(updateFile);
         buttonPanel.add(deleteFile);
         buttonPanel.add(refresh);
+        buttonPanel.add(copy);
+        buttonPanel.add(paste);
 
         panel.add(buttonPanel);
 

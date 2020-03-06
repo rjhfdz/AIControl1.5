@@ -20,6 +20,7 @@ import com.boray.Data.Data;
 import com.boray.Data.RdmData;
 import com.boray.Data.ZhiLingJi;
 import com.boray.Utils.Socket;
+import com.boray.Utils.Util;
 import com.boray.beiFen.Listener.BackupActionListener;
 import com.boray.beiFen.Listener.LoadDMXactionListener;
 import com.boray.beiFen.Listener.LoadToDeviceActionListener;
@@ -588,6 +589,32 @@ public class ComReturnListener implements Runnable {
                             bytes[i] = temp[i];
                         }
                         setLuZhiData(bytes);
+                    } else if (hex0.equals("aa") && secHex.equals("58") && hex3.equals("85")) {
+                        int size = 10, packetN = 0;
+                        byte[] b1 = new byte[size];
+                        if (len <= size) {
+                            for (int i = 0; i < len; i++) {
+                                b1[i] = temp[i];
+                            }
+                        }
+                        int len1 = getAllData(size, len, b1, is);
+                        if (len1 == size) {//收到反馈 停止定时器 发出数据后再重新开启 同时记录发包
+                            Data.againSendDataTimer.cancel();
+                            Data.againSendDataTimer = null;
+                            packetN = Byte.toUnsignedInt(b1[6]) * 256 + Byte.toUnsignedInt(b1[7]);
+                            JButton dataWrite = (JButton) MainUi.map.get("comAndWifiDataWrite");
+                            if (packetN == Data.dataWrite.length) {
+                                //清除重发记录数 防止下次重发出错
+                                Data.sendDataCount = 0;
+                                dataWrite.setText("写入控制器");
+                                dataWrite.setEnabled(true);
+                            } else {
+                                Socket.SerialPortSendData((byte[]) Data.dataWrite[packetN]);
+                                Data.sendDataSum = packetN;
+                                dataWrite.setText((Data.sendDataSum + 1) + "/" + Data.dataWrite.length);
+                                Util.againSendData();
+                            }
+                        }
                     }
 					/*else if (hex0.equals("fd") && hex1.equals("db")) {
 						int size = 180;

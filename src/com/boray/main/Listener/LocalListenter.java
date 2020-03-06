@@ -85,56 +85,61 @@ public class LocalListenter implements ActionListener {
                 JOptionPane.showMessageDialog(frame, "请选择项目！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
             }
-            UIManager.put("FileChooser.saveButtonText", "上传");
+            UIManager.put("FileChooser.saveButtonText", "添加");
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
             if (node.getUserObject() instanceof File) {
-                JFileChooser fileChooser = new JFileChooser();
-                try {
-                    if (!"".equals(Data.yunProjectFilePath)) {
-                        fileChooser.setCurrentDirectory(new File(Data.yunProjectFilePath));
+                File file = (File) node.getUserObject();
+                if (file.isDirectory()) {
+                    JFileChooser fileChooser = new JFileChooser();
+                    try {
+                        if (!"".equals(Data.yunProjectFilePath)) {
+                            fileChooser.setCurrentDirectory(new File(Data.yunProjectFilePath));
+                        }
+                    } catch (Exception e1) {
+                        e1.printStackTrace();
                     }
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                }
-                String[] houZhui = {"xml"};
-                FileNameExtensionFilter filter = new FileNameExtensionFilter("*.xml", houZhui);
-                fileChooser.setFileFilter(filter);
-                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                int returnVal = fileChooser.showSaveDialog(frame);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File source = fileChooser.getSelectedFile();
-                    File dest = new File(((File) node.getUserObject()).getAbsolutePath() + "//" + source.getName());
-                    try {//复制文件
-                        Files.copy(source.toPath(), dest.toPath());
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    } finally {
-                        UIManager.put("FileChooser.saveButtonText", "保存");
-                        refresh();
+                    String[] houZhui = {"xml"};
+                    FileNameExtensionFilter filter = new FileNameExtensionFilter("*.xml", houZhui);
+                    fileChooser.setFileFilter(filter);
+                    fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                    int returnVal = fileChooser.showSaveDialog(frame);
+                    if (returnVal == JFileChooser.APPROVE_OPTION) {
+                        File source = fileChooser.getSelectedFile();
+                        File dest = new File(((File) node.getUserObject()).getAbsolutePath() + "//" + source.getName());
+                        try {//复制文件
+                            Files.copy(source.toPath(), dest.toPath());
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        } finally {
+                            refresh();
+                        }
+                        JOptionPane.showMessageDialog(frame, "添加成功！", "提示", JOptionPane.PLAIN_MESSAGE);
                     }
-                    JOptionPane.showMessageDialog(frame, "上传成功！", "提示", JOptionPane.PLAIN_MESSAGE);
                 }
             }
+            UIManager.put("FileChooser.saveButtonText", "保存");
         } else if (button.getText().equals("工程重命名")) {
             if (null == tree.getSelectionPath().getLastPathComponent()) {
                 JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
             }
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
-            File file = (File) node.getUserObject();//文件
-            CustomTreeNode folder = (CustomTreeNode) node.getParent();
-            File fileOrFolder = (File) folder.getUserObject();//文件夹
-            JDialog dialog = new JDialog(frame, true);
-            dialog.setResizable(false);
-            dialog.setTitle("工程名");
-            int w = 380, h = 180;
-            dialog.setLocation(frame.getLocation().x + frame.getSize().width / 2 - w / 2, frame.getLocation().y + frame.getSize().height / 2 - h / 2);
-            dialog.setSize(w, h);
-            dialog.setLayout(new FlowLayout(FlowLayout.CENTER));
-            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            System.out.println(file.getAbsolutePath());
-            rePorjectName(dialog, file.getAbsolutePath(), fileOrFolder.getAbsolutePath());
-            dialog.setVisible(true);
+            if (((File) node.getUserObject()).isFile()) {
+                File file = (File) node.getUserObject();//文件
+                DefaultMutableTreeNode folder = (DefaultMutableTreeNode) node.getParent();
+                File fileOrFolder = (File) folder.getUserObject();//文件夹
+                JDialog dialog = new JDialog(frame, true);
+                dialog.setResizable(false);
+                dialog.setTitle("工程名");
+                int w = 380, h = 180;
+                dialog.setLocation(frame.getLocation().x + frame.getSize().width / 2 - w / 2, frame.getLocation().y + frame.getSize().height / 2 - h / 2);
+                dialog.setSize(w, h);
+                dialog.setLayout(new FlowLayout(FlowLayout.CENTER));
+                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                System.out.println(file.getAbsolutePath());
+                rePorjectName(dialog, file.getAbsolutePath(), fileOrFolder.getAbsolutePath());
+                dialog.setVisible(true);
+            }
         } else if (button.getText().equals("删除工程")) {
             if (null == tree.getSelectionPath().getLastPathComponent()) {
                 JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
@@ -151,6 +156,31 @@ public class LocalListenter implements ActionListener {
             refresh();
         } else if (button.getText().equals("刷新")) {
             refresh();
+        } else if (button.getText().equals("复制")) {
+            if (null == tree.getSelectionPath().getLastPathComponent()) {
+                JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+            if (node.getUserObject() instanceof File && ((File) node.getUserObject()).isFile()) {
+                Data.tempLocalFile = (File) node.getUserObject();
+            }
+        } else if (button.getText().equals("粘贴")) {
+            if (null == tree.getSelectionPath().getLastPathComponent()) {
+                JOptionPane.showMessageDialog(frame, "请选择项目！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+            if (node.getUserObject() instanceof File && ((File) node.getUserObject()).isDirectory()) {
+                try {//复制文件
+                    File copy = new File(((File) node.getUserObject()).getAbsolutePath() + "//" + Data.tempLocalFile.getName());
+                    Files.copy(Data.tempLocalFile.toPath(), copy.toPath());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } finally {
+                    refresh();
+                }
+            }
         }
     }
 
@@ -192,7 +222,7 @@ public class LocalListenter implements ActionListener {
                 if ("取消".equals(e.getActionCommand())) {
                     dialog.dispose();
                 } else {
-                    new File(Name).renameTo(new File(str + "//" + field.getText() +"."+Name.split("[.]")[1]));
+                    new File(Name).renameTo(new File(str + "//" + field.getText() + "." + Name.split("[.]")[1]));
                     refresh();
                     dialog.dispose();
                 }
