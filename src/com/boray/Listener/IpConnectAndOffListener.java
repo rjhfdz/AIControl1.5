@@ -153,6 +153,8 @@ public class IpConnectAndOffListener implements ActionListener {
             Data.socket = null;
             field.setText("");
             IpOff.setSelected(true);
+            JTextField IpAddress = (JTextField) MainUi.map.get("IpAddress");
+            IpAddress.setEnabled(false);
             init();
         }
     }

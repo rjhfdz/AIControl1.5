@@ -131,7 +131,8 @@ public class LoadProjectFileActionListener implements ActionListener {
         Data.tempWebFile = null;
         Data.tempEditWebFile = null;
         JLabel editLabel = (JLabel) MainUi.map.get("editLabel");
-        editLabel.setText("");
+        if (editLabel != null)
+            editLabel.setText("");
         Data.tempFileAutoSaveTimer = null;
         try {
             InputStream is = new FileInputStream(file);

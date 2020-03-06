@@ -75,7 +75,7 @@ public class Data {
 	public static String shengKon_current_box = "";
 	
 	//记录场景编程或场景测试
-	public static boolean isTest = false;
+	public static boolean isTest = true;
 	
 	//记录通道数
 	public static List dengKuName = new ArrayList();

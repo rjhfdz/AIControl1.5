@@ -23,5 +23,6 @@
     <orderEntry type="library" name="substance" level="project" />
     <orderEntry type="library" name="beautyeye_lnf" level="project" />
     <orderEntry type="library" name="swingx-core-1.6.5-1" level="project" />
+    <orderEntry type="library" name="jRegistryKey" level="project" />
   </component>
 </module>

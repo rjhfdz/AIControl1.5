@@ -4,10 +4,12 @@ import com.boray.Data.Data;
 import com.boray.Data.ZhiLingJi;
 import com.boray.Listener.IpConnectAndOffListener;
 import com.boray.Utils.Socket;
+import com.boray.Utils.WinRegistry;
 import com.boray.main.Listener.DataWriteListener;
 import com.boray.returnListener.ComReturnListener;
 import com.boray.usb.Link;
 
+import javax.comm.CommDriver;
 import javax.comm.CommPortIdentifier;
 import javax.comm.SerialPort;
 import javax.swing.*;
@@ -17,11 +19,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Enumeration;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class RightPane implements ActionListener {
 
@@ -109,14 +112,21 @@ public class RightPane implements ActionListener {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                CommPortIdentifier cpid;
-                Enumeration enumeration = CommPortIdentifier.getPortIdentifiers();
-                comCheckBox.removeAllItems();
-                while (enumeration.hasMoreElements()) {
-                    cpid = (CommPortIdentifier) enumeration.nextElement();
-                    if (cpid.getPortType() == CommPortIdentifier.PORT_SERIAL) {
-                        comCheckBox.addItem(cpid.getName());
+                try {
+                    Map<String, String> map = WinRegistry.valuesForPath(WinRegistry.HKEY_LOCAL_MACHINE, "HARDWARE\\DEVICEMAP\\SERIALCOMM");
+                    if(map.size()>0) {
+                        comCheckBox.removeAllItems();
+                        for (String str : map.values()) {
+                            comCheckBox.addItem(str);
+                        }
                     }
+                    System.out.println();
+                } catch (IllegalAccessException ex) {
+                    ex.printStackTrace();
+                } catch (InvocationTargetException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
             }
         });
@@ -139,6 +149,7 @@ public class RightPane implements ActionListener {
         restartBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //fa 08 d9 +（机型） 00 00 00 +校验
+                JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "设备将重启，管理软件会断开连接，请重新点连接。", "提示", JOptionPane.ERROR_MESSAGE);
                 if (Data.serialPort != null) {
                     try {
                         OutputStream os = Data.serialPort.getOutputStream();
@@ -200,7 +211,13 @@ public class RightPane implements ActionListener {
                 hex = null;
                 final String comsString = comCheckBox.getSelectedItem().toString();
                 Data.comKou = comsString;
-                CommPortIdentifier cpid = CommPortIdentifier.getPortIdentifier(comsString);
+                CommPortIdentifier cpid;
+                try {
+                    cpid = CommPortIdentifier.getPortIdentifier(comsString);
+                } catch (Exception e1) {
+                    CommPortIdentifier.addPortName(comsString, 1, (CommDriver) Class.forName("com.sun.comm.Win32Driver").newInstance());
+                    cpid = CommPortIdentifier.getPortIdentifier(comsString);
+                }
                 Data.serialPort = (SerialPort) cpid.open(comsString, 5);
                 Data.serialPort.setSerialPortParams(4800, 8, 1, 0);
                 Data.baud = 4800;
