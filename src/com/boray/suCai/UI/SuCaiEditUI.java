@@ -1317,7 +1317,7 @@ public class SuCaiEditUI {
         JPanel p4 = new JPanel();
         p4.setLayout(flowLayout);
         //p4.setBorder(new LineBorder(Color.black));
-        p4.setPreferredSize(new Dimension(640, 40));
+        p4.setPreferredSize(new Dimension(570, 40));
         final JCheckBox checkBox4 = new JCheckBox("颜色检测器");
         rgb1CompontList3.add(checkBox4);
         String[] tps = (String[]) bezier.Data.itemMap.get("1");
@@ -1355,14 +1355,14 @@ public class SuCaiEditUI {
                 box83.setEnabled(false);
             }
         }
-        JButton button3 = new JButton("渐变类型");
-        button3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new BezierDialog().show(1, box83.getSelectedIndex(), new JComboBox[]{box83, box81, box82});
-            }
-        });
+//        JButton button3 = new JButton("渐变类型");
+//        button3.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                new BezierDialog().show(1, box83.getSelectedIndex(), new JComboBox[]{box83, box81, box82});
+//            }
+//        });
         p4.add(checkBox4);
-        p4.add(button3);
+//        p4.add(button3);
         rgb1CompontList3.add(box83);
         p4.add(box83);
         JCheckBox box2 = new JCheckBox("渐变");
@@ -1427,12 +1427,12 @@ public class SuCaiEditUI {
         //panel.setBorder(new LineBorder(Color.gray));
         panel.setPreferredSize(new Dimension(410, 90));
         panel.add(new JLabel("拆分"));
-        JComboBox box4 = new JComboBox();
+        JComboBox box4 = new JComboBox(TuXingAction.getValues3());
         rgb1CompontList3.add(box4);
         box4.setPreferredSize(new Dimension(280, 32));
-        box4.addItem("不拆分");
-        box4.addItem("中间拆分");
-        box4.addItem("两端拆分");
+//        box4.addItem("不拆分");
+//        box4.addItem("中间拆分");
+//        box4.addItem("两端拆分");
         JCheckBox checkBox5 = new JCheckBox("拆分反向");
         rgb1CompontList3.add(checkBox5);
         panel.add(box4);
@@ -1658,7 +1658,7 @@ public class SuCaiEditUI {
         JPanel p4 = new JPanel();
         p4.setLayout(flowLayout);
         //p4.setBorder(new LineBorder(Color.black));
-        p4.setPreferredSize(new Dimension(640, 40));
+        p4.setPreferredSize(new Dimension(570, 40));
         final JCheckBox checkBox4 = new JCheckBox("颜色检测器");
         rgb1CompontList2.add(checkBox4);
         String[] tps = (String[]) bezier.Data.itemMap.get("1");
@@ -1696,14 +1696,14 @@ public class SuCaiEditUI {
                 box82.setEnabled(false);
             }
         }
-        JButton button3 = new JButton("渐变类型");
-        button3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new BezierDialog().show(1, box82.getSelectedIndex(), new JComboBox[]{box82, box81, box83});
-            }
-        });
+//        JButton button3 = new JButton("渐变类型");
+//        button3.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                new BezierDialog().show(1, box82.getSelectedIndex(), new JComboBox[]{box82, box81, box83});
+//            }
+//        });
         p4.add(checkBox4);
-        p4.add(button3);
+//        p4.add(button3);
         rgb1CompontList2.add(box82);
         p4.add(box82);
         JCheckBox box2 = new JCheckBox("渐变");
@@ -1768,12 +1768,12 @@ public class SuCaiEditUI {
         //panel.setBorder(new LineBorder(Color.gray));
         panel.setPreferredSize(new Dimension(410, 90));
         panel.add(new JLabel("拆分"));
-        JComboBox box4 = new JComboBox();
+        JComboBox box4 = new JComboBox(TuXingAction.getValues3());
         rgb1CompontList2.add(box4);
         box4.setPreferredSize(new Dimension(280, 32));
-        box4.addItem("不拆分");
-        box4.addItem("中间拆分");
-        box4.addItem("两端拆分");
+//        box4.addItem("不拆分");
+//        box4.addItem("中间拆分");
+//        box4.addItem("两端拆分");
         JCheckBox checkBox5 = new JCheckBox("拆分反向");
         rgb1CompontList2.add(checkBox5);
         panel.add(box4);
@@ -1999,10 +1999,10 @@ public class SuCaiEditUI {
         JPanel p4 = new JPanel();
         p4.setLayout(flowLayout);
         //p4.setBorder(new LineBorder(Color.black));
-        p4.setPreferredSize(new Dimension(640, 40));
+        p4.setPreferredSize(new Dimension(570, 40));
         final JCheckBox checkBox4 = new JCheckBox("颜色检测器");
         rgb1CompontList.add(checkBox4);
-        JButton button3 = new JButton("渐变类型");
+//        JButton button3 = new JButton("渐变类型");
         String[] tps = (String[]) bezier.Data.itemMap.get("1");
 
         if (tps == null) {
@@ -2014,13 +2014,13 @@ public class SuCaiEditUI {
             }
         }
         box81 = new JComboBox(tps);
-        button3.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new BezierDialog().show(1, box81.getSelectedIndex(), new JComboBox[]{box81, box82, box83});
-            }
-        });
+//        button3.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                new BezierDialog().show(1, box81.getSelectedIndex(), new JComboBox[]{box81, box82, box83});
+//            }
+//        });
         p4.add(checkBox4);
-        p4.add(button3);
+//        p4.add(button3);
 
         checkBox4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -2109,12 +2109,12 @@ public class SuCaiEditUI {
         //panel.setBorder(new LineBorder(Color.gray));
         panel.setPreferredSize(new Dimension(410, 90));
         panel.add(new JLabel("拆分"));
-        JComboBox box4 = new JComboBox();
+        JComboBox box4 = new JComboBox(TuXingAction.getValues3());
         rgb1CompontList.add(box4);
         box4.setPreferredSize(new Dimension(280, 32));
-        box4.addItem("不拆分");
-        box4.addItem("中间拆分");
-        box4.addItem("两端拆分");
+//        box4.addItem("不拆分");
+//        box4.addItem("中间拆分");
+//        box4.addItem("两端拆分");
         JCheckBox checkBox5 = new JCheckBox("拆分反向");
         rgb1CompontList.add(checkBox5);
         panel.add(box4);

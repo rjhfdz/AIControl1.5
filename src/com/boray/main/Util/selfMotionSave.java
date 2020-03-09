@@ -18,7 +18,7 @@ import java.util.TimerTask;
 
 public class selfMotionSave {
 
-    public static void autoSave() {
+    public void autoSave() {
         Data.tempFileAutoSaveTimer = new Timer();
         Data.tempFileAutoSaveTimer.schedule(new TimerTask() {
             @Override
@@ -32,7 +32,7 @@ public class selfMotionSave {
         }, 1000,60000);
     }
 
-    static void autoSaveFile() {
+    public void autoSaveFile() {
         HttpClientUtil httpsUtils = new HttpClientUtil();
         Users users = (Users) MainUi.map.get("Users");
         Map<String, String> param = new HashMap<>();

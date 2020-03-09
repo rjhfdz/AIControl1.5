@@ -232,11 +232,11 @@ public class ProjectCreateFileOfCloseFrame {
             int[][][] abc = new int[16][30][20];
             for (int j = 1; j <= 16; j++) {
                 JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels" + j);
-                for (int k = 0; k < 31; k++) {
-                    for (int i = 0; i < timeBlockPanels[k].getComponentCount(); i++) {
-                        if (timeBlockPanels[k].isVisible()) {
-                            if (k == 0) {
-                                DefineJLable_shengKon lable = (DefineJLable_shengKon) timeBlockPanels[k].getComponent(i);
+                for (int k = 1; k <= 30; k++) {
+                    for (int i = 0; i < timeBlockPanels[k - 1].getComponentCount(); i++) {
+                        if (timeBlockPanels[k - 1].isVisible()) {
+                            if ((k - 1) == 0) {
+                                DefineJLable_shengKon lable = (DefineJLable_shengKon) timeBlockPanels[k-1].getComponent(i);
                                 String[] strings = new String[5];
                                 strings[0] = lable.getLocation().x + "";
                                 strings[1] = lable.getLocation().y + "";
@@ -245,14 +245,14 @@ public class ProjectCreateFileOfCloseFrame {
                                 strings[4] = lable.getText();
                                 objects2[j - 1][k - 1][i] = strings;
                             } else {
-                                DefineJLable_shengKon2 lable = (DefineJLable_shengKon2) timeBlockPanels[k].getComponent(i);
+                                DefineJLable_shengKon2 lable = (DefineJLable_shengKon2) timeBlockPanels[k-1].getComponent(i);
                                 String[] strings = new String[6];
                                 strings[0] = lable.getLocation().x + "";
                                 strings[1] = lable.getLocation().y + "";
                                 strings[2] = lable.getWidth() + "";
                                 strings[3] = lable.getHeight() + "";
                                 strings[4] = lable.getText();
-                                if(lable.getBackground().getGreen()==255)
+                                if (lable.getBackground().getGreen() == 255)
                                     strings[5] = "255";
                                 else
                                     strings[5] = "0";

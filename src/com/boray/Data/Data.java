@@ -204,4 +204,6 @@ public class Data {
 	public static int sendDataCount = 0;//重发数据次数
 	public static Timer againSendDataTimer;//重发数据定时器
 	public static int sendDataSum;//记录发包
+
+	public static Timer checkUserLogin;//检查用户状态定时器
 }

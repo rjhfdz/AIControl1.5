@@ -276,7 +276,7 @@ public class SelectSuCaiUI {
                     if (e.getClickCount() == 2) {
                         String suCaiName = list.getSelectedValue().toString();
                         int suCaiNum = Integer.valueOf(suCaiName.split("--->")[1]).intValue();
-                        new SuCaiEditUI().show(suCaiName, suCaiNum, dengKuId);
+                        new SuCaiEditUI().show(suCaiName, suCaiNum, dengKuId - 1);
                     }
                 }
             }

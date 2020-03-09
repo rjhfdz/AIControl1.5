@@ -105,10 +105,11 @@ public class Util {
             @Override
             public void run() {
                 JButton dataWrite = (JButton) MainUi.map.get("comAndWifiDataWrite");
-                if (Data.sendDataCount > 3) {
+                if (Data.sendDataCount >= 3) {
                     JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "数据写入失败，请检查设备或接口。", "提示", JOptionPane.ERROR_MESSAGE);
                     Data.sendDataCount = 0;
                     dataWrite.setText("写入控制器");
+                    dataWrite.setEnabled(true);
                     Data.againSendDataTimer.cancel();
                 } else {
                     if (Data.serialPort != null) {
@@ -123,6 +124,13 @@ public class Util {
                 }
             }
         }, 3000, 2000);
+    }
+
+    /**
+     * 检查用户登录状态
+     */
+    public static void checkUserLogin(){
+
     }
 
 }

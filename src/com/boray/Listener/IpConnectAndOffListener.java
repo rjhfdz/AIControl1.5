@@ -108,6 +108,7 @@ public class IpConnectAndOffListener implements ActionListener {
                                         Data.socket = null;
                                         Data.address = null;
                                         IpOff.setSelected(true);
+                                        IpAddress.setEnabled(true);
                                         JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "网络连接失败!", "提示", JOptionPane.ERROR_MESSAGE);
                                     } else {
                                         String s = hex;

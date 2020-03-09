@@ -144,7 +144,7 @@ public class DengJuChangeDialog implements ActionListener {
                 if (!box.getSelectedItem().toString().equals(str)) {
 					String str = examine();
 					if(!str.equals("")){
-						JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "该灯具被"+str+"引用，请解除关系后再修改！", "提示", JOptionPane.ERROR_MESSAGE);
+						JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "该灯具被"+str+"引用，请解除灯具分组中的关系后再修改！", "提示", JOptionPane.ERROR_MESSAGE);
 						return;
 					}
                 }

@@ -11,6 +11,7 @@ import com.boray.entity.ProjectFile;
 import com.boray.entity.ProjectFileInfo;
 import com.boray.entity.Users;
 import com.boray.main.Listener.CompanyListener;
+import com.boray.main.Listener.CompanyMenuListener;
 import com.boray.main.Listener.LoginListener;
 import com.boray.main.Util.CustomTreeCellRenderer;
 import com.boray.main.Util.CustomTreeNode;
@@ -28,6 +29,9 @@ import javax.swing.table.TableColumn;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +39,17 @@ import java.util.Map;
 public class CompanyUI {
 
     private LoginListener listener;
+    private JPopupMenu popupMenu;
+    private JMenuItem addFolder;
+    private JMenuItem updateFolder;
+    private JMenuItem deleteFolder;
+    private JMenuItem addFile;
+    private JMenuItem updateFile;
+    private JMenuItem deleteFile;
+    private JMenuItem downloadFile;
+    private JMenuItem audit;
+    private JMenuItem copy;
+    private JMenuItem paste;
 
     public void show(JPanel panel) {
         if (MainUi.map.get("Users") == null) {
@@ -79,51 +94,50 @@ public class CompanyUI {
             JPanel buttonPanel = new JPanel();//顶部的按钮
             buttonPanel.setLayout(flowLayout6);
             buttonPanel.setBorder(new LineBorder(Color.gray));
-            buttonPanel.setPreferredSize(new Dimension(900, 60));
-            JButton addFolder = new JButton("新建项目");
-            JButton updateFolder = new JButton("项目重命名");
-            JButton deleteFolder = new JButton("删除项目");
-            JButton addFile = new JButton("上传工程");
-            JButton updateFile = new JButton("重命名");
-            JButton deleteFile = new JButton("删除工程");
-            JButton downloadFile = new JButton("下载工程");
+            buttonPanel.setPreferredSize(new Dimension(900, 35));
             JButton refresh = new JButton("刷新");
-            JButton audit = new JButton("提交审核");
-            JButton copy = new JButton("复制");
-            JButton paste = new JButton("粘贴");
             JButton enableEdit = new JButton("开启编辑");
             JButton cancelEdit = new JButton("取消编辑");
 
+            popupMenu = new JPopupMenu();
+            addFolder = new JMenuItem("新建项目");
+            updateFolder = new JMenuItem("项目重命名");
+            deleteFolder = new JMenuItem("删除项目");
+            addFile = new JMenuItem("上传工程");
+            updateFile = new JMenuItem("重命名");
+            deleteFile = new JMenuItem("删除工程");
+            downloadFile = new JMenuItem("下载工程");
+            audit = new JMenuItem("提交审核");
+            copy = new JMenuItem("复制");
+            paste = new JMenuItem("粘贴");
+            ButtonGroup group = new ButtonGroup();
+            group.add(addFolder);group.add(updateFolder);
+            group.add(deleteFolder);group.add(addFile);
+            group.add(updateFile);group.add(deleteFile);
+            group.add(downloadFile);group.add(audit);
+            group.add(copy);group.add(paste);
+            CompanyMenuListener MenuListener = new CompanyMenuListener();
+            addFolder.addActionListener(MenuListener);updateFolder.addActionListener(MenuListener);
+            deleteFolder.addActionListener(MenuListener);addFile.addActionListener(MenuListener);
+            updateFile.addActionListener(MenuListener);deleteFile.addActionListener(MenuListener);
+            downloadFile.addActionListener(MenuListener);audit.addActionListener(MenuListener);
+            copy.addActionListener(MenuListener);paste.addActionListener(MenuListener);
+            popupMenu.add(addFolder);popupMenu.add(updateFolder);
+            popupMenu.add(deleteFolder);popupMenu.add(addFile);
+            popupMenu.add(updateFile);popupMenu.add(deleteFile);
+            popupMenu.add(downloadFile);popupMenu.add(audit);
+            popupMenu.add(copy);popupMenu.add(paste);
+
             CompanyListener listener = new CompanyListener();
-            addFolder.addActionListener(listener);
-            updateFolder.addActionListener(listener);
-            deleteFolder.addActionListener(listener);
-            addFile.addActionListener(listener);
-            updateFile.addActionListener(listener);
-            deleteFile.addActionListener(listener);
-            downloadFile.addActionListener(listener);
             refresh.addActionListener(listener);
-            audit.addActionListener(listener);
-            copy.addActionListener(listener);
-            paste.addActionListener(listener);
             enableEdit.addActionListener(listener);
             cancelEdit.addActionListener(listener);
 
-            buttonPanel.add(addFolder);
-            buttonPanel.add(updateFolder);
-            buttonPanel.add(deleteFolder);
-            buttonPanel.add(addFile);
-            buttonPanel.add(updateFile);
-            buttonPanel.add(deleteFile);
-            buttonPanel.add(downloadFile);
             buttonPanel.add(refresh);
-            buttonPanel.add(audit);
-            buttonPanel.add(copy);
-            buttonPanel.add(paste);
             buttonPanel.add(enableEdit);
             buttonPanel.add(cancelEdit);
             JLabel editLabel = new JLabel();
-            MainUi.map.put("editLabel", editLabel);
+            MainUi.map.put("CompanyEditLabel", editLabel);
             buttonPanel.add(editLabel);
             panel.add(buttonPanel);
 
@@ -146,7 +160,7 @@ public class CompanyUI {
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(new LineBorder(Color.gray));
-        panel.setPreferredSize(new Dimension(300, 525));
+        panel.setPreferredSize(new Dimension(300, 550));
 
         // 创建根节点
         DefaultMutableTreeNode rootNode = new DefaultMutableTreeNode("Boray");
@@ -196,13 +210,54 @@ public class CompanyUI {
                         for (int i = table.getRowCount() - 1; i >= 0; i--) {
                             model.removeRow(i);
                         }
-                        String[][] data = new String[4][infos.size()];
+                        String[][] data = new String[infos.size()][4];
                         for (int i = 0; i < infos.size(); i++) {
                             data[i][0] = infos.get(i).getDjname();
                             data[i][1] = infos.get(i).getDjtype();
                             data[i][2] = infos.get(i).getDmxstr();
                             data[i][3] = infos.get(i).getZytd();
                             model.addRow(data[i]);
+                        }
+                    }
+                }
+            }
+        });
+        tree.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                TreePath path = tree.getPathForLocation(e.getX(), e.getY());
+                if (path == null) {  //JTree上没有任何项被选中
+                    return;
+                } else {
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+                    if(node.getUserObject() instanceof FileOrFolder){
+                        tree.setSelectionPath(path);
+                        if (e.getButton() == 3) {
+                            addFolder.setEnabled(true);
+                            updateFolder.setEnabled(true);
+                            deleteFolder.setEnabled(true);
+                            addFile.setEnabled(true);
+                            updateFile.setEnabled(false);
+                            deleteFile.setEnabled(false);
+                            downloadFile.setEnabled(false);
+                            audit.setEnabled(false);
+                            copy.setEnabled(false);
+                            paste.setEnabled(true);
+                            popupMenu.show(tree, e.getX(), e.getY());
+                        }
+                    }else if(node.getUserObject() instanceof ProjectFile){
+                        tree.setSelectionPath(path);
+                        if (e.getButton() == 3) {
+                            addFolder.setEnabled(false);
+                            updateFolder.setEnabled(false);
+                            deleteFolder.setEnabled(false);
+                            addFile.setEnabled(false);
+                            updateFile.setEnabled(true);
+                            deleteFile.setEnabled(true);
+                            downloadFile.setEnabled(true);
+                            audit.setEnabled(true);
+                            copy.setEnabled(true);
+                            paste.setEnabled(false);
+                            popupMenu.show(tree, e.getX(), e.getY());
                         }
                     }
                 }

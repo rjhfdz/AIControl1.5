@@ -33,14 +33,14 @@ public class DataWriteListener implements ActionListener {
             public void run() {
                 if (Data.serialPort != null) {
 //                    if (Data.file != null) {
-                        dataWrite.setEnabled(false);
-                        try {
-                            Data.dataWrite = DataPack(4096);
-                            //发起第一包后 线程监听
-                            Socket.SerialPortSendData((byte[]) Data.dataWrite[0]);
-                            Data.sendDataSum = 0;//记录发包
-                            dataWrite.setText((Data.sendDataSum + 1) + "/" + Data.dataWrite.length);
-                            Util.againSendData();//开启定时器 未收到反馈时，重发数据
+                    dataWrite.setEnabled(false);
+                    try {
+                        Data.dataWrite = DataPack(4096);
+                        //发起第一包后 线程监听
+                        Socket.SerialPortSendData((byte[]) Data.dataWrite[0]);
+                        Data.sendDataSum = 0;//记录发包
+                        dataWrite.setText((Data.sendDataSum + 1) + "/" + Data.dataWrite.length);
+                        Util.againSendData();//开启定时器 未收到反馈时，重发数据
 //                            Object[] objects = DataPack(4096);
 //                            OutputStream os = Data.serialPort.getOutputStream();
 //                            int j = 0;
@@ -61,22 +61,22 @@ public class DataWriteListener implements ActionListener {
 //                                os.flush();
 //                                Thread.sleep(200);
 //                            }
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
 //                    } else {
 //                        JOptionPane.showMessageDialog(frame, "请先生成初始版本的控制器文件导入到控制器，再进行写入！", "提示", JOptionPane.ERROR_MESSAGE);
 //                    }
                 } else if (Data.socket != null) {
 //                    if (Data.file != null) {
-                        dataWrite.setEnabled(false);
-                        try {
-                            Data.dataWrite = DataPack(1280);
-                            //发起第一包后 线程监听
-                            Socket.UDPSendData((byte[]) Data.dataWrite[0]);
-                            Data.sendDataSum = 0;//记录发包
-                            dataWrite.setText((Data.sendDataSum + 1) + "/" + Data.dataWrite.length);
-                            Util.againSendData();//开启定时器 未收到反馈时，重发数据
+                    dataWrite.setEnabled(false);
+                    try {
+                        Data.dataWrite = DataPack(1280);
+                        //发起第一包后 线程监听
+                        Socket.UDPSendData((byte[]) Data.dataWrite[0]);
+                        Data.sendDataSum = 0;//记录发包
+                        dataWrite.setText((Data.sendDataSum + 1) + "/" + Data.dataWrite.length);
+                        Util.againSendData();//开启定时器 未收到反馈时，重发数据
 //                            int j = 0;
 //                            for (int i = 0; i < objects.length; i++) {
 //                                if (j == 0)
@@ -94,9 +94,9 @@ public class DataWriteListener implements ActionListener {
 //                                Socket.UDPSendData(b);
 //                                Thread.sleep(300);
 //                            }
-                        } catch (Exception ex) {
-                            ex.printStackTrace();
-                        }
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
 //                    } else {
 //                        JOptionPane.showMessageDialog(frame, "请先生成初始版本的控制器文件导入到控制器，再进行写入！", "提示", JOptionPane.ERROR_MESSAGE);
 //                    }
@@ -151,16 +151,16 @@ public class DataWriteListener implements ActionListener {
      * @return
      */
     public byte[] readFileData() throws IOException {
-        if (Data.file == null) {
-            String path = System.getProperty("user.dir");//获得程序当前文件夹目录
-            File file = new File(path + "\\F0.DAT");
-            File file1 = new File(path + "\\K0.DAT");
-            Data.file = file;
-            MergeAllListener listener = new MergeAllListener();
-            listener.DataWrite(file, file1);
-            ProjectCreateFileOfCloseFrame fileOfCloseFrame = new ProjectCreateFileOfCloseFrame();
-            fileOfCloseFrame.tt(new File(path + "\\project.xml"));
-        }
+//        if (Data.file == null) {
+        String path = System.getProperty("user.dir");//获得程序当前文件夹目录
+        File file = new File(path + "\\F0.DAT");
+        File file1 = new File(path + "\\K0.DAT");
+        Data.file = file;
+        MergeAllListener listener = new MergeAllListener();
+        listener.DataWrite(file, file1);
+        ProjectCreateFileOfCloseFrame fileOfCloseFrame = new ProjectCreateFileOfCloseFrame();
+        fileOfCloseFrame.tt(new File(path + "\\project.xml"));
+//        }
         long fileSize = Data.file.length();
         FileInputStream stream = new FileInputStream(Data.file);
         byte[] buff = new byte[(int) fileSize];
