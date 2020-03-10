@@ -47,7 +47,7 @@ public class ComReturnListener implements Runnable {
             InputStream is = Data.serialPort.getInputStream();
             byte[] temp = new byte[1024];
             int len = -1;
-            String hex0, hex1, hex2, secHex, hex3;
+            String hex0, hex1, hex2, secHex, hex3, hex4;
             while (true) {
                 len = is.read(temp);
                 if (len > 5) {
@@ -56,6 +56,7 @@ public class ComReturnListener implements Runnable {
                     hex1 = Integer.toHexString(temp[2] & 0xFF);
                     hex2 = Integer.toHexString(temp[3] & 0xFF);
                     hex3 = Integer.toHexString(temp[4] & 0xFF);
+                    hex4 = Integer.toHexString(temp[5] & 0xFF);
                     if (hex0.equals("fd") && hex1.equals("88")) {//‘§¿¿
                         int pk = Byte.toUnsignedInt(temp[4]) * 256 + Byte.toUnsignedInt(temp[5]);
                         Data.reviewMap.remove(pk);
@@ -589,7 +590,7 @@ public class ComReturnListener implements Runnable {
                             bytes[i] = temp[i];
                         }
                         setLuZhiData(bytes);
-                    } else if (hex0.equals("aa") && secHex.equals("58") && hex3.equals("85")) {
+                    } else if (hex0.equals("aa") && secHex.equals("58") && hex3.equals("85") && hex4.equals("17")) {
                         int size = 10, packetN = 0;
                         byte[] b1 = new byte[size];
                         if (len <= size) {

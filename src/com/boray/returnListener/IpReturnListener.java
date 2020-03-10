@@ -271,7 +271,7 @@ public class IpReturnListener implements Runnable {
                             }, 2000);
                         }
                     }
-                } else if (hex0.equals("aa") && hex1.equals("57") && hex4.equals("85")) {
+                } else if (hex0.equals("aa") && hex1.equals("57") && hex4.equals("85") && hex5.equals("17")) {
                     int size = 10, packetN = 0;
                     byte[] b1 = new byte[size];
                     if (len <= size) {

@@ -54,7 +54,7 @@ public class ShengKonSuCaiEditUI {
         JFrame f = (JFrame) MainUi.map.get("frame");
         dialog = new JDialog(f, true);
         dialog.setResizable(false);
-        dialog.setTitle("±à¼­ËØ²Ä£º" + suCaiName);
+        dialog.setTitle("±àÉù¿Ø¼­ËØ²Ä£º" + suCaiName);
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         //flowLayout.setVgap(2);
         dialog.getContentPane().setLayout(flowLayout);

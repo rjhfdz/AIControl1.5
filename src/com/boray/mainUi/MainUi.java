@@ -106,7 +106,7 @@ public class MainUi {
             }
         });
 
-        ImageIcon img = new ImageIcon(getClass().getResource("/icon/登入界面.png"));
+        ImageIcon img = new ImageIcon(getClass().getResource("/icon/界面-1-1250X760副本.png"));
         JLabel label = new JLabel(img);
         frame.getLayeredPane().add(label, new Integer(Integer.MIN_VALUE));
         label.setBounds(0, 0, img.getIconWidth(), img.getIconHeight());

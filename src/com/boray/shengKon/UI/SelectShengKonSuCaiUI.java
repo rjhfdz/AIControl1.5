@@ -26,7 +26,7 @@ public class SelectShengKonSuCaiUI {
         JFrame f = (JFrame) MainUi.map.get("frame");
         dialog = new JDialog(f, true);
         dialog.setResizable(false);
-        dialog.setTitle("Ñ¡ÔñËØ²Ä");
+        dialog.setTitle("Ñ¡ÔñÉù¿ØËØ²Ä");
         int w = 450, h = 620;
         dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - w / 2, f.getLocation().y + f.getSize().height / 2 - h / 2);
         dialog.setSize(w, h);
@@ -241,11 +241,15 @@ public class SelectShengKonSuCaiUI {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                String suCaiName = list.getSelectedValue().toString();
-                int denKuNum = groupNum - 1;
-                int suCaiNum = Integer.valueOf(suCaiName.split("--->")[1]).intValue();
-                System.out.println(suCaiName + "" + suCaiNum + "" + denKuNum);
-                new ShengKonSuCaiEditUI().show(suCaiName, suCaiNum, denKuNum);
+                if (list.getSelectedIndex() != -1) {
+                    if (e.getClickCount() == 2) {
+                        String suCaiName = list.getSelectedValue().toString();
+                        int denKuNum = groupNum - 1;
+                        int suCaiNum = Integer.valueOf(suCaiName.split("--->")[1]).intValue();
+                        System.out.println(suCaiName + "" + suCaiNum + "" + denKuNum);
+                        new ShengKonSuCaiEditUI().show(suCaiName, suCaiNum, denKuNum);
+                    }
+                }
             }
         });
         DefaultListModel model = new DefaultListModel();

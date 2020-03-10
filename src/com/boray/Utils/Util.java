@@ -129,8 +129,19 @@ public class Util {
     /**
      * ¼ì²éÓÃ»§µÇÂ¼×´Ì¬
      */
-    public static void checkUserLogin(){
+    public static void checkUserLogin() {
 
+    }
+
+    public static void stopAutoSaveFile() {
+        JLabel editLabel = (JLabel) MainUi.map.get("CompanyEditLabel");
+        if(editLabel!=null) {
+            editLabel.setText("");
+            Data.tempWebFolder = null;
+            Data.tempWebFile = null;
+            Data.tempEditWebFile = null;
+            Data.tempFileAutoSaveTimer = null;
+        }
     }
 
 }

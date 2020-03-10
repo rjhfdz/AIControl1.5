@@ -87,7 +87,7 @@ public class YunChangJingSuCaiDialog implements ActionListener {
         p3.add(scrollPane);
 
         JPanel bottomPanel = new JPanel();
-        bottomPanel.setPreferredSize(new Dimension(280, 40));
+        bottomPanel.setPreferredSize(new Dimension(230, 40));
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
         flowLayout.setVgap(-2);
         flowLayout.setHgap(-2);
@@ -95,23 +95,19 @@ public class YunChangJingSuCaiDialog implements ActionListener {
         JButton newBtn = new JButton("新增");
         JButton editBtn = new JButton("重命名");
         JButton delBtn = new JButton("删除");
-        JButton dowBtn = new JButton("下载");
         JButton leadBtn = new JButton("导入");
         newBtn.addActionListener(this);
         editBtn.addActionListener(this);
         delBtn.addActionListener(this);
-        dowBtn.addActionListener(this);
         leadBtn.addActionListener(this);
         Dimension dimension = new Dimension(55, 34);
         newBtn.setPreferredSize(dimension);
         editBtn.setPreferredSize(new Dimension(68, 34));
         delBtn.setPreferredSize(dimension);
-        dowBtn.setPreferredSize(dimension);
         leadBtn.setPreferredSize(dimension);
         bottomPanel.add(newBtn);
         bottomPanel.add(editBtn);
         bottomPanel.add(delBtn);
-        bottomPanel.add(dowBtn);
         bottomPanel.add(leadBtn);
         p3.add(bottomPanel);
     }

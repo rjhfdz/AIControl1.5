@@ -39,12 +39,13 @@ public class LightGroupsActionListener implements ActionListener {
 							timeBlockPanels[table2.getSelectedRow()+1].removeAll();
 							timeBlockPanels[table2.getSelectedRow()+1].repaint();
 						}
+                        for (int i = selects.length - 1; i >= 0; i--) {
+                            treeSet.remove(Integer.valueOf(table.getValueAt(selects[i], 0).toString().split("#")[0].substring(2)).intValue() - 1);
+                            model.removeRow(selects[i]);
+                        }
 					}
                 }
-				for (int i = selects.length - 1; i >= 0; i--) {
-					treeSet.remove(Integer.valueOf(table.getValueAt(selects[i], 0).toString().split("#")[0].substring(2)).intValue() - 1);
-					model.removeRow(selects[i]);
-				}
+
             }
         } else if ("<<".equals(e.getActionCommand())) {
             TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(table2.getSelectedRow());

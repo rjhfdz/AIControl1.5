@@ -136,55 +136,64 @@ public class SelectSuCaiUI {
                 if ("取消".equals(e.getActionCommand())) {
                     dialog.dispose();
                 } else {
-                    if (!"".equals(field.getText().trim())) {
-                        JList list = (JList) MainUi.map.get("xiaoGuoDeng_list");
-                        DefaultListModel model = (DefaultListModel) list.getModel();
+                    String str = (String) MainUi.map.get("xiaoGuoDengIndex");
+                    TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(Integer.parseInt(str) - 1);
+                    Iterator iterator = treeSet.iterator();
+                    if(iterator.hasNext()) {
+                        if (!"".equals(field.getText().trim())) {
+                            JList list = (JList) MainUi.map.get("xiaoGuoDeng_list");
+                            DefaultListModel model = (DefaultListModel) list.getModel();
 
-                        JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("xiaoGuoDengTypeBtns");
-                        String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
-                        int cnt = 0;
-                        if (map != null) {
+                            JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("xiaoGuoDengTypeBtns");
+                            String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
+                            int cnt = 0;
+                            if (map != null) {
+                                for (int i = 0; i < btns.length; i++) {
+                                    List abc = (List) map.get("" + i);
+                                    if (abc != null) {
+                                        cnt = cnt + abc.size();
+                                    }
+                                }
+                            }
+                            if (cnt == 30) {
+                                JFrame frame = (JFrame) MainUi.map.get("frame");
+                                JOptionPane.showMessageDialog(frame, "最多只能创建30个素材！", "提示", JOptionPane.ERROR_MESSAGE);
+                                return;
+                            }
+                            String suCaiNameAndNumber = field.getText() + "--->" + (cnt + 1);
+                            if (model == null) {
+                                model = new DefaultListModel();
+                                model.addElement(suCaiNameAndNumber);
+                                list.setModel(model);
+                            } else {
+                                model.addElement(suCaiNameAndNumber);
+                            }
+                            list.setSelectedIndex(model.getSize() - 1);
                             for (int i = 0; i < btns.length; i++) {
-                                List abc = (List) map.get("" + i);
-                                if (abc != null) {
-                                    cnt = cnt + abc.size();
+                                if (btns[i].isSelected()) {
+                                    List tmp = (List) map.get("" + i);
+                                    List nameList = (List) nameMap.get("" + i);
+                                    if (nameList != null) {
+                                        nameList.add(suCaiNameAndNumber);
+                                    } else {
+                                        nameList = new ArrayList<>();
+                                        nameList.add(suCaiNameAndNumber);
+                                        nameMap.put("" + i, nameList);
+                                    }
+                                    if (tmp == null) {
+                                        tmp = new ArrayList<>();
+                                    }
+                                    tmp.add(new HashMap<>());
+                                    btns[i].setText(name[i] + "(" + tmp.size() + ")");
+                                    map.put("" + i, tmp);
                                 }
                             }
+                            dialog.dispose();
                         }
-                        if (cnt == 30) {
-                            JFrame frame = (JFrame) MainUi.map.get("frame");
-                            JOptionPane.showMessageDialog(frame, "最多只能创建30个素材！", "提示", JOptionPane.ERROR_MESSAGE);
-                            return;
-                        }
-                        String suCaiNameAndNumber = field.getText() + "--->" + (cnt + 1);
-                        if (model == null) {
-                            model = new DefaultListModel();
-                            model.addElement(suCaiNameAndNumber);
-                            list.setModel(model);
-                        } else {
-                            model.addElement(suCaiNameAndNumber);
-                        }
-                        list.setSelectedIndex(model.getSize() - 1);
-                        for (int i = 0; i < btns.length; i++) {
-                            if (btns[i].isSelected()) {
-                                List tmp = (List) map.get("" + i);
-                                List nameList = (List) nameMap.get("" + i);
-                                if (nameList != null) {
-                                    nameList.add(suCaiNameAndNumber);
-                                } else {
-                                    nameList = new ArrayList<>();
-                                    nameList.add(suCaiNameAndNumber);
-                                    nameMap.put("" + i, nameList);
-                                }
-                                if (tmp == null) {
-                                    tmp = new ArrayList<>();
-                                }
-                                tmp.add(new HashMap<>());
-                                btns[i].setText(name[i] + "(" + tmp.size() + ")");
-                                map.put("" + i, tmp);
-                            }
-                        }
-                        dialog.dispose();
+                    }else{
+                        JFrame frame = (JFrame) MainUi.map.get("frame");
+                        JOptionPane.showMessageDialog(frame, "该灯具无组内灯具，无法创建素材！", "提示", JOptionPane.ERROR_MESSAGE);
+                        return;
                     }
                 }
             }

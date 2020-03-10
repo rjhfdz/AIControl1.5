@@ -32,7 +32,6 @@ public class YunSuCaiTypeListener implements ActionListener {
 				System.out.println(suCaiLightType.getSelectedValue().toString()+btn.getName());
 				if(str!=null&&!str.equals("")) {
 					JSONArray j = JSONArray.parseArray(str);
-					System.out.println(str);
 					for (int i = 0; i < j.size(); i++) {
 						JSONObject jo = j.getJSONObject(i);
 						Data.yunSuCaiMap.put(jo.get("filename"), jo.get("filejson"));

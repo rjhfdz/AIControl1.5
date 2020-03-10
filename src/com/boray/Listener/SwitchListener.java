@@ -93,7 +93,7 @@ public class SwitchListener implements ActionListener {
                     }
                 }
             }
-            if (table.getRowCount() < 30) {
+            if (table.getRowCount() <= 30) {
                 for (int i = 1; i <= 16; i++) {
                     JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels" + i);
                     JLabel[] labels = (JLabel[]) MainUi.map.get("labels_shengKong" + i);

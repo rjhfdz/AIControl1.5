@@ -3,6 +3,7 @@ package com.boray.main.UI;
 import com.boray.Utils.Util;
 import com.boray.beiFen.Listener.LoadProjectFileActionListener;
 import com.boray.main.Listener.LocalListenter;
+import com.boray.main.Listener.LocalMenuListenter;
 import com.boray.main.Util.CustomTreeCellRenderer;
 import com.boray.main.Util.CustomTreeNode;
 import com.boray.main.Util.TreeUtil;
@@ -25,7 +26,15 @@ import java.io.File;
 public class LocalUI implements ActionListener {
 
     private JPopupMenu popupMenu;
-    private JMenuItem menuItem;
+    private JMenuItem loadProject;
+    private JMenuItem addFolder;
+    private JMenuItem reNameFolder;
+    private JMenuItem delFolder;
+    private JMenuItem addFile;
+    private JMenuItem reNameFile;
+    private JMenuItem delFile;
+    private JMenuItem copy;
+    private JMenuItem paste;
 
     public void show(JPanel panel) {
         FlowLayout flowLayout6 = new FlowLayout(FlowLayout.LEFT);
@@ -38,44 +47,53 @@ public class LocalUI implements ActionListener {
         buttonPanel.setLayout(flowLayout6);
         buttonPanel.setBorder(new LineBorder(Color.gray));
         buttonPanel.setPreferredSize(new Dimension(900, 35));
-        JButton addFolder = new JButton("新建项目");
-        JButton updateFolder = new JButton("项目重命名");
-        JButton deleteFolder = new JButton("删除项目");
-        JButton addFile = new JButton("添加工程");
-        JButton updateFile = new JButton("工程重命名");
-        JButton deleteFile = new JButton("删除工程");
         JButton refresh = new JButton("刷新");
-        JButton copy = new JButton("复制");
-        JButton paste = new JButton("粘贴");
 
         LocalListenter listenter = new LocalListenter();
-        addFolder.addActionListener(listenter);
-        updateFolder.addActionListener(listenter);
-        deleteFolder.addActionListener(listenter);
-        addFile.addActionListener(listenter);
-        updateFile.addActionListener(listenter);
-        deleteFile.addActionListener(listenter);
         refresh.addActionListener(listenter);
-        copy.addActionListener(listenter);
-        paste.addActionListener(listenter);
 
         popupMenu = new JPopupMenu();
-        menuItem = new JMenuItem("加载工程");
-        menuItem.addActionListener(this);
+        loadProject = new JMenuItem("加载工程");
+        addFolder = new JMenuItem("添加项目");
+        reNameFolder = new JMenuItem("项目重命名");
+        delFolder = new JMenuItem("删除项目");
+        addFile = new JMenuItem("添加工程");
+        reNameFile = new JMenuItem("工程重命名");
+        delFile = new JMenuItem("删除工程");
+        copy = new JMenuItem("复制");
+        paste = new JMenuItem("粘贴");
         ButtonGroup group = new ButtonGroup();
-        group.add(menuItem);
-        popupMenu.add(menuItem);
+        group.add(loadProject);
+        group.add(addFolder);
+        group.add(reNameFolder);
+        group.add(delFolder);
+        group.add(addFile);
+        group.add(reNameFile);
+        group.add(delFile);
+        group.add(copy);
+        group.add(paste);
+        popupMenu.add(addFolder);
+        popupMenu.add(reNameFolder);
+        popupMenu.add(delFolder);
+        popupMenu.add(addFile);
+        popupMenu.add(reNameFile);
+        popupMenu.add(delFile);
+        popupMenu.add(loadProject);
+        popupMenu.add(copy);
+        popupMenu.add(paste);
 
-        buttonPanel.add(addFolder);
-        buttonPanel.add(updateFolder);
-        buttonPanel.add(deleteFolder);
-        buttonPanel.add(addFile);
-        buttonPanel.add(updateFile);
-        buttonPanel.add(deleteFile);
+        LocalMenuListenter menuListenter = new LocalMenuListenter();
+        addFolder.addActionListener(menuListenter);
+        reNameFolder.addActionListener(menuListenter);
+        delFolder.addActionListener(menuListenter);
+        addFile.addActionListener(menuListenter);
+        reNameFile.addActionListener(menuListenter);
+        delFile.addActionListener(menuListenter);
+        loadProject.addActionListener(this);
+        copy.addActionListener(menuListenter);
+        paste.addActionListener(menuListenter);
+
         buttonPanel.add(refresh);
-        buttonPanel.add(copy);
-        buttonPanel.add(paste);
-
         panel.add(buttonPanel);
 
         init(panel);
@@ -124,9 +142,30 @@ public class LocalUI implements ActionListener {
                 } else {
                     DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
                     File file1 = (File) node.getUserObject();
-                    if (file1.isFile()) {
-                        tree.setSelectionPath(path);
-                        if (e.getButton() == 3) {
+                    if (e.getButton() == 3) {
+                        if (file1.isFile()) {
+                            loadProject.setEnabled(true);
+                            addFolder.setEnabled(false);
+                            reNameFolder.setEnabled(false);
+                            delFolder.setEnabled(false);
+                            addFile.setEnabled(false);
+                            reNameFile.setEnabled(true);
+                            delFile.setEnabled(true);
+                            copy.setEnabled(true);
+                            paste.setEnabled(false);
+                            tree.setSelectionPath(path);
+                            popupMenu.show(tree, e.getX(), e.getY());
+                        } else if (file1.isDirectory()) {
+                            loadProject.setEnabled(false);
+                            addFolder.setEnabled(true);
+                            reNameFolder.setEnabled(true);
+                            delFolder.setEnabled(true);
+                            addFile.setEnabled(true);
+                            reNameFile.setEnabled(false);
+                            delFile.setEnabled(false);
+                            copy.setEnabled(false);
+                            paste.setEnabled(true);
+                            tree.setSelectionPath(path);
                             popupMenu.show(tree, e.getX(), e.getY());
                         }
                     }
@@ -155,8 +194,10 @@ public class LocalUI implements ActionListener {
         DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
         File file1 = (File) node.getUserObject();
         if (file1.exists()) {
+            Util.stopAutoSaveFile();
             LoadProjectFileActionListener listener = new LoadProjectFileActionListener();
             listener.tt(file1, 1);
         }
     }
+
 }
