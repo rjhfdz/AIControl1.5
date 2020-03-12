@@ -14,6 +14,7 @@ import javax.comm.SerialPort;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import javax.usb.UsbPipe;
 
 import com.boray.Data.Data;

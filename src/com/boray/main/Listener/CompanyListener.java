@@ -60,6 +60,8 @@ public class CompanyListener implements ActionListener {
                     editLabel.setText("正在编辑：" + folder.getXmname() + " / " + file.getGcname());
                     selfMotionSave save = new selfMotionSave();
                     save.autoSave();
+                    editLabel = (JLabel) MainUi.map.get("LocalEditLabel");
+                    editLabel.setText("");
                 }
             } else if (button.getText().equals("取消编辑")) {
                 Data.tempWebFolder = null;

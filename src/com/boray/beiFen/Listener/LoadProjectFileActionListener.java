@@ -121,6 +121,8 @@ public class LoadProjectFileActionListener implements ActionListener {
             Data.projectFilePath = file.getParent();
             try {
                 Util.stopAutoSaveFile();
+                JLabel editLabel = (JLabel) MainUi.map.get("LocalEditLabel");
+                editLabel.setText("ÕýÔÚ±à¼­£º" + file.getName());
                 tt(file, type);
             } catch (Exception e2) {
                 e2.printStackTrace();

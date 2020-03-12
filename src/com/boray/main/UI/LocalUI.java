@@ -94,6 +94,9 @@ public class LocalUI implements ActionListener {
         paste.addActionListener(menuListenter);
 
         buttonPanel.add(refresh);
+        JLabel editLabel = new JLabel();
+        MainUi.map.put("LocalEditLabel", editLabel);
+        buttonPanel.add(editLabel);
         panel.add(buttonPanel);
 
         init(panel);
@@ -197,6 +200,8 @@ public class LocalUI implements ActionListener {
             Util.stopAutoSaveFile();
             LoadProjectFileActionListener listener = new LoadProjectFileActionListener();
             listener.tt(file1, 1);
+            JLabel editLabel = (JLabel) MainUi.map.get("LocalEditLabel");
+            editLabel.setText("ÕýÔÚ±à¼­£º" + file1.getName());
         }
     }
 
