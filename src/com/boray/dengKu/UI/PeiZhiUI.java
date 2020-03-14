@@ -14,7 +14,6 @@ import java.util.TreeSet;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -52,6 +51,7 @@ public class PeiZhiUI implements ActionListener{
 		btn2.setPreferredSize(new Dimension(88,34));
 		btn3.setPreferredSize(new Dimension(88,34));
 		btn1.setFocusable(false);btn2.setFocusable(false);btn3.setFocusable(false);
+		btn1.addActionListener(this);
 		btn2.addActionListener(this);
 		btn3.addActionListener(this);
 		//headPane.add(new JLabel("     "));
@@ -152,7 +152,7 @@ public class PeiZhiUI implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if ("新建".equals(e.getActionCommand())) {
 			new DengJuSetDialog().show();
-		} else {
+		} else if("删除".equals(e.getActionCommand())) {
 			NewJTable table = (NewJTable)MainUi.map.get("table_dengJu");
 			int s = table.getSelectedRow();
 			if (s > -1) {
@@ -215,6 +215,8 @@ public class PeiZhiUI implements ActionListener{
 					table.setValueAt(""+(i+1), i, 1);
 				}
 			}
+		}else if("添加RDM灯具信息".equals(e.getActionCommand())){
+			new AddRDMDialog().show();
 		}
 	}
 }

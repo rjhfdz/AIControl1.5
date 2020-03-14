@@ -13,14 +13,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.io.OutputStream;
 import java.util.*;
+import java.util.Timer;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.basic.BasicTableHeaderUI;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -32,6 +27,8 @@ import javax.usb.UsbPipe;
 import com.boray.Data.Data;
 import com.boray.Data.RdmData;
 import com.boray.Data.ZhiLingJi;
+import com.boray.Utils.DragDropRowTableUI;
+import com.boray.dengKu.Listener.RDMTableMoveListener;
 import com.boray.entity.RDM;
 import com.boray.mainUi.MainUi;
 import com.boray.usb.UsbUtil;
@@ -44,6 +41,9 @@ public class RdmPaneUI implements ActionListener {
     //public static Map typeMap = new HashMap();//型号
     //public static Map addAndChannelMap = new HashMap<>();//起始地址、通道
     public static int deviceCount = 0;
+    private JPopupMenu popupMenu;//菜单
+    private JMenuItem moveUpward;//上移
+    private JMenuItem moveDown;//下移
 
     public void show(JPanel pane) {
         pane.setBorder(new LineBorder(Color.gray));
@@ -51,6 +51,20 @@ public class RdmPaneUI implements ActionListener {
         flowLayout.setVgap(0);
         pane.setLayout(flowLayout);
         pane.setPreferredSize(new Dimension(902, 588));
+
+        popupMenu = new JPopupMenu();
+        moveUpward = new JMenuItem("上移");
+        moveDown = new JMenuItem("下移");
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(moveUpward);
+        group.add(moveDown);
+        RDMTableMoveListener listener = new RDMTableMoveListener();
+        moveUpward.addActionListener(listener);
+        moveDown.addActionListener(listener);
+
+        popupMenu.add(moveUpward);
+        popupMenu.add(moveDown);
 
         JPanel headPane = new JPanel();
         FlowLayout flowLayout2 = new FlowLayout(flowLayout.LEFT);
@@ -94,6 +108,7 @@ public class RdmPaneUI implements ActionListener {
         DefaultTableModel model = new DefaultTableModel(data, title);
         final NewJTable table = new NewJTable(model, 3);
         MainUi.map.put("RDM_table", table);
+        table.setUI(new DragDropRowTableUI());
         /////////////////////////
         DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(JTable table,
@@ -177,10 +192,21 @@ public class RdmPaneUI implements ActionListener {
         });
 
         table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                NewJTable t = (NewJTable) e.getSource();
+                if (t.getSelectedRows().length > 0) {
+                    if (e.getButton() == 3) {
+                        popupMenu.show(t, e.getX(), e.getY());
+                    }
+                }
+                super.mouseReleased(e);
+            }
+
             public void mouseClicked(MouseEvent mouseEvent) {
                 NewJTable t = (NewJTable) mouseEvent.getSource();
                 int colIndex = t.columnAtPoint(mouseEvent.getPoint());
-                final int rowIndex = t.rowAtPoint(mouseEvent.getPoint());
+                final int rowIndex = Integer.valueOf(t.getValueAt(t.rowAtPoint(mouseEvent.getPoint()), 2).toString()) - 1;
                 if (colIndex == 7) {
                     if (mouseEvent.getButton() == 1 && mouseEvent.getClickCount() == 2) {
                         new Thread(new Runnable() {
@@ -352,7 +378,7 @@ public class RdmPaneUI implements ActionListener {
                 }
                 for (int i = 0; i < rdms.size(); i++) {
                     String[] s = {String.valueOf(table.getRowCount() + 1), rdms.get(i).getUID(),
-                            "", rdms.get(i).getModel(), rdms.get(i).getDMXStart() + "", rdms.get(i).getAisle() + "", "", "进入高级设置"};
+                            String.valueOf(table.getRowCount() + 1), rdms.get(i).getModel(), rdms.get(i).getDMXStart() + "", rdms.get(i).getAisle() + "", "", "进入高级设置"};
                     uid_Byte.add(rdms.get(i).getUidByte());
                     uidList.add(rdms.get(i).getUidTemp());
                     model.addRow(s);

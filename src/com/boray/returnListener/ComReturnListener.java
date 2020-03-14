@@ -729,7 +729,7 @@ public class ComReturnListener implements Runnable {
                 }
             }
             String[] s = {String.valueOf(table.getRowCount() + 1), uidTemp,
-                    "", "", "", "", "", "进入高级设置"};
+                    String.valueOf(table.getRowCount() + 1), "", "", "", "", "进入高级设置"};
             model.addRow(s);
             RdmPaneUI.uid_Byte.add(uidByte);
             RdmPaneUI.uidList.add(uidTemp);

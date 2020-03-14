@@ -4,8 +4,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.OutputStream;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.JLabel;
 import javax.swing.JList;

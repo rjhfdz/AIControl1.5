@@ -15,12 +15,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
-import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import com.boray.Data.Data;
+import com.boray.Utils.Util;
 import com.boray.mainUi.MainUi;
 
 public class DengJuSetDialog implements ActionListener {
@@ -152,6 +151,20 @@ public class DengJuSetDialog implements ActionListener {
                         JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "通道已超出正常512范围！", "提示", JOptionPane.ERROR_MESSAGE);
                         return;
                     } else {
+                        int srartA = Integer.valueOf(field2.getText()).intValue();
+                        int endA = cnt;
+                        String str = "";
+                        for (int i = 0; i < table.getRowCount(); i++) {
+                            int startB = Integer.valueOf(table.getValueAt(i, 5).toString());
+                            int endB = startB + Integer.valueOf(table.getValueAt(i, 6).toString());
+                            if (Util.checkRepetition(srartA, startB, endA, endB)) {//判断是否重复
+                                str += table.getValueAt(i, 2) + " , ";
+                            }
+                        }
+                        if (!str.equals("")) {
+                            JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "通道与灯具 " + str + "重复！", "提示", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
                         //Data.dengJu_change = true;
 						/*if (table.getRowCount() == 0) {
 							NewJTable table_DMX = (NewJTable)mainUI.map.get("table_DMX_All");

@@ -1,7 +1,6 @@
 package com.boray.Utils;
 
 import com.boray.Data.Data;
-import com.boray.Data.ZhiLingJi;
 import com.boray.mainUi.MainUi;
 
 import javax.swing.*;
@@ -135,12 +134,20 @@ public class Util {
 
     public static void stopAutoSaveFile() {
         JLabel editLabel = (JLabel) MainUi.map.get("CompanyEditLabel");
-        if(editLabel!=null) {
+        if (editLabel != null) {
             editLabel.setText("");
             Data.tempWebFolder = null;
             Data.tempWebFile = null;
             Data.tempEditWebFile = null;
             Data.tempFileAutoSaveTimer = null;
+        }
+    }
+
+    public static boolean checkRepetition(int startA, int startB, int endA, int endB) {
+        if(Math.max(startA,startB)<=Math.min(endA,endB)){
+            return true;
+        }else{
+            return false;
         }
     }
 

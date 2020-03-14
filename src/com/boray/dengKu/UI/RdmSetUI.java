@@ -23,18 +23,16 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
-import javax.usb.UsbPipe;
 
 import com.boray.Data.Data;
 import com.boray.Data.RdmData;
 import com.boray.mainUi.MainUi;
-import com.boray.usb.UsbUtil;
 
 public class RdmSetUI implements ItemListener{
 	private String uid,devType;
 	private JComboBox box4,box5,box6,box7;
+	private JButton button2;
 	public void show(String uid,String devType) {
 		this.uid = uid;
 		this.devType = devType;
@@ -73,6 +71,7 @@ public class RdmSetUI implements ItemListener{
 			}
 		});
 		init(dialog);
+		button2.doClick();
 		dialog.setVisible(true);
 	}
 
@@ -300,7 +299,7 @@ public class RdmSetUI implements ItemListener{
 		}
 		pane.add(box8);
 		
-		JButton button2 = new JButton("Ë¢ÐÂ");
+		button2 = new JButton("Ë¢ÐÂ");
 		button2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				new Thread(new Runnable() {

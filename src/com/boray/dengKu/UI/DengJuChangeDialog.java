@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.boray.Data.Data;
+import com.boray.Utils.Util;
 import com.boray.mainUi.MainUi;
 
 public class DengJuChangeDialog implements ActionListener {
@@ -148,6 +149,22 @@ public class DengJuChangeDialog implements ActionListener {
 						return;
 					}
                 }
+
+                int srartA = Integer.valueOf(field2.getText()).intValue();
+                int endA = cnt;
+                String str = "";
+                for (int i = 0; i < table.getRowCount(); i++) {
+                    int startB = Integer.valueOf(table.getValueAt(i, 5).toString());
+                    int endB = startB + Integer.valueOf(table.getValueAt(i, 6).toString());
+                    if (Util.checkRepetition(srartA, startB, endA, endB)) {//判断是否重复
+                        str += table.getValueAt(i, 2) + " , ";
+                    }
+                }
+                if (!str.equals("")) {
+                    JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "通道与灯具 " + str + "重复！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
                 //Data.dengJu_change = true;
                 table.setValueAt(field.getText(), select, 2);
                 table.setValueAt("ID" + (box.getSelectedIndex() + 1) + "#" + box.getSelectedItem().toString(), select, 3);

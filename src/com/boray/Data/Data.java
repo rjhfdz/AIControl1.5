@@ -17,6 +17,7 @@ public class Data {
 	public static List DengKuVersionList = new ArrayList(20);//灯库版本号
 	public static List dengKuBlackOutAndSpeedList = new ArrayList(20);//灯库对应的熄灯和速度通道
 	public static List GroupOfLightList = new ArrayList(30);//灯具组别
+	public static List<String> dengKuTonDaoList = new ArrayList<>();//灯库自定义通道
 	
 	public static Map YaoMaiMap = new HashMap<>();//摇麦数据
 	public static Map DaoHeCaiMap = new HashMap<>();//声控倒喝彩数据
