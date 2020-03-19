@@ -120,7 +120,7 @@ public class MainLoginUIListener implements ActionListener {
 
         JPanel rjghtPane = new JPanel();
         rjghtPane.setBorder(new LineBorder(Color.gray));
-        rjghtPane.setPreferredSize(new Dimension(160, 570));
+        rjghtPane.setPreferredSize(new Dimension(185, 570));
         new RightPane().show(rjghtPane);
 
         main.add(lightPane);

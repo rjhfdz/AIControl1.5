@@ -25,6 +25,7 @@ import com.boray.Data.DengKuData;
 import com.boray.Data.GetChannelNumber;
 import com.boray.dengKu.Entity.BlackOutEntity;
 import com.boray.dengKu.Entity.SpeedEntity;
+import com.boray.dengKu.UI.AddCustomTonDaoDialog;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
 
@@ -32,8 +33,10 @@ public class DengKuDataListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if ("导入".equals(e.getActionCommand())) {
             importData();
-        } else {
+        } else if ("导出".equals(e.getActionCommand())) {
             exportData();
+        } else if ("自定义通道".equals(e.getActionCommand())) {
+            new AddCustomTonDaoDialog().show();//展示自定义通道界面
         }
     }
 

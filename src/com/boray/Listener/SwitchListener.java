@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
 import com.boray.Data.Data;
+import com.boray.Data.RdmData;
 import com.boray.Data.ZhiLingJi;
 import com.boray.Utils.JPressButton;
 import com.boray.Utils.Socket;
@@ -63,7 +64,7 @@ public class SwitchListener implements ActionListener {
                     OutputStream os = Data.serialPort.getOutputStream();
                     os.write(listener.queryLuZhi());
                     os.flush();
-                }catch (Exception e1){
+                } catch (Exception e1) {
                     e1.printStackTrace();
                 }
             } else if (Data.socket != null) {
@@ -169,7 +170,7 @@ public class SwitchListener implements ActionListener {
                     OutputStream os = Data.serialPort.getOutputStream();
                     os.write(ZhiLingJi.queryUSBFlashDiskState());
                     os.flush();
-                }else if(Data.socket !=null){
+                } else if (Data.socket != null) {
                     Socket.UDPSendData(ZhiLingJi.queryUSBFlashDiskState());
                 }
             } catch (Exception e1) {
@@ -178,7 +179,7 @@ public class SwitchListener implements ActionListener {
         }
         JPanel MenuButtonPanel = (JPanel) MainUi.map.get("MenuButtonPanel");
         for (int i = 0; i < MenuButtonPanel.getComponentCount(); i++) {
-            if(MenuButtonPanel.getComponent(i) instanceof JPressButton) {
+            if (MenuButtonPanel.getComponent(i) instanceof JPressButton) {
                 JPressButton button = (JPressButton) MenuButtonPanel.getComponent(i);
                 if (button.isSelected()) {
                     button.setForeground(Color.black);
@@ -186,6 +187,11 @@ public class SwitchListener implements ActionListener {
                     button.setForeground(Color.WHITE);
                 }
             }
+        }
+        if (!btn.getName().equals("2")) {
+            Socket.SerialPortSendData(RdmData.quit());
+        } else {
+            Socket.SerialPortSendData(RdmData.access());
         }
         selected = btn.getName();
         cardLayout.show(parentPane, btn.getName());

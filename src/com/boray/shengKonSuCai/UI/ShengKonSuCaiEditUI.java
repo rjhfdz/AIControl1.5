@@ -21,7 +21,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.OutputStream;
 import java.util.*;
 
 public class ShengKonSuCaiEditUI {

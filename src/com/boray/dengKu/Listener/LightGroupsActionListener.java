@@ -44,6 +44,11 @@ public class LightGroupsActionListener implements ActionListener {
                             model.removeRow(selects[i]);
                         }
 					}
+                }else{
+                    for (int i = selects.length - 1; i >= 0; i--) {
+                        treeSet.remove(Integer.valueOf(table.getValueAt(selects[i], 0).toString().split("#")[0].substring(2)).intValue() - 1);
+                        model.removeRow(selects[i]);
+                    }
                 }
 
             }

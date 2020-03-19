@@ -18,7 +18,6 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/usbJava.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/comm.jar" path-in-jar="/" />
       <element id="library" level="project" name="httpmime-4.1.1-sources" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/beautyeye_lnf.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/httpclient-4.5.5.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/substance.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/src/lib/httpmime-4.3.5.jar" path-in-jar="/" />

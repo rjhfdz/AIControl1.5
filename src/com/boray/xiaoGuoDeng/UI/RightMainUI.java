@@ -1,6 +1,5 @@
 package com.boray.xiaoGuoDeng.UI;
 
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -17,24 +16,17 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import com.boray.Data.Data;
 import com.boray.Data.XiaoGuoDengModel;
-import com.boray.fileCompare.Compare;
 import com.boray.mainUi.MainUi;
-import com.boray.xiaoGuoDeng.Listener.CreateTimeBlockListener;
-import com.boray.xiaoGuoDeng.Listener.DMXAndModelListener;
-import com.boray.xiaoGuoDeng.Listener.ModelCopyActionListener;
+import com.boray.xiaoGuoDeng.Listener.*;
 import com.boray.xiaoGuoDeng.reviewBlock.ReviewBlock;
-import com.boray.xiaoGuoDeng.reviewCode.ReviewUtils;
 
 public class RightMainUI {
     public static Image image, offScreenImage;
@@ -74,7 +66,7 @@ public class RightMainUI {
 //							}
                         } else if (Data.socket != null) {
 //							ReviewBlock.saveFile(XiaoGuoDengModel.model);
-							ReviewBlock.socketReview(XiaoGuoDengModel.model);
+                            ReviewBlock.socketReview(XiaoGuoDengModel.model);
                         }
                         button.setEnabled(true);
                     }
@@ -183,6 +175,8 @@ public class RightMainUI {
         pane.setPreferredSize(new Dimension(92, 1110));
         JLabel[] labels = new JLabel[31];
         MainUi.map.put("labels_group" + Number, labels);
+        JLabel label = new JLabel("所有灯组");
+        MainUi.map.put("SuoYouDengZuLabel" + Number, label);
         for (int i = 0; i < labels.length; i++) {
             if (i == 0) {
                 labels[i] = new JLabel("DMX录制");
@@ -190,6 +184,14 @@ public class RightMainUI {
                 labels[i].addMouseListener(listener);
             } else {
                 labels[i] = new JLabel("组" + i);
+            }
+            if (i == 1) {
+                label.setOpaque(true);
+                label.setBackground(new Color(243, 243, 243));
+                label.setPreferredSize(new Dimension(88, 30));
+                label.setHorizontalAlignment(SwingConstants.CENTER);
+                label.setBorder(new LineBorder(Color.gray));
+                pane.add(label);
             }
             labels[i].setOpaque(true);
             labels[i].setBackground(new Color(243, 243, 243));
@@ -210,7 +212,7 @@ public class RightMainUI {
         scrollPane.getVerticalScrollBar().setUnitIncrement(30);
         //scrollPane.setHorizontalScrollBarPolicy( JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         //scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        //scrollPane.setBorder(new LineBorder(Color.black));
+        //scrollPane.setBorder(new LineBorder(Color.black));大家都在发
         JPanel parentPane = new JPanel();
         MainUi.map.put("xiaoGuoParentPane" + Number, parentPane);
         parentPane.setPreferredSize(new Dimension(10000, 1096));
@@ -221,6 +223,8 @@ public class RightMainUI {
         CreateTimeBlockListener listener = new CreateTimeBlockListener();
         //FlowLayout flowLayout3 = new FlowLayout(FlowLayout.LEFT);
         //flowLayout3.setHgap(0);flowLayout3.setVgap(0);
+        JPanel panel = new JPanel();
+        MainUi.map.put("SuoYouDengZuPanel" + Number, panel);
         for (int i = 0; i < timeBlockPanels.length; i++) {
             timeBlockPanels[i] = new JPanel();
             timeBlockPanels[i].setLayout(null);
@@ -238,6 +242,20 @@ public class RightMainUI {
                 lable2.setBackground(Color.green);
                 timeBlockPanels[i].add(lable2);
             }*/
+            if (i == 1) {
+                panel.setLayout(null);
+                panel.setBorder(new LineBorder(Color.gray));
+                panel.setPreferredSize(new Dimension(10000, 30));
+                panel.setBackground(new Color(192, 192, 192));
+                panel.setOpaque(true);
+                panel.setEnabled(false);
+                DefineJLable3 lable3 = new DefineJLable3("所有灯库", panel);
+                MainUi.map.put("SuoYouDengZuLable"+Number,lable3);
+                panel.add(lable3);
+                SuoYouDengZuPanelMouseListener suoYouDengZuPanelMouseListener = new SuoYouDengZuPanelMouseListener();
+                panel.addMouseListener(suoYouDengZuPanelMouseListener);
+                parentPane.add(panel);
+            }
             parentPane.add(timeBlockPanels[i]);
         }
         scrollPane.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {

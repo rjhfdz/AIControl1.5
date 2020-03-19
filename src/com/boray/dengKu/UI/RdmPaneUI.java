@@ -28,7 +28,7 @@ import com.boray.Data.Data;
 import com.boray.Data.RdmData;
 import com.boray.Data.ZhiLingJi;
 import com.boray.Utils.DragDropRowTableUI;
-import com.boray.dengKu.Listener.RDMTableMoveListener;
+import com.boray.Utils.Socket;
 import com.boray.entity.RDM;
 import com.boray.mainUi.MainUi;
 import com.boray.usb.UsbUtil;
@@ -36,14 +36,15 @@ import com.boray.usb.UsbUtil;
 public class RdmPaneUI implements ActionListener {
     public static List uidList = new ArrayList(15);//Uid
     public static List uid_Byte = new ArrayList(15);//Uid byte格式
+    public static List tempUidList = new ArrayList(15);//Uid
+    public static List tempUid_Byte = new ArrayList(15);//Uid byte格式
     public static boolean openSet = false;
     public static byte[] currentByte = null;
     //public static Map typeMap = new HashMap();//型号
     //public static Map addAndChannelMap = new HashMap<>();//起始地址、通道
     public static int deviceCount = 0;
-    private JPopupMenu popupMenu;//菜单
-    private JMenuItem moveUpward;//上移
-    private JMenuItem moveDown;//下移
+    private JPopupMenu popupMenu;
+    private JMenuItem autoCreateDMX;
 
     public void show(JPanel pane) {
         pane.setBorder(new LineBorder(Color.gray));
@@ -52,19 +53,6 @@ public class RdmPaneUI implements ActionListener {
         pane.setLayout(flowLayout);
         pane.setPreferredSize(new Dimension(902, 588));
 
-        popupMenu = new JPopupMenu();
-        moveUpward = new JMenuItem("上移");
-        moveDown = new JMenuItem("下移");
-
-        ButtonGroup group = new ButtonGroup();
-        group.add(moveUpward);
-        group.add(moveDown);
-        RDMTableMoveListener listener = new RDMTableMoveListener();
-        moveUpward.addActionListener(listener);
-        moveDown.addActionListener(listener);
-
-        popupMenu.add(moveUpward);
-        popupMenu.add(moveDown);
 
         JPanel headPane = new JPanel();
         FlowLayout flowLayout2 = new FlowLayout(flowLayout.LEFT);
@@ -74,6 +62,8 @@ public class RdmPaneUI implements ActionListener {
         //headPane.setBorder(new LineBorder(Color.gray));
         //JButton btn1 = new JButton("添加RDM灯具信息");
         JButton btn2 = new JButton("搜索");
+        JButton btn5 = new JButton("刷新");
+        MainUi.map.put("RDMRefresh", btn5);
         MainUi.map.put("RDMSearch", btn2);
         JButton btn3 = new JButton("退出RDM");
         JButton btn4 = new JButton("DMX排序");
@@ -81,15 +71,59 @@ public class RdmPaneUI implements ActionListener {
         btn2.setPreferredSize(new Dimension(88, 34));
         btn3.setPreferredSize(new Dimension(88, 34));
         btn4.setPreferredSize(new Dimension(88, 34));
+        btn5.setPreferredSize(new Dimension(88, 34));
         //btn1.setFocusable(false);btn2.setFocusable(false);btn3.setFocusable(false);
         btn2.addActionListener(this);
         btn3.addActionListener(this);
         btn4.addActionListener(this);
+        btn5.addActionListener(this);
         //headPane.add(new JLabel("     "));
         //headPane.add(btn1);
         headPane.add(btn2);
+        headPane.add(btn5);
         headPane.add(btn3);
         headPane.add(btn4);
+
+        popupMenu = new JPopupMenu();
+        autoCreateDMX = new JMenuItem("自动生成DMX");
+        ButtonGroup group = new ButtonGroup();
+        group.add(autoCreateDMX);
+        popupMenu.add(autoCreateDMX);
+
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                NewJTable table = (NewJTable) MainUi.map.get("RDM_table");
+                int[] a = table.getSelectedRows();
+                int count = 0;
+                count = (Integer.parseInt(table.getValueAt(a[0], 4).toString()) + Integer.parseInt(table.getValueAt(a[0], 5).toString()));
+                for (int i = 0; i < a.length - 1; i++) {
+                    count += Integer.parseInt(table.getValueAt(a[i], 5).toString());
+                }
+                if (count > 512) {
+                    JFrame frame = (JFrame) MainUi.map.get("frame");
+                    JOptionPane.showMessageDialog(frame, "起始地址范围1 - 512！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                try {
+                    count = (Integer.parseInt(table.getValueAt(a[0], 4).toString()) + Integer.parseInt(table.getValueAt(a[0], 5).toString()));
+                    for (int i = 0; i < a.length - 1; i++) {
+                        byte[] b = new byte[3];
+                        b[0] = 2;
+                        b[1] = (byte) (count / 256);
+                        b[2] = (byte) (count % 256);
+                        int s = Integer.parseInt(table.getValueAt(a[i + 1], 2).toString()) - 1;
+                        Socket.SerialPortSendData(RdmData.setType((byte[]) uid_Byte.get(s), 3, b));
+                        table.setValueAt(count, a[i + 1], 4);
+                        Thread.sleep(300);
+                        count += Integer.parseInt(table.getValueAt(a[i + 1], 5).toString());
+                    }
+                } catch (Exception e1) {
+                    e1.printStackTrace();
+                }
+            }
+        };
+        autoCreateDMX.addActionListener(listener);
 
         JScrollPane bodyPane = new JScrollPane();
         setBodyPane(bodyPane);
@@ -194,13 +228,10 @@ public class RdmPaneUI implements ActionListener {
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
-                NewJTable t = (NewJTable) e.getSource();
-                if (t.getSelectedRows().length > 0) {
-                    if (e.getButton() == 3) {
-                        popupMenu.show(t, e.getX(), e.getY());
-                    }
-                }
                 super.mouseReleased(e);
+                if (e.getButton() == 3 && table.getSelectedRows().length > 1) {
+                    popupMenu.show(table, e.getX(), e.getY());
+                }
             }
 
             public void mouseClicked(MouseEvent mouseEvent) {
@@ -329,26 +360,7 @@ public class RdmPaneUI implements ActionListener {
             }
         } else if ("退出RDM".equals(e.getActionCommand())) {
             if (Data.serialPort != null) {
-                try {
-                    //FA 14 60 BA 11 00 F0 00 00 00 00 00 00 00 00 00 00 00 00 29
-                    byte[] b = new byte[20];
-                    //b[0] = (byte)0xCC;b[1] = (byte)0xAA;
-                    //b[2] = (byte)0x02;b[3] = (byte)0x3C;
-
-                    b[0] = (byte) 0xFA;
-                    b[1] = (byte) 0x14;
-                    b[2] = (byte) 0x60;
-                    b[3] = (byte) ZhiLingJi.TYPE;
-                    b[4] = (byte) 0x11;
-                    b[5] = (byte) 0x00;
-                    b[6] = (byte) 0xF0;
-                    b[19] = (byte) ZhiLingJi.getJiaoYan(b);
-                    OutputStream os = Data.serialPort.getOutputStream();
-                    os.write(b);
-                    os.flush();
-                } catch (Exception e2) {
-                    e2.printStackTrace();
-                }
+                Socket.SerialPortSendData(RdmData.quit());
             } else {
                 JFrame frame = (JFrame) MainUi.map.get("frame");
                 JOptionPane.showMessageDialog(frame, "还未连接设备！", "提示", JOptionPane.ERROR_MESSAGE);
@@ -383,6 +395,101 @@ public class RdmPaneUI implements ActionListener {
                     uidList.add(rdms.get(i).getUidTemp());
                     model.addRow(s);
                 }
+            }
+        } else if ("刷新".equals(e.getActionCommand())) {
+            try {
+                final JButton btn = (JButton) e.getSource();
+                btn.setEnabled(false);
+                openSet = false;
+                new Timer().schedule(new TimerTask() {
+                    public void run() {
+                        //刷新现有数据
+                        if (RdmPaneUI.uidList.size() != 0) {
+                            try {
+                                //查型号
+                                for (int j = 0; j < RdmPaneUI.uid_Byte.size(); j++) {
+                                    Socket.SerialPortSendData(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(j), 5));
+                                    Thread.sleep(300);
+                                }
+                                //查起始地址、通道数
+                                for (int j = 0; j < RdmPaneUI.uid_Byte.size(); j++) {
+                                    Socket.SerialPortSendData(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(j), 1));
+                                    Thread.sleep(300);
+                                }
+                                NewJTable table = (NewJTable) MainUi.map.get("RDM_table");
+                                for (int n = 0; n < 5; n++) {
+                                    Thread.sleep(100);
+                                    for (int i = 0; i < table.getRowCount(); i++) {
+                                        for (int j = 3; j < 6; j++) {
+                                            if ("".equals(table.getValueAt(i, j).toString())) {
+                                                if (j == 3) {
+                                                    Socket.SerialPortSendData(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(i), 5));
+                                                    Thread.sleep(500);
+                                                } else {
+                                                    Socket.SerialPortSendData(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(i), 1));
+                                                    Thread.sleep(500);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }, 8000);
+                Socket.SerialPortSendData(RdmData.serch());//重新发送查询UID  刷新
+                new Timer().schedule(new TimerTask() {
+                    public void run() {
+                        if (RdmPaneUI.tempUidList.size() != 0) {
+                            try {
+                                //查型号
+                                for (int j = 0; j < RdmPaneUI.tempUid_Byte.size(); j++) {
+                                    Socket.SerialPortSendData(RdmData.serchType((byte[]) RdmPaneUI.tempUid_Byte.get(j), 5));
+                                    Thread.sleep(300);
+                                }
+                                //查起始地址、通道数
+                                for (int j = 0; j < RdmPaneUI.tempUid_Byte.size(); j++) {
+                                    Socket.SerialPortSendData(RdmData.serchType((byte[]) RdmPaneUI.tempUid_Byte.get(j), 1));
+                                    Thread.sleep(300);
+                                }
+                                NewJTable table = (NewJTable) MainUi.map.get("RDM_table");
+                                for (int n = 0; n < 5; n++) {
+                                    Thread.sleep(100);
+                                    for (int i = 0; i < table.getRowCount(); i++) {
+                                        for (int j = 3; j < 6; j++) {
+                                            if ("".equals(table.getValueAt(i, j).toString())) {
+                                                if (j == 3) {
+                                                    Socket.SerialPortSendData(RdmData.serchType((byte[]) RdmPaneUI.tempUid_Byte.get(i), 5));
+                                                    Thread.sleep(500);
+                                                } else {
+                                                    Socket.SerialPortSendData(RdmData.serchType((byte[]) RdmPaneUI.tempUid_Byte.get(i), 1));
+                                                    Thread.sleep(500);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                for (int i = 0; i < RdmPaneUI.tempUidList.size(); i++) {
+                                    RdmPaneUI.uidList.add(RdmPaneUI.tempUidList.get(i));
+                                    RdmPaneUI.uid_Byte.add(RdmPaneUI.tempUid_Byte.get(i));
+                                }
+                                //清除临时数据
+                                RdmPaneUI.tempUidList.clear();
+                                RdmPaneUI.tempUid_Byte.clear();
+                                btn.setEnabled(true);
+                            } catch (Exception e) {
+                                btn.setEnabled(true);
+                                e.printStackTrace();
+                            }
+                        } else {
+                            btn.setEnabled(true);
+                        }
+                    }
+                }, 8000);
+            } catch (Exception e1) {
+                e1.printStackTrace();
             }
         }
     }

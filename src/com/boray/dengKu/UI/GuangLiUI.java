@@ -308,13 +308,16 @@ public class GuangLiUI implements ActionListener {
         JButton delBtn = new JButton("删除");
         JButton exportBtn = new JButton("导出");
         JButton importBtn = new JButton("导入");
+        JButton customBtn = new JButton("自定义通道");
         newBtn.setPreferredSize(new Dimension(68, 32));
         delBtn.setPreferredSize(new Dimension(68, 32));
-        exportBtn.setPreferredSize(new Dimension(88, 32));
-        importBtn.setPreferredSize(new Dimension(88, 32));
+        exportBtn.setPreferredSize(new Dimension(68, 32));
+        importBtn.setPreferredSize(new Dimension(68, 32));
+        customBtn.setPreferredSize(new Dimension(100,32));
         DengKuDataListener listener2 = new DengKuDataListener();
         exportBtn.addActionListener(listener2);
         importBtn.addActionListener(listener2);
+        customBtn.addActionListener(listener2);
         newBtn.addActionListener(this);
         delBtn.addActionListener(this);
         newBtn.setFocusable(false);
@@ -335,7 +338,7 @@ public class GuangLiUI implements ActionListener {
 
         headPane.add(exportBtn);
         headPane.add(importBtn);
-
+//        headPane.add(customBtn);
         pane.add(headPane);
         JLabel labe = new JLabel(" ");
         labe.setPreferredSize(new Dimension(188, 28));

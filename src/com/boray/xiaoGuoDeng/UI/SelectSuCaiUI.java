@@ -27,6 +27,7 @@ public class SelectSuCaiUI {
     private Map map;
     private Map nameMap;
     private int dengKuId;
+    private String dengKuName;
 
     public void show(JPanel pane) {
         JFrame f = (JFrame) MainUi.map.get("frame");
@@ -169,6 +170,14 @@ public class SelectSuCaiUI {
                                 model.addElement(suCaiNameAndNumber);
                             }
                             list.setSelectedIndex(model.getSize() - 1);
+                            if(map==null) {
+                                map = new HashMap();
+                                Data.suCaiMap.put(dengKuName, map);
+                            }
+                            if(nameMap==null) {
+                                nameMap = new HashMap();
+                                Data.suCaiNameMap.put(dengKuName, nameMap);
+                            }
                             for (int i = 0; i < btns.length; i++) {
                                 if (btns[i].isSelected()) {
                                     List tmp = (List) map.get("" + i);
@@ -232,6 +241,7 @@ public class SelectSuCaiUI {
                 String str = ((String) table_dengJu.getValueAt(s1 - 1, 3)).split("#")[0];
                 dengKuId = Integer.parseInt(str.substring(2));
                 map = (Map) Data.suCaiMap.get(s2);
+                dengKuName = s2;
             }
         }
 

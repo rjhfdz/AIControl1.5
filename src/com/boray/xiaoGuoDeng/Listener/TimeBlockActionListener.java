@@ -1,6 +1,5 @@
 package com.boray.xiaoGuoDeng.Listener;
 
-import java.awt.Color;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,8 +11,6 @@ import com.boray.Data.Data;
 import com.boray.Data.MyColor;
 import com.boray.Data.XiaoGuoDengModel;
 import com.boray.Utils.CloneUtils;
-import com.boray.dengKu.UI.NewJTable;
-import com.boray.mainUi.MainUi;
 import com.boray.xiaoGuoDeng.UI.DefineJLable;
 import com.boray.xiaoGuoDeng.UI.SelectSuCaiUI;
 

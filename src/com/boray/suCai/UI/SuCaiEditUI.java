@@ -11,7 +11,6 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -142,8 +141,6 @@ public class SuCaiEditUI {
         tabbedPane.setFocusable(false);
         tabbedPane.setPreferredSize(new Dimension(700, 570));
 
-        getDengZuComBox(comboBox);
-
         //预览的监听
         timeBlockReviewActionListener = new TimeBlockReviewActionListener(comboBox, denKuNum, suCaiNum - 1);
         timeBlockStopReviewActionListener = new TimeBlockStopReviewActionListener(comboBox, 1, 1);
@@ -216,6 +213,7 @@ public class SuCaiEditUI {
 		typeString = table3.getValueAt(i, 3).toString();*/
         //dengKuNumber = Integer.valueOf(typeString.split("#")[0].substring(2)).intValue()-1;
         dengKuNumber = denKuNum;
+        getDengZuComBox(comboBox);
         HashMap map = (HashMap) Data.DengKuList.get(dengKuNumber);
         String tempString = "";
         int count = Integer.valueOf((String) Data.DengKuChannelCountList.get(dengKuNumber)).intValue();
@@ -2624,43 +2622,68 @@ public class SuCaiEditUI {
      * @param box
      */
     public void getDengZuComBox(JComboBox box) {
-        JList suCaiList = (JList) MainUi.map.get("suCaiLightType");
-        int selectIndex = suCaiList.getSelectedIndex();//获得该素材选中的灯库
-        NewJTable table = (NewJTable) MainUi.map.get("GroupTable");//灯具分组
+//        JList suCaiList = (JList) MainUi.map.get("suCaiLightType");
+        int selectIndex = dengKuNumber;//获得该素材选中的灯库
         NewJTable table3 = (NewJTable) MainUi.map.get("allLightTable");//所有灯具
-        NewJTable table4 = (NewJTable) MainUi.map.get("table_dengJu");//灯具配置
+        NewJTable table = (NewJTable) MainUi.map.get("GroupTable");//灯具分组
+        NewJTable table_dengJu = (NewJTable) MainUi.map.get("table_dengJu");//灯具配置
 
         List<String> list = new ArrayList<>();
-
-        //得到所有灯具分组的组内灯具
-        Map<String, List<String>> map = new HashMap();
         for (int i = 0; i < table.getRowCount(); i++) {
             TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(i);
-            List<String> str = new ArrayList<>();
-            if (treeSet.size() > 0) {
-                Iterator iterator = treeSet.iterator();
-                while (iterator.hasNext()) {
-                    int j = (int) iterator.next();
-                    if (j < table3.getRowCount()) {
-                        String s = table3.getValueAt(j, 0).toString();
-                        str.add(s);
+            Iterator iterator = treeSet.iterator();
+            String s = "";
+            while (iterator.hasNext()) {
+                int a = (int) iterator.next();
+                if (table3.getRowCount() > 0) {
+                    s = table3.getValueAt(a, 0).toString();
+                    Integer s1 = Integer.parseInt(s.split("#")[0].substring(2));//组内灯具的灯具id
+                    String s2 = ((String) table_dengJu.getValueAt(s1 - 1, 3)).split("#")[0];//灯库名称
+                    int c = Integer.parseInt(s2.substring(2)) - 1;
+                    if (selectIndex == c) {
+                        String ss = table.getValueAt(i, 1) + "#" + table.getValueAt(i, 2);
+                        list.add(ss);
+                        break;
                     }
                 }
             }
-            map.put(i + "", str);
         }
-        for (String s : map.keySet()) {
-            List<String> str = map.get(s);
-            for (int i = 0; i < str.size(); i++) {
-                int c = Integer.parseInt(str.get(i).substring(2, str.get(i).indexOf("#")));
-                int dengKuId = Integer.parseInt(table4.getValueAt(c - 1, 3).toString().split("#")[0].substring(2)) - 1;
-                if (selectIndex == dengKuId) {
-                    String ss = table.getValueAt(Integer.parseInt(s), 1) + "#" + table.getValueAt(Integer.parseInt(s), 2);
-                    list.add(ss);
-                    break;
-                }
-            }
-        }
+
+//        NewJTable table = (NewJTable) MainUi.map.get("GroupTable");//灯具分组
+//
+//        NewJTable table4 = (NewJTable) MainUi.map.get("table_dengJu");//灯具配置
+//
+
+//
+//        //得到所有灯具分组的组内灯具
+//        Map<String, List<String>> map = new HashMap();
+//        for (int i = 0; i < table.getRowCount(); i++) {
+//            TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(i);
+//            List<String> str = new ArrayList<>();
+//            if (treeSet.size() > 0) {
+//                Iterator iterator = treeSet.iterator();
+//                while (iterator.hasNext()) {
+//                    int j = (int) iterator.next();
+//                    if (j < table3.getRowCount()) {
+//                        String s = table3.getValueAt(j, 0).toString();
+//                        str.add(s);
+//                    }
+//                }
+//            }
+//            map.put(i + "", str);
+//        }
+//        for (String s : map.keySet()) {
+//            List<String> str = map.get(s);
+//            for (int i = 0; i < str.size(); i++) {
+//                int c = Integer.parseInt(str.get(i).substring(2, str.get(i).indexOf("#")));
+//                int dengKuId = Integer.parseInt(table4.getValueAt(c - 1, 3).toString().split("#")[0].substring(2)) - 1;
+//                if (selectIndex == dengKuId) {
+//                    String ss = table.getValueAt(Integer.parseInt(s), 1) + "#" + table.getValueAt(Integer.parseInt(s), 2);
+//                    list.add(ss);
+//                    break;
+//                }
+//            }
+//        }
 
         for (int i = 0; i < list.size(); i++) {
             box.addItem(list.get(i));

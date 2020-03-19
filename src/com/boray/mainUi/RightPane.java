@@ -37,7 +37,7 @@ public class RightPane implements ActionListener {
 
     public void show(JPanel pane) {
         JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(150, 140));
+        panel.setPreferredSize(new Dimension(180, 140));
         TitledBorder tb2 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "网络连接", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         panel.setBorder(tb2);
         final JTextField IpAddress = new JTextField(10);
@@ -94,7 +94,7 @@ public class RightPane implements ActionListener {
 //        pane2.setLayout(flowLayout2);
         TitledBorder tb1 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "设备连接", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         pane2.setBorder(tb1);
-        pane2.setPreferredSize(new Dimension(150, 100));
+        pane2.setPreferredSize(new Dimension(180, 100));
         JLabel COMLabel = new JLabel("端口:");
         pane2.add(COMLabel);
         comCheckBox = new JComboBox();
@@ -114,7 +114,7 @@ public class RightPane implements ActionListener {
                 super.mouseClicked(e);
                 try {
                     Map<String, String> map = WinRegistry.valuesForPath(WinRegistry.HKEY_LOCAL_MACHINE, "HARDWARE\\DEVICEMAP\\SERIALCOMM");
-                    if(map.size()>0) {
+                    if (map.size() > 0) {
                         comCheckBox.removeAllItems();
                         for (String str : map.values()) {
                             comCheckBox.addItem(str);
@@ -190,8 +190,44 @@ public class RightPane implements ActionListener {
 //        N1.add(restartBtn);
         pane.add(pane2);
         pane.add(panel);
+        JPanel pane3 = new JPanel();
+        setArtNetPanel(pane3, flowLayout2);
+        pane.add(pane3);
         pane.add(restartBtn);
 
+    }
+
+    public void setArtNetPanel(JPanel pane3, FlowLayout flowLayout2) {
+        pane3.setLayout(flowLayout2);
+        TitledBorder tb3 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "ArtNet", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
+        pane3.setBorder(tb3);
+        pane3.setPreferredSize(new Dimension(180, 145));
+        pane3.add(new JLabel("  IP1:"));
+        JTextField artNet1 = new JTextField(11);
+        artNet1.setHorizontalAlignment(JTextField.CENTER);
+        pane3.add(artNet1);
+        pane3.add(new JLabel("  IP2:"));
+        JTextField artNet2 = new JTextField(11);
+        artNet2.setHorizontalAlignment(JTextField.CENTER);
+        pane3.add(artNet2);
+        pane3.add(new JLabel("Port1:"));
+        JTextField port1 = new JTextField(3);
+        port1.setHorizontalAlignment(JTextField.CENTER);
+        pane3.add(port1);
+        pane3.add(new JLabel("Port2:"));
+        JTextField port2 = new JTextField(3);
+        port2.setHorizontalAlignment(JTextField.CENTER);
+        pane3.add(port2);
+        JButton button4 = new JButton("连接");
+        JButton button5 = new JButton("断开");
+        ButtonGroup group3 = new ButtonGroup();
+        group3.add(button4);
+        group3.add(button5);
+        button5.setSelected(true);
+        button4.setPreferredSize(new Dimension(56, 32));
+        button5.setPreferredSize(new Dimension(56, 32));
+        pane3.add(button4);
+        pane3.add(button5);
     }
 
     @Override

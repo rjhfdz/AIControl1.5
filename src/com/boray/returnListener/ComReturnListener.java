@@ -723,16 +723,27 @@ public class ComReturnListener implements Runnable {
             }
             NewJTable table = (NewJTable) MainUi.map.get("RDM_table");
             DefaultTableModel model = (DefaultTableModel) table.getModel();
-            if (RdmPaneUI.uidList.size() == 0) {
-                for (int i = table.getRowCount() - 1; i >= 0; i--) {
-                    model.removeRow(i);
+            JButton btn = (JButton) MainUi.map.get("RDMRefresh");
+            if(!btn.isEnabled()){
+                if(!RdmPaneUI.uidList.contains(uidTemp)) {
+                    String[] s = {String.valueOf(table.getRowCount() + 1), uidTemp,
+                            String.valueOf(table.getRowCount() + 1), "", "", "", "", "进入高级设置"};
+                    model.addRow(s);
+                    RdmPaneUI.tempUid_Byte.add(uidByte);
+                    RdmPaneUI.tempUidList.add(uidTemp);
                 }
+            }else {
+                if (RdmPaneUI.uidList.size() == 0) {
+                    for (int i = table.getRowCount() - 1; i >= 0; i--) {
+                        model.removeRow(i);
+                    }
+                }
+                String[] s = {String.valueOf(table.getRowCount() + 1), uidTemp,
+                        String.valueOf(table.getRowCount() + 1), "", "", "", "", "进入高级设置"};
+                model.addRow(s);
+                RdmPaneUI.uid_Byte.add(uidByte);
+                RdmPaneUI.uidList.add(uidTemp);
             }
-            String[] s = {String.valueOf(table.getRowCount() + 1), uidTemp,
-                    String.valueOf(table.getRowCount() + 1), "", "", "", "", "进入高级设置"};
-            model.addRow(s);
-            RdmPaneUI.uid_Byte.add(uidByte);
-            RdmPaneUI.uidList.add(uidTemp);
         } else if ("21".equals(hex0)) {
             hex0 = Integer.toHexString(b[8 - ld] & 0xFF);
             if ("5".equals(hex0) && b.length >= 32) {//查型号

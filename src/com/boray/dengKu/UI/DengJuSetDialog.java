@@ -155,10 +155,12 @@ public class DengJuSetDialog implements ActionListener {
                         int endA = cnt;
                         String str = "";
                         for (int i = 0; i < table.getRowCount(); i++) {
-                            int startB = Integer.valueOf(table.getValueAt(i, 5).toString());
-                            int endB = startB + Integer.valueOf(table.getValueAt(i, 6).toString());
-                            if (Util.checkRepetition(srartA, startB, endA, endB)) {//ÅÐ¶ÏÊÇ·ñÖØ¸´
-                                str += table.getValueAt(i, 2) + " , ";
+                            if (i != table.getSelectedRow()) {
+                                int startB = Integer.valueOf(table.getValueAt(i, 5).toString());
+                                int endB = startB + Integer.valueOf(table.getValueAt(i, 6).toString());
+                                if (Util.checkRepetition(srartA + 1, startB, endA, endB)) {//ÅÐ¶ÏÊÇ·ñÖØ¸´
+                                    str += table.getValueAt(i, 2) + " , ";
+                                }
                             }
                         }
                         if (!str.equals("")) {

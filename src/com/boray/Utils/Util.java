@@ -145,7 +145,11 @@ public class Util {
 
     public static boolean checkRepetition(int startA, int startB, int endA, int endB) {
         if(Math.max(startA,startB)<=Math.min(endA,endB)){
-            return true;
+            if(startA==endB||startB==endA){
+                return false;
+            }else{
+                return true;
+            }
         }else{
             return false;
         }

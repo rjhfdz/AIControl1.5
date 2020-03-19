@@ -33,6 +33,8 @@ public class Data {
 	 * 24表示24个模式，30表示30组，20表示20个时间块
 	 */
 	public static Object[][][] XiaoGuoDengObjects = new Object[24][30][20];//效果灯编程各个时间快对应的数据
+
+	public static Map XiaoGuoDengModelDmxMap = new HashMap();//效果灯编程模式叠加DMX数据
 	
 	/*
 	 * 素材数据
@@ -207,4 +209,5 @@ public class Data {
 	public static int sendDataSum;//记录发包
 
 	public static Timer checkUserLogin;//检查用户状态定时器
+
 }
