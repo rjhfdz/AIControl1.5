@@ -1,12 +1,7 @@
 package com.boray.xiaoGuoDeng.reviewBlock;
 
 import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
-import java.util.Vector;
+import java.util.*;
 
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -20,6 +15,7 @@ import com.boray.dengKu.Entity.SpeedEntity;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
 import com.boray.xiaoGuoDeng.UI.DefineJLable;
+import com.boray.xiaoGuoDeng.UI.DefineJLable3;
 import com.boray.xiaoGuoDeng.reviewCode.ReviewUtils;
 
 public class TimeBlockReviewData {
@@ -298,6 +294,48 @@ public class TimeBlockReviewData {
         return temp;
     }
 
+    /**
+     * 效果多灯 启动预览
+     * @param sc
+     * @return
+     */
+    public static byte[] getStarReview3(int sc){
+        byte[] temp = new byte[15];
+        temp[0] = (byte) 0xBB;
+        temp[1] = (byte) 0x55;
+        temp[2] = (byte) ((15) / 256);
+        temp[3] = (byte) ((15) % 256);
+        temp[4] = (byte) 0x86;
+        temp[5] = (byte) 0x01;
+        temp[6] = (byte) 0xF1;
+        temp[7] = (byte) sc;
+        temp[8] = (byte) 0xFF;
+        temp[9] = (byte) 0xFF;
+        temp[14] = ZhiLingJi.getJiaoYan(temp);
+        return temp;
+    }
+
+    /**
+     * 效果多灯 停止预览
+     * @param sc
+     * @return
+     */
+    public static byte[] getStopReview3(int sc){
+        byte[] temp = new byte[15];
+        temp[0] = (byte) 0xBB;
+        temp[1] = (byte) 0x55;
+        temp[2] = (byte) ((15) / 256);
+        temp[3] = (byte) ((15) % 256);
+        temp[4] = (byte) 0x86;
+        temp[5] = (byte) 0x01;
+        temp[6] = (byte) 0xF0;
+        temp[7] = (byte) sc;
+        temp[8] = (byte) 0xFF;
+        temp[9] = (byte) 0xFF;
+        temp[14] = ZhiLingJi.getJiaoYan(temp);
+        return temp;
+    }
+
     public static Object[] getEffectLight(int sc, int group, int block, int index) {
         byte[] b = getEffectLightToOne2(sc, group, block, index);
         int packet = (b.length - 9) / 512 + 1;
@@ -372,12 +410,14 @@ public class TimeBlockReviewData {
         return temp;
     }
 
-    public static Object[] getEffectLight4(int length, int model, int type) {
+    public static Object[] getEffectLight4(int length, int model, int type, boolean flag) {
         byte[] b = null;
         if (type == 14) {
             b = ReviewUtils.sceneSuCaiReview(model);
         } else if (type == 15) {
             b = ReviewUtils.sceneChangJingReview(model);
+        } else if (type == 18) {
+            b = ReviewUtils.changJingDuoDengReview(model, flag);
         }
         int packet = b.length / length + 1;
         int lastSize = b.length % length;
@@ -395,6 +435,8 @@ public class TimeBlockReviewData {
                     tp1[5] = (byte) 0x14;
                 } else if (type == 15) {
                     tp1[5] = (byte) 0x15;
+                } else if (type == 18) {
+                    tp1[5] = (byte) 0x18;
                 }
                 tp1[6] = (byte) ((i + 1) / 256);
                 tp1[7] = (byte) ((i + 1) % 256);
@@ -412,6 +454,8 @@ public class TimeBlockReviewData {
                     tp2[5] = (byte) 0x14;
                 } else if (type == 15) {
                     tp2[5] = (byte) 0x15;
+                } else if (type == 18) {
+                    tp2[5] = (byte) 0x18;
                 }
                 tp2[6] = (byte) ((i + 1) / 256);
                 tp2[7] = (byte) ((i + 1) % 256);
@@ -473,7 +517,7 @@ public class TimeBlockReviewData {
         return temp;
     }
 
-    public static byte[] getGouXuan(boolean[] bn){
+    public static byte[] getGouXuan(boolean[] bn) {
         int r = 0, yu = 0;
         int[] bp1 = new int[4];
         for (int k = 0; k < bn.length; k++) {

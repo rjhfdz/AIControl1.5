@@ -3,11 +3,18 @@ package com.boray.xiaoGuoDeng.reviewBlock;
 import com.boray.Data.Data;
 import com.boray.Utils.Socket;
 import com.boray.mainUi.MainUi;
+import com.boray.xiaoGuoDeng.UI.DefineJLable3;
+import com.sun.javafx.image.BytePixelSetter;
 
 import javax.swing.*;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Vector;
 
 public class ReviewBlock {
     public static void serialPortReview(int model) {
@@ -44,7 +51,7 @@ public class ReviewBlock {
 
                 //素材数据区
                 Thread.sleep(200);
-                Object[] objects = TimeBlockReviewData.getEffectLight4(4096, model, 14);
+                Object[] objects = TimeBlockReviewData.getEffectLight4(4096, model, 14, false);
                 for (int i = 0; i < objects.length; i++) {
                     b = (byte[]) objects[i];
                     Socket.SerialPortSendData(b);
@@ -53,7 +60,7 @@ public class ReviewBlock {
 
                 //场景
                 Thread.sleep(230);
-                objects = TimeBlockReviewData.getEffectLight4(4096, model, 15);
+                objects = TimeBlockReviewData.getEffectLight4(4096, model, 15, false);
                 for (int i = 0; i < objects.length; i++) {
                     b = (byte[]) objects[i];
                     Socket.SerialPortSendData(b);
@@ -104,7 +111,7 @@ public class ReviewBlock {
 
                 //素材数据区
                 Thread.sleep(200);
-                Object[] objects = TimeBlockReviewData.getEffectLight4(1280, model, 14);
+                Object[] objects = TimeBlockReviewData.getEffectLight4(1280, model, 14, false);
                 for (int i = 0; i < objects.length; i++) {
                     b = (byte[]) objects[i];
                     Socket.UDPSendData(b);
@@ -113,7 +120,7 @@ public class ReviewBlock {
 
                 //场景
                 Thread.sleep(230);
-                objects = TimeBlockReviewData.getEffectLight4(1280, model, 15);
+                objects = TimeBlockReviewData.getEffectLight4(1280, model, 15, false);
                 for (int i = 0; i < objects.length; i++) {
                     b = (byte[]) objects[i];
                     Socket.UDPSendData(b);
@@ -169,14 +176,14 @@ public class ReviewBlock {
                 os.write(b);
 
                 //素材数据区
-                Object[] objects = TimeBlockReviewData.getEffectLight4(4096, model, 14);
+                Object[] objects = TimeBlockReviewData.getEffectLight4(4096, model, 14, false);
                 for (int i = 0; i < objects.length; i++) {
                     b = (byte[]) objects[i];
                     os.write(b);
                 }
 
                 //场景
-                objects = TimeBlockReviewData.getEffectLight4(4096, model, 15);
+                objects = TimeBlockReviewData.getEffectLight4(4096, model, 15, false);
                 for (int i = 0; i < objects.length; i++) {
                     b = (byte[]) objects[i];
                     os.write(b);
@@ -195,6 +202,41 @@ public class ReviewBlock {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public static void xiaoGuoDuoDengReview(int model) {
+        try {
+            if (Data.serialPort != null) {
+                //多灯数据
+                byte[] b = null;
+                Object[] objects = TimeBlockReviewData.getEffectLight4(4096, model, 18, false);
+                for (int i = 0; i < objects.length; i++) {
+                    b = (byte[]) objects[i];
+                    Socket.SerialPortSendData(b);
+                    Thread.sleep(200);
+                }
+
+                //启动预览
+                Thread.sleep(200);
+                b = TimeBlockReviewData.getStarReview3(model);
+                Socket.SerialPortSendData(b);
+            } else if (Data.socket != null) {
+                byte[] b = null;
+                Object[] objects = TimeBlockReviewData.getEffectLight4(1280, model, 18, false);
+                for (int i = 0; i < objects.length; i++) {
+                    b = (byte[]) objects[i];
+                    Socket.UDPSendData(b);
+                    Thread.sleep(230);
+                }
+
+                //启动预览
+                Thread.sleep(200);
+                b = TimeBlockReviewData.getStarReview3(model);
+                Socket.UDPSendData(b);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
     }
 

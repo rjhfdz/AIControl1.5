@@ -26,6 +26,7 @@ import com.boray.mainUi.MainUi;
 import com.boray.shengKon.UI.DefineJLable_shengKon;
 import com.boray.shengKon.UI.DefineJLable_shengKon2;
 import com.boray.xiaoGuoDeng.UI.DefineJLable;
+import com.boray.xiaoGuoDeng.UI.DefineJLable3;
 import com.boray.zhongKon.Data.DataOfZhongKon;
 
 public class ProjectCreateFileOfCloseFrame {
@@ -236,7 +237,7 @@ public class ProjectCreateFileOfCloseFrame {
                     for (int i = 0; i < timeBlockPanels[k - 1].getComponentCount(); i++) {
                         if (timeBlockPanels[k - 1].isVisible()) {
                             if ((k - 1) == 0) {
-                                DefineJLable_shengKon lable = (DefineJLable_shengKon) timeBlockPanels[k-1].getComponent(i);
+                                DefineJLable_shengKon lable = (DefineJLable_shengKon) timeBlockPanels[k - 1].getComponent(i);
                                 String[] strings = new String[5];
                                 strings[0] = lable.getLocation().x + "";
                                 strings[1] = lable.getLocation().y + "";
@@ -245,7 +246,7 @@ public class ProjectCreateFileOfCloseFrame {
                                 strings[4] = lable.getText();
                                 objects2[j - 1][k - 1][i] = strings;
                             } else {
-                                DefineJLable_shengKon2 lable = (DefineJLable_shengKon2) timeBlockPanels[k-1].getComponent(i);
+                                DefineJLable_shengKon2 lable = (DefineJLable_shengKon2) timeBlockPanels[k - 1].getComponent(i);
                                 String[] strings = new String[6];
                                 strings[0] = lable.getLocation().x + "";
                                 strings[1] = lable.getLocation().y + "";
@@ -303,6 +304,20 @@ public class ProjectCreateFileOfCloseFrame {
             //图形动作参数
             xmlEncoder.writeObject(bezier.Data.itemMap);
             xmlEncoder.writeObject(bezier.Data.map);
+
+            //效果灯编程界面多灯
+            xmlEncoder.writeObject(Data.XiaoGuoDengModelDmxMap);
+            Object[][] objects1 = new Object[24][4];
+            for (int i = 0; i < 24; i++) {
+                DefineJLable3 lable3 = (DefineJLable3) MainUi.map.get("SuoYouDengZuLable" + (i + 1));
+                String[] str = new String[4];
+                str[0] = lable3.getLocation().x + "";
+                str[1] = lable3.getLocation().y + "";
+                str[2] = lable3.getWidth() + "";
+                str[3] = lable3.getHeight() + "";
+                objects1[i] = str;
+            }
+            xmlEncoder.writeObject(objects1);
 
             xmlEncoder.flush();
             xmlEncoder.close();

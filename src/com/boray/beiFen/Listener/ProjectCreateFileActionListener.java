@@ -26,6 +26,7 @@ import com.boray.mainUi.MainUi;
 import com.boray.shengKon.UI.DefineJLable_shengKon;
 import com.boray.shengKon.UI.DefineJLable_shengKon2;
 import com.boray.xiaoGuoDeng.UI.DefineJLable;
+import com.boray.xiaoGuoDeng.UI.DefineJLable3;
 import com.boray.zhongKon.Data.DataOfZhongKon;
 
 public class ProjectCreateFileActionListener implements ActionListener {
@@ -252,7 +253,7 @@ public class ProjectCreateFileActionListener implements ActionListener {
                                 strings[2] = lable.getWidth() + "";
                                 strings[3] = lable.getHeight() + "";
                                 strings[4] = lable.getText();
-                                if(lable.getBackground().getGreen()==255)
+                                if (lable.getBackground().getGreen() == 255)
                                     strings[5] = "255";
                                 else
                                     strings[5] = "0";
@@ -303,6 +304,21 @@ public class ProjectCreateFileActionListener implements ActionListener {
             //图形动作参数
             xmlEncoder.writeObject(bezier.Data.itemMap);
             xmlEncoder.writeObject(bezier.Data.map);
+
+            //效果灯编程界面多灯
+            xmlEncoder.writeObject(Data.XiaoGuoDengModelDmxMap);
+            Object[][] objects1 = new Object[24][4];
+            for (int i = 0; i < 24; i++) {
+                DefineJLable3 lable3 = (DefineJLable3) MainUi.map.get("SuoYouDengZuLable" + (i + 1));
+                String[] str = new String[4];
+                str[0] = lable3.getLocation().x + "";
+                str[1] = lable3.getLocation().y + "";
+                str[2] = lable3.getWidth() + "";
+                str[3] = lable3.getHeight() + "";
+                objects1[i] = str;
+            }
+            xmlEncoder.writeObject(objects1);
+
 
             xmlEncoder.flush();
             xmlEncoder.close();

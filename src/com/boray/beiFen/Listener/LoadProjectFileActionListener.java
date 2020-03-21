@@ -30,6 +30,7 @@ import com.boray.mainUi.MainUi;
 import com.boray.shengKon.UI.DefineJLable_shengKon;
 import com.boray.shengKon.UI.DefineJLable_shengKon2;
 import com.boray.xiaoGuoDeng.UI.DefineJLable;
+import com.boray.xiaoGuoDeng.UI.DefineJLable3;
 import com.boray.zhongKon.Data.DataOfZhongKon;
 import com.boray.zhongKon.Listener.ShowAndSaveCode;
 
@@ -527,6 +528,17 @@ public class LoadProjectFileActionListener implements ActionListener {
                 bezier.Data.itemMap = (HashMap) xmlDecoder.readObject();
                 bezier.Data.map = (HashMap) xmlDecoder.readObject();
 
+                //效果灯编程多灯
+                Data.XiaoGuoDengModelDmxMap = (Map) xmlDecoder.readObject();
+                Object[][] objects1 = (Object[][]) xmlDecoder.readObject();
+                for (int i = 0; i < 24; i++) {
+                    JPanel panel = (JPanel) MainUi.map.get("SuoYouDengZuPanel" + (i + 1));
+                    DefineJLable3 lable3 = (DefineJLable3) MainUi.map.get("SuoYouDengZuLable" + (i + 1));
+                    String[] str = (String[]) objects1[i];
+                    lable3.setLocation(new Point(Integer.valueOf(str[0]).intValue(), Integer.valueOf(str[1]).intValue()));
+                    lable3.setSize(Integer.valueOf(str[2]).intValue(), Integer.valueOf(str[3]).intValue());
+                    panel.updateUI();
+                }
             }
 
         } catch (Exception e2) {

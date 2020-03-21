@@ -22,6 +22,7 @@ import com.boray.shengKon.UI.DefineJLable_shengKon;
 import com.boray.shengKon.UI.DefineJLable_shengKon2;
 import com.boray.shengKonSuCai.UI.ShengKonSuCaiUI;
 import com.boray.xiaoGuoDeng.UI.DefineJLable;
+import com.boray.xiaoGuoDeng.reviewCode.ReviewUtils;
 
 public class MergeAllListener implements ActionListener {
 
@@ -396,6 +397,11 @@ public class MergeAllListener implements ActionListener {
             os10.flush();
             System.out.println("声控效果灯数据：" + file.length());
 
+            //场景多灯
+            os10.write(ReviewUtils.changJingDuoDengReview(0,true));
+            os10.flush();
+            System.out.println("场景多灯数据：" + file.length());
+
             os10.close();
 
             file1.delete();//删除计算用的K0文件
@@ -449,6 +455,11 @@ public class MergeAllListener implements ActionListener {
             }
             longs.add(file1.length());
             stream.flush();
+
+            //场景多灯
+            stream.write(ReviewUtils.changJingDuoDengReview(0,true));
+            longs.add(file1.length());
+            stream.flush();
             stream.close();
 
             dongTaiKonJianTable(longs, os10);//写入动态空间索引表
@@ -465,7 +476,7 @@ public class MergeAllListener implements ActionListener {
      * @param os
      */
     private void dongTaiKonJianTable(List<Long> longs, OutputStream os) throws IOException {
-        byte[][] bytes = new byte[8][8];
+        byte[][] bytes = new byte[9][8];
         //总容量. 索引表
         bytes[0][0] = (byte) 0xA1;//固定码
         bytes[0][1] = (byte) 0x1A;
@@ -560,7 +571,18 @@ public class MergeAllListener implements ActionListener {
         bytes[7][5] = (byte) Integer.parseInt(str.substring(2, 4), 16);
         bytes[7][6] = (byte) Integer.parseInt(str.substring(4, 6), 16);
         bytes[7][7] = (byte) Integer.parseInt(str.substring(6), 16);
-        for (int i = 0; i < 8; i++) {
+        //场景多灯
+        str = addZeroForNum(Long.toHexString(longs.get(6)));
+        bytes[8][0] = (byte) Integer.parseInt(str.substring(0, 2), 16);
+        bytes[8][1] = (byte) Integer.parseInt(str.substring(2, 4), 16);
+        bytes[8][2] = (byte) Integer.parseInt(str.substring(4, 6), 16);
+        bytes[8][3] = (byte) Integer.parseInt(str.substring(6), 16);
+        str = addZeroForNum(Long.toHexString(longs.get(7) - longs.get(6)));//数据容量
+        bytes[8][4] = (byte) Integer.parseInt(str.substring(0, 2), 16);
+        bytes[8][5] = (byte) Integer.parseInt(str.substring(2, 4), 16);
+        bytes[8][6] = (byte) Integer.parseInt(str.substring(4, 6), 16);
+        bytes[8][7] = (byte) Integer.parseInt(str.substring(6), 16);
+        for (int i = 0; i < 9; i++) {
             os.write(bytes[i]);
         }
     }

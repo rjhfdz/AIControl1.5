@@ -32,4 +32,12 @@ public class Socket {
             e2.printStackTrace();
         }
     }
+
+    public static void SendData(byte[] buff){
+        if(Data.serialPort!=null){
+            SerialPortSendData(buff);
+        }else if(Data.socket!=null){
+            UDPSendData(buff);
+        }
+    }
 }

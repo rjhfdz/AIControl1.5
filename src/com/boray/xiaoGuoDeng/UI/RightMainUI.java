@@ -1,10 +1,6 @@
 package com.boray.xiaoGuoDeng.UI;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.AdjustmentEvent;
@@ -24,6 +20,7 @@ import javax.swing.border.LineBorder;
 
 import com.boray.Data.Data;
 import com.boray.Data.XiaoGuoDengModel;
+import com.boray.Utils.WaitProgressBar;
 import com.boray.mainUi.MainUi;
 import com.boray.xiaoGuoDeng.Listener.*;
 import com.boray.xiaoGuoDeng.reviewBlock.ReviewBlock;
@@ -49,28 +46,36 @@ public class RightMainUI {
         final JButton button = new JButton("预览");
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new Thread(new Runnable() {
+                Thread thread = new Thread(new Runnable() {
                     public void run() {
                         button.setEnabled(false);
 //						ReviewUtils.sceneReview(XiaoGuoDengModel.model);
+                        DefineJLable3 lable3 = (DefineJLable3) MainUi.map.get("SuoYouDengZuLable" + XiaoGuoDengModel.model);
                         if (Data.serialPort != null) {
 //							if (Data.file!=null) {
 //								new Compare().saveTemp();
 //								Compare.compareFile();
 //								ReviewUtils.sendReviewCode();
 //								ReviewUtils.modeReviewOrder(XiaoGuoDengModel.model);
-                            ReviewBlock.serialPortReview(XiaoGuoDengModel.model);
+                            if (lable3.isEnabled())
+                                ReviewBlock.xiaoGuoDuoDengReview(XiaoGuoDengModel.model);
+                            else
+                                ReviewBlock.serialPortReview(XiaoGuoDengModel.model);
 //							} else {
 //								JFrame frame = (JFrame)MainUi.map.get("frame");
 //								JOptionPane.showMessageDialog(frame, "请先生成初始版本的控制器文件导入到控制器，再进行预览！", "提示", JOptionPane.ERROR_MESSAGE);
 //							}
                         } else if (Data.socket != null) {
 //							ReviewBlock.saveFile(XiaoGuoDengModel.model);
-                            ReviewBlock.socketReview(XiaoGuoDengModel.model);
+                            if (lable3.isEnabled())
+                                ReviewBlock.xiaoGuoDuoDengReview(XiaoGuoDengModel.model);
+                            else
+                                ReviewBlock.socketReview(XiaoGuoDengModel.model);
                         }
                         button.setEnabled(true);
                     }
-                }).start();
+                });
+                WaitProgressBar.show((Frame) MainUi.map.get("frame"), thread, "预览数据发送中。。。", "数据发送完成", "");
             }
         });
         p1.add(button);
@@ -175,7 +180,7 @@ public class RightMainUI {
         pane.setPreferredSize(new Dimension(92, 1110));
         JLabel[] labels = new JLabel[31];
         MainUi.map.put("labels_group" + Number, labels);
-        JLabel label = new JLabel("所有灯组");
+        JLabel label = new JLabel("全部灯组");
         MainUi.map.put("SuoYouDengZuLabel" + Number, label);
         for (int i = 0; i < labels.length; i++) {
             if (i == 0) {
@@ -250,7 +255,7 @@ public class RightMainUI {
                 panel.setOpaque(true);
                 panel.setEnabled(false);
                 DefineJLable3 lable3 = new DefineJLable3("所有灯库", panel);
-                MainUi.map.put("SuoYouDengZuLable"+Number,lable3);
+                MainUi.map.put("SuoYouDengZuLable" + Number, lable3);
                 panel.add(lable3);
                 SuoYouDengZuPanelMouseListener suoYouDengZuPanelMouseListener = new SuoYouDengZuPanelMouseListener();
                 panel.addMouseListener(suoYouDengZuPanelMouseListener);
