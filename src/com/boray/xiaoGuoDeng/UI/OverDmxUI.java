@@ -418,17 +418,19 @@ public class OverDmxUI implements ActionListener {
         pane.setPreferredSize(new Dimension(910, 40));
 
         JButton button1 = new JButton("清零");
-        //JButton button2 = new JButton("全部清零");
+        JButton button2 = new JButton("全部清零");
         JButton button3 = new JButton("满值");
-        //JButton button4 = new JButton("全部满值");
+        JButton button4 = new JButton("全部满值");
         ZiroToFullActionListener ziroToFullActionListener = new ZiroToFullActionListener(runTable);
         ziroToFullActionListener.setDt(sliders, textFields);
         button1.addActionListener(ziroToFullActionListener);
+        button2.addActionListener(ziroToFullActionListener);
         button3.addActionListener(ziroToFullActionListener);
+        button4.addActionListener(ziroToFullActionListener);
         pane.add(button1);
-        //pane.add(button2);
+        pane.add(button2);
         pane.add(button3);
-        //pane.add(button4);
+        pane.add(button4);
 
         pane.add(new JLabel("                  " +
                 "                  执行时长"));

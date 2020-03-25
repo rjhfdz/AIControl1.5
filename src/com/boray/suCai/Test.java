@@ -163,7 +163,8 @@ public abstract class Test {
 //        System.out.println(resultMap);
 //        String folder=System.getProperty("java.io.tmpdir");
 //        System.out.println(folder);
-        System.out.println(System.getProperty("user.dir"));
+//        System.out.println(System.getProperty("user.dir"));
+//        System.out.println((10-15)/2);
     }
 
 }

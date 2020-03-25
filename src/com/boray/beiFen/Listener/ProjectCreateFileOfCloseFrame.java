@@ -307,14 +307,15 @@ public class ProjectCreateFileOfCloseFrame {
 
             //效果灯编程界面多灯
             xmlEncoder.writeObject(Data.XiaoGuoDengModelDmxMap);
-            Object[][] objects1 = new Object[24][4];
+            Object[][] objects1 = new Object[24][5];
             for (int i = 0; i < 24; i++) {
                 DefineJLable3 lable3 = (DefineJLable3) MainUi.map.get("SuoYouDengZuLable" + (i + 1));
-                String[] str = new String[4];
+                String[] str = new String[5];
                 str[0] = lable3.getLocation().x + "";
                 str[1] = lable3.getLocation().y + "";
                 str[2] = lable3.getWidth() + "";
                 str[3] = lable3.getHeight() + "";
+                str[4] = lable3.isEnabled() + "";
                 objects1[i] = str;
             }
             xmlEncoder.writeObject(objects1);

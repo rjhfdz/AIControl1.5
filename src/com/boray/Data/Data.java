@@ -6,6 +6,7 @@ import com.boray.entity.ProjectFile;
 import java.io.File;
 import java.io.InputStream;
 import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.util.*;
 
@@ -63,6 +64,16 @@ public class Data {
 
 	//端口
 	public static int port = 8089;
+
+	//artNet协议发送数据
+	public static DatagramSocket artNetSocket1;
+	public static DatagramSocket artNetSocket2;
+	//artNet ip地址
+	public static InetAddress artNetAddress1;
+	public static InetAddress artNetAddress2;
+
+	//artNet数据协议
+	public static byte dmx_def[] = {0x41, 0x72, 0x74, 0x2D, 0x4E, 0x65, 0x74, 0x00, 0x00, 0x50, 0x00, 0x0E, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00};
 
 	public static boolean deviceShow = false;
 	

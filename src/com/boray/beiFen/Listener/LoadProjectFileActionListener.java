@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.boray.Data.Data;
 import com.boray.Data.MyColor;
+import com.boray.Data.XiaoGuoDengModel;
 import com.boray.Utils.Util;
 import com.boray.changJing.Data.DataOfChangJing;
 import com.boray.changJing.Listener.ChangJingSendCodeListener;
@@ -537,8 +538,34 @@ public class LoadProjectFileActionListener implements ActionListener {
                     String[] str = (String[]) objects1[i];
                     lable3.setLocation(new Point(Integer.valueOf(str[0]).intValue(), Integer.valueOf(str[1]).intValue()));
                     lable3.setSize(Integer.valueOf(str[2]).intValue(), Integer.valueOf(str[3]).intValue());
+                    lable3.setEnabled(Boolean.valueOf(str[4]));
                     panel.updateUI();
+                    JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels_group" + (i + 1));
+                    if (lable3.isEnabled()) {
+                        lable3.setText("所有灯组√");
+                        for (int j = 0; j < timeBlockPanels.length; j++) {
+                            if (j != 0) {
+                                timeBlockPanels[j].setEnabled(false);
+                                for (int k = 0; k < timeBlockPanels[j].getComponentCount(); k++) {
+                                    timeBlockPanels[j].getComponent(k).setEnabled(false);
+                                }
+                                timeBlockPanels[i].updateUI();
+                            }
+                        }
+                    } else {
+                        lable3.setText("所有灯组×");
+                        for (int j = 0; j < timeBlockPanels.length; j++) {
+                            if (j != 0) {
+                                timeBlockPanels[j].setEnabled(true);
+                                for (int k = 0; k < timeBlockPanels[j].getComponentCount(); k++) {
+                                    timeBlockPanels[j].getComponent(k).setEnabled(true);
+                                }
+                                timeBlockPanels[i].updateUI();
+                            }
+                        }
+                    }
                 }
+
             }
 
         } catch (Exception e2) {

@@ -881,62 +881,65 @@ public class ReviewUtils {
                 t1[i + 6] = (byte) vector99.size();
             //24模式全局设置
             DefineJLable3 lable3 = (DefineJLable3) MainUi.map.get("SuoYouDengZuLable" + (i + 1));
-            int maxTime = (lable3.getX() + lable3.getWidth()) / 5;
-            t1[i + 30] = (byte) (lable3.isEnabled() ? 1 : 0);
-            t1[i + 32] = (byte) (maxTime % 256);
-            t1[i + 33] = (byte) (maxTime / 256);
+            int maxTime = lable3.getWidth() / 5;
+            t1[(i * 4) + 30] = (byte) (lable3.isEnabled() ? 1 : 0);
+            t1[(i * 4) + 32] = (byte) (maxTime % 256);
+            t1[(i * 4) + 33] = (byte) (maxTime / 256);
         }
         List<Byte> bytes = new ArrayList<>();
         integrate(bytes, t1);
-        byte[][] channalGouXuan = new byte[2][64];//通道勾选 渐变勾选
         boolean[] tbs = null;
         int r = 0, yu = 0, a = 0;
         if (flag) {//如果为true 展示24模式的数据 否则展示单个模式
             for (int i = 0; i < 24; i++) {
-                //通道勾选
-                tbs = (boolean[]) Data.XiaoGuoDengModelDmxMap.get("GouXuanValue" + (i + 1));
-                if (tbs != null) {
-                    for (int k = 0; k < tbs.length; k++) {
-                        r = k / 8;
-                        yu = 7 - (k % 8);
-                        if (tbs[k]) {
-                            channalGouXuan[0][r] = (byte) (Byte.toUnsignedInt(channalGouXuan[0][r]) + (1 << yu));
+                DefineJLable3 lable3 = (DefineJLable3) MainUi.map.get("SuoYouDengZuLable" + (i + 1));
+                if (lable3.isEnabled()) {
+                    //通道勾选
+                    byte[][] channalGouXuan = new byte[2][64];//通道勾选 渐变勾选
+                    tbs = (boolean[]) Data.XiaoGuoDengModelDmxMap.get("GouXuanValue" + (i + 1));
+                    if (tbs != null) {
+                        for (int k = 0; k < tbs.length; k++) {
+                            r = k / 8;
+                            yu = 7 - (k % 8);
+                            if (tbs[k]) {
+                                channalGouXuan[0][r] = (byte) (Byte.toUnsignedInt(channalGouXuan[0][r]) + (1 << yu));
+                            }
                         }
                     }
-                }
-                //渐变勾选
-                tbs = (boolean[]) Data.XiaoGuoDengModelDmxMap.get("JianBianGouXuanValue" + (i + 1));
-                if (tbs != null) {
-                    for (int k = 0; k < tbs.length; k++) {
-                        r = k / 8;
-                        yu = 7 - (k % 8);
-                        if (tbs[k]) {
-                            channalGouXuan[1][r] = (byte) (Byte.toUnsignedInt(channalGouXuan[1][r]) + (1 << yu));
+                    //渐变勾选
+                    tbs = (boolean[]) Data.XiaoGuoDengModelDmxMap.get("JianBianGouXuanValue" + (i + 1));
+                    if (tbs != null) {
+                        for (int k = 0; k < tbs.length; k++) {
+                            r = k / 8;
+                            yu = 7 - (k % 8);
+                            if (tbs[k]) {
+                                channalGouXuan[1][r] = (byte) (Byte.toUnsignedInt(channalGouXuan[1][r]) + (1 << yu));
+                            }
                         }
                     }
-                }
-                integrate(bytes, channalGouXuan[0]);
-                integrate(bytes, channalGouXuan[1]);
-                //步编辑数据
-                vector99 = (Vector) Data.XiaoGuoDengModelDmxMap.get("TableData" + (i + 1));
-                if (vector99 == null || vector99.size() == 0) {//默认一步
-//                    bytes.addAll(Arrays.asList(new Byte[512]));
-                    integrate(bytes, new byte[512]);
-                } else {
-                    for (int j = 0; j < vector99.size(); j++) {
-                        tp = (Vector) vector99.get(j);
-                        a = Integer.valueOf((String) (tp.get(1)));
-                        bytes.add((byte) (a % 256));
-                        bytes.add((byte) (a / 256));
-                        for (int k = 2; k < 512; k++) {
-                            a = Integer.valueOf((String) (tp.get(k)));
-                            bytes.add((byte) a);
+                    integrate(bytes, channalGouXuan[0]);
+                    integrate(bytes, channalGouXuan[1]);
+                    //步编辑数据
+                    vector99 = (Vector) Data.XiaoGuoDengModelDmxMap.get("TableData" + (i + 1));
+                    if (vector99 == null || vector99.size() == 0) {//默认一步
+                        integrate(bytes, new byte[512]);
+                    } else {
+                        for (int j = 0; j < vector99.size(); j++) {
+                            tp = (Vector) vector99.get(j);
+                            a = Integer.valueOf((String) (tp.get(1)));
+                            bytes.add((byte) (a % 256));
+                            bytes.add((byte) (a / 256));
+                            for (int k = 2; k < 512; k++) {
+                                a = Integer.valueOf((String) (tp.get(k)));
+                                bytes.add((byte) a);
+                            }
                         }
                     }
                 }
             }
         } else {
             //通道勾选
+            byte[][] channalGouXuan = new byte[2][64];//通道勾选 渐变勾选
             tbs = (boolean[]) Data.XiaoGuoDengModelDmxMap.get("GouXuanValue" + model);
             if (tbs != null) {
                 for (int k = 0; k < tbs.length; k++) {
@@ -963,7 +966,6 @@ public class ReviewUtils {
             //步编辑数据
             vector99 = (Vector) Data.XiaoGuoDengModelDmxMap.get("TableData" + model);
             if (vector99 == null || vector99.size() == 0) {//默认一步
-//                bytes.addAll(Arrays.asList(new Byte[512]));
                 integrate(bytes, new byte[512]);
             } else {
                 for (int j = 0; j < vector99.size(); j++) {
@@ -980,10 +982,7 @@ public class ReviewUtils {
         }
         byte[] data = new byte[bytes.size()];
         for (int i = 0; i < bytes.size(); i++) {
-//            if(bytes.get(i)!=null)
-                data[i] = bytes.get(i);
-//            else
-//                data[i] = 0;
+            data[i] = bytes.get(i);
         }
         return data;
     }

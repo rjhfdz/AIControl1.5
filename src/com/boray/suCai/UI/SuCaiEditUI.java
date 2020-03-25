@@ -105,7 +105,7 @@ public class SuCaiEditUI {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         //flowLayout.setVgap(2);
         dialog.getContentPane().setLayout(flowLayout);
-        int width = 740, height = 670;
+        int width = 740, height = 590;
         dialog.setSize(width, height);
         dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - width / 2, f.getLocation().y + f.getSize().height / 2 - height / 2);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -139,7 +139,7 @@ public class SuCaiEditUI {
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         tabbedPane.setFocusable(false);
-        tabbedPane.setPreferredSize(new Dimension(700, 570));
+        tabbedPane.setPreferredSize(new Dimension(700, 500));
 
         //预览的监听
         timeBlockReviewActionListener = new TimeBlockReviewActionListener(comboBox, denKuNum, suCaiNum - 1);
@@ -1060,7 +1060,7 @@ public class SuCaiEditUI {
         ////////////////////////////////////////////////////////////
         pane.add(scrollPane);
         pane.add(p1);
-        pane.add(p3);
+//        pane.add(p3);
         pane.add(p4);
         JPanel p5 = new JPanel();
         p5.setPreferredSize(new Dimension(680, 30));
@@ -2508,6 +2508,7 @@ public class SuCaiEditUI {
         int value = 0;
         if (slt.length != 0) {
             byte[] buff = new byte[512 + 8];
+            byte[] bytes = new byte[512];
             buff[0] = (byte) 0xBB;
             buff[1] = (byte) 0x55;
             buff[2] = (byte) (520 / 256);
@@ -2527,6 +2528,8 @@ public class SuCaiEditUI {
             } else if (Data.socket != null) {
                 Socket.UDPSendData(buff);
             }
+            System.arraycopy(buff, 8, bytes, 0, 512);
+            Socket.ArtNetSendData(buff);//添加artNet数据协议发送
         }
     }
 

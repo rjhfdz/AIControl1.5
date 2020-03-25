@@ -129,7 +129,7 @@ public class TimeBlockEditUI {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         //flowLayout.setVgap(2);
         dialog.getContentPane().setLayout(flowLayout);
-        int width = 740, height = 670;
+        int width = 740, height = 590;
         dialog.setSize(width, height);
         dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - width / 2, f.getLocation().y + f.getSize().height / 2 - height / 2);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -158,7 +158,7 @@ public class TimeBlockEditUI {
         JTabbedPane tabbedPane = new JTabbedPane();
         tabbedPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         tabbedPane.setFocusable(false);
-        tabbedPane.setPreferredSize(new Dimension(700, 570));
+        tabbedPane.setPreferredSize(new Dimension(700, 500));
 
         //////获取当前时间块参数
         int model = Integer.valueOf(XiaoGuoDengModel.model) - 1;
@@ -1056,7 +1056,7 @@ public class TimeBlockEditUI {
         ////////////////////////////////////////////////////////////
         pane.add(scrollPane);
         pane.add(p1);
-        pane.add(p3);
+//        pane.add(p3);
         pane.add(p4);
         JPanel p5 = new JPanel();
         p5.setPreferredSize(new Dimension(680, 30));
@@ -2504,6 +2504,7 @@ public class TimeBlockEditUI {
         int value = 0;
         if (slt.length != 0) {
             byte[] buff = new byte[512 + 8];
+            byte[] bytes = new byte[512];
             buff[0] = (byte) 0xBB;
             buff[1] = (byte) 0x55;
             buff[2] = (byte) (520 / 256);
@@ -2523,6 +2524,14 @@ public class TimeBlockEditUI {
             } else if (Data.socket != null) {
                 Socket.UDPSendData(buff);
             }
+            for (int j = 2; j < table.getColumnCount(); j++) {
+                value = Integer.valueOf(table.getValueAt(slt[0], j).toString()).intValue();
+                for (int i = 0; i < startAddress.length; i++) {
+                    bytes[startAddress[i]+j-3] = (byte) value;
+                }
+            }
+            Socket.ArtNetSendData(bytes);//添加artNet数据协议发送
+//            Socket.SerialPortSendData(bytes);
         }
     }
 
