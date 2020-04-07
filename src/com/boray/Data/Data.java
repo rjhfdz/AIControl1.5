@@ -68,6 +68,8 @@ public class Data {
 	//artNet协议发送数据
 	public static DatagramSocket artNetSocket1;
 	public static DatagramSocket artNetSocket2;
+	public static int port1;
+	public static int port2;
 	//artNet ip地址
 	public static InetAddress artNetAddress1;
 	public static InetAddress artNetAddress2;

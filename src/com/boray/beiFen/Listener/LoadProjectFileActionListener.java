@@ -541,6 +541,7 @@ public class LoadProjectFileActionListener implements ActionListener {
                     lable3.setEnabled(Boolean.valueOf(str[4]));
                     panel.updateUI();
                     JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels_group" + (i + 1));
+                    JPanel jPanel = (JPanel) MainUi.map.get("SuoYouDengZuPanel" + (i + 1));
                     if (lable3.isEnabled()) {
                         lable3.setText("所有灯组√");
                         for (int j = 0; j < timeBlockPanels.length; j++) {
@@ -552,6 +553,10 @@ public class LoadProjectFileActionListener implements ActionListener {
                                 timeBlockPanels[i].updateUI();
                             }
                         }
+                        jPanel.setEnabled(true);
+                        for (int k = 0; k < jPanel.getComponentCount(); k++) {
+                            jPanel.getComponent(k).setEnabled(true);
+                        }
                     } else {
                         lable3.setText("所有灯组×");
                         for (int j = 0; j < timeBlockPanels.length; j++) {
@@ -562,6 +567,10 @@ public class LoadProjectFileActionListener implements ActionListener {
                                 }
                                 timeBlockPanels[i].updateUI();
                             }
+                        }
+                        jPanel.setEnabled(false);
+                        for (int k = 0; k < jPanel.getComponentCount(); k++) {
+                            jPanel.getComponent(k).setEnabled(false);
                         }
                     }
                 }

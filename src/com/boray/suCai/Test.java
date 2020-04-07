@@ -149,6 +149,18 @@ public abstract class Test {
 
 
     public static void test() {
+        List<String> str = new ArrayList<>();
+        str.add("123");
+        str.add("321");
+        str.add("435");
+        str.add("derg");
+        if (!str.contains("456")) {//判断是否存在
+            str.add("456");
+        }
+        for (int i = 0; i < str.size(); i++) {
+            System.out.println(str.get(i));
+        }
+
 //        HttpClientUtil httpsUtils = new HttpClientUtil();
 //        //要上传的文件的路径
 //        String filePath = "E:\\statr.txt";

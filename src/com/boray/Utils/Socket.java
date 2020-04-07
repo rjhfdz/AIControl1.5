@@ -51,11 +51,11 @@ public class Socket {
         }
         try {
             if (Data.artNetSocket1 != null) {
-                DatagramPacket packet = new DatagramPacket(bytes, bytes.length, Data.artNetAddress1, 6454);
+                DatagramPacket packet = new DatagramPacket(bytes, bytes.length, Data.artNetAddress1, Data.port1);
                 Data.artNetSocket1.send(packet);
             }
             if (Data.artNetSocket2 != null) {
-                DatagramPacket packet = new DatagramPacket(bytes, bytes.length, Data.artNetAddress2, 6454);
+                DatagramPacket packet = new DatagramPacket(bytes, bytes.length, Data.artNetAddress2, Data.port2);
                 Data.artNetSocket2.send(packet);
             }
         } catch (Exception e) {

@@ -26,6 +26,8 @@ import javax.usb.UsbPipe;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
@@ -45,6 +47,7 @@ public class OverDmxUI implements ActionListener {
     public boolean[] bs2;
     //private JRadioButton radioButton,radioButton2,radioButton3,radioButton4;
     private JComboBox box;
+    private JComboBox box2;
     private int setNo;
 
     public void show(int no) {
@@ -97,8 +100,8 @@ public class OverDmxUI implements ActionListener {
                 String[] s = new String[1];
                 //s[0] = String.valueOf(radioButton.isSelected());
                 //s[1] = String.valueOf(radioButton3.isSelected());
-                s[0] = String.valueOf(box.getSelectedItem());
-                Data.XiaoGuoDengModelDmxMap.put("YaoMaiSet" + setNo, s);
+//                s[0] = String.valueOf(box.getSelectedItem());
+//                Data.XiaoGuoDengModelDmxMap.put("YaoMaiSet" + setNo, s);
             }
         });
         dialog.setVisible(true);
@@ -127,6 +130,7 @@ public class OverDmxUI implements ActionListener {
                 btns[i].setMargin(new Insets(0, -10, 0, -10));
                 btns[i].setText(table_dengJu.getValueAt(i, 2).toString());
                 pane.add(btns[i]);
+                box2.addItem(table_dengJu.getValueAt(i, 2).toString());
             }
             btns[0].setSelected(true);
             setHeader();
@@ -179,26 +183,114 @@ public class OverDmxUI implements ActionListener {
         FlowLayout flowLayout4 = new FlowLayout(FlowLayout.LEFT);
         flowLayout4.setVgap(10);
         p3.setLayout(flowLayout4);
-        p3.setPreferredSize(new Dimension(208, 34));
-        p3.add(new JLabel("循环轮数"));
+        p3.setPreferredSize(new Dimension(248, 40));
+        p3.add(new JLabel("场景："));
         box = new JComboBox();
-        for (int i = 1; i <= 10; i++) {
+        for (int i = 1; i <= 24; i++) {
             box.addItem("" + i);
         }
         box.setPreferredSize(new Dimension(70, 26));
         //box.addItem("");
         //box.setEditable(true);
+        final JButton changJingCopy = new JButton("复制");
+        changJingCopy.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = Integer.valueOf(box.getSelectedItem().toString());
+                Data.XiaoGuoDengModelDmxMap.put("TableData" + setNo, Data.XiaoGuoDengModelDmxMap.get("TableData" + index));
+                Data.XiaoGuoDengModelDmxMap.put("GouXuanValue" + setNo, Data.XiaoGuoDengModelDmxMap.get("GouXuanValue" + index));
+                Data.XiaoGuoDengModelDmxMap.put("JianBianGouXuanValue" + setNo, Data.XiaoGuoDengModelDmxMap.get("JianBianGouXuanValue" + index));
+                Object[] s = new String[514];
+                String[] temp = new String[514];
+                temp[0] = "1";
+                temp[1] = "0";
+                s[0] = "步骤";
+                s[1] = "执行时长";
+                for (int i = 2; i < s.length; i++) {
+                    s[i] = "" + (i - 1);
+                    temp[i] = "0";
+                }
+                Object[][] data88 = {};
+                DefaultTableModel model = new DefaultTableModel(data88, s);
+                Vector vector99 = (Vector) Data.XiaoGuoDengModelDmxMap.get("TableData" + setNo);
+                if (vector99 != null) {
+                    Vector tp = null;
+                    int a = 0;
+                    for (int i = 0; i < vector99.size(); i++) {
+                        tp = (Vector) vector99.get(i);
+                        a = tp.size();
+                        if (a < 12) {
+                            for (int j = 0; j < 12 - a; j++) {
+                                tp.add("0");
+                            }
+                        }
+                        model.addRow(tp);
+                    }
+                } else {
+                    model.addRow(temp);
+                }
+                runTable.setModel(model);
+                runTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                TableColumnModel tableColumnModel = runTable.getColumnModel();
+                tableColumnModel.getColumn(0).setPreferredWidth(50);
+                tableColumnModel.getColumn(1).setPreferredWidth(50);
+                for (int i = 2; i < runTable.getColumnCount(); i++) {
+                    tableColumnModel.getColumn(i).setPreferredWidth(30);
+                }
+                runTable.setRowSelectionInterval(runTable.getRowCount() - 1, runTable.getRowCount() - 1);
+                setHeader();
+            }
+        });
+
         p3.add(box);
+        p3.add(changJingCopy);
 
         String[] setValue = (String[]) Data.XiaoGuoDengModelDmxMap.get("YaoMaiSet" + setNo);
         if (setValue != null) {
             box.setSelectedItem(setValue[0]);
         }
-        JPanel p4 = new JPanel();
         FlowLayout flowLayout1 = new FlowLayout(FlowLayout.CENTER);
         flowLayout1.setVgap(10);
+        JPanel p5 = new JPanel();
+        p5.setPreferredSize(new Dimension(300, 40));
+        p5.setLayout(flowLayout1);
+        box2 = new JComboBox();
+        box2.setPreferredSize(new Dimension(160, 26));
+        final JButton copy = new JButton("复制到当前");
+        copy.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int select = box2.getSelectedIndex();
+                NewJTable table2 = (NewJTable) MainUi.map.get("table_dengJu");
+                int channelCount = Integer.valueOf(table2.getValueAt(selected, 6).toString()).intValue();
+                int start = Integer.valueOf(table2.getValueAt(selected, 5).toString()).intValue();
+                int channelCount2 = Integer.valueOf(table2.getValueAt(select, 6).toString()).intValue();
+                int start2 = Integer.valueOf(table2.getValueAt(select, 5).toString()).intValue();
+                if (channelCount != channelCount2) {
+                    JFrame frame = (JFrame) MainUi.map.get("frame");
+                    JOptionPane.showMessageDialog(frame, "复制失败，灯库占用通道不一致！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int tableSelect = runTable.getSelectedRow();
+                for (int i = 0; i < channelCount; i++) {
+                    bs[start + i - 1] = bs[start2 + i - 1];
+                    bs2[start + i - 1] = bs2[start2 + i - 1];
+                    checkBoxs[i].setSelected(bs[start2 + i - 1]);
+                    checkBoxes[i].setSelected(bs2[start2 + i - 1]);
+                    Integer value = Integer.valueOf(runTable.getValueAt(tableSelect, start2 + i + 1).toString());
+                    runTable.setValueAt(value, tableSelect, start + i + 1);
+                    sliders[i].setValue(value);
+                    DmxValues[i].setText(value + "");
+                }
+            }
+        });
+        p5.add(box2);
+        p5.add(copy);
+
+        JPanel p4 = new JPanel();
+
         p4.setLayout(flowLayout1);
-        p4.setPreferredSize(new Dimension(500, 40));
+        p4.setPreferredSize(new Dimension(220, 40));
         final JButton review = new JButton("预览");
         review.addActionListener(new ActionListener() {
             @Override
@@ -215,9 +307,9 @@ public class OverDmxUI implements ActionListener {
                 Data.XiaoGuoDengModelDmxMap.put("GouXuanValue" + setNo, tbs);
                 tbs = bs2.clone();
                 Data.XiaoGuoDengModelDmxMap.put("JianBianGouXuanValue" + setNo, tbs);
-                String[] s = new String[1];
-                s[0] = String.valueOf(box.getSelectedItem());
-                Data.XiaoGuoDengModelDmxMap.put("YaoMaiSet" + setNo, s);
+//                String[] s = new String[1];
+//                s[0] = String.valueOf(box.getSelectedItem());
+//                Data.XiaoGuoDengModelDmxMap.put("YaoMaiSet" + setNo, s);
                 //调用命令
                 Thread thread = new Thread(new Runnable() {
                     @Override
@@ -242,6 +334,7 @@ public class OverDmxUI implements ActionListener {
         //pane.add(tempPane);
         //pane.add(p2);
         pane.add(p3);
+        pane.add(p5);
         pane.add(p4);
     }
 
@@ -437,7 +530,7 @@ public class OverDmxUI implements ActionListener {
         slider = new JSlider(0);
         slider.setValue(0);
         slider.setPreferredSize(new Dimension(180, 30));
-        slider.setMaximum(5000);
+        slider.setMaximum(10000);
         field = new JTextField(4);
         slider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -683,6 +776,9 @@ public class OverDmxUI implements ActionListener {
                 }
                 for (int i = 0; i < runTable.getRowCount(); i++) {
                     runTable.setValueAt("" + (i + 1), i, 0);
+                }
+                if (runTable.getSelectedRow() == -1) {
+                    runTable.setRowSelectionInterval(runTable.getRowCount() - 1, runTable.getRowCount() - 1);
                 }
             }
         });

@@ -2,6 +2,7 @@ package com.boray.Listener;
 
 import com.boray.Data.Data;
 import com.boray.Data.ZhiLingJi;
+import com.boray.Utils.JIpAddressField;
 import com.boray.mainUi.MainUi;
 import com.boray.returnListener.IpReturnListener;
 
@@ -42,10 +43,10 @@ public class IpConnectAndOffListener implements ActionListener {
                 JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "请先断开串口连接后再尝试!", "提示", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            JTextField IpAddress = (JTextField) MainUi.map.get("IpAddress");
+            JIpAddressField IpAddress = (JIpAddressField) MainUi.map.get("IpAddress");
             IpAddress.setEnabled(false);
             try {
-                Data.address = new InetSocketAddress(IpAddress.getText(), Data.port);
+                Data.address = new InetSocketAddress(IpAddress.getIpAddress(), Data.port);
                 Data.socket = new DatagramSocket(8090);//创建客户端+端口
                 final Thread thread = new Thread(new Runnable() {
                     public void run() {
@@ -154,8 +155,8 @@ public class IpConnectAndOffListener implements ActionListener {
             Data.socket = null;
             field.setText("");
             IpOff.setSelected(true);
-            JTextField IpAddress = (JTextField) MainUi.map.get("IpAddress");
-            IpAddress.setEnabled(false);
+            JIpAddressField IpAddress = (JIpAddressField) MainUi.map.get("IpAddress");
+            IpAddress.setEnabled(true);
             init();
         }
     }

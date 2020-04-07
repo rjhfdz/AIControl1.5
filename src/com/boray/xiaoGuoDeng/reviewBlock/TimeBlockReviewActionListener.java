@@ -77,8 +77,8 @@ public class TimeBlockReviewActionListener {
 
                 //∆Ù∂Ø‘§¿¿
                 Thread.sleep(200);
-                b = TimeBlockReviewData.getStarReview(sc, group, index);
-                os.write(b);
+//                b = TimeBlockReviewData.getStarReview(sc, group, index);
+//                os.write(b);
                 os.flush();
 
 

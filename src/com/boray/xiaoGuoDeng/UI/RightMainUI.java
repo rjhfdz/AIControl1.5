@@ -177,7 +177,7 @@ public class RightMainUI {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
         JPanel pane = new JPanel();
         //pane.setPreferredSize(new Dimension(94,1130));
-        pane.setPreferredSize(new Dimension(92, 1110));
+        pane.setPreferredSize(new Dimension(92, 1140));
         JLabel[] labels = new JLabel[31];
         MainUi.map.put("labels_group" + Number, labels);
         JLabel label = new JLabel("全部灯组");
@@ -220,7 +220,7 @@ public class RightMainUI {
         //scrollPane.setBorder(new LineBorder(Color.black));大家都在发
         JPanel parentPane = new JPanel();
         MainUi.map.put("xiaoGuoParentPane" + Number, parentPane);
-        parentPane.setPreferredSize(new Dimension(10000, 1096));
+        parentPane.setPreferredSize(new Dimension(10000, 1126));
         JPanel[] timeBlockPanels = new JPanel[31];
         MainUi.map.put("timeBlockPanels_group" + Number, timeBlockPanels);
         //CreateTimeBlockListener[] listeners = new CreateTimeBlockListener[31];

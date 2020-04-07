@@ -2,7 +2,8 @@ package com.boray.mainUi;
 
 import com.boray.Data.Data;
 import com.boray.Data.ZhiLingJi;
-import com.boray.Listener.ArtNetConnectListener;
+import com.boray.Listener.ArtNet1ConnectListener;
+import com.boray.Listener.ArtNet2ConnectListener;
 import com.boray.Listener.IpConnectAndOffListener;
 import com.boray.Utils.JIpAddressField;
 import com.boray.Utils.Socket;
@@ -35,34 +36,13 @@ public class RightPane implements ActionListener {
     private JToggleButton button = null;
     private JToggleButton button2 = null;
     private JButton dataWrite = null;
+    private JToggleButton IpOff = null;
+    private JToggleButton IpConnect = null;
     private JTextField field;
 
     public void show(JPanel pane) {
         JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(180, 140));
-        TitledBorder tb2 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "网络连接", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
-        panel.setBorder(tb2);
-        final JTextField IpAddress = new JTextField(10);
-        IpAddress.setHorizontalAlignment(JTextField.CENTER);
-        IpAddress.setText("192.168.4.1");
-        MainUi.map.put("IpAddress", IpAddress);
-        panel.add(new Label("IP地址:"));
-        panel.add(IpAddress);
-        final JToggleButton IpConnect = new JToggleButton("连接");
-        final JToggleButton IpOff = new JToggleButton("断开");
-        IpConnect.setPreferredSize(new Dimension(56, 32));
-        IpOff.setPreferredSize(new Dimension(56, 32));
-        IpOff.setSelected(true);
-        ButtonGroup buttonGroup = new ButtonGroup();
-        buttonGroup.add(IpConnect);
-        buttonGroup.add(IpOff);
-        IpConnect.setFocusable(false);
-        IpOff.setFocusable(false);
-        panel.add(IpConnect);
-        panel.add(IpOff);
-        IpConnectAndOffListener Iplistener = new IpConnectAndOffListener(IpConnect, IpOff);
-        IpConnect.addActionListener(Iplistener);
-        IpOff.addActionListener(Iplistener);
+        setWIFIUI(panel);//加载WiFi界面
 
         JPanel N1 = new JPanel();
         FlowLayout flowLayout3 = new FlowLayout(FlowLayout.CENTER);
@@ -72,81 +52,34 @@ public class RightPane implements ActionListener {
         MainUi.map.put("USBLink_head", button3);
         button3.addActionListener(new Link());
         button3.setFocusable(false);
-        N1.add(new JLabel("                   "));
+//        N1.add(new JLabel("                   "));
         dataWrite = new JButton("写入控制器");
         MainUi.map.put("comAndWifiDataWrite", dataWrite);
         DataWriteListener dataWriteListener = new DataWriteListener(dataWrite);
         dataWrite.addActionListener(dataWriteListener);
         N1.add(dataWrite);
-
+        JPanel panel2 = new JPanel();
+        panel2.setPreferredSize(new Dimension(160, 10));
+        N1.add(panel2);
+        JPanel panel1 = new JPanel();
+        panel1.setPreferredSize(new Dimension(160, 1));
+        panel1.setBorder(BorderFactory.createLineBorder(Color.gray));
+        N1.add(panel1);
+        JPanel panel4 = new JPanel();
+        panel4.setPreferredSize(new Dimension(160, 10));
+        N1.add(panel4);
         N1.add(new JLabel("设备型号:"));
-        field = new JTextField(8);
+        field = new JTextField(5);
         field.setHorizontalAlignment(JTextField.CENTER);
         field.setEnabled(false);
         MainUi.map.put("sheBeiField", field);
         N1.add(field);
-
-        N1.setPreferredSize(new Dimension(150, 100));
+        N1.setPreferredSize(new Dimension(150, 80));
         pane.add(N1);
 
         JPanel pane2 = new JPanel();
-        FlowLayout flowLayout2 = new FlowLayout(FlowLayout.CENTER);
-        flowLayout2.setVgap(-4);
-        flowLayout2.setHgap(-2);
-//        pane2.setLayout(flowLayout2);
-        TitledBorder tb1 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "设备连接", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
-        pane2.setBorder(tb1);
-        pane2.setPreferredSize(new Dimension(180, 100));
-        JLabel COMLabel = new JLabel("端口:");
-        pane2.add(COMLabel);
-        comCheckBox = new JComboBox();
-        comCheckBox.setFocusable(false);
-        comCheckBox.setPreferredSize(new Dimension(80, 30));
-        CommPortIdentifier cpid;
-        Enumeration enumeration = CommPortIdentifier.getPortIdentifiers();
-        while (enumeration.hasMoreElements()) {
-            cpid = (CommPortIdentifier) enumeration.nextElement();
-            if (cpid.getPortType() == CommPortIdentifier.PORT_SERIAL) {
-                comCheckBox.addItem(cpid.getName());
-            }
-        }
-        COMLabel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                try {
-                    Map<String, String> map = WinRegistry.valuesForPath(WinRegistry.HKEY_LOCAL_MACHINE, "HARDWARE\\DEVICEMAP\\SERIALCOMM");
-                    if (map.size() > 0) {
-                        comCheckBox.removeAllItems();
-                        for (String str : map.values()) {
-                            comCheckBox.addItem(str);
-                        }
-                    }
-                    System.out.println();
-                } catch (IllegalAccessException ex) {
-                    ex.printStackTrace();
-                } catch (InvocationTargetException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
-        pane2.add(comCheckBox);
-        button = new JToggleButton("连接");
-        button2 = new JToggleButton("断开");
-        button2.setSelected(true);
-        button.setPreferredSize(new Dimension(56, 32));
-        button2.setPreferredSize(new Dimension(56, 32));
-        button.addActionListener(this);
-        button2.addActionListener(this);
-        ButtonGroup group2 = new ButtonGroup();
-        group2.add(button);
-        group2.add(button2);
-        button.setFocusable(false);
-        button2.setFocusable(false);
-        pane2.add(button);
-        pane2.add(button2);
+        setComUI(pane2);//加载串口界面
+
         JButton restartBtn = new JButton("重启设备");
         restartBtn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -193,25 +126,166 @@ public class RightPane implements ActionListener {
         pane.add(pane2);
         pane.add(panel);
         JPanel pane3 = new JPanel();
-        setArtNetPanel(pane3, flowLayout2);
+        setArtNetPanel(pane3);
         pane.add(pane3);
         pane.add(restartBtn);
 
     }
 
-    public void setArtNetPanel(JPanel pane3, FlowLayout flowLayout2) {
-        pane3.setLayout(flowLayout2);
-        TitledBorder tb3 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "ArtNet", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
+    public void setWIFIUI(JPanel panel) {
+        panel.setPreferredSize(new Dimension(180, 100));
+        TitledBorder tb2 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "网络连接", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
+        panel.setBorder(tb2);
+        JPanel pane4 = new JPanel();
+        panel.add(pane4);
+        pane4.setPreferredSize(new Dimension(100, 60));
+//        pane4.setBorder(BorderFactory.createLineBorder(Color.gray));
+        FlowLayout flowLayout2 = new FlowLayout(FlowLayout.LEFT);
+        flowLayout2.setVgap(2);
+        flowLayout2.setHgap(2);
+        pane4.setLayout(flowLayout2);
+
+        JIpAddressField IpAddress = new JIpAddressField(20);
+        IpAddress.setIpAddress("192.168.4.1");
+        MainUi.map.put("IpAddress", IpAddress);
+//        panel.add(new Label("IP地址:"));
+//        panel.add(IpAddress);
+        pane4.add(new Label("IP地址:"));
+        pane4.add(IpAddress);
+        IpConnect = new JToggleButton("连接");
+        IpOff = new JToggleButton("断开");
+        IpConnect.setPreferredSize(new Dimension(56, 32));
+        IpOff.setPreferredSize(new Dimension(56, 32));
+        IpOff.setSelected(true);
+        ButtonGroup buttonGroup = new ButtonGroup();
+        buttonGroup.add(IpConnect);
+        buttonGroup.add(IpOff);
+        IpConnect.setFocusable(false);
+        IpOff.setFocusable(false);
+        JPanel pane5 = new JPanel();
+//        pane5.setBorder(BorderFactory.createLineBorder(Color.gray));
+        pane5.setPreferredSize(new Dimension(60, 60));
+        FlowLayout flowLayout4 = new FlowLayout(FlowLayout.RIGHT);
+        flowLayout4.setVgap(-2);
+        flowLayout4.setHgap(-2);
+        pane5.setLayout(flowLayout4);
+        pane5.add(IpConnect);
+        pane5.add(IpOff);
+//        panel.add(IpConnect);
+//        panel.add(IpOff);
+        panel.add(pane5);
+        IpConnectAndOffListener Iplistener = new IpConnectAndOffListener(IpConnect, IpOff);
+        IpConnect.addActionListener(Iplistener);
+        IpOff.addActionListener(Iplistener);
+    }
+
+    public void setComUI(JPanel pane2) {
+        TitledBorder tb1 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "串口连接", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
+        pane2.setBorder(tb1);
+        pane2.setPreferredSize(new Dimension(180, 100));
+        JPanel pane4 = new JPanel();
+        pane2.add(pane4);
+        pane4.setPreferredSize(new Dimension(90, 60));
+//        pane4.setBorder(BorderFactory.createLineBorder(Color.gray));
+        FlowLayout flowLayout2 = new FlowLayout(FlowLayout.CENTER);
+        flowLayout2.setVgap(-2);
+        flowLayout2.setHgap(-2);
+        pane4.setLayout(flowLayout2);
+        JLabel COMLabel = new JLabel("端口:");
+        pane4.add(COMLabel);
+        comCheckBox = new JComboBox();
+        comCheckBox.setFocusable(false);
+        comCheckBox.setPreferredSize(new Dimension(80, 30));
+        CommPortIdentifier cpid;
+        Enumeration enumeration = CommPortIdentifier.getPortIdentifiers();
+        while (enumeration.hasMoreElements()) {
+            cpid = (CommPortIdentifier) enumeration.nextElement();
+            if (cpid.getPortType() == CommPortIdentifier.PORT_SERIAL) {
+                comCheckBox.addItem(cpid.getName());
+            }
+        }
+        COMLabel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                try {
+                    Map<String, String> map = WinRegistry.valuesForPath(WinRegistry.HKEY_LOCAL_MACHINE, "HARDWARE\\DEVICEMAP\\SERIALCOMM");
+                    if (map.size() > 0) {
+                        comCheckBox.removeAllItems();
+                        for (String str : map.values()) {
+                            comCheckBox.addItem(str);
+                        }
+                    }
+                    System.out.println();
+                } catch (IllegalAccessException ex) {
+                    ex.printStackTrace();
+                } catch (InvocationTargetException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+        pane4.add(comCheckBox);
+        button = new JToggleButton("连接");
+        button2 = new JToggleButton("断开");
+        button2.setSelected(true);
+        button.setPreferredSize(new Dimension(56, 32));
+        button2.setPreferredSize(new Dimension(56, 32));
+        button.addActionListener(this);
+        button2.addActionListener(this);
+        ButtonGroup group2 = new ButtonGroup();
+        group2.add(button);
+        group2.add(button2);
+        button.setFocusable(false);
+        button2.setFocusable(false);
+        JPanel pane5 = new JPanel();
+//        pane5.setBorder(BorderFactory.createLineBorder(Color.gray));
+        pane5.setPreferredSize(new Dimension(60, 60));
+        FlowLayout flowLayout4 = new FlowLayout(FlowLayout.RIGHT);
+        flowLayout4.setVgap(-2);
+        flowLayout4.setHgap(-2);
+        pane5.setLayout(flowLayout4);
+        pane5.add(button);
+        pane5.add(button2);
+        pane2.add(pane5);
+    }
+
+    public void setArtNetPanel(JPanel pane3) {
+//        FlowLayout flowLayout2 = new FlowLayout(FlowLayout.CENTER);
+//        flowLayout2.setVgap(-4);
+//        flowLayout2.setHgap(-2);
+//        pane3.setLayout(flowLayout2);
+        TitledBorder tb3 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "Art--Net", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         pane3.setBorder(tb3);
-        pane3.setPreferredSize(new Dimension(180, 100));
-        pane3.add(new JLabel("  IP1:"));
+        pane3.setPreferredSize(new Dimension(180, 250));
+        JPanel panel = new JPanel();
+        FlowLayout flowLayout3 = new FlowLayout(FlowLayout.LEFT);
+        flowLayout3.setVgap(0);
+        flowLayout3.setHgap(0);
+        panel.setLayout(flowLayout3);
+//        panel.setBorder(BorderFactory.createLineBorder(Color.gray));
+        panel.setPreferredSize(new Dimension(170, 60));
+
+//        pane3.add(new JLabel("IP1:"));
+        panel.add(new Label("IP:  "));
         JIpAddressField artNet1 = new JIpAddressField(25);
-//        artNet1.setHorizontalAlignment(JTextField.CENTER);
-        pane3.add(artNet1);
-        pane3.add(new JLabel("  IP2:"));
+        panel.add(artNet1);
+        panel.add(new JLabel("port: "));
+        JTextField port1 = new JTextField(4);
+        panel.add(port1);
+//        pane3.add(artNet1);
+//        pane3.add(new JLabel("IP2:"));
+        JPanel pane2 = new JPanel();
+        pane2.setLayout(flowLayout3);
+        pane2.setPreferredSize(new Dimension(170, 60));
+        pane2.add(new Label("IP:  "));
         JIpAddressField artNet2 = new JIpAddressField(25);
-//        artNet2.setHorizontalAlignment(JTextField.CENTER);
-        pane3.add(artNet2);
+        pane2.add(artNet2);
+        pane2.add(new JLabel("port: "));
+        JTextField port2 = new JTextField(4);
+        pane2.add(port2);
+//        pane3.add(artNet2);
 //        pane3.add(new JLabel("Port1:"));
 //        JTextField port1 = new JTextField(3);
 //        port1.setHorizontalAlignment(JTextField.CENTER);
@@ -228,13 +302,48 @@ public class RightPane implements ActionListener {
         group3.add(Disconnect);
         Connect.setFocusable(false);
         Disconnect.setFocusable(false);
-        ArtNetConnectListener artNetConnectListener = new ArtNetConnectListener(artNet1, artNet2, Connect, Disconnect);
-        Connect.addActionListener(artNetConnectListener);
-        Disconnect.addActionListener(artNetConnectListener);
+        ArtNet1ConnectListener artNet1ConnectListener = new ArtNet1ConnectListener(artNet1, port1, Connect, Disconnect);
+        Connect.addActionListener(artNet1ConnectListener);
+        Disconnect.addActionListener(artNet1ConnectListener);
         Connect.setPreferredSize(new Dimension(56, 32));
         Disconnect.setPreferredSize(new Dimension(56, 32));
-        pane3.add(Connect);
-        pane3.add(Disconnect);
+        JPanel pane5 = new JPanel();
+//        pane5.setBorder(BorderFactory.createLineBorder(Color.gray));
+        pane5.setPreferredSize(new Dimension(170, 40));
+        FlowLayout flowLayout4 = new FlowLayout(FlowLayout.CENTER);
+        flowLayout4.setVgap(0);
+        flowLayout4.setHgap(0);
+        pane5.setLayout(flowLayout4);
+        pane5.add(Connect);
+        pane5.add(Disconnect);
+        JPanel pane6 = new JPanel();
+        pane6.setPreferredSize(new Dimension(170, 40));
+        pane6.setLayout(flowLayout4);
+        JButton Connect2 = new JButton("连接");
+        JButton Disconnect2 = new JButton("断开");
+        ArtNet2ConnectListener artNet2ConnectListener = new ArtNet2ConnectListener(artNet2, port2, Connect2, Disconnect2);
+        Connect2.addActionListener(artNet2ConnectListener);
+        Disconnect2.addActionListener(artNet2ConnectListener);
+        ButtonGroup group4 = new ButtonGroup();
+        group4.add(Connect2);
+        group4.add(Disconnect2);
+        Disconnect2.setSelected(true);
+        Connect2.setFocusable(false);
+        Disconnect2.setFocusable(false);
+        Connect2.setPreferredSize(new Dimension(56, 32));
+        Disconnect2.setPreferredSize(new Dimension(56, 32));
+        pane6.add(Connect2);
+        pane6.add(Disconnect2);
+        pane3.add(panel);
+        pane3.add(pane5);
+        JPanel panel7 = new JPanel();
+        panel7.setPreferredSize(new Dimension(175, 1));
+        panel7.setBorder(BorderFactory.createLineBorder(Color.gray));
+        pane3.add(panel7);
+        pane3.add(pane2);
+        pane3.add(pane6);
+//        pane3.add(Connect);
+//        pane3.add(Disconnect);
     }
 
     @Override

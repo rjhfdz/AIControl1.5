@@ -603,11 +603,10 @@ public class ComReturnListener implements Runnable {
                         if (len1 == size) {//收到反馈 停止定时器 发出数据后再重新开启 同时记录发包
                             Data.againSendDataTimer.cancel();
                             Data.againSendDataTimer = null;
-                            Data.sendDataCount = 0;
+                            Data.sendDataCount = 0;//清除重发记录数 防止定时器计数错误
                             packetN = Byte.toUnsignedInt(b1[6]) * 256 + Byte.toUnsignedInt(b1[7]);
                             JButton dataWrite = (JButton) MainUi.map.get("comAndWifiDataWrite");
                             if (packetN == Data.dataWrite.length) {
-                                //清除重发记录数 防止下次重发出错
                                 dataWrite.setText("写入控制器");
                                 dataWrite.setEnabled(true);
                             } else {

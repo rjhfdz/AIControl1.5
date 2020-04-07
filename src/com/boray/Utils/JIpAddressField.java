@@ -210,7 +210,7 @@ public class JIpAddressField extends JComponent implements SwingConstants {
      */
     private void initGUI() {
         final FlowLayout flowLayout = new FlowLayout();
-        flowLayout.setAlignment(FlowLayout.LEFT);
+        flowLayout.setAlignment(FlowLayout.CENTER);
         flowLayout.setHgap(0);
         flowLayout.setVgap(0);
         this.setLayout(flowLayout);

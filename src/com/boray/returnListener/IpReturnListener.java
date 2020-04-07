@@ -271,7 +271,7 @@ public class IpReturnListener implements Runnable {
                             }, 2000);
                         }
                     }
-                } else if (hex0.equals("aa") && hex1.equals("57") && hex4.equals("85") && hex5.equals("17")) {
+                } else if (hex0.equals("aa") && hex1.equals("58") && hex4.equals("85") && hex5.equals("17")) {
                     int size = 10, packetN = 0;
                     byte[] b1 = new byte[size];
                     if (len <= size) {
@@ -283,18 +283,23 @@ public class IpReturnListener implements Runnable {
                     if (len1 == size) {//收到反馈 停止定时器 发出数据后再重新开启 同时记录发包
                         Data.againSendDataTimer.cancel();
                         Data.againSendDataTimer = null;
+                        Data.sendDataCount = 0;//清除重发记录数 防止定时器计数错误
                         packetN = Byte.toUnsignedInt(b1[6]) * 256 + Byte.toUnsignedInt(b1[7]);
                         JButton dataWrite = (JButton) MainUi.map.get("comAndWifiDataWrite");
                         if (packetN == Data.dataWrite.length) {
                             //清除重发记录数 防止下次重发出错
-                            Data.sendDataCount = 0;
                             dataWrite.setText("写入控制器");
                             dataWrite.setEnabled(true);
                         } else {
-                            Socket.UDPSendData((byte[]) Data.dataWrite[packetN]);
-                            Data.sendDataSum = packetN;
-                            dataWrite.setText((Data.sendDataSum + 1) + "/" + Data.dataWrite.length);
-                            Util.againSendData();
+                            try {
+                                Thread.sleep(100);
+                                Socket.UDPSendData((byte[]) Data.dataWrite[packetN]);
+                                Data.sendDataSum = packetN;
+                                dataWrite.setText((Data.sendDataSum + 1) + "/" + Data.dataWrite.length);
+                                Util.againSendData();
+                            }catch (Exception e){
+
+                            }
                         }
                     }
                 }

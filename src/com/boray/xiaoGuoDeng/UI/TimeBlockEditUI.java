@@ -69,6 +69,7 @@ import com.boray.fileCompare.Compare;
 import com.boray.mainUi.MainUi;
 import com.boray.usb.LastPacketData;
 import com.boray.usb.UsbUtil;
+import com.boray.xiaoGuoDeng.ArtNetReview;
 import com.boray.xiaoGuoDeng.Listener.CopyToTimeBlockEdit;
 import com.boray.xiaoGuoDeng.reviewBlock.TimeBlockReviewActionListener;
 import com.boray.xiaoGuoDeng.reviewBlock.TimeBlockStopReviewActionListener;
@@ -106,6 +107,7 @@ public class TimeBlockEditUI {
     private int[] startAddress;//每个灯的起始地址
 
     private int blockNum, group_N, index_N;
+    private int denKuNum ,suCaiNum;
 
     private JComboBox box81, box82, box83;
     //预览监听
@@ -163,8 +165,8 @@ public class TimeBlockEditUI {
         //////获取当前时间块参数
         int model = Integer.valueOf(XiaoGuoDengModel.model) - 1;
         int grpN = Integer.valueOf(groupNum).intValue() - 1;
-        int denKuNum = getxiaoGuoDengDengKuName();
-        int suCaiNum = block;
+        denKuNum = getxiaoGuoDengDengKuName();
+        suCaiNum = block;
         hashMap = (HashMap) Data.SuCaiObjects[denKuNum - 1][suCaiNum - 1];
         if (hashMap == null) {
             hashMap = new HashMap<>();
@@ -1106,7 +1108,10 @@ public class TimeBlockEditUI {
                         try {
                             button1.setEnabled(false);
                             save();
-                            timeBlockReviewActionListener.actionPerformed();
+//                            timeBlockReviewActionListener.actionPerformed();
+                            ArtNetReview artNetReview = new ArtNetReview(denKuNum-1,suCaiNum-1,startAddress);
+//                            artNetReview.serialPortTest(new int[tt],500);//调用预览数据之前，先归零
+                            artNetReview.getData();//发送数据
                         } catch (Exception e2) {
                             e2.printStackTrace();
                         } finally {
@@ -1197,6 +1202,8 @@ public class TimeBlockEditUI {
 //								}
 //							}
                             timeBlockReviewActionListener.actionPerformed();
+//                            ArtNetReview artNetReview = new ArtNetReview(denKuNum-1,suCaiNum-1,startAddress);
+//                            artNetReview.getData();//发送数据
                         } catch (Exception e2) {
                             e2.printStackTrace();
                         } finally {
@@ -1538,6 +1545,8 @@ public class TimeBlockEditUI {
 //								}
 //							}
                             timeBlockReviewActionListener.actionPerformed();
+//                            ArtNetReview artNetReview = new ArtNetReview(denKuNum-1,suCaiNum-1,startAddress);
+//                            artNetReview.getData();//发送数据
                         } catch (Exception e2) {
                             e2.printStackTrace();
                         } finally {
@@ -1879,6 +1888,8 @@ public class TimeBlockEditUI {
 //								}
 //							}
                             timeBlockReviewActionListener.actionPerformed();
+//                            ArtNetReview artNetReview = new ArtNetReview(denKuNum-1,suCaiNum-1,startAddress);
+//                            artNetReview.getData();//发送数据
                         } catch (Exception e2) {
                             e2.printStackTrace();
                         } finally {
@@ -2351,6 +2362,8 @@ public class TimeBlockEditUI {
 //									JOptionPane.showMessageDialog(dialog, "请先生成初始版本的控制器文件导入到控制器，再进行预览！", "提示", JOptionPane.ERROR_MESSAGE);
 //								}
 //							}
+//                            ArtNetReview artNetReview = new ArtNetReview(denKuNum-1,suCaiNum-1,startAddress);
+//                            artNetReview.getData();//发送数据
                         } catch (Exception e2) {
                             e2.printStackTrace();
                         } finally {
