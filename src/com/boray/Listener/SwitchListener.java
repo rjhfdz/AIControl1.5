@@ -5,10 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.OutputStream;
 
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JToggleButton;
+import javax.swing.*;
 
 import com.boray.Data.Data;
 import com.boray.Data.RdmData;
@@ -128,6 +125,8 @@ public class SwitchListener implements ActionListener {
             new DataActionListener().saveZhongKongData();
         }
         if (!btn.getName().equals("1") && "1".equals(selected)) {
+//            JSlider slider = (JSlider) MainUi.map.get("quanJuLiangDuSlider");
+//            slider.setValue(50);
             new DataActionListener().saveChangJingData();
         }
         if (btn.getName().equals("9")) {
@@ -188,10 +187,15 @@ public class SwitchListener implements ActionListener {
                 }
             }
         }
-        if (!btn.getName().equals("2")) {
-            Socket.SerialPortSendData(RdmData.quit());
-        } else {
-            Socket.SerialPortSendData(RdmData.access());
+        try {//加300毫秒间隔区分 dmx录制状态查询
+            Thread.sleep(300);
+            if (!btn.getName().equals("2")) {
+                Socket.SerialPortSendData(RdmData.quit());
+            } else {
+                Socket.SerialPortSendData(RdmData.access());
+            }
+        }catch (Exception e1){
+            e1.printStackTrace();
         }
         selected = btn.getName();
         cardLayout.show(parentPane, btn.getName());

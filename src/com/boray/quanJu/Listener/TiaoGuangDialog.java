@@ -49,6 +49,7 @@ public class TiaoGuangDialog implements ActionListener{
 		dialog.setLocation(f.getLocation().x+f.getSize().width/2-300,f.getLocation().y+f.getSize().height/2-165);
 		dialog.setSize(600, 330);
 		init(dialog);
+		tiaoGuangSendCode.setData();
 		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		dialog.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -130,7 +131,6 @@ public class TiaoGuangDialog implements ActionListener{
 				box3.addItem(String.valueOf(i));
 			}
 		}
-		
 		slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				ItemListener listener = box2.getItemListeners()[0];
@@ -181,7 +181,6 @@ public class TiaoGuangDialog implements ActionListener{
 				}
 			}
 		});
-		
 		list.add(box);
 		list.add(slider);list.add(slider2);
 		//list.add(box2);list.add(box3);
@@ -217,7 +216,6 @@ public class TiaoGuangDialog implements ActionListener{
 				box3.addItem(String.valueOf(i));
 			}
 		}
-		
 		slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				ItemListener listener = box2.getItemListeners()[0];
@@ -304,7 +302,6 @@ public class TiaoGuangDialog implements ActionListener{
 				box3.addItem(String.valueOf(i));
 			}
 		}
-		
 		slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				ItemListener listener = box2.getItemListeners()[0];
@@ -391,7 +388,6 @@ public class TiaoGuangDialog implements ActionListener{
 				box3.addItem(String.valueOf(i));
 			}
 		}
-		
 		slider.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				ItemListener listener = box2.getItemListeners()[0];
@@ -442,10 +438,10 @@ public class TiaoGuangDialog implements ActionListener{
 				}
 			}
 		});
-		
 		list.add(box);
 		list.add(slider);list.add(slider2);
 		//list.add(box2);list.add(box3);
 		pane.add(box2);pane.add(box3);
+		pane.updateUI();
 	}
 }

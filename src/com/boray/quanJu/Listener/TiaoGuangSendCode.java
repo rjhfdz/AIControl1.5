@@ -65,4 +65,31 @@ public class TiaoGuangSendCode {
 			}
 		}
 	}
+
+	public void setData(){
+		ArrayList list = (ArrayList)MainUi.map.get("setTiaoGuangCpns");
+		//可调、下限
+		JComboBox box = (JComboBox)list.get(0);
+		JSlider slider = (JSlider)list.get(2);
+		slider.setValue(8);
+		JComboBox box2 = (JComboBox)list.get(3);
+		JSlider slider2 = (JSlider)list.get(5);
+		slider2.setValue(8);
+		JComboBox box3 = (JComboBox)list.get(6);
+		JSlider slider3_3 = (JSlider)list.get(8);
+		slider3_3.setValue(8);
+		JComboBox box4 = (JComboBox)list.get(9);
+		JSlider slider4_4 = (JSlider)list.get(11);
+		slider4_4.setValue(8);
+		//上限
+		JSlider slider3 = (JSlider)list.get(1);
+		slider3.setValue(100);
+		JSlider slider4 = (JSlider)list.get(4);
+		slider4.setValue(100);
+		JSlider slider5 = (JSlider)list.get(7);
+		slider5.setValue(100);
+		JSlider slider6 = (JSlider)list.get(10);
+		slider6.setValue(100);
+
+	}
 }

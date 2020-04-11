@@ -270,9 +270,11 @@ public class RightPane implements ActionListener {
 //        pane3.add(new JLabel("IP1:"));
         panel.add(new Label("IP:  "));
         JIpAddressField artNet1 = new JIpAddressField(25);
+        artNet1.setIpAddress("2.0.0.1");
         panel.add(artNet1);
         panel.add(new JLabel("port: "));
         JTextField port1 = new JTextField(4);
+        port1.setText("6454");
         panel.add(port1);
 //        pane3.add(artNet1);
 //        pane3.add(new JLabel("IP2:"));
@@ -281,9 +283,11 @@ public class RightPane implements ActionListener {
         pane2.setPreferredSize(new Dimension(170, 60));
         pane2.add(new Label("IP:  "));
         JIpAddressField artNet2 = new JIpAddressField(25);
+        artNet2.setIpAddress("2.0.0.2");
         pane2.add(artNet2);
         pane2.add(new JLabel("port: "));
         JTextField port2 = new JTextField(4);
+        port2.setText("6454");
         pane2.add(port2);
 //        pane3.add(artNet2);
 //        pane3.add(new JLabel("Port1:"));

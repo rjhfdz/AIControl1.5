@@ -31,7 +31,7 @@ public class DefineJLable3 extends JLabel {
         this.pane = pane;
 //        blockNum = Integer.valueOf(s.substring(0, s.indexOf("("))).intValue();
         this.setEnabled(false);
-        this.setBackground(MyColor.colors[0]);
+        this.setBackground(new Color(101, 198, 233));
         popupMenu = new JPopupMenu();
         menuItem = new JCheckBoxMenuItem("°°∆Ù”√");
         menuItem1 = new JCheckBoxMenuItem("°°Ω˚”√", true);

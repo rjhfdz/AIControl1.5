@@ -91,7 +91,7 @@ public class ChangJinUI implements ActionListener {
         p1.add(btn4);
         p1.add(label);
         p1.add(btn5);
-        p1.setVisible(false);
+//        p1.setVisible(true);
         MainUi.map.put("LiangDu", label);
         MainUi.map.put("changJingLiangDuPane", p1);
         centerPane.add(p1);

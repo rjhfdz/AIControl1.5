@@ -21,6 +21,8 @@ public class UpLoadOrLoadSuCaiMouseListener implements MouseListener {
             JMenuItem export = new JMenuItem("　导出");
             JMenuItem lead = new JMenuItem("　导入");
             JMenuItem coverage = new JMenuItem("　导入覆盖");
+            JMenuItem copy = new JMenuItem("    复制");
+            JMenuItem paste = new JMenuItem("    粘贴");
             coverage.setEnabled(false);
             if(list.getSelectedValue()!=null){//选中
                 coverage.setEnabled(true);
@@ -29,9 +31,13 @@ public class UpLoadOrLoadSuCaiMouseListener implements MouseListener {
             export.addActionListener(listener);
             lead.addActionListener(listener);
             coverage.addActionListener(listener);
+            copy.addActionListener(listener);
+            paste.addActionListener(listener);
             popupMenu.add(export);
             popupMenu.add(lead);
             popupMenu.add(coverage);
+            popupMenu.add(copy);
+            popupMenu.add(paste);
             popupMenu.show(list,e.getX(),e.getY());
         }
     }

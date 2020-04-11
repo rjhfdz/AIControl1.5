@@ -42,6 +42,14 @@ public class Data {
 	 * 20表示20个灯库，30表示30个素材
 	 */
 	public static Object[][] SuCaiObjects = new Object[20][30];
+	/**
+	 * 素材选择的组别
+	 */
+	public static Map suCaiSelectZu = new HashMap();
+	/**
+	 * 复制粘贴 临时素材
+	 */
+	public static String tempSuCai;
 	//新建素材的顺序
 	public static List<String> AddSuCaiOrder = new ArrayList<>();
 	//4个雾机模式数据

@@ -62,7 +62,7 @@ public class ProgrammePaneUI {
 
         dengGuangBoxs.addItemListener(changJingSelectItemListener);
         gonNengBoxs.addItemListener(changJingSelectItemListener);
-        label.setText("正在编辑：" + dengGuangBoxs.getSelectedItem());
+        label.setText("正在编辑：【"+dengGuangBoxs.getSelectedIndex()+"】场景");
 
         DengJuKaiGuangItemListener itemListener = new DengJuKaiGuangItemListener();
 
@@ -316,13 +316,14 @@ public class ProgrammePaneUI {
                 box.addItem(String.valueOf(i));
             }
         }
+        box.setSelectedIndex(25);
         chdPane.add(box);
         RadioActionListener radioActionListener = new RadioActionListener();
         JLabel label2 = new JLabel("开关模式:");
         chdPane.add(label2);
         JRadioButton radioButton = new JRadioButton("固定");
         JRadioButton radioButton2 = new JRadioButton("开关");
-        radioButton2.setSelected(true);
+        radioButton.setSelected(true);
         radioButton.addActionListener(radioActionListener);
         radioButton2.addActionListener(radioActionListener);
         MainUi.map.put("kaiGuangModelBtn1", radioButton);
@@ -336,7 +337,7 @@ public class ProgrammePaneUI {
         chdPane.add(label3);
         JRadioButton radioButton3 = new JRadioButton("固定");
         JRadioButton radioButton4 = new JRadioButton("继承");
-        radioButton4.setSelected(true);
+        radioButton3.setSelected(true);
         radioButton3.addActionListener(radioActionListener);
         radioButton4.addActionListener(radioActionListener);
         MainUi.map.put("liangDuModelBtn1", radioButton3);
@@ -453,7 +454,7 @@ public class ProgrammePaneUI {
         endPane.add(new JLabel("运行模式"));
         JRadioButton radioButton = new JRadioButton("顺序");
         JRadioButton radioButton2 = new JRadioButton("随机");
-        radioButton2.setSelected(true);
+        radioButton.setSelected(true);
         radioButton.addActionListener(radioActionListener2);
         radioButton2.addActionListener(radioActionListener2);
         MainUi.map.put("yunXingModelBtn1", radioButton);

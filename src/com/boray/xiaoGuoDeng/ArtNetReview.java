@@ -271,10 +271,6 @@ public class ArtNetReview {
             }
         }
         buff[519] = ZhiLingJi.getJiaoYan(buff);
-        System.out.println();
-        for (int i = 0; i < buff.length; i++) {
-            System.out.print(buff[i]);
-        }
         try {
             Socket.SerialPortSendData(buff);
             Thread.sleep(time);

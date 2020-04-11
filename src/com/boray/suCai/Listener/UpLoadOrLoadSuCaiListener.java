@@ -77,6 +77,50 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
                     loadDataCoverage(file);
                 }
             }
+        } else if ("    复制".equals(e.getActionCommand())) {
+            JList list = (JList) MainUi.map.get("suCaiLightType");//灯库列表
+            JList suCai_list = (JList) MainUi.map.get("suCai_list");//素材列表
+            String suCaiSelect = suCai_list.getSelectedValue().toString();
+            int suCaiIndex = Integer.parseInt(suCaiSelect.split(">")[1]) - 1;//素材下标
+            int dengKuIndex = list.getSelectedIndex();//灯库下标
+            Data.tempSuCai = dengKuIndex + "#" + suCaiIndex;
+            JFrame frame = (JFrame) MainUi.map.get("frame");
+            JOptionPane.showMessageDialog(frame, "素材复制成功！", "提示", JOptionPane.PLAIN_MESSAGE);
+        } else if ("    粘贴".equals(e.getActionCommand())) {
+            if (Data.tempSuCai == null) {
+                JFrame frame = (JFrame) MainUi.map.get("frame");
+                JOptionPane.showMessageDialog(frame, "素材粘贴失败，未复制素材！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            } else {
+                JList list = (JList) MainUi.map.get("suCaiLightType");//灯库列表
+                String[] str = Data.tempSuCai.split("#");
+                if (!str[0].equals(list.getSelectedIndex() + "")) {
+                    JFrame frame = (JFrame) MainUi.map.get("frame");
+                    JOptionPane.showMessageDialog(frame, "素材粘贴失败，所选灯库不一致！", "提示", JOptionPane.PLAIN_MESSAGE);
+                    return;
+                } else {
+                    JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");//类型列表
+                    String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
+                    String s = null;
+                    for (int i = 0; i < btns.length; i++) {
+                        if (btns[i].isSelected()) {
+                            s = name[i];
+                        }
+                    }
+                    //弹出界面
+                    JFrame f = (JFrame) MainUi.map.get("frame");
+                    JDialog dialog = new JDialog(f, true);
+                    dialog.setResizable(false);
+                    dialog.setTitle("粘贴素材");
+                    int w = 380, h = 180;
+                    dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - w / 2, f.getLocation().y + f.getSize().height / 2 - h / 2);
+                    dialog.setSize(w, h);
+                    dialog.setLayout(new FlowLayout(FlowLayout.CENTER));
+                    dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                    init(dialog, s, "", Data.SuCaiObjects[Integer.valueOf(str[0])][Integer.valueOf(str[1])],"粘贴成功！");
+                    dialog.setVisible(true);
+                }
+            }
         }
     }
 
@@ -178,7 +222,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
                         suCaiList.setModel(model);
                         suCaiList.setSelectedIndex(0);
                         Data.SuCaiObjects[dengkuList.getSelectedIndex()][number - 1] = o;
-                        JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "导入成功！", "提示", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "导入成功", "提示", JOptionPane.ERROR_MESSAGE);
                         dialog.dispose();
                     }
                 }
@@ -285,7 +329,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
             dialog.setSize(w, h);
             dialog.setLayout(new FlowLayout(FlowLayout.CENTER));
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            init(dialog, type, suCaiName, o);
+            init(dialog, type, suCaiName, o,"导入成功！");
             dialog.setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -293,7 +337,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
     }
 
     //初始化界面
-    public void init(final JDialog dialog, final String type, final String suCaiName, final Object o) {
+    public void init(final JDialog dialog, final String type, final String suCaiName, final Object o,final String message) {
         JPanel p1 = new JPanel();
         p1.add(new JLabel("素材名称："));
         final JTextField field = new JTextField(15);
@@ -327,7 +371,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
                         }
                         if (cnt == 30) {
                             JFrame frame = (JFrame) MainUi.map.get("frame");
-                            JOptionPane.showMessageDialog(frame, "最多只能创建30个素材！", "提示", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(frame, "最多只能创建30个素材！", "提示", JOptionPane.PLAIN_MESSAGE);
                             return;
                         }
                         String suCaiNameAndNumber = field.getText() + "--->" + (cnt + 1);
@@ -381,7 +425,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
                         String count = suCaiUI.getCount();//所有灯库的素材数量
                         JLabel countLabel = (JLabel) MainUi.map.get("count");
                         countLabel.setText(count);
-                        JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "导入成功！", "提示", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), message, "提示", JOptionPane.PLAIN_MESSAGE);
                         dialog.dispose();
                     }
                 }
@@ -419,7 +463,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
             }
         }
         String suCaiSelect = suCai_list.getSelectedValue().toString();
-        fileName = "场景素材----"+list.getSelectedValue().toString() + "----" + type + "----" + suCaiSelect.split("--->")[0] + ".xml";
+        fileName = "场景素材----" + list.getSelectedValue().toString() + "----" + type + "----" + suCaiSelect.split("--->")[0] + ".xml";
         return fileName;
     }
 

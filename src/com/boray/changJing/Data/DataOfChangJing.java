@@ -13,6 +13,10 @@ public class DataOfChangJing {
 			for (int j = 0; j < 31; j++) {
 				list.add(String.valueOf(0));
 			}
+			list.set(16,"50");//全局亮度
+			list.set(17,"1");//开关模式
+			list.set(18,"1");//亮度模式
+			list.set(26,"1");//运行模式
 			map.put(""+i, list);
 		}
 	}

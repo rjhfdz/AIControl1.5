@@ -77,6 +77,7 @@ public class SuCaiEditUI {
     private List rgb1CompontList2 = null;
     private List rgb1CompontList3 = null;
     private int tt;//通道数
+    private boolean flag = false;//判断素材是否新建
 
     //////预览使用的参数
     private int channelCount = 0;//通道数量
@@ -84,7 +85,7 @@ public class SuCaiEditUI {
 
     //private int blockNum, group_N;
 
-    private JComboBox box81, box82, box83;
+    private JComboBox box81, box82, box83, zuComboBox;
     //预览监听
     private TimeBlockReviewActionListener timeBlockReviewActionListener;
     //停止预览
@@ -118,9 +119,9 @@ public class SuCaiEditUI {
         p1.setLayout(flowLayout3);
         p1.add(new JLabel("组别"));
         JTextField field = new JTextField(8);
-        JComboBox comboBox = new JComboBox();
+        zuComboBox = new JComboBox();
 //        p1.add(field);
-        p1.add(comboBox);
+        p1.add(zuComboBox);
         p1.add(new Label("素材类型"));
         JTextField field4 = new JTextField(8);
         p1.add(field4);
@@ -142,8 +143,8 @@ public class SuCaiEditUI {
         tabbedPane.setPreferredSize(new Dimension(700, 500));
 
         //预览的监听
-        timeBlockReviewActionListener = new TimeBlockReviewActionListener(comboBox, denKuNum, suCaiNum - 1);
-        timeBlockStopReviewActionListener = new TimeBlockStopReviewActionListener(comboBox, 1, 1);
+        timeBlockReviewActionListener = new TimeBlockReviewActionListener(zuComboBox, denKuNum, suCaiNum - 1);
+        timeBlockStopReviewActionListener = new TimeBlockStopReviewActionListener(zuComboBox, 1, 1);
 
         //////获取当前时间块参数
 		/*int model = Integer.valueOf(XiaoGuoDengModel.model)-1;
@@ -152,6 +153,7 @@ public class SuCaiEditUI {
 		hashMap = (HashMap)Data.XiaoGuoDengObjects[model][grpN][blkN];*/
         hashMap = (HashMap) Data.SuCaiObjects[denKuNum][suCaiNum - 1];
         if (hashMap == null) {
+            flag = true;
             hashMap = new HashMap<>();
             Data.SuCaiObjects[denKuNum][suCaiNum - 1] = hashMap;
         }
@@ -213,7 +215,7 @@ public class SuCaiEditUI {
 		typeString = table3.getValueAt(i, 3).toString();*/
         //dengKuNumber = Integer.valueOf(typeString.split("#")[0].substring(2)).intValue()-1;
         dengKuNumber = denKuNum;
-        getDengZuComBox(comboBox);
+        getDengZuComBox(zuComboBox);
         HashMap map = (HashMap) Data.DengKuList.get(dengKuNumber);
         String tempString = "";
         int count = Integer.valueOf((String) Data.DengKuChannelCountList.get(dengKuNumber)).intValue();
@@ -303,6 +305,10 @@ public class SuCaiEditUI {
         }
         list2.add(f);
         hashMap.put("beiyong", list2);
+//        hashMap.put("zuBieBox", zuComboBox.getSelectedIndex());
+        JList suCaiList = (JList) MainUi.map.get("suCaiLightType");
+        if (zuComboBox.getSelectedIndex() >= 0)
+            Data.suCaiSelectZu.put(suCaiList.getSelectedIndex(), zuComboBox.getSelectedIndex());
 
 //		hashMap.put("suCaiDengJuNumber",)
 
@@ -612,6 +618,13 @@ public class SuCaiEditUI {
         checkBoxs = new JCheckBox[count];
         checkBoxs2 = new JCheckBox[count];
         names = new JLabel[count];
+        if (flag) {
+            if (bn == null)
+                bn = new boolean[tt];
+            for (int i = 0; i < bn.length; i++) {
+                bn[i] = true;
+            }
+        }
         final JLabel[] DmxValues = new JLabel[count];
 
         for (int i = 0; i < count; i++) {
@@ -840,7 +853,9 @@ public class SuCaiEditUI {
         p1.add(button2);
         p1.add(new JLabel("                                执行时长"));
         final JSlider slider = new JSlider(0, 10000);
-        slider.setValue(0);
+//        slider.setValue(0);
+        if (flag)
+            slider.setValue(2000);
         final JTextField field = new JTextField(4);
         field.setText("0");
         slider.addChangeListener(new ChangeListener() {
@@ -924,7 +939,10 @@ public class SuCaiEditUI {
         Object[] s = new String[tt + 2];
         final String[] temp = new String[tt + 2];
         temp[0] = "1";
-        temp[1] = "0";
+        if (flag)
+            temp[1] = "2000";
+        else
+            temp[1] = "0";
         s[0] = "步骤";
         s[1] = "执行时长";
         for (int i = 2; i < s.length; i++) {
@@ -2690,6 +2708,12 @@ public class SuCaiEditUI {
 
         for (int i = 0; i < list.size(); i++) {
             box.addItem(list.get(i));
+        }
+//        Object o = hashMap.get("zuBieBox");
+        JList suCaiList = (JList) MainUi.map.get("suCaiLightType");
+        Object o = Data.suCaiSelectZu.get(suCaiList.getSelectedIndex());
+        if (o != null && o instanceof Integer) {
+            zuComboBox.setSelectedIndex(Integer.valueOf(o.toString()));
         }
     }
 }

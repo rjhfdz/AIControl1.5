@@ -51,7 +51,7 @@ public class MainUi {
 
         frame.setSize(frameWidth, frameHeight);
         frame.setLocation(screenWidth / 2 - frameWidth / 2, screenHeight / 2 - frameHeight / 2);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         frame.addWindowFocusListener(new WindowFocusListener() {
             public void windowLostFocus(WindowEvent e) {
             }
@@ -98,7 +98,10 @@ public class MainUi {
                 if (yes == 1) {
                     new ProjectCreateFileOfCloseFrame().save();
                 }
-                Runtime.getRuntime().halt(1);
+                if (yes == 0) {
+                    Runtime.getRuntime().halt(1);
+                }
+//                Runtime.getRuntime().halt(1);
             }
 
             public void windowOpened(WindowEvent e) {

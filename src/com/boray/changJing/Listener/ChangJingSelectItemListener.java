@@ -46,7 +46,7 @@ public class ChangJingSelectItemListener implements ItemListener {
                 }
             }
             JLabel label = (JLabel) MainUi.map.get("changJingBianChengLabel");
-            label.setText("正在编辑：" + box.getSelectedItem());
+            label.setText("正在编辑：【" + n + "】场景");
             //保存前一个场景数据
             if (Data.changJingModel != -1) {
                 List list = (List) DataOfChangJing.map.get("" + Data.changJingModel);

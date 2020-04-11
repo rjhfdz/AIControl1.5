@@ -101,13 +101,13 @@ public class TimeBlockEditUI {
     private List rgb1CompontList2 = null;
     private List rgb1CompontList3 = null;
     private int tt;//通道数
-
+    private boolean flag = false;//判断素材是否新建
     //////预览使用的参数
     private int channelCount = 0;//通道数量
     private int[] startAddress;//每个灯的起始地址
 
     private int blockNum, group_N, index_N;
-    private int denKuNum ,suCaiNum;
+    private int denKuNum, suCaiNum;
 
     private JComboBox box81, box82, box83;
     //预览监听
@@ -169,6 +169,7 @@ public class TimeBlockEditUI {
         suCaiNum = block;
         hashMap = (HashMap) Data.SuCaiObjects[denKuNum - 1][suCaiNum - 1];
         if (hashMap == null) {
+            flag = true;
             hashMap = new HashMap<>();
             Data.SuCaiObjects[denKuNum - 1][suCaiNum - 1] = hashMap;
         }
@@ -610,6 +611,13 @@ public class TimeBlockEditUI {
         checkBoxs = new JCheckBox[count];
         checkBoxs2 = new JCheckBox[count];
         names = new JLabel[count];
+        if(flag){
+            if(bn==null)
+                bn = new boolean[tt];
+            for (int i = 0;i<bn.length;i++){
+                bn[i] = true;
+            }
+        }
         final JLabel[] DmxValues = new JLabel[count];
 
         for (int i = 0; i < count; i++) {
@@ -838,7 +846,9 @@ public class TimeBlockEditUI {
         p1.add(button2);
         p1.add(new JLabel("                                执行时长"));
         final JSlider slider = new JSlider(0, 10000);
-        slider.setValue(0);
+        if (flag)
+            slider.setValue(2000);
+//        slider.setValue(0);
         final JTextField field = new JTextField(4);
         field.setText("0");
         slider.addChangeListener(new ChangeListener() {
@@ -922,7 +932,10 @@ public class TimeBlockEditUI {
         Object[] s = new String[tt + 2];
         final String[] temp = new String[tt + 2];
         temp[0] = "1";
-        temp[1] = "0";
+        if (flag)
+            temp[1] = "2000";
+        else
+            temp[1] = "0";
         s[0] = "步骤";
         s[1] = "执行时长";
         for (int i = 2; i < s.length; i++) {
@@ -1108,7 +1121,7 @@ public class TimeBlockEditUI {
                         try {
                             button1.setEnabled(false);
                             save();
-//                            timeBlockReviewActionListener.actionPerformed();
+                            timeBlockReviewActionListener.actionPerformed();
                             ArtNetReview artNetReview = new ArtNetReview(denKuNum-1,suCaiNum-1,startAddress);
 //                            artNetReview.serialPortTest(new int[tt],500);//调用预览数据之前，先归零
                             artNetReview.getData();//发送数据
@@ -2540,7 +2553,7 @@ public class TimeBlockEditUI {
             for (int j = 2; j < table.getColumnCount(); j++) {
                 value = Integer.valueOf(table.getValueAt(slt[0], j).toString()).intValue();
                 for (int i = 0; i < startAddress.length; i++) {
-                    bytes[startAddress[i]+j-3] = (byte) value;
+                    bytes[startAddress[i] + j - 3] = (byte) value;
                 }
             }
             Socket.ArtNetSendData(bytes);//添加artNet数据协议发送
