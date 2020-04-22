@@ -21,12 +21,7 @@ import java.awt.event.MouseWheelListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
-import java.util.Vector;
+import java.util.*;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -63,6 +58,7 @@ import com.boray.Data.ChannelName;
 import com.boray.Data.Data;
 import com.boray.Data.MyData;
 import com.boray.Data.ZhiLingJi;
+import com.boray.Utils.Socket;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
 import com.boray.usb.LastPacketData;
@@ -86,6 +82,8 @@ public class EditEffect_shengKonUI {
     Vector vector88 = null;
     String typeString = "";
     String preSelect = "0";
+    private List<Integer> selectPre = new ArrayList<>();
+    ;
     int channelCount = 0;
     Map map88;
     boolean[][] gouXuanValus;
@@ -96,6 +94,8 @@ public class EditEffect_shengKonUI {
 
     private JComboBox duoDengCtrlBox;//多灯控制
     private JPanel pane;
+
+    private ButtonGroup group;
 
     public void show(int block, String groupNum, String number, JPanel pane) {
         this.groupNum = groupNum;
@@ -265,8 +265,16 @@ public class EditEffect_shengKonUI {
                     textFields[a].setText(String.valueOf(sliders[a].getValue()));
                     int[] slt = runTable.getSelectedRows();
                     if (slt.length > 0) {
-                        for (int k = 0; k < slt.length; k++) {
-                            runTable.setValueAt(String.valueOf(sliders[a].getValue()), slt[k], a + (channelCount * Integer.valueOf(preSelect).intValue()) + 2);
+                        if (group.getButtonCount() <= 0) {
+                            for (int k = 0; k < slt.length; k++) {
+                                for (int i = 0; i < selectPre.size(); i++) {
+                                    runTable.setValueAt(String.valueOf(sliders[a].getValue()), slt[k], a + (channelCount * Integer.valueOf(selectPre.get(i)).intValue()) + 2);
+                                }
+                            }
+                        } else {
+                            for (int k = 0; k < slt.length; k++) {
+                                runTable.setValueAt(String.valueOf(sliders[a].getValue()), slt[k], a + (channelCount * Integer.valueOf(preSelect).intValue()) + 2);
+                            }
                         }
                     }
                 }
@@ -478,11 +486,21 @@ public class EditEffect_shengKonUI {
         cnt = treeSet.size();
 
         buttons = new JToggleButton[cnt];
-        ButtonGroup group = new ButtonGroup();
+        group = new ButtonGroup();
         NewJTable table3 = (NewJTable) MainUi.map.get("table_dengJu");//所有灯具
         Iterator iterator = treeSet.iterator();
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if (group.getButtonCount() <= 0) {
+                    selectPre.clear();
+                    for (int i = 0; i < buttons.length; i++) {
+                        if (buttons[i].isSelected()) {
+                            selectPre.add(i);
+                        }
+                    }
+                    return;
+                }
+
                 JToggleButton btn = (JToggleButton) e.getSource();
                 int start = Integer.valueOf(btn.getName()).intValue() * channelCount;
 
@@ -1283,15 +1301,34 @@ public class EditEffect_shengKonUI {
         JTextField field3 = new JTextField(12);
         field3.setEnabled(false);
         field3.setText(cnt + "");
+        JButton button = new JButton("单选");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getActionCommand().equals("单选")) {
+                    for (int i = 0; i < buttons.length; i++) {
+                        group.remove(buttons[i]);
+                    }
+                    button.setText("多选");
+                } else {
+                    for (int i = 0; i < buttons.length; i++) {
+                        group.add(buttons[i]);
+                    }
+                    button.setText("单选");
+                }
+            }
+        });
         pane.add(field3);
+        pane.add(button);
     }
 
     private void outDevice() {
         int[] slt = runTable.getSelectedRows();
         int value = 0;
         int i = 0, ii = 0;
-        if (Data.serialPort != null && slt.length != 0) {
+        if (slt.length != 0) {
             byte[] buff = new byte[512 + 8];
+            byte[] bytes = new byte[512];
             buff[0] = (byte) 0xBB;
             buff[1] = (byte) 0x55;
             buff[2] = (byte) (520 / 256);
@@ -1316,13 +1353,13 @@ public class EditEffect_shengKonUI {
                 }
             }
             buff[519] = ZhiLingJi.getJiaoYan(buff);
-            try {
-                OutputStream os = Data.serialPort.getOutputStream();
-                os.write(buff);
-                os.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (Data.serialPort != null) {
+                Socket.SerialPortSendData(buff);
+            } else if (Data.socket != null) {
+                Socket.UDPSendData(buff);
             }
+            System.arraycopy(buff, 8, bytes, 0, 512);
+            Socket.ArtNetSendData(bytes);//添加artNet数据协议发送
         }
     }
 

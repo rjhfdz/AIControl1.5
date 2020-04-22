@@ -235,7 +235,7 @@ public class ProjectCreateFileOfCloseFrame {
                 JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels" + j);
                 for (int k = 1; k <= 30; k++) {
                     for (int i = 0; i < timeBlockPanels[k - 1].getComponentCount(); i++) {
-                        if (timeBlockPanels[k - 1].isVisible()) {
+//                        if (timeBlockPanels[k - 1].isVisible()) {
                             if ((k - 1) == 0) {
                                 DefineJLable_shengKon lable = (DefineJLable_shengKon) timeBlockPanels[k - 1].getComponent(i);
                                 String[] strings = new String[5];
@@ -259,7 +259,7 @@ public class ProjectCreateFileOfCloseFrame {
                                     strings[5] = "0";
                                 objects2[j - 1][k - 1][i] = strings;
                             }
-                        }
+//                        }
                     }
                 }
 //				for (int i = 0; i < timeBlockPanels[0].getComponentCount(); i++) {

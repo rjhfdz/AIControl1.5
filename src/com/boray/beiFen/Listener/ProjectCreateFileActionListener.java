@@ -235,7 +235,7 @@ public class ProjectCreateFileActionListener implements ActionListener {
                 JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels" + j);
                 for (int k = 0; k < 31; k++) {
                     for (int i = 0; i < timeBlockPanels[k].getComponentCount(); i++) {
-                        if (timeBlockPanels[k].isVisible()) {
+//                        if (timeBlockPanels[k].isVisible()) {
                             if (k == 0) {
                                 DefineJLable_shengKon lable = (DefineJLable_shengKon) timeBlockPanels[k].getComponent(i);
                                 String[] strings = new String[5];
@@ -259,7 +259,7 @@ public class ProjectCreateFileActionListener implements ActionListener {
                                     strings[5] = "0";
                                 objects2[j - 1][k][i] = strings;
                             }
-                        }
+//                        }
                     }
                 }
 //                for (int i = 0; i < timeBlockPanels[0].getComponentCount(); i++) {

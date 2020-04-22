@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -27,6 +29,7 @@ public class DengJuSetDialog implements ActionListener {
     private JTextField field;
     private JTextField field2;
     private JComboBox box;
+    private JComboBox addBox;
     private JLabel label = new JLabel("0");//灯库型号
     private JLabel label2 = new JLabel("1.0");//库版本
 
@@ -35,7 +38,7 @@ public class DengJuSetDialog implements ActionListener {
         dialog = new JDialog(f, true);
         dialog.setResizable(false);
         dialog.setTitle("添加灯具");
-        int w = 380, h = 280;
+        int w = 380, h = 350;
         dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - w / 2, f.getLocation().y + f.getSize().height / 2 - h / 2);
         dialog.setSize(w, h);
         dialog.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -116,6 +119,16 @@ public class DengJuSetDialog implements ActionListener {
         label2.setBackground(new Color(243, 243, 243));
         panel4.add(label2);
 
+        JPanel panel6 = new JPanel();
+        panel6.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        panel6.setPreferredSize(new Dimension(270, 40));
+        panel6.add(new JLabel("添加灯具个数"));
+        addBox = new JComboBox();
+        for (int i = 0; i < 8; i++) {
+            addBox.addItem((i + 1));
+        }
+        addBox.setPreferredSize(new Dimension(170, 30));
+        panel6.add(addBox);
 
         JPanel panel5 = new JPanel();
         JButton btn = new JButton("取消");
@@ -133,6 +146,7 @@ public class DengJuSetDialog implements ActionListener {
         dialog.add(panel2);
         dialog.add(panel3);
         dialog.add(panel4);
+        dialog.add(panel6);
         dialog.add(panel5);
     }
 
@@ -142,18 +156,29 @@ public class DengJuSetDialog implements ActionListener {
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             int index = table.getRowCount();
             if (box.getSelectedItem() != null) {
-                if (index == 50) {
+                int addNumber = Integer.valueOf(addBox.getSelectedItem().toString());
+                if (index == 50 || (index + addNumber) > 50) {
                     JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "添加灯具数量不能超过50个！", "提示", JOptionPane.ERROR_MESSAGE);
                     return;
                 } else {
+                    List<Integer> list = new ArrayList<>();
                     int cnt = Integer.valueOf(field2.getText()).intValue() + Integer.valueOf(label.getText()).intValue();
+                    list.add(cnt);
+                    if (addNumber != 1) {
+                        for (int i = 1; i < addNumber; i++) {
+                            cnt += Integer.valueOf(label.getText());
+                            list.add(cnt);
+                        }
+                    }
                     if (cnt > 513) {
                         JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "通道已超出正常512范围！", "提示", JOptionPane.ERROR_MESSAGE);
                         return;
-                    } else {
-                        int srartA = Integer.valueOf(field2.getText()).intValue();
-                        int endA = cnt;
-                        String str = "";
+                    }
+                    String str = "";
+                    int tondao = Integer.valueOf(label.getText());
+                    for (int k = 0; k < list.size(); k++) {
+                        int srartA = list.get(k) - tondao;
+                        int endA = list.get(k);
                         for (int i = 0; i < table.getRowCount(); i++) {
                             if (i != table.getSelectedRow()) {
                                 int startB = Integer.valueOf(table.getValueAt(i, 5).toString());
@@ -163,26 +188,20 @@ public class DengJuSetDialog implements ActionListener {
                                 }
                             }
                         }
-                        if (!str.equals("")) {
-                            JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "通道与灯具 " + str + "重复！", "提示", JOptionPane.ERROR_MESSAGE);
-                            return;
-                        }
-                        //Data.dengJu_change = true;
-						/*if (table.getRowCount() == 0) {
-							NewJTable table_DMX = (NewJTable)mainUI.map.get("table_DMX_All");
-							DefaultTableModel modelTemp = (DefaultTableModel)table_DMX.getModel();
-							for (int i = table_DMX.getRowCount() - 1; i >= 0 ; i--) {
-								modelTemp.removeRow(i);
-							}
-							modelTemp.addRow(Data.initValue());
-							table_DMX.setRowSelectionInterval(0, 0);
-						}*/
-                        Object[] s = {new Boolean(true), String.valueOf(index + 1), field.getText(), "ID" + (box.getSelectedIndex() + 1) + "#" + box.getSelectedItem().toString(), label2.getText(), field2.getText(), label.getText()};
-                        model.addRow(s);
+                    }
 
-                        //JScrollPane mScrollPane = (JScrollPane)MainUi.map.get("DengJuScrollPane");
-                        //JScrollBar jScrollBar = mScrollPane.getVerticalScrollBar();//获得垂直滚动条
-                        //jScrollBar.setValue(table.getY()+table.getHeight());//设置垂直滚动条位置
+                    if (!str.equals("")) {
+                        JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "通道与灯具 " + str + "重复！", "提示", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    for (int i = 0; i < list.size(); i++) {
+                        if (list.size() == 1) {
+                            Object[] s = {new Boolean(true), String.valueOf(index + 1), field.getText(), "ID" + (box.getSelectedIndex() + 1) + "#" + box.getSelectedItem().toString(), label2.getText(), field2.getText(), label.getText()};
+                            model.addRow(s);
+                        } else {
+                            Object[] s = {new Boolean(true), String.valueOf(table.getRowCount() + 1), field.getText() + "-" + (i + 1), "ID" + (box.getSelectedIndex() + 1) + "#" + box.getSelectedItem().toString(), label2.getText(), list.get(i) - tondao, label.getText()};
+                            model.addRow(s);
+                        }
                     }
                 }
             } else {

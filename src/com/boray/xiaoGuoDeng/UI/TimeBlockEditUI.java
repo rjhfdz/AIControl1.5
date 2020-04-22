@@ -1109,6 +1109,9 @@ public class TimeBlockEditUI {
                     table.setValueAt("" + (i + 1), i, 0);
                 }
                 int size = table.getRowCount();
+                if (table.getSelectedRow() == -1) {
+                    table.setRowSelectionInterval(table.getRowCount() - 1, table.getRowCount() - 1);
+                }
                 stepLabel.setText("总步数:" + size);
             }
         });
@@ -1149,6 +1152,7 @@ public class TimeBlockEditUI {
     private void setRgbColor3(JPanel pane) {
         List list = (List) hashMap.get("rgb3Data");
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
+        FlowLayout flowLayout2 = new FlowLayout(FlowLayout.CENTER);
         JPanel p1 = new JPanel();
         //p1.setBorder(new LineBorder(Color.black));
         p1.setPreferredSize(new Dimension(480, 36));
@@ -1235,6 +1239,13 @@ public class TimeBlockEditUI {
         p1.add(button);
         p1.add(new JLabel("   "));
         p1.add(button2);
+
+        JPanel p7 = new JPanel();
+        p7.setPreferredSize(new Dimension(480, 45));
+        p7.setLayout(flowLayout2);
+        p7.add(button);
+        p7.add(new JLabel("   "));
+        p7.add(button2);
 
         JPanel p2 = new JPanel();
         p2.setLayout(flowLayout);
@@ -1433,11 +1444,10 @@ public class TimeBlockEditUI {
         JPanel p6 = new JPanel();
         TitledBorder tb = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "多灯设置", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         p6.setBorder(tb);
-        p6.setPreferredSize(new Dimension(500, 140));
+        p6.setPreferredSize(new Dimension(500, 120));
         JPanel panel = new JPanel();
-        FlowLayout flowLayout2 = new FlowLayout(FlowLayout.LEFT);
-        flowLayout2.setVgap(10);
-        panel.setLayout(flowLayout2);
+        flowLayout.setVgap(10);
+        panel.setLayout(flowLayout);
         //panel.setBorder(new LineBorder(Color.gray));
         panel.setPreferredSize(new Dimension(410, 90));
         panel.add(new JLabel("拆分"));
@@ -1487,11 +1497,13 @@ public class TimeBlockEditUI {
         pane.add(p4);
         pane.add(p5);
         pane.add(p6);
+        pane.add(p7);
     }
 
     private void setRgbColor2(JPanel pane) {
         List list = (List) hashMap.get("rgb2Data");
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
+        FlowLayout flowLayout2 = new FlowLayout(FlowLayout.CENTER);
         JPanel p1 = new JPanel();
         //p1.setBorder(new LineBorder(Color.black));
         p1.setPreferredSize(new Dimension(480, 36));
@@ -1575,9 +1587,16 @@ public class TimeBlockEditUI {
         p1.add(new JLabel("   "));
         p1.add(radioButton2);
         p1.add(new JLabel("           "));
-        p1.add(button);
-        p1.add(new JLabel("   "));
-        p1.add(button2);
+//        p1.add(button);
+//        p1.add(new JLabel("   "));
+//        p1.add(button2);
+
+        JPanel p7 = new JPanel();
+        p7.setPreferredSize(new Dimension(480, 45));
+        p7.setLayout(flowLayout2);
+        p7.add(button);
+        p7.add(new JLabel("   "));
+        p7.add(button2);
 
         JPanel p2 = new JPanel();
         p2.setLayout(flowLayout);
@@ -1776,11 +1795,10 @@ public class TimeBlockEditUI {
         JPanel p6 = new JPanel();
         TitledBorder tb = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "多灯设置", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         p6.setBorder(tb);
-        p6.setPreferredSize(new Dimension(500, 140));
+        p6.setPreferredSize(new Dimension(500, 120));
         JPanel panel = new JPanel();
-        FlowLayout flowLayout2 = new FlowLayout(FlowLayout.LEFT);
-        flowLayout2.setVgap(10);
-        panel.setLayout(flowLayout2);
+        flowLayout.setVgap(10);
+        panel.setLayout(flowLayout);
         //panel.setBorder(new LineBorder(Color.gray));
         panel.setPreferredSize(new Dimension(410, 90));
         panel.add(new JLabel("拆分"));
@@ -1830,11 +1848,13 @@ public class TimeBlockEditUI {
         pane.add(p4);
         pane.add(p5);
         pane.add(p6);
+        pane.add(p7);
     }
 
     private void setRgbColor1(JPanel pane) {
         List list = (List) hashMap.get("rgb1Data");
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
+        FlowLayout flowLayout2 = new FlowLayout(FlowLayout.CENTER);
         JPanel p1 = new JPanel();
         //p1.setBorder(new LineBorder(Color.black));
         p1.setPreferredSize(new Dimension(480, 36));
@@ -1918,9 +1938,16 @@ public class TimeBlockEditUI {
         p1.add(new JLabel("   "));
         p1.add(radioButton2);
         p1.add(new JLabel("           "));
-        p1.add(button);
-        p1.add(new JLabel("   "));
-        p1.add(button2);
+//        p1.add(button);
+//        p1.add(new JLabel("   "));
+//        p1.add(button2);
+
+        JPanel p7 = new JPanel();
+        p7.setPreferredSize(new Dimension(480, 45));
+        p7.setLayout(flowLayout2);
+        p7.add(button);
+        p7.add(new JLabel("   "));
+        p7.add(button2);
 
         JPanel p2 = new JPanel();
         p2.setLayout(flowLayout);
@@ -2119,11 +2146,10 @@ public class TimeBlockEditUI {
         JPanel p6 = new JPanel();
         TitledBorder tb = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "多灯设置", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         p6.setBorder(tb);
-        p6.setPreferredSize(new Dimension(500, 140));
+        p6.setPreferredSize(new Dimension(500, 120));
         JPanel panel = new JPanel();
-        FlowLayout flowLayout2 = new FlowLayout(FlowLayout.LEFT);
-        flowLayout2.setVgap(10);
-        panel.setLayout(flowLayout2);
+        flowLayout.setVgap(10);
+        panel.setLayout(flowLayout);
         //panel.setBorder(new LineBorder(Color.gray));
         panel.setPreferredSize(new Dimension(410, 90));
         panel.add(new JLabel("拆分"));
@@ -2173,6 +2199,7 @@ public class TimeBlockEditUI {
         pane.add(p4);
         pane.add(p5);
         pane.add(p6);
+        pane.add(p7);
     }
 
     private void setDonZuoPane(JPanel pane) {
@@ -2232,7 +2259,7 @@ public class TimeBlockEditUI {
         JPanel p2 = new JPanel();
         //p2.setBorder(new LineBorder(Color.gray));
         p2.setPreferredSize(new Dimension(680, 50));
-        p2.setLayout(flowLayout2);
+        p2.setLayout(flowLayout);
         JButton button = new JButton("自定义");
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -2352,6 +2379,10 @@ public class TimeBlockEditUI {
         });
         p2.add(box);
         p2.add(new JLabel("   "));
+
+        JPanel p5 = new JPanel();
+        p5.setPreferredSize(new Dimension(680, 50));
+        p5.setLayout(flowLayout);
         final JButton button3 = new JButton("预览");
         //button3.addActionListener(timeBlockReviewActionListener);
         button3.addActionListener(new ActionListener() {
@@ -2388,8 +2419,9 @@ public class TimeBlockEditUI {
         });
         JButton button4 = new JButton("停止预览");
         button4.addActionListener(timeBlockStopReviewActionListener);
-        p2.add(button3);
-        p2.add(button4);
+        p5.add(button3);
+        p5.add(new JLabel("   "));
+        p5.add(button4);
 
         JPanel p3 = new JPanel();
         //p3.setBorder(new LineBorder(Color.gray));
@@ -2459,7 +2491,7 @@ public class TimeBlockEditUI {
 
         JPanel p4_to_p3 = new JPanel();
         p4_to_p3.add(new JLabel("    时差"));
-        final JSlider slider3 = new JSlider(0, 60);
+        final JSlider slider3 = new JSlider(0, 100);
         actionCompontList.add(slider3);
         slider3.setValue(0);
         slider3.setPreferredSize(new Dimension(340, 30));
@@ -2519,6 +2551,7 @@ public class TimeBlockEditUI {
         pane.add(p2);
         pane.add(p3);
         pane.add(p4);
+        pane.add(p5);
     }
 
     void setP1(JPanel pane) {

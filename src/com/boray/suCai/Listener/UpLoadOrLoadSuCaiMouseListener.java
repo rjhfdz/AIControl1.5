@@ -1,8 +1,10 @@
 package com.boray.suCai.Listener;
 
 import com.boray.mainUi.MainUi;
+import com.boray.suCai.UI.SuCaiEditUI;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -10,7 +12,15 @@ public class UpLoadOrLoadSuCaiMouseListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        JList list = (JList) e.getSource();
+        if (list.getSelectedIndex() != -1) {
+            if (e.getClickCount() == 2) {
+                JList suCaiLightType = (JList) MainUi.map.get("suCaiLightType");
+                String suCaiName = list.getSelectedValue().toString();
+                int suCaiNum = Integer.valueOf(suCaiName.split("--->")[1]).intValue();
+                new SuCaiEditUI().show(suCaiName, suCaiNum, suCaiLightType.getSelectedIndex());
+            }
+        }
     }
 
     @Override
@@ -24,7 +34,7 @@ public class UpLoadOrLoadSuCaiMouseListener implements MouseListener {
             JMenuItem copy = new JMenuItem("    复制");
             JMenuItem paste = new JMenuItem("    粘贴");
             coverage.setEnabled(false);
-            if(list.getSelectedValue()!=null){//选中
+            if (list.getSelectedValue() != null) {//选中
                 coverage.setEnabled(true);
             }
             UpLoadOrLoadSuCaiListener listener = new UpLoadOrLoadSuCaiListener();
@@ -38,7 +48,7 @@ public class UpLoadOrLoadSuCaiMouseListener implements MouseListener {
             popupMenu.add(coverage);
             popupMenu.add(copy);
             popupMenu.add(paste);
-            popupMenu.show(list,e.getX(),e.getY());
+            popupMenu.show(list, e.getX(), e.getY());
         }
     }
 

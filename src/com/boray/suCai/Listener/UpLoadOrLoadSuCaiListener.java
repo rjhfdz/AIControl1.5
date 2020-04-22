@@ -84,8 +84,6 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
             int suCaiIndex = Integer.parseInt(suCaiSelect.split(">")[1]) - 1;//素材下标
             int dengKuIndex = list.getSelectedIndex();//灯库下标
             Data.tempSuCai = dengKuIndex + "#" + suCaiIndex;
-            JFrame frame = (JFrame) MainUi.map.get("frame");
-            JOptionPane.showMessageDialog(frame, "素材复制成功！", "提示", JOptionPane.PLAIN_MESSAGE);
         } else if ("    粘贴".equals(e.getActionCommand())) {
             if (Data.tempSuCai == null) {
                 JFrame frame = (JFrame) MainUi.map.get("frame");

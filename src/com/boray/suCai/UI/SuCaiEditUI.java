@@ -1,16 +1,7 @@
 package com.boray.suCai.UI;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -216,6 +207,29 @@ public class SuCaiEditUI {
         //dengKuNumber = Integer.valueOf(typeString.split("#")[0].substring(2)).intValue()-1;
         dengKuNumber = denKuNum;
         getDengZuComBox(zuComboBox);
+        zuComboBox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    if (zuComboBox.getSelectedItem() != null && !zuComboBox.getSelectedItem().toString().equals("")) {
+                        int number = Integer.valueOf(zuComboBox.getSelectedItem().toString().split("#")[0]);
+                        int cnt = 0;//灯具数量
+                        TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(number - 1);
+                        cnt = treeSet.size();
+                        if (cnt != 0) {
+                            startAddress = new int[cnt];
+                            Iterator iterator = treeSet.iterator();
+                            int aa = 0;
+                            while (iterator.hasNext()) {
+                                int cc = (int) iterator.next();
+                                startAddress[aa] = Integer.valueOf(table.getValueAt(cc, 5).toString()).intValue();
+                                aa++;
+                            }
+                        }
+                    }
+                }
+            }
+        });
         HashMap map = (HashMap) Data.DengKuList.get(dengKuNumber);
         String tempString = "";
         int count = Integer.valueOf((String) Data.DengKuChannelCountList.get(dengKuNumber)).intValue();
@@ -1116,6 +1130,9 @@ public class SuCaiEditUI {
                     table.setValueAt("" + (i + 1), i, 0);
                 }
                 int size = table.getRowCount();
+                if (table.getSelectedRow() == -1) {
+                    table.setRowSelectionInterval(table.getRowCount() - 1, table.getRowCount() - 1);
+                }
                 stepLabel.setText("总步数:" + size);
             }
         });
@@ -1153,6 +1170,7 @@ public class SuCaiEditUI {
     private void setRgbColor3(JPanel pane) {
         List list = (List) hashMap.get("rgb3Data");
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
+        FlowLayout flowLayout2 = new FlowLayout(FlowLayout.CENTER);
         JPanel p1 = new JPanel();
         //p1.setBorder(new LineBorder(Color.black));
         p1.setPreferredSize(new Dimension(480, 36));
@@ -1234,9 +1252,16 @@ public class SuCaiEditUI {
         p1.add(new JLabel("   "));
         p1.add(radioButton2);
         p1.add(new JLabel("           "));
-        p1.add(button);
-        p1.add(new JLabel("   "));
-        p1.add(button2);
+//        p1.add(button);
+//        p1.add(new JLabel("   "));
+//        p1.add(button2);
+
+        JPanel p7 = new JPanel();
+        p7.setPreferredSize(new Dimension(480, 45));
+        p7.setLayout(flowLayout2);
+        p7.add(button);
+        p7.add(new JLabel("   "));
+        p7.add(button2);
 
         JPanel p2 = new JPanel();
         p2.setLayout(flowLayout);
@@ -1435,11 +1460,10 @@ public class SuCaiEditUI {
         JPanel p6 = new JPanel();
         TitledBorder tb = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "多灯设置", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         p6.setBorder(tb);
-        p6.setPreferredSize(new Dimension(500, 140));
+        p6.setPreferredSize(new Dimension(500, 120));
         JPanel panel = new JPanel();
-        FlowLayout flowLayout2 = new FlowLayout(FlowLayout.LEFT);
         flowLayout2.setVgap(10);
-        panel.setLayout(flowLayout2);
+        panel.setLayout(flowLayout);
         //panel.setBorder(new LineBorder(Color.gray));
         panel.setPreferredSize(new Dimension(410, 90));
         panel.add(new JLabel("拆分"));
@@ -1489,11 +1513,13 @@ public class SuCaiEditUI {
         pane.add(p4);
         pane.add(p5);
         pane.add(p6);
+        pane.add(p7);
     }
 
     private void setRgbColor2(JPanel pane) {
         List list = (List) hashMap.get("rgb2Data");
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
+        FlowLayout flowLayout2 = new FlowLayout(FlowLayout.CENTER);
         JPanel p1 = new JPanel();
         //p1.setBorder(new LineBorder(Color.black));
         p1.setPreferredSize(new Dimension(480, 36));
@@ -1575,9 +1601,16 @@ public class SuCaiEditUI {
         p1.add(new JLabel("   "));
         p1.add(radioButton2);
         p1.add(new JLabel("           "));
-        p1.add(button);
-        p1.add(new JLabel("   "));
-        p1.add(button2);
+//        p1.add(button);
+//        p1.add(new JLabel("   "));
+//        p1.add(button2);
+
+        JPanel p7 = new JPanel();
+        p7.setPreferredSize(new Dimension(480, 45));
+        p7.setLayout(flowLayout2);
+        p7.add(button);
+        p7.add(new JLabel("   "));
+        p7.add(button2);
 
         JPanel p2 = new JPanel();
         p2.setLayout(flowLayout);
@@ -1776,11 +1809,10 @@ public class SuCaiEditUI {
         JPanel p6 = new JPanel();
         TitledBorder tb = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "多灯设置", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         p6.setBorder(tb);
-        p6.setPreferredSize(new Dimension(500, 140));
+        p6.setPreferredSize(new Dimension(500, 120));
         JPanel panel = new JPanel();
-        FlowLayout flowLayout2 = new FlowLayout(FlowLayout.LEFT);
         flowLayout2.setVgap(10);
-        panel.setLayout(flowLayout2);
+        panel.setLayout(flowLayout);
         //panel.setBorder(new LineBorder(Color.gray));
         panel.setPreferredSize(new Dimension(410, 90));
         panel.add(new JLabel("拆分"));
@@ -1830,11 +1862,13 @@ public class SuCaiEditUI {
         pane.add(p4);
         pane.add(p5);
         pane.add(p6);
+        pane.add(p7);
     }
 
     private void setRgbColor1(JPanel pane) {
         List list = (List) hashMap.get("rgb1Data");
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
+        FlowLayout flowLayout2 = new FlowLayout(FlowLayout.CENTER);
         JPanel p1 = new JPanel();
         //p1.setBorder(new LineBorder(Color.black));
         p1.setPreferredSize(new Dimension(480, 36));
@@ -1916,9 +1950,14 @@ public class SuCaiEditUI {
         p1.add(new JLabel("   "));
         p1.add(radioButton2);
         p1.add(new JLabel("           "));
-        p1.add(button);
-        p1.add(new JLabel("   "));
-        p1.add(button2);
+
+
+        JPanel p7 = new JPanel();
+        p7.setPreferredSize(new Dimension(480, 45));
+        p7.setLayout(flowLayout2);
+        p7.add(button);
+        p7.add(new JLabel("   "));
+        p7.add(button2);
 
         JPanel p2 = new JPanel();
         p2.setLayout(flowLayout);
@@ -2117,11 +2156,10 @@ public class SuCaiEditUI {
         JPanel p6 = new JPanel();
         TitledBorder tb = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "多灯设置", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         p6.setBorder(tb);
-        p6.setPreferredSize(new Dimension(500, 140));
+        p6.setPreferredSize(new Dimension(500, 120));
         JPanel panel = new JPanel();
-        FlowLayout flowLayout2 = new FlowLayout(FlowLayout.LEFT);
         flowLayout2.setVgap(10);
-        panel.setLayout(flowLayout2);
+        panel.setLayout(flowLayout);
         //panel.setBorder(new LineBorder(Color.gray));
         panel.setPreferredSize(new Dimension(410, 90));
         panel.add(new JLabel("拆分"));
@@ -2171,6 +2209,7 @@ public class SuCaiEditUI {
         pane.add(p4);
         pane.add(p5);
         pane.add(p6);
+        pane.add(p7);
     }
 
     private void setDonZuoPane(JPanel pane) {
@@ -2182,7 +2221,7 @@ public class SuCaiEditUI {
 
         JPanel p1 = new JPanel();
         p1.setPreferredSize(new Dimension(500, 30));
-        p1.setLayout(flowLayout2);
+        p1.setLayout(flowLayout);
         final JRadioButton radioButton = new JRadioButton("启用");
         JRadioButton radioButton2 = new JRadioButton("不启用");
         ActionListener listener = new ActionListener() {
@@ -2230,7 +2269,7 @@ public class SuCaiEditUI {
         JPanel p2 = new JPanel();
         //p2.setBorder(new LineBorder(Color.gray));
         p2.setPreferredSize(new Dimension(680, 50));
-        p2.setLayout(flowLayout2);
+        p2.setLayout(flowLayout);
         JButton button = new JButton("自定义");
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -2350,6 +2389,10 @@ public class SuCaiEditUI {
         });
         p2.add(box);
         p2.add(new JLabel("   "));
+        JPanel p5 = new JPanel();
+        //p2.setBorder(new LineBorder(Color.gray));
+        p5.setPreferredSize(new Dimension(680, 50));
+        p5.setLayout(flowLayout);
         final JButton button3 = new JButton("预览");
         //button3.addActionListener(timeBlockReviewActionListener);
         button3.addActionListener(new ActionListener() {
@@ -2384,8 +2427,9 @@ public class SuCaiEditUI {
         });
         JButton button4 = new JButton("停止预览");
         button4.addActionListener(timeBlockStopReviewActionListener);
-        p2.add(button3);
-        p2.add(button4);
+        p5.add(button3);
+        p5.add(new JLabel("   "));
+        p5.add(button4);
 
         JPanel p3 = new JPanel();
         //p3.setBorder(new LineBorder(Color.gray));
@@ -2455,7 +2499,7 @@ public class SuCaiEditUI {
 
         JPanel p4_to_p3 = new JPanel();
         p4_to_p3.add(new JLabel("    时差"));
-        final JSlider slider3 = new JSlider(0, 60);
+        final JSlider slider3 = new JSlider(0, 100);
         actionCompontList.add(slider3);
         slider3.setValue(0);
         slider3.setPreferredSize(new Dimension(340, 30));
@@ -2515,6 +2559,7 @@ public class SuCaiEditUI {
         pane.add(p2);
         pane.add(p3);
         pane.add(p4);
+        pane.add(p5);
     }
 
     void setP1(JPanel pane) {
@@ -2547,7 +2592,7 @@ public class SuCaiEditUI {
                 Socket.UDPSendData(buff);
             }
             System.arraycopy(buff, 8, bytes, 0, 512);
-            Socket.ArtNetSendData(buff);//添加artNet数据协议发送
+            Socket.ArtNetSendData(bytes);//添加artNet数据协议发送
         }
     }
 
@@ -2714,6 +2759,22 @@ public class SuCaiEditUI {
         Object o = Data.suCaiSelectZu.get(suCaiList.getSelectedIndex());
         if (o != null && o instanceof Integer) {
             zuComboBox.setSelectedIndex(Integer.valueOf(o.toString()));
+        }
+        if (zuComboBox.getSelectedItem() != null && !zuComboBox.getSelectedItem().toString().equals("")) {
+            int number = Integer.valueOf(zuComboBox.getSelectedItem().toString().split("#")[0]);
+            int cnt = 0;//灯具数量
+            TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(number - 1);
+            cnt = treeSet.size();
+            if (cnt != 0) {
+                startAddress = new int[cnt];
+                Iterator iterator = treeSet.iterator();
+                int aa = 0;
+                while (iterator.hasNext()) {
+                    int cc = (int) iterator.next();
+                    startAddress[aa] = Integer.valueOf(table_dengJu.getValueAt(cc, 5).toString()).intValue();
+                    aa++;
+                }
+            }
         }
     }
 }

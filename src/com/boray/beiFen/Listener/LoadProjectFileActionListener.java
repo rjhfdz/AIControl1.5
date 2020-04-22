@@ -329,6 +329,11 @@ public class LoadProjectFileActionListener implements ActionListener {
                             + "--" + t2.getValueAt(i, 5).toString() + "--" + t2.getValueAt(i, 6).toString();
                     model.addRow(s[i]);
                 }
+                table = (NewJTable) MainUi.map.get("InGroupsTable");
+                model = (DefaultTableModel) table.getModel();
+                for (int i = table.getRowCount() - 1; i >= 0; i--) {
+                    model.removeRow(i);
+                }
                 ////////////////////////////////////////////////
                 ///////////////ËØ²Ä¹ÜÀí///////////////////////
                 Data.suCaiMap = (Map) xmlDecoder.readObject();

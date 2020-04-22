@@ -42,6 +42,8 @@ public class OverDmxUI implements ActionListener {
     private JToggleButton[] btns;
     private JSlider slider;
     private JTextField field;
+    private List<Integer> selectPre = new ArrayList<>();
+    private ButtonGroup group;
     public static int selected = -1;
     public boolean[] bs;
     public boolean[] bs2;
@@ -119,7 +121,7 @@ public class OverDmxUI implements ActionListener {
         if (count > 0) {
             selected = 0;
             btns = new JToggleButton[count];
-            ButtonGroup group = new ButtonGroup();
+            group = new ButtonGroup();
             for (int i = 0; i < btns.length; i++) {
                 btns[i] = new JToggleButton();
                 btns[i].addActionListener(this);
@@ -329,6 +331,23 @@ public class OverDmxUI implements ActionListener {
                 Socket.SendData(TimeBlockReviewData.getStopReview3(XiaoGuoDengModel.model));
             }
         });
+        JButton button = new JButton("单选");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getActionCommand().equals("单选")) {
+                    for (int i = 0; i < btns.length; i++) {
+                        group.remove(btns[i]);
+                    }
+                    button.setText("多选");
+                } else {
+                    for (int i = 0; i < btns.length; i++) {
+                        group.add(btns[i]);
+                    }
+                    button.setText("单选");
+                }
+            }
+        });
         p4.add(review);
         p4.add(stop);
         //pane.add(tempPane);
@@ -336,6 +355,7 @@ public class OverDmxUI implements ActionListener {
         pane.add(p3);
         pane.add(p5);
         pane.add(p4);
+        pane.add(button);
     }
 
     void setP3(JScrollPane scrollPane) {
@@ -449,8 +469,26 @@ public class OverDmxUI implements ActionListener {
                     textFields[a].setText(String.valueOf(sliders[a].getValue()));
                     int[] slt = runTable.getSelectedRows();
                     if (slt.length > 0) {
-                        for (int k = 0; k < slt.length; k++) {
-                            runTable.setValueAt(String.valueOf(sliders[a].getValue()), slt[k], Integer.valueOf(DmxValues[a].getText()).intValue() + 1);
+//                        for (int k = 0; k < slt.length; k++) {
+//                            runTable.setValueAt(String.valueOf(sliders[a].getValue()), slt[k], Integer.valueOf(DmxValues[a].getText()).intValue() + 1);
+//                        }
+
+                        if (group.getButtonCount() <= 0) {
+                            NewJTable table2 = (NewJTable) MainUi.map.get("table_dengJu");
+                            for (int k = 0; k < slt.length; k++) {
+                                for (int i = 0; i < selectPre.size(); i++) {
+                                    int channelCount = Integer.valueOf(table2.getValueAt(selectPre.get(i), 6).toString()).intValue();
+                                    int start = Integer.valueOf(table2.getValueAt(selectPre.get(i), 5).toString()).intValue();
+                                    if (channelCount > a) {
+                                        runTable.setValueAt(String.valueOf(sliders[a].getValue()), slt[k], start + a + 1);
+                                    }
+                                }
+
+                            }
+                        } else {
+                            for (int k = 0; k < slt.length; k++) {
+                                runTable.setValueAt(String.valueOf(sliders[a].getValue()), slt[k], Integer.valueOf(DmxValues[a].getText()).intValue() + 1);
+                            }
                         }
                     }
                 }
@@ -790,6 +828,15 @@ public class OverDmxUI implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
+        if (group.getButtonCount() <= 0) {
+            selectPre.clear();
+            for (int i = 0; i < btns.length; i++) {
+                if (btns[i].isSelected()) {
+                    selectPre.add(i);
+                }
+            }
+            return;
+        }
         selected = Integer.valueOf(((JToggleButton) e.getSource()).getName()).intValue();
         setHeader();
     }

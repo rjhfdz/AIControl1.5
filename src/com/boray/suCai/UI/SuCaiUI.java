@@ -93,7 +93,7 @@ public class SuCaiUI {
         p3.add(scrollPane);
 
         JPanel bottomPanel = new JPanel();
-        bottomPanel.setPreferredSize(new Dimension(230, 40));
+        bottomPanel.setPreferredSize(new Dimension(280, 40));
         //bottomPanel.setBorder(new LineBorder(Color.black));
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
         flowLayout.setVgap(-2);
@@ -103,11 +103,13 @@ public class SuCaiUI {
         JButton editBtn = new JButton("±‡º≠");
         JButton reNameBtn = new JButton("÷ÿ√¸√˚");
         JButton upLoadBtn = new JButton("‘∆∂À");
+        JButton reviewBtn = new JButton("‘§¿¿");
         CreateOrDelSuCaiListener listener = new CreateOrDelSuCaiListener();
         EditListener listener2 = new EditListener();
         editBtn.addActionListener(listener2);
         newBtn.addActionListener(listener);
         reNameBtn.addActionListener(listener);
+        reviewBtn.addActionListener(listener);
 //        ShangchuanListener shangchuang = new ShangchuanListener();
         upLoadBtn.addActionListener(listener);
         Dimension dimension = new Dimension(55, 34);
@@ -115,10 +117,12 @@ public class SuCaiUI {
         editBtn.setPreferredSize(dimension);
         reNameBtn.setPreferredSize(new Dimension(68, 34));
         upLoadBtn.setPreferredSize(dimension);
+        reviewBtn.setPreferredSize(dimension);
         bottomPanel.add(newBtn);
         bottomPanel.add(editBtn);
         bottomPanel.add(reNameBtn);
         bottomPanel.add(upLoadBtn);
+        bottomPanel.add(reviewBtn);
         p3.add(bottomPanel);
 
         //ÃÌº””“º¸≤Àµ•

@@ -6,8 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,130 +21,46 @@ import com.boray.Utils.HttpClientUtil;
 
 public abstract class Test {
 
-    public static void main(String[] args) {
-        // TODO Auto-generated method stub
-		/*Map<String, Object> map =new HashMap<String, Object>();
-		List listchan = new ArrayList<>();
-		List listtopDengJuNumber = new ArrayList<>();
-    String str = "{\"channelData\":[[[\"1\",\"0\",\"0\",\"123\",\"0\",\"148\",\"132\",\"0\",\"0\",\"0\",\"0\",\"0\"],[\"2\",\"0\",\"0\",\"0\",\"255\",\"115\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\"]],[false,false,false,false,false,false,false,false,false,false],[\"0\",\"0\",\"0\"]],\"TopDengJuNumber\":[\"0\",\"0\"],\"actionXiaoGuoData\":{\"0\":\"false\",\"2\":\"0\",\"3\":\"0\",\"4\":[\"0\",\"false\",\"false\",\"false\",\"false\",\"0\"]}}";
-	
-    JSONObject j =  JSON.parseObject(str);
-    
-    JSONArray chanlist = JSONArray.parseArray(j.getString("channelData"));
-  
-    
-    for (int i = 0; i < chanlist.size(); i++) {
-    	 
-   
-    if(i==0) {
-    	JSONArray chanlist1 = (JSONArray) chanlist.get(i);
-    	List list = new ArrayList<>(); 
-    	for (int k = 0; k < chanlist1.size(); k++) {
-			JSONArray chanlist111 = (JSONArray) chanlist1.get(k);
-			Object [] num = new Object[chanlist111.size()];
-		for (int l = 0; l < chanlist111.size(); l++) {
-			
-			num[l]= chanlist111.get(l);
-			if(l==chanlist1.size()-1) {
-			
-				list.add(num);
-			}
-			
-		}
-		if(k==chanlist1.size()-1) {
-			listchan.add(list);
-		}
-		
-    	}
-    }else {
-    	JSONArray chanlist11 = (JSONArray) chanlist.get(i);
-    	Object [] num = new Object[chanlist11.size()];
-	for (int l = 0; l < chanlist11.size(); l++) {
-			
-			num[l]= chanlist11.get(l);
-			if(l==chanlist11.size()-1) {
-			
-				listchan.add(num);
-			}
-			
-		}
-    	
-    }
-    	
-    	
-	}
-    JSONArray topDengJuNumber = JSONArray.parseArray(j.getString("TopDengJuNumber"));
-    
-    for (int i = 0; i < topDengJuNumber.size(); i++) {
-		listtopDengJuNumber.add(topDengJuNumber.get(i));
-	}
+    public static void main(String[] args) throws IOException  {
 
-    JSONObject actionXiaoGuoData = j.getJSONObject("actionXiaoGuoData");
-    Map actionXiaoGuoDatamap = new HashMap<>();
-    actionXiaoGuoDatamap.put("0", actionXiaoGuoData.get("0"));
-    actionXiaoGuoDatamap.put("2", actionXiaoGuoData.get("2"));
-    actionXiaoGuoDatamap.put("3", actionXiaoGuoData.get("3"));
-    JSONArray a4 = JSONArray.parseArray(actionXiaoGuoData.getString("4"));
-   List a4list = new ArrayList<>();
-   for (int i = 0; i < a4.size(); i++) {
-	a4list.add(a4.get(i));
-}
-   actionXiaoGuoDatamap.put("4", a4list);
-    
-    map.put("TopDengJuNumber", listtopDengJuNumber);
-    map.put("channelData", listchan);
-    map.put("actionXiaoGuoData", actionXiaoGuoDatamap);
-    
-    List listf = (List) map.get("channelData");
-    List v1= (List)listf.get(0);
-    
-    for (int i = 0; i < v1.size(); i++) {
-    	System.out.println(v1.get(i));
-	}
-    
-    System.out.println(JSON.toJSON(map));*/
-        test();
+        //创建发送端Socket对象
+        DatagramSocket ds = new DatagramSocket();
+
+        //创建数据并打包
+        String s = "A001A908020104FE";    //要发送的数据
+
+        byte[] bys = test1();  //将数据放在字节数组中
+        int length = bys.length;    //字节数组的长度
+        InetAddress address = InetAddress.getByName("128.8.3.101"); //目的地址
+        int port = 8089;  //设置端口号
+
+        //打包
+        DatagramPacket dp = new DatagramPacket(bys,length,address,port);
+
+        //发送数据
+        ds.send(dp);
+
+        //释放资源
+        ds.close();
     }
 
-//	 public static final String HTTp_URL="https://yqfile.alicdn.com/541d2074f3ee5857196427f0663df967aadf823a.png";
-//     public static void main(String[] args) {
-//             Dol();
-//     }
-//         public static void Dol(){
-//             BufferedInputStream bis=null;
-//             BufferedOutputStream bos=null;
-//     try {
-//         URL url = new URL(HTTp_URL);
-//         HttpURLConnection connection =  (HttpURLConnection) url.openConnection();
-//         connection.setRequestMethod("GET");
-//         connection.connect();
-//         InputStream is = connection.getInputStream();
-//         
-//         bis = new BufferedInputStream(is);
-//         
-//         File file = new File("D:/"+HTTp_URL.substring((HTTp_URL.lastIndexOf("/"))));//名字截取 可以省略
-//         FileOutputStream fos = new FileOutputStream(file);
-//         bos = new BufferedOutputStream(fos);
-//         int b = 0;
-//         byte[] byArr = new byte[1024*4];
-//         while((b=bis.read(byArr))!=-1){
-//             bos.write(byArr, 0, b);
-//         }
-//     } catch (Exception e) {
-//         e.printStackTrace();
-//     }finally{
-//         try {
-//             if(bis!=null){
-//                 bis.close();
-//             }
-//             if(bos!=null){
-//                 bos.close();
-//             }
-//         } catch (IOException e) {
-//             e.printStackTrace();
-//         }
-//     }
-// }
+    public static byte[] test1(){
+        //A0 01 A9 08 02 02 01 FE
+        byte[] b = new byte[8];
+        int[] a = new int[8];
+        a[0] = 160;
+        a[1] = 1;
+        a[2] = 169;
+        a[3] = 8;
+        a[4] = 2;
+        a[5] = 4;
+        a[6] = 1;
+        a[7] = 254;
+        for (int i = 0; i < a.length; i++) {
+            b[i] = (byte)a[i];
+        }
+        return b;
+    }
 
 
     public static void test() {
