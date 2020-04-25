@@ -40,7 +40,7 @@ public class MainUi {
             e.printStackTrace();
         }
         map = new HashMap();
-        frame = new JFrame("X-Series智能灯光控制器系统V1.0");
+        frame = new JFrame("X-Series智能灯光控制器系统V1.0(测试版本)");
         map.put("frame", frame);
 
         int screenWidth = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);

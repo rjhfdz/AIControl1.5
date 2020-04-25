@@ -76,14 +76,14 @@ public class DefineJLable extends JLabel {
         menuItem2 = new JMenuItem("¡¡±à¼­");
         menuItem3 = new JMenuItem("¡¡É¾³ý");
         menuItem4 = new JMenuItem("¡¡É¾³ýÈ«²¿");
-        menuItem5 = new JMenuItem("¡¡¸´ÖÆ");
-        menuItem6 = new JMenuItem("¡¡Õ³Ìù");
+        menuItem5 = new JMenuItem("¡¡Ñ¡ÔñËØ²Ä");
+//        menuItem6 = new JMenuItem("¡¡Õ³Ìù");
         PopMenuListener listener2 = new PopMenuListener(blockNum, pane, s);
         menuItem2.addActionListener(listener2);
         menuItem3.addActionListener(listener2);
         menuItem4.addActionListener(listener2);
         menuItem5.addActionListener(listener2);
-        menuItem6.addActionListener(listener2);
+//        menuItem6.addActionListener(listener2);
         popupMenu.add(menuItem);
         popupMenu.add(menuItem1);
         popupMenu.add(menuItem2);

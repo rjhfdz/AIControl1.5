@@ -29,7 +29,7 @@ public class SelectSuCaiUI {
     private int dengKuId;
     private String dengKuName;
 
-    public void show(JPanel pane) {
+    public void show(JPanel pane, Boolean flag, DefineJLable defineJLable) {
         JFrame f = (JFrame) MainUi.map.get("frame");
         dialog = new JDialog(f, true);
         dialog.setResizable(false);
@@ -39,11 +39,11 @@ public class SelectSuCaiUI {
         dialog.setSize(w, h);
         dialog.setLayout(new FlowLayout(FlowLayout.LEFT));
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        init(pane);
+        init(pane, flag, defineJLable);
         dialog.setVisible(true);
     }
 
-    private void init(final JPanel pane) {
+    private void init(final JPanel pane, final Boolean flag, final DefineJLable defineJLable) {
         String name = pane.getName();
         //左边效果按钮
         JPanel pane2 = new JPanel();
@@ -58,33 +58,37 @@ public class SelectSuCaiUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JList list = (JList) MainUi.map.get("xiaoGuoDeng_list");
-                int c = pane.getComponentCount();
-                DefineJLable label = new DefineJLable((c + 1) + "(" + list.getSelectedValue().toString().split(">")[1] + ")", pane);
-                ////////////////////////////////////////////////////////×
-                if (c > 0) {
-                    DefineJLable defineJLable = (DefineJLable) pane.getComponent(c - 1);
-                    int x = defineJLable.getLocation().x + defineJLable.getWidth();
-                    int y = defineJLable.getLocation().y;
-                    label.setLocation(new Point(x, y));
-                }
+                if (flag) {
+                    int c = pane.getComponentCount();
+                    DefineJLable label = new DefineJLable((c + 1) + "(" + list.getSelectedValue().toString().split(">")[1] + ")", pane);
+                    ////////////////////////////////////////////////////////×
+                    if (c > 0) {
+                        DefineJLable defineJLable = (DefineJLable) pane.getComponent(c - 1);
+                        int x = defineJLable.getLocation().x + defineJLable.getWidth();
+                        int y = defineJLable.getLocation().y;
+                        label.setLocation(new Point(x, y));
+                    }
 
-                ////////////////////////////////////////////////////////
-                HashMap hashMap = null;
-                Integer denKuNum = Integer.parseInt(getxiaoGuoDengDengKuName()) - 1;
-                Integer suCaiNum = Integer.parseInt(list.getSelectedValue().toString().split(">")[1]);
-                hashMap = (HashMap) Data.SuCaiObjects[denKuNum][suCaiNum - 1];
-                if (hashMap == null) {
-                    hashMap = new HashMap<>();
-                    Data.SuCaiObjects[denKuNum][suCaiNum - 1] = hashMap;
-                }
+                    ////////////////////////////////////////////////////////
+                    HashMap hashMap = null;
+                    Integer denKuNum = Integer.parseInt(getxiaoGuoDengDengKuName()) - 1;
+                    Integer suCaiNum = Integer.parseInt(list.getSelectedValue().toString().split(">")[1]);
+                    hashMap = (HashMap) Data.SuCaiObjects[denKuNum][suCaiNum - 1];
+                    if (hashMap == null) {
+                        hashMap = new HashMap<>();
+                        Data.SuCaiObjects[denKuNum][suCaiNum - 1] = hashMap;
+                    }
 //                Data.XiaoGuoDengObjects[model][grpN][blkN] = hashMap;
-                ////////////////
+                    ////////////////
 
-                if (c >= 10) {
-                    c = c - 10;
+                    if (c >= 10) {
+                        c = c - 10;
+                    }
+                    label.setBackground(MyColor.colors[c]);
+                    pane.add(label);
+                } else {
+                    defineJLable.setText(defineJLable.getText().substring(0, defineJLable.getText().indexOf("(")) + "(" + list.getSelectedValue().toString().split(">")[1] + ")" + defineJLable.getText().substring(defineJLable.getText().indexOf(")")+1, defineJLable.getText().indexOf(")") + 2));
                 }
-                label.setBackground(MyColor.colors[c]);
-                pane.add(label);
                 pane.updateUI();
                 dialog.dispose();
             }
@@ -140,7 +144,7 @@ public class SelectSuCaiUI {
                     String str = (String) MainUi.map.get("xiaoGuoDengIndex");
                     TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(Integer.parseInt(str) - 1);
                     Iterator iterator = treeSet.iterator();
-                    if(iterator.hasNext()) {
+                    if (iterator.hasNext()) {
                         if (!"".equals(field.getText().trim())) {
                             JList list = (JList) MainUi.map.get("xiaoGuoDeng_list");
                             DefaultListModel model = (DefaultListModel) list.getModel();
@@ -170,11 +174,11 @@ public class SelectSuCaiUI {
                                 model.addElement(suCaiNameAndNumber);
                             }
                             list.setSelectedIndex(model.getSize() - 1);
-                            if(map==null) {
+                            if (map == null) {
                                 map = new HashMap();
                                 Data.suCaiMap.put(dengKuName, map);
                             }
-                            if(nameMap==null) {
+                            if (nameMap == null) {
                                 nameMap = new HashMap();
                                 Data.suCaiNameMap.put(dengKuName, nameMap);
                             }
@@ -199,7 +203,7 @@ public class SelectSuCaiUI {
                             }
                             dialog.dispose();
                         }
-                    }else{
+                    } else {
                         JFrame frame = (JFrame) MainUi.map.get("frame");
                         JOptionPane.showMessageDialog(frame, "该灯具无组内灯具，无法创建素材！", "提示", JOptionPane.ERROR_MESSAGE);
                         return;

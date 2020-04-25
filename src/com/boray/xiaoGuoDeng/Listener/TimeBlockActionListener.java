@@ -25,7 +25,7 @@ public class TimeBlockActionListener implements ActionListener{
 			if (c == 20) {
 				return;
 			}
-			new SelectSuCaiUI().show(pane);
+			new SelectSuCaiUI().show(pane,true,null);
 //			DefineJLable label = new DefineJLable((c+1)+"",pane);
 //			////////////////////////////////////////////////////////¡Á
 //			if (c > 0) {

@@ -314,7 +314,7 @@ public class ReviewUtils2 {
                     }
                     dongZuoTuXing[8] = (byte) a;
                     //时间A_L	时间B_H
-                    a = Integer.valueOf(tp1[5]).intValue() * 10;
+                    a = Integer.valueOf(tp1[5]).intValue();
                     dongZuoTuXing[9] = (byte) (a % 256);
                     dongZuoTuXing[10] = (byte) (a / 256);
                     ///////////////自定义动作数据
@@ -392,7 +392,7 @@ public class ReviewUtils2 {
                     }
                     rgb[9] = (byte) a;
                     //时间A_L	时间B_H
-                    a = Integer.valueOf((String) list2.get(9)).intValue() * 10;
+                    a = Integer.valueOf((String) list2.get(9)).intValue();
                     rgb[10] = (byte) (a % 256);
                     rgb[11] = (byte) (a / 256);
                 }
@@ -456,7 +456,7 @@ public class ReviewUtils2 {
                     }
                     rgb[21] = (byte) a;
                     //时间A_L	时间B_H
-                    a = Integer.valueOf((String) list2.get(9)).intValue() * 10;
+                    a = Integer.valueOf((String) list2.get(9)).intValue();
                     rgb[22] = (byte) (a % 256);
                     rgb[23] = (byte) (a / 256);
                 }
@@ -521,7 +521,7 @@ public class ReviewUtils2 {
                     }
                     rgb[33] = (byte) a;
                     //时间A_L	时间B_H
-                    a = Integer.valueOf((String) list2.get(9)).intValue() * 10;
+                    a = Integer.valueOf((String) list2.get(9)).intValue();
                     rgb[34] = (byte) (a % 256);
                     rgb[35] = (byte) (a / 256);
                 }

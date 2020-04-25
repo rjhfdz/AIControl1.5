@@ -26,24 +26,7 @@ import java.util.Map;
 import java.util.TreeSet;
 import java.util.Vector;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JSlider;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
@@ -115,6 +98,8 @@ public class TimeBlockEditUI {
     //停止预览
     private TimeBlockStopReviewActionListener timeBlockStopReviewActionListener;
 
+    private String suCaiName;
+
     public void show(int block, String groupNum, String index) {
         dialog = new JDialog();
         JFrame f = (JFrame) MainUi.map.get("frame");
@@ -127,7 +112,13 @@ public class TimeBlockEditUI {
         blockNum = block;
         group_N = Integer.valueOf(groupNum).intValue();
         index_N = Integer.valueOf(index).intValue();
-        dialog.setTitle("场景编程-模式" + XiaoGuoDengModel.model + "-时间块" + block);
+
+        denKuNum = getxiaoGuoDengDengKuName();
+        suCaiNum = block;
+
+        suCaiName = getSuCaiName();
+
+        dialog.setTitle("场景编程-模式" + XiaoGuoDengModel.model + "-时间块" + block + "   素材：" + suCaiName);
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         //flowLayout.setVgap(2);
         dialog.getContentPane().setLayout(flowLayout);
@@ -165,8 +156,6 @@ public class TimeBlockEditUI {
         //////获取当前时间块参数
         int model = Integer.valueOf(XiaoGuoDengModel.model) - 1;
         int grpN = Integer.valueOf(groupNum).intValue() - 1;
-        denKuNum = getxiaoGuoDengDengKuName();
-        suCaiNum = block;
         hashMap = (HashMap) Data.SuCaiObjects[denKuNum - 1][suCaiNum - 1];
         if (hashMap == null) {
             flag = true;
@@ -611,10 +600,10 @@ public class TimeBlockEditUI {
         checkBoxs = new JCheckBox[count];
         checkBoxs2 = new JCheckBox[count];
         names = new JLabel[count];
-        if(flag){
-            if(bn==null)
+        if (flag) {
+            if (bn == null)
                 bn = new boolean[tt];
-            for (int i = 0;i<bn.length;i++){
+            for (int i = 0; i < bn.length; i++) {
                 bn[i] = true;
             }
         }
@@ -1125,7 +1114,7 @@ public class TimeBlockEditUI {
                             button1.setEnabled(false);
                             save();
                             timeBlockReviewActionListener.actionPerformed();
-                            ArtNetReview artNetReview = new ArtNetReview(denKuNum-1,suCaiNum-1,startAddress);
+                            ArtNetReview artNetReview = new ArtNetReview(denKuNum - 1, suCaiNum - 1, startAddress);
 //                            artNetReview.serialPortTest(new int[tt],500);//调用预览数据之前，先归零
                             artNetReview.getData();//发送数据
                         } catch (Exception e2) {
@@ -1250,7 +1239,7 @@ public class TimeBlockEditUI {
         JPanel p2 = new JPanel();
         p2.setLayout(flowLayout);
         //p2.setBorder(new LineBorder(Color.black));
-        p2.setPreferredSize(new Dimension(378, 114));
+        p2.setPreferredSize(new Dimension(378, 120));
         final JSlider slider = new JSlider(0, 255);
         final JSlider slider2 = new JSlider(0, 255);
         final JSlider slider3 = new JSlider(0, 255);
@@ -1462,12 +1451,13 @@ public class TimeBlockEditUI {
         panel.add(box4);
         panel.add(checkBox5);
         panel.add(new JLabel("时差"));
-        final JSlider slider5 = new JSlider(0, 100);
+        final JSlider slider5 = new JSlider(0, 5000);
         rgb1CompontList3.add(slider5);
         final JTextField field5 = new JTextField(4);
-        slider5.setPreferredSize(new Dimension(280, 32));
+        slider5.setPreferredSize(new Dimension(250, 32));
         panel.add(slider5);
         panel.add(field5);
+        panel.add(new JLabel("毫秒"));
         p6.add(panel);
         slider5.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -1601,7 +1591,7 @@ public class TimeBlockEditUI {
         JPanel p2 = new JPanel();
         p2.setLayout(flowLayout);
         //p2.setBorder(new LineBorder(Color.black));
-        p2.setPreferredSize(new Dimension(378, 114));
+        p2.setPreferredSize(new Dimension(378, 120));
         final JSlider slider = new JSlider(0, 255);
         final JSlider slider2 = new JSlider(0, 255);
         final JSlider slider3 = new JSlider(0, 255);
@@ -1813,12 +1803,13 @@ public class TimeBlockEditUI {
         panel.add(box4);
         panel.add(checkBox5);
         panel.add(new JLabel("时差"));
-        final JSlider slider5 = new JSlider(0, 100);
+        final JSlider slider5 = new JSlider(0, 5000);
         rgb1CompontList2.add(slider5);
         final JTextField field5 = new JTextField(4);
-        slider5.setPreferredSize(new Dimension(280, 32));
+        slider5.setPreferredSize(new Dimension(250, 32));
         panel.add(slider5);
         panel.add(field5);
+        panel.add(new JLabel("毫秒"));
         p6.add(panel);
         slider5.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -1952,7 +1943,7 @@ public class TimeBlockEditUI {
         JPanel p2 = new JPanel();
         p2.setLayout(flowLayout);
         //p2.setBorder(new LineBorder(Color.black));
-        p2.setPreferredSize(new Dimension(378, 114));
+        p2.setPreferredSize(new Dimension(378, 120));
         final JSlider slider = new JSlider(0, 255);
         final JSlider slider2 = new JSlider(0, 255);
         final JSlider slider3 = new JSlider(0, 255);
@@ -2164,12 +2155,13 @@ public class TimeBlockEditUI {
         panel.add(box4);
         panel.add(checkBox5);
         panel.add(new JLabel("时差"));
-        final JSlider slider5 = new JSlider(0, 100);
+        final JSlider slider5 = new JSlider(0, 5000);
         rgb1CompontList.add(slider5);
         final JTextField field5 = new JTextField(4);
-        slider5.setPreferredSize(new Dimension(280, 32));
+        slider5.setPreferredSize(new Dimension(250, 32));
         panel.add(slider5);
         panel.add(field5);
+        panel.add(new JLabel("毫秒"));
         p6.add(panel);
         slider5.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -2463,11 +2455,11 @@ public class TimeBlockEditUI {
         //p4_to_p1.setBorder(new LineBorder(Color.gray));
         p4_to_p1.setPreferredSize(new Dimension(380, 40));
         p4_to_p1.add(new JLabel("拆分"));
-        JComboBox box2 = new JComboBox();
+        JComboBox box2 = new JComboBox(TuXingAction.getValues3());
         actionCompontList.add(box2);
-        box2.addItem("不拆分");
-        box2.addItem("中间拆分");
-        box2.addItem("两端拆分");
+//        box2.addItem("不拆分");
+//        box2.addItem("中间拆分");
+//        box2.addItem("两端拆分");
         p4_to_p1.add(box2);
 
         JPanel p4_to_p2 = new JPanel();
@@ -2491,7 +2483,7 @@ public class TimeBlockEditUI {
 
         JPanel p4_to_p3 = new JPanel();
         p4_to_p3.add(new JLabel("    时差"));
-        final JSlider slider3 = new JSlider(0, 100);
+        final JSlider slider3 = new JSlider(0, 5000);
         actionCompontList.add(slider3);
         slider3.setValue(0);
         slider3.setPreferredSize(new Dimension(340, 30));
@@ -2642,5 +2634,29 @@ public class TimeBlockEditUI {
             }
         }
         return Integer.parseInt(s2);
+    }
+
+    public String getSuCaiName() {
+        String str = "";
+        NewJTable table = (NewJTable) MainUi.map.get("table_DkGl");//所有灯库
+        JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
+        String dengKuName = table.getValueAt(denKuNum - 1, 1).toString();//灯库名称
+        Map nameMap = (Map) Data.suCaiNameMap.get(dengKuName);
+        s:
+        if (nameMap != null) {
+            for (int k = 0; k < btns.length; k++) {
+                List tmp = (List) nameMap.get("" + k);
+                if (tmp != null) {
+                    for (int i = 0; i < tmp.size(); i++) {
+                        String[] strings = tmp.get(i).toString().split("--->");
+                        if (strings[1].equals(suCaiNum + "")) {
+                            str = tmp.get(i).toString();
+                            break s;
+                        }
+                    }
+                }
+            }
+        }
+        return str;
     }
 }

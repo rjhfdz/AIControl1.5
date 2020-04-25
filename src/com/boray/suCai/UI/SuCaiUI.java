@@ -34,6 +34,8 @@ public class SuCaiUI {
         pane.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         JScrollPane p1 = new JScrollPane();
+        TitledBorder titledBorder2 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "µÆ¿âÃû³Æ", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
+        p1.setBorder(titledBorder2);
         p1.setPreferredSize(new Dimension(200, 594));
         setP1(p1);
 

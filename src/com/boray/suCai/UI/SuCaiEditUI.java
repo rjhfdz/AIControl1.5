@@ -319,7 +319,7 @@ public class SuCaiEditUI {
         }
         list2.add(f);
         hashMap.put("beiyong", list2);
-//        hashMap.put("zuBieBox", zuComboBox.getSelectedIndex());
+        hashMap.put("zuBieBox", zuComboBox.getSelectedIndex());
         JList suCaiList = (JList) MainUi.map.get("suCaiLightType");
         if (zuComboBox.getSelectedIndex() >= 0)
             Data.suCaiSelectZu.put(suCaiList.getSelectedIndex(), zuComboBox.getSelectedIndex());
@@ -1266,7 +1266,7 @@ public class SuCaiEditUI {
         JPanel p2 = new JPanel();
         p2.setLayout(flowLayout);
         //p2.setBorder(new LineBorder(Color.black));
-        p2.setPreferredSize(new Dimension(378, 114));
+        p2.setPreferredSize(new Dimension(378, 120));
         final JSlider slider = new JSlider(0, 255);
         final JSlider slider2 = new JSlider(0, 255);
         final JSlider slider3 = new JSlider(0, 255);
@@ -1478,12 +1478,13 @@ public class SuCaiEditUI {
         panel.add(box4);
         panel.add(checkBox5);
         panel.add(new JLabel("时差"));
-        final JSlider slider5 = new JSlider(0, 100);
+        final JSlider slider5 = new JSlider(0, 5000);
         rgb1CompontList3.add(slider5);
         final JTextField field5 = new JTextField(4);
-        slider5.setPreferredSize(new Dimension(280, 32));
+        slider5.setPreferredSize(new Dimension(250, 32));
         panel.add(slider5);
         panel.add(field5);
+        panel.add(new JLabel("毫秒"));
         p6.add(panel);
         slider5.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -1615,7 +1616,7 @@ public class SuCaiEditUI {
         JPanel p2 = new JPanel();
         p2.setLayout(flowLayout);
         //p2.setBorder(new LineBorder(Color.black));
-        p2.setPreferredSize(new Dimension(378, 114));
+        p2.setPreferredSize(new Dimension(378, 120));
         final JSlider slider = new JSlider(0, 255);
         final JSlider slider2 = new JSlider(0, 255);
         final JSlider slider3 = new JSlider(0, 255);
@@ -1827,12 +1828,13 @@ public class SuCaiEditUI {
         panel.add(box4);
         panel.add(checkBox5);
         panel.add(new JLabel("时差"));
-        final JSlider slider5 = new JSlider(0, 100);
+        final JSlider slider5 = new JSlider(0, 5000);
         rgb1CompontList2.add(slider5);
         final JTextField field5 = new JTextField(4);
-        slider5.setPreferredSize(new Dimension(280, 32));
+        slider5.setPreferredSize(new Dimension(250, 32));
         panel.add(slider5);
         panel.add(field5);
+        panel.add(new JLabel("毫秒"));
         p6.add(panel);
         slider5.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -1962,7 +1964,7 @@ public class SuCaiEditUI {
         JPanel p2 = new JPanel();
         p2.setLayout(flowLayout);
         //p2.setBorder(new LineBorder(Color.black));
-        p2.setPreferredSize(new Dimension(378, 114));
+        p2.setPreferredSize(new Dimension(378, 120));
         final JSlider slider = new JSlider(0, 255);
         final JSlider slider2 = new JSlider(0, 255);
         final JSlider slider3 = new JSlider(0, 255);
@@ -2174,12 +2176,13 @@ public class SuCaiEditUI {
         panel.add(box4);
         panel.add(checkBox5);
         panel.add(new JLabel("时差"));
-        final JSlider slider5 = new JSlider(0, 100);
+        final JSlider slider5 = new JSlider(0, 5000);
         rgb1CompontList.add(slider5);
         final JTextField field5 = new JTextField(4);
-        slider5.setPreferredSize(new Dimension(280, 32));
+        slider5.setPreferredSize(new Dimension(250, 32));
         panel.add(slider5);
         panel.add(field5);
+        panel.add(new JLabel("毫秒"));
         p6.add(panel);
         slider5.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -2471,11 +2474,11 @@ public class SuCaiEditUI {
         //p4_to_p1.setBorder(new LineBorder(Color.gray));
         p4_to_p1.setPreferredSize(new Dimension(380, 40));
         p4_to_p1.add(new JLabel("拆分"));
-        JComboBox box2 = new JComboBox();
+        JComboBox box2 = new JComboBox(TuXingAction.getValues3());
         actionCompontList.add(box2);
-        box2.addItem("不拆分");
-        box2.addItem("中间拆分");
-        box2.addItem("两端拆分");
+//        box2.addItem("不拆分");
+//        box2.addItem("中间拆分");
+//        box2.addItem("两端拆分");
         p4_to_p1.add(box2);
 
         JPanel p4_to_p2 = new JPanel();
@@ -2499,7 +2502,7 @@ public class SuCaiEditUI {
 
         JPanel p4_to_p3 = new JPanel();
         p4_to_p3.add(new JLabel("    时差"));
-        final JSlider slider3 = new JSlider(0, 100);
+        final JSlider slider3 = new JSlider(0, 5000);
         actionCompontList.add(slider3);
         slider3.setValue(0);
         slider3.setPreferredSize(new Dimension(340, 30));
@@ -2754,9 +2757,9 @@ public class SuCaiEditUI {
         for (int i = 0; i < list.size(); i++) {
             box.addItem(list.get(i));
         }
-//        Object o = hashMap.get("zuBieBox");
-        JList suCaiList = (JList) MainUi.map.get("suCaiLightType");
-        Object o = Data.suCaiSelectZu.get(suCaiList.getSelectedIndex());
+        Object o = hashMap.get("zuBieBox");
+//        JList suCaiList = (JList) MainUi.map.get("suCaiLightType");
+//        Object o = Data.suCaiSelectZu.get(suCaiList.getSelectedIndex());
         if (o != null && o instanceof Integer) {
             zuComboBox.setSelectedIndex(Integer.valueOf(o.toString()));
         }

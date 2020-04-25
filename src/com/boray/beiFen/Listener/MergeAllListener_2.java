@@ -507,7 +507,7 @@ public class MergeAllListener_2 implements ActionListener{
 						
 						
 						//时间A_L	时间B_H
-						a = Integer.valueOf(tp1[5]).intValue()*10;
+						a = Integer.valueOf(tp1[5]).intValue();
 						T1[i][j][9] = (byte)(a%256);
 						T1[i][j][10] = (byte)(a/256);
 						
@@ -592,7 +592,7 @@ public class MergeAllListener_2 implements ActionListener{
 						}
 						T1[i][j][20] = (byte)a;
 						//时间A_L	时间B_H
-						a = Integer.valueOf((String)list.get(9)).intValue()*10;
+						a = Integer.valueOf((String)list.get(9)).intValue();
 						T1[i][j][21] = (byte)(a%256);
 						T1[i][j][22] = (byte)(a/256);
 					}
@@ -658,7 +658,7 @@ public class MergeAllListener_2 implements ActionListener{
 						}
 						T1[i][j][32] = (byte)a;
 						//时间A_L	时间B_H
-						a = Integer.valueOf((String)list.get(9)).intValue()*10;
+						a = Integer.valueOf((String)list.get(9)).intValue();
 						T1[i][j][33] = (byte)(a%256);
 						T1[i][j][34] = (byte)(a/256);
 					}
@@ -724,7 +724,7 @@ public class MergeAllListener_2 implements ActionListener{
 						}
 						T1[i][j][44] = (byte)a;
 						//时间A_L	时间B_H
-						a = Integer.valueOf((String)list.get(9)).intValue()*10;
+						a = Integer.valueOf((String)list.get(9)).intValue();
 						T1[i][j][45] = (byte)(a%256);
 						T1[i][j][46] = (byte)(a/256);
 					}
