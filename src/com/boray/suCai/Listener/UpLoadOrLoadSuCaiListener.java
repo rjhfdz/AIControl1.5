@@ -367,9 +367,9 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
                                 }
                             }
                         }
-                        if (cnt == 30) {
+                        if (cnt == 50) {
                             JFrame frame = (JFrame) MainUi.map.get("frame");
-                            JOptionPane.showMessageDialog(frame, "最多只能创建30个素材！", "提示", JOptionPane.PLAIN_MESSAGE);
+                            JOptionPane.showMessageDialog(frame, "最多只能创建50个素材！", "提示", JOptionPane.PLAIN_MESSAGE);
                             return;
                         }
                         String suCaiNameAndNumber = field.getText() + "--->" + (cnt + 1);

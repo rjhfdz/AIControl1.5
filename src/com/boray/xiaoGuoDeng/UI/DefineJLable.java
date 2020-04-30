@@ -37,7 +37,7 @@ import com.sun.istack.internal.FinalArrayList;
 public class DefineJLable extends JLabel {
     private int xx, yy;
     private Point p;
-    private int w = 50, h = 29;
+    private int w = 150, h = 29;
     //private int w_1;
     static boolean b = false;
     private JPanel pane;

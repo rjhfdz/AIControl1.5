@@ -14,6 +14,7 @@ import com.boray.entity.Users;
 import com.boray.mainUi.MainUi;
 import com.boray.suCai.UI.SuCaiUI;
 import com.boray.suCai.UI.YunChangJingSuCaiDialog;
+import com.boray.xiaoGuoDeng.UI.DefineJLable;
 import com.boray.xiaoGuoDeng.reviewBlock.TimeBlockReviewActionListener;
 import com.boray.xiaoGuoDeng.reviewBlock.TimeBlockStopReviewActionListener;
 
@@ -230,6 +231,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                     }
                     suCaiList.setModel(model);
                     suCaiList.setSelectedIndex(0);
+                    neatenXiaoGuoDeng(field.getText(), number);
                     dialog.dispose();
                 }
             }
@@ -247,6 +249,78 @@ public class CreateOrDelSuCaiListener implements ActionListener {
         dialog.add(n1);
         dialog.add(p1);
         dialog.add(p2);
+    }
+
+    /**
+     * 整理效果灯编程界面原有的素材名称
+     *
+     * @param str
+     */
+    private void neatenXiaoGuoDeng(String str, int num) {
+        JList dengkuList = (JList) MainUi.map.get("suCaiLightType");//灯库列表
+        NewJTable table = (NewJTable) MainUi.map.get("GroupTable");
+        List<String> list = getDengZuComBox(dengkuList.getSelectedIndex());
+        for (int n = 0; n < table.getRowCount(); n++) {
+            boolean b = (boolean) table.getValueAt(n, 0);
+            for (int i = 1; i <= 24; i++) {
+                JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels_group" + i);
+                JLabel[] labels = (JLabel[]) MainUi.map.get("labels_group" + i);
+                if (b) {
+                    if (list.contains(labels[n + 1].getText())) {
+                        JPanel panel = timeBlockPanels[n + 1];
+                        for (int k = 0; k < panel.getComponentCount(); k++) {
+                            DefineJLable lable = (DefineJLable) panel.getComponent(k);
+                            if (lable.getText().contains("(" + num + ")")) {
+                                String s = lable.getText().substring(0, lable.getText().indexOf("("));
+                                String s1 = "";
+                                if (lable.getText().contains("√")) {
+                                    s1 = "√";
+                                } else {
+                                    s1 = "×";
+                                }
+                                lable.setText(s + "(" + num + ")  " + str + " " + s1);
+                            }
+                        }
+                        panel.updateUI();
+                    }
+                }
+            }
+        }
+
+    }
+
+    /**
+     * 获得引用了该灯库的灯组
+     *
+     * @param dengKuNumber
+     */
+    public List<String> getDengZuComBox(int dengKuNumber) {
+        int selectIndex = dengKuNumber;//获得该素材选中的灯库
+        NewJTable table3 = (NewJTable) MainUi.map.get("allLightTable");//所有灯具
+        NewJTable table = (NewJTable) MainUi.map.get("GroupTable");//灯具分组
+        NewJTable table_dengJu = (NewJTable) MainUi.map.get("table_dengJu");//灯具配置
+
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < table.getRowCount(); i++) {
+            TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(i);
+            Iterator iterator = treeSet.iterator();
+            String s = "";
+            while (iterator.hasNext()) {
+                int a = (int) iterator.next();
+                if (table3.getRowCount() > 0) {
+                    s = table3.getValueAt(a, 0).toString();
+                    Integer s1 = Integer.parseInt(s.split("#")[0].substring(2));//组内灯具的灯具id
+                    String s2 = ((String) table_dengJu.getValueAt(s1 - 1, 3)).split("#")[0];//灯库名称
+                    int c = Integer.parseInt(s2.substring(2)) - 1;
+                    if (selectIndex == c) {
+                        String ss = table.getValueAt(i, 2).toString();
+                        list.add(ss);
+                        break;
+                    }
+                }
+            }
+        }
+        return list;
     }
 
     private void init(final JDialog dialog) {
@@ -281,9 +355,9 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                                 }
                             }
                         }
-                        if (cnt == 30) {
+                        if (cnt == 50) {
                             JFrame frame = (JFrame) MainUi.map.get("frame");
-                            JOptionPane.showMessageDialog(frame, "最多只能创建30个素材！", "提示", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(frame, "最多只能创建50个素材！", "提示", JOptionPane.ERROR_MESSAGE);
                             return;
                         }
                         String suCaiNameAndNumber = field.getText() + "--->" + (cnt + 1);

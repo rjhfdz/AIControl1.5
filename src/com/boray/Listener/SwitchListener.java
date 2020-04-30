@@ -190,9 +190,9 @@ public class SwitchListener implements ActionListener {
         try {//加300毫秒间隔区分 dmx录制状态查询
             Thread.sleep(300);
             if (!btn.getName().equals("2")) {
-                Socket.SerialPortSendData(RdmData.quit());
+                Socket.SendData(RdmData.quit());
             } else {
-                Socket.SerialPortSendData(RdmData.access());
+                Socket.SendData(RdmData.access());
             }
         }catch (Exception e1){
             e1.printStackTrace();

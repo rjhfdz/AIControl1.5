@@ -47,8 +47,10 @@ public class ShengKonSuCaiEditUI {
 
     private JComboBox duoDengCtrlBox;//多灯控制
 
+    private int denKuNum,suCaiNum;
+
     public void show(String suCaiName, int suCaiNum, int denKuNum) {
-        this.groupNum = (denKuNum+1) + "";
+        this.groupNum = (denKuNum + 1) + "";
         JDialog dialog = new JDialog();
         JFrame f = (JFrame) MainUi.map.get("frame");
         dialog = new JDialog(f, true);
@@ -63,18 +65,11 @@ public class ShengKonSuCaiEditUI {
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.addWindowListener(new WindowAdapter() {
             public void windowClosed(WindowEvent e) {
-                if (runTable.getRowCount() > 0) {
-                    DefaultTableModel modelTemp = (DefaultTableModel) runTable.getModel();
-                    Vector temp = (Vector) modelTemp.getDataVector().clone();
-                    map88.put("0", temp);
-                } else {
-                    map88.put("0", null);
-                }
-                map88.put("1", gouXuanValus);
-                map88.put("2", al);
+                save();
             }
         });
-
+        this.denKuNum = denKuNum;
+        this.suCaiNum = suCaiNum - 1;
         JPanel p1 = new JPanel();
         setP1(p1);
         if (!typeString.equals("")) {
@@ -837,11 +832,45 @@ public class ShengKonSuCaiEditUI {
                 }
             }
         });
+        final JButton button1 = new JButton("预览");
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            button1.setEnabled(false);
+                            save();
+                        } catch (Exception e2) {
+                            e2.printStackTrace();
+                        } finally {
+                            button1.setEnabled(true);
+                        }
+                    }
+                }).start();
+            }
+        });
+        JButton button3 = new JButton("停止预览");
+
         p5.add(btn);
         p5.add(btn2);
-
+        p5.add(new JLabel("                                      "));
+//        p5.add(button1);
+//        p5.add(button3);
         pane.add(p4);
         pane.add(p5);
+    }
+
+    void save() {
+        if (runTable.getRowCount() > 0) {
+            DefaultTableModel modelTemp = (DefaultTableModel) runTable.getModel();
+            Vector temp = (Vector) modelTemp.getDataVector().clone();
+            map88.put("0", temp);
+        } else {
+            map88.put("0", null);
+        }
+        map88.put("1", gouXuanValus);
+        map88.put("2", al);
     }
 
     private void setJiaSuDuPane(JPanel pane) {
@@ -1118,8 +1147,9 @@ public class ShengKonSuCaiEditUI {
         int[] slt = runTable.getSelectedRows();
         int value = 0;
         int i = 0, ii = 0;
-        if(slt.length != 0){
+        if (slt.length != 0) {
             byte[] buff = new byte[512 + 8];
+            byte[] bytes = new byte[512];
             buff[0] = (byte) 0xBB;
             buff[1] = (byte) 0x55;
             buff[2] = (byte) (520 / 256);
@@ -1144,11 +1174,13 @@ public class ShengKonSuCaiEditUI {
                 }
             }
             buff[519] = ZhiLingJi.getJiaoYan(buff);
-            if(Data.serialPort != null){
+            if (Data.serialPort != null) {
                 Socket.SerialPortSendData(buff);
-            }else if(Data.socket!=null){
+            } else if (Data.socket != null) {
                 Socket.UDPSendData(buff);
             }
+            System.arraycopy(buff, 8, bytes, 0, 512);
+            Socket.ArtNetSendData(bytes);//添加artNet数据协议发送
         }
     }
 }

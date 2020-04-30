@@ -27,6 +27,7 @@ import javax.swing.border.TitledBorder;
 
 import com.boray.Data.Data;
 import com.boray.Data.RdmData;
+import com.boray.Utils.Socket;
 import com.boray.mainUi.MainUi;
 
 public class RdmSetUI implements ItemListener{
@@ -53,16 +54,18 @@ public class RdmSetUI implements ItemListener{
 						try {
 							//UsbPipe sendUsbPipe = (UsbPipe)MainUi.map.get("sendUsbPipe");
 							//UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType((byte[])RdmPaneUI.currentByte, 1));
-							OutputStream os = Data.serialPort.getOutputStream();
-							os.write(RdmData.serchType((byte[])RdmPaneUI.currentByte, 1));
-							os.flush();
-							Thread.sleep(200);
+//							OutputStream os = Data.serialPort.getOutputStream();
+//							os.write(RdmData.serchType((byte[])RdmPaneUI.currentByte, 1));
+//							os.flush();
+							Socket.SendData(RdmData.serchType((byte[])RdmPaneUI.currentByte, 1));
+							Thread.sleep(500);
 							byte[] b = new byte[2];
 							b[0] = 1;
 							b[1] = 0;
 							//UsbUtil.sendMassge(sendUsbPipe, RdmData.setType(RdmPaneUI.currentByte, 6,b));
-							os.write(RdmData.setType(RdmPaneUI.currentByte, 6,b));
-							os.flush();
+//							os.write(RdmData.setType(RdmPaneUI.currentByte, 6,b));
+//							os.flush();
+							Socket.SendData(RdmData.setType(RdmPaneUI.currentByte, 6,b));
 						} catch (Exception e2) {
 							e2.printStackTrace();
 						}
@@ -107,15 +110,16 @@ public class RdmSetUI implements ItemListener{
 				if (ItemEvent.SELECTED == e.getStateChange() && box.getSelectedIndex() != 0) {
 					try {
 						//UsbPipe sendUsbPipe = (UsbPipe)MainUi.map.get("sendUsbPipe");
-						OutputStream os = Data.serialPort.getOutputStream();
+//						OutputStream os = Data.serialPort.getOutputStream();
 						
 						byte[] b = new byte[2];
 						b[0] = 1;
 						b[1] = (byte)(box.getSelectedIndex() + 80);
 						
 						//UsbUtil.sendMassge(sendUsbPipe, RdmData.setType(RdmPaneUI.currentByte, 7,b));
-						os.write(RdmData.setType(RdmPaneUI.currentByte, 7,b));
-						os.flush();
+//						os.write(RdmData.setType(RdmPaneUI.currentByte, 7,b));
+//						os.flush();
+						Socket.SendData(RdmData.setType(RdmPaneUI.currentByte, 7,b));
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
@@ -133,14 +137,15 @@ public class RdmSetUI implements ItemListener{
 				if (ItemEvent.SELECTED == e.getStateChange()) {
 					try {
 						//UsbPipe sendUsbPipe = (UsbPipe)MainUi.map.get("sendUsbPipe");
-						OutputStream os = Data.serialPort.getOutputStream();
+//						OutputStream os = Data.serialPort.getOutputStream();
 						byte[] b = new byte[2];
 						b[0] = 1;
 						b[1] = (byte)(box2.getSelectedIndex()-1);
 						
 						//UsbUtil.sendMassge(sendUsbPipe, RdmData.setType(RdmPaneUI.currentByte, 8,b));
-						os.write(RdmData.setType(RdmPaneUI.currentByte, 8,b));
-						os.flush();
+//						os.write(RdmData.setType(RdmPaneUI.currentByte, 8,b));
+//						os.flush();
+						Socket.SendData(RdmData.setType(RdmPaneUI.currentByte, 8,b));
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
@@ -159,7 +164,7 @@ public class RdmSetUI implements ItemListener{
 				if (ItemEvent.SELECTED == e.getStateChange()) {
 					try {
 						//UsbPipe sendUsbPipe = (UsbPipe)MainUi.map.get("sendUsbPipe");
-						OutputStream os = Data.serialPort.getOutputStream();
+//						OutputStream os = Data.serialPort.getOutputStream();
 						byte[] b = new byte[2];
 						b[0] = 1;
 						if (box3.getSelectedIndex() == 0) {
@@ -169,8 +174,9 @@ public class RdmSetUI implements ItemListener{
 						}
 						
 						//UsbUtil.sendMassge(sendUsbPipe, RdmData.setType(RdmPaneUI.currentByte, 9,b));
-						os.write(RdmData.setType(RdmPaneUI.currentByte, 9,b));
-						os.flush();
+//						os.write(RdmData.setType(RdmPaneUI.currentByte, 9,b));
+//						os.flush();
+						Socket.SendData(RdmData.setType(RdmPaneUI.currentByte, 9,b));
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
@@ -186,22 +192,24 @@ public class RdmSetUI implements ItemListener{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					//UsbPipe sendUsbPipe = (UsbPipe)MainUi.map.get("sendUsbPipe");
-					OutputStream os = Data.serialPort.getOutputStream();
+//					OutputStream os = Data.serialPort.getOutputStream();
 					byte[] b = new byte[2];
 					b[0] = 1;b[1] = 1;
 					//UsbUtil.sendMassge(sendUsbPipe, RdmData.setType(RdmPaneUI.currentByte, 10, b));
-					os.write(RdmData.setType(RdmPaneUI.currentByte, 10, b));
-					os.flush();
+//					os.write(RdmData.setType(RdmPaneUI.currentByte, 10, b));
+//					os.flush();
+					Socket.SendData(RdmData.setType(RdmPaneUI.currentByte, 10, b));
 					new Thread(new Runnable() {
 						public void run() {
 							try {
 								//UsbPipe sendUsbPipe = (UsbPipe)MainUi.map.get("sendUsbPipe");
-								OutputStream os = Data.serialPort.getOutputStream();
+//								OutputStream os = Data.serialPort.getOutputStream();
 								//查信息
 								Thread.sleep(200);
 								//UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType(RdmPaneUI.currentByte, 1));
-								os.write(RdmData.serchType(RdmPaneUI.currentByte, 1));
-								os.flush();
+//								os.write(RdmData.serchType(RdmPaneUI.currentByte, 1));
+//								os.flush();
+								Socket.SendData(RdmData.serchType(RdmPaneUI.currentByte, 1));
 								Thread.sleep(200);
 								//查工作模式
 								//UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType(RdmPaneUI.currentByte, 7));
@@ -209,8 +217,9 @@ public class RdmSetUI implements ItemListener{
 								
 								//正反显示
 								//UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType(RdmPaneUI.currentByte, 8));
-								os.write(RdmData.serchType(RdmPaneUI.currentByte, 8));
-								os.flush();
+//								os.write(RdmData.serchType(RdmPaneUI.currentByte, 8));
+//								os.flush();
+								Socket.SendData(RdmData.serchType(RdmPaneUI.currentByte, 8));
 								Thread.sleep(200);
 								
 								//复位
@@ -219,14 +228,16 @@ public class RdmSetUI implements ItemListener{
 								
 								//电动模式
 								//UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType(RdmPaneUI.currentByte, 11));
-								os.write(RdmData.serchType(RdmPaneUI.currentByte, 11));
-								os.flush();
+//								os.write(RdmData.serchType(RdmPaneUI.currentByte, 11));
+//								os.flush();
+								Socket.SendData(RdmData.serchType(RdmPaneUI.currentByte, 11));
 								Thread.sleep(200);
 								
 								//通道模式
 								//UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType(RdmPaneUI.currentByte, 12));
-								os.write(RdmData.serchType(RdmPaneUI.currentByte, 12));
-								os.flush();
+//								os.write(RdmData.serchType(RdmPaneUI.currentByte, 12));
+//								os.flush();
+								Socket.SendData(RdmData.serchType(RdmPaneUI.currentByte, 12));
 								Thread.sleep(200);
 								
 							} catch (Exception e) {
@@ -278,14 +289,15 @@ public class RdmSetUI implements ItemListener{
 				if (ItemEvent.SELECTED == e.getStateChange()) {
 					try {
 						//UsbPipe sendUsbPipe = (UsbPipe)MainUi.map.get("sendUsbPipe");
-						OutputStream os = Data.serialPort.getOutputStream();
+//						OutputStream os = Data.serialPort.getOutputStream();
 						byte[] b = new byte[2];
 						b[0] = 1;
 						b[1] = (byte)(box8.getSelectedIndex());
 						
 						//UsbUtil.sendMassge(sendUsbPipe, RdmData.setType(RdmPaneUI.currentByte, 12,b));
-						os.write(RdmData.setType(RdmPaneUI.currentByte, 12,b));
-						os.flush();
+//						os.write(RdmData.setType(RdmPaneUI.currentByte, 12,b));
+//						os.flush();
+						Socket.SendData(RdmData.setType(RdmPaneUI.currentByte, 12,b));
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
@@ -306,11 +318,12 @@ public class RdmSetUI implements ItemListener{
 					public void run() {
 						try {
 							//UsbPipe sendUsbPipe = (UsbPipe)MainUi.map.get("sendUsbPipe");
-							OutputStream os = Data.serialPort.getOutputStream();
+//							OutputStream os = Data.serialPort.getOutputStream();
 							//查信息
 							//UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType(RdmPaneUI.currentByte, 1));
-							os.write(RdmData.serchType(RdmPaneUI.currentByte, 1));
-							os.flush();
+//							os.write(RdmData.serchType(RdmPaneUI.currentByte, 1));
+//							os.flush();
+							Socket.SendData(RdmData.serchType(RdmPaneUI.currentByte, 1));
 							Thread.sleep(200);
 							//查工作模式
 							//UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType(RdmPaneUI.currentByte, 7));
@@ -318,8 +331,9 @@ public class RdmSetUI implements ItemListener{
 							
 							//正反显示
 							//UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType(RdmPaneUI.currentByte, 8));
-							os.write(RdmData.serchType(RdmPaneUI.currentByte, 8));
-							os.flush();
+//							os.write(RdmData.serchType(RdmPaneUI.currentByte, 8));
+//							os.flush();
+							Socket.SendData(RdmData.serchType(RdmPaneUI.currentByte, 8));
 							Thread.sleep(200);
 							
 							//复位
@@ -328,14 +342,16 @@ public class RdmSetUI implements ItemListener{
 							
 							//电动模式
 							//UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType(RdmPaneUI.currentByte, 11));
-							os.write(RdmData.serchType(RdmPaneUI.currentByte, 11));
-							os.flush();
+//							os.write(RdmData.serchType(RdmPaneUI.currentByte, 11));
+//							os.flush();
+							Socket.SendData(RdmData.serchType(RdmPaneUI.currentByte, 11));
 							Thread.sleep(200);
 							
 							//通道模式
 							//UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType(RdmPaneUI.currentByte, 12));
-							os.write(RdmData.serchType(RdmPaneUI.currentByte, 12));
-							os.flush();
+//							os.write(RdmData.serchType(RdmPaneUI.currentByte, 12));
+//							os.flush();
+							Socket.SendData(RdmData.serchType(RdmPaneUI.currentByte, 12));
 							Thread.sleep(200);
 							
 						} catch (Exception e) {
@@ -413,7 +429,7 @@ public class RdmSetUI implements ItemListener{
 				if (ItemEvent.SELECTED == e.getStateChange()) {
 					try {
 						//UsbPipe sendUsbPipe = (UsbPipe)MainUi.map.get("sendUsbPipe");
-						OutputStream os = Data.serialPort.getOutputStream();
+//						OutputStream os = Data.serialPort.getOutputStream();
 						byte[] b = new byte[2];
 						b[0] = 1;
 						if (box.getSelectedIndex() == 0) {
@@ -422,8 +438,9 @@ public class RdmSetUI implements ItemListener{
 							b[1] = 0;
 						}
 						//UsbUtil.sendMassge(sendUsbPipe, RdmData.setType(RdmPaneUI.currentByte, 6,b));
-						os.write(RdmData.setType(RdmPaneUI.currentByte, 6,b));
-						os.flush();
+//						os.write(RdmData.setType(RdmPaneUI.currentByte, 6,b));
+//						os.flush();
+						Socket.SendData(RdmData.setType(RdmPaneUI.currentByte, 6,b));
 					} catch (Exception e2) {
 						e2.printStackTrace();
 					}
@@ -460,14 +477,15 @@ public class RdmSetUI implements ItemListener{
 						}
 						
 						//UsbPipe sendUsbPipe = (UsbPipe)MainUi.map.get("sendUsbPipe");
-						OutputStream os = Data.serialPort.getOutputStream();
+//						OutputStream os = Data.serialPort.getOutputStream();
 						byte[] b = new byte[3];
 						b[0] = 2;
 						b[1] = (byte)(a / 256);
 						b[2] = (byte)(a % 256);
 						//UsbUtil.sendMassge(sendUsbPipe, RdmData.setType(RdmPaneUI.currentByte, 3,b));
-						os.write(RdmData.setType(RdmPaneUI.currentByte, 3,b));
-						os.flush();
+//						os.write(RdmData.setType(RdmPaneUI.currentByte, 3,b));
+//						os.flush();
+						Socket.SendData(RdmData.setType(RdmPaneUI.currentByte, 3,b));
 						
 						button.setText("编辑");
 						fields[7].setEnabled(false);
@@ -521,13 +539,14 @@ public class RdmSetUI implements ItemListener{
 			}
 			try {
 				//UsbPipe sendUsbPipe = (UsbPipe)MainUi.map.get("sendUsbPipe");
-				OutputStream os = Data.serialPort.getOutputStream();
+//				OutputStream os = Data.serialPort.getOutputStream();
 				byte[] b = new byte[2];
 				b[0] = 1;
 				b[1] = (byte)cc;
 				//UsbUtil.sendMassge(sendUsbPipe, RdmData.setType(RdmPaneUI.currentByte, 11,b));
-				os.write(RdmData.setType(RdmPaneUI.currentByte, 11,b));
-				os.flush();
+//				os.write(RdmData.setType(RdmPaneUI.currentByte, 11,b));
+//				os.flush();
+				Socket.SendData(RdmData.setType(RdmPaneUI.currentByte, 11,b));
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}

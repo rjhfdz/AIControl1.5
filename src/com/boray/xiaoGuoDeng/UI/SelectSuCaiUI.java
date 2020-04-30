@@ -60,7 +60,8 @@ public class SelectSuCaiUI {
                 JList list = (JList) MainUi.map.get("xiaoGuoDeng_list");
                 if (flag) {
                     int c = pane.getComponentCount();
-                    DefineJLable label = new DefineJLable((c + 1) + "(" + list.getSelectedValue().toString().split(">")[1] + ")", pane);
+                    String[] strings = list.getSelectedValue().toString().split("--->");
+                    DefineJLable label = new DefineJLable((c + 1) + "(" + strings[1] + ")  " + strings[0] + " ", pane);
                     ////////////////////////////////////////////////////////×
                     if (c > 0) {
                         DefineJLable defineJLable = (DefineJLable) pane.getComponent(c - 1);
@@ -87,7 +88,15 @@ public class SelectSuCaiUI {
                     label.setBackground(MyColor.colors[c]);
                     pane.add(label);
                 } else {
-                    defineJLable.setText(defineJLable.getText().substring(0, defineJLable.getText().indexOf("(")) + "(" + list.getSelectedValue().toString().split(">")[1] + ")" + defineJLable.getText().substring(defineJLable.getText().indexOf(")")+1, defineJLable.getText().indexOf(")") + 2));
+                    String s = defineJLable.getText().substring(0, defineJLable.getText().indexOf("("));
+                    String[] strings = list.getSelectedValue().toString().split("--->");
+                    String s1 = "";
+                    if (defineJLable.getText().contains("√")) {
+                        s1 = "√";
+                    } else {
+                        s1 = "×";
+                    }
+                    defineJLable.setText(s + "(" + strings[1] + ")  " + strings[0] + " " + s1);
                 }
                 pane.updateUI();
                 dialog.dispose();
@@ -160,9 +169,9 @@ public class SelectSuCaiUI {
                                     }
                                 }
                             }
-                            if (cnt == 30) {
+                            if (cnt == 50) {
                                 JFrame frame = (JFrame) MainUi.map.get("frame");
-                                JOptionPane.showMessageDialog(frame, "最多只能创建30个素材！", "提示", JOptionPane.ERROR_MESSAGE);
+                                JOptionPane.showMessageDialog(frame, "最多只能创建50个素材！", "提示", JOptionPane.ERROR_MESSAGE);
                                 return;
                             }
                             String suCaiNameAndNumber = field.getText() + "--->" + (cnt + 1);

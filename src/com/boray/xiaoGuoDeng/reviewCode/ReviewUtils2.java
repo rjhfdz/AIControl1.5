@@ -285,6 +285,7 @@ public class ReviewUtils2 {
                     int cc = Integer.valueOf(tp1[0]) + 1;
                     dongZuoTuXing[3] = (byte) cc;
                     //拆分反向
+                    boolean b = map.containsKey("5") ? (boolean) map.get("5") : false;
                     //X轴反向    是1/否0
                     if ("true".equals(tp1[1])) {
                         a = 1;
@@ -292,6 +293,13 @@ public class ReviewUtils2 {
                         a = 0;
                     }
                     dongZuoTuXing[5] = (byte) a;
+                    if (b) {
+                        if (a == 1) {
+                            dongZuoTuXing[5] = (byte) 0x81;
+                        } else {
+                            dongZuoTuXing[5] = (byte) 0x80;
+                        }
+                    }
                     //X半
                     if ("true".equals(tp1[2])) {
                         a = 1;

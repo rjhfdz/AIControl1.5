@@ -20,15 +20,17 @@ public class TimeBlockStopReviewActionListener implements ActionListener {
         this.group = group;
     }
 
-    public TimeBlockStopReviewActionListener(JComboBox comboBox,int sc,int block){
+    public TimeBlockStopReviewActionListener(JComboBox comboBox, int sc, int block) {
         this.comboBox = comboBox;
         this.sc = sc;
         this.block = block;
     }
 
     public void actionPerformed(ActionEvent e) {
-        if(comboBox!=null){
+        if (comboBox != null || comboBox.getSelectedItem().toString() != "") {
             this.group = Integer.parseInt(comboBox.getSelectedItem().toString().split("#")[0]);
+        }else{
+            return;
         }
         if (Data.serialPort != null) {
             try {

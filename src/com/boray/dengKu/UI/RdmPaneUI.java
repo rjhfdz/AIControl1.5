@@ -113,7 +113,7 @@ public class RdmPaneUI implements ActionListener {
                         b[1] = (byte) (count / 256);
                         b[2] = (byte) (count % 256);
                         int s = Integer.parseInt(table.getValueAt(a[i + 1], 2).toString()) - 1;
-                        Socket.SerialPortSendData(RdmData.setType((byte[]) uid_Byte.get(s), 3, b));
+                        Socket.SendData(RdmData.setType((byte[]) uid_Byte.get(s), 3, b));
                         table.setValueAt(count, a[i + 1], 4);
                         Thread.sleep(300);
                         count += Integer.parseInt(table.getValueAt(a[i + 1], 5).toString());
@@ -252,20 +252,21 @@ public class RdmPaneUI implements ActionListener {
                             openSet = true;
                             currentByte = (byte[]) uid_Byte.get(rowIndex);
                             //UsbPipe sendUsbPipe = (UsbPipe)MainUi.map.get("sendUsbPipe");
-                            OutputStream os = Data.serialPort.getOutputStream();
+//                            OutputStream os = Data.serialPort.getOutputStream();
 
                             byte[] b = new byte[2];
                             b[0] = 1;
                             b[1] = 1;
                             //UsbUtil.sendMassge(sendUsbPipe, RdmData.setType(RdmPaneUI.currentByte, 6,b));
-                            os.write(RdmData.setType(RdmPaneUI.currentByte, 6, b));
-                            os.flush();
-
+//                            os.write(RdmData.setType(RdmPaneUI.currentByte, 6, b));
+//                            os.flush();
+                            Socket.SendData(RdmData.setType(RdmPaneUI.currentByte, 6, b));
                             Thread.sleep(200);
 
                             //UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType((byte[])RdmPaneUI.uid_Byte.get(rowIndex), 1));
-                            os.write(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(rowIndex), 1));
-                            os.flush();
+//                            os.write(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(rowIndex), 1));
+//                            os.flush();
+                            Socket.SendData(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(rowIndex), 1));
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -280,7 +281,7 @@ public class RdmPaneUI implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if ("搜索".equals(e.getActionCommand())) {
-            if (Data.serialPort != null) {
+            if (Data.serialPort != null||Data.socket!=null) {
                 try {
                     final JButton btn = (JButton) e.getSource();
                     btn.setEnabled(false);
@@ -294,9 +295,10 @@ public class RdmPaneUI implements ActionListener {
                     for (int i = table.getRowCount() - 1; i >= 0; i--) {
                         model.removeRow(i);
                     }
-                    OutputStream os = Data.serialPort.getOutputStream();
-                    os.write(RdmData.serch());
-                    os.flush();
+//                    OutputStream os = Data.serialPort.getOutputStream();
+//                    os.write(RdmData.serch());
+//                    os.flush();
+                    Socket.SendData(RdmData.serch());
                     new Timer().schedule(new TimerTask() {
                         public void run() {
                             if (RdmPaneUI.uidList.size() != 0 /*&& RdmPaneUI.uidList.size() == RdmPaneUI.deviceCount*/) {
@@ -305,19 +307,21 @@ public class RdmPaneUI implements ActionListener {
 										Thread.sleep(RdmPaneUI.uidList.size()*200);
 									}*/
                                     //UsbPipe sendUsbPipe = (UsbPipe)MainUi.map.get("sendUsbPipe");
-                                    OutputStream os = Data.serialPort.getOutputStream();
+//                                    OutputStream os = Data.serialPort.getOutputStream();
                                     //查型号
                                     for (int j = 0; j < RdmPaneUI.uid_Byte.size(); j++) {
                                         //UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType((byte[])RdmPaneUI.uid_Byte.get(j), 5));
-                                        os.write(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(j), 5));
-                                        os.flush();
+//                                        os.write(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(j), 5));
+//                                        os.flush();
+                                        Socket.SendData(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(j), 5));
                                         Thread.sleep(300);
                                     }
                                     //查起始地址、通道数
                                     for (int j = 0; j < RdmPaneUI.uid_Byte.size(); j++) {
                                         //UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType((byte[])RdmPaneUI.uid_Byte.get(j), 1));
-                                        os.write(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(j), 1));
-                                        os.flush();
+//                                        os.write(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(j), 1));
+//                                        os.flush();
+                                        Socket.SendData(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(j), 1));
                                         Thread.sleep(300);
                                     }
                                     NewJTable table = (NewJTable) MainUi.map.get("RDM_table");
@@ -328,12 +332,14 @@ public class RdmPaneUI implements ActionListener {
                                                 //System.out.println("//"+table.getValueAt(i, j).toString()+"??");
                                                 if ("".equals(table.getValueAt(i, j).toString())) {
                                                     if (j == 3) {
-                                                        os.write(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(i), 5));
-                                                        os.flush();
+//                                                        os.write(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(i), 5));
+//                                                        os.flush();
+                                                        Socket.SendData(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(i), 5));
                                                         Thread.sleep(500);
                                                     } else {
-                                                        os.write(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(i), 1));
-                                                        os.flush();
+//                                                        os.write(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(i), 1));
+//                                                        os.flush();
+                                                        Socket.SendData(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(i), 1));
                                                         Thread.sleep(500);
                                                     }
                                                 }
@@ -359,8 +365,8 @@ public class RdmPaneUI implements ActionListener {
                 return;
             }
         } else if ("退出RDM".equals(e.getActionCommand())) {
-            if (Data.serialPort != null) {
-                Socket.SerialPortSendData(RdmData.quit());
+            if (Data.serialPort != null||Data.socket!=null) {
+                Socket.SendData(RdmData.quit());
             } else {
                 JFrame frame = (JFrame) MainUi.map.get("frame");
                 JOptionPane.showMessageDialog(frame, "还未连接设备！", "提示", JOptionPane.ERROR_MESSAGE);
@@ -408,12 +414,12 @@ public class RdmPaneUI implements ActionListener {
                             try {
                                 //查型号
                                 for (int j = 0; j < RdmPaneUI.uid_Byte.size(); j++) {
-                                    Socket.SerialPortSendData(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(j), 5));
+                                    Socket.SendData(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(j), 5));
                                     Thread.sleep(300);
                                 }
                                 //查起始地址、通道数
                                 for (int j = 0; j < RdmPaneUI.uid_Byte.size(); j++) {
-                                    Socket.SerialPortSendData(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(j), 1));
+                                    Socket.SendData(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(j), 1));
                                     Thread.sleep(300);
                                 }
                                 NewJTable table = (NewJTable) MainUi.map.get("RDM_table");
@@ -423,10 +429,10 @@ public class RdmPaneUI implements ActionListener {
                                         for (int j = 3; j < 6; j++) {
                                             if ("".equals(table.getValueAt(i, j).toString())) {
                                                 if (j == 3) {
-                                                    Socket.SerialPortSendData(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(i), 5));
+                                                    Socket.SendData(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(i), 5));
                                                     Thread.sleep(500);
                                                 } else {
-                                                    Socket.SerialPortSendData(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(i), 1));
+                                                    Socket.SendData(RdmData.serchType((byte[]) RdmPaneUI.uid_Byte.get(i), 1));
                                                     Thread.sleep(500);
                                                 }
                                             }
@@ -439,19 +445,19 @@ public class RdmPaneUI implements ActionListener {
                         }
                     }
                 }, 8000);
-                Socket.SerialPortSendData(RdmData.serch());//重新发送查询UID  刷新
+                Socket.SendData(RdmData.serch());//重新发送查询UID  刷新
                 new Timer().schedule(new TimerTask() {
                     public void run() {
                         if (RdmPaneUI.tempUidList.size() != 0) {
                             try {
                                 //查型号
                                 for (int j = 0; j < RdmPaneUI.tempUid_Byte.size(); j++) {
-                                    Socket.SerialPortSendData(RdmData.serchType((byte[]) RdmPaneUI.tempUid_Byte.get(j), 5));
+                                    Socket.SendData(RdmData.serchType((byte[]) RdmPaneUI.tempUid_Byte.get(j), 5));
                                     Thread.sleep(300);
                                 }
                                 //查起始地址、通道数
                                 for (int j = 0; j < RdmPaneUI.tempUid_Byte.size(); j++) {
-                                    Socket.SerialPortSendData(RdmData.serchType((byte[]) RdmPaneUI.tempUid_Byte.get(j), 1));
+                                    Socket.SendData(RdmData.serchType((byte[]) RdmPaneUI.tempUid_Byte.get(j), 1));
                                     Thread.sleep(300);
                                 }
                                 NewJTable table = (NewJTable) MainUi.map.get("RDM_table");
@@ -461,10 +467,10 @@ public class RdmPaneUI implements ActionListener {
                                         for (int j = 3; j < 6; j++) {
                                             if ("".equals(table.getValueAt(i, j).toString())) {
                                                 if (j == 3) {
-                                                    Socket.SerialPortSendData(RdmData.serchType((byte[]) RdmPaneUI.tempUid_Byte.get(i), 5));
+                                                    Socket.SendData(RdmData.serchType((byte[]) RdmPaneUI.tempUid_Byte.get(i), 5));
                                                     Thread.sleep(500);
                                                 } else {
-                                                    Socket.SerialPortSendData(RdmData.serchType((byte[]) RdmPaneUI.tempUid_Byte.get(i), 1));
+                                                    Socket.SendData(RdmData.serchType((byte[]) RdmPaneUI.tempUid_Byte.get(i), 1));
                                                     Thread.sleep(500);
                                                 }
                                             }

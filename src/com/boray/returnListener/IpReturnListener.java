@@ -1,12 +1,15 @@
 package com.boray.returnListener;
 
 import com.boray.Data.Data;
+import com.boray.Data.RdmData;
 import com.boray.Data.ZhiLingJi;
 import com.boray.Utils.Socket;
 import com.boray.Utils.Util;
 import com.boray.beiFen.Listener.LoadDMXactionListener;
 import com.boray.beiFen.Listener.LoadToDeviceActionListener;
 import com.boray.beiFen.UI.JingDuUI;
+import com.boray.dengKu.UI.NewJTable;
+import com.boray.dengKu.UI.RdmPaneUI;
 import com.boray.mainUi.MainUi;
 import com.boray.xiaoGuoDeng.Listener.DMXModelListener;
 import com.boray.xiaoGuoDeng.UI.DefineJLable2;
@@ -14,10 +17,13 @@ import com.boray.zhongKon.Listener.WriteActionListener;
 import sun.plugin2.main.server.Plugin;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.DatagramPacket;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -297,12 +303,231 @@ public class IpReturnListener implements Runnable {
                                 Data.sendDataSum = packetN;
                                 dataWrite.setText((Data.sendDataSum + 1) + "/" + Data.dataWrite.length);
                                 Util.againSendData();
-                            }catch (Exception e){
+                            } catch (Exception e) {
 
                             }
                         }
                     }
+                } else if (hex0.equals("fd") && hex2.equals("cc")) {
+                    byte[] b1 = new byte[len];
+                    for (int i = 0; i < len; i++) {
+                        b1[i] = temp[i];
+                    }
+                    Rdmset(b1);
                 }
+            }
+        }
+    }
+
+
+    private void Rdmset(byte[] b) {
+        //int length = 0;
+        String hex0 = "", uidTemp = "";
+        String[] a = new String[6];
+        //length = b.length;//
+        int ld = 4;
+        hex0 = Integer.toHexString(b[9 - ld] & 0xFF);
+        if ("41".equals(hex0)) {//设备数量
+            RdmPaneUI.deviceCount = Byte.toUnsignedInt(b[17 - ld]) * 256 + Byte.toUnsignedInt(b[18 - ld]);
+        } else if ("11".equals(hex0) && b.length >= 15) {//查UID
+            uidTemp = "";
+            byte[] uidByte = new byte[6];
+            for (int i = 0; i < a.length; i++) {
+                uidByte[i] = b[10 + i - ld];
+                a[i] = Integer.toHexString(b[10 + i - ld] & 0xFF).toUpperCase();
+                if (a[i].length() == 1) {
+                    a[i] = "0" + a[i];
+                }
+                if (i == 0) {
+                    uidTemp = uidTemp + a[i];
+                } else {
+                    uidTemp = uidTemp + "-" + a[i];
+                }
+            }
+            NewJTable table = (NewJTable) MainUi.map.get("RDM_table");
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            JButton btn = (JButton) MainUi.map.get("RDMRefresh");
+            if (!btn.isEnabled()) {
+                if (!RdmPaneUI.uidList.contains(uidTemp)) {
+                    String[] s = {String.valueOf(table.getRowCount() + 1), uidTemp,
+                            String.valueOf(table.getRowCount() + 1), "", "", "", "", "进入高级设置"};
+                    model.addRow(s);
+                    RdmPaneUI.tempUid_Byte.add(uidByte);
+                    RdmPaneUI.tempUidList.add(uidTemp);
+                }
+            } else {
+                if (RdmPaneUI.uidList.size() == 0) {
+                    for (int i = table.getRowCount() - 1; i >= 0; i--) {
+                        model.removeRow(i);
+                    }
+                }
+                String[] s = {String.valueOf(table.getRowCount() + 1), uidTemp,
+                        String.valueOf(table.getRowCount() + 1), "", "", "", "", "进入高级设置"};
+                model.addRow(s);
+                RdmPaneUI.uid_Byte.add(uidByte);
+                RdmPaneUI.uidList.add(uidTemp);
+            }
+        } else if ("21".equals(hex0)) {
+            hex0 = Integer.toHexString(b[8 - ld] & 0xFF);
+            if ("5".equals(hex0) && b.length >= 32) {//查型号
+                uidTemp = "";
+                for (int i = 0; i < a.length; i++) {
+                    a[i] = Integer.toHexString(b[10 + i - ld] & 0xFF).toUpperCase();
+                    if (a[i].length() == 1) {
+                        a[i] = "0" + a[i];
+                    }
+                    if (i == 0) {
+                        uidTemp = uidTemp + a[i];
+                    } else {
+                        uidTemp = uidTemp + "-" + a[i];
+                    }
+                }
+                NewJTable table = (NewJTable) MainUi.map.get("RDM_table");
+                for (int i = 0; i < table.getRowCount(); i++) {
+                    if (table.getValueAt(i, 1).toString().equals(uidTemp)) {
+                        table.setValueAt(new String(b, 23 - ld, 12), i, 3);
+                        break;
+                    }
+                }
+            } else if ("1".equals(hex0) && b.length >= 28) {//查起始地址、通道数
+                if (RdmPaneUI.openSet) {
+
+                    JTextField[] fields = (JTextField[]) MainUi.map.get("RdmSet_fields");
+                    if (fields != null) {
+                        fields[1].setText(Byte.toUnsignedInt(b[17 - ld]) + "." + Byte.toUnsignedInt(b[18 - ld]));//RDM协议版本号
+                        fields[2].setText(Byte.toUnsignedInt(b[19 - ld]) + "" + Byte.toUnsignedInt(b[20 - ld]));//设备模型ID
+                        fields[3].setText(Byte.toUnsignedInt(b[21 - ld]) + "" + Byte.toUnsignedInt(b[22 - ld]));//产品分类
+                        fields[4].setText(Byte.toUnsignedInt(b[23 - ld]) + "," + Byte.toUnsignedInt(b[24 - ld])
+                                + "," + Byte.toUnsignedInt(b[25 - ld]) + "," + Byte.toUnsignedInt(b[26 - ld]));//软件版本ID
+                        fields[5].setText("" + Byte.toUnsignedInt(b[28 - ld]));//设备通道数
+                        fields[6].setText(Byte.toUnsignedInt(b[29 - ld]) + "" + Byte.toUnsignedInt(b[30 - ld]));//DMX512特性
+                        fields[7].setText((Byte.toUnsignedInt(b[31 - ld]) * 256 + Byte.toUnsignedInt(b[32 - ld])) + "");//DMX512起始地址
+                        fields[8].setText((Byte.toUnsignedInt(b[33 - ld]) * 256 + Byte.toUnsignedInt(b[34 - ld])) + "");//从设备数量
+                        fields[9].setText("" + Byte.toUnsignedInt(b[35 - ld]));//传感器数量
+                    }
+                    //设备状态查询
+                    //UsbPipe sendUsbPipe = (UsbPipe)MainUi.map.get("sendUsbPipe");
+                    //UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType(RdmPaneUI.currentByte, 6));
+                    new Thread(new Runnable() {
+                        public void run() {
+                            try {
+                                //UsbPipe sendUsbPipe = (UsbPipe)MainUi.map.get("sendUsbPipe");
+//                                OutputStream os = Data.serialPort.getOutputStream();
+                                //查工作模式
+                                //UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType(RdmPaneUI.currentByte, 7));
+                                //Thread.sleep(200);
+
+                                //正反显示
+                                //UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType(RdmPaneUI.currentByte, 8));
+//                                os.write(RdmData.serchType(RdmPaneUI.currentByte, 8));
+//                                os.flush();
+                                Socket.UDPSendData(RdmData.serchType(RdmPaneUI.currentByte, 8));
+                                Thread.sleep(300);
+
+                                //复位
+                                //UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType(RdmPaneUI.currentByte, 9));
+                                //Thread.sleep(200);
+
+                                //电动模式
+                                //UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType(RdmPaneUI.currentByte, 11));
+//                                os.write(RdmData.serchType(RdmPaneUI.currentByte, 11));
+//                                os.flush();
+                                Socket.UDPSendData(RdmData.serchType(RdmPaneUI.currentByte, 11));
+                                Thread.sleep(300);
+
+                                //通道模式
+                                //UsbUtil.sendMassge(sendUsbPipe, RdmData.serchType(RdmPaneUI.currentByte, 12));
+//                                os.write(RdmData.serchType(RdmPaneUI.currentByte, 12));
+//                                os.flush();
+                                Socket.UDPSendData(RdmData.serchType(RdmPaneUI.currentByte, 12));
+                                Thread.sleep(300);
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+                } else {
+                    uidTemp = "";
+                    for (int i = 0; i < a.length; i++) {
+                        a[i] = Integer.toHexString(b[10 + i - ld] & 0xFF).toUpperCase();
+                        if (a[i].length() == 1) {
+                            a[i] = "0" + a[i];
+                        }
+                        if (i == 0) {
+                            uidTemp = uidTemp + a[i];
+                        } else {
+                            uidTemp = uidTemp + "-" + a[i];
+                        }
+                    }
+                    String[] s = new String[2];
+                    int address = Byte.toUnsignedInt(b[28 - ld]);//起始地址
+                    int channels = Byte.toUnsignedInt(b[31 - ld]) * 256 + Byte.toUnsignedInt(b[32 - ld]);//通道数
+                    s[0] = address + "";
+                    s[1] = channels + "";
+
+                    NewJTable table = (NewJTable) MainUi.map.get("RDM_table");
+                    for (int i = 0; i < table.getRowCount(); i++) {
+                        if (table.getValueAt(i, 1).toString().equals(uidTemp)) {
+                            table.setValueAt(s[1], i, 4);
+                            table.setValueAt(s[0], i, 5);
+                            break;
+                        }
+                    }
+                    //RdmPaneUI.addAndChannelMap.put(uidTemp, s);
+                }
+            } else if ("8".equals(hex0)) {//正反显示
+                JComboBox box2 = (JComboBox) MainUi.map.get("RdmSet_zfShow_box");
+                ItemListener listener = box2.getItemListeners()[0];
+                box2.removeItemListener(listener);
+                box2.setSelectedIndex(Byte.toUnsignedInt(b[17 - ld]) + 1);
+                box2.addItemListener(listener);
+            } else if ("c".equals(hex0)) {//通道模式
+                JComboBox box8 = (JComboBox) MainUi.map.get("RdmSet_channelModel_box8");
+                ItemListener listener = box8.getItemListeners()[0];
+                box8.removeItemListener(listener);
+                box8.setSelectedIndex(Byte.toUnsignedInt(b[17 - ld]));
+                box8.addItemListener(listener);
+                if (box8 != null) {
+
+                }
+            } else if ("b".equals(hex0)) {//电动模式
+                int cc = Byte.toUnsignedInt(b[17 - ld]);
+                int tp = cc;
+                java.util.List list = (List) MainUi.map.get("DianJiComponet_list");
+                JComboBox box = null;
+                ItemListener listener = null;
+                //X轴
+                box = (JComboBox) list.get(0);
+                listener = box.getItemListeners()[0];
+                box.removeItemListener(listener);
+                tp = tp % 2;
+                box.setSelectedIndex(tp + 1);
+                box.addItemListener(listener);
+
+                //Y轴
+                box = (JComboBox) list.get(2);
+                box.removeItemListener(listener);
+                tp = cc / 2;
+                tp = tp % 2;
+                box.setSelectedIndex(tp + 1);
+                box.addItemListener(listener);
+
+                //X轴角度
+                box = (JComboBox) list.get(1);
+                box.removeItemListener(listener);
+                tp = cc / 4;
+                tp = tp % 4;
+                box.setSelectedIndex(tp + 1);
+                box.addItemListener(listener);
+
+                //Y轴角度
+                box = (JComboBox) list.get(3);
+                box.removeItemListener(listener);
+                tp = cc / 16;
+                box.setSelectedIndex(tp + 1);
+                box.addItemListener(listener);
+
             }
         }
     }

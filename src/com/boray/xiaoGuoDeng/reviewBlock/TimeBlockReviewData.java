@@ -296,10 +296,11 @@ public class TimeBlockReviewData {
 
     /**
      * 效果多灯 启动预览
+     *
      * @param sc
      * @return
      */
-    public static byte[] getStarReview3(int sc){
+    public static byte[] getStarReview3(int sc) {
         byte[] temp = new byte[15];
         temp[0] = (byte) 0xBB;
         temp[1] = (byte) 0x55;
@@ -317,10 +318,11 @@ public class TimeBlockReviewData {
 
     /**
      * 效果多灯 停止预览
+     *
      * @param sc
      * @return
      */
-    public static byte[] getStopReview3(int sc){
+    public static byte[] getStopReview3(int sc) {
         byte[] temp = new byte[15];
         temp[0] = (byte) 0xBB;
         temp[1] = (byte) 0x55;
@@ -579,7 +581,7 @@ public class TimeBlockReviewData {
                 T1[3] = (byte) cc;
 
                 //拆分反向
-
+                boolean b = map.containsKey("5") ? (boolean) map.get("5") : false;
                 //X轴反向    是1/否0
                 if ("true".equals(tp1[1])) {
                     a = 1;
@@ -587,6 +589,13 @@ public class TimeBlockReviewData {
                     a = 0;
                 }
                 T1[5] = (byte) a;
+                if (b) {
+                    if (a == 1) {
+                        T1[5] = (byte) 0x81;
+                    } else {
+                        T1[5] = (byte) 0x80;
+                    }
+                }
                 //X半
                 if ("true".equals(tp1[2])) {
                     a = 1;
@@ -1063,7 +1072,7 @@ public class TimeBlockReviewData {
                 T1[3] = (byte) cc;
 
                 //拆分反向
-
+                boolean b = map.containsKey("5") ? (boolean) map.get("5") : false;
                 //X轴反向    是1/否0
                 if ("true".equals(tp1[1])) {
                     a = 1;
@@ -1071,6 +1080,13 @@ public class TimeBlockReviewData {
                     a = 0;
                 }
                 T1[5] = (byte) a;
+                if (b) {
+                    if (a == 1) {
+                        T1[5] = (byte) 0x81;
+                    } else {
+                        T1[5] = (byte) 0x80;
+                    }
+                }
                 //X半
                 if ("true".equals(tp1[2])) {
                     a = 1;
@@ -1761,7 +1777,7 @@ public class TimeBlockReviewData {
                         T1[i][j][3] = (byte) cc;
 
                         //拆分反向
-
+                        boolean b = map.containsKey("5") ? (boolean) map.get("5") : false;
                         //X轴反向    是1/否0
                         if ("true".equals(tp1[1])) {
                             a = 1;
@@ -1769,6 +1785,13 @@ public class TimeBlockReviewData {
                             a = 0;
                         }
                         T1[i][j][5] = (byte) a;
+                        if (b) {
+                            if (a == 1) {
+                                T1[i][j][5] = (byte) 0x81;
+                            } else {
+                                T1[i][j][5] = (byte) 0x80;
+                            }
+                        }
                         //X半
                         if ("true".equals(tp1[2])) {
                             a = 1;

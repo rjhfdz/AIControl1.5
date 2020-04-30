@@ -391,6 +391,8 @@ public class SuCaiEditUI {
             JSlider slider2 = (JSlider) actionCompontList.get(8);
             tp[5] = slider2.getValue() + "";
             map.put("4", tp);
+            JCheckBox box4 = (JCheckBox) actionCompontList.get(9);
+            map.put("5", box4.isSelected());
 
             hashMap.put("actionXiaoGuoData", map);
         } else {
@@ -2479,7 +2481,9 @@ public class SuCaiEditUI {
 //        box2.addItem("不拆分");
 //        box2.addItem("中间拆分");
 //        box2.addItem("两端拆分");
+        JCheckBox box7 = new JCheckBox("拆分反向");
         p4_to_p1.add(box2);
+        p4_to_p1.add(box7);
 
         JPanel p4_to_p2 = new JPanel();
         p4_to_p2.setLayout(flowLayout2);
@@ -2504,12 +2508,14 @@ public class SuCaiEditUI {
         p4_to_p3.add(new JLabel("    时差"));
         final JSlider slider3 = new JSlider(0, 5000);
         actionCompontList.add(slider3);
+        actionCompontList.add(box7);
         slider3.setValue(0);
-        slider3.setPreferredSize(new Dimension(340, 30));
+        slider3.setPreferredSize(new Dimension(310, 30));
         p4_to_p3.add(slider3);
         final JTextField field3 = new JTextField(4);
         field3.setText("0");
         p4_to_p3.add(field3);
+        p4_to_p3.add(new JLabel("毫秒"));
         slider3.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 field3.setText(String.valueOf(slider3.getValue()));
@@ -2553,6 +2559,8 @@ public class SuCaiEditUI {
             box6.setSelected(d);
 
             slider3.setValue(Integer.valueOf(tp[5]).intValue());
+            boolean b1 = map.containsKey("5") ? (boolean) map.get("5") : false;
+            box7.setSelected(b1);
         }
 
         p4.add(p4_to_p1);
