@@ -3,6 +3,7 @@ package com.boray.suCai.reviewBlock;
 import com.boray.Data.Data;
 import com.boray.Data.GetChannelNumber;
 import com.boray.Data.ZhiLingJi;
+import com.boray.Utils.Socket;
 import com.boray.dengKu.Entity.BlackOutEntity;
 import com.boray.dengKu.Entity.SpeedEntity;
 import com.boray.dengKu.UI.NewJTable;
@@ -1408,12 +1409,50 @@ public class TimeBlockReviewData {
 
     /**
      * 声控素材块预览
-     * @param denKuNum 灯组序号
-     * @param suCaiNum 素材序号
+     *
+     * @param denKuNum     灯组序号
+     * @param suCaiNum     素材序号
      * @param startAddress 每个灯的起始地址
      */
-    public static void sendShengKonData(int denKuNum,int suCaiNum,int[] startAddress) {
+    public static void sendShengKonData(int denKuNum, int suCaiNum, int[] startAddress, int channelCount) throws InterruptedException {
         Map map88 = (Map) Data.ShengKonSuCai[denKuNum][suCaiNum];
+        Vector vector88 = (Vector) map88.get("0");//获得表数据
+        for (int i = 0; i < vector88.size(); i++) {
+            Vector tp = (Vector) vector88.get(i);
+            Integer time = Integer.valueOf(tp.get(1).toString());//获得间隔时间
+            byte[] buff = new byte[512 + 8];
+            buff[0] = (byte) 0xBB;
+            buff[1] = (byte) 0x55;
+            buff[2] = (byte) (520 / 256);
+            buff[3] = (byte) (520 % 256);
+            buff[4] = (byte) 0x80;
+            buff[5] = (byte) 0x01;
+            buff[6] = (byte) 0xFF;
+            for (int j = 0; j < startAddress.length; j++) {
+                for (int k = 0; k < channelCount; k++) {
+                    int value = Integer.valueOf(tp.get(k + (j * channelCount) + 2).toString());
+                    buff[startAddress[j] + 8 + k] = (byte) value;
+                }
+            }
+            buff[519] = ZhiLingJi.getJiaoYan(buff);
+            Socket.SendData(buff);
+            Thread.sleep(time);
+        }
+    }
 
+    /**
+     * 停止声控块预览
+     */
+    public static void stopShengKonData(){
+        byte[] buff = new byte[512 + 8];
+        buff[0] = (byte) 0xBB;
+        buff[1] = (byte) 0x55;
+        buff[2] = (byte) (520 / 256);
+        buff[3] = (byte) (520 % 256);
+        buff[4] = (byte) 0x80;
+        buff[5] = (byte) 0x01;
+        buff[6] = (byte) 0xFF;
+        buff[519] = ZhiLingJi.getJiaoYan(buff);
+        Socket.SendData(buff);
     }
 }

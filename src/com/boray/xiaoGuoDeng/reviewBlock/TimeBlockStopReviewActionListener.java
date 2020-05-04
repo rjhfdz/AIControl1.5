@@ -29,16 +29,17 @@ public class TimeBlockStopReviewActionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (comboBox != null || comboBox.getSelectedItem().toString() != "") {
             this.group = Integer.parseInt(comboBox.getSelectedItem().toString().split("#")[0]);
-        }else{
+        } else {
             return;
         }
         if (Data.serialPort != null) {
             try {
                 //Õ£÷π‘§¿¿
                 byte[] b = TimeBlockReviewData.getStopReview(sc, group, block);
-                OutputStream os = Data.serialPort.getOutputStream();
-                os.write(b);
-                os.flush();
+//                OutputStream os = Data.serialPort.getOutputStream();
+//                os.write(b);
+//                os.flush();
+                Socket.SerialPortSendData(b);
             } catch (Exception e2) {
                 e2.printStackTrace();
             }

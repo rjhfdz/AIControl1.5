@@ -65,6 +65,7 @@ public class SelectShengKonSuCaiUI {
                 JList list = (JList) MainUi.map.get("shengKon_list");
                 label.setText(i + "(" + list.getSelectedValue().toString().split(">")[1] + ")");
                 label.updateUI();
+                label.setBackground(new Color(0, 255, 0));
                 dialog.dispose();
             }
         });

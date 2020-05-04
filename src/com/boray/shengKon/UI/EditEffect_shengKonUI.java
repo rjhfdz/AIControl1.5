@@ -61,6 +61,7 @@ import com.boray.Data.ZhiLingJi;
 import com.boray.Utils.Socket;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
+import com.boray.suCai.reviewBlock.TimeBlockReviewData;
 import com.boray.usb.LastPacketData;
 import com.boray.usb.UsbUtil;
 import com.boray.xiaoGuoDeng.Listener.CopyToTimeBlockEdit;
@@ -94,8 +95,10 @@ public class EditEffect_shengKonUI {
 
     private JComboBox duoDengCtrlBox;//多灯控制
     private JPanel pane;
+    private JLabel stepLabel;//步数
 
     private ButtonGroup group;
+    private int denKuNum,suCaiNum;
 
     public void show(int block, String groupNum, String number, JPanel pane) {
         this.groupNum = groupNum;
@@ -115,15 +118,7 @@ public class EditEffect_shengKonUI {
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.addWindowListener(new WindowAdapter() {
             public void windowClosed(WindowEvent e) {
-                if (runTable.getRowCount() > 0) {
-                    DefaultTableModel modelTemp = (DefaultTableModel) runTable.getModel();
-                    Vector temp = (Vector) modelTemp.getDataVector().clone();
-                    map88.put("0", temp);
-                } else {
-                    map88.put("0", null);
-                }
-                map88.put("1", gouXuanValus);
-                map88.put("2", al);
+                save();
             }
         });
 
@@ -140,6 +135,8 @@ public class EditEffect_shengKonUI {
 
             map88 = (Map) Data.ShengKonSuCai[Integer.valueOf(groupNum).intValue() - 1][i - 1];
 //			map88 = (Map)Data.ShengKonEditObjects[Integer.valueOf(MyData.ShengKonModel).intValue()-1][Integer.valueOf(groupNum).intValue()-1][block-1];
+            this.denKuNum = Integer.valueOf(groupNum).intValue() - 1;
+            this.suCaiNum = i - 1;
             if (map88 == null) {
                 map88 = new HashMap<>();
 //				Data.ShengKonEditObjects[Integer.valueOf(MyData.ShengKonModel).intValue()-1][Integer.valueOf(groupNum).intValue()-1][block-1] = map88;
@@ -952,7 +949,9 @@ public class EditEffect_shengKonUI {
         final JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem menuItem = new JMenuItem("　复制　　　　　");
         JMenuItem menuItem1 = new JMenuItem("　粘贴　　　　　");
-        CopyToTimeBlockEdit copyListener = new CopyToTimeBlockEdit(runTable);
+        int size = runTable.getRowCount();
+        stepLabel = new JLabel("总步数:" + size);
+        CopyToTimeBlockEdit copyListener = new CopyToTimeBlockEdit(runTable,stepLabel);
         menuItem.addActionListener(copyListener);
         menuItem1.addActionListener(copyListener);
         popupMenu.add(menuItem);
@@ -1007,6 +1006,8 @@ public class EditEffect_shengKonUI {
                     s[0] = "" + (runTable.getRowCount() + 1);
                     model.addRow(temp);
                     runTable.setRowSelectionInterval(runTable.getRowCount() - 1, runTable.getRowCount() - 1);
+                    int size = runTable.getRowCount();
+                    stepLabel.setText("总步数:" + size);
                 } else {
                     JFrame frame = (JFrame) MainUi.map.get("frame");
                     JOptionPane.showMessageDialog(frame, "添加失败，总步骤数不能超过32步！", "提示", JOptionPane.ERROR_MESSAGE);
@@ -1025,11 +1026,44 @@ public class EditEffect_shengKonUI {
                 for (int i = 0; i < runTable.getRowCount(); i++) {
                     runTable.setValueAt("" + (i + 1), i, 0);
                 }
+                stepLabel.setText("总步数:" + size);
             }
         });
+
+        final JButton button1 = new JButton("预览");
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            button1.setEnabled(false);
+                            save();
+                            TimeBlockReviewData.sendShengKonData(denKuNum,suCaiNum,startAddress,channelCount);
+                        } catch (Exception e2) {
+                            e2.printStackTrace();
+                        } finally {
+                            button1.setEnabled(true);
+                        }
+                    }
+                }).start();
+            }
+        });
+        JButton button3 = new JButton("停止预览");
+        button3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TimeBlockReviewData.stopShengKonData();
+            }
+        });
+
         p5.add(btn);
         p5.add(btn2);
-
+        p5.add(new JLabel("                                      "));
+        p5.add(button1);
+        p5.add(button3);
+        p5.add(new JLabel("                                                                         "));
+        p5.add(stepLabel);
         pane.add(p4);
         pane.add(p5);
     }
@@ -1322,6 +1356,17 @@ public class EditEffect_shengKonUI {
         pane.add(button);
     }
 
+    void save(){
+        if (runTable.getRowCount() > 0) {
+            DefaultTableModel modelTemp = (DefaultTableModel) runTable.getModel();
+            Vector temp = (Vector) modelTemp.getDataVector().clone();
+            map88.put("0", temp);
+        } else {
+            map88.put("0", null);
+        }
+        map88.put("1", gouXuanValus);
+        map88.put("2", al);
+    }
     private void outDevice() {
         int[] slt = runTable.getSelectedRows();
         int value = 0;

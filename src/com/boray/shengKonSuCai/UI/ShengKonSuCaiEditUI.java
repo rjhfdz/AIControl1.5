@@ -6,6 +6,7 @@ import com.boray.Data.ZhiLingJi;
 import com.boray.Utils.Socket;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
+import com.boray.suCai.reviewBlock.TimeBlockReviewData;
 import com.boray.xiaoGuoDeng.Listener.CopyToTimeBlockEdit;
 
 import javax.swing.*;
@@ -48,6 +49,7 @@ public class ShengKonSuCaiEditUI {
     private JComboBox duoDengCtrlBox;//多灯控制
 
     private int denKuNum,suCaiNum;
+    private JLabel stepLabel;//步数
 
     public void show(String suCaiName, int suCaiNum, int denKuNum) {
         this.groupNum = (denKuNum + 1) + "";
@@ -757,7 +759,9 @@ public class ShengKonSuCaiEditUI {
         final JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem menuItem = new JMenuItem("　复制　　　　　");
         JMenuItem menuItem1 = new JMenuItem("　粘贴　　　　　");
-        CopyToTimeBlockEdit copyListener = new CopyToTimeBlockEdit(runTable);
+        int size = runTable.getRowCount();
+        stepLabel = new JLabel("总步数:" + size);
+        CopyToTimeBlockEdit copyListener = new CopyToTimeBlockEdit(runTable,stepLabel);
         menuItem.addActionListener(copyListener);
         menuItem1.addActionListener(copyListener);
         popupMenu.add(menuItem);
@@ -812,6 +816,8 @@ public class ShengKonSuCaiEditUI {
                     s[0] = "" + (runTable.getRowCount() + 1);
                     model.addRow(temp);
                     runTable.setRowSelectionInterval(runTable.getRowCount() - 1, runTable.getRowCount() - 1);
+                    int size = runTable.getRowCount();
+                    stepLabel.setText("总步数:" + size);
                 } else {
                     JFrame frame = (JFrame) MainUi.map.get("frame");
                     JOptionPane.showMessageDialog(frame, "添加失败，总步骤数不能超过32步！", "提示", JOptionPane.ERROR_MESSAGE);
@@ -830,6 +836,7 @@ public class ShengKonSuCaiEditUI {
                 for (int i = 0; i < runTable.getRowCount(); i++) {
                     runTable.setValueAt("" + (i + 1), i, 0);
                 }
+                stepLabel.setText("总步数:" + size);
             }
         });
         final JButton button1 = new JButton("预览");
@@ -841,6 +848,7 @@ public class ShengKonSuCaiEditUI {
                         try {
                             button1.setEnabled(false);
                             save();
+                            TimeBlockReviewData.sendShengKonData(denKuNum,suCaiNum,startAddress,channelCount);
                         } catch (Exception e2) {
                             e2.printStackTrace();
                         } finally {
@@ -851,13 +859,21 @@ public class ShengKonSuCaiEditUI {
             }
         });
         JButton button3 = new JButton("停止预览");
+        button3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TimeBlockReviewData.stopShengKonData();
+            }
+        });
 
         p5.add(btn);
         p5.add(btn2);
         p5.add(new JLabel("                                      "));
-//        p5.add(button1);
-//        p5.add(button3);
+        p5.add(button1);
+        p5.add(button3);
         pane.add(p4);
+        p5.add(new JLabel("                                                                         "));
+        p5.add(stepLabel);
         pane.add(p5);
     }
 
