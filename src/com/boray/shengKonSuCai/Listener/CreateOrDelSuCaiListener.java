@@ -13,10 +13,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 public class CreateOrDelSuCaiListener implements ActionListener {
     @Override
@@ -25,6 +23,13 @@ public class CreateOrDelSuCaiListener implements ActionListener {
             JList suCaiLightType = (JList) MainUi.map.get("shengKonSuCaiLightType");
             if (suCaiLightType.getSelectedValue() != null) {
                 JFrame f = (JFrame) MainUi.map.get("frame");
+                int cnt = 0;//灯具数量
+                TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(suCaiLightType.getSelectedIndex());
+                cnt = treeSet.size();
+                if (!(cnt > 0)) {
+                    JOptionPane.showMessageDialog(f, "该组别还没有灯具，请添加灯具！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 JDialog dialog = new JDialog(f, true);
                 dialog.setResizable(false);
                 dialog.setTitle("新建素材");

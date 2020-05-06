@@ -272,15 +272,15 @@ public class ProjectCreateFileActionListener implements ActionListener {
 //                    strings[4] = lable.getText();
 //                    objects2[j - 1][i] = strings;
 //                }
-                for (int i = 1; i < timeBlockPanels.length; i++) {
-                    for (int k = 0; k < timeBlockPanels[i].getComponentCount(); k++) {
-                        DefineJLable_shengKon2 lable2 = (DefineJLable_shengKon2) timeBlockPanels[i].getComponent(k);
-                        if (!lable2.getBackground().equals(Color.red)) {
-                            abc[j - 1][i - 1][k] = 1;
-                        }
-                    }
-
-                }
+//                for (int i = 1; i < timeBlockPanels.length; i++) {
+//                    for (int k = 0; k < timeBlockPanels[i].getComponentCount(); k++) {
+//                        DefineJLable_shengKon2 lable2 = (DefineJLable_shengKon2) timeBlockPanels[i].getComponent(k);
+//                        if (!lable2.getBackground().equals(Color.red)) {
+//                            abc[j - 1][i - 1][k] = 1;
+//                        }
+//                    }
+//
+//                }
             }
             xmlEncoder.writeObject(objects2);
             xmlEncoder.writeObject(abc);

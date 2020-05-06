@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.text.DecimalFormat;
 import java.util.*;
 
 import javax.swing.*;
@@ -398,7 +397,7 @@ public class MergeAllListener implements ActionListener {
             System.out.println("声控效果灯数据：" + file.length());
 
             //场景多灯
-            os10.write(ReviewUtils.changJingDuoDengReview(0,true));
+            os10.write(ReviewUtils.changJingDuoDengReview(0, true));
             os10.flush();
             System.out.println("场景多灯数据：" + file.length());
 
@@ -457,7 +456,7 @@ public class MergeAllListener implements ActionListener {
             stream.flush();
 
             //场景多灯
-            stream.write(ReviewUtils.changJingDuoDengReview(0,true));
+            stream.write(ReviewUtils.changJingDuoDengReview(0, true));
             longs.add(file1.length());
             stream.flush();
             stream.close();
@@ -675,11 +674,11 @@ public class MergeAllListener implements ActionListener {
                     t3[i][1] = 1;
                 }
                 //地址
-                add = Integer.valueOf((String) (table.getValueAt(i, 5))).intValue();
+                add = Integer.valueOf(table.getValueAt(i, 5).toString()).intValue();
                 t3[i][2] = (byte) (add / 256);
                 t3[i][3] = (byte) (add % 256);
                 //占用通道数
-                add = Integer.valueOf((String) (table.getValueAt(i, 6))).intValue();
+                add = Integer.valueOf(table.getValueAt(i, 6).toString()).intValue();
                 t3[i][4] = (byte) add;
                 //灯具名称
                 String s = (String) (table.getValueAt(i, 2));
@@ -688,7 +687,7 @@ public class MergeAllListener implements ActionListener {
                     t3[i][6 + j] = s.getBytes()[j];
                 }
                 //关联灯库编号
-                s = (String) (table.getValueAt(i, 3));
+                s = table.getValueAt(i, 3).toString();
                 s = s.split("#")[0].substring(2);
                 t3[i][22] = (byte) Integer.valueOf(s).intValue();
             }
@@ -2858,7 +2857,11 @@ public class MergeAllListener implements ActionListener {
             String dengZuName = table.getValueAt(i, 2).toString();//灯组名称
             int number = Integer.parseInt(suCaiUI.getAlone(dengZuName));//当前灯组素材总数
             for (int j = 0; j < number; j++) {
-                byte[] b2 = new byte[61];
+                byte[] b2 = new byte[2];
+                TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(i);
+                int cnt = treeSet.size();//灯具数量
+                byte[] b4 = new byte[cnt*4];//通道勾选
+                byte[] b5 = new byte[27];
                 if (Data.ShengKonSuCai[i][j] != null) {
                     Map map = (Map) Data.ShengKonSuCai[i][j];
                     int size = 0;
@@ -2874,13 +2877,15 @@ public class MergeAllListener implements ActionListener {
                             b2[1] = (byte) (size / 256);
                         }
                         gouXuanValus = (boolean[][]) map.get("1");
+
                         if (gouXuanValus != null) {
-                            for (int k2 = 0; k2 < gouXuanValus.length; k2++) {
+                            for (int k2 = 0; k2 < cnt; k2++) {
                                 for (int l = 0; l < gouXuanValus[0].length; l++) {
                                     j2 = l / 8;
                                     yu2 = 7 - (l % 8);
                                     if (gouXuanValus[k2][l]) {
-                                        b2[2 + k2 * 4 + j2] = (byte) (Byte.toUnsignedInt(b2[2 + k2 * 4 + j2]) + (1 << yu2));
+//                                        b2[2 + k2 * 4 + j2] = (byte) (Byte.toUnsignedInt(b2[2 + k2 * 4 + j2]) + (1 << yu2));
+                                        b4[k2 * 4 + j2] = (byte) (Byte.toUnsignedInt(b4[k2 * 4 + j2]) + (1 << yu2));
                                     }
                                 }
                             }
@@ -2888,40 +2893,55 @@ public class MergeAllListener implements ActionListener {
                         al = (int[]) map.get("2");
                         if (al != null) {
                             if (al[0] == 0) {//0表示独立
-                                b2[38] = 2;
+//                                b2[38 + 32] = 2;
+                                b5[4] = 2;
                             } else {
-                                b2[38] = 1;
+//                                b2[38 + 32] = 1;
+                                b5[4] = 1;
                             }
                             //多灯控制
-                            b2[44] = (byte) al[10];
+//                            b2[44 + 32] = (byte) al[10];
+                            b5[10] = (byte) al[10];
                             //加速度
                             if (al[1] == 0) {
-                                b2[46] = 1;
+//                                b2[46 + 32] = 1;
+                                b5[12] = 1;
                             }
                             if (al[2] == 1) {
-                                b2[48] = 1;
+//                                b2[48 + 32] = 1;
+                                b5[14] = 1;
                             }
-                            b2[49] = (byte) al[3];
+//                            b2[49 + 32] = (byte) al[3];
+                            b5[15] = (byte) al[3];
 
-                            b2[51] = (byte) al[4];
-                            b2[52] = (byte) al[6];
-                            b2[53] = (byte) al[8];
-
-                            b2[54] = (byte) al[5];
-                            b2[55] = (byte) al[7];
-                            b2[56] = (byte) al[9];
+//                            b2[51 + 32] = (byte) al[4];
+//                            b2[52 + 32] = (byte) al[6];
+//                            b2[53 + 32] = (byte) al[8];
+//
+//                            b2[54 + 32] = (byte) al[5];
+//                            b2[55 + 32] = (byte) al[7];
+//                            b2[56 + 32] = (byte) al[9];
+                            b5[17] = (byte) al[4];
+                            b5[18] = (byte) al[6];
+                            b5[19] = (byte) al[8];
+                            b5[20] = (byte) al[5];
+                            b5[21] = (byte) al[7];
+                            b5[22] = (byte) al[9];
                         }
                     }
                     for (int k = 0; k < b2.length; k++) {//素材版本
                         shengKonSuCaiBanBen.add(b2[k]);
                     }
+                    for (int k = 0; k < b4.length; k++) {
+                        shengKonSuCaiBanBen.add(b4[k]);
+                    }
+                    for (int k = 0; k < b5.length; k++) {
+                        shengKonSuCaiBanBen.add(b5[k]);
+                    }
                     //步数据
-                    int cnt = 0;//灯具数量
                     int channelCount = 0;//通道数
                     String typeString = "";
                     if (Data.GroupOfLightList.size() > i) {
-                        TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(i);
-                        cnt = treeSet.size();
                         if (cnt > 0) {
                             NewJTable table3 = (NewJTable) MainUi.map.get("table_dengJu");//所有灯具
                             int v = (int) treeSet.first();
@@ -2956,13 +2976,16 @@ public class MergeAllListener implements ActionListener {
                     for (int k = 0; k < b2.length; k++) {//素材版本
                         shengKonSuCaiBanBen.add(b2[k]);
                     }
+                    for (int k = 0; k < b4.length; k++) {
+                        shengKonSuCaiBanBen.add(b4[k]);
+                    }
+                    for (int k = 0; k < b5.length; k++) {
+                        shengKonSuCaiBanBen.add(b5[k]);
+                    }
                     //步数据
-                    int cnt = 0;//灯具数量
                     int channelCount = 0;//通道数
                     String typeString = "";
                     if (Data.GroupOfLightList.size() > i) {
-                        TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(i);
-                        cnt = treeSet.size();
                         if (cnt > 0) {
                             NewJTable table3 = (NewJTable) MainUi.map.get("table_dengJu");//所有灯具
                             int v = (int) treeSet.first();

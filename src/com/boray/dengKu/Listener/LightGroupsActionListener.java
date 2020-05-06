@@ -70,11 +70,11 @@ public class LightGroupsActionListener implements ActionListener {
             for (int i = 0; i < selects.length; i++) {
                 treeSet.add(selects[i]);
             }
-            if (treeSet.size() > 8) {
+            if (treeSet.size() > 16) {
                 for (int i = 0; i < selects.length; i++) {
                     treeSet.remove(selects[i]);
                 }
-                JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "同一组灯具数量不能超过8个！", "提示", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "同一组灯具数量不能超过16个！", "提示", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             for (int i = table.getRowCount() - 1; i >= 0; i--) {
@@ -132,14 +132,14 @@ public class LightGroupsActionListener implements ActionListener {
             }
 
             //////////////////////////回退
-            if (treeSet.size() > 8) {
+            if (treeSet.size() > 16) {
                 treeSet.clear();
                 Iterator iterator = tpTreeSet.iterator();
                 while (iterator.hasNext()) {
                     int a = (int) iterator.next();
                     treeSet.add(a);
                 }
-                JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "同一组灯具数量不能超过8个！", "提示", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "同一组灯具数量不能超过16个！", "提示", JOptionPane.ERROR_MESSAGE);
                 return;
             }
             //////////////////////////

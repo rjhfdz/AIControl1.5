@@ -61,7 +61,7 @@ public class ShengKonSuCaiEditUI {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         //flowLayout.setVgap(2);
         dialog.getContentPane().setLayout(flowLayout);
-        int width = 900, height = 590;
+        int width = 900, height = 630;
         dialog.setSize(width, height);
         dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - width / 2, f.getLocation().y + f.getSize().height / 2 - height / 2);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -95,7 +95,7 @@ public class ShengKonSuCaiEditUI {
             JTabbedPane tabbedPane = new JTabbedPane();
             tabbedPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
             tabbedPane.setFocusable(false);
-            tabbedPane.setPreferredSize(new Dimension(880, 510));
+            tabbedPane.setPreferredSize(new Dimension(880, 550));
 
             JPanel channelPane = new JPanel();
             setChannelPane(channelPane);
@@ -295,7 +295,7 @@ public class ShengKonSuCaiEditUI {
         flowLayout_tt.setVgap(0);
         sp2.setLayout(flowLayout_tt);
         sp2.setBorder(new LineBorder(Color.gray));
-        sp2.setPreferredSize(new Dimension(860, 40));
+        sp2.setPreferredSize(new Dimension(860, 80));
 
         int cnt = 0;//µÆ¾ßÊýÁ¿
         int number = Integer.valueOf(groupNum).intValue();
@@ -848,7 +848,7 @@ public class ShengKonSuCaiEditUI {
                         try {
                             button1.setEnabled(false);
                             save();
-                            TimeBlockReviewData.sendShengKonData(denKuNum,suCaiNum,startAddress,channelCount);
+                            TimeBlockReviewData.sendShengKonData(denKuNum,suCaiNum,startAddress,channelCount,duoDengCtrlBox);
                         } catch (Exception e2) {
                             e2.printStackTrace();
                         } finally {

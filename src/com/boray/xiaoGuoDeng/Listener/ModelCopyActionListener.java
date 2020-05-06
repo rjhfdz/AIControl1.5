@@ -47,8 +47,11 @@ public class ModelCopyActionListener implements ActionListener {
         Data.XiaoGuoDengObjects[XiaoGuoDengModel.model - 1] = CloneUtils.clone(Data.XiaoGuoDengObjects[scenN - 1]);
 
         timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels_group" + XiaoGuoDengModel.model);
+        JPanel panel = (JPanel) MainUi.map.get("SuoYouDengZuPanel" + XiaoGuoDengModel.model);
         for (int k = 1; k < 31; k++) {
             timeBlockPanels[k].removeAll();
+            if(panel.isEnabled())
+                timeBlockPanels[k].setEnabled(false);
             for (int i = 0; i < 20; i++) {
                 if (objects[k - 1][i] != null) {
                     String[] strings = (String[]) objects[k - 1][i];
@@ -62,6 +65,8 @@ public class ModelCopyActionListener implements ActionListener {
                         c = c - 10;
                     }
                     lable.setBackground(MyColor.colors[c]);
+                    if(panel.isEnabled())
+                        lable.setEnabled(false);
                     timeBlockPanels[k].add(lable);
                 }
             }

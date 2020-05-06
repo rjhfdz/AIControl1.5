@@ -64,8 +64,8 @@ public class SelectShengKonSuCaiUI {
                 DefineJLable_shengKon2 label = (DefineJLable_shengKon2) pane.getComponent(i - 1);
                 JList list = (JList) MainUi.map.get("shengKon_list");
                 label.setText(i + "(" + list.getSelectedValue().toString().split(">")[1] + ")");
-                label.updateUI();
                 label.setBackground(new Color(0, 255, 0));
+                label.updateUI();
                 dialog.dispose();
             }
         });

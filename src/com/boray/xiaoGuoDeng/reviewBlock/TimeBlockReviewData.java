@@ -44,19 +44,19 @@ public class TimeBlockReviewData {
             boolean b = (boolean) table.getValueAt(i, 0);
             if (b) {
                 //地址
-                add = Integer.valueOf((String) (table.getValueAt(i, 5))).intValue();
+                add = Integer.valueOf((table.getValueAt(i, 5).toString())).intValue();
                 //t3[i][0] = (byte)(add/256);
                 //t3[i][1] = (byte)(add%256);
                 lightsByte[8 + i * 4] = (byte) (add / 256);
                 lightsByte[9 + i * 4] = (byte) (add % 256);
                 //占用通道数
-                add = Integer.valueOf((String) (table.getValueAt(i, 6))).intValue();
+                add = Integer.valueOf((table.getValueAt(i, 6).toString())).intValue();
                 //t3[i][2] = (byte)add;
                 lightsByte[10 + i * 4] = (byte) add;
                 //灯具名称
                 String s = (String) (table.getValueAt(i, 2));
                 //关联灯库编号
-                s = (String) (table.getValueAt(i, 3));
+                s = (table.getValueAt(i, 3).toString());
                 s = s.split("#")[0].substring(2);
                 //t3[i][3] = (byte)Integer.valueOf(s).intValue();
                 lightsByte[11 + i * 4] = (byte) Integer.valueOf(s).intValue();

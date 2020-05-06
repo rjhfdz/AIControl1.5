@@ -199,7 +199,7 @@ public class DengJuSetDialog implements ActionListener {
                             Object[] s = {new Boolean(true), String.valueOf(index + 1), field.getText(), "ID" + (box.getSelectedIndex() + 1) + "#" + box.getSelectedItem().toString(), label2.getText(), field2.getText(), label.getText()};
                             model.addRow(s);
                         } else {
-                            Object[] s = {new Boolean(true), String.valueOf(table.getRowCount() + 1), field.getText() + "-" + (i + 1), "ID" + (box.getSelectedIndex() + 1) + "#" + box.getSelectedItem().toString(), label2.getText(), list.get(i) - tondao, label.getText()};
+                            Object[] s = {new Boolean(true), String.valueOf(table.getRowCount() + 1), field.getText() + "-" + (i + 1), "ID" + (box.getSelectedIndex() + 1) + "#" + box.getSelectedItem().toString(), label2.getText(), (list.get(i) - tondao) + "", label.getText()};
                             model.addRow(s);
                         }
                     }

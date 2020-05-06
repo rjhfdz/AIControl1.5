@@ -229,24 +229,24 @@ public class ProjectCreateFileOfCloseFrame {
             /////声控--效果灯模式顺序设置数据
             xmlEncoder.writeObject(Data.ShengKonShiXuSetObjects);
             /////声控--效果灯模式时间块数据
-            Object[][][] objects2 = new Object[16][30][20];//时间长度
+            Object[][][] objects2 = new Object[16][31][20];//时间长度
             int[][][] abc = new int[16][30][20];
             for (int j = 1; j <= 16; j++) {
                 JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels" + j);
-                for (int k = 1; k <= 30; k++) {
-                    for (int i = 0; i < timeBlockPanels[k - 1].getComponentCount(); i++) {
+                for (int k = 0; k < 31; k++) {
+                    for (int i = 0; i < timeBlockPanels[k].getComponentCount(); i++) {
 //                        if (timeBlockPanels[k - 1].isVisible()) {
-                            if ((k - 1) == 0) {
-                                DefineJLable_shengKon lable = (DefineJLable_shengKon) timeBlockPanels[k - 1].getComponent(i);
+                            if (k == 0) {
+                                DefineJLable_shengKon lable = (DefineJLable_shengKon) timeBlockPanels[k].getComponent(i);
                                 String[] strings = new String[5];
                                 strings[0] = lable.getLocation().x + "";
                                 strings[1] = lable.getLocation().y + "";
                                 strings[2] = lable.getWidth() + "";
                                 strings[3] = lable.getHeight() + "";
                                 strings[4] = lable.getText();
-                                objects2[j - 1][k - 1][i] = strings;
+                                objects2[j - 1][k][i] = strings;
                             } else {
-                                DefineJLable_shengKon2 lable = (DefineJLable_shengKon2) timeBlockPanels[k - 1].getComponent(i);
+                                DefineJLable_shengKon2 lable = (DefineJLable_shengKon2) timeBlockPanels[k].getComponent(i);
                                 String[] strings = new String[6];
                                 strings[0] = lable.getLocation().x + "";
                                 strings[1] = lable.getLocation().y + "";
@@ -257,7 +257,7 @@ public class ProjectCreateFileOfCloseFrame {
                                     strings[5] = "255";
                                 else
                                     strings[5] = "0";
-                                objects2[j - 1][k - 1][i] = strings;
+                                objects2[j - 1][k][i] = strings;
                             }
 //                        }
                     }
@@ -272,15 +272,15 @@ public class ProjectCreateFileOfCloseFrame {
 //					strings[4] = lable.getText();
 //					objects2[j-1][i] = strings;
 //				}
-                for (int i = 1; i < timeBlockPanels.length; i++) {
-                    for (int k = 0; k < timeBlockPanels[i].getComponentCount(); k++) {
-                        DefineJLable_shengKon2 lable2 = (DefineJLable_shengKon2) timeBlockPanels[i].getComponent(k);
-                        if (!lable2.getBackground().equals(Color.red)) {
-                            abc[j - 1][i - 1][k] = 1;
-                        }
-                    }
-
-                }
+//                for (int i = 1; i < timeBlockPanels.length; i++) {
+//                    for (int k = 0; k < timeBlockPanels[i].getComponentCount(); k++) {
+//                        DefineJLable_shengKon2 lable2 = (DefineJLable_shengKon2) timeBlockPanels[i].getComponent(k);
+//                        if (!lable2.getBackground().equals(Color.red)) {
+//                            abc[j - 1][i - 1][k] = 1;
+//                        }
+//                    }
+//
+//                }
             }
             xmlEncoder.writeObject(objects2);
             xmlEncoder.writeObject(abc);
@@ -322,8 +322,8 @@ public class ProjectCreateFileOfCloseFrame {
 
             xmlEncoder.flush();
             xmlEncoder.close();
-            //JFrame frame = (JFrame)MainUi.map.get("frame");
-            //JOptionPane.showMessageDialog(frame, "工程保存成功！", "提示", JOptionPane.PLAIN_MESSAGE);
+            JFrame frame = (JFrame)MainUi.map.get("frame");
+            JOptionPane.showMessageDialog(frame, "工程保存成功！", "提示", JOptionPane.PLAIN_MESSAGE);
         } catch (Exception e2) {
             e2.printStackTrace();
         }

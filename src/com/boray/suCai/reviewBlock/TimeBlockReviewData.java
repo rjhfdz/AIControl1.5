@@ -1414,7 +1414,7 @@ public class TimeBlockReviewData {
      * @param suCaiNum     素材序号
      * @param startAddress 每个灯的起始地址
      */
-    public static void sendShengKonData(int denKuNum, int suCaiNum, int[] startAddress, int channelCount) throws InterruptedException {
+    public static void sendShengKonData(int denKuNum, int suCaiNum, int[] startAddress, int channelCount, JComboBox duoDengCtrlBox) throws InterruptedException {
         Map map88 = (Map) Data.ShengKonSuCai[denKuNum][suCaiNum];
         Vector vector88 = (Vector) map88.get("0");//获得表数据
         for (int i = 0; i < vector88.size(); i++) {
@@ -1428,22 +1428,39 @@ public class TimeBlockReviewData {
             buff[4] = (byte) 0x80;
             buff[5] = (byte) 0x01;
             buff[6] = (byte) 0xFF;
-            for (int j = 0; j < startAddress.length; j++) {
-                for (int k = 0; k < channelCount; k++) {
-                    int value = Integer.valueOf(tp.get(k + (j * channelCount) + 2).toString());
-                    buff[startAddress[j] + 8 + k] = (byte) value;
+//            for (int j = 0; j < startAddress.length; j++) {
+//                for (int k = 0; k < channelCount; k++) {
+//                    int value = Integer.valueOf(tp.get(k + (j * channelCount) + 2).toString());
+//                    buff[startAddress[j] + 6 + k] = (byte) value;
+//                }
+//            }
+            if ("独立控制".equals(duoDengCtrlBox.getSelectedItem().toString())) {
+                for (int j = 2; j < tp.size(); j++) {
+                    int value = Integer.valueOf(tp.get(j).toString()).intValue();
+                    int k = (j - 2) / channelCount;
+                    int ii = (j - 2) % channelCount;
+                    buff[ii + startAddress[k] - 1 + 7] = (byte) value;
+                }
+            } else if ("全部控制".equals(duoDengCtrlBox.getSelectedItem().toString())) {
+                for (int j = 2; j < channelCount + 2; j++) {
+                    int value = Integer.valueOf(tp.get(j).toString()).intValue();
+                    int ii = (j - 2) % channelCount;
+                    for (int j2 = 0; j2 < startAddress.length; j2++) {
+                        buff[ii + startAddress[j2] - 1 + 7] = (byte) value;
+                    }
                 }
             }
+
             buff[519] = ZhiLingJi.getJiaoYan(buff);
             Socket.SendData(buff);
-            Thread.sleep(time);
+            Thread.sleep(time < 100 ? 100 : time);
         }
     }
 
     /**
      * 停止声控块预览
      */
-    public static void stopShengKonData(){
+    public static void stopShengKonData() {
         byte[] buff = new byte[512 + 8];
         buff[0] = (byte) 0xBB;
         buff[1] = (byte) 0x55;
