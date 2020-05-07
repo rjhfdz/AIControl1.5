@@ -5,14 +5,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.boray.Data.Data;
 import com.boray.Utils.HttpClientUtil;
-import com.boray.beiFen.Listener.ProjectCreateFileOfCloseFrame;
+import com.boray.beiFen.Listener.ProjectCreateFileActionListener;
 import com.boray.entity.Message;
 import com.boray.entity.ProjectFileInfo;
 import com.boray.entity.Users;
 import com.boray.mainUi.MainUi;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.*;
 
 public class selfMotionSave {
@@ -23,7 +21,7 @@ public class selfMotionSave {
             @Override
             public void run() {
                 if (Data.tempWebFolder != null && Data.tempWebFile != null) {
-                    ProjectCreateFileOfCloseFrame fileOfCloseFrame = new ProjectCreateFileOfCloseFrame();
+                    ProjectCreateFileActionListener fileOfCloseFrame = new ProjectCreateFileActionListener();
                     fileOfCloseFrame.tt(Data.tempEditWebFile);
                     autoSaveFile();
                 }

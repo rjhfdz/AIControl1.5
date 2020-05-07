@@ -322,8 +322,8 @@ public class ProjectCreateFileOfCloseFrame {
 
             xmlEncoder.flush();
             xmlEncoder.close();
-            JFrame frame = (JFrame)MainUi.map.get("frame");
-            JOptionPane.showMessageDialog(frame, "工程保存成功！", "提示", JOptionPane.PLAIN_MESSAGE);
+//            JFrame frame = (JFrame)MainUi.map.get("frame");
+//            JOptionPane.showMessageDialog(frame, "工程保存成功！", "提示", JOptionPane.PLAIN_MESSAGE);
         } catch (Exception e2) {
             e2.printStackTrace();
         }

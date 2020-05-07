@@ -5,7 +5,7 @@ import com.boray.Data.ZhiLingJi;
 import com.boray.Utils.Socket;
 import com.boray.Utils.Util;
 import com.boray.beiFen.Listener.MergeAllListener;
-import com.boray.beiFen.Listener.ProjectCreateFileOfCloseFrame;
+import com.boray.beiFen.Listener.ProjectCreateFileActionListener;
 import com.boray.mainUi.MainUi;
 
 import javax.swing.*;
@@ -14,7 +14,6 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 
 public class DataWriteListener implements ActionListener {
 
@@ -158,7 +157,7 @@ public class DataWriteListener implements ActionListener {
         Data.file = file;
         MergeAllListener listener = new MergeAllListener();
         listener.DataWrite(file, file1);
-        ProjectCreateFileOfCloseFrame fileOfCloseFrame = new ProjectCreateFileOfCloseFrame();
+        ProjectCreateFileActionListener fileOfCloseFrame = new ProjectCreateFileActionListener();
         fileOfCloseFrame.tt(new File(path + "\\project.xml"));
 //        }
         long fileSize = Data.file.length();

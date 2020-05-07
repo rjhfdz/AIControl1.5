@@ -440,7 +440,7 @@ public class LoadProjectFileActionListener implements ActionListener {
                         timeBlockPanels[e].removeAll();
                         //timeBlockPanels[k].repaint();
                     }
-                    for (int k = 0; k < 30; k++) {
+                    for (int k = 0; k < 31; k++) {
                         for (int i = 0; i < 20; i++) {
                             if (objects2[j - 1][k][i] != null) {
                                 if (k == 0) {

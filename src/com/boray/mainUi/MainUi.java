@@ -15,7 +15,7 @@ import com.boray.Data.Data;
 import com.boray.Data.ZhiLingJi;
 import com.boray.Listener.MainLoginUIListener;
 import com.boray.Utils.Socket;
-import com.boray.beiFen.Listener.ProjectCreateFileOfCloseFrame;
+import com.boray.beiFen.Listener.ProjectCreateFileActionListener;
 
 public class MainUi {
     public static Map map;
@@ -96,7 +96,8 @@ public class MainUi {
                         JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                         null, options, options[1]);
                 if (yes == 1) {
-                    new ProjectCreateFileOfCloseFrame().save();
+                    new ProjectCreateFileActionListener().save();
+                    Runtime.getRuntime().halt(1);
                 }
                 if (yes == 0) {
                     Runtime.getRuntime().halt(1);

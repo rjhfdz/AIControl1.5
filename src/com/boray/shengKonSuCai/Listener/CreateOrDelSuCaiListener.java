@@ -1,13 +1,13 @@
 package com.boray.shengKonSuCai.Listener;
 
 import com.boray.Data.Data;
+import com.boray.dengKu.UI.NewJTable;
 import com.boray.entity.Users;
 import com.boray.mainUi.MainUi;
+import com.boray.shengKon.UI.DefineJLable_shengKon2;
 import com.boray.shengKonSuCai.UI.ShengKonSuCaiEditUI;
 import com.boray.shengKonSuCai.UI.ShengKonSuCaiUI;
 import com.boray.shengKonSuCai.UI.YunShengKonSuCaiDialog;
-import com.boray.suCai.UI.DialogSuCaiUI;
-import com.boray.suCai.UI.SuCaiEditUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -122,6 +122,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                 }
                 suCaiList.setModel(model);
                 suCaiList.setSelectedIndex(0);
+                neatenShengKon(field.getText(), number);
                 dialog.dispose();
             }
         };
@@ -239,5 +240,29 @@ public class CreateOrDelSuCaiListener implements ActionListener {
         dialog.add(n1);
         dialog.add(p1);
         dialog.add(p2);
+    }
+
+
+    private void neatenShengKon(String str, int num){
+        NewJTable table = (NewJTable) MainUi.map.get("GroupTable");
+        for (int n = 0; n < table.getRowCount(); n++) {
+            String name = table.getValueAt(n,2).toString();//µÆ×éÃû³Æ
+            for (int j = 1; j <= 16; j++) {
+                JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels" + j);
+                JLabel[] labels = (JLabel[]) MainUi.map.get("labels_shengKong"+j);
+                for (int i =1;i<labels.length;i++){
+                    if(name.equals(labels[i].getText())){
+                        for (int k = 0; k < timeBlockPanels[i].getComponentCount(); k++) {
+                            DefineJLable_shengKon2 lable = (DefineJLable_shengKon2) timeBlockPanels[i].getComponent(k);
+                            if (lable.getText().contains("(" + num + ")")) {
+                                String s = lable.getText().substring(0, lable.getText().indexOf("("));
+                                lable.setText(s + "(" + num + ")  " + str);
+                            }
+                        }
+                        timeBlockPanels[i].updateUI();
+                    }
+                }
+            }
+        }
     }
 }

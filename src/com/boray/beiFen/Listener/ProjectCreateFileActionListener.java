@@ -43,10 +43,30 @@ public class ProjectCreateFileActionListener implements ActionListener {
             File file = fileChooser.getSelectedFile();
             Data.projectFilePath = file.getParent();
             tt(file);
+            JFrame frame = (JFrame) MainUi.map.get("frame");
+            JOptionPane.showMessageDialog(frame, "工程保存成功！", "提示", JOptionPane.PLAIN_MESSAGE);
         }
     }
 
-    void tt(File file) {
+    public void save() {
+        JFileChooser fileChooser = new JFileChooser();
+        if (!"".equals(Data.projectFilePath)) {
+            fileChooser.setCurrentDirectory(new File(Data.projectFilePath));
+        }
+
+        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fileChooser.setSelectedFile(new File("project.xml"));
+        int returnVal = fileChooser.showSaveDialog((JFrame) MainUi.map.get("frame"));
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            Data.projectFilePath = file.getParent();
+            tt(file);
+            JFrame frame = (JFrame) MainUi.map.get("frame");
+            JOptionPane.showMessageDialog(frame, "工程保存成功！", "提示", JOptionPane.PLAIN_MESSAGE);
+        }
+    }
+
+    public void tt(File file) {
         new DataActionListener().saveChangJingData().saveZhongKongData();
         try {
             OutputStream os = new FileOutputStream(file);
@@ -236,29 +256,29 @@ public class ProjectCreateFileActionListener implements ActionListener {
                 for (int k = 0; k < 31; k++) {
                     for (int i = 0; i < timeBlockPanels[k].getComponentCount(); i++) {
 //                        if (timeBlockPanels[k].isVisible()) {
-                            if (k == 0) {
-                                DefineJLable_shengKon lable = (DefineJLable_shengKon) timeBlockPanels[k].getComponent(i);
-                                String[] strings = new String[5];
-                                strings[0] = lable.getLocation().x + "";
-                                strings[1] = lable.getLocation().y + "";
-                                strings[2] = lable.getWidth() + "";
-                                strings[3] = lable.getHeight() + "";
-                                strings[4] = lable.getText();
-                                objects2[j - 1][k][i] = strings;
-                            } else {
-                                DefineJLable_shengKon2 lable = (DefineJLable_shengKon2) timeBlockPanels[k].getComponent(i);
-                                String[] strings = new String[6];
-                                strings[0] = lable.getLocation().x + "";
-                                strings[1] = lable.getLocation().y + "";
-                                strings[2] = lable.getWidth() + "";
-                                strings[3] = lable.getHeight() + "";
-                                strings[4] = lable.getText();
-                                if (lable.getBackground().getGreen() == 255)
-                                    strings[5] = "255";
-                                else
-                                    strings[5] = "0";
-                                objects2[j - 1][k][i] = strings;
-                            }
+                        if (k == 0) {
+                            DefineJLable_shengKon lable = (DefineJLable_shengKon) timeBlockPanels[k].getComponent(i);
+                            String[] strings = new String[5];
+                            strings[0] = lable.getLocation().x + "";
+                            strings[1] = lable.getLocation().y + "";
+                            strings[2] = lable.getWidth() + "";
+                            strings[3] = lable.getHeight() + "";
+                            strings[4] = lable.getText();
+                            objects2[j - 1][k][i] = strings;
+                        } else {
+                            DefineJLable_shengKon2 lable = (DefineJLable_shengKon2) timeBlockPanels[k].getComponent(i);
+                            String[] strings = new String[6];
+                            strings[0] = lable.getLocation().x + "";
+                            strings[1] = lable.getLocation().y + "";
+                            strings[2] = lable.getWidth() + "";
+                            strings[3] = lable.getHeight() + "";
+                            strings[4] = lable.getText();
+                            if (lable.getBackground().getGreen() == 255)
+                                strings[5] = "255";
+                            else
+                                strings[5] = "0";
+                            objects2[j - 1][k][i] = strings;
+                        }
 //                        }
                     }
                 }
@@ -323,8 +343,6 @@ public class ProjectCreateFileActionListener implements ActionListener {
 
             xmlEncoder.flush();
             xmlEncoder.close();
-            JFrame frame = (JFrame) MainUi.map.get("frame");
-            JOptionPane.showMessageDialog(frame, "工程保存成功！", "提示", JOptionPane.PLAIN_MESSAGE);
         } catch (Exception e2) {
             e2.printStackTrace();
         }
