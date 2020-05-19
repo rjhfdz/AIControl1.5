@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemListener;
 import java.beans.XMLDecoder;
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,6 +21,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
+import com.boray.Data.ChannelName;
 import com.boray.Data.Data;
 import com.boray.Data.MyColor;
 import com.boray.Data.XiaoGuoDengModel;
@@ -141,6 +143,7 @@ public class LoadProjectFileActionListener implements ActionListener {
                 xmlDecoder.readObject();
             } else {
                 DataOfChangJing.map = (Map) xmlDecoder.readObject();
+                DataOfChangJing.timeMap = (Map) xmlDecoder.readObject();
             }
 
             //ÖÐ¿ØÑ§Ï°Çø
@@ -263,6 +266,8 @@ public class LoadProjectFileActionListener implements ActionListener {
                 Data.DengKuList = (List) xmlDecoder.readObject();
                 Data.dengKuBlackOutAndSpeedList = (List) xmlDecoder.readObject();
                 Vector vector = (Vector) xmlDecoder.readObject();
+                Data.dengKuTonDaoList = (List<String>) xmlDecoder.readObject();
+                setZiDingYiTonDao();
                 NewJTable table = (NewJTable) MainUi.map.get("table_DkGl");
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
                 for (int i = table.getRowCount() - 1; i >= 0; i--) {
@@ -584,6 +589,68 @@ public class LoadProjectFileActionListener implements ActionListener {
 
         } catch (Exception e2) {
             e2.printStackTrace();
+        }
+    }
+
+    void setZiDingYiTonDao(){
+        JComboBox[] channelBoxs_L = (JComboBox[]) MainUi.map.get("lamp_1_To_16");
+        JComboBox[] channelBoxs_R = (JComboBox[]) MainUi.map.get("lamp_17_To_32");
+        ItemListener listener = (ItemListener) MainUi.map.get("ChannelItemListener");
+        for (int j = 0; j < 16; j++) {
+            channelBoxs_L[j].removeItemListener(listener);
+            channelBoxs_R[j].removeItemListener(listener);
+        }
+        for (int i = 0; i < channelBoxs_L.length; i++) {
+//            if (channelBoxs_L[i].isEnabled()) {
+                channelBoxs_L[i].removeAllItems();
+//            }
+//            if (channelBoxs_R[i].isEnabled()) {
+                channelBoxs_R[i].removeAllItems();
+//            }
+            for (int j = 0; j < ChannelName.names.length; j++) {
+//                if (channelBoxs_L[i].isEnabled())
+                    channelBoxs_L[i].addItem(ChannelName.names[j]);
+//                if (channelBoxs_R[i].isEnabled())
+                    channelBoxs_R[i].addItem(ChannelName.names[j]);
+            }
+        }
+        for (int i = 0; i < channelBoxs_L.length; i++) {
+            for (int j = 0; j < Data.dengKuTonDaoList.size(); j++) {
+//                if (channelBoxs_L[i].isEnabled())
+                    channelBoxs_L[i].addItem(Data.dengKuTonDaoList.get(j));
+//                if (channelBoxs_R[i].isEnabled())
+                    channelBoxs_R[i].addItem(Data.dengKuTonDaoList.get(j));
+            }
+        }
+//        int c = Integer.valueOf(Data.DengKuChannelCountList.get(0).toString()).intValue();
+//        HashMap map = (HashMap) Data.DengKuList.get(0);
+//        if (c > 16) {
+//            for (int i = 0; i < 16; i++) {
+//                channelBoxs_L[i].setEnabled(true);
+//                channelBoxs_L[i].setSelectedItem(map.get(channelBoxs_L[i].getName()).toString());
+//            }
+//            for (int i = 0; i < c - 16; i++) {
+//                channelBoxs_R[i].setEnabled(true);
+//                channelBoxs_R[i].setSelectedItem(map.get(channelBoxs_R[i].getName()).toString());
+//            }
+//            for (int i = c - 16; i < channelBoxs_R.length; i++) {
+//                channelBoxs_R[i].setEnabled(false);
+//            }
+//        } else {
+//            for (int i = 0; i < channelBoxs_R.length; i++) {
+//                channelBoxs_R[i].setEnabled(false);
+//            }
+//            for (int i = 0; i < c; i++) {
+//                channelBoxs_L[i].setEnabled(true);
+//                channelBoxs_L[i].setSelectedItem(map.get(channelBoxs_L[i].getName()).toString());
+//            }
+//            for (int i = c; i < channelBoxs_L.length; i++) {
+//                channelBoxs_L[i].setEnabled(false);
+//            }
+//        }
+        for (int j = 0; j < 16; j++) {
+            channelBoxs_L[j].addItemListener(listener);
+            channelBoxs_R[j].addItemListener(listener);
         }
     }
 

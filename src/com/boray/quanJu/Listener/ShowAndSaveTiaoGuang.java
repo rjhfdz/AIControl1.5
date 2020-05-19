@@ -36,8 +36,8 @@ public class ShowAndSaveTiaoGuang {
 		JSlider slider8 = (JSlider)list.get(11);
 		
 		
-		SerialPort serialPort = Data.serialPort;
-		Data.serialPort = null;
+//		SerialPort serialPort = Data.serialPort;
+//		Data.serialPort = null;
 		
 		//25 可调、下限
 		List list66 = (List)DataOfChangJing.map.get(""+25);
@@ -61,7 +61,7 @@ public class ShowAndSaveTiaoGuang {
 		slider5.setValue(Integer.valueOf(list66.get(13).toString()).intValue());
 		slider7.setValue(Integer.valueOf(list66.get(15).toString()).intValue());
 		
-		Data.serialPort = serialPort;
+//		Data.serialPort = serialPort;
 		/*if (DataOfTiaoGuang.list.size() > 0) {
 			SerialPort serialPort = Data.serialPort;
 			Data.serialPort = null;

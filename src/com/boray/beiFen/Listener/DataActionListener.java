@@ -81,6 +81,12 @@ public class DataActionListener {
                 b[0][36] = "e".getBytes()[0];
                 b[0][37] = "r".getBytes()[0];
             }
+            List timeList = (List) DataOfChangJing.timeMap.get("" + i);
+            for (int k = 0; k < timeList.size(); k++) {
+                int time = Integer.valueOf(timeList.get(k).toString());
+                b[i][38 + k * 2] = (byte) (time % 256);
+                b[i][39 + k * 2] = (byte) (time / 256);
+            }
         }
 
         //中控学习区
@@ -646,11 +652,21 @@ public class DataActionListener {
     }
 
     private void saveData(List list) {
+        List timeList = (List) DataOfChangJing.timeMap.get("" + Data.changJingModel);
+        if (timeList == null) {
+            timeList = new ArrayList();
+        } else {
+            timeList.clear();
+        }
         list.clear();
         //8个不可调
         JComboBox[] boxs8 = (JComboBox[]) MainUi.map.get("kaiGuangBox_BuKeTiao");
         for (int i = 0; i < boxs8.length; i++) {
             list.add(String.valueOf(boxs8[i].getSelectedIndex()));
+        }
+        JTextField[] field8 = (JTextField[]) MainUi.map.get("kaiGuangField_BuKeTiao");
+        for (int i = 0; i < field8.length; i++) {
+            timeList.add(field8[i].getText());
         }
 
         //4个灯的开关和亮度
@@ -659,6 +675,10 @@ public class DataActionListener {
         for (int i = 0; i < sliders.length; i++) {
             list.add(String.valueOf(boxs[i].getSelectedIndex()));
             list.add(String.valueOf(sliders[i].getValue()));
+        }
+        JTextField[] fields2 = (JTextField[]) MainUi.map.get("liangDufields");
+        for (int i = 0; i < fields2.length; i++) {
+            timeList.add(fields2[i].getText());
         }
         //全局亮度
         JSlider slider = (JSlider) MainUi.map.get("quanJuLiangDuSlider");
@@ -704,24 +724,26 @@ public class DataActionListener {
         }
 
         //摇麦模式
-		JComboBox box3 = (JComboBox)MainUi.map.get("yaoMaiModelBox");
-		list.add(String.valueOf(box3.getSelectedIndex()));
+        JComboBox box3 = (JComboBox) MainUi.map.get("yaoMaiModelBox");
+        list.add(String.valueOf(box3.getSelectedIndex()));
 
         //摇麦触发间隔
-		JComboBox box2 = (JComboBox)MainUi.map.get("yaoMaiJianGeBox");
-		list.add(String.valueOf(box2.getSelectedIndex()));
-		
-		//摇麦延续开关
-		JRadioButton radioButton4 = (JRadioButton)MainUi.map.get("yaoMaiKaiGuangBtn1");
-		if (radioButton4.isSelected()) {
-			list.add(String.valueOf(1));
-		} else {
-			list.add(String.valueOf(0));
-		}
+        JComboBox box2 = (JComboBox) MainUi.map.get("yaoMaiJianGeBox");
+        list.add(String.valueOf(box2.getSelectedIndex()));
+
+        //摇麦延续开关
+        JRadioButton radioButton4 = (JRadioButton) MainUi.map.get("yaoMaiKaiGuangBtn1");
+        if (radioButton4.isSelected()) {
+            list.add(String.valueOf(1));
+        } else {
+            list.add(String.valueOf(0));
+        }
 
         //雾机模式
         JComboBox boxes = (JComboBox) MainUi.map.get("wuJiModelBox");
         list.add(String.valueOf(boxes.getSelectedIndex()));
+
+        DataOfChangJing.timeMap.put("" + Data.changJingModel, timeList);
     }
 
     public void saveZhongKongData() {

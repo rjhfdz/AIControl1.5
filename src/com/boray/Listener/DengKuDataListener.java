@@ -9,7 +9,9 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.swing.JComboBox;
@@ -73,15 +75,127 @@ public class DengKuDataListener implements ActionListener {
                 byte[] temp = new byte[size];
                 is.read(temp);
                 is.close();
-                if (size % 128 == 0 && Byte.toUnsignedInt(temp[0]) == 253 && Byte.toUnsignedInt(temp[1]) == 80) {
-                    handle(temp, 128);
-                } else if (size % 80 == 0 && Byte.toUnsignedInt(temp[0]) == 253 && Byte.toUnsignedInt(temp[1]) == 80) {
-                    handle(temp, 80);
+//                if (size % 128 == 0 && Byte.toUnsignedInt(temp[0]) == 253 && Byte.toUnsignedInt(temp[1]) == 80) {
+//                    handle(temp, 128);
+//                } else if (size % 80 == 0 && Byte.toUnsignedInt(temp[0]) == 253 && Byte.toUnsignedInt(temp[1]) == 80) {
+//                    handle(temp, 80);
+//                }
+                if (temp.length >= 129 && Byte.toUnsignedInt(temp[0]) == 253 && Byte.toUnsignedInt(temp[1]) == 80) {
+                    handle(temp);
                 }
                 Data.dengKu_change = true;
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    private void handle(byte[] file) {
+        int channelCount = Byte.toUnsignedInt(file[42]);
+        String version = String.valueOf(Byte.toUnsignedInt(file[7]) + "." + String.valueOf(Byte.toUnsignedInt(file[8])));
+        Data.DengKuVersionList.add(version);
+        Map map = new HashMap();
+        BlackOutEntity blackOutEntity = new BlackOutEntity();
+        SpeedEntity speedEntity = new SpeedEntity();
+        byte[] cc = new byte[48];
+        System.arraycopy(file, 80, cc, 0, 48);
+        setEnty(blackOutEntity, speedEntity, cc);
+        map.put("blackOutEntity", blackOutEntity);
+        map.put("speedEntity", speedEntity);
+        Data.dengKuBlackOutAndSpeedList.add(map);
+        int NameCount = Byte.toUnsignedInt(file[128]);//自定义通道数量
+        for (int i = 0; i < NameCount; i++) {
+            int nameLenght = Byte.toUnsignedInt(file[129 + i * 20]);
+            byte[] bytes = new byte[nameLenght];
+            for (int k = 0; k < nameLenght; k++) {
+                bytes[k] = file[130 + i * 20 + k];
+            }
+            String name = new String(bytes, 0, nameLenght);//自定义通道名称
+            if (!Data.dengKuTonDaoList.contains(name)) {
+                Data.dengKuTonDaoList.add(name);
+            }
+        }
+        if (channelCount != 0) {
+            int nameLenght = Byte.toUnsignedInt(file[9]);
+            byte[] b = new byte[nameLenght];
+            for (int j = 0; j < nameLenght; j++) {
+                b[j] = file[10 + j];
+            }
+            String name = new String(b, 0, nameLenght);//灯库名称
+
+            String[] channels = new String[channelCount];//通道定义
+            for (int j = 0; j < channelCount; j++) {
+                channels[j] = GetChannelNumber.getChannelName(Byte.toUnsignedInt(file[43 + j]));
+            }
+            String[] channelNames = new String[channelCount];
+            for (int j = 0; j < channelCount; j++) {
+                int anInt = Byte.toUnsignedInt(file[129 + NameCount * 20 + j * 20]);
+                byte[] bytes = new byte[anInt];
+                for (int k = 0; k < anInt; k++) {
+                    bytes[k] = file[130 + NameCount * 20 + j * 20 + k];
+                }
+                channelNames[j] = new String(bytes, 0, anInt);
+            }
+
+            //////////////////////////////////////////////////////
+            NewJTable table = (NewJTable) MainUi.map.get("table_DkGl");
+
+            Data.DengKuChannelCountList.add(String.valueOf(channelCount));
+            DefaultTableModel model = (DefaultTableModel) table.getModel();
+            int index = table.getRowCount() + 1;
+            String[] s = {index + "", name};
+            model.addRow(s);
+            HashMap hashMap = new HashMap();
+            tonDao(channelCount, channelNames, hashMap);
+            new AddCustomTonDaoDialog().addDengKuTonDaoList();
+            hashMap.clear();
+            tonDao(channelCount, channelNames, hashMap);
+            Data.DengKuList.add(hashMap);
+            table.setRowSelectionInterval(table.getRowCount() - 1, table.getRowCount() - 1);
+        }
+    }
+
+    private void tonDao(int channelCount, String[] channelNames, HashMap hashMap) {
+        JComboBox[] boxs = (JComboBox[]) MainUi.map.get("lamp_1_To_16");
+        JComboBox[] boxs2 = (JComboBox[]) MainUi.map.get("lamp_17_To_32");
+        ItemListener listener = (ItemListener) MainUi.map.get("ChannelItemListener");
+        for (int j = 0; j < 16; j++) {
+            boxs[j].removeItemListener(listener);
+            boxs2[j].removeItemListener(listener);
+        }
+        if (channelCount > 16) {
+            for (int n = 0; n < 16; n++) {
+                boxs[n].setEnabled(true);
+//                    boxs[n].setSelectedItem(channels[n]);
+                boxs[n].setSelectedItem(channelNames[n]);
+                hashMap.put(boxs[n].getName(), channelNames[n]);
+            }
+            for (int n = 0; n < channelCount - 16; n++) {
+                hashMap.put(boxs2[n].getName(), channelNames[n + 16]);
+                boxs2[n].setEnabled(true);
+//                    boxs2[n].setSelectedItem(channels[n + 16]);
+                boxs2[n].setSelectedItem(channelNames[n + 16]);
+            }
+            for (int n = channelCount - 16; n < boxs2.length; n++) {
+                boxs2[n].setEnabled(false);
+            }
+        } else {
+            for (int n = 0; n < boxs2.length; n++) {
+                boxs2[n].setEnabled(false);
+            }
+            for (int n = 0; n < channelCount; n++) {
+                boxs[n].setEnabled(true);
+//                    boxs[n].setSelectedItem(channels[n]);
+                boxs[n].setSelectedItem(channelNames[n]);
+                hashMap.put(boxs[n].getName(), channelNames[n]);
+            }
+            for (int n = channelCount; n < boxs.length; n++) {
+                boxs[n].setEnabled(false);
+            }
+        }
+        for (int j = 0; j < 16; j++) {
+            boxs[j].addItemListener(listener);
+            boxs2[j].addItemListener(listener);
         }
     }
 
@@ -395,6 +509,50 @@ public class DengKuDataListener implements ActionListener {
                     byte[] cc = getCC(selected);
 
                     os.write(cc);
+                    os.write(Data.dengKuTonDaoList.size());//记录自定义通道数量
+                    //自定义通道
+                    byte[][] bytes = new byte[Data.dengKuTonDaoList.size()][20];
+                    for (int i = 0; i < bytes.length; i++) {
+                        byte[] bytes1 = Data.dengKuTonDaoList.get(i).getBytes();
+                        bytes[i][0] = (byte) bytes1.length;
+                        for (int k = 0; k < bytes1.length; k++) {
+                            bytes[i][k + 1] = bytes1[k];
+                        }
+                    }
+                    for (int i = 0; i < bytes.length; i++) {
+                        os.write(bytes[i]);
+                    }
+
+                    //记录所有通道名称
+                    bytes = new byte[channelCount][20];
+                    if (channelCount > 16) {
+                        for (int i = 0; i < 16; i++) {
+                            byte[] nameLen = channelBoxs_L[i].getSelectedItem().toString().getBytes();
+                            bytes[i][0] = (byte) nameLen.length;
+                            for (int k = 0; k < nameLen.length; k++) {
+                                bytes[i][1 + k] = nameLen[k];
+                            }
+                        }
+                        for (int i = 16; i < channelCount; i++) {
+                            byte[] nameLen = channelBoxs_R[i - 16].getSelectedItem().toString().getBytes();
+                            bytes[i][0] = (byte) nameLen.length;
+                            for (int k = 0; k < nameLen.length; k++) {
+                                bytes[i][1 + k] = nameLen[k];
+                            }
+                        }
+                    } else {
+                        for (int i = 0; i < channelCount; i++) {
+                            byte[] nameLen = channelBoxs_L[i].getSelectedItem().toString().getBytes();
+                            bytes[i][0] = (byte) nameLen.length;
+                            for (int k = 0; k < nameLen.length; k++) {
+                                bytes[i][1 + k] = nameLen[k];
+                            }
+                        }
+                    }
+                    for (int i = 0; i < bytes.length; i++) {
+                        os.write(bytes[i]);
+                    }
+
                     os.flush();
                     os.close();
                 } catch (Exception e2) {

@@ -65,7 +65,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
             reName(dialog, name);
             dialog.setVisible(true);
-        } else if("云端".equals(e.getActionCommand())){
+        } else if ("云端".equals(e.getActionCommand())) {
             Users users = (Users) MainUi.map.get("Users");
             if (users != null && users.getLoginstatus() != 0) {
                 JFrame f = (JFrame) MainUi.map.get("frame");
@@ -87,7 +87,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
         }
     }
 
-    private void reName(final JDialog dialog, final String name){
+    private void reName(final JDialog dialog, final String name) {
         JPanel p1 = new JPanel();
         p1.add(new JLabel("素材名称："));
         final JTextField field = new JTextField(15);
@@ -100,30 +100,34 @@ public class CreateOrDelSuCaiListener implements ActionListener {
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JList suCaiList = (JList) MainUi.map.get("shengKonSuCai_list");
-                JList dengkuList = (JList) MainUi.map.get("shengKonSuCaiLightType");
-                JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("shengKonSuCaiTypeBtns");
-                Map nameMap = (Map) Data.shengKonSuCaiNameMap.get(dengkuList.getSelectedValue().toString());
-                int number = Integer.parseInt(suCaiList.getSelectedValue().toString().split("--->")[1]);//获得对应素材的编号
-                int index = suCaiList.getSelectedIndex();//获得对应下标
-                int btnIndex = 0;
-                for (int i = 0; i < btns.length; i++) {
-                    if (btns[i].isSelected()) {
-                        btnIndex = i;
-                        break;
+                if (e.getActionCommand().equals("确定")) {
+                    JList suCaiList = (JList) MainUi.map.get("shengKonSuCai_list");
+                    JList dengkuList = (JList) MainUi.map.get("shengKonSuCaiLightType");
+                    JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("shengKonSuCaiTypeBtns");
+                    Map nameMap = (Map) Data.shengKonSuCaiNameMap.get(dengkuList.getSelectedValue().toString());
+                    int number = Integer.parseInt(suCaiList.getSelectedValue().toString().split("--->")[1]);//获得对应素材的编号
+                    int index = suCaiList.getSelectedIndex();//获得对应下标
+                    int btnIndex = 0;
+                    for (int i = 0; i < btns.length; i++) {
+                        if (btns[i].isSelected()) {
+                            btnIndex = i;
+                            break;
+                        }
                     }
+                    List nameList = (List) nameMap.get("" + btnIndex);
+                    nameList.set(index, field.getText() + "--->" + number);
+                    suCaiList.removeAll();
+                    DefaultListModel model = new DefaultListModel();
+                    for (int i = 0; i < nameList.size(); i++) {
+                        model.addElement(nameList.get(i));
+                    }
+                    suCaiList.setModel(model);
+                    suCaiList.setSelectedIndex(0);
+                    neatenShengKon(field.getText(), number);
+                    dialog.dispose();
+                } else if (e.getActionCommand().equals("取消")) {
+                    dialog.dispose();
                 }
-                List nameList = (List) nameMap.get("" + btnIndex);
-                nameList.set(index, field.getText() + "--->" + number);
-                suCaiList.removeAll();
-                DefaultListModel model = new DefaultListModel();
-                for (int i = 0; i < nameList.size(); i++) {
-                    model.addElement(nameList.get(i));
-                }
-                suCaiList.setModel(model);
-                suCaiList.setSelectedIndex(0);
-                neatenShengKon(field.getText(), number);
-                dialog.dispose();
             }
         };
 
@@ -242,16 +246,21 @@ public class CreateOrDelSuCaiListener implements ActionListener {
         dialog.add(p2);
     }
 
-
-    private void neatenShengKon(String str, int num){
+    /**
+     * 声控素材重命名时同步修改声控编程界面的引用素材名称
+     *
+     * @param str
+     * @param num
+     */
+    private void neatenShengKon(String str, int num) {
         NewJTable table = (NewJTable) MainUi.map.get("GroupTable");
         for (int n = 0; n < table.getRowCount(); n++) {
-            String name = table.getValueAt(n,2).toString();//灯组名称
+            String name = table.getValueAt(n, 2).toString();//灯组名称
             for (int j = 1; j <= 16; j++) {
                 JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels" + j);
-                JLabel[] labels = (JLabel[]) MainUi.map.get("labels_shengKong"+j);
-                for (int i =1;i<labels.length;i++){
-                    if(name.equals(labels[i].getText())){
+                JLabel[] labels = (JLabel[]) MainUi.map.get("labels_shengKong" + j);
+                for (int i = 1; i < labels.length; i++) {
+                    if (name.equals(labels[i].getText())) {
                         for (int k = 0; k < timeBlockPanels[i].getComponentCount(); k++) {
                             DefineJLable_shengKon2 lable = (DefineJLable_shengKon2) timeBlockPanels[i].getComponent(k);
                             if (lable.getText().contains("(" + num + ")")) {

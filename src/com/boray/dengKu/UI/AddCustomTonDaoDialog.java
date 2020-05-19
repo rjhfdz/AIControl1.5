@@ -177,7 +177,7 @@ public class AddCustomTonDaoDialog implements ActionListener, WindowListener {
             dia.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
             init(dia);
             dia.setVisible(true);
-        }else if("É¾³ý".equals(e.getActionCommand())){
+        } else if ("É¾³ý".equals(e.getActionCommand())) {
             Data.dengKuTonDaoList.remove(table.getSelectedRow());
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             model.removeRow(table.getSelectedRow());
@@ -200,11 +200,11 @@ public class AddCustomTonDaoDialog implements ActionListener, WindowListener {
                 if ("È¡Ïû".equals(e.getActionCommand())) {
                     dia.dispose();
                 } else {
-                    if (field.getText() != null && field.getText() != "") {
+                    if (field.getText() != null && field.getText().trim() != "") {
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
-                        Object[] o = {table.getRowCount() + 1, field.getText()};
+                        Object[] o = {table.getRowCount() + 1, field.getText().trim()};
                         model.addRow(o);
-                        Data.dengKuTonDaoList.add(field.getText());
+                        Data.dengKuTonDaoList.add(field.getText().trim());
                         table.repaint();
                         dia.dispose();
                     }
@@ -225,35 +225,61 @@ public class AddCustomTonDaoDialog implements ActionListener, WindowListener {
         dia.add(p2);
     }
 
+    public void addDengKuTonDaoList() {
+        JComboBox[] channelBoxs_L = (JComboBox[]) MainUi.map.get("lamp_1_To_16");
+        JComboBox[] channelBoxs_R = (JComboBox[]) MainUi.map.get("lamp_17_To_32");
+        List<String> channelStr_L = new ArrayList<>();
+        List<String> channelStr_R = new ArrayList<>();
+        ItemListener listener = (ItemListener) MainUi.map.get("ChannelItemListener");
+        for (int j = 0; j < 16; j++) {
+            channelBoxs_L[j].removeItemListener(listener);
+            channelBoxs_R[j].removeItemListener(listener);
+        }
+        for (int i = 0; i < channelBoxs_L.length; i++) {
+            if (channelBoxs_L[i].isEnabled()) {
+                channelStr_L.add(channelBoxs_L[i].getSelectedItem().toString());
+                channelBoxs_L[i].removeAllItems();
+            }
+            if (channelBoxs_R[i].isEnabled()) {
+                channelStr_R.add(channelBoxs_R[i].getSelectedItem().toString());
+                channelBoxs_R[i].removeAllItems();
+            }
+            for (int j = 0; j < ChannelName.names.length; j++) {
+                if (channelBoxs_L[i].isEnabled())
+                    channelBoxs_L[i].addItem(ChannelName.names[j]);
+                if (channelBoxs_R[i].isEnabled())
+                    channelBoxs_R[i].addItem(ChannelName.names[j]);
+            }
+        }
+        for (int i = 0; i < channelBoxs_L.length; i++) {
+            for (int j = 0; j < Data.dengKuTonDaoList.size(); j++) {
+                if (channelBoxs_L[i].isEnabled())
+                    channelBoxs_L[i].addItem(Data.dengKuTonDaoList.get(j));
+                if (channelBoxs_R[i].isEnabled())
+                    channelBoxs_R[i].addItem(Data.dengKuTonDaoList.get(j));
+            }
+        }
+        for (int i = 0; i < channelBoxs_L.length; i++) {
+            if (channelBoxs_L[i].isEnabled())
+                channelBoxs_L[i].setSelectedItem(channelStr_L.get(i));
+            if (channelBoxs_R[i].isEnabled())
+                channelBoxs_R[i].setSelectedItem(channelStr_R.get(i));
+        }
+        for (int j = 0; j < 16; j++) {
+            channelBoxs_L[j].addItemListener(listener);
+            channelBoxs_R[j].addItemListener(listener);
+        }
+    }
+
     @Override
     public void windowOpened(WindowEvent e) {
     }
 
     @Override
     public void windowClosing(WindowEvent e) {
-        JComboBox[] channelBoxs_L = (JComboBox[]) MainUi.map.get("lamp_1_To_16");
-        JComboBox[] channelBoxs_R = (JComboBox[]) MainUi.map.get("lamp_17_To_32");
-        List<String> channelStr_L = new ArrayList<>();
-        List<String> channelStr_R = new ArrayList<>();
-        for (int i = 0; i < channelBoxs_L.length; i++) {
-            channelStr_L.add(channelBoxs_L[i].getSelectedItem().toString());
-            channelStr_R.add(channelBoxs_R[i].getSelectedItem().toString());
-            channelBoxs_L[i].removeAllItems();
-            channelBoxs_R[i].removeAllItems();
-            for (int j = 0; j < ChannelName.names.length; j++) {
-                channelBoxs_L[i].addItem(ChannelName.names[j]);
-                channelBoxs_R[i].addItem(ChannelName.names[j]);
-            }
-        }
-        for (int i = 0; i < channelBoxs_L.length; i++) {
-            for (int j = 0; j < Data.dengKuTonDaoList.size(); j++) {
-                channelBoxs_L[i].addItem(Data.dengKuTonDaoList.get(j));
-                channelBoxs_R[i].addItem(Data.dengKuTonDaoList.get(j));
-            }
-        }
-        for (int i = 0; i < channelBoxs_L.length; i++) {
-            channelBoxs_L[i].setSelectedItem(channelStr_L.get(i));
-            channelBoxs_R[i].setSelectedItem(channelStr_R.get(i));
+        NewJTable table_DkGl = (NewJTable) MainUi.map.get("table_DkGl");
+        if (table_DkGl.getRowCount() > 0) {
+            addDengKuTonDaoList();
         }
     }
 

@@ -7,11 +7,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JSlider;
+import javax.swing.*;
 import javax.swing.event.ChangeListener;
 
 import com.boray.Data.Data;
@@ -55,19 +51,32 @@ public class ProgramToTestListener implements ActionListener {
 
     //保存场景数据
     private void saveData(List list) {
+        List timeList = (List) DataOfChangJing.timeMap.get("" + Data.changJingModel);
+        if (timeList == null) {
+            timeList = new ArrayList();
+        } else {
+            timeList.clear();
+        }
         list.clear();
         //8个不可调
         JComboBox[] boxs8 = (JComboBox[]) MainUi.map.get("kaiGuangBox_BuKeTiao");
         for (int i = 0; i < boxs8.length; i++) {
             list.add(String.valueOf(boxs8[i].getSelectedIndex()));
         }
-
+        JTextField[] field8 = (JTextField[]) MainUi.map.get("kaiGuangField_BuKeTiao");
+        for (int i = 0; i < field8.length; i++) {
+            timeList.add(field8[i].getText());
+        }
         //4个灯的开关和亮度
         JComboBox[] boxs = (JComboBox[]) MainUi.map.get("kaiGuangBox");
         JSlider[] sliders = (JSlider[]) MainUi.map.get("liangDuSliders");
         for (int i = 0; i < sliders.length; i++) {
             list.add(String.valueOf(boxs[i].getSelectedIndex()));
             list.add(String.valueOf(sliders[i].getValue()));
+        }
+        JTextField[] fields2 = (JTextField[]) MainUi.map.get("liangDufields");
+        for (int i = 0; i < fields2.length; i++) {
+            timeList.add(fields2[i].getText());
         }
         //全局亮度
         JSlider slider = (JSlider) MainUi.map.get("quanJuLiangDuSlider");
@@ -131,6 +140,8 @@ public class ProgramToTestListener implements ActionListener {
         //雾机模式
         JComboBox boxes = (JComboBox) MainUi.map.get("wuJiModelBox");
         list.add(String.valueOf(boxes.getSelectedIndex()));
+
+        DataOfChangJing.timeMap.put("" + Data.changJingModel, timeList);
     }
 
     private void setChangJing1(boolean b) {

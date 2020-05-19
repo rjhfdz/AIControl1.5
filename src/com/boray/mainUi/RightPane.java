@@ -488,6 +488,12 @@ public class RightPane implements ActionListener {
                         }
                     }
                 }, time);
+                new java.util.Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        Socket.SendData(ZhiLingJi.quanJuSetData());
+                    }
+                },2000);
             } catch (javax.comm.PortInUseException ee) {
                 button2.setSelected(true);
                 field.setText("");

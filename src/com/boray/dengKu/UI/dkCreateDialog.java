@@ -160,6 +160,7 @@ public class dkCreateDialog implements ActionListener{
 			}
 			Data.DengKuList.add(hashMap);
 			Data.dengKuBlackOutAndSpeedList.add(null);
+			new AddCustomTonDaoDialog().addDengKuTonDaoList();
 			table.setRowSelectionInterval(table.getRowCount()-1, table.getRowCount()-1);
 			dialog.dispose();
 		} else {

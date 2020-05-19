@@ -190,6 +190,7 @@ public class dkChangeDialog implements ActionListener {
                     table8.setValueAt(String.valueOf(c), i, 6);
                 }
             }
+            new AddCustomTonDaoDialog().addDengKuTonDaoList();
             //table.setRowSelectionInterval(table.getRowCount()-1, table.getRowCount()-1);
             dialog.dispose();
         } else {

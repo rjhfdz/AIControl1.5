@@ -7,14 +7,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,6 +62,7 @@ public class WuJiModelUI {
     private String[] tkp;
     private String[] tkp2;
     private JComboBox box88;
+    private JComboBox box2;
 
     public void show(final int no) {
         wuJiComponList = new ArrayList();
@@ -836,6 +830,19 @@ public class WuJiModelUI {
             box88.addItem(String.valueOf(i));
         }
         box88.setSelectedIndex(499);
+        box88.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == 1) {
+                    int startAddress = box88.getSelectedIndex() + 1;
+                    int tonDao = Integer.valueOf(box2.getSelectedItem().toString());
+                    if (startAddress + tonDao > 512) {
+                        JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "数据超出512通道范围，请重新选择地址或通道！", "提示", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                }
+            }
+        });
         pane.add(radioButton);
         pane.add(radioButton2);
         pane.add(new JLabel("            DMX512地址:"));
@@ -849,12 +856,25 @@ public class WuJiModelUI {
         group2.add(radioButton3);
         group2.add(radioButton4);
         radioButton3.setSelected(true);
-        JComboBox box2 = new JComboBox();
+        box2 = new JComboBox();
         wuJiComponList.add(box2);
         box2.setPreferredSize(new Dimension(70, 28));
         for (int i = 1; i < 11; i++) {
             box2.addItem(String.valueOf(i));
         }
+        box2.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == 1) {
+                    int startAddress = box88.getSelectedIndex() + 1;
+                    int tonDao = Integer.valueOf(box2.getSelectedItem().toString());
+                    if (startAddress + tonDao > 512) {
+                        JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "数据超出512通道范围，请重新选择地址或通道！", "提示", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                }
+            }
+        });
         pane.add(radioButton3);
         pane.add(radioButton4);
         pane.add(new JLabel("                 通道数量:"));
@@ -883,28 +903,30 @@ public class WuJiModelUI {
         int[] slt = table.getSelectedRows();
         int value = 0;
         int startAddress = box88.getSelectedIndex() + 1;
-        if (slt.length != 0) {
-            byte[] buff = new byte[512 + 8];
-            byte[] bytes = new byte[512];
-            buff[0] = (byte) 0xBB;
-            buff[1] = (byte) 0x55;
-            buff[2] = (byte) (520 / 256);
-            buff[3] = (byte) (520 % 256);
-            buff[4] = (byte) 0x80;
-            buff[5] = (byte) 0x01;
-            buff[6] = (byte) 0xFF;
-            for (int j = 2; j < table.getColumnCount(); j++) {
-                value = Integer.valueOf(table.getValueAt(slt[0], j).toString()).intValue();
-                buff[j - 3 + startAddress + 7] = (byte) value;
+        if (startAddress + Integer.valueOf(box2.getSelectedItem().toString()) <= 512) {
+            if (slt.length != 0) {
+                byte[] buff = new byte[512 + 8];
+                byte[] bytes = new byte[512];
+                buff[0] = (byte) 0xBB;
+                buff[1] = (byte) 0x55;
+                buff[2] = (byte) (520 / 256);
+                buff[3] = (byte) (520 % 256);
+                buff[4] = (byte) 0x80;
+                buff[5] = (byte) 0x01;
+                buff[6] = (byte) 0xFF;
+                for (int j = 2; j < (Integer.valueOf(box2.getSelectedItem().toString()) + 2); j++) {
+                    value = Integer.valueOf(table.getValueAt(slt[0], j).toString()).intValue();
+                    buff[j - 3 + startAddress + 7] = (byte) value;
+                }
+                buff[519] = ZhiLingJi.getJiaoYan(buff);
+                if (Data.serialPort != null) {
+                    Socket.SerialPortSendData(buff);
+                } else if (Data.socket != null) {
+                    Socket.UDPSendData(buff);
+                }
+                System.arraycopy(buff, 8, bytes, 0, 512);
+                Socket.ArtNetSendData(bytes);//添加artNet数据协议发送
             }
-            buff[519] = ZhiLingJi.getJiaoYan(buff);
-            if (Data.serialPort != null) {
-                Socket.SerialPortSendData(buff);
-            } else if (Data.socket != null) {
-                Socket.UDPSendData(buff);
-            }
-            System.arraycopy(buff, 8, bytes, 0, 512);
-            Socket.ArtNetSendData(bytes);//添加artNet数据协议发送
         }
     }
 

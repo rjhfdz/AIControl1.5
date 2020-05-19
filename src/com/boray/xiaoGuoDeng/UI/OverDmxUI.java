@@ -317,7 +317,7 @@ public class OverDmxUI implements ActionListener {
                     @Override
                     public void run() {
                         review.setEnabled(false);
-                        ReviewBlock.xiaoGuoDuoDengReview(XiaoGuoDengModel.model);
+                        ReviewBlock.xiaoGuoDuoDengReview2(XiaoGuoDengModel.model);
                         review.setEnabled(true);
                     }
                 });
@@ -747,7 +747,7 @@ public class OverDmxUI implements ActionListener {
         menuItem1.addActionListener(copyListener);
         popupMenu.add(menuItem);
         popupMenu.add(menuItem1);
-        runTable.setName("多灯");
+        runTable.setName("效果多灯");
         runTable.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON3) {

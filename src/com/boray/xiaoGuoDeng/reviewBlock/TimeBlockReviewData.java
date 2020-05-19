@@ -338,6 +338,50 @@ public class TimeBlockReviewData {
         return temp;
     }
 
+    /**
+     * 所有多灯 启动预览
+     *
+     * @param sc
+     * @return
+     */
+    public static byte[] getStarReview4(int sc) {
+        byte[] temp = new byte[15];
+        temp[0] = (byte) 0xBB;
+        temp[1] = (byte) 0x55;
+        temp[2] = (byte) ((15) / 256);
+        temp[3] = (byte) ((15) % 256);
+        temp[4] = (byte) 0x87;
+        temp[5] = (byte) 0x01;
+        temp[6] = (byte) 0xF1;
+        temp[7] = (byte) sc;
+        temp[8] = (byte) 0xFF;
+        temp[9] = (byte) 0xFF;
+        temp[14] = ZhiLingJi.getJiaoYan(temp);
+        return temp;
+    }
+
+    /**
+     * 所有多灯 停止预览
+     *
+     * @param sc
+     * @return
+     */
+    public static byte[] getStopReview4(int sc) {
+        byte[] temp = new byte[15];
+        temp[0] = (byte) 0xBB;
+        temp[1] = (byte) 0x55;
+        temp[2] = (byte) ((15) / 256);
+        temp[3] = (byte) ((15) % 256);
+        temp[4] = (byte) 0x87;
+        temp[5] = (byte) 0x01;
+        temp[6] = (byte) 0xF0;
+        temp[7] = (byte) sc;
+        temp[8] = (byte) 0xFF;
+        temp[9] = (byte) 0xFF;
+        temp[14] = ZhiLingJi.getJiaoYan(temp);
+        return temp;
+    }
+
     public static Object[] getEffectLight(int sc, int group, int block, int index) {
         byte[] b = getEffectLightToOne2(sc, group, block, index);
         int packet = (b.length - 9) / 512 + 1;

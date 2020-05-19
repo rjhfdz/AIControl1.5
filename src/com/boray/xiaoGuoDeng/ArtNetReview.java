@@ -6,6 +6,7 @@ import com.boray.Data.ZhiLingJi;
 import com.boray.Utils.RGBData;
 import com.boray.Utils.Socket;
 
+import java.nio.Buffer;
 import java.util.*;
 
 public class ArtNetReview {
@@ -104,11 +105,21 @@ public class ArtNetReview {
         list2 = (List) map.get("rgb3Data");
         neatenRGBData(list, list2, "RGB3");
 
+        List<byte[]> bytes = new ArrayList<>();
         //整理数据后，发送数据
         for (int i = 0; i < list.size(); i++) {
 //            serialPortTest(list.get(i), 100);
-            neatenData(list.get(i),100);
+//            neatenData(list.get(i),100);
+            int[] a = list.get(i);
+            byte[] buff = new byte[512];
+            for (int j = 0; j < a.length; j++) {
+                for (int k = 0; k < startAddress.length; k++) {
+                    buff[startAddress[k] + j - 1] = (byte) a[j];
+                }
+            }
+            bytes.add(buff);
         }
+
         System.out.println();
     }
 
@@ -203,6 +214,165 @@ public class ArtNetReview {
             }
         }
     }
+
+    /**
+     * 整理RGB中的多灯设置
+     *
+     * @param bytes
+     * @param list2
+     * @param type
+     */
+    public void neatenRGBDDuoDengata(List<byte[]> bytes, List list2, String type) {
+        if (list2 != null) {
+            if ((boolean) list2.get(0)) {//启用
+                List<Integer> ints = getRGBTonDaoIndex(type);//获得对应RGB的通道下标
+                int select = Integer.parseInt(list2.get(11).toString());//多灯模式选择
+                boolean flag = (boolean) list2.get(12);//是否拆分反向
+                int speed = Integer.parseInt(list2.get(13).toString()) / 100;//多灯模式时差
+                switch (select) {
+                    case 0://不拆分
+                        break;
+                    case 1://中间拆分
+                        break;
+                    case 2://两端拆分
+                        break;
+                    case 3://跑马灯
+                        break;
+                    case 4://跑马灯(往返)
+                        break;
+                    case 5://跑马灯2
+                        break;
+                    case 6://跑马灯(往返)
+                        break;
+                    case 7://奇数
+                        break;
+                    case 8://奇数(往返)
+                        break;
+                    case 9://偶数
+                        break;
+                    case 10://偶数(往返)
+                        break;
+                    case 11://奇数+偶数
+                        break;
+                    case 12://奇数+偶数(往返)
+                        break;
+                    case 13://偶数+奇数
+                        break;
+                    case 14://偶数+奇数(往返)
+                        break;
+                    case 15://流水灯
+                        break;
+                }
+
+            }
+        }
+    }
+
+    public void RGBDuoDeng1(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
+        List<Set<Integer>> setList = new ArrayList<>();
+        if (startAddress.length % 2 == 0) {
+            int a = (startAddress.length / 2);
+            for (int i = 0; i < a; i++) {
+                Set<Integer> sets = getstartAddressSets();
+                Set<Integer> newSet = new HashSet<>();
+                newSet.add(a - (i + 1));
+                newSet.add(a + i);
+                sets.removeAll(newSet);
+                setList.add(sets);
+            }
+        } else {
+            int a = (startAddress.length + 1) / 2;
+            for (int i = 0; i < a; i++) {
+                if (i == 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(a - 1);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                } else {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(a - (i + 1));
+                    newSet.add(a + (i - 1));
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+        }
+        int a = 0;
+        for (int i = 0; i < bytes.size(); i++) {
+            if ((i + 1) % speed == 0) {
+
+            } else {
+
+            }
+        }
+    }
+
+    public void RGBDuoDeng2() {
+
+    }
+
+    public void RGBDuoDeng3() {
+
+    }
+
+    public void RGBDuoDeng4() {
+
+    }
+
+    public void RGBDuoDeng5() {
+
+    }
+
+    public void RGBDuoDeng6() {
+
+    }
+
+    public void RGBDuoDeng7() {
+
+    }
+
+    public void RGBDuoDeng8() {
+
+    }
+
+    public void RGBDuoDeng9() {
+
+    }
+
+    public void RGBDuoDeng10() {
+
+    }
+
+    public void RGBDuoDeng11() {
+
+    }
+
+    public void RGBDuoDeng12() {
+
+    }
+
+    public void RGBDuoDeng13() {
+
+    }
+
+    public void RGBDuoDeng14() {
+
+    }
+
+    public void RGBDuoDeng15() {
+
+    }
+
+    public Set<Integer> getstartAddressSets() {
+        Set<Integer> sets = new HashSet<>();
+        for (int i = 0; i < startAddress.length; i++) {
+            sets.add(i);
+        }
+        return sets;
+    }
+
 
     /**
      * 获得对应RGB通道下标

@@ -13,6 +13,7 @@ import com.boray.entity.Users;
 import com.boray.main.Listener.CompanyListener;
 import com.boray.main.Listener.CompanyMenuListener;
 import com.boray.main.Listener.LoginListener;
+import com.boray.main.Listener.RegisterListener;
 import com.boray.main.Util.CustomTreeCellRenderer;
 import com.boray.main.Util.CustomTreeNode;
 import com.boray.main.Util.TreeUtil;
@@ -70,15 +71,18 @@ public class CompanyUI {
             pane.add(password);
             JButton clear = new JButton("Çå³ý");
             JButton login = new JButton("µÇÂ¼");
+            JButton register = new JButton("×¢²á");
             login.setName("Company");
             clear.setName("Company");
 
             listener = new LoginListener(pane);
             login.addActionListener(listener);
             clear.addActionListener(listener);
+            register.addActionListener(new RegisterListener());
 
             pane.add(clear);
             pane.add(login);
+            pane.add(register);
             jPanel2.add(jPanel);
             jPanel2.add(pane);
             panel.add(jPanel2, BorderLayout.CENTER);

@@ -3,6 +3,7 @@ package com.boray.Listener;
 import com.boray.Data.Data;
 import com.boray.Data.ZhiLingJi;
 import com.boray.Utils.JIpAddressField;
+import com.boray.Utils.Socket;
 import com.boray.mainUi.MainUi;
 import com.boray.returnListener.IpReturnListener;
 
@@ -129,6 +130,12 @@ public class IpConnectAndOffListener implements ActionListener {
                         }
                     }
                 }, time);
+                new java.util.Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        Socket.SendData(ZhiLingJi.quanJuSetData());
+                    }
+                },2000);
             } catch (BindException ex) {
                 JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "8090端口或8089端口被占用!", "提示", JOptionPane.ERROR_MESSAGE);
                 ex.printStackTrace();

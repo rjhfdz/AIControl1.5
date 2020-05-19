@@ -74,6 +74,7 @@ public class ProjectCreateFileActionListener implements ActionListener {
 
             //场景配置区
             xmlEncoder.writeObject(DataOfChangJing.map);
+            xmlEncoder.writeObject(DataOfChangJing.timeMap);
 
             //中控学习区
             //串口墙板
@@ -185,6 +186,7 @@ public class ProjectCreateFileActionListener implements ActionListener {
             NewJTable table = (NewJTable) MainUi.map.get("table_DkGl");
             DefaultTableModel model = (DefaultTableModel) table.getModel();
             xmlEncoder.writeObject(model.getDataVector());
+            xmlEncoder.writeObject(Data.dengKuTonDaoList);
             ////////////////灯具///////////////////
             table = (NewJTable) MainUi.map.get("table_dengJu");
             if (table.isEditing()) {

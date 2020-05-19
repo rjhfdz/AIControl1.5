@@ -266,7 +266,7 @@ public class GuangLiUI implements ActionListener {
             channeLabels_L[i].setFocusable(false);
             //channeLabels_L[i].setVisible(false);
             channelBoxs_L[i].setFocusable(false);
-            channelBoxs_L[i].setEditable(true);
+            channelBoxs_L[i].setEditable(false);
             channelBoxs_L[i].setEnabled(false);
             //channelBoxs_L[i].setVisible(false);
             channelBoxs_L[i].addItemListener(listener);
@@ -333,12 +333,12 @@ public class GuangLiUI implements ActionListener {
         headPane.add(versionField);
         JPanel NULLPane = new JPanel();
         NULLPane.setPreferredSize(new Dimension(242, 30));
-        //headPane.add(NULLPane);
+//        headPane.add(NULLPane);
         headPane.setBorder(BorderFactory.createEmptyBorder(-5, 0, 0, 0));
 
         headPane.add(exportBtn);
         headPane.add(importBtn);
-//        headPane.add(customBtn);
+        headPane.add(customBtn);
         pane.add(headPane);
         JLabel labe = new JLabel(" ");
         labe.setPreferredSize(new Dimension(188, 28));

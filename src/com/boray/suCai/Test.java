@@ -24,24 +24,25 @@ public abstract class Test {
     public static void main(String[] args) throws IOException  {
 
         //创建发送端Socket对象
-        DatagramSocket ds = new DatagramSocket();
-
-        //创建数据并打包
-        String s = "A001A908020104FE";    //要发送的数据
-
-        byte[] bys = test1();  //将数据放在字节数组中
-        int length = bys.length;    //字节数组的长度
-        InetAddress address = InetAddress.getByName("128.8.3.101"); //目的地址
-        int port = 8089;  //设置端口号
-
-        //打包
-        DatagramPacket dp = new DatagramPacket(bys,length,address,port);
-
-        //发送数据
-        ds.send(dp);
-
-        //释放资源
-        ds.close();
+//        DatagramSocket ds = new DatagramSocket();
+//
+//        //创建数据并打包
+//        String s = "A001A908020104FE";    //要发送的数据
+//
+//        byte[] bys = test1();  //将数据放在字节数组中
+//        int length = bys.length;    //字节数组的长度
+//        InetAddress address = InetAddress.getByName("128.8.3.101"); //目的地址
+//        int port = 8089;  //设置端口号
+//
+//        //打包
+//        DatagramPacket dp = new DatagramPacket(bys,length,address,port);
+//
+//        //发送数据
+//        ds.send(dp);
+//
+//        //释放资源
+//        ds.close();
+        System.out.println(6%2);
     }
 
     public static byte[] test1(){

@@ -82,11 +82,11 @@ public class AddGroupUI implements ActionListener {
                         timeBlockPanels[table.getRowCount()].removeAll();
                         for (int j = 0; j < timeBlockPanels[0].getComponentCount(); j++) {
                             int c = timeBlockPanels[table.getRowCount()].getComponentCount();
-                            DefineJLable_shengKon2 label2 = new DefineJLable_shengKon2((c + 1) + "", timeBlockPanels[i]);
+                            DefineJLable_shengKon2 label2 = new DefineJLable_shengKon2((c + 1) + "", timeBlockPanels[table.getRowCount()]);
                             DefineJLable_shengKon defineJLable = (DefineJLable_shengKon) timeBlockPanels[0].getComponent(j);
                             label2.setPreferredSize(defineJLable.getPreferredSize());
-                            label2.setLocation(new Point(defineJLable.getLocation().x,defineJLable.getLocation().y));
-                            label2.setSize(defineJLable.getWidth(),defineJLable.getHeight());
+                            label2.setLocation(new Point(defineJLable.getLocation().x, defineJLable.getLocation().y));
+                            label2.setSize(defineJLable.getWidth(), defineJLable.getHeight());
                             label2.setBackground(Color.red);
                             timeBlockPanels[table.getRowCount()].add(label2);
                         }

@@ -52,6 +52,10 @@ public class CopyToTimeBlockEdit implements ActionListener {
                     JOptionPane.showMessageDialog(frame, "粘贴失败，总步骤数不能超过32步！", "提示", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+                if ((table_DMX.getName().equals("效果多灯")) && data.length + table_DMX.getRowCount() > 128) {
+                    JOptionPane.showMessageDialog(frame, "粘贴失败，总步骤数不能超过128步！", "提示", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 DefaultTableModel modelTemp = (DefaultTableModel) table_DMX.getModel();
                 int lastSelect = table_DMX.getRowCount() - 1;
                 int[] selects = table_DMX.getSelectedRows();

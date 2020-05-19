@@ -8,6 +8,7 @@ import com.boray.entity.ProjectFile;
 import com.boray.entity.Users;
 import com.boray.main.Listener.LoginListener;
 import com.boray.main.Listener.MineButtonListener;
+import com.boray.main.Listener.RegisterListener;
 import com.boray.main.Listener.ShareListener;
 import com.boray.main.Util.CustomTreeCellRenderer;
 import com.boray.main.Util.CustomTreeNode;
@@ -48,15 +49,18 @@ public class ShareUI {
             pane.add(password);
             JButton clear = new JButton("Çå³ý");
             JButton login = new JButton("µÇÂ¼");
+            JButton register = new JButton("×¢²á");
             login.setName("Share");
             clear.setName("Share");
 
             listener = new LoginListener(pane);
             login.addActionListener(listener);
             clear.addActionListener(listener);
+            register.addActionListener(new RegisterListener());
 
             pane.add(clear);
             pane.add(login);
+            pane.add(register);
             jPanel2.add(jPanel);
             jPanel2.add(pane);
             panel.add(jPanel2, BorderLayout.CENTER);

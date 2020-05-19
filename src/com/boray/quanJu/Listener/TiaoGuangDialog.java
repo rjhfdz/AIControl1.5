@@ -30,6 +30,7 @@ import javax.swing.event.ChangeListener;
 
 import com.boray.Data.Data;
 import com.boray.Data.ZhiLingJi;
+import com.boray.Utils.Socket;
 import com.boray.mainUi.MainUi;
 
 public class TiaoGuangDialog implements ActionListener{
@@ -49,7 +50,6 @@ public class TiaoGuangDialog implements ActionListener{
 		dialog.setLocation(f.getLocation().x+f.getSize().width/2-300,f.getLocation().y+f.getSize().height/2-165);
 		dialog.setSize(600, 330);
 		init(dialog);
-		tiaoGuangSendCode.setData();
 		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		dialog.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
@@ -86,16 +86,17 @@ public class TiaoGuangDialog implements ActionListener{
 		new ShowAndSaveTiaoGuang().show();
 		new Thread(new Runnable() {
 			public void run() {
-				if (Data.serialPort != null) {
-					try {
-						OutputStream os = Data.serialPort.getOutputStream();
-						os.write(ZhiLingJi.changJingChaXun(25));
-						os.flush();
-						os.close();
-					} catch (Exception e2) {
-						e2.printStackTrace();
-					}
-				}
+//				if (Data.serialPort != null) {
+//					try {
+//						OutputStream os = Data.serialPort.getOutputStream();
+//						os.write(ZhiLingJi.changJingChaXun(25));
+//						os.flush();
+//						os.close();
+//					} catch (Exception e2) {
+//						e2.printStackTrace();
+//					}
+//				}
+				Socket.SendData(ZhiLingJi.changJingChaXun(25));
 			}
 		}).start();
 		dialog.add(p1);dialog.add(p2);

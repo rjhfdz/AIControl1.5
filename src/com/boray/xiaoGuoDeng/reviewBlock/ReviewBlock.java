@@ -219,6 +219,41 @@ public class ReviewBlock {
 
                 //∆Ù∂Ø‘§¿¿
                 Thread.sleep(200);
+                b = TimeBlockReviewData.getStarReview4(model);
+                Socket.SerialPortSendData(b);
+            } else if (Data.socket != null) {
+                byte[] b = null;
+                Object[] objects = TimeBlockReviewData.getEffectLight4(1280, model, 18, false);
+                for (int i = 0; i < objects.length; i++) {
+                    b = (byte[]) objects[i];
+                    Socket.UDPSendData(b);
+                    Thread.sleep(230);
+                }
+
+                //∆Ù∂Ø‘§¿¿
+                Thread.sleep(200);
+                b = TimeBlockReviewData.getStarReview4(model);
+                Socket.UDPSendData(b);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void xiaoGuoDuoDengReview2(int model) {
+        try {
+            if (Data.serialPort != null) {
+                //∂‡µ∆ ˝æ›
+                byte[] b = null;
+                Object[] objects = TimeBlockReviewData.getEffectLight4(4096, model, 18, false);
+                for (int i = 0; i < objects.length; i++) {
+                    b = (byte[]) objects[i];
+                    Socket.SerialPortSendData(b);
+                    Thread.sleep(200);
+                }
+
+                //∆Ù∂Ø‘§¿¿
+                Thread.sleep(200);
                 b = TimeBlockReviewData.getStarReview3(model);
                 Socket.SerialPortSendData(b);
             } else if (Data.socket != null) {

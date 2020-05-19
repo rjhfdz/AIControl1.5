@@ -9,20 +9,22 @@ import javax.swing.JRadioButton;
 
 import com.boray.Data.Data;
 import com.boray.Data.ZhiLingJi;
+import com.boray.Utils.Socket;
 import com.boray.mainUi.MainUi;
 
 public class ComboxItemListener implements ItemListener{
 	public void itemStateChanged(ItemEvent e) {
 		if (ItemEvent.SELECTED == e.getStateChange()) {
-			if (Data.serialPort != null) {
-				try {
-					OutputStream os = Data.serialPort.getOutputStream();
-					os.write(code());
-					os.flush();
-					os.close();
-				} catch (Exception e2) {
-					e2.printStackTrace();
-				}
+			if (Data.serialPort != null|| Data.socket!=null) {
+				Socket.SendData(code());
+//				try {
+//					OutputStream os = Data.serialPort.getOutputStream();
+//					os.write(code());
+//					os.flush();
+//					os.close();
+//				} catch (Exception e2) {
+//					e2.printStackTrace();
+//				}
 			}
 		}
 	}

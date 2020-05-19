@@ -16,34 +16,34 @@ import com.boray.mainUi.MainUi;
 public class DengJuKaiGuangItemListener implements ItemListener {
     public void itemStateChanged(ItemEvent e) {
         if (ItemEvent.SELECTED == e.getStateChange()) {
-            if (Data.serialPort != null) {
-                try {
-                    OutputStream os = Data.serialPort.getOutputStream();
-                    os.write(code());
-                    os.flush();
-                    os.close();
-                } catch (Exception e2) {
-                    e2.printStackTrace();
-                }
-            } else if (Data.socket != null) {
-                Socket.UDPSendData(code());
+            if (Data.serialPort != null||Data.socket!=null) {
+                Socket.SendData(code());
+//                try {
+//                    OutputStream os = Data.serialPort.getOutputStream();
+//                    os.write(code());
+//                    os.flush();
+//                    os.close();
+//                } catch (Exception e2) {
+//                    e2.printStackTrace();
+//                }
             }
         }
     }
 
     public void sendData(){
-        if (Data.serialPort != null) {
-            try {
-                OutputStream os = Data.serialPort.getOutputStream();
-                os.write(code());
-                os.flush();
-                os.close();
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-        } else if (Data.socket != null) {
-            Socket.UDPSendData(code());
-        }
+        if (Data.serialPort != null||Data.socket!=null) {
+            Socket.SendData(code());
+//            try {
+//                OutputStream os = Data.serialPort.getOutputStream();
+//                os.write(code());
+//                os.flush();
+//                os.close();
+//            } catch (Exception e2) {
+//                e2.printStackTrace();
+//            }
+        } /*else if (Data.socket != null) {
+//            Socket.UDPSendData(code());
+//        }*/
     }
 
     public byte[] code() {

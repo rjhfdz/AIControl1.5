@@ -2,6 +2,7 @@ package com.boray.changJing.UI;
 
 import com.boray.Data.ChangJinData;
 import com.boray.Data.Data;
+import com.boray.Utils.Socket;
 import com.boray.changJing.Listener.*;
 import com.boray.mainUi.MainUi;
 
@@ -62,7 +63,7 @@ public class ProgrammePaneUI {
 
         dengGuangBoxs.addItemListener(changJingSelectItemListener);
         gonNengBoxs.addItemListener(changJingSelectItemListener);
-        label.setText("正在编辑：【"+dengGuangBoxs.getSelectedIndex()+"】场景");
+        label.setText("正在编辑：【" + dengGuangBoxs.getSelectedIndex() + "】场景");
 
         DengJuKaiGuangItemListener itemListener = new DengJuKaiGuangItemListener();
 
@@ -81,29 +82,44 @@ public class ProgrammePaneUI {
 
         JPanel[] panels8 = new JPanel[8];
         JLabel[] labels8 = new JLabel[8];
+        JTextField[] field8 = new JTextField[6];
+//        JSlider[] sliders8 = new JSlider[6];
         JComboBox[] boxs8 = new JComboBox[8];
         MainUi.map.put("kaiGuangBox_BuKeTiao", boxs8);
+        MainUi.map.put("kaiGuangField_BuKeTiao", field8);
         for (int i = 0; i < boxs8.length; i++) {
             labels8[i] = new JLabel("灯" + (i + 1));
             boxs8[i] = new JComboBox();
-            boxs8[i].setBorder(BorderFactory.createEmptyBorder(-2, 0, -2, 0));
+            boxs8[i].setBorder(BorderFactory.createEmptyBorder(0, 0, -2, 0));
             boxs8[i].addItem("开");
             boxs8[i].addItem("关");
             boxs8[i].addItem("保持");
             boxs8[i].addItemListener(itemListener);
-            boxs8[i].setPreferredSize(new Dimension(90, 30));
+            boxs8[i].setPreferredSize(new Dimension(80, 24));
+            if(i>=6){
+                continue;
+            }
+            field8[i] = new JTextField();
+            field8[i].setPreferredSize(new Dimension(60, 30));
+            field8[i].setText("100");
+//            sliders8[i] = new JSlider(0,200,1);
+//            sliders8[i].setPreferredSize(new Dimension(70, 24));
             panels8[i] = new JPanel();
-            panels8[i].setPreferredSize(new Dimension(100, 160));
+            panels8[i].setPreferredSize(new Dimension(160, 130));
             panels8[i].setLayout(flowLayout2);
             panels8[i].add(labels8[i]);
             panels8[i].add(boxs8[i]);
+            panels8[i].add(new JLabel("   延时"));
+            panels8[i].add(field8[i]);
+//            panels8[i].add(sliders8[i]);
+            panels8[i].add(new JLabel("毫秒"));
             p9.add(panels8[i]);
         }
         JPanel p10 = new JPanel();
         TitledBorder tb8 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "可调设置", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         p10.setBorder(tb8);
-        p10.setPreferredSize(new Dimension(440, 160));
-        p10.setLayout(flowLayout5);
+        p10.setPreferredSize(new Dimension(440, 135));
+        p10.setLayout(flowLayout7);
 //        panel.add(p10);
 
         JPanel[] panels = new JPanel[4];
@@ -111,25 +127,27 @@ public class ProgrammePaneUI {
         JComboBox[] boxs1 = new JComboBox[4];
         final JSlider[] sliders = new JSlider[4];
         final JComboBox[] boxs2 = new JComboBox[4];
+        JTextField[] fields2 = new JTextField[2];
         MainUi.map.put("kaiGuangBox", boxs1);
         MainUi.map.put("liangDuSliders", sliders);
         MainUi.map.put("liangDuBoxs", boxs2);
+        MainUi.map.put("liangDufields", fields2);
         for (int i = 0; i < boxs2.length; i++) {
             final int a = i;
             labels[i] = new JLabel("灯" + (i + 1));
-            labels[i].setBorder(BorderFactory.createEmptyBorder(-2, 0, -2, 0));
+            labels[i].setBorder(BorderFactory.createEmptyBorder(0, 0, -2, 0));
             //labels[i].setBorder(new LineBorder(Color.black));
             boxs1[i] = new JComboBox();
-            boxs1[i].setBorder(BorderFactory.createEmptyBorder(-2, 0, -2, 0));
+            boxs1[i].setBorder(BorderFactory.createEmptyBorder(0, 0, -2, 0));
             boxs1[i].addItem("开");
             boxs1[i].addItem("关");
             boxs1[i].addItem("保持");
             boxs1[i].addItemListener(itemListener);
-            boxs1[i].setPreferredSize(new Dimension(90, 24));
+            boxs1[i].setPreferredSize(new Dimension(70, 24));
             sliders[i] = new JSlider(0, 100, 0);
             sliders[i].setMinorTickSpacing(2);
-            sliders[i].setOrientation(SwingConstants.VERTICAL);
-            sliders[i].setPreferredSize(new Dimension(30, 70));
+//            sliders[i].setOrientation(SwingConstants.VERTICAL);
+            sliders[i].setPreferredSize(new Dimension(70, 30));
             sliders[i].addChangeListener(new ChangeListener() {
                 public void stateChanged(ChangeEvent e) {
                     if (sliders[a].getValue() % 2 != 0) {
@@ -149,35 +167,39 @@ public class ProgrammePaneUI {
                         cc = cc + 1;
                         sliders[a].setValue(cc);
                     }
-                    if (Data.serialPort != null) {
-                        try {
-                            OutputStream os = Data.serialPort.getOutputStream();
-                            os.write(new DengJuKaiGuangItemListener().code());
-                            os.flush();
-                            os.close();
-                        } catch (Exception e2) {
-                            e2.printStackTrace();
-                        }
-                    }
+                    if (Data.serialPort != null || Data.socket != null)
+                        Socket.SendData(new DengJuKaiGuangItemListener().code());
+//                    if (Data.serialPort != null) {
+//                        try {
+//                            OutputStream os = Data.serialPort.getOutputStream();
+//                            os.write(new DengJuKaiGuangItemListener().code());
+//                            os.flush();
+//                            os.close();
+//                        } catch (Exception e2) {
+//                            e2.printStackTrace();
+//                        }
+//                    }
                 }
             });
             boxs2[i] = new JComboBox();
-            boxs2[i].setPreferredSize(new Dimension(90, 24));
-            boxs2[i].setBorder(BorderFactory.createEmptyBorder(-2, 0, -2, 0));
+            boxs2[i].setPreferredSize(new Dimension(70, 24));
+            boxs2[i].setBorder(BorderFactory.createEmptyBorder(0, 0, -2, 0));
             boxs2[i].addItemListener(new ItemListener() {
                 public void itemStateChanged(ItemEvent e) {
                     if (ItemEvent.SELECTED == e.getStateChange()) {
                         sliders[a].setValue(Integer.valueOf(boxs2[a].getSelectedItem().toString()));
-                        if (Data.serialPort != null) {
-                            try {
-                                OutputStream os = Data.serialPort.getOutputStream();
-                                os.write(new DengJuKaiGuangItemListener().code());
-                                os.flush();
-                                os.close();
-                            } catch (Exception e2) {
-                                e2.printStackTrace();
-                            }
-                        }
+                        if (Data.serialPort != null || Data.socket != null)
+                            Socket.SendData(new DengJuKaiGuangItemListener().code());
+//                        if (Data.serialPort != null) {
+//                            try {
+//                                OutputStream os = Data.serialPort.getOutputStream();
+//                                os.write(new DengJuKaiGuangItemListener().code());
+//                                os.flush();
+//                                os.close();
+//                            } catch (Exception e2) {
+//                                e2.printStackTrace();
+//                            }
+//                        }
                     }
                 }
             });
@@ -186,15 +208,27 @@ public class ProgrammePaneUI {
                     boxs2[i].addItem(String.valueOf(j));
                 }
             }
+            if (i >= 2) {
+                continue;
+            }
+            fields2[i] = new JTextField();
+            fields2[i].setPreferredSize(new Dimension(60, 30));
+            fields2[i].setText("100");
         }
         for (int i = 0; i < panels.length; i++) {
+            if (i >= 2) {
+                continue;
+            }
             panels[i] = new JPanel();
-            panels[i].setPreferredSize(new Dimension(95, 160));
+            panels[i].setPreferredSize(new Dimension(430, 70));
             panels[i].setLayout(flowLayout2);
             panels[i].add(labels[i]);
             panels[i].add(boxs1[i]);
             panels[i].add(sliders[i]);
             panels[i].add(boxs2[i]);
+            panels[i].add(new JLabel("   延时"));
+            panels[i].add(fields2[i]);
+            panels[i].add(new JLabel("毫秒"));
             p10.add(panels[i]);
         }
 
@@ -202,13 +236,13 @@ public class ProgrammePaneUI {
         T3(panel3);
         TitledBorder tb3 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "复制", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         panel3.setBorder(tb3);
-        panel3.setPreferredSize(new Dimension(560, 75));
+        panel3.setPreferredSize(new Dimension(560, 65));
 
         JPanel panel6 = new JPanel();
         T6(panel6);
         TitledBorder tb6 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "雾机控制模式", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         panel6.setBorder(tb6);
-        panel6.setPreferredSize(new Dimension(560, 75));
+        panel6.setPreferredSize(new Dimension(560, 65));
 
         JPanel panel2 = new JPanel();
         T2(panel2);
@@ -229,11 +263,11 @@ public class ProgrammePaneUI {
         panel5.setPreferredSize(new Dimension(1010, 80));
 
         JPanel jPanel = new JPanel();
-        jPanel.setPreferredSize(new Dimension(1010, 165));
+        jPanel.setPreferredSize(new Dimension(1010, 145));
         jPanel.setLayout(flowLayout5);
         jPanel.add(p10);
         JPanel jPanel1 = new JPanel();
-        jPanel1.setPreferredSize(new Dimension(570, 165));
+        jPanel1.setPreferredSize(new Dimension(570, 145));
         jPanel1.add(panel3);
         jPanel1.add(panel6);
         jPanel.add(jPanel1);
@@ -281,16 +315,18 @@ public class ProgrammePaneUI {
                     cc = cc + 1;
                     slider.setValue(cc);
                 }
-                if (Data.serialPort != null) {
-                    try {
-                        OutputStream os = Data.serialPort.getOutputStream();
-                        os.write(new DengJuKaiGuangItemListener().code());
-                        os.flush();
-                        os.close();
-                    } catch (Exception e2) {
-                        e2.printStackTrace();
-                    }
-                }
+                if (Data.serialPort != null || Data.socket != null)
+                    Socket.SendData(new DengJuKaiGuangItemListener().code());
+//                if (Data.serialPort != null) {
+//                    try {
+//                        OutputStream os = Data.serialPort.getOutputStream();
+//                        os.write(new DengJuKaiGuangItemListener().code());
+//                        os.flush();
+//                        os.close();
+//                    } catch (Exception e2) {
+//                        e2.printStackTrace();
+//                    }
+//                }
             }
         });
         box.setPreferredSize(new Dimension(60, 28));
@@ -298,16 +334,18 @@ public class ProgrammePaneUI {
             public void itemStateChanged(ItemEvent e) {
                 if (ItemEvent.SELECTED == e.getStateChange()) {
                     slider.setValue(Integer.valueOf(box.getSelectedItem().toString()));
-                    if (Data.serialPort != null) {
-                        try {
-                            OutputStream os = Data.serialPort.getOutputStream();
-                            os.write(new DengJuKaiGuangItemListener().code());
-                            os.flush();
-                            os.close();
-                        } catch (Exception e2) {
-                            e2.printStackTrace();
-                        }
-                    }
+                    if (Data.serialPort != null || Data.socket != null)
+                        Socket.SendData(new DengJuKaiGuangItemListener().code());
+//                    if (Data.serialPort != null) {
+//                        try {
+//                            OutputStream os = Data.serialPort.getOutputStream();
+//                            os.write(new DengJuKaiGuangItemListener().code());
+//                            os.flush();
+//                            os.close();
+//                        } catch (Exception e2) {
+//                            e2.printStackTrace();
+//                        }
+//                    }
                 }
             }
         });
@@ -478,7 +516,7 @@ public class ProgrammePaneUI {
         JComboBox box = new JComboBox();
         box.addItemListener(itemListener8);
         MainUi.map.put("wuJiModelBox", box);
-        box.setPreferredSize(new Dimension(100, 40));
+        box.setPreferredSize(new Dimension(100, 30));
         box.addItem("关");
         box.addItem("保持");
         for (int i = 1; i < 5; i++) {
@@ -503,7 +541,7 @@ public class ProgrammePaneUI {
         chdPane.add(label);
         JComboBox box = new JComboBox();
         MainUi.map.put("copyBox", box);
-        box.setPreferredSize(new Dimension(100, 40));
+        box.setPreferredSize(new Dimension(100, 30));
         for (int i = 0; i < 37; i++) {
             box.addItem(String.valueOf(i));
         }
