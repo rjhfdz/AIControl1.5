@@ -692,7 +692,7 @@ public class TimeBlockEditUI {
 
             names[i].setFont(f1);
             names[i].setPreferredSize(new Dimension(42, 30));
-            names[i].setBorder(BorderFactory.createEmptyBorder(-10, 0, -10, 0));
+            names[i].setBorder(BorderFactory.createEmptyBorder(0, 2, -10, 2));
             //names[i].setPreferredSize(new Dimension(42,30));
             DmxValues[i] = new JLabel("" + (i + 1));
             //names[i].setBorder(new LineBorder(Color.black));

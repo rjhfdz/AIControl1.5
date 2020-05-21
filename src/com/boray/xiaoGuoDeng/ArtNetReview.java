@@ -119,26 +119,38 @@ public class ArtNetReview {
             }
             bytes.add(buff);
         }
-
+        //RGB1 多灯设置
+        list2 = (List) map.get("rgb1Data");
+        neatenRGBDDuoDengata(bytes, list2, "RGB1");
+        //RGB2
+        list2 = (List) map.get("rgb2Data");
+        neatenRGBDDuoDengata(bytes, list2, "RGB2");
+        //RGB3
+        list2 = (List) map.get("rgb3Data");
+        neatenRGBDDuoDengata(bytes, list2, "RGB3");
+        //artnet协议发送数据
+        neatenData(bytes, 100);
         System.out.println();
     }
 
     /**
      * artnet协议发送数据
      *
-     * @param a
+     * @param bytes
      * @param time
      */
-    public void neatenData(int[] a, int time) {
+    public void neatenData(List<byte[]> bytes, int time) {
         try {
-            byte[] bytes = new byte[512];
-            for (int j = 0; j < a.length; j++) {
-                for (int i = 0; i < startAddress.length; i++) {
-                    bytes[startAddress[i] + j - 1] = (byte) a[j];
-                }
+//            byte[] bytes = new byte[512];
+//            for (int j = 0; j < a.length; j++) {
+//                for (int i = 0; i < startAddress.length; i++) {
+//                    bytes[startAddress[i] + j - 1] = (byte) a[j];
+//                }
+//            }
+            for (int i = 0; i < bytes.size(); i++) {
+                Socket.ArtNetSendData(bytes.get(i));//添加artNet数据协议发送
+                Thread.sleep(time);
             }
-            Socket.ArtNetSendData(bytes);//添加artNet数据协议发送
-            Thread.sleep(time);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -233,8 +245,10 @@ public class ArtNetReview {
                     case 0://不拆分
                         break;
                     case 1://中间拆分
+                        RGBDuoDeng1(ints, flag, speed, bytes);
                         break;
                     case 2://两端拆分
+                        RGBDuoDeng2(ints, flag, speed, bytes);
                         break;
                     case 3://跑马灯
                         break;
@@ -268,56 +282,152 @@ public class ArtNetReview {
         }
     }
 
-    public void RGBDuoDeng1(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
-        List<Set<Integer>> setList = new ArrayList<>();
-        if (startAddress.length % 2 == 0) {
-            int a = (startAddress.length / 2);
-            for (int i = 0; i < a; i++) {
-                Set<Integer> sets = getstartAddressSets();
-                Set<Integer> newSet = new HashSet<>();
-                newSet.add(a - (i + 1));
-                newSet.add(a + i);
-                sets.removeAll(newSet);
-                setList.add(sets);
-            }
-        } else {
-            int a = (startAddress.length + 1) / 2;
-            for (int i = 0; i < a; i++) {
-                if (i == 0) {
-                    Set<Integer> sets = getstartAddressSets();
-                    Set<Integer> newSet = new HashSet<>();
-                    newSet.add(a - 1);
-                    sets.removeAll(newSet);
-                    setList.add(sets);
-                } else {
-                    Set<Integer> sets = getstartAddressSets();
-                    Set<Integer> newSet = new HashSet<>();
-                    newSet.add(a - (i + 1));
-                    newSet.add(a + (i - 1));
-                    sets.removeAll(newSet);
-                    setList.add(sets);
+    /**
+     * 根据rgb所选的设置，计算地址，并处理数据
+     * @param setList
+     * @param ints
+     * @param bytes
+     * @param speed
+     */
+    public void setRGBDuoDengData(List<Set<Integer>> setList, List<Integer> ints, List<byte[]> bytes, int speed) {
+        //计算对应灯组的rgb起始地址
+        List<Set<Integer>> RGBStartAddress = new ArrayList<>();
+        for (int i = 0; i < setList.size(); i++) {
+            Set<Integer> set = setList.get(i);
+            Set<Integer> newSet = new HashSet<>();
+            for (Integer s : set) {
+                for (int k = 0; k < ints.size(); k++) {
+                    newSet.add(startAddress[s] + ints.get(k));
                 }
             }
+            RGBStartAddress.add(newSet);
         }
         int a = 0;
         for (int i = 0; i < bytes.size(); i++) {
             if ((i + 1) % speed == 0) {
-
+                a++;
+                if (a > RGBStartAddress.size())
+                    a = 0;
             } else {
-
+                Set<Integer> set = RGBStartAddress.get(a);
+                for (Integer s : set) {
+                    bytes.get(i)[s] = 0;
+                }
             }
         }
     }
 
-    public void RGBDuoDeng2() {
+    /**
+     * 中间拆分
+     *
+     * @param ints
+     * @param flag
+     * @param speed
+     * @param bytes
+     */
+    public void RGBDuoDeng1(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
+        if (flag) {//是否拆分反向
+            RGBDuoDeng2(ints, false, speed, bytes);
+        } else {
+            List<Set<Integer>> setList = new ArrayList<>();
+            if (startAddress.length % 2 == 0) {
+                int a = (startAddress.length / 2);
+                for (int i = 0; i < a; i++) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(a - (i + 1));
+                    newSet.add(a + i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            } else {
+                int a = (startAddress.length + 1) / 2;
+                for (int i = 0; i < a; i++) {
+                    if (i == 0) {
+                        Set<Integer> sets = getstartAddressSets();
+                        Set<Integer> newSet = new HashSet<>();
+                        newSet.add(a - 1);
+                        sets.removeAll(newSet);
+                        setList.add(sets);
+                    } else {
+                        Set<Integer> sets = getstartAddressSets();
+                        Set<Integer> newSet = new HashSet<>();
+                        newSet.add(a - (i + 1));
+                        newSet.add(a + (i - 1));
+                        sets.removeAll(newSet);
+                        setList.add(sets);
+                    }
+                }
+            }
+            setRGBDuoDengData(setList, ints, bytes, speed);
+        }
+    }
+
+    /**
+     * 两端拆分
+     *
+     * @param ints
+     * @param flag
+     * @param speed
+     * @param bytes
+     */
+    public void RGBDuoDeng2(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
+        if (flag) {
+            RGBDuoDeng1(ints, false, speed, bytes);
+        } else {
+            List<Set<Integer>> setList = new ArrayList<>();
+            if (startAddress.length % 2 == 0) {
+                int a = (startAddress.length / 2);
+                for (int i = 0; i < a; i++) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    newSet.add(startAddress.length - (i + 1));
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            } else {
+                int a = (startAddress.length + 1) / 2;
+                for (int i = 0; i < a; i++) {
+                    if (i == a) {
+                        Set<Integer> sets = getstartAddressSets();
+                        Set<Integer> newSet = new HashSet<>();
+                        newSet.add(a - 1);
+                        sets.removeAll(newSet);
+                        setList.add(sets);
+                    } else {
+                        Set<Integer> sets = getstartAddressSets();
+                        Set<Integer> newSet = new HashSet<>();
+                        newSet.add(i);
+                        newSet.add(startAddress.length - (i + 1));
+                        sets.removeAll(newSet);
+                        setList.add(sets);
+                    }
+                }
+            }
+            setRGBDuoDengData(setList, ints, bytes, speed);
+        }
+    }
+
+    /**
+     * 跑马灯
+     * @param ints
+     * @param flag
+     * @param speed
+     * @param bytes
+     */
+    public void RGBDuoDeng3(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
 
     }
 
-    public void RGBDuoDeng3() {
-
-    }
-
-    public void RGBDuoDeng4() {
+    /**
+     * 跑马灯(往返)
+     * @param ints
+     * @param flag
+     * @param speed
+     * @param bytes
+     */
+    public void RGBDuoDeng4(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
 
     }
 

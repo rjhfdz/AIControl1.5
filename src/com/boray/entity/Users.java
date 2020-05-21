@@ -7,6 +7,25 @@ public class Users {
     private String id;
     private Integer loginstatus;//µÇÂ¼×´Ì¬
 
+	private String usercode;//ÓÃ»§±àºÅ
+	private Integer code;//µÇÂ¼×´Ì¬
+
+	public String getUsercode() {
+		return usercode;
+	}
+
+	public void setUsercode(String usercode) {
+		this.usercode = usercode;
+	}
+
+	public Integer getCode() {
+		return code;
+	}
+
+	public void setCode(Integer code) {
+		this.code = code;
+	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}

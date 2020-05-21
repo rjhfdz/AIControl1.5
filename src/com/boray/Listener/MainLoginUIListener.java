@@ -65,14 +65,14 @@ public class MainLoginUIListener implements ActionListener {
             IpConfig config = new IpConfig();
             config.getIpConfig();
             Map<String, String> param = new HashMap<>();
-            param.put("username", username);
-            param.put("userpassword", password);
-            String request = HttpClientUtil.doGet(Data.ipPort + "logindl", param);
+            param.put("logincode", username);
+            param.put("password", password);
+            String request = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/login", param);
             Users users = JSON.parseObject(request, Users.class);
-            if (users != null && !users.getLoginstatus().equals(0)) {
-                if (Data.RememberPassword) {
-                    Data.userLogin.put(Util.encode(username), Util.encode(password));
-                }
+            if (users != null && !users.getCode().equals(-1)) {
+//                if (Data.RememberPassword) {
+//                    Data.userLogin.put(Util.encode(username), Util.encode(password));
+//                }
                 MainUi.map.put("Users", users);
                 frame.getContentPane().removeAll();
                 //È¥µô±³¾°Í¼

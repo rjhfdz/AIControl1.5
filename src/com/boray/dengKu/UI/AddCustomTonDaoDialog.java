@@ -28,7 +28,7 @@ public class AddCustomTonDaoDialog implements ActionListener, WindowListener {
         dialog = new JDialog(frame, true);
         dialog.setResizable(false);
         dialog.setTitle("自定义通道");
-        int w = 400, h = 300;
+        int w = 800, h = 600;
         dialog.setLocation(frame.getLocation().x + frame.getSize().width / 2 - w / 2, frame.getLocation().y + frame.getSize().height / 2 - h / 2);
         dialog.setSize(w, h);
         dialog.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -50,7 +50,7 @@ public class AddCustomTonDaoDialog implements ActionListener, WindowListener {
         panel.add(btn1);
 
         JScrollPane bodyPane = new JScrollPane();
-        bodyPane.setPreferredSize(new Dimension(380, 280));
+        bodyPane.setPreferredSize(new Dimension(780, 520));
         Object[][] data = {};
         String[] title = {"ID", "通道名称"};
         DefaultTableModel model = new DefaultTableModel(data, title);
@@ -77,6 +77,7 @@ public class AddCustomTonDaoDialog implements ActionListener, WindowListener {
                 return cell;
             }
         };
+//        cellRenderer.setHorizontalAlignment(JLabel.CENTER);
         for (int i = 0; i < title.length; i++) {
             table.getColumn(table.getColumnName(i)).setCellRenderer(cellRenderer);
         }
@@ -85,13 +86,13 @@ public class AddCustomTonDaoDialog implements ActionListener, WindowListener {
         table.getTableHeader().setReorderingAllowed(false);
         table.setOpaque(false);
         table.setFont(new Font(Font.SERIF, Font.BOLD, 14));
-        table.getColumnModel().getColumn(0).setPreferredWidth(30);
-        table.getColumnModel().getColumn(1).setPreferredWidth(102);
+//        table.getColumnModel().getColumn(0).setPreferredWidth(30);
+//        table.getColumnModel().getColumn(1).setPreferredWidth(102);
         table.setRowHeight(30);
         bodyPane.setViewportView(table);
 
         initData();
-
+//        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent mouseEvent) {
                 if (mouseEvent.getX() == x) {
@@ -200,13 +201,20 @@ public class AddCustomTonDaoDialog implements ActionListener, WindowListener {
                 if ("取消".equals(e.getActionCommand())) {
                     dia.dispose();
                 } else {
-                    if (field.getText() != null && field.getText().trim() != "") {
+                    if (field.getText() != null && !field.getText().equals("")) {
+                        if (Data.dengKuTonDaoList.contains(field.getText().trim())) {
+                            JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "该通道已存在，请重新输入！", "提示", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
                         DefaultTableModel model = (DefaultTableModel) table.getModel();
                         Object[] o = {table.getRowCount() + 1, field.getText().trim()};
                         model.addRow(o);
                         Data.dengKuTonDaoList.add(field.getText().trim());
                         table.repaint();
                         dia.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "内容不能为空！", "提示", JOptionPane.ERROR_MESSAGE);
+                        return;
                     }
                 }
             }
