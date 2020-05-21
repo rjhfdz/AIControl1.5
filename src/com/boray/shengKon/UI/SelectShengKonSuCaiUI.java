@@ -1,6 +1,7 @@
 package com.boray.shengKon.UI;
 
 import com.boray.Data.Data;
+import com.boray.Utils.IconJDialog;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
 import com.boray.shengKon.Listener.shengKonTypeListener;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SelectShengKonSuCaiUI {
-    private JDialog dialog;
+    private IconJDialog dialog;
     private Map map;
     private Map nameMap;
     private String dengZu;
@@ -24,7 +25,7 @@ public class SelectShengKonSuCaiUI {
 
     public void show(JPanel pane, String text) {
         JFrame f = (JFrame) MainUi.map.get("frame");
-        dialog = new JDialog(f, true);
+        dialog = new IconJDialog(f, true);
         dialog.setResizable(false);
         dialog.setTitle("Ñ¡ÔñÉù¿ØËØ²Ä");
         int w = 450, h = 620;
@@ -83,7 +84,7 @@ public class SelectShengKonSuCaiUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JFrame f = (JFrame) MainUi.map.get("frame");
-                JDialog dialog = new JDialog(f, true);
+                IconJDialog dialog = new IconJDialog(f, true);
                 dialog.setResizable(false);
                 dialog.setTitle("ÐÂ½¨ËØ²Ä");
                 int w = 380, h = 180;

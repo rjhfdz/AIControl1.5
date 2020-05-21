@@ -26,6 +26,7 @@ import javax.swing.border.TitledBorder;
 
 import com.boray.Data.Data;
 import com.boray.Data.MyData;
+import com.boray.Utils.IconJDialog;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
 
@@ -33,9 +34,9 @@ public class ShiXuSetUI {
     private int[][] DataSetInts;
 
     public void show(int blockNum) {
-        JDialog dialog = new JDialog();
+        IconJDialog dialog = new IconJDialog();
         JFrame f = (JFrame) MainUi.map.get("frame");
-        dialog = new JDialog(f, true);
+        dialog = new IconJDialog(f, true);
         dialog.setResizable(false);
         dialog.setTitle("声控时序设置-模式" + MyData.ShengKonModel + "时间片" + blockNum);
         int modelInt = Integer.valueOf(MyData.ShengKonModel).intValue() - 1;

@@ -13,6 +13,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.border.LineBorder;
 
+import com.boray.Utils.IconJDialog;
 import com.boray.mainUi.MainUi;
 
 public class BezierDialog
@@ -20,7 +21,7 @@ public class BezierDialog
 	public void show(int type,int sled,JComboBox[] box88){
 		int select = sled;
 		JFrame frame = (JFrame)MainUi.map.get("frame");
-		JDialog dialog = new JDialog(frame,true);
+		IconJDialog dialog = new IconJDialog(frame,true);
 		int width = 264;
 		int height = 360;
 		dialog.setSize(width,height);

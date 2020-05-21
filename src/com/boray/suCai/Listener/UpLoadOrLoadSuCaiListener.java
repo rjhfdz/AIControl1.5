@@ -1,6 +1,7 @@
 package com.boray.suCai.Listener;
 
 import com.boray.Data.Data;
+import com.boray.Utils.IconJDialog;
 import com.boray.mainUi.MainUi;
 import com.boray.suCai.UI.SuCaiUI;
 
@@ -107,7 +108,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
                     }
                     //弹出界面
                     JFrame f = (JFrame) MainUi.map.get("frame");
-                    JDialog dialog = new JDialog(f, true);
+                    IconJDialog dialog = new IconJDialog(f, true);
                     dialog.setResizable(false);
                     dialog.setTitle("粘贴素材");
                     int w = 380, h = 180;
@@ -166,7 +167,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
             }
             //弹出界面
             JFrame f = (JFrame) MainUi.map.get("frame");
-            JDialog dialog = new JDialog(f, true);
+            IconJDialog dialog = new IconJDialog(f, true);
             dialog.setResizable(false);
             dialog.setTitle("导入素材");
             int w = 380, h = 180;
@@ -319,7 +320,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
             }
             //弹出界面
             JFrame f = (JFrame) MainUi.map.get("frame");
-            JDialog dialog = new JDialog(f, true);
+            IconJDialog dialog = new IconJDialog(f, true);
             dialog.setResizable(false);
             dialog.setTitle("导入素材");
             int w = 380, h = 180;

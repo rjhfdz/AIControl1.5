@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import com.boray.Utils.IconJDialog;
 import com.boray.beiFen.Listener.BackupActionListener;
 import com.boray.mainUi.MainUi;
 
@@ -22,7 +23,7 @@ public class JingDuUI {
 	public void show(){
 		closeDialog = true;
 		JFrame f = (JFrame)MainUi.map.get("frame");
-		final JDialog dialog = new JDialog(f,true);
+		final IconJDialog dialog = new IconJDialog(f,true);
 		MainUi.map.put("JingDuDialog", dialog);
 		dialog.setResizable(false);
 		dialog.setTitle("½ø¶È");

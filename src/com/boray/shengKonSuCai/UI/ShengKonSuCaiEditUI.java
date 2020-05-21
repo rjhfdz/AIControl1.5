@@ -3,6 +3,7 @@ package com.boray.shengKonSuCai.UI;
 import com.boray.Data.ChannelName;
 import com.boray.Data.Data;
 import com.boray.Data.ZhiLingJi;
+import com.boray.Utils.IconJDialog;
 import com.boray.Utils.Socket;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
@@ -53,11 +54,11 @@ public class ShengKonSuCaiEditUI {
 
     public void show(String suCaiName, int suCaiNum, int denKuNum) {
         this.groupNum = (denKuNum + 1) + "";
-        JDialog dialog = new JDialog();
+        IconJDialog dialog = new IconJDialog();
         JFrame f = (JFrame) MainUi.map.get("frame");
-        dialog = new JDialog(f, true);
+        dialog = new IconJDialog(f, true);
         dialog.setResizable(false);
-        dialog.setTitle("±àÉù¿Ø¼­ËØ²Ä£º" + suCaiName);
+        dialog.setTitle("±à¼­Éù¿Ø¼­ËØ²Ä£º" + suCaiName);
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         //flowLayout.setVgap(2);
         dialog.getContentPane().setLayout(flowLayout);

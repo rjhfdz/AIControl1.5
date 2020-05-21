@@ -27,6 +27,7 @@ import javax.swing.border.TitledBorder;
 
 import com.boray.Data.Data;
 import com.boray.Data.RdmData;
+import com.boray.Utils.IconJDialog;
 import com.boray.Utils.Socket;
 import com.boray.mainUi.MainUi;
 
@@ -38,7 +39,7 @@ public class RdmSetUI implements ItemListener{
 		this.uid = uid;
 		this.devType = devType;
 		JFrame f = (JFrame)MainUi.map.get("frame");
-		JDialog dialog = new JDialog(f,true);
+		IconJDialog dialog = new IconJDialog(f,true);
 		dialog.setResizable(false);
 		dialog.setTitle("RDM≈‰÷√");
 		int w = 760,h = 460;

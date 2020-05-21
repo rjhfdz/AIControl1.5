@@ -26,6 +26,7 @@ import javax.swing.event.ChangeListener;
 
 import com.boray.Data.Data;
 import com.boray.Data.MyData;
+import com.boray.Utils.IconJDialog;
 import com.boray.mainUi.MainUi;
 
 public class SetParamterListener implements ActionListener{
@@ -33,7 +34,7 @@ public class SetParamterListener implements ActionListener{
 		show();
 	}
 	public void show(){
-		JDialog dialog = new JDialog();
+		IconJDialog dialog = new IconJDialog();
 		final JSlider slider = new JSlider(0,20000);
 		final JSlider slider2 = new JSlider(0,20000);
 		final JSlider slider3 = new JSlider(0,100);
@@ -42,7 +43,7 @@ public class SetParamterListener implements ActionListener{
 		final JTextField field3 = new JTextField(4);
 		
 		JFrame f = (JFrame)MainUi.map.get("frame");
-		dialog = new JDialog(f,true);
+		dialog = new IconJDialog(f,true);
 		dialog.setResizable(false);
 		dialog.setTitle("…Ë÷√-ƒ£ Ω"+MyData.ShengKonModel);
 		FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);

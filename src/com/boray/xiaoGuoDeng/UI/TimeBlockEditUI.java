@@ -40,6 +40,7 @@ import com.boray.Data.Data;
 import com.boray.Data.TuXingAction;
 import com.boray.Data.XiaoGuoDengModel;
 import com.boray.Data.ZhiLingJi;
+import com.boray.Utils.IconJDialog;
 import com.boray.Utils.Socket;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.fileCompare.Compare;
@@ -54,7 +55,7 @@ import com.boray.xiaoGuoDeng.reviewByPc.TimeBlockReviewByPc;
 import com.boray.xiaoGuoDeng.reviewCode.ReviewUtils;
 
 public class TimeBlockEditUI {
-    private JDialog dialog;
+    private IconJDialog dialog;
     private JCheckBox[] checkBoxs;
     private JCheckBox[] checkBoxs2;//备用
     private int dengKuNumber;//灯库位置
@@ -95,9 +96,8 @@ public class TimeBlockEditUI {
     private String suCaiName;
 
     public void show(int block, String groupNum, String index) {
-        dialog = new JDialog();
         JFrame f = (JFrame) MainUi.map.get("frame");
-        dialog = new JDialog(f, true);
+        dialog = new IconJDialog(f, true);
         dialog.setResizable(false);
         actionCompontList = new ArrayList<>();
         rgb1CompontList = new ArrayList<>();
@@ -2252,7 +2252,7 @@ public class TimeBlockEditUI {
             public void actionPerformed(ActionEvent e) {
 
                 JFrame f = (JFrame) MainUi.map.get("frame");
-                final JDialog dialog2 = new JDialog(f, true);
+                final IconJDialog dialog2 = new IconJDialog(f, true);
                 dialog2.setResizable(false);
                 dialog2.setTitle("自定义");
                 dialog2.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER));

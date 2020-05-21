@@ -30,6 +30,7 @@ import javax.swing.event.ChangeListener;
 
 import com.boray.Data.Data;
 import com.boray.Data.ZhiLingJi;
+import com.boray.Utils.IconJDialog;
 import com.boray.Utils.Socket;
 import com.boray.mainUi.MainUi;
 
@@ -42,7 +43,7 @@ public class TiaoGuangDialog implements ActionListener{
 	private void show(){
 		tiaoGuangSendCode = new TiaoGuangSendCode();
 		JFrame f = (JFrame)MainUi.map.get("frame");
-		JDialog dialog = new JDialog(f,true);
+		IconJDialog dialog = new IconJDialog(f,true);
 		dialog.setResizable(false);
 		dialog.setTitle("µ˜π‚…Ë÷√");
 		dialog.setLayout(new FlowLayout(FlowLayout.CENTER));

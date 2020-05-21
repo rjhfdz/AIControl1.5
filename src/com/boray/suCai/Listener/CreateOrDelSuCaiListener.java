@@ -9,6 +9,7 @@ import java.util.*;
 import javax.swing.*;
 
 import com.boray.Data.Data;
+import com.boray.Utils.IconJDialog;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.entity.Users;
 import com.boray.mainUi.MainUi;
@@ -24,7 +25,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
             JList suCaiLightType = (JList) MainUi.map.get("suCaiLightType");
             if (suCaiLightType.getSelectedValue() != null) {
                 JFrame f = (JFrame) MainUi.map.get("frame");
-                JDialog dialog = new JDialog(f, true);
+                IconJDialog dialog = new IconJDialog(f, true);
                 dialog.setResizable(false);
                 dialog.setTitle("ÐÂ½¨ËØ²Ä");
                 int w = 380, h = 180;
@@ -65,7 +66,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
             JList suCaiList = (JList) MainUi.map.get("suCai_list");//ËØ²ÄÁÐ±í
             String name = suCaiList.getSelectedValue().toString().split("--->")[0];
             JFrame f = (JFrame) MainUi.map.get("frame");
-            JDialog dialog = new JDialog(f, true);
+            IconJDialog dialog = new IconJDialog(f, true);
             dialog.setResizable(false);
             dialog.setTitle("ÖØÃüÃû");
             int w = 380, h = 180;
@@ -79,7 +80,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
             Users users = (Users) MainUi.map.get("Users");
             if (users != null && users.getLoginstatus() != 0) {
                 JFrame f = (JFrame) MainUi.map.get("frame");
-                JDialog dialog = new JDialog(f, true);
+                IconJDialog dialog = new IconJDialog(f, true);
                 dialog.setTitle("ÔÆ¶ËËØ²Ä");
                 dialog.setResizable(false);
                 int width = 720, height = 620;
@@ -102,7 +103,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                 return;
             }
             JFrame f = (JFrame) MainUi.map.get("frame");
-            JDialog dialog = new JDialog(f, true);
+            IconJDialog dialog = new IconJDialog(f, true);
             dialog.setResizable(false);
             dialog.setTitle("Ô¤ÀÀ");
             int w = 380, h = 180;

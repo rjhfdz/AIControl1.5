@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 
 import com.boray.Data.Data;
 import com.boray.Data.ZhiLingJi;
+import com.boray.Utils.IconJDialog;
 import com.boray.beiFen.UI.JingDuUI;
 import com.boray.mainUi.MainUi;
 
@@ -66,7 +67,7 @@ public class BackupActionListener implements ActionListener{
 			}
 			os.flush();
 			os.close();
-			JDialog dialog = (JDialog)MainUi.map.get("JingDuDialog");
+			IconJDialog dialog = (IconJDialog)MainUi.map.get("JingDuDialog");
 			dialog.dispose();
 			BackupActionListener.temp = null;
 			JFrame frame = (JFrame)MainUi.map.get("frame");

@@ -3,6 +3,7 @@ package com.boray.main.Listener;
 import com.alibaba.fastjson.JSON;
 import com.boray.Data.Data;
 import com.boray.Utils.HttpClientUtil;
+import com.boray.Utils.IconJDialog;
 import com.boray.entity.FileOrFolder;
 import com.boray.entity.Message;
 import com.boray.entity.ProjectFile;
@@ -42,7 +43,7 @@ public class MineButtonListener implements ActionListener {
         frame = (JFrame) MainUi.map.get("frame");
         tree = (JTree) MainUi.map.get("mineTree");
         if (button.getText().equals("新建项目")) {
-            JDialog dialog = new JDialog(frame, true);
+            IconJDialog dialog = new IconJDialog(frame, true);
             dialog.setResizable(false);
             dialog.setTitle("新建项目");
             int w = 380, h = 180;
@@ -59,7 +60,7 @@ public class MineButtonListener implements ActionListener {
             }
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
             if (node.getUserObject() instanceof FileOrFolder) {
-                JDialog dialog = new JDialog(frame, true);
+                IconJDialog dialog = new IconJDialog(frame, true);
                 dialog.setResizable(false);
                 dialog.setTitle("重命名");
                 int w = 380, h = 180;
@@ -136,7 +137,7 @@ public class MineButtonListener implements ActionListener {
             }
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
             if (node.getUserObject() instanceof ProjectFile) {
-                JDialog dialog = new JDialog(frame, true);
+                IconJDialog dialog = new IconJDialog(frame, true);
                 dialog.setResizable(false);
                 dialog.setTitle("重命名");
                 int w = 380, h = 180;

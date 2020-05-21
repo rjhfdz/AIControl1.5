@@ -2,6 +2,7 @@ package com.boray.xiaoGuoDeng.UI;
 
 import com.boray.Data.*;
 import com.boray.Listener.ZiroToFullActionListener;
+import com.boray.Utils.IconJDialog;
 import com.boray.Utils.Socket;
 import com.boray.Utils.WaitProgressBar;
 import com.boray.dengKu.UI.NewJTable;
@@ -57,9 +58,9 @@ public class OverDmxUI implements ActionListener {
         selected = -1;
         bs = new boolean[512];
         bs2 = new boolean[512];
-        JDialog dialog = new JDialog();
+        IconJDialog dialog = new IconJDialog();
         JFrame f = (JFrame) MainUi.map.get("frame");
-        dialog = new JDialog(f, true);
+        dialog = new IconJDialog(f, true);
         dialog.setResizable(false);
         dialog.setTitle("³¡¾°¶àµÆ" + no);
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);

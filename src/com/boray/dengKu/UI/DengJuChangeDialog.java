@@ -10,21 +10,15 @@ import java.awt.event.ItemListener;
 import java.util.Iterator;
 import java.util.TreeSet;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import com.boray.Data.Data;
+import com.boray.Utils.IconJDialog;
 import com.boray.Utils.Util;
 import com.boray.mainUi.MainUi;
 
 public class DengJuChangeDialog implements ActionListener {
-    private JDialog dialog;
+    private IconJDialog dialog;
     private JTextField field;
     private JTextField field2;
     private JComboBox box;
@@ -35,7 +29,7 @@ public class DengJuChangeDialog implements ActionListener {
 
     public void show() {
         JFrame f = (JFrame) MainUi.map.get("frame");
-        dialog = new JDialog(f, true);
+        dialog = new IconJDialog(f, true);
         dialog.setResizable(false);
         dialog.setTitle("ÐÞ¸ÄµÆ¾ß");
         int w = 380, h = 280;

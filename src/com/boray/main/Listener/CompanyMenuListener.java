@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.boray.Data.Data;
 import com.boray.Utils.HttpClientUtil;
+import com.boray.Utils.IconJDialog;
 import com.boray.entity.*;
 import com.boray.main.Util.CustomTreeCellRenderer;
 import com.boray.main.Util.CustomTreeNode;
@@ -43,7 +44,7 @@ public class CompanyMenuListener implements ActionListener {
             JMenuItem menuItem = (JMenuItem) e.getSource();
             if (node.getUserObject() instanceof FileOrFolder) {
                 if (menuItem.getText().equals("新建项目")) {
-                    JDialog dialog = new JDialog(frame, true);
+                    IconJDialog dialog = new IconJDialog(frame, true);
                     dialog.setResizable(false);
                     dialog.setTitle("新建项目");
                     int w = 380, h = 180;
@@ -54,7 +55,7 @@ public class CompanyMenuListener implements ActionListener {
                     addItem(dialog);
                     dialog.setVisible(true);
                 } else if (menuItem.getText().equals("项目重命名")) {
-                    JDialog dialog = new JDialog(frame, true);
+                    IconJDialog dialog = new IconJDialog(frame, true);
                     dialog.setResizable(false);
                     dialog.setTitle("重命名");
                     int w = 380, h = 180;
@@ -114,7 +115,7 @@ public class CompanyMenuListener implements ActionListener {
             } else if (node.getUserObject() instanceof ProjectFile) {
                 ProjectFile file = (ProjectFile) node.getUserObject();
                 if (menuItem.getText().equals("重命名")) {
-                    JDialog dialog = new JDialog(frame, true);
+                    IconJDialog dialog = new IconJDialog(frame, true);
                     dialog.setResizable(false);
                     dialog.setTitle("重命名");
                     int w = 380, h = 180;

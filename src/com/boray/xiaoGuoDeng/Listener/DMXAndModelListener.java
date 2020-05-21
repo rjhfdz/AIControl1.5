@@ -1,5 +1,6 @@
 package com.boray.xiaoGuoDeng.Listener;
 
+import com.boray.Utils.IconJDialog;
 import com.boray.mainUi.MainUi;
 
 import javax.swing.*;
@@ -19,7 +20,7 @@ public class DMXAndModelListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         JFrame frame = (JFrame) MainUi.map.get("frame");
-        JDialog dialog = new JDialog(frame, true);
+        IconJDialog dialog = new IconJDialog(frame, true);
         dialog.setResizable(false);
         dialog.setTitle("DMXÂ¼ÖÆ¡ª¡ªÄ£Ê½" + model);
         int w = 600, h = 285;

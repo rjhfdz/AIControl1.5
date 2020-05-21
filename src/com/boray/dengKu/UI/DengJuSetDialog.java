@@ -21,11 +21,12 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import com.boray.Data.Data;
+import com.boray.Utils.IconJDialog;
 import com.boray.Utils.Util;
 import com.boray.mainUi.MainUi;
 
 public class DengJuSetDialog implements ActionListener {
-    private JDialog dialog;
+    private IconJDialog dialog;
     private JTextField field;
     private JTextField field2;
     private JComboBox box;
@@ -35,7 +36,7 @@ public class DengJuSetDialog implements ActionListener {
 
     public void show() {
         JFrame f = (JFrame) MainUi.map.get("frame");
-        dialog = new JDialog(f, true);
+        dialog = new IconJDialog(f, true);
         dialog.setResizable(false);
         dialog.setTitle("Ìí¼ÓµÆ¾ß");
         int w = 380, h = 350;

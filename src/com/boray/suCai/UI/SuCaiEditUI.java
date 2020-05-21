@@ -30,6 +30,7 @@ import com.boray.Data.Data;
 import com.boray.Data.TuXingAction;
 import com.boray.Data.XiaoGuoDengModel;
 import com.boray.Data.ZhiLingJi;
+import com.boray.Utils.IconJDialog;
 import com.boray.Utils.Socket;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.fileCompare.Compare;
@@ -43,7 +44,7 @@ import com.boray.xiaoGuoDeng.reviewByPc.TimeBlockReviewByPc;
 import com.boray.xiaoGuoDeng.reviewCode.ReviewUtils;
 
 public class SuCaiEditUI {
-    private JDialog dialog;
+    private IconJDialog dialog;
     private JCheckBox[] checkBoxs;//勾选
     private JCheckBox[] checkBoxs2;//备用
     private JTextField dengJuNunber;//灯具数量
@@ -83,9 +84,9 @@ public class SuCaiEditUI {
     private TimeBlockStopReviewActionListener timeBlockStopReviewActionListener;
 
     public void show(String suCaiName, int suCaiNum, int denKuNum) {
-        dialog = new JDialog();
+        dialog = new IconJDialog();
         JFrame f = (JFrame) MainUi.map.get("frame");
-        dialog = new JDialog(f, true);
+        dialog = new IconJDialog(f, true);
         dialog.setResizable(false);
         actionCompontList = new ArrayList<>();
         rgb1CompontList = new ArrayList<>();

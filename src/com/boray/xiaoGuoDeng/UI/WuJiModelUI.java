@@ -46,6 +46,7 @@ import javax.usb.UsbPipe;
 
 import com.boray.Data.Data;
 import com.boray.Data.ZhiLingJi;
+import com.boray.Utils.IconJDialog;
 import com.boray.Utils.Socket;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
@@ -66,9 +67,9 @@ public class WuJiModelUI {
 
     public void show(final int no) {
         wuJiComponList = new ArrayList();
-        JDialog dialog = new JDialog();
+        IconJDialog dialog = new IconJDialog();
         JFrame f = (JFrame) MainUi.map.get("frame");
-        dialog = new JDialog(f, true);
+        dialog = new IconJDialog(f, true);
         dialog.setResizable(false);
         dialog.setTitle("Îí»ú¿ØÖÆ" + no);
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);

@@ -20,6 +20,7 @@ import javax.usb.UsbPipe;
 import com.boray.Data.Data;
 import com.boray.Data.RdmData;
 import com.boray.Data.ZhiLingJi;
+import com.boray.Utils.IconJDialog;
 import com.boray.Utils.Socket;
 import com.boray.Utils.Util;
 import com.boray.beiFen.Listener.BackupActionListener;
@@ -92,7 +93,7 @@ public class ComReturnListener implements Runnable {
                                     LoadToDeviceActionListener.timer.cancel();
                                     LoadToDeviceActionListener.timer = null;
                                     LoadToDeviceActionListener.temp = null;
-                                    JDialog dialog = (JDialog) MainUi.map.get("JingDuDialog");
+                                    IconJDialog dialog = (IconJDialog) MainUi.map.get("JingDuDialog");
                                     dialog.dispose();
                                     JFrame frame = (JFrame) MainUi.map.get("frame");
                                     JOptionPane.showMessageDialog(frame, "加载完成！", "提示", JOptionPane.PLAIN_MESSAGE);

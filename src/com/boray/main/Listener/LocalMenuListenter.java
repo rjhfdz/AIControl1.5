@@ -1,6 +1,7 @@
 package com.boray.main.Listener;
 
 import com.boray.Data.Data;
+import com.boray.Utils.IconJDialog;
 import com.boray.Utils.Util;
 import com.boray.main.Util.CustomTreeCellRenderer;
 import com.boray.main.Util.TreeUtil;
@@ -35,7 +36,7 @@ public class LocalMenuListenter implements ActionListener {
                 if (menuItem.getText().equals("添加项目")) {
                     DefaultMutableTreeNode root = (DefaultMutableTreeNode) tree.getModel().getRoot();
                     File file1 = (File) root.getUserObject();
-                    JDialog dialog = new JDialog(frame, true);
+                    IconJDialog dialog = new IconJDialog(frame, true);
                     dialog.setResizable(false);
                     dialog.setTitle("添加项目");
                     int w = 380, h = 180;
@@ -46,7 +47,7 @@ public class LocalMenuListenter implements ActionListener {
                     addItem(dialog, file1.getAbsolutePath());
                     dialog.setVisible(true);
                 } else if (menuItem.getText().equals("项目重命名")) {
-                    JDialog dialog = new JDialog(frame, true);
+                    IconJDialog dialog = new IconJDialog(frame, true);
                     dialog.setResizable(false);
                     dialog.setTitle("项目重命名");
                     int w = 380, h = 180;
@@ -114,7 +115,7 @@ public class LocalMenuListenter implements ActionListener {
                 if (menuItem.getText().equals("工程重命名")) {
                     DefaultMutableTreeNode folder = (DefaultMutableTreeNode) node.getParent();
                     File fileOrFolder = (File) folder.getUserObject();//文件夹
-                    JDialog dialog = new JDialog(frame, true);
+                    IconJDialog dialog = new IconJDialog(frame, true);
                     dialog.setResizable(false);
                     dialog.setTitle("工程名");
                     int w = 380, h = 180;

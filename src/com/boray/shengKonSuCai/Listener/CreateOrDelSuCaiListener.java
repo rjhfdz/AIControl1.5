@@ -1,6 +1,7 @@
 package com.boray.shengKonSuCai.Listener;
 
 import com.boray.Data.Data;
+import com.boray.Utils.IconJDialog;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.entity.Users;
 import com.boray.mainUi.MainUi;
@@ -30,7 +31,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                     JOptionPane.showMessageDialog(f, "该组别还没有灯具，请添加灯具！", "提示", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                JDialog dialog = new JDialog(f, true);
+                IconJDialog dialog = new IconJDialog(f, true);
                 dialog.setResizable(false);
                 dialog.setTitle("新建素材");
                 int w = 380, h = 180;
@@ -55,7 +56,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
             JList suCaiList = (JList) MainUi.map.get("shengKonSuCai_list");
             String name = suCaiList.getSelectedValue().toString().split("--->")[0];
             JFrame f = (JFrame) MainUi.map.get("frame");
-            JDialog dialog = new JDialog(f, true);
+            IconJDialog dialog = new IconJDialog(f, true);
             dialog.setResizable(false);
             dialog.setTitle("重命名");
             int w = 380, h = 180;
@@ -69,7 +70,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
             Users users = (Users) MainUi.map.get("Users");
             if (users != null && users.getLoginstatus() != 0) {
                 JFrame f = (JFrame) MainUi.map.get("frame");
-                JDialog dialog = new JDialog(f, true);
+                IconJDialog dialog = new IconJDialog(f, true);
                 dialog.setTitle("云端素材");
                 dialog.setResizable(false);
                 int width = 720, height = 620;

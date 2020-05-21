@@ -17,11 +17,12 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import com.boray.Data.Data;
+import com.boray.Utils.IconJDialog;
 import com.boray.mainUi.MainUi;
 
 
 public class dkCreateDialog implements ActionListener{
-	private JDialog dialog;
+	private IconJDialog dialog;
 	private NewJTable table;
 	private JTextField field;
 	private JComboBox channelBox;
@@ -29,7 +30,7 @@ public class dkCreateDialog implements ActionListener{
 	public void show(NewJTable table){
 		this.table = table;
 		JFrame f = (JFrame)MainUi.map.get("frame");
-		dialog = new JDialog(f,true);
+		dialog = new IconJDialog(f,true);
 		dialog.setResizable(false);
 		dialog.setTitle("ÐÂ½¨µÆ¿â");
 		int w = 380,h = 280;

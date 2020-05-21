@@ -1,6 +1,7 @@
 package com.boray.dengKu.UI;
 
 import com.boray.Data.Data;
+import com.boray.Utils.IconJDialog;
 import com.boray.Utils.Util;
 import com.boray.addJCheckBox.CWCheckBoxRenderer;
 import com.boray.addJCheckBox.CheckBoxCellEditor;
@@ -18,7 +19,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class AddRDMDialog implements ActionListener {
-    private JDialog dialog;
+    private IconJDialog dialog;
     private NewJTable table;
     private String[] str;
     private JFrame frame;
@@ -29,7 +30,7 @@ public class AddRDMDialog implements ActionListener {
      */
     public void show() {
         frame = (JFrame) MainUi.map.get("frame");
-        dialog = new JDialog(frame, true);
+        dialog = new IconJDialog(frame, true);
         dialog.setResizable(false);
         dialog.setTitle("添加RDM灯具信息");
         int w = 910, h = 570;

@@ -3,6 +3,7 @@ package com.boray.suCai.UI;
 import com.alibaba.fastjson.JSON;
 import com.boray.Data.Data;
 import com.boray.Utils.HttpClientUtil;
+import com.boray.Utils.IconJDialog;
 import com.boray.entity.Message;
 import com.boray.entity.SuCaiFile;
 import com.boray.entity.Users;
@@ -244,7 +245,7 @@ public class YunChangJingSuCaiDialog implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if ("新增".equals(e.getActionCommand())) {
             JFrame f = (JFrame) MainUi.map.get("frame");
-            JDialog dialog = new JDialog(f, true);
+            IconJDialog dialog = new IconJDialog(f, true);
             dialog.setTitle("新增");
             dialog.setResizable(false);
             int width = 280, height = 250;
@@ -257,7 +258,7 @@ public class YunChangJingSuCaiDialog implements ActionListener {
             dialog.setVisible(true);
         } else if ("重命名".equals(e.getActionCommand())) {
             JFrame f = (JFrame) MainUi.map.get("frame");
-            JDialog dialog = new JDialog(f, true);
+            IconJDialog dialog = new IconJDialog(f, true);
             dialog.setTitle("重命名");
             dialog.setResizable(false);
             int width = 280, height = 130;

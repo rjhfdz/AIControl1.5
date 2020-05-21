@@ -2,6 +2,7 @@ package com.boray.dengKu.UI;
 
 import com.boray.Data.ChannelName;
 import com.boray.Data.Data;
+import com.boray.Utils.IconJDialog;
 import com.boray.mainUi.MainUi;
 
 import javax.swing.*;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class AddCustomTonDaoDialog implements ActionListener, WindowListener {
 
-    private JDialog dialog;
+    private IconJDialog dialog;
     private JFrame frame;
     private NewJTable table;
     private int x = 0;
@@ -25,7 +26,7 @@ public class AddCustomTonDaoDialog implements ActionListener, WindowListener {
      */
     public void show() {
         frame = (JFrame) MainUi.map.get("frame");
-        dialog = new JDialog(frame, true);
+        dialog = new IconJDialog(frame, true);
         dialog.setResizable(false);
         dialog.setTitle("自定义通道");
         int w = 800, h = 600;
@@ -97,7 +98,7 @@ public class AddCustomTonDaoDialog implements ActionListener, WindowListener {
             public void mouseClicked(MouseEvent mouseEvent) {
                 if (mouseEvent.getX() == x) {
                     if (mouseEvent.getButton() == 1 && mouseEvent.getClickCount() == 2) {
-                        JDialog dia = new JDialog(frame, true);
+                        IconJDialog dia = new IconJDialog(frame, true);
                         dia.setResizable(false);
                         dia.setTitle("编辑");
                         int w = 380, h = 180;
@@ -168,7 +169,7 @@ public class AddCustomTonDaoDialog implements ActionListener, WindowListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if ("新建".equals(e.getActionCommand())) {
-            JDialog dia = new JDialog(frame, true);
+            IconJDialog dia = new IconJDialog(frame, true);
             dia.setResizable(false);
             dia.setTitle("新建");
             int w = 380, h = 180;

@@ -1,6 +1,7 @@
 package com.boray.shengKonSuCai.Listener;
 
 import com.boray.Data.Data;
+import com.boray.Utils.IconJDialog;
 import com.boray.mainUi.MainUi;
 import com.boray.shengKonSuCai.UI.ShengKonSuCaiUI;
 
@@ -118,7 +119,7 @@ public class UpLoadOrLoadShengKonSuCaiListener implements ActionListener {
             }
             //弹出界面
             JFrame f = (JFrame) MainUi.map.get("frame");
-            JDialog dialog = new JDialog(f, true);
+            IconJDialog dialog = new IconJDialog(f, true);
             dialog.setResizable(false);
             dialog.setTitle("导入素材");
             int w = 380, h = 180;
@@ -301,7 +302,7 @@ public class UpLoadOrLoadShengKonSuCaiListener implements ActionListener {
             }
             //弹出界面
             JFrame f = (JFrame) MainUi.map.get("frame");
-            JDialog dialog = new JDialog(f, true);
+            IconJDialog dialog = new IconJDialog(f, true);
             dialog.setResizable(false);
             dialog.setTitle("导入素材");
             int w = 380, h = 180;

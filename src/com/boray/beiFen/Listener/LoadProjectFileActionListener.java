@@ -25,6 +25,7 @@ import com.boray.Data.ChannelName;
 import com.boray.Data.Data;
 import com.boray.Data.MyColor;
 import com.boray.Data.XiaoGuoDengModel;
+import com.boray.Utils.IconJDialog;
 import com.boray.Utils.Util;
 import com.boray.changJing.Data.DataOfChangJing;
 import com.boray.changJing.Listener.ChangJingSendCodeListener;
@@ -38,14 +39,14 @@ import com.boray.zhongKon.Data.DataOfZhongKon;
 import com.boray.zhongKon.Listener.ShowAndSaveCode;
 
 public class LoadProjectFileActionListener implements ActionListener {
-    private JDialog dialog;
+    private IconJDialog dialog;
     private JRadioButton radioButton, radioButton2;
 
     private void loadPjtUI() {
         int a = 0;
 
         JFrame f = (JFrame) MainUi.map.get("frame");
-        dialog = new JDialog(f, true);
+        dialog = new IconJDialog(f, true);
         dialog.setResizable(false);
         dialog.setTitle("º”‘ÿπ§≥Ã");
         int w = 380, h = 200;

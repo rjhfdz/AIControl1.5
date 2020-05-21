@@ -130,7 +130,7 @@ public class ArtNetReview {
         neatenRGBDDuoDengata(bytes, list2, "RGB3");
         //artnet协议发送数据
         neatenData(bytes, 100);
-        System.out.println();
+//        System.out.println();
     }
 
     /**
@@ -238,9 +238,9 @@ public class ArtNetReview {
         if (list2 != null) {
             if ((boolean) list2.get(0)) {//启用
                 List<Integer> ints = getRGBTonDaoIndex(type);//获得对应RGB的通道下标
-                int select = Integer.parseInt(list2.get(11).toString());//多灯模式选择
-                boolean flag = (boolean) list2.get(12);//是否拆分反向
-                int speed = Integer.parseInt(list2.get(13).toString()) / 100;//多灯模式时差
+                int select = Integer.parseInt(list2.get(7).toString());//多灯模式选择
+                boolean flag = (boolean) list2.get(8);//是否拆分反向
+                int speed = Integer.parseInt(list2.get(9).toString()) / 100;//多灯模式时差
                 switch (select) {
                     case 0://不拆分
                         break;
@@ -284,6 +284,7 @@ public class ArtNetReview {
 
     /**
      * 根据rgb所选的设置，计算地址，并处理数据
+     *
      * @param setList
      * @param ints
      * @param bytes
@@ -411,6 +412,7 @@ public class ArtNetReview {
 
     /**
      * 跑马灯
+     *
      * @param ints
      * @param flag
      * @param speed
@@ -422,6 +424,7 @@ public class ArtNetReview {
 
     /**
      * 跑马灯(往返)
+     *
      * @param ints
      * @param flag
      * @param speed
@@ -498,30 +501,30 @@ public class ArtNetReview {
                 str = ChannelName.getChangeName(nameMap.get("L" + j).toString());
                 if (type.equals("RGB1")) {
                     if (str.contains("RGBR-1") || str.contains("RGBG-1") || str.contains("RGBB-1")) {
-                        ints.add(j);
+                        ints.add((j + 1));
                     }
                 } else if (type.equals("RGB2")) {
                     if (str.contains("RGBR-2") || str.contains("RGBG-2") || str.contains("RGBB-2")) {
-                        ints.add(j);
+                        ints.add((j + 1));
                     }
                 } else if (type.equals("RGB3")) {
                     if (str.contains("RGBR-3") || str.contains("RGBG-3") || str.contains("RGBB-3")) {
-                        ints.add(j);
+                        ints.add((j + 1));
                     }
                 }
             } else {
                 str = ChannelName.getChangeName(nameMap.get("R" + (j - 16)).toString());
                 if (type.equals("RGB1")) {
                     if (str.contains("RGBR-1") || str.contains("RGBG-1") || str.contains("RGBB-1")) {
-                        ints.add(j);
+                        ints.add((j + 1));
                     }
                 } else if (type.equals("RGB2")) {
                     if (str.contains("RGBR-2") || str.contains("RGBG-2") || str.contains("RGBB-2")) {
-                        ints.add(j);
+                        ints.add((j + 1));
                     }
                 } else if (type.equals("RGB3")) {
                     if (str.contains("RGBR-3") || str.contains("RGBG-3") || str.contains("RGBB-3")) {
-                        ints.add(j);
+                        ints.add((j + 1));
                     }
                 }
 

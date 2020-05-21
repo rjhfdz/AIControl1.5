@@ -8,7 +8,7 @@ import java.awt.event.*;
 public class WaitProgressBar implements ActionListener {
 
     private static final String DEFAULT_STATUS = "«Î…‘∫Û°£°£°£";
-    private JDialog dialog;
+    private IconJDialog dialog;
     private JProgressBar progressBar;
     private JLabel lbStatus;
     private JButton btnCancel;
@@ -77,11 +77,11 @@ public class WaitProgressBar implements ActionListener {
      */
     private void initUI() {
         if (parent instanceof Dialog) {
-            dialog = new JDialog((Dialog) parent, true);
+            dialog = new IconJDialog((Dialog) parent, true);
         } else if (parent instanceof Frame) {
-            dialog = new JDialog((Frame) parent, true);
+            dialog = new IconJDialog((Frame) parent, true);
         } else {
-            dialog = new JDialog((Frame) null, true);
+            dialog = new IconJDialog((Frame) null, true);
         }
 
         final JPanel mainPane = new JPanel(null);

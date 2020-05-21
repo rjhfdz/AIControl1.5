@@ -17,17 +17,18 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 import com.boray.Data.Data;
+import com.boray.Utils.IconJDialog;
 import com.boray.mainUi.MainUi;
 import com.boray.shengKon.UI.DefineJLable_shengKon;
 import com.boray.shengKon.UI.DefineJLable_shengKon2;
 
 public class AddGroupUI implements ActionListener {
-    private JDialog dialog;
+    private IconJDialog dialog;
     private JTextField field;
 
     public void show() {
         JFrame f = (JFrame) MainUi.map.get("frame");
-        dialog = new JDialog(f, true);
+        dialog = new IconJDialog(f, true);
         dialog.setResizable(false);
         dialog.setTitle("Ìí¼Ó·Ö×é");
         int w = 380, h = 280;
