@@ -288,7 +288,7 @@ public class GuangLiUI implements ActionListener {
             channeLabels_R[i].setFocusable(false);
             //channeLabels_R[i].setVisible(false);
             channelBoxs_R[i].setFocusable(false);
-            channelBoxs_R[i].setEditable(true);
+            channelBoxs_R[i].setEditable(false);
             channelBoxs_R[i].setEnabled(false);
             //channelBoxs_R[i].setVisible(false);
             channelBoxs_R[i].addItemListener(listener);

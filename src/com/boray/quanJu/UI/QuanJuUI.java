@@ -23,6 +23,7 @@ import com.boray.Data.Data;
 import com.boray.Data.ZhiLingJi;
 import com.boray.mainUi.MainUi;
 import com.boray.quanJu.Listener.ComBoxItemListener;
+import com.boray.quanJu.Listener.DMX512TestDialog;
 import com.boray.quanJu.Listener.TiaoGuangDialog;
 
 public class QuanJuUI implements ActionListener{
@@ -118,7 +119,7 @@ public class QuanJuUI implements ActionListener{
 		p6.add(radioButton2);p6.add(radioButton3);
 		
 		JPanel p7 = new JPanel();
-		p7.setPreferredSize(new Dimension(495,80));
+		p7.setPreferredSize(new Dimension(295,80));
 		p7.setLayout(new FlowLayout(FlowLayout.LEFT));
 		TitledBorder tb7 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "摇麦模式1", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
 		p7.setBorder(tb7);
@@ -135,7 +136,7 @@ public class QuanJuUI implements ActionListener{
 		p7.add(radioButton4);p7.add(radioButton5);
 		
 		JPanel p8 = new JPanel();
-		p8.setPreferredSize(new Dimension(495,80));
+		p8.setPreferredSize(new Dimension(295,80));
 		p8.setLayout(new FlowLayout(FlowLayout.LEFT));
 		TitledBorder tb8 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "摇麦模式2", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
 		p8.setBorder(tb8);
@@ -150,7 +151,16 @@ public class QuanJuUI implements ActionListener{
 		group2.add(radioButton6);group2.add(radioButton7);
 		p8.add(new JLabel("摇麦运行模式2："));
 		p8.add(radioButton6);p8.add(radioButton7);
-		
+
+		JPanel p10 = new JPanel();
+		p10.setPreferredSize(new Dimension(395,80));
+		p10.setLayout(new FlowLayout(FlowLayout.CENTER));
+		TitledBorder tb10 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray),"DMx512通道测试",TitledBorder.LEFT,TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
+		p10.setBorder(tb10);
+		JButton DMXBtn = new JButton("DMX512通道测试");
+		DMXBtn.addActionListener(new DMX512TestDialog());
+		DMXBtn.setPreferredSize(new Dimension(140,36));
+		p10.add(DMXBtn);
 		
 		JPanel p9 = new JPanel();
 		p9.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -170,6 +180,7 @@ public class QuanJuUI implements ActionListener{
 		//pane.add(p6);
 		pane.add(p7);
 		pane.add(p8);
+		pane.add(p10);
 		pane.add(p9);
 	}
 	

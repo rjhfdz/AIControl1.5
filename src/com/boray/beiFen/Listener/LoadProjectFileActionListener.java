@@ -586,6 +586,8 @@ public class LoadProjectFileActionListener implements ActionListener {
                     }
                 }
 
+                //DMX512通道测试数据
+                Data.DMX512Data = (byte[]) xmlDecoder.readObject();
             }
 
         } catch (Exception e2) {

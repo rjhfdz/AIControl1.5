@@ -24,340 +24,20 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/boray/Utils/IconJDialog.java" afterDir="false" />
+    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="artnet协议修复异常。&#10;项目新增自定义JDialog，左上角添加图标。&#10;同时替换项目中所有使用的JDialog。">
+      <change afterPath="$PROJECT_DIR$/src/com/boray/quanJu/Listener/DMX512TestDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/bezier/BezierDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/bezier/BezierDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$1$1$1$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$1$1$1$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$1$1$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$1$1$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$1$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$1$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$2$1$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$2$1$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$2$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$2$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$2$1$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$2$1$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$2$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$2$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$2$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/BackupActionListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/Data/Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/Data/Data.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadProjectFileActionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadProjectFileActionListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/UI/JingDuUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/UI/JingDuUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/UI/JingDuUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/UI/JingDuUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/AddGroupUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/AddGroupUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/DengJuChangeDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/DengJuChangeDialog$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/DengJuChangeDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/DengJuChangeDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/DengJuSetDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/DengJuSetDialog$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/DengJuSetDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/DengJuSetDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$5$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$5$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$7$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$7$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/RdmSetUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/dkCreateDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/dkCreateDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$19.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$20.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$21.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$22.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$23.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$24.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$25.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$25.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$26.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$26.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$27.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$27.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$28.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$28.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$29.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$29.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$30.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$30.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/SetParamterListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/SetParamterListener$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/SetParamterListener$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/SetParamterListener$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/SetParamterListener$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/SetParamterListener$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/SetParamterListener$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/SetParamterListener$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/SetParamterListener$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/SetParamterListener$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/SetParamterListener$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/SetParamterListener$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/SetParamterListener$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/SetParamterListener$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/SetParamterListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/SetParamterListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$19.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$20.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$21.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$22.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$23.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$24.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$25.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$25.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$26.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$26.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$27.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$27.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$28.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$28.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$29.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$29.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$30.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$30.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$31.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$31.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$32.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$32.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$33.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$33.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$34.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$34.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$35.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$35.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$36.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$36.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$37.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$37.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$38.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$38.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/EditEffect_shengKonUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/OverDmxUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$19.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$20.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShiXuSetUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$19.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$20.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$21.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$22.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$23.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$24.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$25.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$25.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$26.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$26.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$27.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$27.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$28.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$28.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$29.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$29.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$30.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$30.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$31.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$31.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$32.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$32.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$33.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$33.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$34.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$34.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$35.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$35.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$36.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$36.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$37.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$37.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$38.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$38.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$39.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$39.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$40.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$40.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$41.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$41.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$42.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$42.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$43.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$43.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$44.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$44.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$45.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$45.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$46.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$46.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$47.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$47.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$48.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$48.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$49.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$49.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$50.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$50.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$51.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$51.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$52.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$52.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$53.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$53.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$54.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$54.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$55.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$55.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$56.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$56.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$57.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$57.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$58.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$58.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$59.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$59.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$60.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$60.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$61.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$61.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$62.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$62.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$63.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$63.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$64.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$64.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$65.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$65.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$66.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$66.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/SelectSuCaiUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/SelectSuCaiUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/SelectSuCaiUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/SelectSuCaiUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/SelectSuCaiUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/SelectSuCaiUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$60.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$60.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$19.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$20.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$21.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$22.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$23.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$24.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$25.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$25.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/WuJiModelUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bezier/BezierDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bezier/BezierDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/Utils/WaitProgressBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Utils/WaitProgressBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/BackupActionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/BackupActionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/ProjectCreateFileActionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/ProjectCreateFileActionListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/GuangLiUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/GuangLiUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/UI/QuanJuUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/UI/QuanJuUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/artifacts/AIControl1.5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/AIControl1.5.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/Data/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Data/Data.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/LoadProjectFileActionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/LoadProjectFileActionListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/UI/JingDuUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/UI/JingDuUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/dengKu/UI/AddCustomTonDaoDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/dengKu/UI/AddCustomTonDaoDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/dengKu/UI/AddGroupUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/dengKu/UI/AddGroupUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/dengKu/UI/AddRDMDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/dengKu/UI/AddRDMDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/dengKu/UI/DengJuChangeDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/dengKu/UI/DengJuChangeDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/dengKu/UI/DengJuSetDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/dengKu/UI/DengJuSetDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/dengKu/UI/RdmSetUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/dengKu/UI/RdmSetUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/dengKu/UI/dkCreateDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/dengKu/UI/dkCreateDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/Listener/CompanyMenuListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/CompanyMenuListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/Listener/LocalMenuListenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/LocalMenuListenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/Listener/MineButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/MineButtonListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/quanJu/Listener/TiaoGuangDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/quanJu/Listener/TiaoGuangDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/returnListener/ComReturnListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/returnListener/ComReturnListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKon/Listener/SetParamterListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKon/Listener/SetParamterListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKon/UI/EditEffect_shengKonUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKon/UI/EditEffect_shengKonUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKon/UI/OverDmxUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKon/UI/OverDmxUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKon/UI/SelectShengKonSuCaiUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKon/UI/SelectShengKonSuCaiUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKon/UI/ShiXuSetUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKon/UI/ShiXuSetUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKon/UI/XiaoGuoDengModelUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKon/UI/XiaoGuoDengModelUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/Listener/CreateOrDelSuCaiListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/Listener/CreateOrDelSuCaiListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/Listener/UpLoadOrLoadShengKonSuCaiListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/Listener/UpLoadOrLoadShengKonSuCaiListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/UI/ShengKonSuCaiEditUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/UI/ShengKonSuCaiEditUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/Listener/CreateOrDelSuCaiListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/Listener/CreateOrDelSuCaiListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/Listener/UpLoadOrLoadSuCaiListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/Listener/UpLoadOrLoadSuCaiListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/UI/SuCaiEditUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/UI/SuCaiEditUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/UI/YunChangJingSuCaiDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/UI/YunChangJingSuCaiDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/ArtNetReview.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/ArtNetReview.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/Listener/DMXAndModelListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/Listener/DMXAndModelListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/OverDmxUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/OverDmxUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/SelectSuCaiUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/SelectSuCaiUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/WuJiModelUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/WuJiModelUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/ProjectCreateFileActionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/ProjectCreateFileActionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/dengKu/UI/GuangLiUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/dengKu/UI/GuangLiUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/quanJu/UI/QuanJuUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/quanJu/UI/QuanJuUI.java" afterDir="false" />
     </list>
     <list id="8e2f3826-f652-4540-934c-0fbbebdda1b0" name="Revert: " comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -429,7 +109,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -823,14 +503,10 @@
       <workItem from="1589848680041" duration="24868000" />
       <workItem from="1589934077820" duration="24469000" />
       <workItem from="1590022173560" duration="11338000" />
-      <workItem from="1590052383156" duration="300000" />
-    </task>
-    <task id="LOCAL-00024" summary="控制文件打包异常处理，灯库配置界面添加雾机控制模式">
-      <created>1574997276774</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1574997276775</updated>
+      <workItem from="1590052383156" duration="4939000" />
+      <workItem from="1590107418503" duration="509000" />
+      <workItem from="1590107977056" duration="28527000" />
+      <workItem from="1590366775075" duration="3655000" />
     </task>
     <task id="LOCAL-00025" summary="声控编程界面逻辑调整，灯库配置添加雾机模式，生成控制文件天机雾机模式数据。">
       <created>1575019602174</created>
@@ -1168,7 +844,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589851907897</updated>
     </task>
-    <option name="localTasksCounter" value="73" />
+    <task id="LOCAL-00073" summary="artnet协议修复异常。&#10;项目新增自定义JDialog，左上角添加图标。&#10;同时替换项目中所有使用的JDialog。">
+      <created>1590052700067</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1590052700068</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1231,10 +914,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="178" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1586911043199" />
-    <state x="742" y="204" key="#Plugins" timestamp="1588641209460">
+    <state x="742" y="204" key="#Plugins" timestamp="1590108000616">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="742" y="204" key="#Plugins/0.0.1920.1040@0.0.1920.1040" timestamp="1588641209460" />
+    <state x="742" y="204" key="#Plugins/0.0.1920.1040@0.0.1920.1040" timestamp="1590108000616" />
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588753551087">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -1243,10 +926,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="704" y="355" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588646279935" />
-    <state x="811" y="252" key="#com.intellij.ide.util.MemberChooser" timestamp="1589873154400">
+    <state x="811" y="252" key="#com.intellij.ide.util.MemberChooser" timestamp="1590114495723">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="811" y="252" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1589873154400" />
+    <state x="811" y="252" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1590114495723" />
     <state x="640" y="255" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1588587988523">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -1257,10 +940,10 @@
     <state x="122" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585640915499" />
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585625173512" />
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585625173512" />
-    <state x="560" y="104" width="936" height="792" key="CommitChangelistDialog2" timestamp="1588648918988">
+    <state x="560" y="104" width="936" height="792" key="CommitChangelistDialog2" timestamp="1590057077847">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="560" y="104" width="936" height="792" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1588648918988" />
+    <state x="560" y="104" width="936" height="792" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1590057077847" />
     <state width="479" height="466" key="DebuggerActiveHint" timestamp="1590025811435">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -1273,50 +956,50 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="761" y="342" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1590022398858" />
-    <state width="1877" height="235" key="GridCell.Tab.0.bottom" timestamp="1590040336542">
+    <state width="1877" height="235" key="GridCell.Tab.0.bottom" timestamp="1590367761044">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1590040336542" />
-    <state width="1877" height="235" key="GridCell.Tab.0.center" timestamp="1590040336542">
+    <state width="1877" height="235" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1590367761044" />
+    <state width="1877" height="235" key="GridCell.Tab.0.center" timestamp="1590367761044">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1590040336542" />
-    <state width="1877" height="235" key="GridCell.Tab.0.left" timestamp="1590040336541">
+    <state width="1877" height="235" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1590367761044" />
+    <state width="1877" height="235" key="GridCell.Tab.0.left" timestamp="1590367761043">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1590040336541" />
-    <state width="1877" height="235" key="GridCell.Tab.0.right" timestamp="1590040336542">
+    <state width="1877" height="235" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1590367761043" />
+    <state width="1877" height="235" key="GridCell.Tab.0.right" timestamp="1590367761044">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1590040336542" />
-    <state width="1877" height="235" key="GridCell.Tab.1.bottom" timestamp="1590040336542">
+    <state width="1877" height="235" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1590367761044" />
+    <state width="1877" height="235" key="GridCell.Tab.1.bottom" timestamp="1590146386470">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1590040336542" />
-    <state width="1877" height="235" key="GridCell.Tab.1.center" timestamp="1590040336542">
+    <state width="1877" height="235" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1590146386470" />
+    <state width="1877" height="235" key="GridCell.Tab.1.center" timestamp="1590146386470">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1590040336542" />
-    <state width="1877" height="235" key="GridCell.Tab.1.left" timestamp="1590040336542">
+    <state width="1877" height="235" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1590146386470" />
+    <state width="1877" height="235" key="GridCell.Tab.1.left" timestamp="1590146386470">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1590040336542" />
-    <state width="1877" height="235" key="GridCell.Tab.1.right" timestamp="1590040336542">
+    <state width="1877" height="235" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1590146386470" />
+    <state width="1877" height="235" key="GridCell.Tab.1.right" timestamp="1590146386470">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1590040336542" />
-    <state x="540" y="254" width="1225" height="609" key="IDE.errors.dialog" timestamp="1590022307609">
+    <state width="1877" height="235" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1590146386470" />
+    <state x="540" y="254" width="1225" height="609" key="IDE.errors.dialog" timestamp="1590108011229">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="540" y="254" width="1225" height="609" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1590022307609" />
-    <state x="412" y="205" key="SettingsEditor" timestamp="1590022416254">
+    <state x="540" y="254" width="1225" height="609" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1590108011229" />
+    <state x="412" y="205" key="SettingsEditor" timestamp="1590059540227">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="412" y="205" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1590022416254" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1589851919385">
+    <state x="412" y="205" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1590059540227" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1590052721162">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1589851919385" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1590052721162" />
     <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1588551445935">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -1329,10 +1012,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="333" y="317" width="716" height="574" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1590022414970" />
-    <state x="1086" y="229" width="672" height="676" key="search.everywhere.popup" timestamp="1588659366076">
+    <state x="1086" y="229" width="672" height="676" key="search.everywhere.popup" timestamp="1590116258068">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1086" y="229" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1588659366076" />
+    <state x="1086" y="229" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1590116258068" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/AIControl1_5$MainUi.ic" NAME="MainUi Coverage Results" MODIFIED="1587969587664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

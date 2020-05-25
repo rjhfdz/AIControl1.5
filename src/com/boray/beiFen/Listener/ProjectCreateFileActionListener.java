@@ -342,6 +342,9 @@ public class ProjectCreateFileActionListener implements ActionListener {
             }
             xmlEncoder.writeObject(objects1);
 
+            //DMX512通道测试数据
+            xmlEncoder.writeObject(Data.DMX512Data);
+
 
             xmlEncoder.flush();
             xmlEncoder.close();
