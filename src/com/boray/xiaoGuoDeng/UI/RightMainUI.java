@@ -51,27 +51,32 @@ public class RightMainUI {
                         button.setEnabled(false);
 //						ReviewUtils.sceneReview(XiaoGuoDengModel.model);
                         DefineJLable3 lable3 = (DefineJLable3) MainUi.map.get("SuoYouDengZuLable" + XiaoGuoDengModel.model);
-                        if (Data.serialPort != null) {
-//							if (Data.file!=null) {
-//								new Compare().saveTemp();
-//								Compare.compareFile();
-//								ReviewUtils.sendReviewCode();
-//								ReviewUtils.modeReviewOrder(XiaoGuoDengModel.model);
-                            if (lable3.isEnabled())
-                                ReviewBlock.xiaoGuoDuoDengReview(XiaoGuoDengModel.model);
-                            else
-                                ReviewBlock.serialPortReview(XiaoGuoDengModel.model);
-//							} else {
-//								JFrame frame = (JFrame)MainUi.map.get("frame");
-//								JOptionPane.showMessageDialog(frame, "请先生成初始版本的控制器文件导入到控制器，再进行预览！", "提示", JOptionPane.ERROR_MESSAGE);
-//							}
-                        } else if (Data.socket != null) {
-//							ReviewBlock.saveFile(XiaoGuoDengModel.model);
-                            if (lable3.isEnabled())
-                                ReviewBlock.xiaoGuoDuoDengReview(XiaoGuoDengModel.model);
-                            else
-                                ReviewBlock.socketReview(XiaoGuoDengModel.model);
-                        }
+
+                        if (lable3.isEnabled())
+                            ReviewBlock.xiaoGuoDuoDengReview(XiaoGuoDengModel.model);
+                        else
+                            ReviewBlock.Review(XiaoGuoDengModel.model);
+//                        if (Data.serialPort != null) {
+////							if (Data.file!=null) {
+////								new Compare().saveTemp();
+////								Compare.compareFile();
+////								ReviewUtils.sendReviewCode();
+////								ReviewUtils.modeReviewOrder(XiaoGuoDengModel.model);
+//                            if (lable3.isEnabled())
+//                                ReviewBlock.xiaoGuoDuoDengReview(XiaoGuoDengModel.model);
+//                            else
+//                                ReviewBlock.Review(XiaoGuoDengModel.model);
+////							} else {
+////								JFrame frame = (JFrame)MainUi.map.get("frame");
+////								JOptionPane.showMessageDialog(frame, "请先生成初始版本的控制器文件导入到控制器，再进行预览！", "提示", JOptionPane.ERROR_MESSAGE);
+////							}
+//                        } else if (Data.socket != null) {
+////							ReviewBlock.saveFile(XiaoGuoDengModel.model);
+//                            if (lable3.isEnabled())
+//                                ReviewBlock.xiaoGuoDuoDengReview(XiaoGuoDengModel.model);
+//                            else
+//                                ReviewBlock.Review(XiaoGuoDengModel.model);
+//                        }
                         button.setEnabled(true);
                     }
                 });

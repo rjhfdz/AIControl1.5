@@ -61,7 +61,7 @@ public class GuangLiUI implements ActionListener {
         JScrollPane leftPane = new JScrollPane();
         //leftPane.setBorder(new LineBorder(Color.black));
         leftPane.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
-        leftPane.setPreferredSize(new Dimension(132, 550));
+        leftPane.setPreferredSize(new Dimension(182, 550));
 
         Object[][] data = {};
         String[] s = {"ÐòºÅ", "µÆ¿âÃû³Æ"};
@@ -112,7 +112,7 @@ public class GuangLiUI implements ActionListener {
         //table.setFocusable(false);
         table.setFont(new Font(Font.SERIF, Font.BOLD, 14));
         table.getColumnModel().getColumn(0).setPreferredWidth(30);
-        table.getColumnModel().getColumn(1).setPreferredWidth(102);
+        table.getColumnModel().getColumn(1).setPreferredWidth(152);
         table.setRowHeight(30);
         table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent e) {
@@ -222,7 +222,7 @@ public class GuangLiUI implements ActionListener {
 
 
         JPanel rightPane = new JPanel();
-        rightPane.setPreferredSize(new Dimension(380, 554));
+        rightPane.setPreferredSize(new Dimension(320, 554));
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
         flowLayout.setVgap(-4);
         rightPane.setLayout(flowLayout);
@@ -240,8 +240,8 @@ public class GuangLiUI implements ActionListener {
         Rpane.setLayout(flowLayout3);
 		/*Lpane.setBorder(new LineBorder(Color.black));
 		Rpane.setBorder(new LineBorder(Color.black));*/
-        Lpane.setPreferredSize(new Dimension(180, 590));
-        Rpane.setPreferredSize(new Dimension(180, 590));
+        Lpane.setPreferredSize(new Dimension(150, 590));
+        Rpane.setPreferredSize(new Dimension(150, 590));
         channelBoxs_L = new JComboBox[16];
         channelBoxs_R = new JComboBox[16];
         channeLabels_L = new JLabel[16];
@@ -254,7 +254,7 @@ public class GuangLiUI implements ActionListener {
         MainUi.map.put("ChannelItemListener", listener);
         for (int i = 0; i < channelBoxs_L.length; i++) {
             channeLabels_L[i] = new JLabel("" + (1 + i), JLabel.CENTER);
-            channeLabels_L[i].setPreferredSize(new Dimension(58, 22));
+            channeLabels_L[i].setPreferredSize(new Dimension(30, 22));
             channeLabels_L[i].setBackground(new Color(243, 243, 243));
             channeLabels_L[i].setOpaque(true);
             channeLabels_L[i].setBorder(new LineBorder(new Color(192, 192, 192)));
@@ -276,7 +276,7 @@ public class GuangLiUI implements ActionListener {
         }
         for (int i = 0; i < channelBoxs_R.length; i++) {
             channeLabels_R[i] = new JLabel("" + (17 + i), JLabel.CENTER);
-            channeLabels_R[i].setPreferredSize(new Dimension(58, 22));
+            channeLabels_R[i].setPreferredSize(new Dimension(30, 22));
             channeLabels_R[i].setBackground(new Color(243, 243, 243));
             channeLabels_R[i].setOpaque(true);
             channeLabels_R[i].setBorder(new LineBorder(new Color(192, 192, 192)));
@@ -313,7 +313,7 @@ public class GuangLiUI implements ActionListener {
         delBtn.setPreferredSize(new Dimension(68, 32));
         exportBtn.setPreferredSize(new Dimension(68, 32));
         importBtn.setPreferredSize(new Dimension(68, 32));
-        customBtn.setPreferredSize(new Dimension(100,32));
+        customBtn.setPreferredSize(new Dimension(100, 32));
         DengKuDataListener listener2 = new DengKuDataListener();
         exportBtn.addActionListener(listener2);
         importBtn.addActionListener(listener2);

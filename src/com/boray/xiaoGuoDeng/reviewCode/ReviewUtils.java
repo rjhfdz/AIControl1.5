@@ -365,7 +365,7 @@ public class ReviewUtils {
                         if (s != null) {
                             p1 = new int[24];
                             for (int j = 0; j < s.length; j++) {
-                                p1[j] = Integer.valueOf(s[j]);
+                                p1[j] = Double.valueOf(s[j]).intValue();
                             }
                         } else {
                             p1 = bezier.Data.ZB[0];

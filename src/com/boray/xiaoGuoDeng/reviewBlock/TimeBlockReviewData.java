@@ -986,7 +986,7 @@ public class TimeBlockReviewData {
             if (s != null) {
                 p1 = new int[24];
                 for (int i = 0; i < s.length; i++) {
-                    p1[i] = Integer.valueOf(s[i]);
+                    p1[i] = Double.valueOf(s[i]).intValue();
                 }
             } else {
                 p1 = bezier.Data.ZB[0];
@@ -1008,7 +1008,7 @@ public class TimeBlockReviewData {
             if (s != null) {
                 p2 = new int[24];
                 for (int i = 0; i < s.length; i++) {
-                    p2[i] = Integer.valueOf(s[i]);
+                    p2[i] = Double.valueOf(s[i]).intValue();
                 }
             } else {
                 p2 = bezier.Data.ZB[0];
@@ -1030,7 +1030,7 @@ public class TimeBlockReviewData {
             if (s != null) {
                 p3 = new int[24];
                 for (int i = 0; i < s.length; i++) {
-                    p3[i] = Integer.valueOf(s[i]);
+                    p3[i] = Double.valueOf(s[i]).intValue();
                 }
             } else {
                 p3 = bezier.Data.ZB[0];
@@ -1052,7 +1052,7 @@ public class TimeBlockReviewData {
             if (s != null) {
                 p4 = new int[24];
                 for (int i = 0; i < s.length; i++) {
-                    p4[i] = Integer.valueOf(s[i]);
+                    p4[i] = Double.valueOf(s[i]).intValue();
                 }
             } else {
                 p4 = bezier.Data.ZB[0];
@@ -1475,7 +1475,7 @@ public class TimeBlockReviewData {
             if (s != null) {
                 p1 = new int[24];
                 for (int i = 0; i < s.length; i++) {
-                    p1[i] = Integer.valueOf(s[i]);
+                    p1[i] = Double.valueOf(s[i]).intValue();
                 }
             } else {
                 p1 = bezier.Data.ZB[0];

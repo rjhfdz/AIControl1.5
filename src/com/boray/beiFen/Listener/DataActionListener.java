@@ -2,6 +2,7 @@ package com.boray.beiFen.Listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Console;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -659,6 +660,7 @@ public class DataActionListener {
             timeList.clear();
         }
         list.clear();
+
         //8个不可调
         JComboBox[] boxs8 = (JComboBox[]) MainUi.map.get("kaiGuangBox_BuKeTiao");
         for (int i = 0; i < boxs8.length; i++) {
@@ -841,6 +843,7 @@ public class DataActionListener {
         int[] tp;
         int time = 0;
         String s = null;
+        boolean flag = false;
         for (int i = 1; i < 19; i++) {
             list = null;
             s = null;
@@ -848,6 +851,7 @@ public class DataActionListener {
             if (map != null) {
                 list = (List) map.get("0");
                 s = (String) map.get("3");
+                flag = (boolean) map.get("4");
             }
             for (int j = 0; j < 20; j++) {
                 tp = null;
@@ -866,13 +870,25 @@ public class DataActionListener {
                         }
                     }
                 }
-                if (s != null) {
-                    if ("0".equals(s)) {
-                        b1[i - 1][j][32] = (byte) 1;
-                    } else if ("1".equals(s)) {
-                        b1[i - 1][j][32] = (byte) 2;
-                    } else if ("2".equals(s)) {
-                        b1[i - 1][j][32] = (byte) 0;
+                if (flag) {
+                    if (s != null) {
+                        if ("0".equals(s)) {
+                            b1[i - 1][j][32] = (byte) 0X81;
+                        } else if ("1".equals(s)) {
+                            b1[i - 1][j][32] = (byte) 0X82;
+                        } else if ("2".equals(s)) {
+                            b1[i - 1][j][32] = (byte) 0X80;
+                        }
+                    }
+                } else {
+                    if (s != null) {
+                        if ("0".equals(s)) {
+                            b1[i - 1][j][32] = (byte) 1;
+                        } else if ("1".equals(s)) {
+                            b1[i - 1][j][32] = (byte) 2;
+                        } else if ("2".equals(s)) {
+                            b1[i - 1][j][32] = (byte) 0;
+                        }
                     }
                 }
             }

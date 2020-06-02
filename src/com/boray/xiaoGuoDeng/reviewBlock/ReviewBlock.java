@@ -17,44 +17,45 @@ import java.util.List;
 import java.util.Vector;
 
 public class ReviewBlock {
-    public static void serialPortReview(int model) {
-        if (Data.serialPort != null) {
-            try {
+    public static void Review(int model) {
+//        if (Data.serialPort != null) {
+        try {
 
-                //灯具数据
-                byte[] b = TimeBlockReviewData.getInfOfLight();
-                Socket.SerialPortSendData(b);
-                Thread.sleep(200);
+            //灯具数据
+            byte[] b = TimeBlockReviewData.getInfOfLight();
+            Socket.SendData(b);
+            Thread.sleep(200);
 
-                //分组
-                b = TimeBlockReviewData.getGroupOfLights();
-                Socket.SerialPortSendData(b);
+            //分组
+            b = TimeBlockReviewData.getGroupOfLights();
+            Socket.SendData(b);
 
-                Thread.sleep(200);
+            Thread.sleep(200);
 
 
-                //熄灯+加速度
-                b = TimeBlockReviewData.getOffLights()[0];
-                Socket.SerialPortSendData(b);
+            //熄灯+加速度
+            b = TimeBlockReviewData.getOffLights()[0];
+            Socket.SendData(b);
 
-                Thread.sleep(200);
-                b = TimeBlockReviewData.getOffLights()[1];
-                Socket.SerialPortSendData(b);
+            Thread.sleep(200);
+            b = TimeBlockReviewData.getOffLights()[1];
+            Socket.SendData(b);
 
-                //灯库
-                Thread.sleep(200);
-                b = TimeBlockReviewData.getlibOfLights()[0];
-                Socket.SerialPortSendData(b);
-                Thread.sleep(200);
-                b = TimeBlockReviewData.getlibOfLights()[1];
-                Socket.SerialPortSendData(b);
+            //灯库
+            Thread.sleep(200);
+            b = TimeBlockReviewData.getlibOfLights()[0];
+            Socket.SendData(b);
+            Thread.sleep(200);
+            b = TimeBlockReviewData.getlibOfLights()[1];
+            Socket.SendData(b);
 
+            if (Data.serialPort != null) {
                 //素材数据区
                 Thread.sleep(200);
                 Object[] objects = TimeBlockReviewData.getEffectLight4(4096, model, 14, false);
                 for (int i = 0; i < objects.length; i++) {
                     b = (byte[]) objects[i];
-                    Socket.SerialPortSendData(b);
+                    Socket.SendData(b);
                     Thread.sleep(200);
                 }
 
@@ -63,19 +64,39 @@ public class ReviewBlock {
                 objects = TimeBlockReviewData.getEffectLight4(4096, model, 15, false);
                 for (int i = 0; i < objects.length; i++) {
                     b = (byte[]) objects[i];
-                    Socket.SerialPortSendData(b);
+                    Socket.SendData(b);
                     Thread.sleep(230);
                 }
+            } else if (Data.socket != null) {
+                //素材数据区
+                Thread.sleep(350);
+                Object[] objects = TimeBlockReviewData.getEffectLight4(1280, model, 14, false);
+                for (int i = 0; i < objects.length; i++) {
+                    b = (byte[]) objects[i];
+                    Socket.SendData(b);
+                    Thread.sleep(350);
+                }
 
-                //启动预览
-                Thread.sleep(200);
-                b = TimeBlockReviewData.getStarReview2(model);
-                Socket.SerialPortSendData(b);
-
-            } catch (Exception e2) {
-                e2.printStackTrace();
+                //场景
+                Thread.sleep(350);
+                objects = TimeBlockReviewData.getEffectLight4(1280, model, 15, false);
+                for (int i = 0; i < objects.length; i++) {
+                    b = (byte[]) objects[i];
+                    Socket.SendData(b);
+                    Thread.sleep(350);
+                }
             }
+
+
+            //启动预览
+            Thread.sleep(200);
+            b = TimeBlockReviewData.getStarReview2(model);
+            Socket.SendData(b);
+
+        } catch (Exception e2) {
+            e2.printStackTrace();
         }
+//        }
     }
 
     public static void socketReview(int model) {
@@ -235,7 +256,7 @@ public class ReviewBlock {
                 b = TimeBlockReviewData.getStarReview4(model);
                 Socket.UDPSendData(b);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -270,7 +291,7 @@ public class ReviewBlock {
                 b = TimeBlockReviewData.getStarReview3(model);
                 Socket.UDPSendData(b);
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -27,6 +27,8 @@ public class PopMenuListener implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if ("¡¡±à¼­".equals(e.getActionCommand())) {
+            DefineJLable lable = (DefineJLable) pane.getComponent(blockNum-1);
+            ss = lable.getText();
             new TimeBlockEditUI().show(Integer.parseInt(ss.substring(ss.indexOf("(") + 1, ss.indexOf(")"))), pane.getName(), ss.substring(0, ss.indexOf("(")));
         } else if ("¡¡É¾³ý".equals(e.getActionCommand())) {
             if (blockNum == pane.getComponentCount()) {

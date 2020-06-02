@@ -1,16 +1,7 @@
 package com.boray.xiaoGuoDeng.UI;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -339,6 +330,11 @@ public class TimeBlockEditUI {
             }
             JComboBox box = (JComboBox) actionCompontList.get(1);
             map.put("2", box.getSelectedIndex() + "");
+            if (box.getSelectedIndex() >= 48) {
+                String str = box.getSelectedItem().toString();
+                map.put("6", str.substring(str.indexOf("(") + 1, str.indexOf(")")));
+                map.put("7", bezier.Data.map.get("" + box.getSelectedIndex()));
+            }
 
             JSlider slider = (JSlider) actionCompontList.get(2);
             map.put("3", slider.getValue() + "");

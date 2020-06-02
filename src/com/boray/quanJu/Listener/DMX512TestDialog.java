@@ -112,6 +112,8 @@ public class DMX512TestDialog implements ActionListener {
                 @Override
                 public void stateChanged(ChangeEvent e) {
                     textFields[a].setText(String.valueOf(sliders[a].getValue()));
+                    saveData();
+//                    outDevice();
                 }
             });
             sliders[i].addMouseWheelListener(new MouseWheelListener() {
@@ -123,6 +125,7 @@ public class DMX512TestDialog implements ActionListener {
                         } else {
                             sliders[a].setValue(sliders[a].getValue() + 1);
                         }
+                        saveData();
                         outDevice();
                     }
                 }
@@ -140,6 +143,7 @@ public class DMX512TestDialog implements ActionListener {
                             sliders[a].setValue(tb - 1);
                         }
                         sliders[a].setValue(tb);
+                        saveData();
                         outDevice();
                     }
                 }
@@ -167,6 +171,8 @@ public class DMX512TestDialog implements ActionListener {
                 for (int i = 0; i < 20; i++) {
                     sliders[i].setValue(0);
                 }
+                saveData();
+                outDevice();
             }
         });
         JButton button2 = new JButton("全部清零");
@@ -179,6 +185,7 @@ public class DMX512TestDialog implements ActionListener {
                 for (int i = 0; i < 512; i++) {
                     Data.DMX512Data[i] = 0;
                 }
+                outDevice();
             }
         });
         JButton button3 = new JButton("满值");
@@ -188,6 +195,8 @@ public class DMX512TestDialog implements ActionListener {
                 for (int i = 0; i < 20; i++) {
                     sliders[i].setValue(255);
                 }
+                saveData();
+                outDevice();
             }
         });
         JButton button4 = new JButton("全部满值");
@@ -200,6 +209,7 @@ public class DMX512TestDialog implements ActionListener {
                 for (int i = 0; i < 512; i++) {
                     Data.DMX512Data[i] = (byte) 255;
                 }
+                outDevice();
             }
         });
         p3.add(button1);
@@ -216,19 +226,21 @@ public class DMX512TestDialog implements ActionListener {
      * 发送预览数据
      */
     private void outDevice() {
-        byte[] buff = new byte[512 + 8];
-        buff[0] = (byte) 0xBB;
-        buff[1] = (byte) 0x55;
-        buff[2] = (byte) (520 / 256);
-        buff[3] = (byte) (520 % 256);
-        buff[4] = (byte) 0x80;
-        buff[5] = (byte) 0x01;
-        buff[6] = (byte) 0xFF;
-        for (int j = 0; j < 512; j++) {
-            buff[j + 7] = Data.DMX512Data[j];
+        if (Data.serialPort != null || Data.socket != null) {
+            byte[] buff = new byte[512 + 8];
+            buff[0] = (byte) 0xBB;
+            buff[1] = (byte) 0x55;
+            buff[2] = (byte) (520 / 256);
+            buff[3] = (byte) (520 % 256);
+            buff[4] = (byte) 0x80;
+            buff[5] = (byte) 0x01;
+            buff[6] = (byte) 0xFF;
+            for (int j = 0; j < 512; j++) {
+                buff[j + 7] = Data.DMX512Data[j];
+            }
+            buff[519] = ZhiLingJi.getJiaoYan(buff);
+            Socket.SendData(buff);
         }
-        buff[519] = ZhiLingJi.getJiaoYan(buff);
-        Socket.SendData(buff);
     }
 
     /**

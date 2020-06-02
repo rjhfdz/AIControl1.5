@@ -30,7 +30,7 @@ public class AddGroupUI implements ActionListener {
         JFrame f = (JFrame) MainUi.map.get("frame");
         dialog = new IconJDialog(f, true);
         dialog.setResizable(false);
-        dialog.setTitle("添加分组");
+        dialog.setTitle("新建分组");
         int w = 380, h = 280;
         dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - w / 2, f.getLocation().y + f.getSize().height / 2 - h / 2);
         dialog.setSize(w, h);

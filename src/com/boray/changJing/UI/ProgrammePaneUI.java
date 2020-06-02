@@ -102,6 +102,7 @@ public class ProgrammePaneUI {
             field8[i] = new JTextField();
             field8[i].setPreferredSize(new Dimension(60, 30));
             field8[i].setText("100");
+//            field8[i].add
 //            sliders8[i] = new JSlider(0,200,1);
 //            sliders8[i].setPreferredSize(new Dimension(70, 24));
             panels8[i] = new JPanel();

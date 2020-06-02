@@ -8,6 +8,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -153,6 +155,17 @@ public class Util {
         }else{
             return false;
         }
+    }
+
+    public static Object Clone(Object o){
+        Object newObj = new Object();
+        Map map = (Map) o;
+        Map newMap = new HashMap();
+        for (Object key:map.keySet()){
+            newMap.put(key,map.get(key));
+        }
+        newObj = newMap;
+        return newObj;
     }
 
 }

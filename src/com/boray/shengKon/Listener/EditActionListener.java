@@ -20,6 +20,7 @@ public class EditActionListener implements ActionListener{
 		this.pane = pane;
 	}
 	public void actionPerformed(ActionEvent e) {
+
 		new EditEffect_shengKonUI().show(blockNum,groupNum,number,pane);
 	}
 }

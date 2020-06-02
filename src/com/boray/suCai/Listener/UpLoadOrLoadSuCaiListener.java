@@ -1,7 +1,9 @@
 package com.boray.suCai.Listener;
 
 import com.boray.Data.Data;
+import com.boray.Data.TuXingAction;
 import com.boray.Utils.IconJDialog;
+import com.boray.Utils.Util;
 import com.boray.mainUi.MainUi;
 import com.boray.suCai.UI.SuCaiUI;
 
@@ -116,7 +118,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
                     dialog.setSize(w, h);
                     dialog.setLayout(new FlowLayout(FlowLayout.CENTER));
                     dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                    init(dialog, s, "", Data.SuCaiObjects[Integer.valueOf(str[0])][Integer.valueOf(str[1])],"粘贴成功！");
+                    init(dialog, s, "", Data.SuCaiObjects[Integer.valueOf(str[0])][Integer.valueOf(str[1])], "粘贴成功！");
                     dialog.setVisible(true);
                 }
             }
@@ -221,6 +223,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
                         suCaiList.setModel(model);
                         suCaiList.setSelectedIndex(0);
                         Data.SuCaiObjects[dengkuList.getSelectedIndex()][number - 1] = o;
+                        dongZuo(o);
                         JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "导入成功", "提示", JOptionPane.ERROR_MESSAGE);
                         dialog.dispose();
                     }
@@ -265,6 +268,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
             xmlEncoder.writeObject(type);//写入素材类型
             xmlEncoder.writeObject(suCaiName);//写入素材名称
             xmlEncoder.writeObject(Data.SuCaiObjects[dengKuIndex][suCaiIndex]);//写入素材数据
+
 
             xmlEncoder.flush();
             xmlEncoder.close();
@@ -328,7 +332,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
             dialog.setSize(w, h);
             dialog.setLayout(new FlowLayout(FlowLayout.CENTER));
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            init(dialog, type, suCaiName, o,"导入成功！");
+            init(dialog, type, suCaiName, o, "导入成功！");
             dialog.setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -336,7 +340,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
     }
 
     //初始化界面
-    public void init(final JDialog dialog, final String type, final String suCaiName, final Object o,final String message) {
+    public void init(final JDialog dialog, final String type, final String suCaiName, final Object o, final String message) {
         JPanel p1 = new JPanel();
         p1.add(new JLabel("素材名称："));
         final JTextField field = new JTextField(15);
@@ -375,7 +379,8 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
                         }
                         String suCaiNameAndNumber = field.getText() + "--->" + (cnt + 1);
 
-                        Data.SuCaiObjects[suCaiLightType.getSelectedIndex()][cnt] = o;
+                        Data.SuCaiObjects[suCaiLightType.getSelectedIndex()][cnt] = Util.Clone(o);
+                        dongZuo(Data.SuCaiObjects[suCaiLightType.getSelectedIndex()][cnt]);
 
                         if (model == null) {
                             model = new DefaultListModel();
@@ -481,5 +486,53 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
             e.printStackTrace();
         }
         return str;
+    }
+
+    /**
+     * 判断导入的素材中是否有动作自定义图形  并整理数据
+     *
+     * @param o
+     */
+    public void dongZuo(Object o) {
+        HashMap hashMap = (HashMap) o;
+        Map map = (Map) hashMap.get("actionXiaoGuoData");
+        if (map != null) {
+            if (Integer.valueOf(map.get("2").toString()) >= 48) {
+                String name = map.get("6").toString();
+                String[] temp = (String[]) map.get("7");
+                String[] tps = (String[]) bezier.Data.itemMap.get("0");
+                if (tps == null) {
+                    tps = TuXingAction.getValus();
+                }
+                boolean flag = false;
+                int index = 48;
+                for (int i = 48; i < tps.length; i++) {
+                    if (tps[i].contains("(")) {
+                        String str = tps[i].substring(tps[i].indexOf("(") + 1, tps[i].indexOf(")"));
+                        if (str.equals(name)) {
+                            index = i;
+                            flag = true;
+                        }
+                    }else{
+                        index = i;
+                    }
+                }
+                if (flag) {
+                    tps[index] = (index - 1) + "(" + name + ")";
+                    bezier.Data.map.put("" + index, temp);
+                } else {
+                    for (int i = 48; i < 256; i++) {
+                        if (!tps[i].contains("(")) {
+                            index = i;
+                            break;
+                        }
+                    }
+                    tps[index] = (index - 1) + "(" + name + ")";
+                    bezier.Data.map.put("" + index, temp);
+                }
+                bezier.Data.itemMap.put("0", tps);
+                map.put("2", "" + index);
+            }
+        }
     }
 }

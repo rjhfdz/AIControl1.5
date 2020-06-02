@@ -241,7 +241,7 @@ public class FenZhuUI implements ActionListener {
         flowLayout.setHgap(-2);
         pane.setLayout(flowLayout);
         pane.add(new JLabel("灯具分组"));
-        JButton btn1 = new JButton("添加");
+        JButton btn1 = new JButton("新建");
         JButton btn2 = new JButton("删除");
         btn1.addActionListener(this);
         btn2.addActionListener(this);
@@ -362,7 +362,7 @@ public class FenZhuUI implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        if ("添加".equals(e.getActionCommand())) {
+        if ("新建".equals(e.getActionCommand())) {
             new AddGroupUI().show();
         } else {
             NewJTable table = (NewJTable) MainUi.map.get("GroupTable");

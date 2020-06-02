@@ -683,9 +683,9 @@ public class MergeAllListener implements ActionListener {
                 //灯具名称
                 String s = (String) (table.getValueAt(i, 2));
                 t3[i][5] = (byte) s.getBytes().length;
-                for (int j = 0; j < s.getBytes().length; j++) {
-                    t3[i][6 + j] = s.getBytes()[j];
-                }
+//                for (int j = 0; j < s.getBytes().length; j++) {
+//                    t3[i][6 + j] = s.getBytes()[j];
+//                }
                 //关联灯库编号
                 s = table.getValueAt(i, 3).toString();
                 s = s.split("#")[0].substring(2);
@@ -927,7 +927,7 @@ public class MergeAllListener implements ActionListener {
                         if (s != null) {
                             p1 = new int[24];
                             for (int j = 0; j < s.length; j++) {
-                                p1[j] = Integer.valueOf(s[j]);
+                                p1[j] = Double.valueOf(s[j]).intValue();
                             }
                         } else {
                             p1 = bezier.Data.ZB[0];
@@ -3482,6 +3482,7 @@ public class MergeAllListener implements ActionListener {
         int[] tp;
         int time = 0;
         String s = null;
+        boolean flag = false;
         for (int i = 1; i < 19; i++) {
             list = null;
             s = null;
@@ -3489,6 +3490,7 @@ public class MergeAllListener implements ActionListener {
             if (map != null) {
                 list = (List) map.get("0");
                 s = (String) map.get("3");
+                flag = (boolean) map.get("4");
             }
             for (int j = 0; j < 20; j++) {
                 tp = null;
@@ -3507,13 +3509,17 @@ public class MergeAllListener implements ActionListener {
                         }
                     }
                 }
-                if (s != null) {
-                    if ("0".equals(s)) {
-                        b1[i - 1][j][32] = (byte) 1;
-                    } else if ("1".equals(s)) {
-                        b1[i - 1][j][32] = (byte) 2;
-                    } else if ("2".equals(s)) {
-                        b1[i - 1][j][32] = (byte) 0;
+                if(!flag){
+                    b1[i - 1][j][32] = (byte) 0X80;
+                }else {
+                    if (s != null) {
+                        if ("0".equals(s)) {
+                            b1[i - 1][j][32] = (byte) 1;
+                        } else if ("1".equals(s)) {
+                            b1[i - 1][j][32] = (byte) 2;
+                        } else if ("2".equals(s)) {
+                            b1[i - 1][j][32] = (byte) 0;
+                        }
                     }
                 }
                 os.write(b1[i - 1][j]);

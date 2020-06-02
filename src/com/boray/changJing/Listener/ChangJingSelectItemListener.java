@@ -1,6 +1,7 @@
 package com.boray.changJing.Listener;
 
 import com.boray.Data.Data;
+import com.boray.Utils.Socket;
 import com.boray.changJing.Data.DataOfChangJing;
 import com.boray.mainUi.MainUi;
 
@@ -58,6 +59,9 @@ public class ChangJingSelectItemListener implements ItemListener {
             }
             //加载当前场景数据
             loadData(n);
+            //加载数据后  发送数据
+            if (Data.serialPort != null || Data.socket != null)
+                Socket.SendData(new DengJuKaiGuangItemListener().code());
 
             Data.changJingModel = n;
             JComboBox boxs = (JComboBox) MainUi.map.get("copyBox");

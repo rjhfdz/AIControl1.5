@@ -378,6 +378,11 @@ public class SuCaiEditUI {
             }
             JComboBox box = (JComboBox) actionCompontList.get(1);
             map.put("2", box.getSelectedIndex() + "");
+            if (box.getSelectedIndex() >= 48) {
+                String str = box.getSelectedItem().toString();
+                map.put("6", str.substring(str.indexOf("(") + 1, str.indexOf(")")));
+                map.put("7", bezier.Data.map.get("" + box.getSelectedIndex()));
+            }
 
             JSlider slider = (JSlider) actionCompontList.get(2);
             map.put("3", slider.getValue() + "");

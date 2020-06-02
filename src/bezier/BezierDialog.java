@@ -24,6 +24,7 @@ public class BezierDialog
 		IconJDialog dialog = new IconJDialog(frame,true);
 		int width = 264;
 		int height = 360;
+		dialog.setTitle("自定义图形");
 		dialog.setSize(width,height);
 		FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
 		flowLayout.setHgap(0);
