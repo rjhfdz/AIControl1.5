@@ -974,7 +974,7 @@ public class TimeBlockReviewData {
         }
         //动作12点数据
         int[] p1 = null;
-        int action = Byte.toUnsignedInt(T1[0]);
+        int action = Byte.toUnsignedInt(T1[0]) + 1;
         if (action == 0) {
             p1 = bezier.Data.ZB[1];
         } else if (action == 1) {

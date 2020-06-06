@@ -21,23 +21,23 @@
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="artnet协议修复异常。&#10;项目新增自定义JDialog，左上角添加图标。&#10;同时替换项目中所有使用的JDialog。">
-      <change afterPath="$PROJECT_DIR$/src/com/boray/Utils/UtilJDialog.java" afterDir="false" />
+    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="贝塞尔曲线模块修改。数据保存方式，以及素材导入导出格式。&#10;场景界面下拉框选择对应场景时，发送对应的数据。&#10;场景界面调整，对应的数据打包，以及加载工程时的修改。&#10;灯库已有通道位置调整。&#10;声控环境灯界面，数据打包修改。&#10;全局界面添加DMX512测试功能。&#10;修复效果灯选择素材时的异常。&#10;灯库界面调整。灯库名称过长，导致的数据打包异常。&#10;效果灯场景页面对应的WiFi发送数据时间间隔调整。&#10;自定义贝塞尔曲线，数据打包异常修改。">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/json_lib_2_4_jdk15.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/bezier/bezierListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/bezier/bezierListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/Data/ChannelName.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/Data/ChannelName.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/Data/TuXingAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/Data/TuXingAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/DataActionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/DataActionListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AIControl1.5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AIControl1.5.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/bezier/BezierDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/bezier/BezierDialog.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/MergeAllListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/MergeAllListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/changJing/Listener/ChangJingSendCodeListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/changJing/Listener/ChangJingSendCodeListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/AddGroupUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/AddGroupUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/FenZhuUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/FenZhuUI$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/FenZhuUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/FenZhuUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/GuangLiUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/GuangLiUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/EditActionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/Listener/EditActionListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$10.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$2.class" afterDir="false" />
@@ -49,98 +49,28 @@
       <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$8.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$9.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/Listener/PopMenuListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/Listener/PopMenuListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$19$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$19$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$19.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$20.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$21.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$22.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$23.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$24.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$25.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$25.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$26.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$26.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$27.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$27.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$28.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$28.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$29.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$29.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$30.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$30.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$31.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$31.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$32.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$32.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$33.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$33.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$34.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$34.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$35.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$35.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$36.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$36.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$37.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$37.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$38.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$38.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$39.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$39.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$40.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$40.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$41.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$41.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$42.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$42.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$43.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$43.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$44.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$44.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$45.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$45.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$46.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$46.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$47.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$47.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$48.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$48.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$49.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$49.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$50.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$50.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$51.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$51.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$52.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$52.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$53.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$53.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$54.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$54.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$55.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$55.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$56.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$56.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$57.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$57.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$58.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$58.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$59.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$59.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$60.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$60.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$61.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$61.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$62.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$62.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$63.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$63.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$64.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$64.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$65.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$65.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$66.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$66.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiEditUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/reviewBlock/TimeBlockReviewData.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/reviewBlock/TimeBlockReviewData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/reviewCode/ReviewUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/reviewCode/ReviewUtils.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/artifacts/AIControl1.5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/AIControl1.5.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bezier/BezierDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bezier/BezierDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bezier/bezierListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bezier/bezierListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/Data/ChannelName.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Data/ChannelName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/Data/TuXingAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Data/TuXingAction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/Utils/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Utils/Util.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/DataActionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/DataActionListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/MergeAllListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/MergeAllListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/changJing/Listener/ChangJingSelectItemListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/changJing/Listener/ChangJingSelectItemListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/changJing/Listener/ChangJingSendCodeListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/changJing/Listener/ChangJingSendCodeListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/changJing/UI/ProgrammePaneUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/changJing/UI/ProgrammePaneUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/dengKu/UI/AddGroupUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/dengKu/UI/AddGroupUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/dengKu/UI/FenZhuUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/dengKu/UI/FenZhuUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/dengKu/UI/GuangLiUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/dengKu/UI/GuangLiUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/quanJu/Listener/DMX512TestDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/quanJu/Listener/DMX512TestDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKon/Listener/EditActionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKon/Listener/EditActionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/returnListener/ComReturnListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/returnListener/ComReturnListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/returnListener/IpReturnListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/returnListener/IpReturnListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/shengKon/UI/ShengKonUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKon/UI/ShengKonUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/Listener/UpLoadOrLoadSuCaiListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/Listener/UpLoadOrLoadSuCaiListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/UI/SuCaiEditUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/UI/SuCaiEditUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/Listener/PopMenuListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/Listener/PopMenuListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/RightMainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/RightMainUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/TimeBlockEditUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/reviewBlock/ReviewBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/reviewBlock/ReviewBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/OverDmxUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/OverDmxUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/reviewBlock/TimeBlockReviewData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/reviewBlock/TimeBlockReviewData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/reviewCode/ReviewUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/reviewCode/ReviewUtils.java" afterDir="false" />
     </list>
@@ -149,9 +79,6 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="CoverageViewManager">
-    <option name="myElementSize" value="241" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -204,25 +131,29 @@
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3" value="308" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="308" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth5" value="308" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TODO_SCOPE" value="All Places" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../RuoYi" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/lib" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="yiiguxing.plugin.translate" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="com.boray.Utils" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\BorayWork\AIControl1.5\src" />
-      <recent name="D:\BorayWork\AIControl1.5\src\com\boray\Data" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\BorayWork\AIControl1.5\src\lib" />
+      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5\src\icon" />
+      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5" />
+      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5\src\lib" />
+      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5\src\com\boray\shengKon\Listener" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.boray.Listener" />
@@ -230,12 +161,9 @@
       <recent name="com.boray.shengKon.UI" />
       <recent name="com.boray.xiaoGuoDeng.reviewCode" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5\src\icon" />
-      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5" />
-      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5\src\lib" />
-      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5\src\com\boray\shengKon\Listener" />
-      <recent name="D:\BorayWork\AIControl1.5\src\resource" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\BorayWork\AIControl1.5\src" />
+      <recent name="D:\BorayWork\AIControl1.5\src\com\boray\Data" />
     </key>
   </component>
   <component name="RunManager" selected="Application.MainUi">
@@ -621,14 +549,15 @@
       <workItem from="1590748433956" duration="1289000" />
       <workItem from="1590799610806" duration="26383000" />
       <workItem from="1590971564427" duration="35565000" />
-      <workItem from="1591057680646" duration="19625000" />
-    </task>
-    <task id="LOCAL-00026" summary="声控效果区数据打包异常处理&#10;声控素材编辑页面步骤异常处理&#10;顶部菜单栏，修改到左边侧边栏">
-      <created>1575505147723</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1575505147723</updated>
+      <workItem from="1591057680646" duration="34623000" />
+      <workItem from="1591143700215" duration="34442000" />
+      <workItem from="1591229704778" duration="16657000" />
+      <workItem from="1591252502974" duration="115000" />
+      <workItem from="1591252678284" duration="323000" />
+      <workItem from="1591253413884" duration="413000" />
+      <workItem from="1591253864498" duration="10158000" />
+      <workItem from="1591316926180" duration="32620000" />
+      <workItem from="1591403196665" duration="2427000" />
     </task>
     <task id="LOCAL-00027" summary="主窗口界面调整，本地项目不用登陆就可以查看&#10;我的项目以及公司项目，需要登陆才能查看">
       <created>1575525566704</created>
@@ -966,7 +895,14 @@
       <option name="project" value="LOCAL" />
       <updated>1590370848704</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="贝塞尔曲线模块修改。数据保存方式，以及素材导入导出格式。&#10;场景界面下拉框选择对应场景时，发送对应的数据。&#10;场景界面调整，对应的数据打包，以及加载工程时的修改。&#10;灯库已有通道位置调整。&#10;声控环境灯界面，数据打包修改。&#10;全局界面添加DMX512测试功能。&#10;修复效果灯选择素材时的异常。&#10;灯库界面调整。灯库名称过长，导致的数据打包异常。&#10;效果灯场景页面对应的WiFi发送数据时间间隔调整。&#10;自定义贝塞尔曲线，数据打包异常修改。">
+      <created>1591087312085</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1591087312086</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -977,7 +913,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -985,7 +933,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="重启机制逻辑（提示：硬件重启后，管理软件会自动断开，要重新连接。）&#10;在线管理的自动保存功能。&#10;PC主动获取新串口端号。&#10;新建灯具时，灯库型号，默认为操作选中的最后一个。&#10;编程&lt;灯光场景&gt;与《功能场景》的区别显示" />
     <MESSAGE value="效果灯编程以及声控编程界面选择素材界面添加创建素材功能，以及双击打开&#10;主窗口界面添加正在编辑功能（自动保存）" />
     <MESSAGE value="写入控制器功能添加防错机制(收到反馈才会发送下一包，未收到重复发送三次)&#10;主窗口本地管理添加复制粘贴功能" />
     <MESSAGE value="写入控制器，防错机制bug修复&#10;添加WinRegistry工具类，实现串口热拔功能" />
@@ -1010,7 +957,8 @@
     <MESSAGE value="灯库添加自定义通道，灯库导入导出文件结构修改，工程结构修改，保存的自定义通道，加载工程后可以保持，灯库通道新加多个。&#10;修复声控编程界面异常。&#10;场景界面添加时序，以及界面控件修改，数据打包修改，工程结构修改。&#10;场景界面部分串口发码添加WiFi模式发码。&#10;效果灯多灯界面粘贴复制异常，以及素材重命名修复。&#10;雾机异常修复，添加提示，起始地址加通道不能超过512。" />
     <MESSAGE value="artnet协议修复异常。&#10;项目新增自定义JDialog，左上角添加图标。&#10;同时替换项目中所有使用的JDialog。" />
     <MESSAGE value="全局设置添加DMX512测试通道。&#10;工程文件修改，包含DMX512测试数据。" />
-    <option name="LAST_COMMIT_MESSAGE" value="全局设置添加DMX512测试通道。&#10;工程文件修改，包含DMX512测试数据。" />
+    <MESSAGE value="贝塞尔曲线模块修改。数据保存方式，以及素材导入导出格式。&#10;场景界面下拉框选择对应场景时，发送对应的数据。&#10;场景界面调整，对应的数据打包，以及加载工程时的修改。&#10;灯库已有通道位置调整。&#10;声控环境灯界面，数据打包修改。&#10;全局界面添加DMX512测试功能。&#10;修复效果灯选择素材时的异常。&#10;灯库界面调整。灯库名称过长，导致的数据打包异常。&#10;效果灯场景页面对应的WiFi发送数据时间间隔调整。&#10;自定义贝塞尔曲线，数据打包异常修改。" />
+    <option name="LAST_COMMIT_MESSAGE" value="贝塞尔曲线模块修改。数据保存方式，以及素材导入导出格式。&#10;场景界面下拉框选择对应场景时，发送对应的数据。&#10;场景界面调整，对应的数据打包，以及加载工程时的修改。&#10;灯库已有通道位置调整。&#10;声控环境灯界面，数据打包修改。&#10;全局界面添加DMX512测试功能。&#10;修复效果灯选择素材时的异常。&#10;灯库界面调整。灯库名称过长，导致的数据打包异常。&#10;效果灯场景页面对应的WiFi发送数据时间间隔调整。&#10;自定义贝塞尔曲线，数据打包异常修改。" />
   </component>
   <component name="WindowStateProjectService">
     <state x="679" y="111" key="#Custom_Plugin_Repositories" timestamp="1589265521924">
@@ -1037,14 +985,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588753551087" />
-    <state x="704" y="355" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1588646279935">
+    <state x="704" y="355" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1591252993397">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="704" y="355" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588646279935" />
-    <state x="811" y="252" key="#com.intellij.ide.util.MemberChooser" timestamp="1590984250217">
+    <state x="704" y="355" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591252993397" />
+    <state x="1100" y="357" key="#com.intellij.ide.util.MemberChooser" timestamp="1591322997839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="811" y="252" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1590984250217" />
+    <state x="1100" y="357" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1591322997839" />
     <state x="640" y="255" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1588587988523">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -1063,81 +1011,81 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="491" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1590388094970" />
-    <state x="252" y="66" width="1536" height="860" key="DiffContextDialog" timestamp="1589794724767">
+    <state x="252" y="66" width="1536" height="860" key="DiffContextDialog" timestamp="1591102091748">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="252" y="66" width="1536" height="860" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1589794724767" />
-    <state x="761" y="342" key="FileChooserDialogImpl" timestamp="1590022398858">
+    <state x="252" y="66" width="1536" height="860" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591102091748" />
+    <state x="761" y="342" key="FileChooserDialogImpl" timestamp="1591252992098">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="761" y="342" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1590022398858" />
-    <state width="1877" height="235" key="GridCell.Tab.0.bottom" timestamp="1591086092671">
+    <state x="761" y="342" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591252992098" />
+    <state width="1877" height="234" key="GridCell.Tab.0.bottom" timestamp="1591359653545">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591086092671" />
-    <state width="1877" height="235" key="GridCell.Tab.0.center" timestamp="1591086092670">
+    <state width="1877" height="234" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591359653545" />
+    <state width="1877" height="234" key="GridCell.Tab.0.center" timestamp="1591359653545">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591086092670" />
-    <state width="1877" height="235" key="GridCell.Tab.0.left" timestamp="1591086092670">
+    <state width="1877" height="234" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591359653545" />
+    <state width="1877" height="234" key="GridCell.Tab.0.left" timestamp="1591359653544">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591086092670" />
-    <state width="1877" height="235" key="GridCell.Tab.0.right" timestamp="1591086092671">
+    <state width="1877" height="234" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591359653544" />
+    <state width="1877" height="234" key="GridCell.Tab.0.right" timestamp="1591359653545">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591086092671" />
-    <state width="1877" height="235" key="GridCell.Tab.1.bottom" timestamp="1591086092519">
+    <state width="1877" height="234" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591359653545" />
+    <state width="1877" height="234" key="GridCell.Tab.1.bottom" timestamp="1591359653545">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591086092519" />
-    <state width="1877" height="235" key="GridCell.Tab.1.center" timestamp="1591086092519">
+    <state width="1877" height="234" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591359653545" />
+    <state width="1877" height="234" key="GridCell.Tab.1.center" timestamp="1591359653545">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591086092519" />
-    <state width="1877" height="235" key="GridCell.Tab.1.left" timestamp="1591086092518">
+    <state width="1877" height="234" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591359653545" />
+    <state width="1877" height="234" key="GridCell.Tab.1.left" timestamp="1591359653545">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591086092518" />
-    <state width="1877" height="235" key="GridCell.Tab.1.right" timestamp="1591086092519">
+    <state width="1877" height="234" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591359653545" />
+    <state width="1877" height="234" key="GridCell.Tab.1.right" timestamp="1591359653545">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="235" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591086092519" />
-    <state x="540" y="254" width="1225" height="609" key="IDE.errors.dialog" timestamp="1591078904061">
+    <state width="1877" height="234" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591359653545" />
+    <state x="540" y="254" width="1225" height="609" key="IDE.errors.dialog" timestamp="1591403494468">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="540" y="254" width="1225" height="609" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591078904061" />
+    <state x="540" y="254" width="1225" height="609" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591403494468" />
     <state x="760" y="240" key="RollbackChangesDialog" timestamp="1590459655570">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="760" y="240" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1590459655570" />
-    <state x="412" y="205" key="SettingsEditor" timestamp="1590059540227">
+    <state x="521" y="161" key="SettingsEditor" timestamp="1591261709852">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="412" y="205" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1590059540227" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1590370868249">
+    <state x="521" y="161" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1591261709852" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1591087325418">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1590370868249" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591087325418" />
     <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1588551445935">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588551445935" />
-    <state x="857" y="153" width="958" height="801" key="find.popup" timestamp="1591083842070">
+    <state x="857" y="153" width="958" height="801" key="find.popup" timestamp="1591354588090">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="857" y="153" width="958" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591083842070" />
-    <state x="333" y="317" width="716" height="574" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1590022414970">
+    <state x="857" y="153" width="958" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591354588090" />
+    <state x="333" y="317" width="716" height="574" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1591254155193">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="333" y="317" width="716" height="574" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1590022414970" />
+    <state x="333" y="317" width="716" height="574" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591254155193" />
     <state x="1086" y="229" width="672" height="676" key="search.everywhere.popup" timestamp="1591008503944">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1086" y="229" width="672" height="676" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1591008503944" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/AIControl1_5$MainUi.ic" NAME="MainUi Coverage Results" MODIFIED="1587969587664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/AIControl1_5$MainUi.ic" NAME="MainUi Coverage Results" MODIFIED="1591153039605" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.boray.mainUi.*</FILTER>
     </SUITE>
   </component>

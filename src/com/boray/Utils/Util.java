@@ -1,17 +1,18 @@
 package com.boray.Utils;
 
 import com.boray.Data.Data;
+import com.boray.Data.ZhiLingJi;
 import com.boray.mainUi.MainUi;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class Util {
     static DefaultMutableTreeNode temp;
@@ -146,26 +147,62 @@ public class Util {
     }
 
     public static boolean checkRepetition(int startA, int startB, int endA, int endB) {
-        if(Math.max(startA,startB)<=Math.min(endA,endB)){
-            if(startA==endB||startB==endA){
+        if (Math.max(startA, startB) <= Math.min(endA, endB)) {
+            if (startA == endB || startB == endA) {
                 return false;
-            }else{
+            } else {
                 return true;
             }
-        }else{
+        } else {
             return false;
         }
     }
 
-    public static Object Clone(Object o){
+    /**
+     * 素材复制
+     * @param o
+     * @return
+     */
+    public static Object Clone(Object o) {
         Object newObj = new Object();
-        Map map = (Map) o;
-        Map newMap = new HashMap();
-        for (Object key:map.keySet()){
-            newMap.put(key,map.get(key));
+        //HashMap 没有深复制方法 暂用读取文件的方式代替
+        try {
+            File file = new File("cs.xml");
+            OutputStream os = new FileOutputStream(file);
+            XMLEncoder xmlEncoder = new XMLEncoder(os);
+            xmlEncoder.writeObject(o);
+
+            xmlEncoder.flush();
+            xmlEncoder.close();
+
+            InputStream is = new FileInputStream(file);
+            XMLDecoder xmlDecoder = new XMLDecoder(is);
+            newObj = xmlDecoder.readObject();
+
+            xmlDecoder.close();
+
+            file.delete();
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        newObj = newMap;
         return newObj;
+    }
+
+    /**
+     * 设备RAM重装指令
+     */
+    public static void RAMReset(){
+        byte[] bytes = new byte[20];
+        bytes[0] = (byte) 0XFA;
+        bytes[1] = (byte) 0X14;
+        bytes[2] = (byte) 0X64;
+        bytes[3] = ZhiLingJi.TYPE;
+        bytes[4] = (byte) 0X10;
+        bytes[5] = (byte) 0X00;
+        bytes[6] = (byte) 0X55;
+        bytes[7] = (byte) 0XAA;
+        bytes[19] = ZhiLingJi.getJiaoYan(bytes);
+        Socket.SendData(bytes);
     }
 
 }

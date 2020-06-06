@@ -59,14 +59,14 @@ public class FenZhuUI implements ActionListener {
 
     private void setP4(JPanel pane) {
         //pane.setBorder(new LineBorder(Color.gray));
-        pane.setPreferredSize(new Dimension(190, 584));
+        pane.setPreferredSize(new Dimension(250, 584));
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
         flowLayout.setVgap(26);
         flowLayout.setHgap(-2);
         pane.setLayout(flowLayout);
 
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setPreferredSize(new Dimension(190, 558));
+        scrollPane.setPreferredSize(new Dimension(250, 558));
         Object[][] data = {};
         String[] title = {"所有灯具"};
         DefaultTableModel model = new DefaultTableModel(data, title);
@@ -160,14 +160,14 @@ public class FenZhuUI implements ActionListener {
 
     private void setP2(JPanel pane) {
         //pane.setBorder(new LineBorder(Color.gray));
-        pane.setPreferredSize(new Dimension(190, 584));
+        pane.setPreferredSize(new Dimension(250, 584));
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
         flowLayout.setVgap(26);
         flowLayout.setHgap(-2);
         pane.setLayout(flowLayout);
 
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setPreferredSize(new Dimension(190, 558));
+        scrollPane.setPreferredSize(new Dimension(250, 558));
         Object[][] data = {};
         String[] title = {"组内灯具"};
         DefaultTableModel model = new DefaultTableModel(data, title);

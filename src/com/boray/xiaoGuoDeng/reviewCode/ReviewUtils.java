@@ -352,7 +352,7 @@ public class ReviewUtils {
                     }
                     dongZuoTuXing[0] = (byte) selected;
                     ////动作12点数据
-                    int action = selected;
+                    int action = selected + 1;
                     int[] p1 = null;
                     if (action == 0) {
                         p1 = bezier.Data.ZB[1];

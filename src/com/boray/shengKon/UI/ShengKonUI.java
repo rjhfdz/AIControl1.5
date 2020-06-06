@@ -208,9 +208,11 @@ public class ShengKonUI implements ActionListener {
         group2.add(radioButton4);
         group2.add(radioButton5);
         radioButton5.setSelected(true);
+        p1.add(new JLabel("                                                          "));
         p1.add(radioButton4);
+        p1.add(new JLabel("                      "));
         p1.add(radioButton5);
-        p1.add(new JLabel("                                                                                                                                                           "));
+        p1.add(new JLabel("                                                                             "));
         ActionListener listener2 = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -308,6 +310,7 @@ public class ShengKonUI implements ActionListener {
             }
         });
         p1.add(box2);
+        p1.add(new JLabel("                                                                                                    "));
         p1.add(new JLabel("执行方式:"));
         radioButton = new JRadioButton("单步");
         radioButton2 = new JRadioButton("双步");
@@ -395,6 +398,7 @@ public class ShengKonUI implements ActionListener {
         //p1.setBorder(new LineBorder(Color.gray));
 
         JPanel p2 = new JPanel();
+        p2.setLayout(flowLayout);
         p2.setBorder(new LineBorder(Color.gray));
         p2.setPreferredSize(new Dimension(810, 190));
         JPanel[] panels = new JPanel[2];
@@ -478,11 +482,18 @@ public class ShengKonUI implements ActionListener {
             panels[i].add(boxs2[i]);
             p2.add(panels[i]);
         }
-        p2.add(new JLabel("步骤号:"));
-        p2.add(box);
-        p2.add(new JLabel("执行时长(毫秒):"));
-        p2.add(slider);
-        p2.add(field);
+        JPanel p3 = new JPanel();
+//        p3.setBorder(new LineBorder(Color.gray));
+        p3.setPreferredSize(new Dimension(400,130));
+        p3.add(new JLabel("步骤号:"));
+        p3.add(box);
+        p3.add(new JLabel("                                                       "));
+        p3.add(new JLabel("执行时长:"));
+        p3.add(slider);
+        p3.add(field);
+        p3.add(new JLabel("(毫秒)"));
+
+        p2.add(p3);
 
         panel.add(p1);
         panel.add(p2);

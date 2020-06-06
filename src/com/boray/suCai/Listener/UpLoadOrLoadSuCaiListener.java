@@ -2,6 +2,7 @@ package com.boray.suCai.Listener;
 
 import com.boray.Data.Data;
 import com.boray.Data.TuXingAction;
+import com.boray.Utils.CloneUtils;
 import com.boray.Utils.IconJDialog;
 import com.boray.Utils.Util;
 import com.boray.mainUi.MainUi;
@@ -379,7 +380,8 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
                         }
                         String suCaiNameAndNumber = field.getText() + "--->" + (cnt + 1);
 
-                        Data.SuCaiObjects[suCaiLightType.getSelectedIndex()][cnt] = Util.Clone(o);
+                        Object newObj = Util.Clone(o);
+                        Data.SuCaiObjects[suCaiLightType.getSelectedIndex()][cnt] = newObj;
                         dongZuo(Data.SuCaiObjects[suCaiLightType.getSelectedIndex()][cnt]);
 
                         if (model == null) {

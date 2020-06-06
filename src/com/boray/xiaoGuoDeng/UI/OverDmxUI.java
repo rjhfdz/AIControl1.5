@@ -283,7 +283,7 @@ public class OverDmxUI implements ActionListener {
                     Integer value = Integer.valueOf(runTable.getValueAt(tableSelect, start2 + i + 1).toString());
                     runTable.setValueAt(value, tableSelect, start + i + 1);
                     sliders[i].setValue(value);
-                    DmxValues[i].setText(value + "");
+//                    DmxValues[i].setText(value + "");
                 }
             }
         });

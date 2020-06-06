@@ -914,7 +914,7 @@ public class MergeAllListener implements ActionListener {
                     }
                     dongZuoTuXing[0] = (byte) selected;
                     ////动作12点数据
-                    int action = selected;
+                    int action = selected + 1;
                     int[] p1 = null;
                     if (action == 0) {
                         p1 = bezier.Data.ZB[1];
@@ -2860,7 +2860,7 @@ public class MergeAllListener implements ActionListener {
                 byte[] b2 = new byte[2];
                 TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(i);
                 int cnt = treeSet.size();//灯具数量
-                byte[] b4 = new byte[cnt*4];//通道勾选
+                byte[] b4 = new byte[cnt * 4];//通道勾选
                 byte[] b5 = new byte[27];
                 if (Data.ShengKonSuCai[i][j] != null) {
                     Map map = (Map) Data.ShengKonSuCai[i][j];
@@ -3509,9 +3509,9 @@ public class MergeAllListener implements ActionListener {
                         }
                     }
                 }
-                if(!flag){
+                if (!flag) {
                     b1[i - 1][j][32] = (byte) 0X80;
-                }else {
+                } else {
                     if (s != null) {
                         if ("0".equals(s)) {
                             b1[i - 1][j][32] = (byte) 1;

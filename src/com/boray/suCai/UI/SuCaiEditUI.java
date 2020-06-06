@@ -2,13 +2,8 @@ package com.boray.suCai.UI;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
-import java.util.Vector;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

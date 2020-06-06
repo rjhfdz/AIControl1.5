@@ -610,6 +610,8 @@ public class ComReturnListener implements Runnable {
                             if (packetN == Data.dataWrite.length) {
                                 dataWrite.setText("Ð´Èë¿ØÖÆÆ÷");
                                 dataWrite.setEnabled(true);
+                                Thread.sleep(300);
+                                Util.RAMReset();
                             } else {
                                 Socket.SerialPortSendData((byte[]) Data.dataWrite[packetN]);
                                 Data.sendDataSum = packetN;
