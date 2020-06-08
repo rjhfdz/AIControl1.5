@@ -146,6 +146,8 @@ public class TimeBlockEditUI {
             flag = true;
             hashMap = new HashMap<>();
             Data.SuCaiObjects[denKuNum - 1][suCaiNum - 1] = hashMap;
+        }else if(hashMap.size()<=0){
+            flag = true;
         }
 //		hashMap = (HashMap)Data.XiaoGuoDengObjects[model][grpN][blkN];
 //		if (hashMap == null) {
@@ -1066,6 +1068,7 @@ public class TimeBlockEditUI {
                     DefaultTableModel model = (DefaultTableModel) table.getModel();
                     String[] s = temp;
                     s[0] = "" + (table.getRowCount() + 1);
+                    s[1] = "2000";
                     model.addRow(temp);
                     table.setRowSelectionInterval(table.getRowCount() - 1, table.getRowCount() - 1);
                     int size = table.getRowCount();

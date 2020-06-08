@@ -416,7 +416,7 @@ public class OverDmxUI implements ActionListener {
         pane.add(new JLabel("                  " +
                 "                  Ö´ÐÐÊ±³¤"));
         slider = new JSlider(0);
-        slider.setValue(0);
+        slider.setValue(2000);
         slider.setPreferredSize(new Dimension(180, 30));
         slider.setMaximum(5000);
         field = new JTextField(4);

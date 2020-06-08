@@ -373,13 +373,39 @@ public class OverDmxUI implements ActionListener {
         JPanel lefPane = new JPanel();
         //lefPane.setBorder(new LineBorder(Color.black));
         //lefPane.setBorder(BorderFactory.createEmptyBorder(0,0,0,-4));
-        lefPane.setPreferredSize(new Dimension(70, 230));
+        lefPane.setPreferredSize(new Dimension(90, 230));
         lefPane.setLayout(new FlowLayout(FlowLayout.CENTER));
         JPanel nullPane = new JPanel();
-        nullPane.setPreferredSize(new Dimension(60, 155));
+        nullPane.setPreferredSize(new Dimension(90, 125));
         lefPane.add(nullPane);
-        JLabel huaBuJLabel = new JLabel("<html>通道全选</html>");
-        huaBuJLabel.setPreferredSize(new Dimension(60, 20));
+        JLabel huaBuJLabelAll = new JLabel("所有通道全选");
+        huaBuJLabelAll.setPreferredSize(new Dimension(90, 20));
+        huaBuJLabelAll.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                NewJTable table2 = (NewJTable) MainUi.map.get("table_dengJu");
+                boolean b = checkBoxs[0].isSelected();
+                for (int i = 0; i < checkBoxs.length; i++) {
+                    if (checkBoxs[i].isEnabled()) {
+                        checkBoxs[i].setSelected(!b);
+                    }
+                }
+                for (int i = 0; i < btns.length; i++) {
+                    int start = Integer.valueOf(table2.getValueAt(i, 5).toString()).intValue();
+                    int channelCount = Integer.valueOf(table2.getValueAt(i, 6).toString()).intValue();
+                    for (int k = 0; k < channelCount; k++) {
+                        bs[start + k - 1] = !b;
+                    }
+                }
+
+            }
+
+            public void mouseEntered(MouseEvent e) {
+                JLabel label = (JLabel) e.getSource();
+                label.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+        });
+        JLabel huaBuJLabel = new JLabel("   通道全选");
+        huaBuJLabel.setPreferredSize(new Dimension(90, 20));
         huaBuJLabel.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
                 JLabel label = (JLabel) e.getSource();
@@ -395,9 +421,12 @@ public class OverDmxUI implements ActionListener {
                 }
             }
         });
+        lefPane.add(huaBuJLabelAll);
         lefPane.add(huaBuJLabel);
-        JLabel huaBuJLabel2 = new JLabel("<html>渐变全选</html>");
-        huaBuJLabel2.setPreferredSize(new Dimension(60, 20));
+        JLabel huaBuJLabel2 = new JLabel("   渐变全选");
+        JLabel huaBuJLabel2All = new JLabel("所有渐变全选");
+        huaBuJLabel2.setPreferredSize(new Dimension(90, 20));
+        huaBuJLabel2All.setPreferredSize(new Dimension(90, 20));
         huaBuJLabel2.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
                 JLabel label = (JLabel) e.getSource();
@@ -413,7 +442,31 @@ public class OverDmxUI implements ActionListener {
                 }
             }
         });
+        huaBuJLabel2All.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                NewJTable table2 = (NewJTable) MainUi.map.get("table_dengJu");
+                boolean b = checkBoxes[0].isSelected();
+                for (int i = 0; i < checkBoxes.length; i++) {
+                    if (checkBoxes[i].isEnabled()) {
+                        checkBoxes[i].setSelected(!b);
+                    }
+                }
+                for (int i = 0; i < btns.length; i++) {
+                    int start = Integer.valueOf(table2.getValueAt(i, 5).toString()).intValue();
+                    int channelCount = Integer.valueOf(table2.getValueAt(i, 6).toString()).intValue();
+                    for (int k = 0; k < channelCount; k++) {
+                        bs2[start + k - 1] = !b;
+                    }
+                }
+            }
+
+            public void mouseEntered(MouseEvent e) {
+                JLabel label = (JLabel) e.getSource();
+                label.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+        });
         lefPane.add(huaBuJLabel2);
+        lefPane.add(huaBuJLabel2All);
         //lefPane.add(new JLabel("DMX"));
         pane.add(lefPane);
 
@@ -567,7 +620,7 @@ public class OverDmxUI implements ActionListener {
         pane.add(new JLabel("                  " +
                 "                  执行时长"));
         slider = new JSlider(0);
-        slider.setValue(0);
+        slider.setValue(2000);
         slider.setPreferredSize(new Dimension(180, 30));
         slider.setMaximum(10000);
         field = new JTextField(4);
@@ -614,7 +667,7 @@ public class OverDmxUI implements ActionListener {
         Object[] s = new String[514];
         final String[] temp = new String[514];
         temp[0] = "1";
-        temp[1] = "0";
+        temp[1] = "2000";
         s[0] = "步骤";
         s[1] = "执行时长";
         for (int i = 2; i < s.length; i++) {
@@ -624,7 +677,6 @@ public class OverDmxUI implements ActionListener {
         Object[][] data88 = {};
         DefaultTableModel model = new DefaultTableModel(data88, s);
         Vector vector99 = (Vector) Data.XiaoGuoDengModelDmxMap.get("TableData" + setNo);
-        ;
         if (vector99 != null) {
             Vector tp = null;
             int a = 0;
@@ -796,6 +848,7 @@ public class OverDmxUI implements ActionListener {
                     DefaultTableModel model = (DefaultTableModel) runTable.getModel();
                     String[] s = temp;
                     s[0] = "" + (runTable.getRowCount() + 1);
+                    s[1] = "2000";
                     model.addRow(temp);
                     runTable.setRowSelectionInterval(runTable.getRowCount() - 1, runTable.getRowCount() - 1);
                 } else {

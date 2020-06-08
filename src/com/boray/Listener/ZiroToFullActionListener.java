@@ -116,18 +116,34 @@ public class ZiroToFullActionListener implements ActionListener {
                     ChannelValueSliders[i].setValue(0);
                 }
             }
-            for (int i = 2; i < table_DMX_All.getColumnCount(); i++) {
-                table_DMX_All.setValueAt("0", table_DMX_All.getSelectedRow(), i);
+            NewJTable table2 = (NewJTable) MainUi.map.get("table_dengJu");
+            for (int i = 0; i < table2.getRowCount(); i++) {
+                int start = Integer.valueOf(table2.getValueAt(i, 5).toString()).intValue();
+                int channelCount = Integer.valueOf(table2.getValueAt(i, 6).toString()).intValue();
+                for (int k = 0; k < channelCount; k++) {
+                    table_DMX_All.setValueAt("0", table_DMX_All.getSelectedRow(), start + 1 + k);
+                }
             }
+//            for (int i = 2; i < table_DMX_All.getColumnCount(); i++) {
+//                table_DMX_All.setValueAt("0", table_DMX_All.getSelectedRow(), i);
+//            }
         } else if ("È«²¿ÂúÖµ".equals(e.getActionCommand())) {
             for (int i = 0; i < ChannelValueSliders.length; i++) {
                 if (ChannelValueSliders[i].isEnabled()) {
                     ChannelValueSliders[i].setValue(255);
                 }
             }
-            for (int i = 2; i < table_DMX_All.getColumnCount(); i++) {
-                table_DMX_All.setValueAt("255", table_DMX_All.getSelectedRow(), i);
+            NewJTable table2 = (NewJTable) MainUi.map.get("table_dengJu");
+            for (int i = 0; i < table2.getRowCount(); i++) {
+                int start = Integer.valueOf(table2.getValueAt(i, 5).toString()).intValue();
+                int channelCount = Integer.valueOf(table2.getValueAt(i, 6).toString()).intValue();
+                for (int k = 0; k < channelCount; k++) {
+                    table_DMX_All.setValueAt("255", table_DMX_All.getSelectedRow(), start + 1 + k);
+                }
             }
+//            for (int i = 2; i < table_DMX_All.getColumnCount(); i++) {
+//                table_DMX_All.setValueAt("255", table_DMX_All.getSelectedRow(), i);
+//            }
         }
         outDevice();
     }

@@ -88,6 +88,7 @@ public class ShengKonSuCaiEditUI {
             al = (int[]) map88.get("2");
             if (al == null) {
                 al = new int[11];//a[10]表示多灯控制
+                al[0] = 1;
                 al[5] = 1;
                 al[7] = 1;
                 al[9] = 1;
@@ -484,7 +485,7 @@ public class ShengKonSuCaiEditUI {
             }
         });
         p1.add(duoDengCtrlBox);
-        slider.setValue(0);
+        slider.setValue(2000);
         slider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 field.setText(String.valueOf(slider.getValue()));

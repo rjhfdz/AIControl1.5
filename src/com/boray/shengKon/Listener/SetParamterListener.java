@@ -120,7 +120,7 @@ public class SetParamterListener implements ActionListener{
 				}
 			}
 		});
-		p3.add(field3);p3.add(new JLabel("ºÁÃë"));
+		p3.add(field3);p3.add(new JLabel("Ö¡Êý"));
 		List list = (List)Data.ShengKonModelSet.get(MyData.ShengKonModel);
 		slider.setValue(0);slider2.setValue(0);slider3.setValue(0);
 		if (list != null) {
@@ -128,7 +128,7 @@ public class SetParamterListener implements ActionListener{
 			slider2.setValue(Integer.valueOf(list.get(1).toString()));
 			slider3.setValue(Integer.valueOf(list.get(2).toString()));
 		} else {
-			slider.setValue(0);slider2.setValue(0);slider3.setValue(0);
+			slider.setValue(5000);slider2.setValue(5000);slider3.setValue(1);
 		}
 		dialog.add(p1);dialog.add(p2);dialog.add(p3);
 		dialog.setVisible(true);
