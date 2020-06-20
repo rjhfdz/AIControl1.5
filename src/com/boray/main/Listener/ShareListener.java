@@ -3,8 +3,9 @@ package com.boray.main.Listener;
 import com.alibaba.fastjson.JSON;
 import com.boray.Data.Data;
 import com.boray.Utils.HttpClientUtil;
-import com.boray.entity.ProjectFile;
-import com.boray.entity.Users;
+import com.boray.Utils.IconJDialog;
+import com.boray.Utils.UtilJDialog;
+import com.boray.entity.*;
 import com.boray.main.Util.CustomTreeCellRenderer;
 import com.boray.main.Util.CustomTreeNode;
 import com.boray.main.Util.TreeUtil;
@@ -32,66 +33,76 @@ public class ShareListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton button = (JButton) e.getSource();
+        String str = e.getActionCommand();
         frame = (JFrame) MainUi.map.get("frame");
         tree = (JTree) MainUi.map.get("shareTree");
-        if (button.getText().equals("下载工程")) {
-            if (null == tree.getSelectionPath().getLastPathComponent()) {
-                JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
-                return;
-            }
-            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
-            if (node.getUserObject() instanceof ProjectFile) {
-                ProjectFile file = (ProjectFile) node.getUserObject();
-                CustomTreeNode folder = (CustomTreeNode) node.getParent();
-                String str = (String) folder.getUserObject();
-                String path = getPath(str);
-                File file1 = new File(path);
-                if (!file1.exists()) {//判断文件夹是否存在
-                    file1.mkdirs();
-                }
-                try {
-                    File selectedFile = new File(path + "//" + file.getGcname() + ".xml");
-                    URL url = new URL(HttpClientUtil.URLEncode(Data.downloadIp + file.getGcurl()));
-                    HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
-                    urlCon.setConnectTimeout(6000);
-                    urlCon.setReadTimeout(6000);
-                    int code = urlCon.getResponseCode();
-                    if (code != HttpURLConnection.HTTP_OK) {
-                        JOptionPane.showMessageDialog(frame, "文件下载失败！", "提示", JOptionPane.PLAIN_MESSAGE);
-                        return;
-                    }
-                    DataInputStream in = new DataInputStream(urlCon.getInputStream());
-                    DataOutputStream out = new DataOutputStream(new FileOutputStream(selectedFile.getAbsoluteFile()));
-                    byte[] buffer = new byte[2048];
-                    int count = 0;
-                    while ((count = in.read(buffer)) > 0) {
-                        out.write(buffer, 0, count);
-                    }
-                    if (out != null) {
-                        out.close();
-                    }
-                    if (in != null) {
-                        in.close();
-                    }
-                    JOptionPane.showMessageDialog(frame, "文件下载完成！", "提示", JOptionPane.PLAIN_MESSAGE);
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(frame, "文件下载失败！", "提示", JOptionPane.PLAIN_MESSAGE);
-                    ex.printStackTrace();
-                }
-            }
-        } else if (button.getText().equals("刷新")) {
+        if (str.equals("刷新")) {
             refresh();
-        } else if (button.getText().equals("复制")) {
-            if (null == tree.getSelectionPath().getLastPathComponent()) {
-                JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
-                return;
-            }
+        } else if (str.equals("增加成员")) {
+            final IconJDialog dialog = new IconJDialog(frame, true);
+            final JTextField field = new JTextField(12);
+            ActionListener listener = new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (e.getActionCommand().equals("确定")) {
+                        String s = field.getText();
+                        if (s != null && s != "") {
+                            Admin admin = (Admin) MainUi.map.get("admin");
+                            Map<String, String> param = new HashMap<>();
+                            param.put("usercode", s);
+                            param.put("officecode", admin.getOfficecode());
+                            String request = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/inserttuandui", param);
+                            Message message = JSON.parseObject(request, Message.class);
+                            if (Integer.parseInt(message.getCode()) == 0) {
+                                JOptionPane.showMessageDialog(frame, "添加成功", "提示", JOptionPane.PLAIN_MESSAGE);
+                            } else {
+                                JOptionPane.showMessageDialog(frame, "添加失败,没有该用户", "提示", JOptionPane.PLAIN_MESSAGE);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(frame, "成员名称不能为空", "提示", JOptionPane.PLAIN_MESSAGE);
+                            return;
+                        }
+                        refresh();
+                        dialog.dispose();
+                    } else {
+                        dialog.dispose();
+                    }
+                }
+            };
+            UtilJDialog utilJDialog = new UtilJDialog(dialog, "增加成员", field, "用户账号", listener);
+            utilJDialog.isVisible(true);
+        } else if (str.equals("踢出成员")) {
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
-            if (node.getUserObject() instanceof ProjectFile) {
-                Data.tempProjectFile = (ProjectFile) node.getUserObject();
+            Object[] options = {"否", "是"};
+            int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "是否踢出该成员？", "警告",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                    null, options, options[1]);
+            if (yes == 1) {
+                if (node.getUserObject() instanceof Member) {
+                    Member member = (Member) node.getUserObject();
+                    Map<String, String> param = new HashMap<>();
+                    param.put("id", member.getId().toString());
+                    String request = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/deletetuandui", param);
+                    Message message = JSON.parseObject(request, Message.class);
+                    if (Integer.parseInt(message.getCode()) == 0) {
+                        JOptionPane.showMessageDialog(frame, "成功踢出该成员", "提示", JOptionPane.PLAIN_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(frame, "踢出该成员失败", "提示", JOptionPane.PLAIN_MESSAGE);
+                    }
+                    refresh();
+                }
             }
         }
+//        else if (button.getText().equals("复制")) {
+//            if (null == tree.getSelectionPath().getLastPathComponent()) {
+//                JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
+//                return;
+//            }
+//            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+//            if (node.getUserObject() instanceof ProjectFile) {
+//                Data.tempProjectFile = (ProjectFile) node.getUserObject();
+//            }
+//        }
     }
 
     /**
@@ -110,16 +121,18 @@ public class ShareListener implements ActionListener {
      */
     private void refresh() {
         tree.removeAll();
-        CustomTreeNode rootNode = new CustomTreeNode("BorayShare");
+        CustomTreeNode rootNode = new CustomTreeNode("成员");
         rootNode.setLevel(0);
         DefaultTreeModel model = new DefaultTreeModel(rootNode);
         tree.setModel(model);
         tree.setCellRenderer(new CustomTreeCellRenderer());
         Map<String, String> param = new HashMap<>();
-        String request = HttpClientUtil.doGet(Data.ipPort + "findbygx", param);
-        java.util.List<ProjectFile> list = JSON.parseArray(request, ProjectFile.class);
-        for (ProjectFile file : list) {
-            CustomTreeNode node = new CustomTreeNode(file);
+        Admin admin = (Admin) MainUi.map.get("admin");
+        param.put("officecode", admin.getOfficecode());
+        String request = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/gettuandui", param);
+        java.util.List<Member> list = JSON.parseArray(request, Member.class);
+        for (Member member : list) {
+            CustomTreeNode node = new CustomTreeNode(member);
             node.setLevel(1);
             rootNode.add(node);
         }

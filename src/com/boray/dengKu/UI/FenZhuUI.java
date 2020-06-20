@@ -113,7 +113,7 @@ public class FenZhuUI implements ActionListener {
         table.setOpaque(false);
         //table.setFocusable(false);
         table.setFont(new Font(Font.SERIF, Font.BOLD, 14));
-        table.getColumnModel().getColumn(0).setPreferredWidth(182);
+        table.getColumnModel().getColumn(0).setPreferredWidth(240);
         table.setRowHeight(28);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
@@ -213,7 +213,7 @@ public class FenZhuUI implements ActionListener {
         table.setOpaque(false);
         //table.setFocusable(false);
         table.setFont(new Font(Font.SERIF, Font.BOLD, 14));
-        table.getColumnModel().getColumn(0).setPreferredWidth(182);
+        table.getColumnModel().getColumn(0).setPreferredWidth(240);
         table.setRowHeight(28);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 

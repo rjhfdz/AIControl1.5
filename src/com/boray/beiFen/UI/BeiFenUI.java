@@ -8,9 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import com.boray.beiFen.Listener.*;
+import com.boray.main.Listener.DataWriteListener;
 import com.boray.mainUi.MainUi;
 
 public class BeiFenUI {
@@ -63,10 +65,10 @@ public class BeiFenUI {
         flowLayout.setVgap(4);
         p1.setLayout(flowLayout);
         //p1.setPreferredSize(new Dimension(920,180));
-        p1.setPreferredSize(new Dimension(920, 120));
+        p1.setPreferredSize(new Dimension(920, 150));
 
         JPanel p1_1 = new JPanel();
-        p1_1.setPreferredSize(new Dimension(420, 80));
+        p1_1.setPreferredSize(new Dimension(420, 100));
         p1_1.setLayout(flowLayout);
         TitledBorder tb5 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "配置", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         p1_1.setBorder(tb5);
@@ -96,16 +98,36 @@ public class BeiFenUI {
         p1_1.add(radioButton3);
         p1_1.add(radioButton4);
         JPanel np = new JPanel();
-        np.setPreferredSize(new Dimension(500, 20));
-        //np.setBorder(new LineBorder(Color.gray));
-        //p1.add(np);
+        np.setPreferredSize(new Dimension(470, 100));
+        TitledBorder tb6 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "写入控制器文件", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
+        np.setBorder(tb6);
+        np.setLayout(flowLayout);
         BackupActionListener backupActionListener = new BackupActionListener();
-        JButton button5 = new JButton("备份配置");
-        button5.addActionListener(backupActionListener);
-        button5.setPreferredSize(new Dimension(120, 34));
+//        JButton button5 = new JButton("备份配置");
+//        button5.addActionListener(backupActionListener);
+//        button5.setPreferredSize(new Dimension(120, 34));
         //p1.add(button5);
         //p1.add(new JLabel("全部"));
+
+        JButton button1 = new JButton("选择控制器文件");
+        button1.addActionListener(new SelectDATFileActionListener());
+        np.add(button1);
+        JButton DataWriteBtn = new JButton("写入控制器");
+        MainUi.map.put("BeiFenComAndWifiDataWrite", DataWriteBtn);
+        DataWriteBtn.setName("BeiFenComAndWifiDataWrite");
+        DataWriteListener dataWriteListener = new DataWriteListener(DataWriteBtn);
+        DataWriteBtn.addActionListener(dataWriteListener);
+        np.add(DataWriteBtn);
+        JPanel np2 = new JPanel();
+        np2.setPreferredSize(new Dimension(400, 30));
+        np2.setLayout(flowLayout);
+        JLabel label1 = new JLabel("未选择:");
+        MainUi.map.put("KonZhiQiLabel", label1);
+        np2.add(label1);
+        np.add(np2);
+
         p1.add(p1_1);
+        p1.add(np);
 
 
         JPanel p2 = new JPanel();
@@ -129,7 +151,7 @@ public class BeiFenUI {
         TitledBorder tb4 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "U盘", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         p3.setBorder(tb4);
         p3.setLayout(flowLayout);
-		p3.setPreferredSize(new Dimension(920, 70));
+        p3.setPreferredSize(new Dimension(920, 70));
         JLabel label = new JLabel("设备U盘状态：");
         JLabel state = new JLabel("未插入");
         MainUi.map.put("state", state);
@@ -150,7 +172,7 @@ public class BeiFenUI {
         progressBar.setStringPainted(true);
         progressBar.setVisible(false);
         p3.add(progressBar);
-        MainUi.map.put("USBProgressBar",progressBar);
+        MainUi.map.put("USBProgressBar", progressBar);
 
         pane.add(p3);
     }

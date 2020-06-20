@@ -2,8 +2,10 @@ package com.boray.shengKonSuCai.Listener;
 
 import com.boray.Data.Data;
 import com.boray.Utils.IconJDialog;
+import com.boray.Utils.Util;
 import com.boray.mainUi.MainUi;
 import com.boray.shengKonSuCai.UI.ShengKonSuCaiUI;
+import com.boray.suCai.UI.SuCaiUI;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -72,7 +74,156 @@ public class UpLoadOrLoadShengKonSuCaiListener implements ActionListener {
                     loadDataCoverage(file);
                 }
             }
+        }else if("    复制".equals(e.getActionCommand())){
+            JList list = (JList) MainUi.map.get("shengKonSuCaiLightType");//灯组列表
+            JList suCai_list = (JList) MainUi.map.get("shengKonSuCai_list");//素材列表
+            String suCaiSelect = suCai_list.getSelectedValue().toString();
+            int suCaiIndex = Integer.parseInt(suCaiSelect.split(">")[1]) - 1;//素材下标
+            int dengKuIndex = list.getSelectedIndex();//灯库下标
+            Data.tempShengKonSuCai = dengKuIndex + "#" + suCaiIndex;
+        }else if("    粘贴".equals(e.getActionCommand())){
+            if (Data.tempShengKonSuCai == null) {
+                JFrame frame = (JFrame) MainUi.map.get("frame");
+                JOptionPane.showMessageDialog(frame, "素材粘贴失败，未复制素材！", "提示", JOptionPane.PLAIN_MESSAGE);
+                return;
+            }else{
+                JList list = (JList) MainUi.map.get("shengKonSuCaiLightType");//灯库列表
+                String[] str = Data.tempShengKonSuCai.split("#");
+                if (!str[0].equals(list.getSelectedIndex() + "")) {
+                    JFrame frame = (JFrame) MainUi.map.get("frame");
+                    JOptionPane.showMessageDialog(frame, "素材粘贴失败，所选灯库不一致！", "提示", JOptionPane.PLAIN_MESSAGE);
+                    return;
+                } else {
+                    JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("shengKonSuCaiTypeBtns");
+                    String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
+                    String s = null;
+                    for (int i = 0; i < btns.length; i++) {
+                        if (btns[i].isSelected()) {
+                            s = name[i];
+                        }
+                    }
+                    //弹出界面
+                    JFrame f = (JFrame) MainUi.map.get("frame");
+                    IconJDialog dialog = new IconJDialog(f, true);
+                    dialog.setResizable(false);
+                    dialog.setTitle("粘贴素材");
+                    int w = 380, h = 180;
+                    dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - w / 2, f.getLocation().y + f.getSize().height / 2 - h / 2);
+                    dialog.setSize(w, h);
+                    dialog.setLayout(new FlowLayout(FlowLayout.CENTER));
+                    dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                    init(dialog, s, "", Data.ShengKonSuCai[Integer.valueOf(str[0])][Integer.valueOf(str[1])], "粘贴成功！");
+                    dialog.setVisible(true);
+                }
+            }
         }
+    }
+
+    //初始化界面
+    public void init(final JDialog dialog, final String type, final String suCaiName, final Object o, final String message) {
+        JPanel p1 = new JPanel();
+        p1.add(new JLabel("素材名称："));
+        final JTextField field = new JTextField(15);
+        field.setText(suCaiName);
+        p1.add(field);
+        JPanel p2 = new JPanel();
+        JButton btn1 = new JButton("确定");
+        JButton btn2 = new JButton("取消");
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if ("取消".equals(e.getActionCommand())) {
+                    dialog.dispose();
+                } else {
+                    if (!"".equals(field.getText().trim())) {
+                        JList list = (JList) MainUi.map.get("shengKonSuCai_list");
+                        DefaultListModel model = (DefaultListModel) list.getModel();
+                        //////////////////获取素材数量
+                        JList suCaiLightType = (JList) MainUi.map.get("shengKonSuCaiLightType");
+                        Map map2 = (Map) Data.shengKonSuCaiMap.get(suCaiLightType.getSelectedValue().toString());
+                        JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("shengKonSuCaiTypeBtns");
+                        String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
+                        int cnt = 0;
+                        if (map2 != null) {
+                            for (int i = 0; i < btns.length; i++) {
+                                java.util.List abc = (List) map2.get("" + i);
+                                if (abc != null) {
+                                    cnt = cnt + abc.size();
+                                }
+                            }
+                        }
+                        if (cnt == 30) {
+                            JFrame frame = (JFrame) MainUi.map.get("frame");
+                            JOptionPane.showMessageDialog(frame, "最多只能创建50个素材！", "提示", JOptionPane.PLAIN_MESSAGE);
+                            return;
+                        }
+                        String suCaiNameAndNumber = field.getText() + "--->" + (cnt + 1);
+
+                        Object newObj = Util.Clone(o);
+                        Data.ShengKonSuCai[suCaiLightType.getSelectedIndex()][cnt] = newObj;
+
+                        if (model == null) {
+                            model = new DefaultListModel();
+                            model.addElement(suCaiNameAndNumber);
+                            list.setModel(model);
+                        } else {
+                            model.addElement(suCaiNameAndNumber);
+                        }
+                        list.setSelectedIndex(model.getSize() - 1);
+                        Map map = (Map) Data.shengKonSuCaiMap.get(suCaiLightType.getSelectedValue().toString());
+                        Map nameMap = (Map) Data.shengKonSuCaiNameMap.get(suCaiLightType.getSelectedValue().toString());
+                        if (map == null) {
+                            map = new HashMap<>();
+                            Data.shengKonSuCaiMap.put(suCaiLightType.getSelectedValue().toString(), map);
+                        }
+                        if (nameMap == null) {
+                            nameMap = new HashMap<>();
+                            Data.shengKonSuCaiNameMap.put(suCaiLightType.getSelectedValue().toString(), nameMap);
+                        }
+                        for (int i = 0; i < btns.length; i++) {
+                            if (btns[i].getText().contains(type)) {
+                                List tmp = (List) map.get("" + i);
+                                List nameList = (List) nameMap.get("" + i);
+                                if (nameList != null) {
+                                    nameList.add(suCaiNameAndNumber);
+                                } else {
+                                    nameList = new ArrayList<>();
+                                    nameList.add(suCaiNameAndNumber);
+                                    nameMap.put("" + i, nameList);
+                                }
+                                if (tmp == null) {
+                                    tmp = new ArrayList<>();
+                                }
+                                tmp.add(new HashMap<>());
+                                btns[i].setText(name[i] + "(" + tmp.size() + ")");
+                                map.put("" + i, tmp);
+                            }
+                        }
+                        ShengKonSuCaiUI suCaiUI = new ShengKonSuCaiUI();
+                        String aloneCount = suCaiUI.getAlone(suCaiLightType.getSelectedValue().toString());//当前灯库的素材数量
+                        JLabel alone = (JLabel) MainUi.map.get("shengKonAlone");
+                        alone.setText(aloneCount);
+
+                        String count = suCaiUI.getCount();//所有灯库的素材数量
+                        JLabel countLabel = (JLabel) MainUi.map.get("shengKonCount");
+                        countLabel.setText(count);
+                        JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), message, "提示", JOptionPane.PLAIN_MESSAGE);
+                        dialog.dispose();
+                    }
+                }
+            }
+        };
+        btn1.addActionListener(listener);
+        btn2.addActionListener(listener);
+        p2.add(btn1);
+        p2.add(new JLabel("     "));
+        p2.add(btn2);
+
+        JPanel n1 = new JPanel();
+        n1.setPreferredSize(new Dimension(350, 20));
+        dialog.add(n1);
+        dialog.add(p1);
+        dialog.add(p2);
     }
 
     private void loadDataCoverage(File file) {
@@ -211,7 +362,7 @@ public class UpLoadOrLoadShengKonSuCaiListener implements ActionListener {
             }
         }
         String suCaiSelect = suCai_list.getSelectedValue().toString();
-        fileName = "声控素材----" + list.getSelectedValue().toString() + "----" + type + "----" + suCaiSelect.split("--->")[0] + ".xml";
+        fileName = "声控-" + list.getSelectedValue().toString() + "-" + type + "-" + suCaiSelect.split("--->")[0] + ".xml";
         return fileName;
     }
 

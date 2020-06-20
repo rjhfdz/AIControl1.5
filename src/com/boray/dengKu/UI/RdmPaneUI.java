@@ -281,8 +281,10 @@ public class RdmPaneUI implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if ("搜索".equals(e.getActionCommand())) {
-            if (Data.serialPort != null||Data.socket!=null) {
+            if (Data.serialPort != null || Data.socket != null) {
                 try {
+                    final JButton btn2 = (JButton) MainUi.map.get("RDMRefresh");
+                    btn2.setVisible(false);
                     final JButton btn = (JButton) e.getSource();
                     btn.setEnabled(false);
                     openSet = false;
@@ -346,12 +348,15 @@ public class RdmPaneUI implements ActionListener {
                                             }
                                         }
                                     }
+                                    btn2.setVisible(true);
                                     btn.setEnabled(true);
                                 } catch (Exception e) {
+                                    btn2.setVisible(true);
                                     btn.setEnabled(true);
                                     e.printStackTrace();
                                 }
                             } else {
+                                btn2.setVisible(true);
                                 btn.setEnabled(true);
                             }
                         }
@@ -365,7 +370,7 @@ public class RdmPaneUI implements ActionListener {
                 return;
             }
         } else if ("退出RDM".equals(e.getActionCommand())) {
-            if (Data.serialPort != null||Data.socket!=null) {
+            if (Data.serialPort != null || Data.socket != null) {
                 Socket.SendData(RdmData.quit());
             } else {
                 JFrame frame = (JFrame) MainUi.map.get("frame");
@@ -404,6 +409,8 @@ public class RdmPaneUI implements ActionListener {
             }
         } else if ("刷新".equals(e.getActionCommand())) {
             try {
+                final JButton btn2 = (JButton) MainUi.map.get("RDMSearch");
+                btn2.setVisible(false);
                 final JButton btn = (JButton) e.getSource();
                 btn.setEnabled(false);
                 openSet = false;
@@ -484,12 +491,15 @@ public class RdmPaneUI implements ActionListener {
                                 //清除临时数据
                                 RdmPaneUI.tempUidList.clear();
                                 RdmPaneUI.tempUid_Byte.clear();
+                                btn2.setVisible(true);
                                 btn.setEnabled(true);
                             } catch (Exception e) {
+                                btn2.setVisible(true);
                                 btn.setEnabled(true);
                                 e.printStackTrace();
                             }
                         } else {
+                            btn2.setVisible(true);
                             btn.setEnabled(true);
                         }
                     }

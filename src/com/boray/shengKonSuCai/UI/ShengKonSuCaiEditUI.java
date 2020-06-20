@@ -24,6 +24,7 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.List;
 
 public class ShengKonSuCaiEditUI {
     private NewJTable runTable;
@@ -39,6 +40,8 @@ public class ShengKonSuCaiEditUI {
     Vector vector88 = null;
     String typeString = "";
     String preSelect = "0";
+    private List<Integer> selectPre = new ArrayList<>();
+
     int channelCount = 0;
     Map map88;
     boolean[][] gouXuanValus;
@@ -49,7 +52,8 @@ public class ShengKonSuCaiEditUI {
 
     private JComboBox duoDengCtrlBox;//多灯控制
 
-    private int denKuNum,suCaiNum;
+    private ButtonGroup group;
+    private int denKuNum, suCaiNum;
     private JLabel stepLabel;//步数
 
     public void show(String suCaiName, int suCaiNum, int denKuNum) {
@@ -62,7 +66,7 @@ public class ShengKonSuCaiEditUI {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         //flowLayout.setVgap(2);
         dialog.getContentPane().setLayout(flowLayout);
-        int width = 900, height = 630;
+        int width = 900, height = 670;
         dialog.setSize(width, height);
         dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - width / 2, f.getLocation().y + f.getSize().height / 2 - height / 2);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -89,15 +93,17 @@ public class ShengKonSuCaiEditUI {
             if (al == null) {
                 al = new int[11];//a[10]表示多灯控制
                 al[0] = 1;
+                al[1] = 1;
                 al[5] = 1;
                 al[7] = 1;
                 al[9] = 1;
+                al[10] = 1;
             }
 
             JTabbedPane tabbedPane = new JTabbedPane();
             tabbedPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
             tabbedPane.setFocusable(false);
-            tabbedPane.setPreferredSize(new Dimension(880, 550));
+            tabbedPane.setPreferredSize(new Dimension(880, 570));
 
             JPanel channelPane = new JPanel();
             setChannelPane(channelPane);
@@ -122,14 +128,14 @@ public class ShengKonSuCaiEditUI {
         int dengKuNumber = Integer.valueOf(typeString.split("#")[0].substring(2)).intValue() - 1;
         HashMap map = (HashMap) Data.DengKuList.get(dengKuNumber);
         int tt = Integer.valueOf((String) Data.DengKuChannelCountList.get(dengKuNumber)).intValue();
-        scrollPane.setPreferredSize(new Dimension(858, 200));
+        scrollPane.setPreferredSize(new Dimension(858, 220));
         scrollPane.setBorder(new LineBorder(Color.gray));
 
         JPanel pane = new JPanel();
         FlowLayout flowLayout2 = new FlowLayout(FlowLayout.LEFT);
         flowLayout2.setHgap(0);
         pane.setLayout(flowLayout2);
-        pane.setPreferredSize(new Dimension(1510, 180));
+        pane.setPreferredSize(new Dimension(1510, 200));
         //TitledBorder tb = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "调光通道", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
         //tgPane.setBorder(tb);
         JPanel lefPane = new JPanel();
@@ -138,7 +144,7 @@ public class ShengKonSuCaiEditUI {
         lefPane.setPreferredSize(new Dimension(26, 180));
         lefPane.setLayout(new FlowLayout(FlowLayout.CENTER));
         JPanel nullPane = new JPanel();
-        nullPane.setPreferredSize(new Dimension(20, 144));
+        nullPane.setPreferredSize(new Dimension(20, 150));
         lefPane.add(nullPane);
         JLabel huaBuJLabel = new JLabel("<html>全选</html>");
         huaBuJLabel.setPreferredSize(new Dimension(32, 24));
@@ -176,7 +182,7 @@ public class ShengKonSuCaiEditUI {
             itemPanes[i] = new JPanel();
             itemPanes[i].setLayout(flowLayout);
             //itemPanes[i].setBorder(new LineBorder(Color.black));
-            itemPanes[i].setPreferredSize(new Dimension(46, 180));
+            itemPanes[i].setPreferredSize(new Dimension(46, 200));
             if (i > 8) {
                 labels[i] = new JLabel((i + 1) + "");
             } else {
@@ -204,8 +210,16 @@ public class ShengKonSuCaiEditUI {
                     textFields[a].setText(String.valueOf(sliders[a].getValue()));
                     int[] slt = runTable.getSelectedRows();
                     if (slt.length > 0) {
-                        for (int k = 0; k < slt.length; k++) {
-                            runTable.setValueAt(String.valueOf(sliders[a].getValue()), slt[k], a + (channelCount * Integer.valueOf(preSelect).intValue()) + 2);
+                        if (group.getButtonCount() <= 0) {
+                            for (int k = 0; k < slt.length; k++) {
+                                for (int i = 0; i < selectPre.size(); i++) {
+                                    runTable.setValueAt(String.valueOf(sliders[a].getValue()), slt[k], a + (channelCount * Integer.valueOf(selectPre.get(i)).intValue()) + 2);
+                                }
+                            }
+                        } else {
+                            for (int k = 0; k < slt.length; k++) {
+                                runTable.setValueAt(String.valueOf(sliders[a].getValue()), slt[k], a + (channelCount * Integer.valueOf(preSelect).intValue()) + 2);
+                            }
                         }
                     }
                 }
@@ -247,7 +261,7 @@ public class ShengKonSuCaiEditUI {
                 names[i].setEnabled(false);
             }
             names[i].setFont(f1);
-            names[i].setPreferredSize(new Dimension(42, 30));
+            names[i].setPreferredSize(new Dimension(42, 50));
             //DmxValues[i] = new JLabel(""+(i+1));
             names[i].setBorder(BorderFactory.createEmptyBorder(-10, 0, -10, 0));
             //names[i].setBorder(new LineBorder(Color.black));
@@ -305,11 +319,21 @@ public class ShengKonSuCaiEditUI {
         cnt = treeSet.size();
 
         buttons = new JToggleButton[cnt];
-        ButtonGroup group = new ButtonGroup();
+        group = new ButtonGroup();
         NewJTable table3 = (NewJTable) MainUi.map.get("table_dengJu");//所有灯具
         Iterator iterator = treeSet.iterator();
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                if (group.getButtonCount() <= 0) {
+                    selectPre.clear();
+                    for (int i = 0; i < buttons.length; i++) {
+                        if (buttons[i].isSelected()) {
+                            selectPre.add(i);
+                        }
+                    }
+                    return;
+                }
+
                 JToggleButton btn = (JToggleButton) e.getSource();
                 int start = Integer.valueOf(btn.getName()).intValue() * channelCount;
 
@@ -485,7 +509,6 @@ public class ShengKonSuCaiEditUI {
             }
         });
         p1.add(duoDengCtrlBox);
-        slider.setValue(2000);
         slider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 field.setText(String.valueOf(slider.getValue()));
@@ -607,7 +630,7 @@ public class ShengKonSuCaiEditUI {
         Object[] s = new String[tt + 2];
         final String[] temp = new String[tt + 2];
         temp[0] = "1";
-        temp[1] = "0";
+        temp[1] = "2000";
         s[0] = "步骤";
         s[1] = "亮灯时长";
         for (int i = 2; i < s.length; i++) {
@@ -763,7 +786,7 @@ public class ShengKonSuCaiEditUI {
         JMenuItem menuItem1 = new JMenuItem("　粘贴　　　　　");
         int size = runTable.getRowCount();
         stepLabel = new JLabel("总步数:" + size);
-        CopyToTimeBlockEdit copyListener = new CopyToTimeBlockEdit(runTable,stepLabel);
+        CopyToTimeBlockEdit copyListener = new CopyToTimeBlockEdit(runTable, stepLabel);
         menuItem.addActionListener(copyListener);
         menuItem1.addActionListener(copyListener);
         popupMenu.add(menuItem);
@@ -850,7 +873,7 @@ public class ShengKonSuCaiEditUI {
                         try {
                             button1.setEnabled(false);
                             save();
-                            TimeBlockReviewData.sendShengKonData(denKuNum,suCaiNum,startAddress,channelCount,duoDengCtrlBox);
+                            TimeBlockReviewData.sendShengKonData(denKuNum, suCaiNum, startAddress, channelCount, duoDengCtrlBox);
                         } catch (Exception e2) {
                             e2.printStackTrace();
                         } finally {
@@ -1158,7 +1181,28 @@ public class ShengKonSuCaiEditUI {
         JTextField field3 = new JTextField(12);
         field3.setEnabled(false);
         field3.setText(cnt + "");
+        JButton button = new JButton("单选");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(al[10]==1){
+                    JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "当前多灯控制为全部控制，单选多选按钮无效！", "提示", JOptionPane.ERROR_MESSAGE);
+                }
+                if (e.getActionCommand().equals("单选")) {
+                    for (int i = 0; i < buttons.length; i++) {
+                        group.remove(buttons[i]);
+                    }
+                    button.setText("多选");
+                } else {
+                    for (int i = 0; i < buttons.length; i++) {
+                        group.add(buttons[i]);
+                    }
+                    button.setText("单选");
+                }
+            }
+        });
         pane.add(field3);
+        pane.add(button);
     }
 
     private void outDevice() {

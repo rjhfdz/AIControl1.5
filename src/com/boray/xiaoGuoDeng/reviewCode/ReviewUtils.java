@@ -934,11 +934,11 @@ public class ReviewUtils {
                     } else {
                         for (int j = 0; j < vector99.size(); j++) {
                             tp = (Vector) vector99.get(j);
-                            a = Integer.valueOf((String) (tp.get(1)));
+                            a = Integer.valueOf(tp.get(1).toString());
                             bytes.add((byte) (a % 256));
                             bytes.add((byte) (a / 256));
                             for (int k = 2; k < 512; k++) {
-                                a = Integer.valueOf((String) (tp.get(k)));
+                                a = Integer.valueOf(tp.get(k).toString());
                                 bytes.add((byte) a);
                             }
                         }
@@ -978,11 +978,11 @@ public class ReviewUtils {
             } else {
                 for (int j = 0; j < vector99.size(); j++) {
                     tp = (Vector) vector99.get(j);
-                    a = Integer.valueOf((String) (tp.get(1)));
+                    a = Integer.valueOf(tp.get(1).toString());
                     bytes.add((byte) (a % 256));
                     bytes.add((byte) (a / 256));
                     for (int k = 2; k < 512; k++) {
-                        a = Integer.valueOf((String) (tp.get(k)));
+                        a = Integer.valueOf(tp.get(k).toString());
                         bytes.add((byte) a);
                     }
                 }

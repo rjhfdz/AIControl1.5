@@ -40,7 +40,7 @@ public class MainUi {
             e.printStackTrace();
         }
         map = new HashMap();
-        frame = new JFrame("X-Series智能灯光控制器系统V1.0(测试版本)");
+        frame = new JFrame("X-Series智能灯光控制器系统V1.1");
         map.put("frame", frame);
 
         int screenWidth = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
@@ -81,13 +81,7 @@ public class MainUi {
 //                    e1.printStackTrace();
 //                }
                 if (Data.serialPort != null) {
-                    try {
-                        OutputStream os = Data.serialPort.getOutputStream();
-                        os.write(ZhiLingJi.setBackBaut());
-                        os.flush();
-                    } catch (Exception e2) {
-                        e2.printStackTrace();
-                    }
+                    Socket.SerialPortSendData(ZhiLingJi.setBackBaut());
                 } else if (Data.socket != null) {
                     Socket.UDPSendData(ZhiLingJi.setBackBaut());
                 }

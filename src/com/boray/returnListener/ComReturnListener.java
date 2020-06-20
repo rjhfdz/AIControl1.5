@@ -606,7 +606,7 @@ public class ComReturnListener implements Runnable {
                             Data.againSendDataTimer = null;
                             Data.sendDataCount = 0;//清除重发记录数 防止定时器计数错误
                             packetN = Byte.toUnsignedInt(b1[6]) * 256 + Byte.toUnsignedInt(b1[7]);
-                            JButton dataWrite = (JButton) MainUi.map.get("comAndWifiDataWrite");
+                            JButton dataWrite = (JButton) MainUi.map.get(Data.DataWriteBtnName);
                             if (packetN == Data.dataWrite.length) {
                                 dataWrite.setText("写入控制器");
                                 dataWrite.setEnabled(true);
@@ -626,7 +626,7 @@ public class ComReturnListener implements Runnable {
 						byte[] b1 = new byte[size];
 						if (len <= size) {
 							for (int i = 0; i < len; i++) {
-								b1[i] = temp[i];
+								b1[i] = temp[i];最近更新
 							}
 							len1 = getAllData(size, len, b1, is);
 						} else {

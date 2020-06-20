@@ -113,7 +113,7 @@ public class EditEffect_shengKonUI {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         //flowLayout.setVgap(2);
         dialog.getContentPane().setLayout(flowLayout);
-        int width = 900, height = 630;
+        int width = 900, height = 670;
         dialog.setSize(width, height);
         dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - width / 2, f.getLocation().y + f.getSize().height / 2 - height / 2);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -149,15 +149,17 @@ public class EditEffect_shengKonUI {
             if (al == null) {
                 al = new int[11];//a[10]表示多灯控制
                 al[0] = 1;
+                al[1] = 1;
                 al[5] = 1;
                 al[7] = 1;
                 al[9] = 1;
+                al[10] = 1;
             }
 
             JTabbedPane tabbedPane = new JTabbedPane();
             tabbedPane.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
             tabbedPane.setFocusable(false);
-            tabbedPane.setPreferredSize(new Dimension(880, 550));
+            tabbedPane.setPreferredSize(new Dimension(880, 570));
 
             JPanel channelPane = new JPanel();
             setChannelPane(channelPane);
@@ -182,14 +184,14 @@ public class EditEffect_shengKonUI {
         int dengKuNumber = Integer.valueOf(typeString.split("#")[0].substring(2)).intValue() - 1;
         HashMap map = (HashMap) Data.DengKuList.get(dengKuNumber);
         int tt = Integer.valueOf((String) Data.DengKuChannelCountList.get(dengKuNumber)).intValue();
-        scrollPane.setPreferredSize(new Dimension(858, 200));
+        scrollPane.setPreferredSize(new Dimension(858, 220));
         scrollPane.setBorder(new LineBorder(Color.gray));
 
         JPanel pane = new JPanel();
         FlowLayout flowLayout2 = new FlowLayout(FlowLayout.LEFT);
         flowLayout2.setHgap(0);
         pane.setLayout(flowLayout2);
-        pane.setPreferredSize(new Dimension(1510, 180));
+        pane.setPreferredSize(new Dimension(1510, 200));
         //TitledBorder tb = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "调光通道", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
         //tgPane.setBorder(tb);
         JPanel lefPane = new JPanel();
@@ -198,7 +200,7 @@ public class EditEffect_shengKonUI {
         lefPane.setPreferredSize(new Dimension(26, 180));
         lefPane.setLayout(new FlowLayout(FlowLayout.CENTER));
         JPanel nullPane = new JPanel();
-        nullPane.setPreferredSize(new Dimension(20, 144));
+        nullPane.setPreferredSize(new Dimension(20, 150));
         lefPane.add(nullPane);
         JLabel huaBuJLabel = new JLabel("<html>全选</html>");
         huaBuJLabel.setPreferredSize(new Dimension(32, 24));
@@ -236,7 +238,7 @@ public class EditEffect_shengKonUI {
             itemPanes[i] = new JPanel();
             itemPanes[i].setLayout(flowLayout);
             //itemPanes[i].setBorder(new LineBorder(Color.black));
-            itemPanes[i].setPreferredSize(new Dimension(46, 180));
+            itemPanes[i].setPreferredSize(new Dimension(46, 200));
             if (i > 8) {
                 labels[i] = new JLabel((i + 1) + "");
             } else {
@@ -315,7 +317,7 @@ public class EditEffect_shengKonUI {
                 names[i].setEnabled(false);
             }
             names[i].setFont(f1);
-            names[i].setPreferredSize(new Dimension(42, 30));
+            names[i].setPreferredSize(new Dimension(42, 50));
             //DmxValues[i] = new JLabel(""+(i+1));
             names[i].setBorder(BorderFactory.createEmptyBorder(-10, 0, -10, 0));
             //names[i].setBorder(new LineBorder(Color.black));
@@ -797,7 +799,7 @@ public class EditEffect_shengKonUI {
         Object[] s = new String[tt + 2];
         final String[] temp = new String[tt + 2];
         temp[0] = "1";
-        temp[1] = "0";
+        temp[1] = "2000";
         s[0] = "步骤";
         s[1] = "亮灯时长";
         for (int i = 2; i < s.length; i++) {
@@ -1341,6 +1343,9 @@ public class EditEffect_shengKonUI {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(al[10]==1){
+                    JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "当前多灯控制为全部控制，单选多选按钮无效！", "提示", JOptionPane.ERROR_MESSAGE);
+                }
                 if (e.getActionCommand().equals("单选")) {
                     for (int i = 0; i < buttons.length; i++) {
                         group.remove(buttons[i]);

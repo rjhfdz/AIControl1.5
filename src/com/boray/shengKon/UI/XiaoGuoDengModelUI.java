@@ -364,23 +364,23 @@ public class XiaoGuoDengModelUI implements ActionListener {
     }
 
     void setP3(JScrollPane scrollPane) {
-        scrollPane.setPreferredSize(new Dimension(858, 220));
+        scrollPane.setPreferredSize(new Dimension(858, 230));
         scrollPane.setBorder(new LineBorder(Color.gray));
 
         JPanel pane = new JPanel();
         FlowLayout flowLayout2 = new FlowLayout(FlowLayout.LEFT);
         flowLayout2.setHgap(0);
         pane.setLayout(flowLayout2);
-        pane.setPreferredSize(new Dimension(1510, 196));
+        pane.setPreferredSize(new Dimension(1510, 206));
         //TitledBorder tb = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "调光通道", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
         //tgPane.setBorder(tb);
         JPanel lefPane = new JPanel();
         //lefPane.setBorder(new LineBorder(Color.black));
         //lefPane.setBorder(BorderFactory.createEmptyBorder(0,0,0,-4));
-        lefPane.setPreferredSize(new Dimension(26, 196));
+        lefPane.setPreferredSize(new Dimension(26, 206));
         lefPane.setLayout(new FlowLayout(FlowLayout.CENTER));
         JPanel nullPane = new JPanel();
-        nullPane.setPreferredSize(new Dimension(20, 144));
+        nullPane.setPreferredSize(new Dimension(20, 154));
         lefPane.add(nullPane);
         JLabel huaBuJLabel = new JLabel("<html>全选</html>");
         huaBuJLabel.setPreferredSize(new Dimension(32, 24));
@@ -418,7 +418,7 @@ public class XiaoGuoDengModelUI implements ActionListener {
             itemPanes[i] = new JPanel();
             itemPanes[i].setLayout(flowLayout);
             //itemPanes[i].setBorder(new LineBorder(Color.black));
-            itemPanes[i].setPreferredSize(new Dimension(46, 196));
+            itemPanes[i].setPreferredSize(new Dimension(46, 206));
             if (i > 8) {
                 labels[i] = new JLabel((i + 1) + "");
             } else {
@@ -501,7 +501,7 @@ public class XiaoGuoDengModelUI implements ActionListener {
             });
 
             names[i].setFont(f1);
-            names[i].setPreferredSize(new Dimension(42, 30));
+            names[i].setPreferredSize(new Dimension(42, 40));
             DmxValues[i] = new JLabel("" + (i + 1));
             names[i].setBorder(BorderFactory.createEmptyBorder(-10, 0, -10, 0));
             //names[i].setBorder(new LineBorder(Color.black));

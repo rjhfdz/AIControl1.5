@@ -106,7 +106,7 @@ public class Util {
         Data.againSendDataTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                JButton dataWrite = (JButton) MainUi.map.get("comAndWifiDataWrite");
+                JButton dataWrite = (JButton) MainUi.map.get(Data.DataWriteBtnName);
                 if (Data.sendDataCount >= 3) {
                     JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "数据写入失败，请检查设备或接口。", "提示", JOptionPane.ERROR_MESSAGE);
                     Data.sendDataCount = 0;
@@ -164,29 +164,23 @@ public class Util {
      * @return
      */
     public static Object Clone(Object o) {
-        Object newObj = new Object();
-        //HashMap 没有深复制方法 暂用读取文件的方式代替
+        Object newObj = null;
         try {
-            File file = new File("cs.xml");
-            OutputStream os = new FileOutputStream(file);
-            XMLEncoder xmlEncoder = new XMLEncoder(os);
-            xmlEncoder.writeObject(o);
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            ObjectOutputStream obs = new ObjectOutputStream(out);
+            obs.writeObject(o);
 
-            xmlEncoder.flush();
-            xmlEncoder.close();
+            ByteArrayInputStream ios = new ByteArrayInputStream(out.toByteArray());
+            ObjectInputStream ois = new ObjectInputStream(ios);
 
-            InputStream is = new FileInputStream(file);
-            XMLDecoder xmlDecoder = new XMLDecoder(is);
-            newObj = xmlDecoder.readObject();
-
-            xmlDecoder.close();
-
-            file.delete();
+            newObj = ois.readObject();
+            ois.close();
         }catch (Exception e){
             e.printStackTrace();
         }
         return newObj;
     }
+
 
     /**
      * 设备RAM重装指令

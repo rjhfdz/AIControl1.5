@@ -1,6 +1,7 @@
 package com.boray.main.Util;
 
 import com.boray.entity.FileOrFolder;
+import com.boray.entity.Member;
 import com.boray.entity.ProjectFile;
 import resource.Resources;
 
@@ -22,6 +23,7 @@ public class CustomTreeCellRenderer extends DefaultTreeCellRenderer {
     private static final ImageIcon company = (ImageIcon) Resources.getInstance().createIcon(Resources.getInstance().createImage("prfrs_32.png"), 16, 16);
     private static final ImageIcon local = (ImageIcon) Resources.getInstance().createIcon(Resources.getInstance().createImage("MidType.png"), 16, 16);
     private static final ImageIcon file = (ImageIcon) Resources.getInstance().createIcon(Resources.getInstance().createImage("FileIcon.png"), 16, 16);
+    private static final ImageIcon member = (ImageIcon) Resources.getInstance().createIcon(Resources.getInstance().createImage("Group.png"), 16, 16);
 
     @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {
@@ -30,7 +32,7 @@ public class CustomTreeCellRenderer extends DefaultTreeCellRenderer {
         Object obj = node.getUserObject();
         if (node.isRoot()) {
             setIcon(root);
-            if(obj != null && obj instanceof File){
+            if (obj != null && obj instanceof File) {
                 File obj1 = (File) obj;
                 String[] strings = obj1.getAbsolutePath().split("\\\\");
                 setText(strings[strings.length - 1]);
@@ -52,6 +54,10 @@ public class CustomTreeCellRenderer extends DefaultTreeCellRenderer {
             }
             String[] strings = obj1.getAbsolutePath().split("\\\\");
             setText(strings[strings.length - 1]);
+        } else if (obj != null && obj instanceof Member) {
+            Member m = (Member) obj;
+            setIcon(member);
+            setText(m.getUsername());
         }
         return this;
     }

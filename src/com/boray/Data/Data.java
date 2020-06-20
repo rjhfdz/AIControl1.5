@@ -50,6 +50,10 @@ public class Data {
 	 * 复制粘贴 临时素材
 	 */
 	public static String tempSuCai;
+	/**
+	 * 复制粘贴 临时声控素材
+	 */
+	public static String tempShengKonSuCai;
 	//新建素材的顺序
 	public static List<String> AddSuCaiOrder = new ArrayList<>();
 	//4个雾机模式数据
@@ -185,7 +189,11 @@ public class Data {
 
 	//云端添加工程
 	public static String yunProjectFilePath = "";
-	
+
+	public static String saveCtrlFile = "";
+
+	public static String DataWriteBtnName = "";
+
 	//灯具变更
 	public static boolean dengJu_change = false;
 	
@@ -213,6 +221,7 @@ public class Data {
 	public static Object[][] ShengKonSuCai = new Object[30][30];
 
 	public static String ipPort;
+	public static String ipPort2;
 	public static String ip;
 	public static String downloadIp;
 

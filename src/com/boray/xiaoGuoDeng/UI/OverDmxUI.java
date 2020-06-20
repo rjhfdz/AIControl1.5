@@ -4,6 +4,7 @@ import com.boray.Data.*;
 import com.boray.Listener.ZiroToFullActionListener;
 import com.boray.Utils.IconJDialog;
 import com.boray.Utils.Socket;
+import com.boray.Utils.Util;
 import com.boray.Utils.WaitProgressBar;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
@@ -70,7 +71,7 @@ public class OverDmxUI implements ActionListener {
         dialog.setSize(width, height);
         dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - width / 2, f.getLocation().y + f.getSize().height / 2 - height / 2);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        JPanel p1 = new JPanel();
+        JScrollPane p1 = new JScrollPane();
         JPanel p2 = new JPanel();
         JScrollPane p3 = new JScrollPane();
         JPanel p4 = new JPanel();
@@ -110,9 +111,17 @@ public class OverDmxUI implements ActionListener {
         dialog.setVisible(true);
     }
 
-    void setP1(JPanel pane) {
+    void setP1(JScrollPane scrollPane) {
+        scrollPane.setPreferredSize(new Dimension(910, 140));
+        scrollPane.setBorder(new LineBorder(Color.gray));
+
+        JPanel pane = new JPanel();
         pane.setBorder(new LineBorder(Color.gray));
-        pane.setPreferredSize(new Dimension(910, 140));
+        pane.setPreferredSize(new Dimension(880, 250));
+
+        scrollPane.getVerticalScrollBar().setUnitIncrement(30);
+        scrollPane.setViewportView(pane);
+
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
         flowLayout.setVgap(-2);
         flowLayout.setHgap(0);
@@ -200,9 +209,9 @@ public class OverDmxUI implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int index = Integer.valueOf(box.getSelectedItem().toString());
-                Data.XiaoGuoDengModelDmxMap.put("TableData" + setNo, Data.XiaoGuoDengModelDmxMap.get("TableData" + index));
-                Data.XiaoGuoDengModelDmxMap.put("GouXuanValue" + setNo, Data.XiaoGuoDengModelDmxMap.get("GouXuanValue" + index));
-                Data.XiaoGuoDengModelDmxMap.put("JianBianGouXuanValue" + setNo, Data.XiaoGuoDengModelDmxMap.get("JianBianGouXuanValue" + index));
+                Data.XiaoGuoDengModelDmxMap.put("TableData" + setNo, Util.Clone(Data.XiaoGuoDengModelDmxMap.get("TableData" + index)));
+                Data.XiaoGuoDengModelDmxMap.put("GouXuanValue" + setNo, Util.Clone(Data.XiaoGuoDengModelDmxMap.get("GouXuanValue" + index)));
+                Data.XiaoGuoDengModelDmxMap.put("JianBianGouXuanValue" + setNo, Util.Clone(Data.XiaoGuoDengModelDmxMap.get("JianBianGouXuanValue" + index)));
                 Object[] s = new String[514];
                 String[] temp = new String[514];
                 temp[0] = "1";
@@ -293,7 +302,7 @@ public class OverDmxUI implements ActionListener {
         JPanel p4 = new JPanel();
 
         p4.setLayout(flowLayout1);
-        p4.setPreferredSize(new Dimension(220, 40));
+        p4.setPreferredSize(new Dimension(280, 40));
         final JButton review = new JButton("预览");
         review.addActionListener(new ActionListener() {
             @Override
@@ -332,7 +341,7 @@ public class OverDmxUI implements ActionListener {
                 Socket.SendData(TimeBlockReviewData.getStopReview3(XiaoGuoDengModel.model));
             }
         });
-        JButton button = new JButton("单选");
+        final JButton button = new JButton("单选");
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -351,12 +360,14 @@ public class OverDmxUI implements ActionListener {
         });
         p4.add(review);
         p4.add(stop);
+        p4.add(new JLabel("  "));
+        p4.add(button);
         //pane.add(tempPane);
         //pane.add(p2);
         pane.add(p3);
         pane.add(p5);
         pane.add(p4);
-        pane.add(button);
+//        pane.add(button);
     }
 
     void setP3(JScrollPane scrollPane) {
@@ -378,7 +389,7 @@ public class OverDmxUI implements ActionListener {
         JPanel nullPane = new JPanel();
         nullPane.setPreferredSize(new Dimension(90, 125));
         lefPane.add(nullPane);
-        JLabel huaBuJLabelAll = new JLabel("所有通道全选");
+        JLabel huaBuJLabelAll = new JLabel("   通道全选");
         huaBuJLabelAll.setPreferredSize(new Dimension(90, 20));
         huaBuJLabelAll.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
@@ -404,7 +415,7 @@ public class OverDmxUI implements ActionListener {
                 label.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
         });
-        JLabel huaBuJLabel = new JLabel("   通道全选");
+        JLabel huaBuJLabel = new JLabel("   通道页选");
         huaBuJLabel.setPreferredSize(new Dimension(90, 20));
         huaBuJLabel.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
@@ -423,8 +434,8 @@ public class OverDmxUI implements ActionListener {
         });
         lefPane.add(huaBuJLabelAll);
         lefPane.add(huaBuJLabel);
-        JLabel huaBuJLabel2 = new JLabel("   渐变全选");
-        JLabel huaBuJLabel2All = new JLabel("所有渐变全选");
+        JLabel huaBuJLabel2 = new JLabel("   渐变页选");
+        JLabel huaBuJLabel2All = new JLabel("   渐变全选");
         huaBuJLabel2.setPreferredSize(new Dimension(90, 20));
         huaBuJLabel2All.setPreferredSize(new Dimension(90, 20));
         huaBuJLabel2.addMouseListener(new MouseAdapter() {
@@ -486,7 +497,7 @@ public class OverDmxUI implements ActionListener {
             itemPanes[i] = new JPanel();
             itemPanes[i].setLayout(flowLayout);
             //itemPanes[i].setBorder(new LineBorder(Color.black));
-            itemPanes[i].setPreferredSize(new Dimension(46, 210));
+            itemPanes[i].setPreferredSize(new Dimension(46, 220));
             if (i > 8) {
                 labels[i] = new JLabel((i + 1) + "");
             } else {
@@ -578,7 +589,7 @@ public class OverDmxUI implements ActionListener {
             });
 
             names[i].setFont(f1);
-            names[i].setPreferredSize(new Dimension(42, 30));
+            names[i].setPreferredSize(new Dimension(42, 40));
             DmxValues[i] = new JLabel("" + (i + 1));
             names[i].setBorder(BorderFactory.createEmptyBorder(-10, 0, -10, 0));
             //names[i].setBorder(new LineBorder(Color.black));
