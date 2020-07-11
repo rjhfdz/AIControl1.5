@@ -54,6 +54,7 @@ public class CompanyUI {
 
     public void show(JPanel panel) {
         if (MainUi.map.get("Users") == null) {
+            panel.removeAll();//清除所有控件，重新布局
             JPanel jPanel2 = new JPanel();
             jPanel2.setPreferredSize(new Dimension(900, 588));
             JPanel jPanel = new JPanel();

@@ -22,6 +22,7 @@ public class ArtNetReview {
     public ArtNetReview(int group, int index, int[] startAddress) {
         this.group = group;
         this.index = index;
+        Arrays.sort(startAddress);//¶ÔµØÖ·½øÐÐÅÅÐò
         this.startAddress = startAddress;
         this.map = (HashMap) Data.SuCaiObjects[this.group][this.index];
         this.suCaiTonDaoShu = Integer.parseInt(Data.DengKuChannelCountList.get(group).toString());
@@ -251,30 +252,43 @@ public class ArtNetReview {
                         RGBDuoDeng2(ints, flag, speed, bytes);
                         break;
                     case 3://ÅÜÂíµÆ
+                        RGBDuoDeng3(ints, flag, speed, bytes);
                         break;
                     case 4://ÅÜÂíµÆ(Íù·µ)
+                        RGBDuoDeng4(ints, flag, speed, bytes);
                         break;
                     case 5://ÅÜÂíµÆ2
+                        RGBDuoDeng5(ints, flag, speed, bytes);
                         break;
-                    case 6://ÅÜÂíµÆ(Íù·µ)
+                    case 6://ÅÜÂíµÆ2(Íù·µ)
+                        RGBDuoDeng6(ints, flag, speed, bytes);
                         break;
                     case 7://ÆæÊý
+                        RGBDuoDeng7(ints, flag, speed, bytes);
                         break;
                     case 8://ÆæÊý(Íù·µ)
+                        RGBDuoDeng8(ints, flag, speed, bytes);
                         break;
                     case 9://Å¼Êý
+                        RGBDuoDeng9(ints, flag, speed, bytes);
                         break;
                     case 10://Å¼Êý(Íù·µ)
+                        RGBDuoDeng10(ints, flag, speed, bytes);
                         break;
                     case 11://ÆæÊý+Å¼Êý
+                        RGBDuoDeng11(ints, flag, speed, bytes);
                         break;
                     case 12://ÆæÊý+Å¼Êý(Íù·µ)
+                        RGBDuoDeng12(ints, flag, speed, bytes);
                         break;
                     case 13://Å¼Êý+ÆæÊý
+                        RGBDuoDeng13(ints, flag, speed, bytes);
                         break;
                     case 14://Å¼Êý+ÆæÊý(Íù·µ)
+                        RGBDuoDeng14(ints, flag, speed, bytes);
                         break;
                     case 15://Á÷Ë®µÆ
+                        RGBDuoDeng15(ints, flag, speed, bytes);
                         break;
                 }
 
@@ -390,7 +404,7 @@ public class ArtNetReview {
             } else {
                 int a = (startAddress.length + 1) / 2;
                 for (int i = 0; i < a; i++) {
-                    if (i == a) {
+                    if (i == a - 1) {
                         Set<Integer> sets = getstartAddressSets();
                         Set<Integer> newSet = new HashSet<>();
                         newSet.add(a - 1);
@@ -419,7 +433,19 @@ public class ArtNetReview {
      * @param bytes
      */
     public void RGBDuoDeng3(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
-
+        if (flag) {
+            RGBDuoDeng4(ints, false, speed, bytes);
+        } else {
+            List<Set<Integer>> setList = new ArrayList<>();
+            for (int i = 0; i < startAddress.length; i++) {
+                Set<Integer> sets = getstartAddressSets();
+                Set<Integer> newSet = new HashSet<>();
+                newSet.add(i);
+                sets.removeAll(newSet);
+                setList.add(sets);
+            }
+            setRGBDuoDengData(setList, ints, bytes, speed);
+        }
     }
 
     /**
@@ -431,50 +457,451 @@ public class ArtNetReview {
      * @param bytes
      */
     public void RGBDuoDeng4(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
-
+        if (flag) {
+            RGBDuoDeng3(ints, false, speed, bytes);
+        } else {
+            List<Set<Integer>> setList = new ArrayList<>();
+            for (int i = 0; i < startAddress.length; i++) {
+                Set<Integer> sets = getstartAddressSets();
+                Set<Integer> newSet = new HashSet<>();
+                newSet.add(i);
+                sets.removeAll(newSet);
+                setList.add(sets);
+            }
+            for (int i = startAddress.length - 1; i <= 0; i--) {
+                Set<Integer> sets = getstartAddressSets();
+                Set<Integer> newSet = new HashSet<>();
+                newSet.add(i);
+                sets.removeAll(newSet);
+                setList.add(sets);
+            }
+            setRGBDuoDengData(setList, ints, bytes, speed);
+        }
     }
 
-    public void RGBDuoDeng5() {
-
+    /**
+     * ÅÜÂíµÆ2
+     *
+     * @param ints
+     * @param flag
+     * @param speed
+     * @param bytes
+     */
+    public void RGBDuoDeng5(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
+        if (flag) {
+            RGBDuoDeng6(ints, false, speed, bytes);
+        } else {
+            List<Set<Integer>> setList = new ArrayList<>();
+            if (startAddress.length % 2 == 0) {
+                int a = (startAddress.length / 2);
+                for (int i = 0; i < a; i++) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i + i);
+                    newSet.add(i + i + 1);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            } else {
+                int a = (startAddress.length + 1) / 2;
+                for (int i = 0; i < a; i++) {
+                    if (i == a - 1) {
+                        Set<Integer> sets = getstartAddressSets();
+                        Set<Integer> newSet = new HashSet<>();
+                        newSet.add(i + 1);
+                        sets.removeAll(newSet);
+                        setList.add(sets);
+                    } else {
+                        Set<Integer> sets = getstartAddressSets();
+                        Set<Integer> newSet = new HashSet<>();
+                        newSet.add(i + i);
+                        newSet.add(i + i + 1);
+                        sets.removeAll(newSet);
+                        setList.add(sets);
+                    }
+                }
+            }
+            setRGBDuoDengData(setList, ints, bytes, speed);
+        }
     }
 
-    public void RGBDuoDeng6() {
-
+    /**
+     * ÅÜÂíµÆ2(Íù·µ)
+     *
+     * @param ints
+     * @param flag
+     * @param speed
+     * @param bytes
+     */
+    public void RGBDuoDeng6(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
+        if (flag) {
+            RGBDuoDeng5(ints, false, speed, bytes);
+        } else {
+            List<Set<Integer>> setList = new ArrayList<>();
+            if (startAddress.length % 2 == 0) {
+                int a = (startAddress.length / 2);
+                for (int i = 0; i < a; i++) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i + i);
+                    newSet.add(i + i + 1);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+                for (int i = a; i <= 0; i--) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i + i + 1);
+                    newSet.add(i + i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            } else {
+                int a = (startAddress.length + 1) / 2;
+                for (int i = 0; i < a; i++) {
+                    if (i == a - 1) {
+                        Set<Integer> sets = getstartAddressSets();
+                        Set<Integer> newSet = new HashSet<>();
+                        newSet.add(a + 1);
+                        sets.removeAll(newSet);
+                        setList.add(sets);
+                    } else {
+                        Set<Integer> sets = getstartAddressSets();
+                        Set<Integer> newSet = new HashSet<>();
+                        newSet.add(i + i);
+                        newSet.add(i + i + 1);
+                        sets.removeAll(newSet);
+                        setList.add(sets);
+                    }
+                }
+                for (int i = a; i <= 0; i++) {
+                    if (i == a) {
+                        Set<Integer> sets = getstartAddressSets();
+                        Set<Integer> newSet = new HashSet<>();
+                        newSet.add(a + 1);
+                        sets.removeAll(newSet);
+                        setList.add(sets);
+                    } else {
+                        Set<Integer> sets = getstartAddressSets();
+                        Set<Integer> newSet = new HashSet<>();
+                        newSet.add(i + i);
+                        newSet.add(i + i + 1);
+                        sets.removeAll(newSet);
+                        setList.add(sets);
+                    }
+                }
+            }
+            setRGBDuoDengData(setList, ints, bytes, speed);
+        }
     }
 
-    public void RGBDuoDeng7() {
-
+    /**
+     * ÆæÊý
+     *
+     * @param ints
+     * @param flag
+     * @param speed
+     * @param bytes
+     */
+    public void RGBDuoDeng7(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
+        if (flag) {
+            RGBDuoDeng8(ints, false, speed, bytes);
+        } else {
+            List<Set<Integer>> setList = new ArrayList<>();
+            for (int i = 0; i < startAddress.length; i++) {
+                if ((i + 1) % 2 != 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            setRGBDuoDengData(setList, ints, bytes, speed);
+        }
     }
 
-    public void RGBDuoDeng8() {
-
+    /**
+     * ÆæÊý(Íù·µ)
+     *
+     * @param ints
+     * @param flag
+     * @param speed
+     * @param bytes
+     */
+    public void RGBDuoDeng8(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
+        if (flag) {
+            RGBDuoDeng7(ints, false, speed, bytes);
+        } else {
+            List<Set<Integer>> setList = new ArrayList<>();
+            for (int i = 0; i < startAddress.length; i++) {
+                if ((i + 1) % 2 != 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            for (int i = startAddress.length - 1; i <= 0; i--) {
+                if ((i + 1) % 2 != 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            setRGBDuoDengData(setList, ints, bytes, speed);
+        }
     }
 
-    public void RGBDuoDeng9() {
-
+    /**
+     * Å¼Êý
+     *
+     * @param ints
+     * @param flag
+     * @param speed
+     * @param bytes
+     */
+    public void RGBDuoDeng9(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
+        if (flag) {
+            RGBDuoDeng10(ints, false, speed, bytes);
+        } else {
+            List<Set<Integer>> setList = new ArrayList<>();
+            for (int i = 0; i < startAddress.length; i++) {
+                if ((i + 1) % 2 == 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            setRGBDuoDengData(setList, ints, bytes, speed);
+        }
     }
 
-    public void RGBDuoDeng10() {
-
+    /**
+     * Å¼Êý(Íù·µ)
+     *
+     * @param ints
+     * @param flag
+     * @param speed
+     * @param bytes
+     */
+    public void RGBDuoDeng10(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
+        if (flag) {
+            RGBDuoDeng9(ints, false, speed, bytes);
+        } else {
+            List<Set<Integer>> setList = new ArrayList<>();
+            for (int i = 0; i < startAddress.length; i++) {
+                if ((i + 1) % 2 == 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            for (int i = startAddress.length - 1; i <= 0; i--) {
+                if ((i + 1) % 2 == 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            setRGBDuoDengData(setList, ints, bytes, speed);
+        }
     }
 
-    public void RGBDuoDeng11() {
-
+    /**
+     * ÆæÊý+Å¼Êý
+     *
+     * @param ints
+     * @param flag
+     * @param speed
+     * @param bytes
+     */
+    public void RGBDuoDeng11(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
+        if (flag) {
+            RGBDuoDeng12(ints, false, speed, bytes);
+        } else {
+            List<Set<Integer>> setList = new ArrayList<>();
+            for (int i = 0; i < startAddress.length; i++) {
+                if ((i + 1) % 2 != 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            for (int i = 0; i < startAddress.length; i++) {
+                if ((i + 1) % 2 == 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            setRGBDuoDengData(setList, ints, bytes, speed);
+        }
     }
 
-    public void RGBDuoDeng12() {
-
+    /**
+     * ÆæÊý+Å¼Êý(Íù·µ)
+     *
+     * @param ints
+     * @param flag
+     * @param speed
+     * @param bytes
+     */
+    public void RGBDuoDeng12(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
+        if (flag) {
+            RGBDuoDeng11(ints, false, speed, bytes);
+        } else {
+            List<Set<Integer>> setList = new ArrayList<>();
+            for (int i = 0; i < startAddress.length; i++) {
+                if ((i + 1) % 2 != 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            for (int i = 0; i < startAddress.length; i++) {
+                if ((i + 1) % 2 == 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            for (int i = startAddress.length - 1; i <= 0; i--) {
+                if ((i + 1) % 2 == 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            for (int i = startAddress.length - 1; i <= 0; i--) {
+                if ((i + 1) % 2 != 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            setRGBDuoDengData(setList, ints, bytes, speed);
+        }
     }
 
-    public void RGBDuoDeng13() {
-
+    /**
+     * Å¼Êý+ÆæÊý
+     *
+     * @param ints
+     * @param flag
+     * @param speed
+     * @param bytes
+     */
+    public void RGBDuoDeng13(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
+        if (flag) {
+            RGBDuoDeng14(ints, false, speed, bytes);
+        } else {
+            List<Set<Integer>> setList = new ArrayList<>();
+            for (int i = 0; i < startAddress.length; i++) {
+                if ((i + 1) % 2 == 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            for (int i = 0; i < startAddress.length; i++) {
+                if ((i + 1) % 2 != 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            setRGBDuoDengData(setList, ints, bytes, speed);
+        }
     }
 
-    public void RGBDuoDeng14() {
-
+    /**
+     * Å¼Êý+ÆæÊý(Íù·µ)
+     *
+     * @param ints
+     * @param flag
+     * @param speed
+     * @param bytes
+     */
+    public void RGBDuoDeng14(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
+        if (flag) {
+            RGBDuoDeng13(ints, false, speed, bytes);
+        } else {
+            List<Set<Integer>> setList = new ArrayList<>();
+            for (int i = 0; i < startAddress.length; i++) {
+                if ((i + 1) % 2 == 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            for (int i = 0; i < startAddress.length; i++) {
+                if ((i + 1) % 2 != 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            for (int i = startAddress.length - 1; i <= 0; i--) {
+                if ((i + 1) % 2 != 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            for (int i = startAddress.length - 1; i <= 0; i--) {
+                if ((i + 1) % 2 == 0) {
+                    Set<Integer> sets = getstartAddressSets();
+                    Set<Integer> newSet = new HashSet<>();
+                    newSet.add(i);
+                    sets.removeAll(newSet);
+                    setList.add(sets);
+                }
+            }
+            setRGBDuoDengData(setList, ints, bytes, speed);
+        }
     }
 
-    public void RGBDuoDeng15() {
+    /**
+     * Á÷Ë®µÆ
+     *
+     * @param ints
+     * @param flag
+     * @param speed
+     * @param bytes
+     */
+    public void RGBDuoDeng15(List<Integer> ints, boolean flag, int speed, List<byte[]> bytes) {
 
     }
 

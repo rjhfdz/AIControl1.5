@@ -187,6 +187,11 @@ public class TiaoGuangDialog implements ActionListener{
 		list.add(slider);list.add(slider2);
 		//list.add(box2);list.add(box3);
 		pane.add(box2);pane.add(box3);
+		box.setEnabled(false);
+		slider.setEnabled(false);
+		slider2.setEnabled(false);
+		box2.setEnabled(false);
+		box3.setEnabled(false);
 	}
 	private void setP3(JPanel pane){
 		JComboBox box = new JComboBox(new String[]{"可控","不可控"});
@@ -273,6 +278,11 @@ public class TiaoGuangDialog implements ActionListener{
 		list.add(slider);list.add(slider2);
 		//list.add(box2);list.add(box3);
 		pane.add(box2);pane.add(box3);
+		box.setEnabled(false);
+		slider.setEnabled(false);
+		slider2.setEnabled(false);
+		box2.setEnabled(false);
+		box3.setEnabled(false);
 	}
 	private void setP2(JPanel pane){
 		JComboBox box = new JComboBox(new String[]{"可控","不可控"});

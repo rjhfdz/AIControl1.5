@@ -13,6 +13,8 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.text.StyledEditorKit;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,7 +58,7 @@ public class BorayMainUI {
         pane.setLayout(new FlowLayout(FlowLayout.LEFT));
         JPanel leftPane = new JPanel();
         leftPane.setBorder(new LineBorder(Color.gray));
-        leftPane.setPreferredSize(new Dimension(108, 588));
+        leftPane.setPreferredSize(new Dimension(130, 588));
         JToggleButton btn = new JToggleButton("官方发布");
         JToggleButton btn2 = new JToggleButton("个人管理");
         JToggleButton btn3 = new JToggleButton("成员管理");
@@ -88,6 +90,50 @@ public class BorayMainUI {
         }
         leftPane.add(btn4);
         leftPane.add(btn5);
+        if (CheckAdmin()) {//查询是否是管理员
+            JPanel panel = new JPanel();
+            panel.setPreferredSize(new Dimension(120, 200));
+            leftPane.add(panel);
+        } else {
+            JPanel panel = new JPanel();
+            panel.setPreferredSize(new Dimension(120, 260));
+            leftPane.add(panel);
+        }
+        JLabel UserLabel = new JLabel("用户:SYSTEM");
+        UserLabel.setVisible(false);
+        UserLabel.setPreferredSize(new Dimension(120,30));
+        MainUi.map.put("UserLabel", UserLabel);
+        JLabel LogoutLabel = new JLabel("<html>注销</html>");
+        LogoutLabel.setVisible(false);
+        MainUi.map.put("LogoutLabel", LogoutLabel);
+        LogoutLabel.setForeground(Color.BLUE);
+        LogoutLabel.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                JLabel label = (JLabel) e.getSource();
+                label.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+
+            public void mouseReleased(MouseEvent e) {
+                Object[] options = {"否", "是"};
+                int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "是否注销？", "提示",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                        null, options, options[1]);
+                if(yes == 1){
+                    MainUi.map.remove("Users");
+                    JLabel UserLabel = (JLabel) MainUi.map.get("UserLabel");
+                    JLabel LogoutLabel = (JLabel) MainUi.map.get("LogoutLabel");
+                    UserLabel.setVisible(false);
+                    LogoutLabel.setVisible(false);
+                    new UccnUI().show((JPanel) MainUi.map.get("UccnPanel"));
+                    new MineUI().show((JPanel) MainUi.map.get("MinePanel"));
+                    new ShareUI().show((JPanel) MainUi.map.get("SharePanel"));
+                    new CompanyUI().show((JPanel) MainUi.map.get("CompanyPanel"));
+                }
+            }
+        });
+
+        leftPane.add(UserLabel);
+        leftPane.add(LogoutLabel);
 
         rightPane = new JPanel();
         card = new CardLayout();
@@ -126,7 +172,7 @@ public class BorayMainUI {
         rightPane.add(CompanyPanel, "4");
         rightPane.add(LocalPanel, "5");
 
-
+//        VisibleUser();
         pane.add(leftPane);
         pane.add(rightPane);
     }
@@ -150,5 +196,17 @@ public class BorayMainUI {
             }
         }
         return flag;
+    }
+
+    /**
+     * 显示当前登录用户
+     */
+    private void VisibleUser() {
+        Users users = (Users) MainUi.map.get("Users");
+        JLabel UserLabel = (JLabel) MainUi.map.get("UserLabel");
+        JLabel LogoutLabel = (JLabel) MainUi.map.get("LogoutLabel");
+        UserLabel.setText("用户:" + users.getUsercode());
+        UserLabel.setVisible(true);
+        LogoutLabel.setVisible(true);
     }
 }

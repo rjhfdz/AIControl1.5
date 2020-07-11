@@ -130,4 +130,5 @@ public class MainLoginUIListener implements ActionListener {
 //        frame.setVisible(true);
         frame.validate();
     }
+
 }

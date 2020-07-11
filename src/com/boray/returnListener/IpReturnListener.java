@@ -319,6 +319,36 @@ public class IpReturnListener implements Runnable {
                             b1[i] = temp[i];
                         }
                         Rdmset(b1);
+                    } else if (hex0.equals("fd") && hex2.equals("db")) {
+                        int size = 90;
+                        int len1 = 0;
+                        byte[] b1 = new byte[size];
+                        if (len <= size) {
+                            for (int i = 0; i < len; i++) {
+                                b1[i] = temp[i];
+                            }
+                            len1 = getAllData(size, len, b1);
+                        } else {
+                            for (int i = 0; i < size; i++) {
+                                b1[i] = temp[i];
+                            }
+                            len1 = size;
+                        }
+                        if (len1 == size) {
+                            JLabel label = (JLabel) MainUi.map.get("DeviceLabel");
+                            if (Data.deviceShow) {
+                                label.setText("");
+                                Data.deviceShow = false;
+                            }
+                            int lg = Byte.toUnsignedInt(b1[5]);
+                            String s = new String(b1, 6, lg);
+                            String ss = label.getText();
+                            if (ss.length() > 0) {
+                                label.setText(ss.substring(0, ss.length() - 7) + s + "<br>" + "</html>");
+                            } else {
+                                label.setText("<html>" + s + "<br>" + "</html>");
+                            }
+                        }
                     }
                 }
             }

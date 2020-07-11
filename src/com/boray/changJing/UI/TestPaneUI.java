@@ -1,12 +1,16 @@
 package com.boray.changJing.UI;
 
 import com.boray.Data.ChangJinData;
+import com.boray.Utils.NumberTextField;
+import com.boray.Utils.Socket;
 import com.boray.changJing.Listener.ChangJingSendCodeListener;
 import com.boray.mainUi.MainUi;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TestPaneUI {
 
@@ -50,6 +54,7 @@ public class TestPaneUI {
             group.add(btns[i]);
             panel.add(btns[i]);
         }
+//        addXieMaUI(panel);
 
 
         JPanel panel2 = new JPanel();
@@ -78,5 +83,51 @@ public class TestPaneUI {
 
         pane.add(panel, BorderLayout.NORTH);
         pane.add(panel2);
+    }
+
+    public void addXieMaUI(JPanel panel) {
+        JLabel label1 = new JLabel("起始地址:");
+        final JTextField startAddress = new JTextField(10);
+        startAddress.setDocument(new NumberTextField());
+        startAddress.setText("1");
+        JLabel label2 = new JLabel("芯片数量:");
+        final JTextField xinPianCount = new JTextField(10);
+        xinPianCount.setDocument(new NumberTextField());
+        xinPianCount.setText("1");
+        JButton button = new JButton("写入");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int address = Integer.parseInt(startAddress.getText().equals("") ? "1" : startAddress.getText());
+                if (startAddress.getText().equals("")||startAddress.getText().equals("0")) {
+                    startAddress.setText("1");
+                }
+                if (address > 1024 || address < 0) {
+                    JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "起始地址范围不得超过1-1024！", "提示", JOptionPane.PLAIN_MESSAGE);
+                    return;
+                }
+                int count = Integer.parseInt(xinPianCount.getText().equals("") ? "1" : xinPianCount.getText());
+                if (xinPianCount.getText().equals("")||xinPianCount.getText().equals("0")) {
+                    xinPianCount.setText("1");
+                }
+                if (count > 512 || count < 0) {
+                    JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "芯片数量范围不得超过1-512！", "提示", JOptionPane.PLAIN_MESSAGE);
+                    return;
+                }
+                byte[] bytes = new byte[6];
+                bytes[0] = (byte) 0XBB;
+                bytes[1] = (byte) 0X06;
+                bytes[2] = (byte) (address / 256);
+                bytes[3] = (byte) (address % 256);
+                bytes[4] = (byte) (count / 256);
+                bytes[5] = (byte) (count % 256);
+                Socket.SendData(bytes);
+            }
+        });
+        panel.add(label1);
+        panel.add(startAddress);
+        panel.add(label2);
+        panel.add(xinPianCount);
+        panel.add(button);
     }
 }

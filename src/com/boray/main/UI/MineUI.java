@@ -40,6 +40,7 @@ public class MineUI {
 
     public void show(JPanel panel) {
         if (MainUi.map.get("Users") == null) {
+            panel.removeAll();//清除所有控件，重新布局
             JPanel jPanel2 = new JPanel();
             jPanel2.setPreferredSize(new Dimension(900, 588));
             JPanel jPanel = new JPanel();
@@ -89,6 +90,7 @@ public class MineUI {
 //            JButton downloadFile = new JButton("下载工程");
             JButton refresh = new JButton("刷新");
 
+            popupMenu = new JPopupMenu();
             addFolder = new JMenuItem("新建项目");
             updateFolder = new JMenuItem("项目重命名");
             deleteFolder = new JMenuItem("删除项目");

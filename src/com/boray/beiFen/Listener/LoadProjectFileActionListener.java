@@ -142,6 +142,7 @@ public class LoadProjectFileActionListener implements ActionListener {
             //≥°æ∞≈‰÷√«¯
             if (type == 2) {
                 xmlDecoder.readObject();
+                xmlDecoder.readObject();
             } else {
                 DataOfChangJing.map = (Map) xmlDecoder.readObject();
                 DataOfChangJing.timeMap = (Map) xmlDecoder.readObject();

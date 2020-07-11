@@ -380,11 +380,40 @@ public class XiaoGuoDengModelUI implements ActionListener {
         lefPane.setPreferredSize(new Dimension(26, 206));
         lefPane.setLayout(new FlowLayout(FlowLayout.CENTER));
         JPanel nullPane = new JPanel();
-        nullPane.setPreferredSize(new Dimension(20, 154));
+        nullPane.setPreferredSize(new Dimension(20, 144));
         lefPane.add(nullPane);
         JLabel huaBuJLabel = new JLabel("<html>ȫѡ</html>");
         huaBuJLabel.setPreferredSize(new Dimension(32, 24));
         huaBuJLabel.addMouseListener(new MouseAdapter() {
+            public void mouseEntered(MouseEvent e) {
+                JLabel label = (JLabel) e.getSource();
+                label.setCursor(new Cursor(Cursor.HAND_CURSOR));
+            }
+
+            public void mouseReleased(MouseEvent e) {
+                NewJTable table2 = (NewJTable) MainUi.map.get("table_dengJu");
+                boolean b = checkBoxs[0].isSelected();
+                for (int i = 0; i < checkBoxs.length; i++) {
+                    if (checkBoxs[i].isEnabled()) {
+                        checkBoxs[i].setSelected(!b);
+                    }
+                }
+                for (int i = 0; i < btns.length; i++) {
+                    int start = Integer.valueOf(table2.getValueAt(i, 5).toString()).intValue();
+                    int channelCount = Integer.valueOf(table2.getValueAt(i, 6).toString()).intValue();
+                    for (int k = 0; k < channelCount; k++) {
+                        if (radioButton.isSelected()) {
+                            bs[0][start + k - 1] = !b;
+                        } else {
+                            bs[1][start + k - 1] = !b;
+                        }
+                    }
+                }
+            }
+        });
+        JLabel huaBuJLabel2 = new JLabel("<html>ҳѡ</html>");
+        huaBuJLabel2.setPreferredSize(new Dimension(32, 24));
+        huaBuJLabel2.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
                 JLabel label = (JLabel) e.getSource();
                 label.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -399,6 +428,7 @@ public class XiaoGuoDengModelUI implements ActionListener {
                 }
             }
         });
+        lefPane.add(huaBuJLabel2);
         lefPane.add(huaBuJLabel);
         //lefPane.add(new JLabel("DMX"));
         pane.add(lefPane);

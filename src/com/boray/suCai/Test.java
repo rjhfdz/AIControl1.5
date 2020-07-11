@@ -42,7 +42,10 @@ public abstract class Test {
 //
 //        //สอทลืสิด
 //        ds.close();
-        System.out.println(6%2);
+//        System.out.println(6%2);
+        for (int i =0;i<5;i++){
+            System.out.println(i);
+        }
     }
 
     public static byte[] test1(){
