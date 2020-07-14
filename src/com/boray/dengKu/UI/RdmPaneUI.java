@@ -46,6 +46,10 @@ public class RdmPaneUI implements ActionListener {
     private JPopupMenu popupMenu;
     private JMenuItem autoCreateDMX;
 
+    private JButton btn2;
+    private JButton btn5;
+
+
     public void show(JPanel pane) {
         pane.setBorder(new LineBorder(Color.gray));
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
@@ -61,8 +65,8 @@ public class RdmPaneUI implements ActionListener {
         headPane.setPreferredSize(new Dimension(890, 32));
         //headPane.setBorder(new LineBorder(Color.gray));
         //JButton btn1 = new JButton("添加RDM灯具信息");
-        JButton btn2 = new JButton("搜索");
-        JButton btn5 = new JButton("刷新");
+        btn2 = new JButton("搜索");
+        btn5 = new JButton("刷新");
         MainUi.map.put("RDMRefresh", btn5);
         MainUi.map.put("RDMSearch", btn2);
         JButton btn3 = new JButton("退出RDM");
@@ -283,8 +287,9 @@ public class RdmPaneUI implements ActionListener {
         if ("搜索".equals(e.getActionCommand())) {
             if (Data.serialPort != null||Data.socket!=null) {
                 try {
-                    final JButton btn = (JButton) e.getSource();
-                    btn.setEnabled(false);
+//                    final JButton btn = (JButton) e.getSource();
+                    btn2.setEnabled(false);
+                    btn5.setEnabled(false);
                     openSet = false;
                     uidList.clear();
                     uid_Byte.clear();
@@ -346,13 +351,16 @@ public class RdmPaneUI implements ActionListener {
                                             }
                                         }
                                     }
-                                    btn.setEnabled(true);
+                                    btn2.setEnabled(true);
+                                    btn5.setEnabled(true);
                                 } catch (Exception e) {
-                                    btn.setEnabled(true);
+                                    btn2.setEnabled(true);
+                                    btn5.setEnabled(true);
                                     e.printStackTrace();
                                 }
                             } else {
-                                btn.setEnabled(true);
+                                btn2.setEnabled(true);
+                                btn5.setEnabled(true);
                             }
                         }
                     }, 8000);
@@ -404,8 +412,9 @@ public class RdmPaneUI implements ActionListener {
             }
         } else if ("刷新".equals(e.getActionCommand())) {
             try {
-                final JButton btn = (JButton) e.getSource();
-                btn.setEnabled(false);
+//                final JButton btn = (JButton) e.getSource();
+                btn2.setEnabled(false);
+                btn5.setEnabled(false);
                 openSet = false;
                 new Timer().schedule(new TimerTask() {
                     public void run() {
@@ -484,13 +493,16 @@ public class RdmPaneUI implements ActionListener {
                                 //清除临时数据
                                 RdmPaneUI.tempUidList.clear();
                                 RdmPaneUI.tempUid_Byte.clear();
-                                btn.setEnabled(true);
+                                btn2.setEnabled(true);
+                                btn5.setEnabled(true);
                             } catch (Exception e) {
-                                btn.setEnabled(true);
+                                btn2.setEnabled(true);
+                                btn5.setEnabled(true);
                                 e.printStackTrace();
                             }
                         } else {
-                            btn.setEnabled(true);
+                            btn2.setEnabled(true);
+                            btn5.setEnabled(true);
                         }
                     }
                 }, 8000);

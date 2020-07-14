@@ -469,7 +469,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
             }
         }
         String suCaiSelect = suCai_list.getSelectedValue().toString();
-        fileName = "³¡¾°ËØ²Ä----" + list.getSelectedValue().toString() + "----" + type + "----" + suCaiSelect.split("--->")[0] + ".xml";
+        fileName = "³¡¾°-" + list.getSelectedValue().toString() + "-" + type + "-" + suCaiSelect.split("--->")[0] + ".xml";
         return fileName;
     }
 

@@ -215,7 +215,7 @@ public class OverDmxUI implements ActionListener {
         if (setValue != null) {
             box.setSelectedItem(setValue[0]);
         }
-        JButton button = new JButton("单选");
+        final JButton button = new JButton("单选");
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

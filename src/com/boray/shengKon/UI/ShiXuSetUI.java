@@ -11,16 +11,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Map;
 
-import javax.swing.BorderFactory;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSlider;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
@@ -29,6 +20,7 @@ import com.boray.Data.MyData;
 import com.boray.Utils.IconJDialog;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
+import sun.applet.Main;
 
 public class ShiXuSetUI {
     private int[][] DataSetInts;
@@ -159,6 +151,28 @@ public class ShiXuSetUI {
         label2.setVisible(false);
         box4.setVisible(false);
 
+        final JButton button = new JButton("清除");
+        pane.add(button);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JCheckBox[] checkBoxs = (JCheckBox[]) MainUi.map.get("ShiXuDiPing");
+                for (int i = 0; i < checkBoxs.length; i++) {
+                    checkBoxs[i].setSelected(false);
+                    DataSetInts[0][4 + i * 6] = 0;
+                }
+                JCheckBox checkBox = (JCheckBox) MainUi.map.get("ShiXuDiPingChiXu");
+                checkBox.setSelected(false);
+                DataSetInts[0][64] = 0;
+                JPanel panel = (JPanel) MainUi.map.get("ShiXuDiPingPanel");
+                for (int i = 0; i < panel.getComponentCount(); i++) {
+                    checkBox = (JCheckBox) panel.getComponent(i);
+                    checkBox.setSelected(false);
+                    DataSetInts[0][Integer.valueOf(checkBox.getName()).intValue() + 67] = 0;
+                }
+            }
+        });
+
         box3.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (ItemEvent.SELECTED == e.getStateChange()) {
@@ -253,6 +267,28 @@ public class ShiXuSetUI {
         label2.setVisible(false);
         box4.setVisible(false);
 
+        final JButton button = new JButton("清除");
+        pane.add(button);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JCheckBox[] checkBoxs = (JCheckBox[]) MainUi.map.get("ShiXuGaoPing");
+                for (int i = 0; i < checkBoxs.length; i++) {
+                    checkBoxs[i].setSelected(false);
+                    DataSetInts[1][4 + i * 6] = 0;
+                }
+                JCheckBox checkBox = (JCheckBox) MainUi.map.get("ShiXuGaoPingChiXu");
+                checkBox.setSelected(false);
+                DataSetInts[1][64] = 0;
+                JPanel panel = (JPanel) MainUi.map.get("ShiXuGaoPingPanel");
+                for (int i = 0; i < panel.getComponentCount(); i++) {
+                    checkBox = (JCheckBox) panel.getComponent(i);
+                    checkBox.setSelected(false);
+                    DataSetInts[1][Integer.valueOf(checkBox.getName()).intValue() + 67] = 0;
+                }
+            }
+        });
+
         box3.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (ItemEvent.SELECTED == e.getStateChange()) {
@@ -285,6 +321,7 @@ public class ShiXuSetUI {
         JPanel[] panels = new JPanel[10];
         JLabel[] labels = new JLabel[10];
         JCheckBox[] checkBoxs = new JCheckBox[10];
+        MainUi.map.put("ShiXuDiPing", checkBoxs);
         JComboBox[][] comboBoxs = new JComboBox[10][5];
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
         flowLayout.setVgap(-2);
@@ -362,6 +399,7 @@ public class ShiXuSetUI {
         JPanel[] panels = new JPanel[10];
         JLabel[] labels = new JLabel[10];
         JCheckBox[] checkBoxs = new JCheckBox[10];
+        MainUi.map.put("ShiXuGaoPing", checkBoxs);
         JComboBox[][] comboBoxs = new JComboBox[10][3];
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
         flowLayout.setVgap(-2);
@@ -446,6 +484,7 @@ public class ShiXuSetUI {
         //p1.setBorder(new LineBorder(Color.gray));
         p1.setLayout(flowLayout);
         final JCheckBox checkBox = new JCheckBox("持续运行总开关");
+        MainUi.map.put("ShiXuDiPingChiXu", checkBox);
         checkBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (checkBox.isSelected()) {
@@ -518,6 +557,8 @@ public class ShiXuSetUI {
         p3.setBorder(new LineBorder(Color.gray));
         pane.add(p3);
 
+        MainUi.map.put("ShiXuDiPingPanel", p3);
+
         NewJTable table = (NewJTable) MainUi.map.get("GroupTable");
         if (table.isEditing()) {
             table.getCellEditor().stopCellEditing();
@@ -578,6 +619,7 @@ public class ShiXuSetUI {
         //p1.setBorder(new LineBorder(Color.gray));
         p1.setLayout(flowLayout);
         final JCheckBox checkBox = new JCheckBox("持续运行总开关");
+        MainUi.map.put("ShiXuGaoPingChiXu", checkBox);
         checkBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (checkBox.isSelected()) {
@@ -650,6 +692,8 @@ public class ShiXuSetUI {
         //p3.setBorder(new LineBorder(Color.gray));
         scrollPane.setViewportView(p3);
         pane.add(scrollPane);
+
+        MainUi.map.put("ShiXuGaoPingPanel", p3);
 
         NewJTable table = (NewJTable) MainUi.map.get("GroupTable");
         if (table.isEditing()) {

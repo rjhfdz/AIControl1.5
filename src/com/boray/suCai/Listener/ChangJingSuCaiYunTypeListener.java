@@ -25,10 +25,10 @@ public class ChangJingSuCaiYunTypeListener implements ActionListener {
                 List<SuCaiFile> listFile = (List<SuCaiFile>) MainUi.map.get("changJingDengKuYun");
                 SuCaiFile file = listFile.get(list.getSelectedIndex());
                 Map<String, String> param = new HashMap<>();
-                param.put("username", users.getUsername());
+                param.put("usercode", users.getUsername());
                 param.put("kuname", file.getKuname());
                 param.put("sctype", btns[i].getName());
-                String request = HttpClientUtil.doGet(Data.ipPort + "getsc", param);
+                String request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/getgrshucai", param);
                 List<SuCaiFile> suCaiList = JSON.parseArray(request, SuCaiFile.class);
                 JList jList = (JList) MainUi.map.get("changJingSuCaiYun_list");
                 DefaultListModel model = (DefaultListModel) jList.getModel();

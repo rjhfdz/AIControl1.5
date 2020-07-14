@@ -14,8 +14,6 @@ import com.boray.mainUi.MainUi;
 import com.boray.xiaoGuoDeng.Listener.DMXModelListener;
 import com.boray.xiaoGuoDeng.UI.DefineJLable2;
 import com.boray.zhongKon.Listener.WriteActionListener;
-import sun.plugin2.main.server.Plugin;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;

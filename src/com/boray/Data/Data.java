@@ -185,7 +185,9 @@ public class Data {
 
 	//云端添加工程
 	public static String yunProjectFilePath = "";
-	
+
+	public static String saveCtrlFile = "";
+
 	//灯具变更
 	public static boolean dengJu_change = false;
 	
@@ -213,6 +215,7 @@ public class Data {
 	public static Object[][] ShengKonSuCai = new Object[30][30];
 
 	public static String ipPort;
+	public static String ipPort2;
 	public static String ip;
 	public static String downloadIp;
 

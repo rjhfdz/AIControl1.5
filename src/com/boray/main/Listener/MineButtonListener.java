@@ -39,10 +39,10 @@ public class MineButtonListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton button = (JButton) e.getSource();
+        String str = e.getActionCommand();
         frame = (JFrame) MainUi.map.get("frame");
         tree = (JTree) MainUi.map.get("mineTree");
-        if (button.getText().equals("新建项目")) {
+        if (str.equals("新建项目")) {
             IconJDialog dialog = new IconJDialog(frame, true);
             dialog.setResizable(false);
             dialog.setTitle("新建项目");
@@ -53,7 +53,7 @@ public class MineButtonListener implements ActionListener {
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
             addItem(dialog);
             dialog.setVisible(true);
-        } else if (button.getText().equals("项目重命名")) {
+        } else if (str.equals("项目重命名")) {
             if (null == tree.getSelectionPath().getLastPathComponent()) {
                 JOptionPane.showMessageDialog(frame, "请选择项目！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
@@ -73,7 +73,7 @@ public class MineButtonListener implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(frame, "请选择项目！", "提示", JOptionPane.PLAIN_MESSAGE);
             }
-        } else if (button.getText().equals("删除项目")) {
+        } else if (str.equals("删除项目")) {
             if (null == tree.getSelectionPath().getLastPathComponent()) {
                 JOptionPane.showMessageDialog(frame, "请选择项目！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
@@ -85,14 +85,14 @@ public class MineButtonListener implements ActionListener {
                 Map<String, String> param = new HashMap<>();
                 param.put("createby", users.getUsername());
                 param.put("xmid", folder.getId() + "");
-                String request = HttpClientUtil.doGet(Data.ipPort + "deletexminfo", param);
+                String request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/deletegrxm", param);
                 Message message = JSON.parseObject(request, Message.class);
-                JOptionPane.showMessageDialog(frame, message.getCode(), "提示", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(frame, "删除成功", "提示", JOptionPane.PLAIN_MESSAGE);
                 refresh();
             } else {
                 JOptionPane.showMessageDialog(frame, "请选择项目！", "提示", JOptionPane.PLAIN_MESSAGE);
             }
-        } else if (button.getText().equals("上传工程")) {
+        } else if (str.equals("上传工程")) {
             if (null == tree.getSelectionPath().getLastPathComponent()) {
                 JOptionPane.showMessageDialog(frame, "请选择项目！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
@@ -130,7 +130,7 @@ public class MineButtonListener implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(frame, "请选择项目！", "提示", JOptionPane.PLAIN_MESSAGE);
             }
-        } else if (button.getText().equals("工程重命名")) {
+        } else if (str.equals("工程重命名")) {
             if (null == tree.getSelectionPath().getLastPathComponent()) {
                 JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
@@ -150,7 +150,7 @@ public class MineButtonListener implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
             }
-        } else if (button.getText().equals("删除工程")) {
+        } else if (str.equals("删除工程")) {
             if (null == tree.getSelectionPath().getLastPathComponent()) {
                 JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
@@ -160,14 +160,15 @@ public class MineButtonListener implements ActionListener {
                 ProjectFile file = (ProjectFile) node.getUserObject();
                 Map<String, String> map = new HashMap<>();
                 map.put("id", file.getId() + "");
-                String request = HttpClientUtil.doGet(Data.ipPort + "deletegc", map);
+                String request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/deletegrgcname", map);
                 Message message = JSON.parseObject(request, Message.class);
-                JOptionPane.showMessageDialog(frame, message.getCode(), "提示", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(frame, "成功", "提示", JOptionPane.PLAIN_MESSAGE);
                 refresh();
             } else {
                 JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
             }
-        } else if (button.getText().equals("下载工程")) {
+        } else if (str.equals("下载工程")) {
+        	
             if (null == tree.getSelectionPath().getLastPathComponent()) {
                 JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
@@ -190,11 +191,11 @@ public class MineButtonListener implements ActionListener {
                         HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
                         urlCon.setConnectTimeout(6000);
                         urlCon.setReadTimeout(6000);
-                        int code = urlCon.getResponseCode();
-                        if (code != HttpURLConnection.HTTP_OK) {
+                       // int code = urlCon.getResponseCode();
+                     /*   if (code != HttpURLConnection.HTTP_OK) {
                             JOptionPane.showMessageDialog(frame, "文件下载失败！", "提示", JOptionPane.PLAIN_MESSAGE);
                             return;
-                        }
+                        }*/
                         DataInputStream in = new DataInputStream(urlCon.getInputStream());
                         DataOutputStream out = new DataOutputStream(new FileOutputStream(selectedFile.getAbsoluteFile()));
                         byte[] buffer = new byte[2048];
@@ -214,8 +215,10 @@ public class MineButtonListener implements ActionListener {
                     }
                 }
             }
-        } else if (button.getText().equals("刷新")) {
+        } else if (str.equals("刷新")) {
             refresh();
+        }else if (str.equals("项目刷新")) {
+        	  refresh2();
         }
     }
 
@@ -231,12 +234,12 @@ public class MineButtonListener implements ActionListener {
         Users users = (Users) MainUi.map.get("Users");
         Map<String, String> param = new HashMap<>();
         param.put("gcname", file.getName().substring(0, file.getName().indexOf(".")));
-        param.put("username", users.getUsername());
+        param.put("usercode", users.getUsercode());
         param.put("xmid", folder.getId() + "");
-        param.put("i", "0");
-        Map<String, Object> resultMap = httpsUtils.uploadFileByHTTP(file, Data.ipPort + "fileUploadServletgc", param);
+      //  param.put("i", "0");
+        Map<String, Object> resultMap = httpsUtils.uploadFileByHTTP(file, Data.ipPort + "/js/a/jk/insertgrgc", param);
         Message message = JSON.parseObject(resultMap.get("data").toString(), Message.class);
-        JOptionPane.showMessageDialog(frame, message.getCode(), "提示", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(frame, "成功", "提示", JOptionPane.PLAIN_MESSAGE);
         refresh();
 
     }
@@ -268,7 +271,7 @@ public class MineButtonListener implements ActionListener {
                     Map<String, String> param = new HashMap<>();
                     param.put("id", file.getId() + "");
                     param.put("gcname", field.getText());
-                    Message(dialog, "updategc", param);
+                    Message(dialog, "/js/a/jk/updategrgcname", param);
                     refresh();
                 }
             }
@@ -307,9 +310,9 @@ public class MineButtonListener implements ActionListener {
                     Users users = (Users) MainUi.map.get("Users");
                     Map<String, String> param = new HashMap<>();
                     param.put("xmname", field.getText());
-                    param.put("createby", users.getUsername());
-                    param.put("xmtype", "0");
-                    Message(dialog, "xmcreategr", param);
+                    param.put("usercode", users.getUsercode());
+                   // param.put("xmtype", "0");
+                    Message(dialog, "/js/a/jk/insertgrxm", param);
                     refresh();
                 }
             }
@@ -349,9 +352,9 @@ public class MineButtonListener implements ActionListener {
                     Users users = (Users) MainUi.map.get("Users");
                     Map<String, String> param = new HashMap<>();
                     param.put("createby", users.getUsername());
-                    param.put("xmid", folder.getId() + "");
+                    param.put("id", folder.getId() + "");
                     param.put("xmname", field.getText());
-                    Message(dialog, "updatexminfo", param);
+                    Message(dialog, "/js/a/jk/updategrxm", param);
                     refresh();
                 }
             }
@@ -381,15 +384,46 @@ public class MineButtonListener implements ActionListener {
         tree.setCellRenderer(new CustomTreeCellRenderer());
         Users users = (Users) MainUi.map.get("Users");
         Map<String, String> param = new HashMap<>();
-        param.put("createby", users.getUsername());
-        String request = HttpClientUtil.doGet(Data.ipPort + "findallxminfogr", param);
+        param.put("usercode", users.getUsercode());
+        String request = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/getgrxm", param);
         List<FileOrFolder> list = JSON.parseArray(request, FileOrFolder.class);
         for (FileOrFolder folder : list) {
             CustomTreeNode node = new CustomTreeNode(folder);
             node.setLevel(1);
             Map<String, String> map = new HashMap<>();
             map.put("xmid", folder.getId() + "");
-            String str = HttpClientUtil.doGet(Data.ipPort + "findbyxmid", map);
+            String str = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/getgrgc", map);
+            List<ProjectFile> files = JSON.parseArray(str, ProjectFile.class);
+            for (ProjectFile file : files) {
+                CustomTreeNode fileNode = new CustomTreeNode(file);
+                fileNode.setLevel(2);
+                node.add(fileNode);
+            }
+            root.add(node);
+        }
+        //默认展开全部节点
+        TreeUtil util = new TreeUtil();
+        util.expandAll(tree, new TreePath(root), true);
+    }
+    
+    private void refresh2() {
+        tree.removeAll();
+        CustomTreeNode root = new CustomTreeNode("团队项目");
+        root.setLevel(0);
+        DefaultTreeModel model = new DefaultTreeModel(root);
+        tree.setModel(model);
+        tree.setCellRenderer(new CustomTreeCellRenderer());
+        Users users = (Users) MainUi.map.get("Users");
+        Map<String, String> param = new HashMap<>();
+        param.put("usercode", users.getUsercode());
+        String request = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/gettdxminfo", param);
+        List<FileOrFolder> list = JSON.parseArray(request, FileOrFolder.class);
+        for (FileOrFolder folder : list) {
+            CustomTreeNode node = new CustomTreeNode(folder);
+            node.setLevel(1);
+            Map<String, String> map = new HashMap<>();
+            map.put("id", folder.getId() + "");
+            String str = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/gettdgcinfo", map);
             List<ProjectFile> files = JSON.parseArray(str, ProjectFile.class);
             for (ProjectFile file : files) {
                 CustomTreeNode fileNode = new CustomTreeNode(file);
@@ -412,8 +446,8 @@ public class MineButtonListener implements ActionListener {
      */
     private void Message(JDialog dialog, String code, Map<String, String> param) {
         String request = HttpClientUtil.doGet(Data.ipPort + code, param);
-        Message message = JSON.parseObject(request, Message.class);
+        //Message message = JSON.parseObject(request, Message.class);
         dialog.dispose();
-        JOptionPane.showMessageDialog(frame, message.getCode(), "提示", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(frame, "成功", "提示", JOptionPane.PLAIN_MESSAGE);
     }
 }

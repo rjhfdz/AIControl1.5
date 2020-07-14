@@ -3,9 +3,7 @@ package com.boray.main.UI;
 import com.alibaba.fastjson.JSON;
 import com.boray.Data.Data;
 import com.boray.Utils.HttpClientUtil;
-import com.boray.entity.FileOrFolder;
-import com.boray.entity.ProjectFile;
-import com.boray.entity.Users;
+import com.boray.entity.*;
 import com.boray.main.Listener.LoginListener;
 import com.boray.main.Listener.MineButtonListener;
 import com.boray.main.Listener.RegisterListener;
@@ -22,6 +20,8 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,8 +29,11 @@ import java.util.Map;
 public class ShareUI {
 
     private LoginListener listener;
+    private JPopupMenu popupMenu;
+    private JMenuItem addMember;
+    private JMenuItem delMember;
 
-    public void show(JPanel panel){
+    public void show(JPanel panel) {
         if (MainUi.map.get("Users") == null) {
             JPanel jPanel2 = new JPanel();
             jPanel2.setPreferredSize(new Dimension(900, 588));
@@ -64,7 +67,7 @@ public class ShareUI {
             jPanel2.add(jPanel);
             jPanel2.add(pane);
             panel.add(jPanel2, BorderLayout.CENTER);
-        }else{
+        } else {
             panel.removeAll();//清除所有控件，重新布局
             panel.updateUI();
             FlowLayout flowLayout6 = new FlowLayout(FlowLayout.LEFT);
@@ -77,18 +80,32 @@ public class ShareUI {
             buttonPanel.setLayout(flowLayout6);
             buttonPanel.setBorder(new LineBorder(Color.gray));
             buttonPanel.setPreferredSize(new Dimension(900, 35));
-            JButton downloadFile = new JButton("下载工程");
+//            JButton downloadFile = new JButton("下载工程");
             JButton refresh = new JButton("刷新");
-            JButton copy = new JButton("复制");
+//            JButton copy = new JButton("复制");
 
             ShareListener listener = new ShareListener();
-            downloadFile.addActionListener(listener);
+//            downloadFile.addActionListener(listener);
             refresh.addActionListener(listener);
-            copy.addActionListener(listener);
+//            copy.addActionListener(listener);
 
-            buttonPanel.add(downloadFile);
+//            buttonPanel.add(downloadFile);
             buttonPanel.add(refresh);
-            buttonPanel.add(copy);
+//            buttonPanel.add(copy);
+
+            popupMenu = new JPopupMenu();
+            addMember = new JMenuItem("增加成员");
+            delMember = new JMenuItem("踢出成员");
+
+            ButtonGroup group = new ButtonGroup();
+            group.add(addMember);
+            group.add(delMember);
+
+            popupMenu.add(addMember);
+            popupMenu.add(delMember);
+
+            addMember.addActionListener(listener);
+            delMember.addActionListener(listener);
 
             panel.add(buttonPanel);
 
@@ -97,32 +114,34 @@ public class ShareUI {
     }
 
     /**
-     * 加载文件列表 暂时静态
+     * 加载团队成员列表
      *
      * @param pane
      */
     public void init(JPanel pane) {
+        Admin admin = (Admin) MainUi.map.get("admin");
         Map<String, String> param = new HashMap<>();
-        String request = HttpClientUtil.doGet(Data.ipPort + "findbygx", param);
-        java.util.List<ProjectFile> list = JSON.parseArray(request, ProjectFile.class);
+        param.put("officecode", admin.getOfficecode());
+        String request = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/gettuandui", param);
+        java.util.List<Member> list = JSON.parseArray(request, Member.class);
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(new LineBorder(Color.gray));
         panel.setPreferredSize(new Dimension(300, 550));
 
         // 创建根节点
-        CustomTreeNode rootNode = new CustomTreeNode("BorayShare");
+        CustomTreeNode rootNode = new CustomTreeNode("成员");
         rootNode.setLevel(0);
         DefaultTreeModel model = new DefaultTreeModel(rootNode);
 
         // 使用根节点创建树组件
-        JTree tree = new JTree(model);
+        final JTree tree = new JTree(model);
 
         //设置图标样式
         tree.setCellRenderer(new CustomTreeCellRenderer());
 
-        for (ProjectFile file : list) {
-            CustomTreeNode node = new CustomTreeNode(file);
+        for (Member member : list) {
+            CustomTreeNode node = new CustomTreeNode(member);
             node.setLevel(1);
             rootNode.add(node);
         }
@@ -137,6 +156,14 @@ public class ShareUI {
                 System.out.println("当前被选中的节点: " + e.getPath());
             }
         });
+        //右键菜单
+        tree.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if (e.getButton() == 3) {
+                    popupMenu.show(tree, e.getX(), e.getY());
+                }
+            }
+        });
 
         // 创建滚动面板，包裹树（因为树节点展开后可能需要很大的空间来显示，所以需要用一个滚动面板来包裹）
         JScrollPane scrollPane = new JScrollPane(tree);
@@ -148,7 +175,7 @@ public class ShareUI {
         TreeUtil util = new TreeUtil();
         util.expandAll(tree, new TreePath(rootNode), true);
 
-        MainUi.map.put("shareTree", tree);
+        MainUi.map.put("shareTree1", tree);
 
         pane.add(panel);
     }

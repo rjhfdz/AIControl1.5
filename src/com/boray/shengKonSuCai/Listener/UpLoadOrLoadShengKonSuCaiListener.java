@@ -211,7 +211,7 @@ public class UpLoadOrLoadShengKonSuCaiListener implements ActionListener {
             }
         }
         String suCaiSelect = suCai_list.getSelectedValue().toString();
-        fileName = "Éù¿ØËØ²Ä----" + list.getSelectedValue().toString() + "----" + type + "----" + suCaiSelect.split("--->")[0] + ".xml";
+        fileName = "Éù¿Ø-" + list.getSelectedValue().toString() + "-" + type + "-" + suCaiSelect.split("--->")[0] + ".xml";
         return fileName;
     }
 

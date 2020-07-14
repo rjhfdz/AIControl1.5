@@ -62,7 +62,7 @@ public class ShengKonSuCaiEditUI {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         //flowLayout.setVgap(2);
         dialog.getContentPane().setLayout(flowLayout);
-        int width = 900, height = 630;
+        int width = 900, height = 650;
         dialog.setSize(width, height);
         dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - width / 2, f.getLocation().y + f.getSize().height / 2 - height / 2);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -122,14 +122,14 @@ public class ShengKonSuCaiEditUI {
         int dengKuNumber = Integer.valueOf(typeString.split("#")[0].substring(2)).intValue() - 1;
         HashMap map = (HashMap) Data.DengKuList.get(dengKuNumber);
         int tt = Integer.valueOf((String) Data.DengKuChannelCountList.get(dengKuNumber)).intValue();
-        scrollPane.setPreferredSize(new Dimension(858, 200));
+        scrollPane.setPreferredSize(new Dimension(858, 220));
         scrollPane.setBorder(new LineBorder(Color.gray));
 
         JPanel pane = new JPanel();
         FlowLayout flowLayout2 = new FlowLayout(FlowLayout.LEFT);
         flowLayout2.setHgap(0);
         pane.setLayout(flowLayout2);
-        pane.setPreferredSize(new Dimension(1510, 180));
+        pane.setPreferredSize(new Dimension(1510, 200));
         //TitledBorder tb = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "调光通道", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
         //tgPane.setBorder(tb);
         JPanel lefPane = new JPanel();
@@ -176,7 +176,7 @@ public class ShengKonSuCaiEditUI {
             itemPanes[i] = new JPanel();
             itemPanes[i].setLayout(flowLayout);
             //itemPanes[i].setBorder(new LineBorder(Color.black));
-            itemPanes[i].setPreferredSize(new Dimension(46, 180));
+            itemPanes[i].setPreferredSize(new Dimension(46, 200));
             if (i > 8) {
                 labels[i] = new JLabel((i + 1) + "");
             } else {
@@ -247,7 +247,7 @@ public class ShengKonSuCaiEditUI {
                 names[i].setEnabled(false);
             }
             names[i].setFont(f1);
-            names[i].setPreferredSize(new Dimension(42, 30));
+            names[i].setPreferredSize(new Dimension(42, 50));
             //DmxValues[i] = new JLabel(""+(i+1));
             names[i].setBorder(BorderFactory.createEmptyBorder(-10, 0, -10, 0));
             //names[i].setBorder(new LineBorder(Color.black));
@@ -485,7 +485,6 @@ public class ShengKonSuCaiEditUI {
             }
         });
         p1.add(duoDengCtrlBox);
-        slider.setValue(2000);
         slider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 field.setText(String.valueOf(slider.getValue()));
@@ -607,7 +606,7 @@ public class ShengKonSuCaiEditUI {
         Object[] s = new String[tt + 2];
         final String[] temp = new String[tt + 2];
         temp[0] = "1";
-        temp[1] = "0";
+        temp[1] = "2000";
         s[0] = "步骤";
         s[1] = "亮灯时长";
         for (int i = 2; i < s.length; i++) {
@@ -761,7 +760,7 @@ public class ShengKonSuCaiEditUI {
         final JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem menuItem = new JMenuItem("　复制　　　　　");
         JMenuItem menuItem1 = new JMenuItem("　粘贴　　　　　");
-        int size = runTable.getRowCount();
+        final int size = runTable.getRowCount();
         stepLabel = new JLabel("总步数:" + size);
         CopyToTimeBlockEdit copyListener = new CopyToTimeBlockEdit(runTable,stepLabel);
         menuItem.addActionListener(copyListener);

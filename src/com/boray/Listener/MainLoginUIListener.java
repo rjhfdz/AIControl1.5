@@ -70,9 +70,10 @@ public class MainLoginUIListener implements ActionListener {
             String request = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/login", param);
             Users users = JSON.parseObject(request, Users.class);
             if (users != null && !users.getCode().equals(-1)) {
-//                if (Data.RememberPassword) {
-//                    Data.userLogin.put(Util.encode(username), Util.encode(password));
-//                }
+                if (Data.RememberPassword) {
+                    Data.userLogin.put(Util.encode(username), Util.encode(password));
+                }
+                users.setLoginstatus(1);
                 MainUi.map.put("Users", users);
                 frame.getContentPane().removeAll();
                 //È¥µô±³¾°Í¼

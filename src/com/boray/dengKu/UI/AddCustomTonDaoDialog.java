@@ -98,7 +98,7 @@ public class AddCustomTonDaoDialog implements ActionListener, WindowListener {
             public void mouseClicked(MouseEvent mouseEvent) {
                 if (mouseEvent.getX() == x) {
                     if (mouseEvent.getButton() == 1 && mouseEvent.getClickCount() == 2) {
-                        IconJDialog dia = new IconJDialog(frame, true);
+                        final IconJDialog dia = new IconJDialog(frame, true);
                         dia.setResizable(false);
                         dia.setTitle("±à¼­");
                         int w = 380, h = 180;

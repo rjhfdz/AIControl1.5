@@ -26,7 +26,7 @@ public class DataWriteListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        JFrame frame = (JFrame) MainUi.map.get("frame");
+        final JFrame frame = (JFrame) MainUi.map.get("frame");
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -151,14 +151,22 @@ public class DataWriteListener implements ActionListener {
      */
     public byte[] readFileData() throws IOException {
 //        if (Data.file == null) {
-        String path = System.getProperty("user.dir");//获得程序当前文件夹目录
-        File file = new File(path + "\\F0.DAT");
-        File file1 = new File(path + "\\K0.DAT");
-        Data.file = file;
-        MergeAllListener listener = new MergeAllListener();
-        listener.DataWrite(file, file1);
-        ProjectCreateFileActionListener fileOfCloseFrame = new ProjectCreateFileActionListener();
-        fileOfCloseFrame.tt(new File(path + "\\project.xml"));
+
+        JCheckBox checkBox = (JCheckBox) MainUi.map.get("KonZhiQiCheckBox");
+        if (checkBox.isSelected() && Data.saveCtrlFile != null) {
+            Data.file = new File(Data.saveCtrlFile);
+        } else {
+            JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "！", "提示", JOptionPane.PLAIN_MESSAGE);
+            String path = System.getProperty("user.dir");//获得程序当前文件夹目录
+            File file = new File(path + "\\F0.DAT");
+            File file1 = new File(path + "\\K0.DAT");
+            Data.file = file;
+            MergeAllListener listener = new MergeAllListener();
+            listener.DataWrite(file, file1);
+            ProjectCreateFileActionListener fileOfCloseFrame = new ProjectCreateFileActionListener();
+            fileOfCloseFrame.tt(new File(path + "\\project.xml"));
+        }
+
 //        }
         long fileSize = Data.file.length();
         FileInputStream stream = new FileInputStream(Data.file);

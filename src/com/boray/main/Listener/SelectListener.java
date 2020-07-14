@@ -19,14 +19,18 @@ public class SelectListener implements ItemListener {
     public void itemStateChanged(ItemEvent e) {
         JToggleButton btn = (JToggleButton) e.getSource();
         if (e.getStateChange() == ItemEvent.SELECTED) {
-            if ("共享平台".equals(btn.getText())) {
+            if ("官方发布".equals(btn.getText())) {
                 card.show(rightPane, "1");
-            } else if ("项目管理".equals(btn.getText())) {
+            } else if ("个人管理".equals(btn.getText())) {
                 card.show(rightPane, "2");
-            } else if ("本地项目".equals(btn.getText())) {
+            } else if ("成员管理".equals(btn.getText())) {
                 card.show(rightPane, "3");
-            } else if ("官方发布".equals(btn.getText())) {
+            } else if ("设置团队".equals(btn.getText())) {
                 card.show(rightPane, "4");
+            } else if ("本地项目".equals(btn.getText())) {
+                card.show(rightPane, "5");
+            }else if ("团队资料".equals(btn.getText())) {
+            	 card.show(rightPane, "6");
             }
         }
     }

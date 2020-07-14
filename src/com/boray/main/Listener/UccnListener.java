@@ -138,7 +138,7 @@ public class UccnListener implements ActionListener {
         rootNode.add(gonCheng);
         rootNode.add(suCai);
         Map<String, String> param = new HashMap<>();
-        String request = HttpClientUtil.doGet(Data.ipPort + "findallgsgcinfo", param);
+        String request = HttpClientUtil.doGet(Data.ipPort2 + "findallgsgcinfo", param);
         java.util.List<ProjectFile> list = JSON.parseArray(request, ProjectFile.class);
         for (ProjectFile file : list) {
             CustomTreeNode node = new CustomTreeNode(file);
@@ -148,7 +148,7 @@ public class UccnListener implements ActionListener {
         //ËØ²Ä
         param.clear();
         param.put("gctype", 0 + "");
-        request = HttpClientUtil.doGet(Data.ipPort + "findallgssuchai", param);
+        request = HttpClientUtil.doGet(Data.ipPort2 + "findallgssuchai", param);
         list = JSON.parseArray(request, ProjectFile.class);
         for (ProjectFile file : list) {
             CustomTreeNode node = new CustomTreeNode(file);
@@ -156,7 +156,7 @@ public class UccnListener implements ActionListener {
             changJingSuCai.add(node);
         }
         param.put("gctype", 1 + "");
-        request = HttpClientUtil.doGet(Data.ipPort + "findallgssuchai", param);
+        request = HttpClientUtil.doGet(Data.ipPort2 + "findallgssuchai", param);
         list = JSON.parseArray(request, ProjectFile.class);
         for (ProjectFile file : list) {
             CustomTreeNode node = new CustomTreeNode(file);

@@ -332,7 +332,7 @@ public class OverDmxUI implements ActionListener {
                 Socket.SendData(TimeBlockReviewData.getStopReview3(XiaoGuoDengModel.model));
             }
         });
-        JButton button = new JButton("单选");
+        final JButton button = new JButton("单选");
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -378,7 +378,7 @@ public class OverDmxUI implements ActionListener {
         JPanel nullPane = new JPanel();
         nullPane.setPreferredSize(new Dimension(90, 125));
         lefPane.add(nullPane);
-        JLabel huaBuJLabelAll = new JLabel("所有通道全选");
+        JLabel huaBuJLabelAll = new JLabel("   通道全选");
         huaBuJLabelAll.setPreferredSize(new Dimension(90, 20));
         huaBuJLabelAll.addMouseListener(new MouseAdapter() {
             public void mouseReleased(MouseEvent e) {
@@ -404,7 +404,7 @@ public class OverDmxUI implements ActionListener {
                 label.setCursor(new Cursor(Cursor.HAND_CURSOR));
             }
         });
-        JLabel huaBuJLabel = new JLabel("   通道全选");
+        JLabel huaBuJLabel = new JLabel("   通道页选");
         huaBuJLabel.setPreferredSize(new Dimension(90, 20));
         huaBuJLabel.addMouseListener(new MouseAdapter() {
             public void mouseEntered(MouseEvent e) {
@@ -423,8 +423,8 @@ public class OverDmxUI implements ActionListener {
         });
         lefPane.add(huaBuJLabelAll);
         lefPane.add(huaBuJLabel);
-        JLabel huaBuJLabel2 = new JLabel("   渐变全选");
-        JLabel huaBuJLabel2All = new JLabel("所有渐变全选");
+        JLabel huaBuJLabel2 = new JLabel("   渐变页选");
+        JLabel huaBuJLabel2All = new JLabel("   渐变全选");
         huaBuJLabel2.setPreferredSize(new Dimension(90, 20));
         huaBuJLabel2All.setPreferredSize(new Dimension(90, 20));
         huaBuJLabel2.addMouseListener(new MouseAdapter() {

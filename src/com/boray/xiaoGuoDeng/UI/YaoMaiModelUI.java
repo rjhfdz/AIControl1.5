@@ -103,7 +103,7 @@ public class YaoMaiModelUI implements ActionListener {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         //flowLayout.setVgap(2);
         dialog.getContentPane().setLayout(flowLayout);
-        int width = 880, height = 650;
+        int width = 880, height = 670;
         dialog.setSize(width, height);
         dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - width / 2, f.getLocation().y + f.getSize().height / 2 - height / 2);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -339,7 +339,7 @@ public class YaoMaiModelUI implements ActionListener {
             box.setSelectedItem(setValue[2]);
         }
 
-        JButton button = new JButton("单选");
+        final JButton button = new JButton("单选");
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -364,14 +364,14 @@ public class YaoMaiModelUI implements ActionListener {
     }
 
     void setP3(JScrollPane scrollPane) {
-        scrollPane.setPreferredSize(new Dimension(858, 220));
+        scrollPane.setPreferredSize(new Dimension(858, 240));
         scrollPane.setBorder(new LineBorder(Color.gray));
 
         JPanel pane = new JPanel();
         FlowLayout flowLayout2 = new FlowLayout(FlowLayout.LEFT);
         flowLayout2.setHgap(0);
         pane.setLayout(flowLayout2);
-        pane.setPreferredSize(new Dimension(1510, 196));
+        pane.setPreferredSize(new Dimension(1510, 216));
         //TitledBorder tb = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "调光通道", TitledBorder.LEFT, TitledBorder.TOP,new Font(Font.SERIF, Font.BOLD, 12));
         //tgPane.setBorder(tb);
         JPanel lefPane = new JPanel();
@@ -418,7 +418,7 @@ public class YaoMaiModelUI implements ActionListener {
             itemPanes[i] = new JPanel();
             itemPanes[i].setLayout(flowLayout);
             //itemPanes[i].setBorder(new LineBorder(Color.black));
-            itemPanes[i].setPreferredSize(new Dimension(46, 196));
+            itemPanes[i].setPreferredSize(new Dimension(46, 216));
             if (i > 8) {
                 labels[i] = new JLabel((i + 1) + "");
             } else {
@@ -501,7 +501,7 @@ public class YaoMaiModelUI implements ActionListener {
             });
 
             names[i].setFont(f1);
-            names[i].setPreferredSize(new Dimension(42, 30));
+            names[i].setPreferredSize(new Dimension(42, 50));
             DmxValues[i] = new JLabel("" + (i + 1));
             names[i].setBorder(BorderFactory.createEmptyBorder(-10, 0, -10, 0));
             //names[i].setBorder(new LineBorder(Color.black));

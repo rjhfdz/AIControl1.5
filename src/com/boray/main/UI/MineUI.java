@@ -20,6 +20,8 @@ import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +29,14 @@ import java.util.Map;
 public class MineUI {
 
     private LoginListener listener;
+    private JPopupMenu popupMenu;
+    private JMenuItem addFolder;
+    private JMenuItem updateFolder;
+    private JMenuItem deleteFolder;
+    private JMenuItem addFile;
+    private JMenuItem updateFile;
+    private JMenuItem deleteFile;
+    private JMenuItem downloadFile;
 
     public void show(JPanel panel) {
         if (MainUi.map.get("Users") == null) {
@@ -70,14 +80,31 @@ public class MineUI {
             buttonPanel.setLayout(flowLayout6);
             buttonPanel.setBorder(new LineBorder(Color.gray));
             buttonPanel.setPreferredSize(new Dimension(900, 35));
-            JButton addFolder = new JButton("新建项目");
-            JButton updateFolder = new JButton("项目重命名");
-            JButton deleteFolder = new JButton("删除项目");
-            JButton addFile = new JButton("上传工程");
-            JButton updateFile = new JButton("工程重命名");
-            JButton deleteFile = new JButton("删除工程");
-            JButton downloadFile = new JButton("下载工程");
+//            JButton addFolder = new JButton("新建项目");
+//            JButton updateFolder = new JButton("项目重命名");
+//            JButton deleteFolder = new JButton("删除项目");
+//            JButton addFile = new JButton("上传工程");
+//            JButton updateFile = new JButton("工程重命名");
+//            JButton deleteFile = new JButton("删除工程");
+//            JButton downloadFile = new JButton("下载工程");
             JButton refresh = new JButton("刷新");
+
+            addFolder = new JMenuItem("新建项目");
+            updateFolder = new JMenuItem("项目重命名");
+            deleteFolder = new JMenuItem("删除项目");
+            addFile = new JMenuItem("上传工程");
+            updateFile = new JMenuItem("工程重命名");
+            deleteFile = new JMenuItem("删除工程");
+            downloadFile = new JMenuItem("下载工程");
+
+            ButtonGroup group = new ButtonGroup();
+            group.add(addFolder);
+            group.add(updateFolder);
+            group.add(deleteFolder);
+            group.add(addFile);
+            group.add(updateFile);
+            group.add(deleteFile);
+            group.add(downloadFile);
 
             MineButtonListener listener = new MineButtonListener();
             addFolder.addActionListener(listener);
@@ -89,14 +116,15 @@ public class MineUI {
             downloadFile.addActionListener(listener);
             refresh.addActionListener(listener);
 
-            buttonPanel.add(addFolder);
-            buttonPanel.add(updateFolder);
-            buttonPanel.add(deleteFolder);
-            buttonPanel.add(addFile);
-            buttonPanel.add(updateFile);
-            buttonPanel.add(deleteFile);
-            buttonPanel.add(downloadFile);
             buttonPanel.add(refresh);
+            popupMenu = new JPopupMenu();
+            popupMenu.add(addFolder);
+            popupMenu.add(updateFolder);
+            popupMenu.add(deleteFolder);
+            popupMenu.add(addFile);
+            popupMenu.add(updateFile);
+            popupMenu.add(deleteFile);
+            popupMenu.add(downloadFile);
 
             panel.add(buttonPanel);
 
@@ -112,8 +140,8 @@ public class MineUI {
     public void init(JPanel pane) {
         Users users = (Users) MainUi.map.get("Users");
         Map<String, String> param = new HashMap<>();
-        param.put("createby", users.getId());
-        String request = HttpClientUtil.doGet(Data.ipPort + "findallxminfogs", param);
+        param.put("usercode", users.getUsercode());
+        String request = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/getgrxm", param);
         List<FileOrFolder> list = JSON.parseArray(request, FileOrFolder.class);
 
         JPanel panel = new JPanel(new BorderLayout());
@@ -126,7 +154,7 @@ public class MineUI {
         DefaultTreeModel model = new DefaultTreeModel(rootNode);
 
         // 使用根节点创建树组件
-        JTree tree = new JTree(model);
+        final JTree tree = new JTree(model);
 
         //设置图标样式
         tree.setCellRenderer(new CustomTreeCellRenderer());
@@ -136,7 +164,7 @@ public class MineUI {
             node.setLevel(1);
             Map<String, String> map = new HashMap<>();
             map.put("xmid", folder.getId() + "");
-            String str = HttpClientUtil.doGet(Data.ipPort + "findbyxmid", map);
+            String str = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/getgrgc", map);
             List<ProjectFile> files = JSON.parseArray(str, ProjectFile.class);
             for (ProjectFile file : files) {
                 CustomTreeNode fileNode = new CustomTreeNode(file);
@@ -157,6 +185,14 @@ public class MineUI {
             @Override
             public void valueChanged(TreeSelectionEvent e) {
                 System.out.println("当前被选中的节点: " + e.getPath());
+            }
+        });
+        //右键菜单
+        tree.addMouseListener(new MouseAdapter() {
+            public void mouseReleased(MouseEvent e) {
+                if (e.getButton() == 3) {
+                    popupMenu.show(tree, e.getX(), e.getY());
+                }
             }
         });
 
