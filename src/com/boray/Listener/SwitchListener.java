@@ -100,16 +100,9 @@ public class SwitchListener implements ActionListener {
                 }
             }
         } else if (btn.getName().equals("7")) {
-            if (Data.serialPort != null) {
+            if (Data.serialPort != null || Data.socket != null) {
                 Data.deviceShow = true;
-                try {
-                    OutputStream os = Data.serialPort.getOutputStream();
-                    os.write(ZhiLingJi.queryQuanJuSet());
-                    os.flush();
-                    os.close();
-                } catch (Exception e2) {
-                    e2.printStackTrace();
-                }
+                Socket.SendData(ZhiLingJi.queryQuanJuSet());
             }
         }/* else if (btn.getName().equals("6") && !"6".equals(selected)) {
 			JComboBox box = (JComboBox)MainUi.map.get("zhongKonGroupBox");
@@ -164,6 +157,7 @@ public class SwitchListener implements ActionListener {
         }
         if (btn.getName().equals("8")) {
             try {
+                Thread.sleep(500);
                 if (Data.serialPort != null) {
                     //U盘状态查询
                     OutputStream os = Data.serialPort.getOutputStream();
@@ -187,16 +181,16 @@ public class SwitchListener implements ActionListener {
                 }
             }
         }
-        try {//加300毫秒间隔区分 dmx录制状态查询
-            Thread.sleep(300);
-            if (!btn.getName().equals("2")) {
-                Socket.SendData(RdmData.quit());
-            } else {
-                Socket.SendData(RdmData.access());
-            }
-        }catch (Exception e1){
-            e1.printStackTrace();
-        }
+//        try {//加300毫秒间隔区分 dmx录制状态查询
+//            Thread.sleep(500);
+//            if (!btn.getName().equals("2")) {
+//                Socket.SendData(RdmData.quit());
+//            } else {
+//                Socket.SendData(RdmData.access());
+//            }
+//        } catch (Exception e1) {
+//            e1.printStackTrace();
+//        }
         selected = btn.getName();
         cardLayout.show(parentPane, btn.getName());
     }

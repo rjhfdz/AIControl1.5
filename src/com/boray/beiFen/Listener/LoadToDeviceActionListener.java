@@ -80,9 +80,9 @@ public class LoadToDeviceActionListener implements ActionListener {
                     }
                 }).start();
                 JRadioButton radioButton = (JRadioButton) list.get(0);
-                JRadioButton radioButton2 = (JRadioButton) list.get(1);
-                JRadioButton radioButton3 = (JRadioButton) list.get(2);
-                JRadioButton radioButton4 = (JRadioButton) list.get(3);
+//                JRadioButton radioButton2 = (JRadioButton) list.get(1);
+                JRadioButton radioButton3 = (JRadioButton) list.get(1);
+                JRadioButton radioButton4 = (JRadioButton) list.get(2);
                 if (radioButton.isSelected()) {//灯光
                     type = 1;
                     //A部分  0-4扇区
@@ -90,10 +90,10 @@ public class LoadToDeviceActionListener implements ActionListener {
                     //B部分 7-11扇区
                     reSend(1);
                 }
-                if (radioButton2.isSelected()) {//空调  12-13扇区
-                    type = 2;
-                    reSend(1);
-                }
+//                if (radioButton2.isSelected()) {//空调  12-13扇区
+//                    type = 2;
+//                    reSend(1);
+//                }
                 if (radioButton3.isSelected()) {//中控  5-6扇区
                     type = 3;
                     reSend(1);

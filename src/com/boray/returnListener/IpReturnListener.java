@@ -258,6 +258,7 @@ public class IpReturnListener implements Runnable {
                         for (int i = 0; i < 20; i++) {
                             buff[i] = temp[i];
                         }
+                        final JProgressBar bar = (JProgressBar) MainUi.map.get("USBProgressBar");
                         String state = Integer.toHexString(buff[6] & 0XFF);
                         String ImportAndExport = Integer.toHexString(buff[5] & 0XFF);
                         JLabel stateLabel = (JLabel) MainUi.map.get("state");
@@ -265,9 +266,9 @@ public class IpReturnListener implements Runnable {
                             stateLabel.setText("ÒÑ²åÈë");
                         } else if (state.equals("82") && (!ImportAndExport.equals("1") && !ImportAndExport.equals("2"))) {
                             stateLabel.setText("Î´²åÈë");
+                            bar.setVisible(false);
                         }
                         if (ImportAndExport.equals("1") || ImportAndExport.equals("2")) {
-                            final JProgressBar bar = (JProgressBar) MainUi.map.get("USBProgressBar");
                             bar.setVisible(true);
                             Integer value = Math.toIntExact(Long.parseLong(state.toUpperCase(), 16));
                             bar.setValue(value);
@@ -319,6 +320,70 @@ public class IpReturnListener implements Runnable {
                             b1[i] = temp[i];
                         }
                         Rdmset(b1);
+                    } else if (hex0.equals("fd") && hex2.equals("64") && !hex4.equals("f")) {
+                        if (Byte.toUnsignedInt(temp[4]) == 1) {
+                            int size = 30;
+                            byte[] b1 = new byte[size];
+                            if (len <= size) {
+                                for (int i = 0; i < len; i++) {
+                                    b1[i] = temp[i];
+                                }
+                            }
+                            int len1 = getAllData(size, len, b1);
+                            if (len1 == 30) {
+                                final byte[] cc = b1;
+                                new Thread(new Runnable() {
+                                    public void run() {
+                                        setChangJing2(cc);
+                                    }
+                                }).start();
+                            }
+                        } else if (Byte.toUnsignedInt(temp[4]) == 3) {
+                            int size = 20;
+                            byte[] b1 = new byte[size];
+                            if (len <= size) {
+                                for (int i = 0; i < len; i++) {
+                                    b1[i] = temp[i];
+                                }
+                            }
+                            int len1 = getAllData(size, len, b1);
+                            if (len1 == size) {
+                                final byte[] cc = b1;
+                                new Thread(new Runnable() {
+                                    public void run() {
+                                        setQuanJu(cc);
+                                        try {
+                                            Thread.sleep(50);
+                                            Socket.UDPSendData(ZhiLingJi.queryDevice());
+                                        } catch (Exception e) {
+                                        }
+                                    }
+                                }).start();
+                            }
+                        } else if (Byte.toUnsignedInt(temp[4]) == 2) {
+                            int size = 20;
+                            int len1 = 0;
+                            byte[] b1 = new byte[size];
+                            if (len <= size) {
+                                for (int i = 0; i < len; i++) {
+                                    b1[i] = temp[i];
+                                }
+                                len1 = getAllData(size, len, b1);
+                            } else {
+                                for (int i = 0; i < size; i++) {
+                                    b1[i] = temp[i];
+                                }
+                                len1 = size;
+                            }
+                            if (len1 == size) {
+                                final byte[] cc = b1;
+                                new Thread(new Runnable() {
+                                    public void run() {
+                                        setZhongKong2(cc);
+                                    }
+                                }).start();
+                            }
+                        }
                     } else if (hex0.equals("fd") && hex2.equals("db")) {
                         int size = 90;
                         int len1 = 0;
@@ -637,6 +702,15 @@ public class IpReturnListener implements Runnable {
             e.printStackTrace();
         }
         return len1;
+    }
+
+    private void setChangJing2(byte[] b) {
+    }
+
+    private void setQuanJu(byte[] b) {
+    }
+
+    private void setZhongKong2(byte[] b) {
     }
 
     private void setStudyZhongKong(byte[] b) {

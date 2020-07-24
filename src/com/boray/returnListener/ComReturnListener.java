@@ -522,6 +522,7 @@ public class ComReturnListener implements Runnable {
                         for (int i = 0; i < 20; i++) {
                             buff[i] = temp[i];
                         }
+                        final JProgressBar bar = (JProgressBar) MainUi.map.get("USBProgressBar");
                         String state = Integer.toHexString(buff[6] & 0XFF);
                         String ImportAndExport = Integer.toHexString(buff[5] & 0XFF);
                         JLabel stateLabel = (JLabel) MainUi.map.get("state");
@@ -529,9 +530,10 @@ public class ComReturnListener implements Runnable {
                             stateLabel.setText("ÒÑ²åÈë");
                         } else if (state.equals("82") && (!ImportAndExport.equals("1") && !ImportAndExport.equals("2"))) {
                             stateLabel.setText("Î´²åÈë");
+                            bar.setVisible(false);
                         }
                         if (ImportAndExport.equals("1") || ImportAndExport.equals("2")) {
-                            final JProgressBar bar = (JProgressBar) MainUi.map.get("USBProgressBar");
+
                             bar.setVisible(true);
                             Integer value = Math.toIntExact(Long.parseLong(state.toUpperCase(), 16));
                             bar.setValue(value);

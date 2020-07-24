@@ -30,91 +30,39 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="1、效果多灯UI显示，通道，以及灯组显示&#10;2、效果多灯复制功能，预览不发数据&#10;3、声控编程界面编辑生成打包文件不一致&#10;4、备份界面，添加写入控制器按钮以及发包数显示&#10;5, 倒喝彩UI显示&#10;6, 声控素材，双击打开编辑 &#10;7, 声控素材，复制&#10;8，声控-加速度，默认《不开启》&#10;9, 声音素材，单选、多选 编辑 切换&#10;10，增加写入控制器方式 ：写指定路径下《*.dat》 &#10;11，写入控制器时弹出对话框《正在写入控制器，请稍候！   0/xx》">
-      <change afterPath="$PROJECT_DIR$/src/com/boray/Utils/NumberTextField.java" afterDir="false" />
+    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="一些功能的优化，以及异常处理。">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/json_lib_2_4_jdk15.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/Data/MyData.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/Data/MyData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadProjectFileActionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadProjectFileActionListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadToDeviceActionListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadToDeviceActionListener$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadToDeviceActionListener$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadToDeviceActionListener$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadToDeviceActionListener$3$1$1$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadToDeviceActionListener$3$1$1$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadToDeviceActionListener$3$1$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadToDeviceActionListener$3$1$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadToDeviceActionListener$3$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadToDeviceActionListener$3$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadToDeviceActionListener$3$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadToDeviceActionListener$3$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadToDeviceActionListener$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadToDeviceActionListener$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AIControl1.5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/AIControl1.5.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/Listener/SwitchListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/Listener/SwitchListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadToDeviceActionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadToDeviceActionListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/UI/BeiFenUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/UI/BeiFenUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/MergeAllListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/MergeAllListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/FenZhuUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/dengKu/UI/FenZhuUI$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/mainUi/MainUi$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/mainUi/MainUi$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/mainUi/MainUi$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/mainUi/MainUi$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/mainUi/MainUi.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/mainUi/MainUi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$18.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$18.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$19.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$19.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$20.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$20.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$21.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$21.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$22.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$22.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$23.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$23.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$24.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$24.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$25.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$25.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$26.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$26.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$27.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$27.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$28.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$28.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$29.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$29.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$30.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog$30.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/quanJu/Listener/TiaoGuangDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/XiaoGuoDengModelUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/returnListener/ComReturnListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/shengKon/UI/ShengKonUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/artifacts/AIControl1.5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/AIControl1.5.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/Data/MyData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Data/MyData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/Listener/MainLoginUIListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Listener/MainLoginUIListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/LoadProjectFileActionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/LoadProjectFileActionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/Listener/SwitchListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Listener/SwitchListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/LoadToDeviceActionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/LoadToDeviceActionListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/UI/BeiFenUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/UI/BeiFenUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/changJing/UI/TestPaneUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/changJing/UI/TestPaneUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/MergeAllListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/MergeAllListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/USBFlashDiskListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/USBFlashDiskListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/BorayMainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/BorayMainUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/CompanyUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/CompanyUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/MineUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/MineUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/ShareUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/ShareUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/UccnUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/UccnUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/mainUi/MainUi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/mainUi/MainUi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/quanJu/Listener/TiaoGuangDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/quanJu/Listener/TiaoGuangDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/returnListener/ComReturnListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/returnListener/ComReturnListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/returnListener/IpReturnListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/returnListener/IpReturnListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKon/UI/XiaoGuoDengModelUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKon/UI/XiaoGuoDengModelUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKon/UI/ShengKonUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKon/UI/ShengKonUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/ArtNetReview.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/ArtNetReview.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ipConfig.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/ipConfig.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/OverDmxUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/OverDmxUI.java" afterDir="false" />
     </list>
     <list id="8e2f3826-f652-4540-934c-0fbbebdda1b0" name="Revert: " comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -184,7 +132,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="yiiguxing.plugin.translate" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
@@ -644,14 +592,23 @@
       <workItem from="1594340001891" duration="15677000" />
       <workItem from="1594425715494" duration="1341000" />
       <workItem from="1594428383214" duration="2790000" />
-      <workItem from="1594432800122" duration="1631000" />
-    </task>
-    <task id="LOCAL-00030" summary="外观更换为BeautyEye（只做备用）">
-      <created>1575879148266</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1575879148266</updated>
+      <workItem from="1594432800122" duration="16866000" />
+      <workItem from="1594598855394" duration="29474000" />
+      <workItem from="1594685947053" duration="3468000" />
+      <workItem from="1594711826932" duration="7613000" />
+      <workItem from="1594771905320" duration="22393000" />
+      <workItem from="1594809646255" duration="4773000" />
+      <workItem from="1594858245298" duration="21337000" />
+      <workItem from="1594945111012" duration="1863000" />
+      <workItem from="1595037054059" duration="376000" />
+      <workItem from="1595205105435" duration="247000" />
+      <workItem from="1595206925389" duration="224000" />
+      <workItem from="1595217168434" duration="4175000" />
+      <workItem from="1595298533428" duration="1842000" />
+      <workItem from="1595470675577" duration="7655000" />
+      <workItem from="1595486859288" duration="6790000" />
+      <workItem from="1595494493037" duration="6816000" />
+      <workItem from="1595549576326" duration="3481000" />
     </task>
     <task id="LOCAL-00031" summary="界面调优，主界面登录设计，菜单栏图标样式格式调整（备份）">
       <created>1576129610246</created>
@@ -989,7 +946,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592635144067</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="一些功能的优化，以及异常处理。">
+      <created>1594434549261</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1594434549261</updated>
+    </task>
+    <option name="localTasksCounter" value="80" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1020,7 +984,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="界面细节调整" />
     <MESSAGE value="自动保存功能bug修复&#10;效果灯素材拆分下拉框修改&#10;主窗口界面按钮修改为右键菜单" />
     <MESSAGE value="主窗口自动保存bug修复&#10;效果灯编辑页面下拉框选项修改&#10;灯库页面新增逻辑（新增灯具时，声控编程界面对应的时间块进行修改）&#10;主窗口的本地项目（按钮改为右键菜单）&#10;软件启动界面背景图修改&#10;效果灯编程选择素材界面逻辑修改&#10;自动反馈增加逻辑判断" />
     <MESSAGE value="主窗口界面本地管理添加正在编辑提示&#10;RDM界面添加按照DMX排序功能" />
@@ -1045,17 +1008,14 @@
     <MESSAGE value="写入控制器后添加设备RAM重装指令，串口和WiFi。&#10;灯组界面调整。打包数据十二点动作数据自定义微调。&#10;素材预览，动作数据微调。场景预览动作数据微调。&#10;声控环境灯界面调整。" />
     <MESSAGE value="声控编程、声控设置、场景多灯添加一些固定的默认值。&#10;场景多灯，添加所有通道全选、添加所有渐变全选。" />
     <MESSAGE value="1、效果多灯UI显示，通道，以及灯组显示&#10;2、效果多灯复制功能，预览不发数据&#10;3、声控编程界面编辑生成打包文件不一致&#10;4、备份界面，添加写入控制器按钮以及发包数显示&#10;5, 倒喝彩UI显示&#10;6, 声控素材，双击打开编辑 &#10;7, 声控素材，复制&#10;8，声控-加速度，默认《不开启》&#10;9, 声音素材，单选、多选 编辑 切换&#10;10，增加写入控制器方式 ：写指定路径下《*.dat》 &#10;11，写入控制器时弹出对话框《正在写入控制器，请稍候！   0/xx》" />
-    <option name="LAST_COMMIT_MESSAGE" value="1、效果多灯UI显示，通道，以及灯组显示&#10;2、效果多灯复制功能，预览不发数据&#10;3、声控编程界面编辑生成打包文件不一致&#10;4、备份界面，添加写入控制器按钮以及发包数显示&#10;5, 倒喝彩UI显示&#10;6, 声控素材，双击打开编辑 &#10;7, 声控素材，复制&#10;8，声控-加速度，默认《不开启》&#10;9, 声音素材，单选、多选 编辑 切换&#10;10，增加写入控制器方式 ：写指定路径下《*.dat》 &#10;11，写入控制器时弹出对话框《正在写入控制器，请稍候！   0/xx》" />
+    <MESSAGE value="一些功能的优化，以及异常处理。" />
+    <option name="LAST_COMMIT_MESSAGE" value="一些功能的优化，以及异常处理。" />
   </component>
   <component name="WindowStateProjectService">
     <state x="679" y="111" key="#Custom_Plugin_Repositories" timestamp="1589265521924">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="679" y="111" key="#Custom_Plugin_Repositories/0.0.1920.1040@0.0.1920.1040" timestamp="1589265521924" />
-    <state x="679" y="111" key="#HTTP_Proxy" timestamp="1586591873063">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="679" y="111" key="#HTTP_Proxy/0.0.1920.1040@0.0.1920.1040" timestamp="1586591873063" />
     <state x="533" y="52" key="#Java" timestamp="1589194194872">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -1084,12 +1044,6 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="255" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588587988523" />
-    <state x="122" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1585640915499">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="122" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585640915499" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1585625173512" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1585625173512" />
     <state x="560" y="104" width="936" height="792" key="CommitChangelistDialog2" timestamp="1590057077847">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -1102,42 +1056,42 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="252" y="66" width="1536" height="860" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591863817525" />
-    <state x="761" y="342" key="FileChooserDialogImpl" timestamp="1591922474598">
+    <state x="761" y="342" key="FileChooserDialogImpl" timestamp="1594606284962">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="761" y="342" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591922474598" />
-    <state width="1877" height="205" key="GridCell.Tab.0.bottom" timestamp="1594108895046">
+    <state x="761" y="342" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1594606284962" />
+    <state width="1877" height="231" key="GridCell.Tab.0.bottom" timestamp="1595506180260">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="205" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594108895046" />
-    <state width="1877" height="205" key="GridCell.Tab.0.center" timestamp="1594108895046">
+    <state width="1877" height="231" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1595506180260" />
+    <state width="1877" height="231" key="GridCell.Tab.0.center" timestamp="1595506180260">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="205" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594108895046" />
-    <state width="1877" height="205" key="GridCell.Tab.0.left" timestamp="1594108895046">
+    <state width="1877" height="231" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1595506180260" />
+    <state width="1877" height="231" key="GridCell.Tab.0.left" timestamp="1595506180260">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="205" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594108895046" />
-    <state width="1877" height="205" key="GridCell.Tab.0.right" timestamp="1594108895046">
+    <state width="1877" height="231" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1595506180260" />
+    <state width="1877" height="231" key="GridCell.Tab.0.right" timestamp="1595506180260">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="205" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594108895046" />
-    <state width="1877" height="205" key="GridCell.Tab.1.bottom" timestamp="1594108895046">
+    <state width="1877" height="231" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1595506180260" />
+    <state width="1877" height="231" key="GridCell.Tab.1.bottom" timestamp="1595506180261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="205" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1594108895046" />
-    <state width="1877" height="205" key="GridCell.Tab.1.center" timestamp="1594108895046">
+    <state width="1877" height="231" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1595506180261" />
+    <state width="1877" height="231" key="GridCell.Tab.1.center" timestamp="1595506180261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="205" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1594108895046" />
-    <state width="1877" height="205" key="GridCell.Tab.1.left" timestamp="1594108895046">
+    <state width="1877" height="231" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1595506180261" />
+    <state width="1877" height="231" key="GridCell.Tab.1.left" timestamp="1595506180261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="205" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1594108895046" />
-    <state width="1877" height="205" key="GridCell.Tab.1.right" timestamp="1594108895046">
+    <state width="1877" height="231" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1595506180261" />
+    <state width="1877" height="231" key="GridCell.Tab.1.right" timestamp="1595506180261">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="205" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1594108895046" />
+    <state width="1877" height="231" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1595506180261" />
     <state x="540" y="254" width="1225" height="609" key="IDE.errors.dialog" timestamp="1592959643653">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -1146,14 +1100,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="760" y="240" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1590459655570" />
-    <state x="521" y="161" key="SettingsEditor" timestamp="1593591173619">
+    <state x="521" y="161" key="SettingsEditor" timestamp="1594808222558">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="521" y="161" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1593591173619" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1592635157365">
+    <state x="521" y="161" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1594808222558" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1594434559567">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1592635157365" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594434559567" />
     <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1588551445935">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -1162,14 +1116,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="504" y="249" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1920.1040@0.0.1920.1040" timestamp="1592274062051" />
-    <state x="857" y="153" width="958" height="801" key="find.popup" timestamp="1594093596680">
+    <state x="857" y="153" width="958" height="801" key="find.popup" timestamp="1594891751567">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="857" y="153" width="958" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1594093596680" />
-    <state x="333" y="317" width="716" height="574" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1591922498340">
+    <state x="857" y="153" width="958" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1594891751567" />
+    <state x="333" y="317" width="716" height="574" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1594606286657">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="333" y="317" width="716" height="574" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591922498340" />
+    <state x="333" y="317" width="716" height="574" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594606286657" />
     <state x="1086" y="229" width="672" height="676" key="search.everywhere.popup" timestamp="1593510017653">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

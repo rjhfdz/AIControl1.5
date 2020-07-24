@@ -1132,7 +1132,7 @@ public class OverDmxUI implements ActionListener {
         int[] slt = runTable.getSelectedRows();
         int value = 0;
         //int startAddress = box88.getSelectedIndex()+1;
-        if (Data.serialPort != null && slt.length != 0) {
+        if (slt.length != 0) {
             byte[] buff = new byte[512 + 8];
             buff[0] = (byte) 0xBB;
             buff[1] = (byte) 0x55;
@@ -1146,13 +1146,14 @@ public class OverDmxUI implements ActionListener {
                 buff[j - 2 + 7] = (byte) value;
             }
             buff[519] = ZhiLingJi.getJiaoYan(buff);
-            try {
-                OutputStream os = Data.serialPort.getOutputStream();
-                os.write(buff);
-                os.flush();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            Socket.SendData(buff);
+//            try {
+//                OutputStream os = Data.serialPort.getOutputStream();
+//                os.write(buff);
+//                os.flush();
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
         }
     }
 

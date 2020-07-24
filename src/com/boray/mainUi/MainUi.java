@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.*;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
@@ -40,7 +41,7 @@ public class MainUi {
             e.printStackTrace();
         }
         map = new HashMap();
-        frame = new JFrame("X-Series智能灯光控制器系统V1.0");
+        frame = new JFrame("X-Series智能灯光控制器系统V1.0(测试2020-7-23)");
         map.put("frame", frame);
 
         int screenWidth = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);

@@ -2877,9 +2877,8 @@ public class MergeAllListener implements ActionListener {
                             b2[1] = (byte) (size / 256);
                         }
                         gouXuanValus = (boolean[][]) map.get("1");
-
                         if (gouXuanValus != null) {
-                            for (int k2 = 0; k2 < cnt; k2++) {
+                            for (int k2 = 0; k2 < gouXuanValus.length; k2++) {
                                 for (int l = 0; l < gouXuanValus[0].length; l++) {
                                     j2 = l / 8;
                                     yu2 = 7 - (l % 8);
@@ -2968,6 +2967,12 @@ public class MergeAllListener implements ActionListener {
                             }
                             for (int l = 2; l < lgth; l++) {
                                 shengKonSuCaiBanBen.add(Integer.valueOf(tp.get(l).toString()).byteValue());
+                            }
+                            if (tp.size() - 2 < stepWidth) {
+                                byte[] bytes = new byte[stepWidth - (tp.size() - 2)];
+                                for (int k = 0; k < bytes.length; k++) {
+                                    shengKonSuCaiBanBen.add(bytes[k]);
+                                }
                             }
                         }
                         vector88 = null;

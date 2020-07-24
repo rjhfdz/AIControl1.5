@@ -342,6 +342,7 @@ public class ShengKonUI implements ActionListener {
         p1.add(radioButton3);
 //        p1.add(new JLabel("执行时长(毫秒):"));
         slider = new JSlider(0, 5000);
+        slider.setValue(1000);
         final JTextField field = new JTextField(4);
         slider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
@@ -484,7 +485,7 @@ public class ShengKonUI implements ActionListener {
         }
         JPanel p3 = new JPanel();
 //        p3.setBorder(new LineBorder(Color.gray));
-        p3.setPreferredSize(new Dimension(400,130));
+        p3.setPreferredSize(new Dimension(400, 130));
         p3.add(new JLabel("步骤号:"));
         p3.add(box);
         p3.add(new JLabel("                                                       "));
@@ -636,9 +637,10 @@ public class ShengKonUI implements ActionListener {
                     map.put("0", list);
 
                     int[] tp = new int[17];
+                    tp[0] = 1000;
                     list.add(tp);
-
                     slider.setValue(tp[0]);
+                    System.out.println(slider.getValue());
                     for (int i = 0; i < 2; i++) {
                         boxs1[i].setSelectedIndex(tp[i + 1]);
                         sliders[i].setValue(tp[i + 9]);
@@ -674,9 +676,9 @@ public class ShengKonUI implements ActionListener {
                     } else if (s.equals("2")) {
                         radioButton3.setSelected(true);
                     }
-                    if((Boolean) map.get("4")){
+                    if ((Boolean) map.get("4")) {
                         radioButton4.setSelected(true);
-                    }else{
+                    } else {
                         radioButton5.setSelected(true);
                     }
 

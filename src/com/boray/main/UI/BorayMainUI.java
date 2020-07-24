@@ -100,11 +100,11 @@ public class BorayMainUI {
             leftPane.add(panel);
         }
         JLabel UserLabel = new JLabel("ÓÃ»§:SYSTEM");
-        UserLabel.setVisible(false);
+        UserLabel.setVisible(true);
         UserLabel.setPreferredSize(new Dimension(120,30));
         MainUi.map.put("UserLabel", UserLabel);
         JLabel LogoutLabel = new JLabel("<html>×¢Ïú</html>");
-        LogoutLabel.setVisible(false);
+        LogoutLabel.setVisible(true);
         MainUi.map.put("LogoutLabel", LogoutLabel);
         LogoutLabel.setForeground(Color.BLUE);
         LogoutLabel.addMouseListener(new MouseAdapter() {
