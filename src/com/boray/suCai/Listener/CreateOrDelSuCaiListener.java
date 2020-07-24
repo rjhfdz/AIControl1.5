@@ -79,18 +79,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
         } else if ("云端".equals(e.getActionCommand())) {
             Users users = (Users) MainUi.map.get("Users");
             if (users != null && users.getLoginstatus() != 0) {
-                JFrame f = (JFrame) MainUi.map.get("frame");
-                IconJDialog dialog = new IconJDialog(f, true);
-                dialog.setTitle("云端素材");
-                dialog.setResizable(false);
-                int width = 720, height = 620;
-                dialog.setSize(width, height);
-                dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - width / 2, f.getLocation().y + f.getSize().height / 2 - height / 2);
-                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                JPanel p = new JPanel();
-                new YunChangJingSuCaiDialog().show(p);
-                dialog.getContentPane().add(p);
-                dialog.setVisible(true);
+                openGeRenOrTuanDui();
             } else {
                 JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "请登录", "警告", JOptionPane.WARNING_MESSAGE);
                 return;
@@ -114,6 +103,67 @@ public class CreateOrDelSuCaiListener implements ActionListener {
             reViewsDialog(dialog);
             dialog.setVisible(true);
         }
+    }
+
+    /**
+     * 判断用户选择打开个人素材还是团队素材
+     */
+    public void openGeRenOrTuanDui() {
+        JFrame f = (JFrame) MainUi.map.get("frame");
+        IconJDialog dia = new IconJDialog(f, true);
+        dia.setResizable(false);
+        dia.setTitle("云端素材");
+        int w = 380, h = 200;
+        dia.setLocation(f.getLocation().x + f.getSize().width / 2 - w / 2, f.getLocation().y + f.getSize().height / 2 - h / 2);
+        dia.setSize(w, h);
+        dia.setLayout(new FlowLayout(FlowLayout.CENTER));
+        dia.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
+        JRadioButton radioButton = new JRadioButton("个人");
+        JRadioButton radioButton2 = new JRadioButton("团队");
+        ButtonGroup group = new ButtonGroup();
+        group.add(radioButton);
+        group.add(radioButton2);
+        radioButton.setSelected(true);
+        JPanel p1 = new JPanel();
+        p1.setPreferredSize(new Dimension(300, 200));
+        FlowLayout flowLayout = new FlowLayout();
+        flowLayout.setVgap(40);
+        flowLayout.setHgap(26);
+        p1.setLayout(flowLayout);
+        p1.add(radioButton);
+        p1.add(new JLabel("     "));
+        p1.add(radioButton2);
+        JButton sureBtn = new JButton("确定");
+        JButton canceBtn = new JButton("取消");
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getActionCommand().equals("确定")) {
+                    dia.dispose();
+                    IconJDialog dialog = new IconJDialog(f, true);
+                    dialog.setTitle("云端素材");
+                    dialog.setResizable(false);
+                    int width = 720, height = 620;
+                    dialog.setSize(width, height);
+                    dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - width / 2, f.getLocation().y + f.getSize().height / 2 - height / 2);
+                    dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+                    JPanel p = new JPanel();
+                    new YunChangJingSuCaiDialog().show(p, radioButton.isSelected());
+                    dialog.getContentPane().add(p);
+                    dialog.setVisible(true);
+                } else {
+                    dia.dispose();
+                }
+            }
+        };
+        sureBtn.addActionListener(listener);
+        canceBtn.addActionListener(listener);
+        p1.add(sureBtn);
+        p1.add(new JLabel(" "));
+        p1.add(canceBtn);
+        dia.add(p1);
+        dia.setVisible(true);
     }
 
     public void getDengZuComBox(JComboBox box) {

@@ -6,7 +6,16 @@ public class SuCaiFile {
     private String kuname;
     private String sctype;
     private String shucaifile;
+    private String shucainame;
     private String countsctype;
+
+    public String getShucainame() {
+        return shucainame;
+    }
+
+    public void setShucainame(String shucainame) {
+        this.shucainame = shucainame;
+    }
 
     public String getCountsctype() {
         return countsctype;

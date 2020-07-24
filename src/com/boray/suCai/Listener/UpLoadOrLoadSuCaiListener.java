@@ -361,6 +361,11 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
                         DefaultListModel model = (DefaultListModel) list.getModel();
                         //////////////////获取素材数量
                         JList suCaiLightType = (JList) MainUi.map.get("suCaiLightType");
+                        if(suCaiLightType.getSelectedValue()==null){
+                            JFrame frame = (JFrame) MainUi.map.get("frame");
+                            JOptionPane.showMessageDialog(frame, "请新建灯库后再操作！", "提示", JOptionPane.PLAIN_MESSAGE);
+                            return;
+                        }
                         Map map2 = (Map) Data.suCaiMap.get(suCaiLightType.getSelectedValue().toString());
                         JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
                         String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
