@@ -1,9 +1,6 @@
 package com.boray.main.Util;
 
-import com.boray.entity.FileOrFolder;
-import com.boray.entity.Member;
-import com.boray.entity.Offerentity;
-import com.boray.entity.ProjectFile;
+import com.boray.entity.*;
 import resource.Resources;
 
 import javax.swing.*;
@@ -33,7 +30,7 @@ public class CustomTreeCellRenderer extends DefaultTreeCellRenderer {
         Object obj = node.getUserObject();
         if (node.isRoot()) {
             setIcon(root);
-            if (obj != null && obj instanceof File) {
+            if(obj != null && obj instanceof File){
                 File obj1 = (File) obj;
                 String[] strings = obj1.getAbsolutePath().split("\\\\");
                 setText(strings[strings.length - 1]);
@@ -63,6 +60,10 @@ public class CustomTreeCellRenderer extends DefaultTreeCellRenderer {
         	Offerentity o =(Offerentity) obj;
         	setIcon(member);
         	setText(o.getOfficename());
+        }else if(obj!=null && obj instanceof SuCaiFile) {
+        	SuCaiFile s = (SuCaiFile)obj;
+        	setIcon(file);
+        	setText(s.getFilename());
         }
         return this;
     }

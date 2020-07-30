@@ -149,7 +149,7 @@ public class TdUi {
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(new LineBorder(Color.gray));
-        panel.setPreferredSize(new Dimension(250, 550));
+        panel.setPreferredSize(new Dimension(430, 550));
 
         // 创建根节点
         CustomTreeNode rootNode = new CustomTreeNode("团队项目");

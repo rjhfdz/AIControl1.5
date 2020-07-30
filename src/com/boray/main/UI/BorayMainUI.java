@@ -11,7 +11,6 @@ import com.boray.mainUi.MainUi;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import javax.swing.text.StyledEditorKit;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -63,28 +62,29 @@ public class BorayMainUI {
         JToggleButton btn4 = new JToggleButton("设置团队");
         JToggleButton btn5 = new JToggleButton("本地项目");
         JToggleButton btn6 = new JToggleButton("团队资料");
+        JToggleButton btn7 = new JToggleButton("切换用户");
         btn.setPreferredSize(new Dimension(98, 58));
         btn2.setPreferredSize(new Dimension(98, 58));
         btn3.setPreferredSize(new Dimension(98, 58));
         btn4.setPreferredSize(new Dimension(98, 58));
         btn5.setPreferredSize(new Dimension(98, 58));
         btn6.setPreferredSize(new Dimension(98, 58));
+        btn7.setPreferredSize(new Dimension(98, 58));
         ButtonGroup group = new ButtonGroup();
-
         group.add(btn);
         group.add(btn2);
         group.add(btn3);
         group.add(btn4);
         group.add(btn5);
         group.add(btn6);
+        group.add(btn7);
         btn.setSelected(true);
         btn2.setFocusable(false);
         btn3.setFocusable(false);
         btn4.setFocusable(false);
-        btn5.setFocusable(false);
-        btn6.setFocusable(false);
 
-
+        leftPane.add(btn2);
+        leftPane.add(btn4);
         leftPane.add(btn);
         leftPane.add(btn2);
         if (CheckAdmin()) {//查询是否是管理员
@@ -93,6 +93,7 @@ public class BorayMainUI {
         leftPane.add(btn4);
         leftPane.add(btn5);
         leftPane.add(btn6);
+        leftPane.add(btn7);
         rightPane = new JPanel();
         card = new CardLayout();
         rightPane.setLayout(card);
@@ -104,6 +105,7 @@ public class BorayMainUI {
         btn4.addItemListener(listener);
         btn5.addItemListener(listener);
         btn6.addItemListener(listener);
+        btn7.addItemListener(listener);
 
         JPanel uccnPanel = new JPanel();//官方发布
         new UccnUI().show(uccnPanel);
@@ -117,7 +119,7 @@ public class BorayMainUI {
         if (CheckAdmin()) {//查询是否是管理员
         	 new ShareUI().show(sharePanel);
         }
-       
+
         MainUi.map.put("SharePanel", sharePanel);
 
 
@@ -127,9 +129,12 @@ public class BorayMainUI {
 
         JPanel LocalPanel = new JPanel();//本地项目
         new LocalUI().show(LocalPanel);
-        
+
         JPanel TdUi = new JPanel();//团队资料
         new TdUi().show(TdUi);
+
+        JPanel denglu = new JPanel();//登录
+        new LoginUi().show(denglu);
 
         rightPane.add(uccnPanel, "1");
         rightPane.add(minePanel, "2");
@@ -137,6 +142,7 @@ public class BorayMainUI {
         rightPane.add(CompanyPanel, "4");
         rightPane.add(LocalPanel, "5");
         rightPane.add(TdUi, "6");
+        rightPane.add(denglu, "7");
 
         pane.add(leftPane);
         pane.add(rightPane);

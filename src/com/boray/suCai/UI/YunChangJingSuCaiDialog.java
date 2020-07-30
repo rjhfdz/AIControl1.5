@@ -261,8 +261,7 @@ public class YunChangJingSuCaiDialog implements ActionListener {
         }
 
         String[] s = new String[listFile.size()];
-        for (
-                int i = 0; i < listFile.size(); i++) {
+        for (int i = 0; i < listFile.size(); i++) {
             s[i] = listFile.get(i).getKuname();
         }
         list.setListData(s);
@@ -414,7 +413,6 @@ public class YunChangJingSuCaiDialog implements ActionListener {
                 HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
                 urlCon.setConnectTimeout(6000);
                 urlCon.setReadTimeout(6000);
-                System.out.println(url);
                 int code = urlCon.getResponseCode();
                 if (code != HttpURLConnection.HTTP_OK) {
                     JOptionPane.showMessageDialog(frame, "文件下载失败！", "提示", JOptionPane.PLAIN_MESSAGE);
@@ -449,6 +447,7 @@ public class YunChangJingSuCaiDialog implements ActionListener {
         if (caiFile == null) {
             return;
         }
+
         JPanel panel5 = new JPanel();
         panel5.setLayout(new FlowLayout(FlowLayout.LEFT));
         panel5.setPreferredSize(new Dimension(270, 40));

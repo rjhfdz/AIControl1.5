@@ -31,29 +31,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="声控编程、声控设置、场景多灯添加一些固定的默认值。&#10;场景多灯，添加所有通道全选、添加所有渐变全选。">
-      <change afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/SelectDATFileActionListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/boray/entity/Admin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/boray/entity/Member.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/resource/Group.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.classpath" beforeDir="false" afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/AIControl1.5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/AIControl1.5.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/Data/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Data/Data.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/Listener/IpConnectAndOffListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Listener/IpConnectAndOffListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/Listener/MainLoginUIListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/Listener/MainLoginUIListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/UI/BeiFenUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/UI/BeiFenUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/changJing/UI/ProgrammePaneUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/changJing/UI/ProgrammePaneUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/dengKu/UI/AddCustomTonDaoDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/dengKu/UI/AddCustomTonDaoDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/dengKu/UI/FenZhuUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/dengKu/UI/FenZhuUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/dengKu/UI/RdmPaneUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/dengKu/UI/RdmPaneUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/Util/IpConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Util/IpConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/returnListener/IpReturnListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/returnListener/IpReturnListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKon/UI/DefineJLable_shengKon2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKon/UI/DefineJLable_shengKon2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKon/UI/EditEffect_shengKonUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKon/UI/EditEffect_shengKonUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKon/UI/ShiXuSetUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKon/UI/ShiXuSetUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKon/UI/XiaoGuoDengModelUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKon/UI/XiaoGuoDengModelUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/UI/ShengKonSuCaiEditUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/UI/ShengKonSuCaiEditUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/UI/SuCaiEditUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/UI/SuCaiEditUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/YaoMaiModelUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/main/Listener/LoginListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/LoginListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/main/Listener/MineButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/MineButtonListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/main/Listener/SelectListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/SelectListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/main/Listener/ShareListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/ShareListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/BorayMainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/BorayMainUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/CompanyUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/CompanyUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/MineUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/MineUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/TdUi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/TdUi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/UccnUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/UccnUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/main/Util/CustomTreeCellRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Util/CustomTreeCellRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/UI/YunChangJingSuCaiDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/UI/YunChangJingSuCaiDialog.java" afterDir="false" />
     </list>
     <list id="8e2f3826-f652-4540-934c-0fbbebdda1b0" name="Revert: " comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -134,9 +123,12 @@
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="com.boray.Utils" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\BorayWork\AIControl1.5\src" />
-      <recent name="D:\BorayWork\AIControl1.5\src\com\boray\Data" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\BorayWork\AIControl1.5\src\lib" />
+      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5\src\icon" />
+      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5" />
+      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5\src\lib" />
+      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5\src\com\boray\shengKon\Listener" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.boray.Listener" />
@@ -144,12 +136,9 @@
       <recent name="com.boray.shengKon.UI" />
       <recent name="com.boray.xiaoGuoDeng.reviewCode" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\BorayWork\AIControl1.5\src\resource" />
-      <recent name="D:\BorayWork\AIControl1.5\src\lib" />
-      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5\src\icon" />
-      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5" />
-      <recent name="D:\BorayWork\myRepositories\kzq\AIControl1.5\src\lib" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\BorayWork\AIControl1.5\src" />
+      <recent name="D:\BorayWork\AIControl1.5\src\com\boray\Data" />
     </key>
   </component>
   <component name="RunManager" selected="Application.MainUi">
@@ -179,28 +168,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="aa" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.boray.beiFen.Listener.aa" />
-      <module name="AIControl1.5" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.boray.beiFen.Listener.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.MainUi" />
       <item itemvalue="Application.Test" />
-      <item itemvalue="Application.aa" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainUi" />
-        <item itemvalue="Application.aa" />
         <item itemvalue="Application.Test" />
       </list>
     </recent_temporary>
@@ -565,26 +539,6 @@
       <workItem from="1591696023141" duration="6468000" />
       <workItem from="1591749262984" duration="17068000" />
       <workItem from="1591775051340" duration="6454000" />
-      <workItem from="1594691434342" duration="1461000" />
-      <workItem from="1594693293338" duration="8960000" />
-      <workItem from="1594947267410" duration="18466000" />
-      <workItem from="1595031433645" duration="41000" />
-      <workItem from="1595031530536" duration="4815000" />
-      <workItem from="1595037435230" duration="17466000" />
-      <workItem from="1595083069055" duration="731000" />
-      <workItem from="1595203905022" duration="1143000" />
-      <workItem from="1595205356167" duration="1563000" />
-      <workItem from="1595207153017" duration="9057000" />
-      <workItem from="1595226823283" duration="16602000" />
-      <workItem from="1595290413774" duration="7433000" />
-      <workItem from="1595300383768" duration="5581000" />
-      <workItem from="1595311154833" duration="1837000" />
-      <workItem from="1595317172397" duration="456000" />
-      <workItem from="1595319062441" duration="9986000" />
-      <workItem from="1595376859765" duration="25108000" />
-      <workItem from="1595463131816" duration="6075000" />
-      <workItem from="1595484260529" duration="2521000" />
-      <workItem from="1595494482530" duration="8000" />
     </task>
     <task id="LOCAL-00030" summary="外观更换为BeautyEye（只做备用）">
       <created>1575879148266</created>
@@ -960,6 +914,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="写入控制器，防错机制bug修复&#10;添加WinRegistry工具类，实现串口热拔功能" />
     <MESSAGE value="界面细节调整" />
     <MESSAGE value="自动保存功能bug修复&#10;效果灯素材拆分下拉框修改&#10;主窗口界面按钮修改为右键菜单" />
     <MESSAGE value="主窗口自动保存bug修复&#10;效果灯编辑页面下拉框选项修改&#10;灯库页面新增逻辑（新增灯具时，声控编程界面对应的时间块进行修改）&#10;主窗口的本地项目（按钮改为右键菜单）&#10;软件启动界面背景图修改&#10;效果灯编程选择素材界面逻辑修改&#10;自动反馈增加逻辑判断" />
@@ -996,10 +951,6 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="533" y="52" key="#Java/0.0.1920.1040@0.0.1920.1040" timestamp="1589194194872" />
-    <state x="552" y="178" key="#Notifications" timestamp="1586911043199">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="178" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1586911043199" />
     <state x="742" y="204" key="#Plugins" timestamp="1590108000616">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -1012,66 +963,66 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="704" y="355" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591252993397" />
-    <state x="1100" y="357" key="#com.intellij.ide.util.MemberChooser" timestamp="1595214555511">
+    <state x="1100" y="357" key="#com.intellij.ide.util.MemberChooser" timestamp="1591780155111">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="1100" y="357" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1595214555511" />
+    <state x="1100" y="357" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1591780155111" />
     <state x="640" y="255" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1588587988523">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="255" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588587988523" />
-    <state x="560" y="104" width="936" height="792" key="CommitChangelistDialog2" timestamp="1594691801399">
+    <state x="560" y="104" width="936" height="792" key="CommitChangelistDialog2" timestamp="1590057077847">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="560" y="104" width="936" height="792" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1594691801399" />
-    <state width="540" height="466" key="DebuggerActiveHint" timestamp="1595213635036">
+    <state x="560" y="104" width="936" height="792" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1590057077847" />
+    <state width="540" height="466" key="DebuggerActiveHint" timestamp="1591672387813">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="540" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1595213635036" />
-    <state x="252" y="66" width="1536" height="860" key="DiffContextDialog" timestamp="1594691585854">
+    <state width="540" height="466" key="DebuggerActiveHint/0.0.1920.1040@0.0.1920.1040" timestamp="1591672387813" />
+    <state x="59" y="22" width="1536" height="860" key="DiffContextDialog" timestamp="1596105509896">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="252" y="66" width="1536" height="860" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594691585854" />
+    <state x="59" y="22" width="1536" height="860" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1596105509896" />
     <state x="761" y="342" key="FileChooserDialogImpl" timestamp="1591252992098">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="761" y="342" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1591252992098" />
-    <state width="1877" height="208" key="GridCell.Tab.0.bottom" timestamp="1595486852768">
+    <state width="1877" height="231" key="GridCell.Tab.0.bottom" timestamp="1596105371963">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="208" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1595486852768" />
-    <state width="1877" height="208" key="GridCell.Tab.0.center" timestamp="1595486852768">
+    <state width="1877" height="231" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596105371963" />
+    <state width="1877" height="231" key="GridCell.Tab.0.center" timestamp="1596105371963">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="208" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1595486852768" />
-    <state width="1877" height="208" key="GridCell.Tab.0.left" timestamp="1595486852768">
+    <state width="1877" height="231" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596105371963" />
+    <state width="1877" height="231" key="GridCell.Tab.0.left" timestamp="1596105371962">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="208" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1595486852768" />
-    <state width="1877" height="208" key="GridCell.Tab.0.right" timestamp="1595486852768">
+    <state width="1877" height="231" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596105371962" />
+    <state width="1877" height="231" key="GridCell.Tab.0.right" timestamp="1596105371963">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="208" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1595486852768" />
-    <state width="1877" height="208" key="GridCell.Tab.1.bottom" timestamp="1595486852768">
+    <state width="1877" height="231" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596105371963" />
+    <state width="1877" height="231" key="GridCell.Tab.1.bottom" timestamp="1596105259465">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="208" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1595486852768" />
-    <state width="1877" height="208" key="GridCell.Tab.1.center" timestamp="1595486852768">
+    <state width="1877" height="231" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1596105259465" />
+    <state width="1877" height="231" key="GridCell.Tab.1.center" timestamp="1596105259464">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="208" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1595486852768" />
-    <state width="1877" height="208" key="GridCell.Tab.1.left" timestamp="1595486852768">
+    <state width="1877" height="231" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1596105259464" />
+    <state width="1877" height="231" key="GridCell.Tab.1.left" timestamp="1596105259464">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="208" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1595486852768" />
-    <state width="1877" height="208" key="GridCell.Tab.1.right" timestamp="1595486852768">
+    <state width="1877" height="231" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1596105259464" />
+    <state width="1877" height="231" key="GridCell.Tab.1.right" timestamp="1596105259465">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="208" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1595486852768" />
+    <state width="1877" height="231" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1596105259465" />
     <state x="540" y="254" width="1225" height="609" key="IDE.errors.dialog" timestamp="1591775097424">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="540" y="254" width="1225" height="609" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591775097424" />
+    <state x="540" y="254" width="1225" height="609" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1591576295788" />
     <state x="760" y="240" key="RollbackChangesDialog" timestamp="1590459655570">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -1083,15 +1034,18 @@
     <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1594691836162">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1594691836162" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1591604400045" />
     <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1594693285287">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="92" y="92" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1594693285287" />
     <state x="640" y="344" key="com.intellij.ide.util.TipDialog" timestamp="1588551445935">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="640" y="344" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588551445935" />
+    <state x="753" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1596104567442">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="753" y="433" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1040@0.0.1920.1040" timestamp="1596104567442" />
     <state x="857" y="153" width="958" height="801" key="find.popup" timestamp="1595377662724">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

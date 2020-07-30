@@ -49,7 +49,7 @@ public class UccnUI {
             login.setName("Uccn");
             clear.setName("Uccn");
 
-            listener = new LoginListener(pane);
+            listener = new LoginListener(panel);
             login.addActionListener(listener);
             clear.addActionListener(listener);
             register.addActionListener(new RegisterListener());
@@ -100,7 +100,7 @@ public class UccnUI {
     public void init(JPanel pane) {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(new LineBorder(Color.gray));
-        panel.setPreferredSize(new Dimension(300, 550));
+        panel.setPreferredSize(new Dimension(420, 650));
 
         // 创建根节点
         CustomTreeNode rootNode = new CustomTreeNode("官方共享");
@@ -180,5 +180,6 @@ public class UccnUI {
         MainUi.map.put("uccnTree", tree);
 
         pane.add(panel);
+        panel.updateUI();
     }
 }

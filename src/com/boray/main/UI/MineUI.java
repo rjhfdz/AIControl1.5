@@ -5,6 +5,7 @@ import com.boray.Data.Data;
 import com.boray.Utils.HttpClientUtil;
 import com.boray.entity.FileOrFolder;
 import com.boray.entity.ProjectFile;
+import com.boray.entity.SuCaiFile;
 import com.boray.entity.Users;
 import com.boray.main.Listener.LoginListener;
 import com.boray.main.Listener.MineButtonListener;
@@ -40,6 +41,8 @@ public class MineUI {
 
     public void show(JPanel panel) {
         if (MainUi.map.get("Users") == null) {
+        	 panel.removeAll();//清除所有控件，重新布局
+             panel.updateUI();
             JPanel jPanel2 = new JPanel();
             jPanel2.setPreferredSize(new Dimension(900, 588));
             JPanel jPanel = new JPanel();
@@ -143,14 +146,22 @@ public class MineUI {
         param.put("usercode", users.getUsercode());
         String request = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/getgrxm", param);
         List<FileOrFolder> list = JSON.parseArray(request, FileOrFolder.class);
+        
+        String requestsucai = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/getgrshucai", param);
+        List<SuCaiFile> suCaiFilelist = JSON.parseArray(requestsucai, SuCaiFile.class);
 
+        String requestsksucai = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/getgrskshucai", param);
+        List<SuCaiFile> sksuCaiFilelist = JSON.parseArray(requestsksucai, SuCaiFile.class);
+
+        
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(new LineBorder(Color.gray));
-        panel.setPreferredSize(new Dimension(250, 550));
+        panel.setPreferredSize(new Dimension(430, 550));
 
         // 创建根节点
-        CustomTreeNode rootNode = new CustomTreeNode("我的项目");
+        CustomTreeNode rootNode = new CustomTreeNode("个人管理");
         rootNode.setLevel(0);
+        
         DefaultTreeModel model = new DefaultTreeModel(rootNode);
 
         // 使用根节点创建树组件
@@ -159,6 +170,20 @@ public class MineUI {
         //设置图标样式
         tree.setCellRenderer(new CustomTreeCellRenderer());
 
+        
+        CustomTreeNode gonCheng = new CustomTreeNode("个人工程");
+        gonCheng.setLevel(1);
+        CustomTreeNode suCai = new CustomTreeNode("个人素材");
+        suCai.setLevel(1);
+        CustomTreeNode changJingSuCai = new CustomTreeNode("场景素材");
+        CustomTreeNode ShengKonSuCai = new CustomTreeNode("声控素材");
+        changJingSuCai.setLevel(3);
+        ShengKonSuCai.setLevel(3);
+        suCai.add(changJingSuCai);
+        suCai.add(ShengKonSuCai);
+        rootNode.add(gonCheng);
+        rootNode.add(suCai);
+        
         for (FileOrFolder folder : list) {
             CustomTreeNode node = new CustomTreeNode(folder);
             node.setLevel(1);
@@ -171,8 +196,24 @@ public class MineUI {
                 fileNode.setLevel(2);
                 node.add(fileNode);
             }
-            rootNode.add(node);
+            gonCheng.add(node);
         }
+        
+        for (SuCaiFile folder : suCaiFilelist) {
+            CustomTreeNode node = new CustomTreeNode(folder);
+            node.setLevel(4);
+            
+            changJingSuCai.add(node);
+        }
+        
+        for (SuCaiFile folder : sksuCaiFilelist) {
+            CustomTreeNode node = new CustomTreeNode(folder);
+            node.setLevel(4);
+            
+            ShengKonSuCai.add(node);
+        }
+        
+        
 
         // 设置树显示根节点句柄
         tree.setShowsRootHandles(true);

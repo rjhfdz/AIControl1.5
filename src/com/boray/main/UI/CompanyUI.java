@@ -6,18 +6,8 @@ import com.boray.Utils.HttpClientUtil;
 import com.boray.addJCheckBox.CWCheckBoxRenderer;
 import com.boray.addJCheckBox.CheckBoxCellEditor;
 import com.boray.dengKu.UI.NewJTable;
-import com.boray.entity.Admin;
-import com.boray.entity.FileOrFolder;
-import com.boray.entity.Member;
-import com.boray.entity.Offerentity;
-import com.boray.entity.ProjectFile;
-import com.boray.entity.ProjectFileInfo;
-import com.boray.entity.Users;
-import com.boray.main.Listener.CompanyListener;
-import com.boray.main.Listener.CompanyMenuListener;
-import com.boray.main.Listener.LoginListener;
-import com.boray.main.Listener.RegisterListener;
-import com.boray.main.Listener.ShareListener;
+import com.boray.entity.*;
+import com.boray.main.Listener.*;
 import com.boray.main.Util.CustomTreeCellRenderer;
 import com.boray.main.Util.CustomTreeNode;
 import com.boray.main.Util.TreeUtil;
@@ -96,7 +86,6 @@ public class CompanyUI {
             buttonPanel.setLayout(flowLayout6);
             buttonPanel.setBorder(new LineBorder(Color.gray));
             buttonPanel.setPreferredSize(new Dimension(900, 35));
-//            JButton downloadFile = new JButton("下载工程");
             JButton refresh = new JButton("刷新");
 //            JButton copy = new JButton("复制");
 
@@ -105,7 +94,6 @@ public class CompanyUI {
             refresh.addActionListener(listener);
 //            copy.addActionListener(listener);
 
-//            buttonPanel.add(downloadFile);
             buttonPanel.add(refresh);
 //            buttonPanel.add(copy);
 
