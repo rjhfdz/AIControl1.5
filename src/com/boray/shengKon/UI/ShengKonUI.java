@@ -310,6 +310,23 @@ public class ShengKonUI implements ActionListener {
             }
         });
         p1.add(box2);
+        loopLabel = new JLabel("   循环轮数:");
+        box3_loop = new JComboBox();
+        for (int i = 1; i < 13; i++) {
+            box3_loop.addItem(String.valueOf(i));
+        }
+        box3_loop.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (ItemEvent.SELECTED == e.getStateChange()) {
+                    Map map = (Map) Data.ShengKonHuanJingModelMap.get(MyData.ShengKonHuanJingModel);
+                    if (map != null) {
+                        map.put("5", String.valueOf(box3_loop.getSelectedIndex()));
+                    }
+                }
+            }
+        });
+        box3_loop.setVisible(false);
+        loopLabel.setVisible(false);
         p1.add(new JLabel("                                                                                                    "));
         p1.add(new JLabel("执行方式:"));
         radioButton = new JRadioButton("单步");
@@ -340,6 +357,9 @@ public class ShengKonUI implements ActionListener {
         p1.add(radioButton);
         p1.add(radioButton2);
         p1.add(radioButton3);
+        p1.add(new JLabel("                                                                                "));
+        p1.add(loopLabel);
+        p1.add(box3_loop);
 //        p1.add(new JLabel("执行时长(毫秒):"));
         slider = new JSlider(0, 5000);
         slider.setValue(1000);
@@ -377,26 +397,9 @@ public class ShengKonUI implements ActionListener {
 //        p1.add(slider);
 //        p1.add(field);
 
-        loopLabel = new JLabel("   循环轮数:");
-        box3_loop = new JComboBox();
-        for (int i = 1; i < 13; i++) {
-            box3_loop.addItem(String.valueOf(i));
-        }
-        box3_loop.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if (ItemEvent.SELECTED == e.getStateChange()) {
-                    Map map = (Map) Data.ShengKonHuanJingModelMap.get(MyData.ShengKonHuanJingModel);
-                    if (map != null) {
-                        map.put("4", String.valueOf(box3_loop.getSelectedIndex()));
-                    }
-                }
-            }
-        });
-        box3_loop.setVisible(false);
-        loopLabel.setVisible(false);
-        p1.add(loopLabel);
-        p1.add(box3_loop);
-        //p1.setBorder(new LineBorder(Color.gray));
+
+
+        p1.setBorder(new LineBorder(Color.gray));
 
         JPanel p2 = new JPanel();
         p2.setLayout(flowLayout);
@@ -663,7 +666,7 @@ public class ShengKonUI implements ActionListener {
 
                     radioButton.setSelected(true);
                     if ("17".equals(MyData.ShengKonHuanJingModel) || "18".equals(MyData.ShengKonHuanJingModel)) {
-                        map.put("4", "0");
+                        map.put("5", "0");
                         box3_loop.setSelectedIndex(0);
                     }
 
@@ -703,7 +706,7 @@ public class ShengKonUI implements ActionListener {
                     }
 
                     if ("17".equals(MyData.ShengKonHuanJingModel) || "18".equals(MyData.ShengKonHuanJingModel)) {
-                        s = (String) map.get("4");
+                        s = (String) map.get("5");
                         box3_loop.setSelectedIndex(Integer.valueOf(s).intValue());
                     }
                 }

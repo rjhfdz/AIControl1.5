@@ -241,6 +241,6 @@ public class Data {
 	public static Timer againSendDataTimer;//重发数据定时器
 	public static int sendDataSum;//记录发包
 
-	public static Timer checkUserLogin;//检查用户状态定时器
+	public static Timer checkUserState;//检查用户状态定时器
 
 }

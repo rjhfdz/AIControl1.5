@@ -74,6 +74,7 @@ public class MainLoginUIListener implements ActionListener {
 //                if (Data.RememberPassword) {
 //                    Data.userLogin.put(Util.encode(username), Util.encode(password));
 //                }
+                users.setUserpassword(password);
                 MainUi.map.put("Users", users);
                 frame.getContentPane().removeAll();
                 //去掉背景图
@@ -127,9 +128,11 @@ public class MainLoginUIListener implements ActionListener {
         main.add(lightPane);
         main.add(bodyPane);
         main.add(rjghtPane);
-        JLabel statusbar = new JLabel(" 当前登录用户：RJHFDZ !");
+        JLabel statusbar = new JLabel();
+        MainUi.map.put("statusbar", statusbar);
         statusbar.setForeground(Color.RED);
         //statusbar.setText("nimabi");
+        Util.checkUserState();
         statusbar.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
         frame.add(statusbar, BorderLayout.SOUTH);
         frame.add(main);

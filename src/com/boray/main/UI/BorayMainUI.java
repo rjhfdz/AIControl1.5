@@ -99,10 +99,6 @@ public class BorayMainUI {
             panel.setPreferredSize(new Dimension(120, 260));
             leftPane.add(panel);
         }
-        JLabel UserLabel = new JLabel("ÓÃ»§:SYSTEM");
-        UserLabel.setVisible(true);
-        UserLabel.setPreferredSize(new Dimension(120,30));
-        MainUi.map.put("UserLabel", UserLabel);
         JLabel LogoutLabel = new JLabel("<html>×¢Ïú</html>");
         LogoutLabel.setVisible(true);
         MainUi.map.put("LogoutLabel", LogoutLabel);
@@ -120,9 +116,7 @@ public class BorayMainUI {
                         null, options, options[1]);
                 if(yes == 1){
                     MainUi.map.remove("Users");
-                    JLabel UserLabel = (JLabel) MainUi.map.get("UserLabel");
                     JLabel LogoutLabel = (JLabel) MainUi.map.get("LogoutLabel");
-                    UserLabel.setVisible(false);
                     LogoutLabel.setVisible(false);
                     new UccnUI().show((JPanel) MainUi.map.get("UccnPanel"));
                     new MineUI().show((JPanel) MainUi.map.get("MinePanel"));
@@ -132,7 +126,6 @@ public class BorayMainUI {
             }
         });
 
-        leftPane.add(UserLabel);
         leftPane.add(LogoutLabel);
 
         rightPane = new JPanel();

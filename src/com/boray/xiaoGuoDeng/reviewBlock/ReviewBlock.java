@@ -283,7 +283,7 @@ public class ReviewBlock {
                 for (int i = 0; i < objects.length; i++) {
                     b = (byte[]) objects[i];
                     Socket.UDPSendData(b);
-                    Thread.sleep(230);
+                    Thread.sleep(300);
                 }
 
                 //Æô¶¯Ô¤ÀÀ

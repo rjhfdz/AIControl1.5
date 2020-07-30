@@ -242,7 +242,7 @@ public class DataActionListener {
                     b5[406 + i] = (byte) list68.size();
                 }
                 if (i == 17 || i == 18) {
-                    s = (String) map.get("4");
+                    s = (String) map.get("5");
                     if (s != null) {
                         b5[427 + (i - 17)] = (byte) (Integer.valueOf(s).intValue() + 1);
                     }

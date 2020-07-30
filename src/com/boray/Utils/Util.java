@@ -1,7 +1,9 @@
 package com.boray.Utils;
 
+import com.alibaba.fastjson.JSON;
 import com.boray.Data.Data;
 import com.boray.Data.ZhiLingJi;
+import com.boray.entity.Users;
 import com.boray.mainUi.MainUi;
 
 import javax.swing.*;
@@ -129,6 +131,41 @@ public class Util {
     }
 
     /**
+     * 定时任务，每隔十秒执行一次检测当前用户是否在线
+     */
+    public static void checkUserState() {
+        if (Data.checkUserState != null) {
+            Data.checkUserState = null;
+        }
+        Data.checkUserState = new Timer();
+        Data.checkUserState.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                JLabel statusbar = (JLabel) MainUi.map.get("statusbar");//状态栏
+                Users users = (Users) MainUi.map.get("Users");
+                if (users != null) {
+                    Map<String, String> param = new HashMap<>();
+                    param.put("logincode", users.getUsercode());
+                    param.put("password", users.getUserpassword());
+                    try {
+                        String request = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/login", param);
+                        Users user = JSON.parseObject(request, Users.class);
+                        if (user != null && !users.getCode().equals(-1)) {
+                            user.setUserpassword(users.getUserpassword());
+                            MainUi.map.put("Users", user);
+                            statusbar.setText(" 当前登录用户：" + user.getUsercode() + " ！");
+                        }
+                    } catch (Exception e) {
+                        statusbar.setText(" 网络错误，用户离线中 ！");
+                    }
+                } else {
+                    statusbar.setText(" 当前暂无用户登录 ！");
+                }
+            }
+        }, 0, 10000);//立即执行，之后该任务每间十秒执行一次
+    }
+
+    /**
      * 检查用户登录状态
      */
     public static void checkUserLogin() {
@@ -160,6 +197,7 @@ public class Util {
 
     /**
      * 素材复制
+     *
      * @param o
      * @return
      */
@@ -175,7 +213,7 @@ public class Util {
 
             newObj = ois.readObject();
             ois.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return newObj;
@@ -185,7 +223,7 @@ public class Util {
     /**
      * 设备RAM重装指令
      */
-    public static void RAMReset(){
+    public static void RAMReset() {
         byte[] bytes = new byte[20];
         bytes[0] = (byte) 0XFA;
         bytes[1] = (byte) 0X14;
