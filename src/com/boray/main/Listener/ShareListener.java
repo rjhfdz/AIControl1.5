@@ -35,7 +35,8 @@ public class ShareListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String str = e.getActionCommand();
         frame = (JFrame) MainUi.map.get("frame");
-        tree = (JTree) MainUi.map.get("shareTree");
+        tree = (JTree) MainUi.map.get("shareTree1");
+        tree2 = (JTree) MainUi.map.get("shareTree2");
         if (str.equals("刷新")) {
             refresh();
         } else if (str.equals("增加成员")) {
@@ -92,17 +93,30 @@ public class ShareListener implements ActionListener {
                     refresh();
                 }
             }
+        }else if (str.equals("设置团队")) {
+        	 DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree2.getSelectionPath().getLastPathComponent();
+             Object[] options = {"否", "是"};
+             int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "是否设置改团队？", "警告",
+                     JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                     null, options, options[1]);
+             if (yes == 1) {
+                 if (node.getUserObject() instanceof Offerentity) {
+                	 Offerentity member = (Offerentity) node.getUserObject();
+                     Users users = (Users) MainUi.map.get("Users");
+                     Map<String, String> param = new HashMap<>();
+                     param.put("officecode", member.getOfficecode().toString());
+                     param.put("usercode", users.getUsercode());
+                     String request = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/updatetdinfo", param);
+                     JOptionPane.showMessageDialog(frame, "设置成功", "提示", JOptionPane.PLAIN_MESSAGE);
+                  /*   if (Integer.parseInt(message.getCode()) == 0) {
+
+                     } else {
+                         JOptionPane.showMessageDialog(frame, "踢出该成员失败", "提示", JOptionPane.PLAIN_MESSAGE);
+                     }*/
+                     //refresh();
+                 }
+             }
         }
-//        else if (button.getText().equals("复制")) {
-//            if (null == tree.getSelectionPath().getLastPathComponent()) {
-//                JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
-//                return;
-//            }
-//            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
-//            if (node.getUserObject() instanceof ProjectFile) {
-//                Data.tempProjectFile = (ProjectFile) node.getUserObject();
-//            }
-//        }
     }
 
     /**

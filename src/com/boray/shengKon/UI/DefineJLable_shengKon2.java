@@ -30,7 +30,7 @@ public class DefineJLable_shengKon2 extends JLabel {
     private JMenuItem menuItem, menuItem1, menuItem2, menuItem3;
     private Color oldColor;
 
-    public DefineJLable_shengKon2(final String s, JPanel pane) {
+    public DefineJLable_shengKon2(final String s, final JPanel pane) {
         super(s, SwingConstants.CENTER);
         p = new Point(0, 0);
         this.pane = pane;

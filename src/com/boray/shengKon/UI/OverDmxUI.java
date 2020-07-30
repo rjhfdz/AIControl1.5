@@ -215,7 +215,7 @@ public class OverDmxUI implements ActionListener {
         if (setValue != null) {
             box.setSelectedItem(setValue[0]);
         }
-        JButton button = new JButton("单选");
+        final JButton button = new JButton("单选");
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -416,7 +416,7 @@ public class OverDmxUI implements ActionListener {
         pane.add(new JLabel("                  " +
                 "                  执行时长"));
         slider = new JSlider(0);
-        slider.setValue(2000);
+//        slider.setValue(2000);
         slider.setPreferredSize(new Dimension(180, 30));
         slider.setMaximum(5000);
         field = new JTextField(4);
@@ -463,7 +463,7 @@ public class OverDmxUI implements ActionListener {
         Object[] s = new String[514];
         final String[] temp = new String[514];
         temp[0] = "1";
-        temp[1] = "0";
+        temp[1] = "2000";
         s[0] = "步骤";
         s[1] = "执行时长";
         for (int i = 2; i < s.length; i++) {
@@ -645,6 +645,7 @@ public class OverDmxUI implements ActionListener {
                     DefaultTableModel model = (DefaultTableModel) runTable.getModel();
                     String[] s = temp;
                     s[0] = "" + (runTable.getRowCount() + 1);
+                    s[1] = "0";
                     model.addRow(temp);
                     runTable.setRowSelectionInterval(runTable.getRowCount() - 1, runTable.getRowCount() - 1);
                 } else {

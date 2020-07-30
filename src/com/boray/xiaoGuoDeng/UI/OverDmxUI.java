@@ -497,7 +497,7 @@ public class OverDmxUI implements ActionListener {
             itemPanes[i] = new JPanel();
             itemPanes[i].setLayout(flowLayout);
             //itemPanes[i].setBorder(new LineBorder(Color.black));
-            itemPanes[i].setPreferredSize(new Dimension(46, 220));
+            itemPanes[i].setPreferredSize(new Dimension(46, 210));
             if (i > 8) {
                 labels[i] = new JLabel((i + 1) + "");
             } else {

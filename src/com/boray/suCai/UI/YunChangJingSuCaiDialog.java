@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,8 +36,16 @@ public class YunChangJingSuCaiDialog implements ActionListener {
     private Users users;
     private JFrame frame;
     private File file;
+    private boolean flag;
 
-    public void show(JPanel pane) {
+    /**
+     * 加载效果灯云端素材界面
+     *
+     * @param pane 面板
+     * @param flag 判断加的数据是个人的还是团队的
+     */
+    public void show(JPanel pane, boolean flag) {
+        this.flag = flag;
         pane.setBorder(new LineBorder(Color.black));
         pane.setLayout(new FlowLayout(FlowLayout.LEFT));
 
@@ -106,9 +115,11 @@ public class YunChangJingSuCaiDialog implements ActionListener {
         editBtn.setPreferredSize(new Dimension(68, 34));
         delBtn.setPreferredSize(dimension);
         leadBtn.setPreferredSize(dimension);
-        bottomPanel.add(newBtn);
-        bottomPanel.add(editBtn);
-        bottomPanel.add(delBtn);
+        if (flag) {
+            bottomPanel.add(newBtn);
+            bottomPanel.add(editBtn);
+            bottomPanel.add(delBtn);
+        }
         bottomPanel.add(leadBtn);
         p3.add(bottomPanel);
     }
@@ -121,7 +132,7 @@ public class YunChangJingSuCaiDialog implements ActionListener {
         JToggleButton[] btns = new JToggleButton[name.length];
         MainUi.map.put("changJingSuCaiYunTypeBtns", btns);
         ButtonGroup group = new ButtonGroup();
-        ChangJingSuCaiYunTypeListener listener = new ChangJingSuCaiYunTypeListener();
+        ChangJingSuCaiYunTypeListener listener = new ChangJingSuCaiYunTypeListener(flag);
         for (int i = 0; i < btns.length; i++) {
             btns[i] = new JToggleButton(name[i]);
             btns[i].setName("" + i);
@@ -164,7 +175,7 @@ public class YunChangJingSuCaiDialog implements ActionListener {
                     SuCaiFile selectDengzu = listFile.get(list.getSelectedIndex());
 
                     Map<String, String> param = new HashMap<>();
-                    param.put("username", users.getUsername());
+                    param.put("usercode", users.getUsercode());
                     param.put("kuname", selectDengzu.getKuname());
                     //当前灯组素材
                     JLabel alone = (JLabel) MainUi.map.get("changJingYunAlone");
@@ -180,25 +191,75 @@ public class YunChangJingSuCaiDialog implements ActionListener {
                     JList list = (JList) MainUi.map.get("changJingSuCaiYun_list");
                     DefaultListModel model = (DefaultListModel) list.getModel();
                     model.removeAllElements();
-                    for (int i = 0; i < btns.length; i++) {
-                        param.put("sctype", btns[i].getName());
-                        String request = HttpClientUtil.doGet(Data.ipPort + "getsc", param);
+
+
+                    String request = "";
+                    if (flag) {
+                        for (int i = 0; i < btns.length; i++) {
+                            param.put("sctype", btns[i].getName());
+                            request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/getgrshucaisctypecount2", param);
+                            java.util.List<SuCaiFile> suCaiList = JSON.parseArray(request, SuCaiFile.class);
+                            if (btns[i].isSelected()) {
+                                for (int j = 0; j < suCaiList.size(); j++) {
+                                    model.addElement(suCaiList.get(j).getFilename());
+                                }
+                            }
+                            btns[i].setText(name[i] + "(" + suCaiList.size() + ")");
+                            MainUi.map.put("changJingSuCaiFileYun_list", suCaiList);
+                        }
+                    } else {
+                        request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/gettdshucaisctypecount", param);
                         java.util.List<SuCaiFile> suCaiList = JSON.parseArray(request, SuCaiFile.class);
-                        if (btns[i].isSelected()) {
+                        for (int i = 0; i < btns.length; i++) {
                             for (int j = 0; j < suCaiList.size(); j++) {
-                                model.addElement(suCaiList.get(j).getFilename());
+                                if (suCaiList.get(j).getSctype().equals(i + "")) {
+                                    btns[i].setText(name[i] + "(" + suCaiList.get(j).getCountsctype() + ")");
+                                    System.out.println(name[i] + "(" + suCaiList.get(j).getCountsctype() + ")");
+                                }
                             }
                         }
-                        btns[i].setText(name[i] + "(" + suCaiList.size() + ")");
-                        MainUi.map.put("changJingSuCaiFileYun_list", suCaiList);
+                        for (int i = 0; i < btns.length; i++) {
+                            if (!btns[i].getText().contains("(")) {
+                                btns[i].setText(name[i] + "(0)");
+                            }
+                            if (btns[i].isSelected()) {
+                                list = (JList) MainUi.map.get("changJingSuCaiDengKuYun");
+                                SuCaiFile file = listFile.get(list.getSelectedIndex());
+                                param = new HashMap<>();
+                                param.put("usercode", users.getUsercode());
+                                param.put("kuname", file.getKuname());
+                                param.put("sctype", btns[i].getName());
+                                request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/gettdsctype", param);
+                                suCaiList = JSON.parseArray(request, SuCaiFile.class);
+                                JList jList = (JList) MainUi.map.get("changJingSuCaiYun_list");
+                                model = (DefaultListModel) jList.getModel();
+                                model.removeAllElements();
+                                for (int j = 0; j < suCaiList.size(); j++) {
+                                    model.addElement(suCaiList.get(j).getShucainame());
+                                }
+                                jList.updateUI();
+                            }
+                        }
                     }
+
                 }
             }
         });
         Map<String, String> param = new HashMap<>();
-        param.put("username", users.getUsername());
-        String request = HttpClientUtil.doGet(Data.ipPort + "getku", param);
-        List<SuCaiFile> listFile = JSON.parseArray(request, SuCaiFile.class);
+        param.put("usercode", users.getUsercode());
+        String request = "";
+        if (flag) {//判断加载个人素材还是团队素材
+            request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/getgrkuname", param);
+        } else {
+            request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/gettdsckuname", param);
+        }
+
+        List<SuCaiFile> listFile = new ArrayList<SuCaiFile>();
+
+        if (request != null) {
+            listFile = JSON.parseArray(request, SuCaiFile.class);
+        }
+
         String[] s = new String[listFile.size()];
         for (int i = 0; i < listFile.size(); i++) {
             s[i] = listFile.get(i).getKuname();
@@ -215,13 +276,19 @@ public class YunChangJingSuCaiDialog implements ActionListener {
         SuCaiFile suCaiFile = listFile.get(index);
         int count = 0;
         Map<String, String> param = new HashMap<>();
-        param.put("username", users.getUsername());
+        param.put("usercode", users.getUsercode());
         param.put("kuname", suCaiFile.getKuname());
-        String request = HttpClientUtil.doGet(Data.ipPort + "getsctype", param);
+        String request = "";
+        if (flag) {
+            request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/getgrshucaisctypecount", param);
+        } else {
+            request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/gettdshucaisctypecount", param);
+        }
         List<SuCaiFile> files = JSON.parseArray(request, SuCaiFile.class);
         for (int j = 0; j < files.size(); j++) {
             count = Integer.parseInt(files.get(j).getCountsctype()) + count;
         }
+        System.out.println(count);
         return count + "";
     }
 
@@ -230,9 +297,14 @@ public class YunChangJingSuCaiDialog implements ActionListener {
         Map<String, String> param = new HashMap<>();
         int count = 0;
         for (int i = 0; i < listFile.size(); i++) {
-            param.put("username", users.getUsername());
+            param.put("usercode", users.getUsercode());
             param.put("kuname", listFile.get(i).getKuname());
-            String request = HttpClientUtil.doGet(Data.ipPort + "getsctype", param);
+            String request = "";
+            if (flag) {
+                request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/getgrshucaisctypecount", param);
+            } else {
+                request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/gettdshucaisctypecount", param);
+            }
             List<SuCaiFile> suCaiFile = JSON.parseArray(request, SuCaiFile.class);
             for (int j = 0; j < suCaiFile.size(); j++) {
                 count = Integer.parseInt(suCaiFile.get(j).getCountsctype()) + count;
@@ -284,9 +356,9 @@ public class YunChangJingSuCaiDialog implements ActionListener {
                 model.remove(list1.getSelectedIndex());
                 Map<String, String> param = new HashMap<>();
                 param.put("id", caiFile.getId() + "");
-                String request = HttpClientUtil.doGet(Data.ipPort + "deletesc", param);
+                String request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/deletegrshucainame", param);
                 Message message = JSON.parseObject(request, Message.class);
-                JOptionPane.showMessageDialog(frame, message.getCode(), "提示", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(frame, "删除成功", "提示", JOptionPane.PLAIN_MESSAGE);
                 refresh();
             }
         } else if ("下载".equals(e.getActionCommand())) {
@@ -335,9 +407,9 @@ public class YunChangJingSuCaiDialog implements ActionListener {
                 return;
             }
             String folder = System.getProperty("java.io.tmpdir");
-            File file = new File(folder+caiFile.getFilename() + ".xml");
+            File file = new File(folder + caiFile.getFilename() + ".xml");
             try {
-                URL url = new URL(HttpClientUtil.URLEncode(Data.downloadIp + caiFile.getShucaifile()));
+                URL url = new URL(HttpClientUtil.URLEncode(Data.downloadIp + caiFile.getShucaifile().replace('\\','/')));
                 HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
                 urlCon.setConnectTimeout(6000);
                 urlCon.setReadTimeout(6000);
@@ -369,7 +441,7 @@ public class YunChangJingSuCaiDialog implements ActionListener {
         }
     }
 
-    private void editSuCaiUI(JPanel pane, JDialog dialog) {
+    private void editSuCaiUI(JPanel pane, final JDialog dialog) {
         pane.setLayout(new FlowLayout(FlowLayout.LEFT));
         final SuCaiFile caiFile = getSelectSuCaiFile();
         if (caiFile == null) {
@@ -398,13 +470,14 @@ public class YunChangJingSuCaiDialog implements ActionListener {
                     Map<String, String> param = new HashMap<>();
                     param.put("kuname", caiFile.getKuname());
                     param.put("sctype", caiFile.getSctype());
-                    param.put("name", field3.getText());
-                    param.put("username", users.getUsername());
-                    param.put("i", "1");
+                    param.put("suchainame", field3.getText());
+                    System.out.println(users.getUsercode());
+                    param.put("username", users.getUsercode());
                     param.put("id", caiFile.getId() + "");
-                    String request = HttpClientUtil.doGet(Data.ipPort + "updatesc", param);
+
+                    String request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/updategrshucainame", param);
                     Message message = JSON.parseObject(request, Message.class);
-                    JOptionPane.showMessageDialog(frame, message.getCode(), "提示", JOptionPane.PLAIN_MESSAGE);
+                    JOptionPane.showMessageDialog(frame, "成功", "提示", JOptionPane.PLAIN_MESSAGE);
                     refresh();
                     dialog.dispose();
                 } else {
@@ -424,13 +497,21 @@ public class YunChangJingSuCaiDialog implements ActionListener {
 
     private void addSuCaiUI(JPanel dialog, final JDialog jDialog) {
 
+        List<SuCaiFile> suCaiFiles = (List<SuCaiFile>) MainUi.map.get("changJingDengKuYun");
+
         dialog.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.LEFT));
         panel.setPreferredSize(new Dimension(270, 40));
         panel.add(new JLabel("灯库名称"));
-        final JTextField field = new JTextField(14);
+        final JComboBox field = new JComboBox();
+        field.setPreferredSize(new Dimension(180, 30));
+        field.setEditable(true);
+        for (int i = 0; i < suCaiFiles.size(); i++) {
+            field.addItem(suCaiFiles.get(i).getKuname());
+        }
+//        final JTextField field = new JTextField(14);
         panel.add(field);
 
         JPanel panel2 = new JPanel();
@@ -474,10 +555,14 @@ public class YunChangJingSuCaiDialog implements ActionListener {
                 int returnVal = fileChooser.showSaveDialog(frame);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     file = fileChooser.getSelectedFile();
+
+
 //                    if (file.getName().contains("(") || file.getName().contains("（") || file.getName().contains(")") || file.getName().contains("）")) {
 //                        JOptionPane.showMessageDialog(frame, "文件名中不能带括号！", "提示", JOptionPane.PLAIN_MESSAGE);
 //                        return;
 //                    }
+                    String[] s = file.toString().split("\\\\");
+                    field3.setText(s[s.length - 1].split("[.]")[0]);
                     Data.yunProjectFilePath = file.getParent();
                 }
             }
@@ -490,7 +575,8 @@ public class YunChangJingSuCaiDialog implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if ("确定".equals(e.getActionCommand())) {
-                    if (field.getText() == null || field.getText().equals("")) {
+                    String str = field.getSelectedItem().toString();
+                    if (str == null || str.equals("")) {
                         JOptionPane.showMessageDialog(frame, "灯库名称未填写！", "提示", JOptionPane.PLAIN_MESSAGE);
                         return;
                     }
@@ -504,14 +590,15 @@ public class YunChangJingSuCaiDialog implements ActionListener {
                     }
                     HttpClientUtil httpsUtils = new HttpClientUtil();
                     Map<String, String> param = new HashMap<>();
-                    param.put("kuname", field.getText());
+                    param.put("kuname", str);
                     param.put("sctype", field2.getSelectedIndex() + "");
                     param.put("suchainame", field3.getText());
-                    param.put("username", users.getUsername());
-                    param.put("i", "0");
-                    Map<String, Object> resultMap = httpsUtils.uploadFileByHTTP(file, Data.ipPort + "insertsc", param);
-                    Message message = JSON.parseObject(resultMap.get("data").toString(), Message.class);
-                    JOptionPane.showMessageDialog(frame, message.getCode(), "提示", JOptionPane.PLAIN_MESSAGE);
+                    System.out.println(users.getUsercode());
+                    param.put("username", users.getUsercode());
+
+                    Map<String, Object> resultMap = httpsUtils.uploadFileByHTTP(file, Data.ipPort + "/js/a/jk/insertgrshucai", param);
+                    // Message message = JSON.parseObject(resultMap.get("data").toString(), Message.class);
+                    JOptionPane.showMessageDialog(frame, "成功", "提示", JOptionPane.PLAIN_MESSAGE);
                     refresh();
                     jDialog.dispose();
                 } else {
@@ -539,7 +626,7 @@ public class YunChangJingSuCaiDialog implements ActionListener {
         SuCaiFile selectDengzu = listFile.get(list.getSelectedIndex());
 
         Map<String, String> param = new HashMap<>();
-        param.put("username", users.getUsername());
+        param.put("usercode", users.getUsercode());
         param.put("kuname", selectDengzu.getKuname());
 
         JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("changJingSuCaiYunTypeBtns");
@@ -548,7 +635,12 @@ public class YunChangJingSuCaiDialog implements ActionListener {
         for (int i = 0; i < btns.length; i++) {
             if (btns[i].isSelected()) {
                 param.put("sctype", btns[i].getName());
-                String request = HttpClientUtil.doGet(Data.ipPort + "getsc", param);
+                String request = "";
+                if(flag){
+                    request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/getgrshucai", param);
+                }else{
+                    request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/gettdsctype", param);
+                }
                 List<SuCaiFile> suCaiList = JSON.parseArray(request, SuCaiFile.class);
                 suCaiFile = suCaiList.get(list1.getSelectedIndex());
             }
@@ -558,10 +650,10 @@ public class YunChangJingSuCaiDialog implements ActionListener {
 
     public void refresh() {
         Map<String, String> param = new HashMap<>();
-        param.put("username", users.getUsername());
+        param.put("usercode", users.getUsercode());
         JList list = (JList) MainUi.map.get("changJingSuCaiDengKuYun");
         list.removeAll();
-        String request = HttpClientUtil.doGet(Data.ipPort + "getku", param);
+        String request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/getgrkuname", param);
         List<SuCaiFile> listFile2 = JSON.parseArray(request, SuCaiFile.class);
         MainUi.map.put("changJingDengKuYun", listFile2);
         String[] s = new String[listFile2.size()];
@@ -595,7 +687,7 @@ public class YunChangJingSuCaiDialog implements ActionListener {
         model.removeAllElements();
         for (int i = 0; i < btns.length; i++) {
             param.put("sctype", btns[i].getName());
-            request = HttpClientUtil.doGet(Data.ipPort + "getsc", param);
+            request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/getgrshucai", param);
             List<SuCaiFile> suCaiList = JSON.parseArray(request, SuCaiFile.class);
             if (btns[i].isSelected()) {
                 for (int j = 0; j < suCaiList.size(); j++) {
@@ -615,10 +707,10 @@ public class YunChangJingSuCaiDialog implements ActionListener {
         List<SuCaiFile> listFile = (List<SuCaiFile>) MainUi.map.get("changJingDengKuYun");
         SuCaiFile file = listFile.get(list.getSelectedIndex());
         Map<String, String> param = new HashMap<>();
-        param.put("username", users.getUsername());
+        param.put("usercode", users.getUsercode());
         param.put("kuname", file.getKuname());
         param.put("sctype", type);
-        String request = HttpClientUtil.doGet(Data.ipPort + "getsc", param);
+        String request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/getgrshucai", param);
         List<SuCaiFile> suCaiList = JSON.parseArray(request, SuCaiFile.class);
         JList jList = (JList) MainUi.map.get("changJingSuCaiYun_list");
         DefaultListModel model = (DefaultListModel) jList.getModel();

@@ -65,7 +65,7 @@ public class ProgrammePaneUI {
         gonNengBoxs.addItemListener(changJingSelectItemListener);
         label.setText("正在编辑：【" + dengGuangBoxs.getSelectedIndex() + "】场景");
 
-        DengJuKaiGuangItemListener itemListener = new DengJuKaiGuangItemListener();
+        final DengJuKaiGuangItemListener itemListener = new DengJuKaiGuangItemListener();
 
         JPanel p9 = new JPanel();
         TitledBorder tb1 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "开关设置", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));

@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
 import com.boray.beiFen.Listener.*;
-import com.boray.main.Listener.DataWriteListener;
 import com.boray.mainUi.MainUi;
 
 public class BeiFenUI {
@@ -65,10 +63,10 @@ public class BeiFenUI {
         flowLayout.setVgap(4);
         p1.setLayout(flowLayout);
         //p1.setPreferredSize(new Dimension(920,180));
-        p1.setPreferredSize(new Dimension(920, 150));
+        p1.setPreferredSize(new Dimension(920, 120));
 
         JPanel p1_1 = new JPanel();
-        p1_1.setPreferredSize(new Dimension(420, 100));
+        p1_1.setPreferredSize(new Dimension(420, 80));
         p1_1.setLayout(flowLayout);
         TitledBorder tb5 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "配置", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         p1_1.setBorder(tb5);
@@ -77,24 +75,24 @@ public class BeiFenUI {
         btn.addActionListener(new LoadToDeviceActionListener());
         btn.setPreferredSize(new Dimension(120, 34));
         JRadioButton radioButton = new JRadioButton("灯光");
-//        JRadioButton radioButton2 = new JRadioButton("空调");
+        JRadioButton radioButton2 = new JRadioButton("空调");
         JRadioButton radioButton3 = new JRadioButton("中控");
         JRadioButton radioButton4 = new JRadioButton("全部");
         List list = new ArrayList();
         list.add(radioButton);
-//        list.add(radioButton2);
+        list.add(radioButton2);
         list.add(radioButton3);
         list.add(radioButton4);
         MainUi.map.put("LoadSetListComponent", list);
         radioButton.setSelected(true);
         ButtonGroup group = new ButtonGroup();
         group.add(radioButton);
-//        group.add(radioButton2);
+        group.add(radioButton2);
         group.add(radioButton3);
         group.add(radioButton4);
         p1_1.add(btn);
         p1_1.add(radioButton);
-//        p1_1.add(radioButton2);
+        p1_1.add(radioButton2);
         p1_1.add(radioButton3);
         p1_1.add(radioButton4);
         JPanel np = new JPanel();
@@ -127,7 +125,6 @@ public class BeiFenUI {
         np.add(np2);
 
         p1.add(p1_1);
-        p1.add(np);
 
 
         JPanel p2 = new JPanel();
@@ -151,7 +148,7 @@ public class BeiFenUI {
         TitledBorder tb4 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "U盘", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         p3.setBorder(tb4);
         p3.setLayout(flowLayout);
-        p3.setPreferredSize(new Dimension(920, 70));
+		p3.setPreferredSize(new Dimension(920, 70));
         JLabel label = new JLabel("设备U盘状态：");
         JLabel state = new JLabel("未插入");
         MainUi.map.put("state", state);
@@ -172,7 +169,7 @@ public class BeiFenUI {
         progressBar.setStringPainted(true);
         progressBar.setVisible(false);
         p3.add(progressBar);
-        MainUi.map.put("USBProgressBar", progressBar);
+        MainUi.map.put("USBProgressBar",progressBar);
 
         pane.add(p3);
     }

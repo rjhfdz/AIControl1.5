@@ -488,6 +488,11 @@ public class UpLoadOrLoadShengKonSuCaiListener implements ActionListener {
                         DefaultListModel model = (DefaultListModel) list.getModel();
                         ///获取素材数量
                         JList suCaiLightType = (JList) MainUi.map.get("shengKonSuCaiLightType");
+                        if(suCaiLightType.getSelectedValue()==null){
+                            JFrame frame = (JFrame) MainUi.map.get("frame");
+                            JOptionPane.showMessageDialog(frame, "请新建灯组后再进行操作！", "提示", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
                         Map map2 = (Map) Data.shengKonSuCaiMap.get(suCaiLightType.getSelectedValue().toString());
                         JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("shengKonSuCaiTypeBtns");
                         String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};

@@ -1,20 +1,12 @@
 package com.boray.main.UI;
 
-import com.alibaba.fastjson.JSON;
-import com.boray.Data.Data;
-import com.boray.Utils.HttpClientUtil;
-import com.boray.entity.Admin;
-import com.boray.entity.Users;
 import com.boray.main.Listener.LoginListener;
 import com.boray.main.Listener.SelectListener;
 import com.boray.mainUi.MainUi;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import javax.swing.text.StyledEditorKit;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -58,31 +50,36 @@ public class BorayMainUI {
         pane.setLayout(new FlowLayout(FlowLayout.LEFT));
         JPanel leftPane = new JPanel();
         leftPane.setBorder(new LineBorder(Color.gray));
-        leftPane.setPreferredSize(new Dimension(130, 588));
+        leftPane.setPreferredSize(new Dimension(108, 588));
         JToggleButton btn = new JToggleButton("官方发布");
         JToggleButton btn2 = new JToggleButton("个人管理");
         JToggleButton btn3 = new JToggleButton("成员管理");
         JToggleButton btn4 = new JToggleButton("设置团队");
         JToggleButton btn5 = new JToggleButton("本地项目");
+        JToggleButton btn6 = new JToggleButton("团队资料");
+        JToggleButton btn7 = new JToggleButton("切换用户");
         btn.setPreferredSize(new Dimension(98, 58));
         btn2.setPreferredSize(new Dimension(98, 58));
         btn3.setPreferredSize(new Dimension(98, 58));
         btn4.setPreferredSize(new Dimension(98, 58));
         btn5.setPreferredSize(new Dimension(98, 58));
+        btn6.setPreferredSize(new Dimension(98, 58));
+        btn7.setPreferredSize(new Dimension(98, 58));
         ButtonGroup group = new ButtonGroup();
-
         group.add(btn);
         group.add(btn2);
         group.add(btn3);
         group.add(btn4);
         group.add(btn5);
+        group.add(btn6);
+        group.add(btn7);
         btn.setSelected(true);
         btn2.setFocusable(false);
         btn3.setFocusable(false);
         btn4.setFocusable(false);
-        btn5.setFocusable(false);
 
-
+        leftPane.add(btn2);
+        leftPane.add(btn4);
         leftPane.add(btn);
         leftPane.add(btn2);
         if (CheckAdmin()) {//查询是否是管理员
@@ -90,44 +87,8 @@ public class BorayMainUI {
         }
         leftPane.add(btn4);
         leftPane.add(btn5);
-        if (CheckAdmin()) {//查询是否是管理员
-            JPanel panel = new JPanel();
-            panel.setPreferredSize(new Dimension(120, 200));
-            leftPane.add(panel);
-        } else {
-            JPanel panel = new JPanel();
-            panel.setPreferredSize(new Dimension(120, 260));
-            leftPane.add(panel);
-        }
-        JLabel LogoutLabel = new JLabel("<html>注销</html>");
-        LogoutLabel.setVisible(true);
-        MainUi.map.put("LogoutLabel", LogoutLabel);
-        LogoutLabel.setForeground(Color.BLUE);
-        LogoutLabel.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent e) {
-                JLabel label = (JLabel) e.getSource();
-                label.setCursor(new Cursor(Cursor.HAND_CURSOR));
-            }
-
-            public void mouseReleased(MouseEvent e) {
-                Object[] options = {"否", "是"};
-                int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "是否注销？", "提示",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-                        null, options, options[1]);
-                if(yes == 1){
-                    MainUi.map.remove("Users");
-                    JLabel LogoutLabel = (JLabel) MainUi.map.get("LogoutLabel");
-                    LogoutLabel.setVisible(false);
-                    new UccnUI().show((JPanel) MainUi.map.get("UccnPanel"));
-                    new MineUI().show((JPanel) MainUi.map.get("MinePanel"));
-                    new ShareUI().show((JPanel) MainUi.map.get("SharePanel"));
-                    new CompanyUI().show((JPanel) MainUi.map.get("CompanyPanel"));
-                }
-            }
-        });
-
-        leftPane.add(LogoutLabel);
-
+        leftPane.add(btn6);
+        leftPane.add(btn7);
         rightPane = new JPanel();
         card = new CardLayout();
         rightPane.setLayout(card);
@@ -138,6 +99,8 @@ public class BorayMainUI {
         btn3.addItemListener(listener);
         btn4.addItemListener(listener);
         btn5.addItemListener(listener);
+        btn6.addItemListener(listener);
+        btn7.addItemListener(listener);
 
         JPanel uccnPanel = new JPanel();//官方发布
         new UccnUI().show(uccnPanel);
@@ -148,24 +111,34 @@ public class BorayMainUI {
         MainUi.map.put("MinePanel", minePanel);
 
         JPanel sharePanel = new JPanel();//成员管理
-        new ShareUI().show(sharePanel);
+        if (CheckAdmin()) {//查询是否是管理员
+        	 new ShareUI().show(sharePanel);
+        }
+
         MainUi.map.put("SharePanel", sharePanel);
 
 
         JPanel CompanyPanel = new JPanel();//设置团队
-//        new CompanyUI().show(CompanyPanel);
+        new CompanyUI().show(CompanyPanel);
         MainUi.map.put("CompanyPanel", CompanyPanel);
 
         JPanel LocalPanel = new JPanel();//本地项目
         new LocalUI().show(LocalPanel);
+
+        JPanel TdUi = new JPanel();//团队资料
+        new TdUi().show(TdUi);
+
+        JPanel denglu = new JPanel();//登录
+        new LoginUi().show(denglu);
 
         rightPane.add(uccnPanel, "1");
         rightPane.add(minePanel, "2");
         rightPane.add(sharePanel, "3");
         rightPane.add(CompanyPanel, "4");
         rightPane.add(LocalPanel, "5");
+        rightPane.add(TdUi, "6");
+        rightPane.add(denglu, "7");
 
-//        VisibleUser();
         pane.add(leftPane);
         pane.add(rightPane);
     }
@@ -189,17 +162,5 @@ public class BorayMainUI {
             }
         }
         return flag;
-    }
-
-    /**
-     * 显示当前登录用户
-     */
-    private void VisibleUser() {
-        Users users = (Users) MainUi.map.get("Users");
-        JLabel UserLabel = (JLabel) MainUi.map.get("UserLabel");
-        JLabel LogoutLabel = (JLabel) MainUi.map.get("LogoutLabel");
-        UserLabel.setText("用户:" + users.getUsercode());
-        UserLabel.setVisible(true);
-        LogoutLabel.setVisible(true);
     }
 }

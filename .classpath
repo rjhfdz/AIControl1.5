@@ -16,11 +16,12 @@
 	<classpathentry kind="lib" path="src/lib/usb4java-1.2.0.jar"/>
 	<classpathentry kind="lib" path="src/lib/usb4java-javax-1.2.0.jar"/>
 	<classpathentry kind="lib" path="src/lib/usbJava.jar"/>
-	<classpathentry kind="lib" path="src/lib/httpclient-4.5.2.jar"/>
 	<classpathentry kind="lib" path="src/lib/httpcore-4.4.4.jar"/>
 	<classpathentry kind="lib" path="src/lib/commons-logging-1.2.jar"/>
 	<classpathentry kind="lib" path="src/lib/fastjson-1.2.4.jar"/>
-	<classpathentry kind="lib" path="src/lib/mysql-connector-java-5.1.46.jar"/>
 	<classpathentry kind="lib" path="src/lib/httpmime-4.3.5.jar"/>
+	<classpathentry kind="lib" path="src/lib/httpclient-4.5.5.jar"/>
+	<classpathentry kind="lib" path="src/lib/httpmime-4.1.1-sources.jar"/>
+	<classpathentry kind="lib" path="src/lib/substance.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

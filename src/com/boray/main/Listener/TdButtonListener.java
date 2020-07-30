@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MineButtonListener implements ActionListener {
+public class TdButtonListener implements ActionListener {
 
     private JFrame frame;
     private JTree tree;
@@ -41,7 +41,7 @@ public class MineButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String str = e.getActionCommand();
         frame = (JFrame) MainUi.map.get("frame");
-        tree = (JTree) MainUi.map.get("mineTree");
+        tree = (JTree) MainUi.map.get("tdTree");
         if (str.equals("新建项目")) {
             IconJDialog dialog = new IconJDialog(frame, true);
             dialog.setResizable(false);
@@ -87,7 +87,7 @@ public class MineButtonListener implements ActionListener {
                 param.put("xmid", folder.getId() + "");
                 String request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/deletegrxm", param);
                 Message message = JSON.parseObject(request, Message.class);
-                JOptionPane.showMessageDialog(frame, "删除成功", "提示", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(frame, message.getCode(), "提示", JOptionPane.PLAIN_MESSAGE);
                 refresh();
             } else {
                 JOptionPane.showMessageDialog(frame, "请选择项目！", "提示", JOptionPane.PLAIN_MESSAGE);
@@ -155,13 +155,6 @@ public class MineButtonListener implements ActionListener {
                 JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
             }
-            Object[] options = {"否", "是"};
-            int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "是否删除？", "警告",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-                    null, options, options[1]);
-            if(yes==0) {
-            	return;
-            }
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
             if (node.getUserObject() instanceof ProjectFile) {
                 ProjectFile file = (ProjectFile) node.getUserObject();
@@ -169,13 +162,13 @@ public class MineButtonListener implements ActionListener {
                 map.put("id", file.getId() + "");
                 String request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/deletegrgcname", map);
                 Message message = JSON.parseObject(request, Message.class);
-                JOptionPane.showMessageDialog(frame, "成功", "提示", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(frame, message.getCode(), "提示", JOptionPane.PLAIN_MESSAGE);
                 refresh();
             } else {
                 JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
             }
         } else if (str.equals("下载工程")) {
-
+        	
             if (null == tree.getSelectionPath().getLastPathComponent()) {
                 JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
@@ -246,7 +239,7 @@ public class MineButtonListener implements ActionListener {
       //  param.put("i", "0");
         Map<String, Object> resultMap = httpsUtils.uploadFileByHTTP(file, Data.ipPort + "/js/a/jk/insertgrgc", param);
         Message message = JSON.parseObject(resultMap.get("data").toString(), Message.class);
-        JOptionPane.showMessageDialog(frame, "成功", "提示", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(frame, message.getCode(), "提示", JOptionPane.PLAIN_MESSAGE);
         refresh();
 
     }
@@ -412,7 +405,7 @@ public class MineButtonListener implements ActionListener {
         TreeUtil util = new TreeUtil();
         util.expandAll(tree, new TreePath(root), true);
     }
-
+    
     private void refresh2() {
         tree.removeAll();
         CustomTreeNode root = new CustomTreeNode("团队项目");
@@ -455,6 +448,6 @@ public class MineButtonListener implements ActionListener {
         String request = HttpClientUtil.doGet(Data.ipPort + code, param);
         //Message message = JSON.parseObject(request, Message.class);
         dialog.dispose();
-        JOptionPane.showMessageDialog(frame, "成功", "提示", JOptionPane.PLAIN_MESSAGE);
+        JOptionPane.showMessageDialog(frame, request, "提示", JOptionPane.PLAIN_MESSAGE);
     }
 }

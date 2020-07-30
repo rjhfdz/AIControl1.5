@@ -136,7 +136,7 @@ public class ShareUI {
         DefaultTreeModel model = new DefaultTreeModel(rootNode);
 
         // 使用根节点创建树组件
-        JTree tree = new JTree(model);
+        final JTree tree = new JTree(model);
 
         //设置图标样式
         tree.setCellRenderer(new CustomTreeCellRenderer());
@@ -176,7 +176,7 @@ public class ShareUI {
         TreeUtil util = new TreeUtil();
         util.expandAll(tree, new TreePath(rootNode), true);
 
-        MainUi.map.put("shareTree", tree);
+        MainUi.map.put("shareTree1", tree);
 
         pane.add(panel);
     }

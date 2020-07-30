@@ -339,7 +339,7 @@ public class YaoMaiModelUI implements ActionListener {
             box.setSelectedItem(setValue[2]);
         }
 
-        JButton button = new JButton("单选");
+        final JButton button = new JButton("单选");
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

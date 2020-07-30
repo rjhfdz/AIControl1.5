@@ -167,7 +167,7 @@ public class SuCaiEditUI {
 
         //获得DMX起始地址
         List<Integer> list = new ArrayList<Integer>();
-        NewJTable table = (NewJTable) MainUi.map.get("table_dengJu");//所有灯具
+        final NewJTable table = (NewJTable) MainUi.map.get("table_dengJu");//所有灯具
         for (int i = 0; i < table.getRowCount(); i++) {
             String str = table.getValueAt(i, 3).toString();
             int index = Integer.parseInt(str.substring(2, str.indexOf("#"))) - 1;

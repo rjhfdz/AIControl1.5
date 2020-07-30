@@ -182,9 +182,6 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="StructureViewFactory">
-    <option name="ACTIVE_ACTIONS" value=",SHOW_PROPERTIES,SHOW_INTERFACES,SHOW_ANONYMOUS,SHOW_LAMBDA" />
-  </component>
   <component name="SvnConfiguration" cleanupOnStartRun="true">
     <configuration>C:\Users\Administrator\AppData\Roaming\Subversion</configuration>
     <supportedVersion>125</supportedVersion>
@@ -952,16 +949,6 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
   </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ORDER">
-      <list>
-        <option value="0" />
-        <option value="2" />
-        <option value="3" />
-        <option value="1" />
-      </list>
-    </option>
-  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -1019,10 +1006,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="679" y="111" key="#Custom_Plugin_Repositories/0.0.1920.1040@0.0.1920.1040" timestamp="1589265521924" />
+    <state x="679" y="111" key="#HTTP_Proxy" timestamp="1586591873063">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="679" y="111" key="#HTTP_Proxy/0.0.1920.1040@0.0.1920.1040" timestamp="1586591873063" />
     <state x="533" y="52" key="#Java" timestamp="1589194194872">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="533" y="52" key="#Java/0.0.1920.1040@0.0.1920.1040" timestamp="1589194194872" />
+    <state x="552" y="178" key="#Notifications" timestamp="1586911043199">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="178" key="#Notifications/0.0.1920.1040@0.0.1920.1040" timestamp="1586911043199" />
     <state x="742" y="204" key="#Plugins" timestamp="1590108000616">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

@@ -1,6 +1,6 @@
 package com.boray.entity;
 
-public class ProjectFile {
+	public class ProjectFile {
     private int id;//ID
     private String gcname;//工程名字
     private String xmid;//项目id

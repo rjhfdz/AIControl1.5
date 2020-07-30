@@ -93,11 +93,9 @@ public class ShengKonSuCaiEditUI {
             if (al == null) {
                 al = new int[11];//a[10]表示多灯控制
                 al[0] = 1;
-                al[1] = 1;
                 al[5] = 1;
                 al[7] = 1;
                 al[9] = 1;
-                al[10] = 1;
             }
 
             JTabbedPane tabbedPane = new JTabbedPane();
@@ -324,16 +322,6 @@ public class ShengKonSuCaiEditUI {
         Iterator iterator = treeSet.iterator();
         ActionListener listener = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (group.getButtonCount() <= 0) {
-                    selectPre.clear();
-                    for (int i = 0; i < buttons.length; i++) {
-                        if (buttons[i].isSelected()) {
-                            selectPre.add(i);
-                        }
-                    }
-                    return;
-                }
-
                 JToggleButton btn = (JToggleButton) e.getSource();
                 int start = Integer.valueOf(btn.getName()).intValue() * channelCount;
 
@@ -873,7 +861,7 @@ public class ShengKonSuCaiEditUI {
                         try {
                             button1.setEnabled(false);
                             save();
-                            TimeBlockReviewData.sendShengKonData(denKuNum, suCaiNum, startAddress, channelCount, duoDengCtrlBox);
+                            TimeBlockReviewData.sendShengKonData(denKuNum,suCaiNum,startAddress,channelCount,duoDengCtrlBox);
                         } catch (Exception e2) {
                             e2.printStackTrace();
                         } finally {
@@ -1181,28 +1169,7 @@ public class ShengKonSuCaiEditUI {
         JTextField field3 = new JTextField(12);
         field3.setEnabled(false);
         field3.setText(cnt + "");
-        JButton button = new JButton("单选");
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(al[10]==1){
-                    JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "当前多灯控制为全部控制，单选多选按钮无效！", "提示", JOptionPane.ERROR_MESSAGE);
-                }
-                if (e.getActionCommand().equals("单选")) {
-                    for (int i = 0; i < buttons.length; i++) {
-                        group.remove(buttons[i]);
-                    }
-                    button.setText("多选");
-                } else {
-                    for (int i = 0; i < buttons.length; i++) {
-                        group.add(buttons[i]);
-                    }
-                    button.setText("单选");
-                }
-            }
-        });
         pane.add(field3);
-        pane.add(button);
     }
 
     private void outDevice() {

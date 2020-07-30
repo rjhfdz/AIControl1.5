@@ -44,7 +44,7 @@ public class IpConnectAndOffListener implements ActionListener {
                 JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "请先断开串口连接后再尝试!", "提示", JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            JIpAddressField IpAddress = (JIpAddressField) MainUi.map.get("IpAddress");
+            final JIpAddressField IpAddress = (JIpAddressField) MainUi.map.get("IpAddress");
             IpAddress.setEnabled(false);
             try {
                 Data.address = new InetSocketAddress(IpAddress.getIpAddress(), Data.port);

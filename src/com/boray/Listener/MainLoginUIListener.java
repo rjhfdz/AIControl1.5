@@ -8,7 +8,6 @@ import com.boray.main.Util.IpConfig;
 import com.boray.mainUi.*;
 
 import javax.swing.*;
-import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
@@ -74,6 +73,7 @@ public class MainLoginUIListener implements ActionListener {
 //                if (Data.RememberPassword) {
 //                    Data.userLogin.put(Util.encode(username), Util.encode(password));
 //                }
+                users.setLoginstatus(1);
                 users.setUserpassword(password);
                 MainUi.map.put("Users", users);
                 frame.getContentPane().removeAll();
@@ -96,7 +96,7 @@ public class MainLoginUIListener implements ActionListener {
     }
 
     private void init() {
-//        frame.setLayout(new FlowLayout(FlowLayout.LEFT));
+        frame.setLayout(new FlowLayout(FlowLayout.LEFT));
 //        JTabbedPane tabbedPane = new JTabbedPane();
 //        tabbedPane.setBorder(BorderFactory.createEmptyBorder(0,0,0,0));
 //        tabbedPane.setPreferredSize(new Dimension(1020,100));
@@ -128,16 +128,8 @@ public class MainLoginUIListener implements ActionListener {
         main.add(lightPane);
         main.add(bodyPane);
         main.add(rjghtPane);
-        JLabel statusbar = new JLabel();
-        MainUi.map.put("statusbar", statusbar);
-        statusbar.setForeground(Color.RED);
-        //statusbar.setText("nimabi");
-        Util.checkUserState();
-        statusbar.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
-        frame.add(statusbar, BorderLayout.SOUTH);
         frame.add(main);
 //        frame.setVisible(true);
         frame.validate();
     }
-
 }
