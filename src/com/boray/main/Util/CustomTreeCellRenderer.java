@@ -21,6 +21,7 @@ public class CustomTreeCellRenderer extends DefaultTreeCellRenderer {
     private static final ImageIcon company = (ImageIcon) Resources.getInstance().createIcon(Resources.getInstance().createImage("prfrs_32.png"), 16, 16);
     private static final ImageIcon local = (ImageIcon) Resources.getInstance().createIcon(Resources.getInstance().createImage("MidType.png"), 16, 16);
     private static final ImageIcon file = (ImageIcon) Resources.getInstance().createIcon(Resources.getInstance().createImage("FileIcon.png"), 16, 16);
+    private static final ImageIcon member = (ImageIcon) Resources.getInstance().createIcon(Resources.getInstance().createImage("Group.png"), 16, 16);
 
     @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded, boolean leaf, int row, boolean hasFocus) {

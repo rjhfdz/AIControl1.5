@@ -41,8 +41,7 @@ public class MineUI {
 
     public void show(JPanel panel) {
         if (MainUi.map.get("Users") == null) {
-        	 panel.removeAll();//清除所有控件，重新布局
-             panel.updateUI();
+            panel.removeAll();//清除所有控件，重新布局
             JPanel jPanel2 = new JPanel();
             jPanel2.setPreferredSize(new Dimension(900, 588));
             JPanel jPanel = new JPanel();
@@ -60,6 +59,8 @@ public class MineUI {
             pane.add(password);
             JButton clear = new JButton("清除");
             JButton login = new JButton("登录");
+            login.setName("Mine");
+            clear.setName("Mine");
 
             listener = new LoginListener(pane);
             login.addActionListener(listener);
@@ -70,6 +71,7 @@ public class MineUI {
             jPanel2.add(jPanel);
             jPanel2.add(pane);
             panel.add(jPanel2, BorderLayout.CENTER);
+            panel.updateUI();
         } else {
             panel.removeAll();//清除所有控件，重新布局
             panel.updateUI();
@@ -212,7 +214,6 @@ public class MineUI {
 
             ShengKonSuCai.add(node);
         }
-
 
 
         // 设置树显示根节点句柄

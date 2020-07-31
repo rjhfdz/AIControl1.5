@@ -11,6 +11,7 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 import com.boray.beiFen.Listener.*;
+import com.boray.main.Listener.DataWriteListener;
 import com.boray.mainUi.MainUi;
 
 public class BeiFenUI {

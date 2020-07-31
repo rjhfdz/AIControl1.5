@@ -52,14 +52,16 @@ public class TdUi {
             pane.setPreferredSize(new Dimension(350, 200));
             pane.add(new JLabel("用户名："));
             JTextField username = new JTextField(20);
-            MainUi.map.put("MineUsername", username);
+            MainUi.map.put("TdUiUsername", username);
             pane.add(username);
             JPasswordField password = new JPasswordField(20);
-            MainUi.map.put("MinePassword", password);
+            MainUi.map.put("TdUiPassword", password);
             pane.add(new JLabel("密码：   "));
             pane.add(password);
             JButton clear = new JButton("清除");
             JButton login = new JButton("登录");
+            login.setName("TdUi");
+            clear.setName("TdUi");
 
             listener = new LoginListener(pane);
             login.addActionListener(listener);
@@ -70,6 +72,7 @@ public class TdUi {
             jPanel2.add(jPanel);
             jPanel2.add(pane);
             panel.add(jPanel2, BorderLayout.CENTER);
+            panel.updateUI();
         } else {
             panel.removeAll();//清除所有控件，重新布局
             panel.updateUI();

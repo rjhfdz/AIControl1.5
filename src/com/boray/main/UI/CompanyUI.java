@@ -51,17 +51,17 @@ public class CompanyUI {
             pane.setPreferredSize(new Dimension(350, 200));
             pane.add(new JLabel("用户名："));
             JTextField username = new JTextField(20);
-            MainUi.map.put("ShareUsername", username);
+            MainUi.map.put("CompanyUsername", username);
             pane.add(username);
             JPasswordField password = new JPasswordField(20);
-            MainUi.map.put("SharePassword", password);
+            MainUi.map.put("CompanyPassword", password);
             pane.add(new JLabel("密码：   "));
             pane.add(password);
             JButton clear = new JButton("清除");
             JButton login = new JButton("登录");
             JButton register = new JButton("注册");
-            login.setName("Share");
-            clear.setName("Share");
+            login.setName("Company");
+            clear.setName("Company");
 
             listener = new LoginListener(pane);
             login.addActionListener(listener);
@@ -74,6 +74,7 @@ public class CompanyUI {
             jPanel2.add(jPanel);
             jPanel2.add(pane);
             panel.add(jPanel2, BorderLayout.CENTER);
+            panel.updateUI();
         } else {
             panel.removeAll();//清除所有控件，重新布局
             panel.updateUI();

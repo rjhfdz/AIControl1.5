@@ -61,6 +61,7 @@ public class UccnUI {
             jPanel2.add(jPanel);
             jPanel2.add(pane);
             panel.add(jPanel2, BorderLayout.CENTER);
+            panel.updateUI();
         } else {
             panel.removeAll();//清除所有控件，重新布局
             panel.updateUI();
@@ -101,7 +102,7 @@ public class UccnUI {
     public void init(JPanel pane) {
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(new LineBorder(Color.gray));
-        panel.setPreferredSize(new Dimension(420, 650));
+        panel.setPreferredSize(new Dimension(420, 550));
 
         // 创建根节点
         CustomTreeNode rootNode = new CustomTreeNode("官方共享");

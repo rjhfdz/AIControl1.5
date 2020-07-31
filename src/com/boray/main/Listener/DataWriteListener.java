@@ -18,6 +18,7 @@ import java.io.IOException;
 public class DataWriteListener implements ActionListener {
 
     private JButton dataWrite;
+    private String DataWriteBtnName;
 
     public DataWriteListener(JButton dataWrite) {
         this.dataWrite = dataWrite;
@@ -33,8 +34,12 @@ public class DataWriteListener implements ActionListener {
             @Override
             public void run() {
                 if (Data.serialPort != null) {
-//                    if (Data.file != null) {
                     dataWrite.setEnabled(false);
+                    if (DataWriteBtnName.equals("BeiFenComAndWifiDataWrite") && Data.saveCtrlFile == "") {
+                        JOptionPane.showMessageDialog(frame, "未选择控制器文件！", "提示", JOptionPane.ERROR_MESSAGE);
+                        dataWrite.setEnabled(true);
+                        return;
+                    }
                     try {
                         Data.dataWrite = DataPack(4096);
                         //发起第一包后 线程监听
@@ -42,35 +47,16 @@ public class DataWriteListener implements ActionListener {
                         Data.sendDataSum = 0;//记录发包
                         dataWrite.setText((Data.sendDataSum + 1) + "/" + Data.dataWrite.length);
                         Util.againSendData();//开启定时器 未收到反馈时，重发数据
-//                            Object[] objects = DataPack(4096);
-//                            OutputStream os = Data.serialPort.getOutputStream();
-//                            int j = 0;
-//                            for (int i = 0; i < objects.length; i++) {
-//                                if (j == 0)
-//                                    dataWrite.setText("写入中");
-//                                else if (j == 1)
-//                                    dataWrite.setText("写入中.");
-//                                else if (j == 2)
-//                                    dataWrite.setText("写入中..");
-//                                else if (j == 3)
-//                                    dataWrite.setText("写入中...");
-//                                j++;
-//                                if (j > 3)
-//                                    j = 0;
-//                                byte[] b = (byte[]) objects[i];
-//                                os.write(b);
-//                                os.flush();
-//                                Thread.sleep(200);
-//                            }
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-//                    } else {
-//                        JOptionPane.showMessageDialog(frame, "请先生成初始版本的控制器文件导入到控制器，再进行写入！", "提示", JOptionPane.ERROR_MESSAGE);
-//                    }
                 } else if (Data.socket != null) {
-//                    if (Data.file != null) {
                     dataWrite.setEnabled(false);
+                    if (DataWriteBtnName.equals("BeiFenComAndWifiDataWrite") && Data.saveCtrlFile == "") {
+                        JOptionPane.showMessageDialog(frame, "未选择控制器文件！", "提示", JOptionPane.ERROR_MESSAGE);
+                        dataWrite.setEnabled(true);
+                        return;
+                    }
                     try {
                         Data.dataWrite = DataPack(1280);
                         //发起第一包后 线程监听
@@ -78,29 +64,9 @@ public class DataWriteListener implements ActionListener {
                         Data.sendDataSum = 0;//记录发包
                         dataWrite.setText((Data.sendDataSum + 1) + "/" + Data.dataWrite.length);
                         Util.againSendData();//开启定时器 未收到反馈时，重发数据
-//                            int j = 0;
-//                            for (int i = 0; i < objects.length; i++) {
-//                                if (j == 0)
-//                                    dataWrite.setText("写入中");
-//                                else if (j == 1)
-//                                    dataWrite.setText("写入中.");
-//                                else if (j == 2)
-//                                    dataWrite.setText("写入中..");
-//                                else if (j == 3)
-//                                    dataWrite.setText("写入中...");
-//                                j++;
-//                                if (j > 3)
-//                                    j = 0;
-//                                byte[] b = (byte[]) objects[i];
-//                                Socket.UDPSendData(b);
-//                                Thread.sleep(300);
-//                            }
                     } catch (Exception ex) {
                         ex.printStackTrace();
                     }
-//                    } else {
-//                        JOptionPane.showMessageDialog(frame, "请先生成初始版本的控制器文件导入到控制器，再进行写入！", "提示", JOptionPane.ERROR_MESSAGE);
-//                    }
                 } else {
                     JOptionPane.showMessageDialog(frame, "串口或网络未连接，请连接串口后，再进行写入！", "提示", JOptionPane.ERROR_MESSAGE);
                 }

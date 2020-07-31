@@ -68,6 +68,7 @@ public class ShareUI {
             jPanel2.add(jPanel);
             jPanel2.add(pane);
             panel.add(jPanel2, BorderLayout.CENTER);
+            panel.updateUI();
         } else {
             panel.removeAll();//清除所有控件，重新布局
             panel.updateUI();
