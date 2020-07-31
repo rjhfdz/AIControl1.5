@@ -99,6 +99,7 @@ public class LoginListener implements ActionListener {
 //                }
                 users.setUserpassword(password);
                 MainUi.map.put("Users", users);
+                CheckAdmin();
 //                JPanel p = (JPanel) MainUi.map.get("dapane");
 //
 //
@@ -260,6 +261,8 @@ public class LoginListener implements ActionListener {
             if (admin.getCode() == 0) {
                 flag = true;
                 MainUi.map.put("admin", admin);
+                JToggleButton btn = (JToggleButton) MainUi.map.get("ShareBtn");
+                btn.setVisible(true);
             }
         }
         return flag;

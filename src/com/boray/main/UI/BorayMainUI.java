@@ -89,9 +89,11 @@ public class BorayMainUI {
         leftPane.add(btn4);
         leftPane.add(btn);
         leftPane.add(btn2);
-        if (CheckAdmin()) {//查询是否是管理员
-            leftPane.add(btn3);
-        }
+//        if (CheckAdmin()) {//查询是否是管理员
+        leftPane.add(btn3);
+        btn3.setVisible(false);
+        MainUi.map.put("ShareBtn",btn3);
+//        }
         leftPane.add(btn4);
         leftPane.add(btn5);
         leftPane.add(btn6);
@@ -112,7 +114,7 @@ public class BorayMainUI {
                 int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "是否注销？", "提示",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                         null, options, options[1]);
-                if(yes == 1){
+                if (yes == 1) {
                     MainUi.map.remove("Users");
                     JLabel LogoutLabel = (JLabel) MainUi.map.get("LogoutLabel");
                     LogoutLabel.setVisible(false);
@@ -149,7 +151,7 @@ public class BorayMainUI {
 
         JPanel sharePanel = new JPanel();//成员管理
         if (CheckAdmin()) {//查询是否是管理员
-        	 new ShareUI().show(sharePanel);
+            new ShareUI().show(sharePanel);
         }
 
         MainUi.map.put("SharePanel", sharePanel);
@@ -197,6 +199,8 @@ public class BorayMainUI {
             if (admin.getCode() == 0) {
                 flag = true;
                 MainUi.map.put("admin", admin);
+                JToggleButton btn = (JToggleButton) MainUi.map.get("ShareBtn");
+                btn.setVisible(true);
             }
         }
         return flag;
