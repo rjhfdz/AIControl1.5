@@ -93,9 +93,11 @@ public class ShengKonSuCaiEditUI {
             if (al == null) {
                 al = new int[11];//a[10]表示多灯控制
                 al[0] = 1;
+                al[1] = 1;
                 al[5] = 1;
                 al[7] = 1;
                 al[9] = 1;
+                al[10] = 1;
             }
 
             JTabbedPane tabbedPane = new JTabbedPane();

@@ -2449,7 +2449,7 @@ public class TimeBlockEditUI {
         //p4_to_p1.setBorder(new LineBorder(Color.gray));
         p4_to_p1.setPreferredSize(new Dimension(380, 40));
         p4_to_p1.add(new JLabel("拆分"));
-        JComboBox box2 = new JComboBox(TuXingAction.getValues3());
+        JComboBox box2 = new JComboBox(TuXingAction.getValues4());
         actionCompontList.add(box2);
 //        box2.addItem("不拆分");
 //        box2.addItem("中间拆分");

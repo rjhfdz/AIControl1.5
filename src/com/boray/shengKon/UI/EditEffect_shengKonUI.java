@@ -149,9 +149,11 @@ public class EditEffect_shengKonUI {
             if (al == null) {
                 al = new int[11];//a[10]表示多灯控制
                 al[0] = 1;
+                al[1] = 1;
                 al[5] = 1;
                 al[7] = 1;
                 al[9] = 1;
+                al[10] = 1;
             }
 
             JTabbedPane tabbedPane = new JTabbedPane();
@@ -797,7 +799,7 @@ public class EditEffect_shengKonUI {
         Object[] s = new String[tt + 2];
         final String[] temp = new String[tt + 2];
         temp[0] = "1";
-        temp[1] = "0";
+        temp[1] = "2000";
         s[0] = "步骤";
         s[1] = "亮灯时长";
         for (int i = 2; i < s.length; i++) {
@@ -951,7 +953,7 @@ public class EditEffect_shengKonUI {
         final JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem menuItem = new JMenuItem("　复制　　　　　");
         JMenuItem menuItem1 = new JMenuItem("　粘贴　　　　　");
-        int size = runTable.getRowCount();
+        final int size = runTable.getRowCount();
         stepLabel = new JLabel("总步数:" + size);
         CopyToTimeBlockEdit copyListener = new CopyToTimeBlockEdit(runTable,stepLabel);
         menuItem.addActionListener(copyListener);
@@ -1337,7 +1339,7 @@ public class EditEffect_shengKonUI {
         JTextField field3 = new JTextField(12);
         field3.setEnabled(false);
         field3.setText(cnt + "");
-        JButton button = new JButton("单选");
+        final JButton button = new JButton("单选");
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

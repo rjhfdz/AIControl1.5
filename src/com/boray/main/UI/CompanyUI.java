@@ -125,7 +125,7 @@ public class CompanyUI {
      * @param pane
      */
     public void init(JPanel pane) {
-        Admin admin = (Admin) MainUi.map.get("admin");
+        //Admin admin = (Admin) MainUi.map.get("admin");
         Users users = (Users) MainUi.map.get("Users");
         Map<String, String> param = new HashMap<>();
         param.put("usercode", users.getUsercode());
@@ -182,7 +182,7 @@ public class CompanyUI {
         TreeUtil util = new TreeUtil();
         util.expandAll(tree, new TreePath(rootNode), true);
 
-        MainUi.map.put("shareTree", tree);
+        MainUi.map.put("shareTree2", tree);
 
         pane.add(panel);
     }

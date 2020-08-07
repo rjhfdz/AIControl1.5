@@ -181,16 +181,16 @@ public class SwitchListener implements ActionListener {
                 }
             }
         }
-//        try {//加300毫秒间隔区分 dmx录制状态查询
-//            Thread.sleep(500);
-//            if (!btn.getName().equals("2")) {
-//                Socket.SendData(RdmData.quit());
-//            } else {
-//                Socket.SendData(RdmData.access());
-//            }
-//        } catch (Exception e1) {
-//            e1.printStackTrace();
-//        }
+        try {//加300毫秒间隔区分 dmx录制状态查询
+            Thread.sleep(500);
+            if (!btn.getName().equals("2")) {
+                Socket.SendData(RdmData.quit());
+            } else {
+                Socket.SendData(RdmData.access());
+            }
+        }catch (Exception e1){
+            e1.printStackTrace();
+        }
         selected = btn.getName();
         cardLayout.show(parentPane, btn.getName());
     }

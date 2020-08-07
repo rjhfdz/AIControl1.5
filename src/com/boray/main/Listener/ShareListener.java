@@ -34,11 +34,10 @@ public class ShareListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JButton button = (JButton) e.getSource();
+        String str = e.getActionCommand();
         frame = (JFrame) MainUi.map.get("frame");
         tree = (JTree) MainUi.map.get("shareTree1");
         tree2 = (JTree) MainUi.map.get("shareTree2");
-        String str = button.getActionCommand();
         if (str.equals("刷新")) {
             refresh();
         } else if (str.equals("增加成员")) {
@@ -96,29 +95,39 @@ public class ShareListener implements ActionListener {
                 }
             }
         }else if (str.equals("设置团队")) {
-            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree2.getSelectionPath().getLastPathComponent();
-            Object[] options = {"否", "是"};
-            int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "是否设置改团队？", "警告",
-                    JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-                    null, options, options[1]);
-            if (yes == 1) {
-                if (node.getUserObject() instanceof Offerentity) {
-                    Offerentity member = (Offerentity) node.getUserObject();
-                    Users users = (Users) MainUi.map.get("Users");
-                    Map<String, String> param = new HashMap<>();
-                    param.put("officecode", member.getOfficecode().toString());
-                    param.put("usercode", users.getUsercode());
-                    String request = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/updatetdinfo", param);
-                    JOptionPane.showMessageDialog(frame, "设置成功", "提示", JOptionPane.PLAIN_MESSAGE);
+        	 DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree2.getSelectionPath().getLastPathComponent();
+             Object[] options = {"否", "是"};
+             int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "是否设置改团队？", "警告",
+                     JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                     null, options, options[1]);
+             if (yes == 1) {
+                 if (node.getUserObject() instanceof Offerentity) {
+                	 Offerentity member = (Offerentity) node.getUserObject();
+                     Users users = (Users) MainUi.map.get("Users");
+                     Map<String, String> param = new HashMap<>();
+                     param.put("officecode", member.getOfficecode().toString());
+                     param.put("usercode", users.getUsercode());
+                     String request = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/updatetdinfo", param);
+                     JOptionPane.showMessageDialog(frame, "设置成功", "提示", JOptionPane.PLAIN_MESSAGE);
                   /*   if (Integer.parseInt(message.getCode()) == 0) {
-
+                       
                      } else {
                          JOptionPane.showMessageDialog(frame, "踢出该成员失败", "提示", JOptionPane.PLAIN_MESSAGE);
                      }*/
-                    //refresh();
-                }
-            }
+                     //refresh();
+                 }
+             }
         }
+//        else if (button.getText().equals("复制")) {
+//            if (null == tree.getSelectionPath().getLastPathComponent()) {
+//                JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
+//                return;
+//            }
+//            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+//            if (node.getUserObject() instanceof ProjectFile) {
+//                Data.tempProjectFile = (ProjectFile) node.getUserObject();
+//            }
+//        }
     }
 
     /**
@@ -137,16 +146,18 @@ public class ShareListener implements ActionListener {
      */
     private void refresh() {
         tree.removeAll();
-        CustomTreeNode rootNode = new CustomTreeNode("BorayShare");
+        CustomTreeNode rootNode = new CustomTreeNode("成员");
         rootNode.setLevel(0);
         DefaultTreeModel model = new DefaultTreeModel(rootNode);
         tree.setModel(model);
         tree.setCellRenderer(new CustomTreeCellRenderer());
         Map<String, String> param = new HashMap<>();
-        String request = HttpClientUtil.doGet(Data.ipPort + "findbygx", param);
-        java.util.List<ProjectFile> list = JSON.parseArray(request, ProjectFile.class);
-        for (ProjectFile file : list) {
-            CustomTreeNode node = new CustomTreeNode(file);
+        Admin admin = (Admin) MainUi.map.get("admin");
+        param.put("officecode", admin.getOfficecode());
+        String request = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/gettuandui", param);
+        java.util.List<Member> list = JSON.parseArray(request, Member.class);
+        for (Member member : list) {
+            CustomTreeNode node = new CustomTreeNode(member);
             node.setLevel(1);
             rootNode.add(node);
         }

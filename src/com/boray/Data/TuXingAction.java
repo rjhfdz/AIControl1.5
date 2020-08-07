@@ -36,6 +36,12 @@ public class TuXingAction {
             "7(跑马灯2(往返))","8(奇数)","9(奇数(往返))","10(偶数)","11(偶数(往返))","12(奇数+偶数)",
             "13(奇数+偶数(往返))","14(偶数+奇数)","15(偶数+奇数(往返))","16(流水灯)"
     };
+    public static String[] values4 = {
+            "1(不拆分)","2(中间拆分)","3(两端拆分)","4(跑马灯1)","5(跑马灯1(往返))","6(跑马灯2)",
+            "7(跑马灯2(往返))","8(奇数)","9(奇数(往返))","10(偶数)","11(偶数(往返))","12(奇数+偶数)",
+            "13(奇数+偶数(往返))","14(偶数+奇数)","15(偶数+奇数(往返))","16(流水灯)","17(左右拆分)",
+            "18(奇偶拆分)","19(备用1)","20(备用2)"
+    };
 
     public static String[] getValus() {
         String[] s = new String[256];
@@ -68,5 +74,13 @@ public class TuXingAction {
             s[i] = values3[i];
         }
         return values3;
+    }
+
+    public static String[] getValues4(){
+        String[] s = new String[10];
+        for (int i = 0;i<s.length;i++){
+            s[i] = values4[i];
+        }
+        return values4;
     }
 }
