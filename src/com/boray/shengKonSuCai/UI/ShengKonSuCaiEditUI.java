@@ -774,7 +774,7 @@ public class ShengKonSuCaiEditUI {
         final JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem menuItem = new JMenuItem("　复制　　　　　");
         JMenuItem menuItem1 = new JMenuItem("　粘贴　　　　　");
-        int size = runTable.getRowCount();
+        final int size = runTable.getRowCount();
         stepLabel = new JLabel("总步数:" + size);
         CopyToTimeBlockEdit copyListener = new CopyToTimeBlockEdit(runTable, stepLabel);
         menuItem.addActionListener(copyListener);
@@ -887,7 +887,7 @@ public class ShengKonSuCaiEditUI {
         p5.add(button1);
         p5.add(button3);
         pane.add(p4);
-        p5.add(new JLabel("                                                                         "));
+        p5.add(new JLabel("                                                                    "));
         p5.add(stepLabel);
         pane.add(p5);
     }

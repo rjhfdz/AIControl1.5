@@ -58,7 +58,7 @@ public class YunShengKonSuCaiDialog implements ActionListener {
         JPanel p3 = new JPanel();
         TitledBorder titledBorder1 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "素材列表", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         p3.setBorder(titledBorder1);
-        p3.setPreferredSize(new Dimension(280, 594));
+        p3.setPreferredSize(new Dimension(330, 594));
         setP3(p3);
 
         JList listFile = (JList) MainUi.map.get("shengKonSuCaiDengZuYun");
@@ -71,7 +71,7 @@ public class YunShengKonSuCaiDialog implements ActionListener {
 
     private void setP3(JPanel p3) {
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setPreferredSize(new Dimension(270, 520));
+        scrollPane.setPreferredSize(new Dimension(330, 520));
 
         //素材列表
         final JList list = new JList();
@@ -90,7 +90,7 @@ public class YunShengKonSuCaiDialog implements ActionListener {
         p3.add(scrollPane);
 
         JPanel bottomPanel = new JPanel();
-        bottomPanel.setPreferredSize(new Dimension(230, 40));
+        bottomPanel.setPreferredSize(new Dimension(300, 40));
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
         flowLayout.setVgap(-2);
         flowLayout.setHgap(-2);
@@ -99,19 +99,23 @@ public class YunShengKonSuCaiDialog implements ActionListener {
         JButton editBtn = new JButton("重命名");
         JButton delBtn = new JButton("删除");
         JButton leadBtn = new JButton("导入");
+        JButton shanchuang = new JButton("上传到团队");
         newBtn.addActionListener(this);
         editBtn.addActionListener(this);
         delBtn.addActionListener(this);
         leadBtn.addActionListener(this);
+        shanchuang.addActionListener(this);
         Dimension dimension = new Dimension(55, 34);
         newBtn.setPreferredSize(dimension);
         editBtn.setPreferredSize(new Dimension(68, 34));
         delBtn.setPreferredSize(dimension);
         leadBtn.setPreferredSize(dimension);
+        shanchuang.setPreferredSize(new Dimension(108, 34));
         if (flag) {
             bottomPanel.add(newBtn);
             bottomPanel.add(editBtn);
             bottomPanel.add(delBtn);
+            bottomPanel.add(shanchuang);
         }
         bottomPanel.add(leadBtn);
         p3.add(bottomPanel);
@@ -357,7 +361,29 @@ public class YunShengKonSuCaiDialog implements ActionListener {
                     e1.printStackTrace();
                 }
             }
-        } else if ("导入".equals(e.getActionCommand())) {
+        }else if("上传到团队".equals(e.getActionCommand())) {
+      	  Object[] options = {"否", "是"};
+          int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "是否上传素材？", "警告",
+                  JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                  null, options, options[1]);
+          if (yes == 1) {
+              final SuCaiFile caiFile = getSelectSuCaiFile();
+              if (caiFile == null) {
+                  return;
+              }
+              JList list1 = (JList) MainUi.map.get("shengKonSuCaiYun_list");
+              DefaultListModel model = (DefaultListModel) list1.getModel();
+              model.remove(list1.getSelectedIndex());
+              Map<String, String> param = new HashMap<>();
+              param.put("id", caiFile.getId() + "");
+              param.put("usercode", users.getUsercode());
+              String request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/tdsksucaiinsert", param);
+
+              JOptionPane.showMessageDialog(frame, "上传成功", "提示", JOptionPane.PLAIN_MESSAGE);
+              refresh();
+          }
+    }
+        else if ("导入".equals(e.getActionCommand())) {
             final SuCaiFile caiFile = getSelectSuCaiFile();
             if (caiFile == null) {
                 return;

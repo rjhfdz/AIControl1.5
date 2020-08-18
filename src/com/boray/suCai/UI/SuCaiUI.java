@@ -106,12 +106,14 @@ public class SuCaiUI {
         JButton reNameBtn = new JButton("ÖØÃüÃû");
         JButton upLoadBtn = new JButton("ÔÆ¶Ë");
         JButton reviewBtn = new JButton("Ô¤ÀÀ");
+        JButton removeBtn = new JButton("É¾³ý");
         CreateOrDelSuCaiListener listener = new CreateOrDelSuCaiListener();
         EditListener listener2 = new EditListener();
         editBtn.addActionListener(listener2);
         newBtn.addActionListener(listener);
         reNameBtn.addActionListener(listener);
         reviewBtn.addActionListener(listener);
+        removeBtn.addActionListener(listener);
 //        ShangchuanListener shangchuang = new ShangchuanListener();
         upLoadBtn.addActionListener(listener);
         Dimension dimension = new Dimension(55, 34);
@@ -120,11 +122,13 @@ public class SuCaiUI {
         reNameBtn.setPreferredSize(new Dimension(68, 34));
         upLoadBtn.setPreferredSize(dimension);
         reviewBtn.setPreferredSize(dimension);
+        removeBtn.setPreferredSize(dimension);
         bottomPanel.add(newBtn);
         bottomPanel.add(editBtn);
         bottomPanel.add(reNameBtn);
         bottomPanel.add(upLoadBtn);
         bottomPanel.add(reviewBtn);
+//        bottomPanel.add(removeBtn);
         p3.add(bottomPanel);
 
         //Ìí¼ÓÓÒ¼ü²Ëµ¥

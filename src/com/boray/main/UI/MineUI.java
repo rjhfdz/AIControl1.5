@@ -38,6 +38,7 @@ public class MineUI {
     private JMenuItem updateFile;
     private JMenuItem deleteFile;
     private JMenuItem downloadFile;
+    private JMenuItem addtd;
 
     public void show(JPanel panel) {
         if (MainUi.map.get("Users") == null) {
@@ -101,7 +102,7 @@ public class MineUI {
             updateFile = new JMenuItem("工程重命名");
             deleteFile = new JMenuItem("删除工程");
             downloadFile = new JMenuItem("下载工程");
-
+            addtd = new JMenuItem("上传资源到团队");
             ButtonGroup group = new ButtonGroup();
             group.add(addFolder);
             group.add(updateFolder);
@@ -110,6 +111,7 @@ public class MineUI {
             group.add(updateFile);
             group.add(deleteFile);
             group.add(downloadFile);
+            group.add(addtd);
 
             MineButtonListener listener = new MineButtonListener();
             addFolder.addActionListener(listener);
@@ -120,6 +122,7 @@ public class MineUI {
             deleteFile.addActionListener(listener);
             downloadFile.addActionListener(listener);
             refresh.addActionListener(listener);
+            addtd.addActionListener(listener);
 
             buttonPanel.add(refresh);
             popupMenu = new JPopupMenu();
@@ -130,7 +133,7 @@ public class MineUI {
             popupMenu.add(updateFile);
             popupMenu.add(deleteFile);
             popupMenu.add(downloadFile);
-
+            popupMenu.add(addtd);
             panel.add(buttonPanel);
 
             init(panel);

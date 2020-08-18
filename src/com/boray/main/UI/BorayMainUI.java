@@ -89,11 +89,13 @@ public class BorayMainUI {
         leftPane.add(btn4);
         leftPane.add(btn);
         leftPane.add(btn2);
-//        if (CheckAdmin()) {//查询是否是管理员
+        
+        MainUi.map.put("ShareBtn",btn3);
+        if (CheckAdmin()) {//查询是否是管理员
         leftPane.add(btn3);
         btn3.setVisible(false);
-        MainUi.map.put("ShareBtn",btn3);
-//        }
+   
+        }
         leftPane.add(btn4);
         leftPane.add(btn5);
         leftPane.add(btn6);

@@ -20,10 +20,12 @@ import javax.swing.border.LineBorder;
 
 import com.boray.Data.Data;
 import com.boray.Data.XiaoGuoDengModel;
+import com.boray.Utils.Socket;
 import com.boray.Utils.WaitProgressBar;
 import com.boray.mainUi.MainUi;
 import com.boray.xiaoGuoDeng.Listener.*;
 import com.boray.xiaoGuoDeng.reviewBlock.ReviewBlock;
+import com.boray.xiaoGuoDeng.reviewBlock.TimeBlockReviewData;
 
 public class RightMainUI {
     public static Image image, offScreenImage;
@@ -52,10 +54,19 @@ public class RightMainUI {
 //						ReviewUtils.sceneReview(XiaoGuoDengModel.model);
                         DefineJLable3 lable3 = (DefineJLable3) MainUi.map.get("SuoYouDengZuLable" + XiaoGuoDengModel.model);
 
-                        if (lable3.isEnabled())
+                        ReviewBlock.Review(XiaoGuoDengModel.model);
+                        if (lable3.getText().contains("¡Ì"))
                             ReviewBlock.xiaoGuoDuoDengReview(XiaoGuoDengModel.model);
-                        else
-                            ReviewBlock.Review(XiaoGuoDengModel.model);
+                        try {
+                            Thread.sleep(300);
+                            if (lable3.getText().contains("¡Ì"))
+                                Socket.SendData(TimeBlockReviewData.getStarReview4(XiaoGuoDengModel.model));
+                            else
+                                Socket.SendData(TimeBlockReviewData.getStarReview2(XiaoGuoDengModel.model));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
 //                        if (Data.serialPort != null) {
 ////							if (Data.file!=null) {
 ////								new Compare().saveTemp();

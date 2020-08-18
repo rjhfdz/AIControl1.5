@@ -15,10 +15,8 @@ import java.awt.event.ActionListener;
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 public class UpLoadOrLoadShengKonSuCaiListener implements ActionListener {
     @Override
@@ -394,6 +392,10 @@ public class UpLoadOrLoadShengKonSuCaiListener implements ActionListener {
             xmlEncoder.writeObject(encode("shengKon"));//声控素材
             xmlEncoder.writeObject(type);//写入素材类型
             xmlEncoder.writeObject(suCaiName);//写入素材名称
+            Map map = (Map) Data.ShengKonSuCai[dengZu][suCaiIndex];
+            TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(dengZu);
+            map.put("dengZuCount",treeSet.size());
+            Data.ShengKonSuCai[dengZu][suCaiIndex] = map;
             xmlEncoder.writeObject(Data.ShengKonSuCai[dengZu][suCaiIndex]);//写入素材数据
 
             xmlEncoder.flush();

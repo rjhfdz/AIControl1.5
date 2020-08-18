@@ -890,7 +890,7 @@ public class ReviewUtils {
             //24模式全局设置
             DefineJLable3 lable3 = (DefineJLable3) MainUi.map.get("SuoYouDengZuLable" + (i + 1));
             int maxTime = lable3.getWidth() / 5;
-            t1[(i * 4) + 30] = (byte) (lable3.isEnabled() ? 1 : 0);
+            t1[(i * 4) + 30] = (byte) (lable3.getText().contains("√") ? 1 : 0);
             t1[(i * 4) + 32] = (byte) (maxTime % 256);
             t1[(i * 4) + 33] = (byte) (maxTime / 256);
         }
@@ -901,7 +901,7 @@ public class ReviewUtils {
         if (flag) {//如果为true 展示24模式的数据 否则展示单个模式
             for (int i = 0; i < 24; i++) {
                 DefineJLable3 lable3 = (DefineJLable3) MainUi.map.get("SuoYouDengZuLable" + (i + 1));
-                if (lable3.isEnabled()) {
+                if (lable3.getText().contains("√")) {
                     //通道勾选
                     byte[][] channalGouXuan = new byte[2][64];//通道勾选 渐变勾选
                     tbs = (boolean[]) Data.XiaoGuoDengModelDmxMap.get("GouXuanValue" + (i + 1));

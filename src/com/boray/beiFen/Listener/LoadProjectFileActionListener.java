@@ -550,40 +550,44 @@ public class LoadProjectFileActionListener implements ActionListener {
                     String[] str = (String[]) objects1[i];
                     lable3.setLocation(new Point(Integer.valueOf(str[0]).intValue(), Integer.valueOf(str[1]).intValue()));
                     lable3.setSize(Integer.valueOf(str[2]).intValue(), Integer.valueOf(str[3]).intValue());
-                    lable3.setEnabled(Boolean.valueOf(str[4]));
+//                    lable3.setEnabled(Boolean.valueOf(str[4]));
                     panel.updateUI();
                     JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels_group" + (i + 1));
                     JPanel jPanel = (JPanel) MainUi.map.get("SuoYouDengZuPanel" + (i + 1));
-                    if (lable3.isEnabled()) {
+                    if (Boolean.valueOf(str[4])) {
                         lable3.setText("所有灯组√");
-                        for (int j = 0; j < timeBlockPanels.length; j++) {
-                            if (j != 0) {
-                                timeBlockPanels[j].setEnabled(false);
-                                for (int k = 0; k < timeBlockPanels[j].getComponentCount(); k++) {
-                                    timeBlockPanels[j].getComponent(k).setEnabled(false);
-                                }
-                                timeBlockPanels[i].updateUI();
-                            }
-                        }
-                        jPanel.setEnabled(true);
-                        for (int k = 0; k < jPanel.getComponentCount(); k++) {
-                            jPanel.getComponent(k).setEnabled(true);
-                        }
+//                        for (int j = 0; j < timeBlockPanels.length; j++) {
+//                            if (j != 0) {
+//                                timeBlockPanels[j].setEnabled(false);
+//                                for (int k = 0; k < timeBlockPanels[j].getComponentCount(); k++) {
+//                                    timeBlockPanels[j].getComponent(k).setEnabled(false);
+//                                }
+//                                timeBlockPanels[i].updateUI();
+//                            }
+//                        }
+//                        jPanel.setEnabled(true);
+//                        for (int k = 0; k < jPanel.getComponentCount(); k++) {
+//                            jPanel.getComponent(k).setEnabled(true);
+//                        }
+                        lable3.updateUI();
+                        jPanel.updateUI();
                     } else {
                         lable3.setText("所有灯组×");
-                        for (int j = 0; j < timeBlockPanels.length; j++) {
-                            if (j != 0) {
-                                timeBlockPanels[j].setEnabled(true);
-                                for (int k = 0; k < timeBlockPanels[j].getComponentCount(); k++) {
-                                    timeBlockPanels[j].getComponent(k).setEnabled(true);
-                                }
-                                timeBlockPanels[i].updateUI();
-                            }
-                        }
-                        jPanel.setEnabled(false);
-                        for (int k = 0; k < jPanel.getComponentCount(); k++) {
-                            jPanel.getComponent(k).setEnabled(false);
-                        }
+//                        for (int j = 0; j < timeBlockPanels.length; j++) {
+//                            if (j != 0) {
+//                                timeBlockPanels[j].setEnabled(true);
+//                                for (int k = 0; k < timeBlockPanels[j].getComponentCount(); k++) {
+//                                    timeBlockPanels[j].getComponent(k).setEnabled(true);
+//                                }
+//                                timeBlockPanels[i].updateUI();
+//                            }
+//                        }
+//                        jPanel.setEnabled(false);
+//                        for (int k = 0; k < jPanel.getComponentCount(); k++) {
+//                            jPanel.getComponent(k).setEnabled(false);
+//                        }
+                        lable3.updateUI();
+                        jPanel.updateUI();
                     }
                 }
 

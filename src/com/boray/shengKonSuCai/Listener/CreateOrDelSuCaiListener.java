@@ -82,8 +82,8 @@ public class CreateOrDelSuCaiListener implements ActionListener {
      * 判断用户选择打开个人素材还是团队素材
      */
     public void openGeRenOrTuanDui() {
-        JFrame f = (JFrame) MainUi.map.get("frame");
-        IconJDialog dia = new IconJDialog(f, true);
+        final JFrame f = (JFrame) MainUi.map.get("frame");
+        final IconJDialog dia = new IconJDialog(f, true);
         dia.setResizable(false);
         dia.setTitle("云端素材");
         int w = 380, h = 200;
@@ -92,7 +92,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
         dia.setLayout(new FlowLayout(FlowLayout.CENTER));
         dia.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
-        JRadioButton radioButton = new JRadioButton("个人");
+        final JRadioButton radioButton = new JRadioButton("个人");
         JRadioButton radioButton2 = new JRadioButton("团队");
         ButtonGroup group = new ButtonGroup();
         group.add(radioButton);

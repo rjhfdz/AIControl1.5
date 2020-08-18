@@ -18,34 +18,38 @@ public class SuoYouDengZuLabelMouseListener implements ActionListener {
         DefineJLable3 lable3 = (DefineJLable3) MainUi.map.get("SuoYouDengZuLable" + XiaoGuoDengModel.model);
         if ("　启用".equals(e.getActionCommand())) {
             lable3.setText("所有灯组√");
-            for (int i = 0; i < timeBlockPanels.length; i++) {
-                if (i != 0) {
-                    timeBlockPanels[i].setEnabled(false);
-                    for (int j = 0; j < timeBlockPanels[i].getComponentCount(); j++) {
-                        timeBlockPanels[i].getComponent(j).setEnabled(false);
-                    }
-                    timeBlockPanels[i].updateUI();
-                }
-            }
-            panel.setEnabled(true);
-            for (int i = 0; i < panel.getComponentCount(); i++) {
-                panel.getComponent(i).setEnabled(true);
-            }
+//            for (int i = 0; i < timeBlockPanels.length; i++) {
+//                if (i != 0) {
+//                    timeBlockPanels[i].setEnabled(false);
+//                    for (int j = 0; j < timeBlockPanels[i].getComponentCount(); j++) {
+//                        timeBlockPanels[i].getComponent(j).setEnabled(false);
+//                    }
+//                    timeBlockPanels[i].updateUI();
+//                }
+//            }
+//            panel.setEnabled(true);
+//            for (int i = 0; i < panel.getComponentCount(); i++) {
+//                panel.getComponent(i).setEnabled(true);
+//            }
+            lable3.updateUI();
+            panel.updateUI();
         } else if ("　禁用".equals(e.getActionCommand())) {
             lable3.setText("所有灯组×");
-            for (int i = 0; i < timeBlockPanels.length; i++) {
-                if (i != 0) {
-                    timeBlockPanels[i].setEnabled(true);
-                    for (int j = 0; j < timeBlockPanels[i].getComponentCount(); j++) {
-                        timeBlockPanels[i].getComponent(j).setEnabled(true);
-                    }
-                    timeBlockPanels[i].updateUI();
-                }
-            }
-            panel.setEnabled(false);
-            for (int i = 0; i < panel.getComponentCount(); i++) {
-                panel.getComponent(i).setEnabled(false);
-            }
+//            for (int i = 0; i < timeBlockPanels.length; i++) {
+//                if (i != 0) {
+//                    timeBlockPanels[i].setEnabled(true);
+//                    for (int j = 0; j < timeBlockPanels[i].getComponentCount(); j++) {
+//                        timeBlockPanels[i].getComponent(j).setEnabled(true);
+//                    }
+//                    timeBlockPanels[i].updateUI();
+//                }
+//            }
+//            panel.setEnabled(false);
+//            for (int i = 0; i < panel.getComponentCount(); i++) {
+//                panel.getComponent(i).setEnabled(false);
+//            }
+            lable3.updateUI();
+            panel.updateUI();
         } else {
             new OverDmxUI().show(XiaoGuoDengModel.model);
         }

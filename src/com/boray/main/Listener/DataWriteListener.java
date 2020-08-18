@@ -29,7 +29,7 @@ public class DataWriteListener implements ActionListener {
 
         this.DataWriteBtnName = dataWrite.getName();
         Data.DataWriteBtnName = dataWrite.getName();
-        JFrame frame = (JFrame) MainUi.map.get("frame");
+        final JFrame frame = (JFrame) MainUi.map.get("frame");
         new Thread(new Runnable() {
             @Override
             public void run() {

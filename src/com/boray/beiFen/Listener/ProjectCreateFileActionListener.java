@@ -337,7 +337,7 @@ public class ProjectCreateFileActionListener implements ActionListener {
                 str[1] = lable3.getLocation().y + "";
                 str[2] = lable3.getWidth() + "";
                 str[3] = lable3.getHeight() + "";
-                str[4] = lable3.isEnabled() + "";
+                str[4] = lable3.getText().contains("¡Ì") + "";
                 objects1[i] = str;
             }
             xmlEncoder.writeObject(objects1);

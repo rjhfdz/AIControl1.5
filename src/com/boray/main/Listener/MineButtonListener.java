@@ -12,6 +12,7 @@ import com.boray.entity.Users;
 import com.boray.main.Util.CustomTreeCellRenderer;
 import com.boray.main.Util.CustomTreeNode;
 import com.boray.main.Util.TreeUtil;
+import com.boray.main.Util.Util;
 import com.boray.mainUi.MainUi;
 
 import javax.swing.*;
@@ -84,8 +85,8 @@ public class MineButtonListener implements ActionListener {
             int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "是否删除？", "警告",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                     null, options, options[1]);
-            if(yes==0) {
-            	return;
+            if (yes == 0) {
+                return;
             }
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
             if (node.getUserObject() instanceof FileOrFolder) {
@@ -144,7 +145,7 @@ public class MineButtonListener implements ActionListener {
                 JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
             }
-           
+
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
             if (node.getUserObject() instanceof ProjectFile) {
                 IconJDialog dialog = new IconJDialog(frame, true);
@@ -169,8 +170,8 @@ public class MineButtonListener implements ActionListener {
             int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "是否删除？", "警告",
                     JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                     null, options, options[1]);
-            if(yes==0) {
-            	return;
+            if (yes == 0) {
+                return;
             }
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
             if (node.getUserObject() instanceof ProjectFile) {
@@ -185,57 +186,106 @@ public class MineButtonListener implements ActionListener {
                 JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
             }
         } else if (str.equals("下载工程")) {
-        	
+
             if (null == tree.getSelectionPath().getLastPathComponent()) {
                 JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
                 return;
             }
-            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
-            if (node.getUserObject() instanceof ProjectFile) {
-                ProjectFile file = (ProjectFile) node.getUserObject();
-                JFileChooser fileChooser = new JFileChooser();
-                if (!"".equals(Data.projectFilePath)) {
-                    fileChooser.setCurrentDirectory(new File(Data.projectFilePath));
-                }
-                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-                fileChooser.setSelectedFile(new File(file.getGcname() + ".xml"));
-                int returnVal = fileChooser.showSaveDialog((JFrame) MainUi.map.get("frame"));
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File selectedFile = fileChooser.getSelectedFile();
-                    Data.projectFilePath = selectedFile.getParent();
-                    try {
-                        URL url = new URL(Data.ip + file.getGcurl());
-                        HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
-                        urlCon.setConnectTimeout(6000);
-                        urlCon.setReadTimeout(6000);
-                       // int code = urlCon.getResponseCode();
-                     /*   if (code != HttpURLConnection.HTTP_OK) {
-                            JOptionPane.showMessageDialog(frame, "文件下载失败！", "提示", JOptionPane.PLAIN_MESSAGE);
-                            return;
-                        }*/
-                        DataInputStream in = new DataInputStream(urlCon.getInputStream());
-                        DataOutputStream out = new DataOutputStream(new FileOutputStream(selectedFile.getAbsoluteFile()));
-                        byte[] buffer = new byte[2048];
-                        int count = 0;
-                        while ((count = in.read(buffer)) > 0) {
-                            out.write(buffer, 0, count);
-                        }
-                        if (out != null) {
-                            out.close();
-                        }
-                        if (in != null) {
-                            in.close();
-                        }
-                        JOptionPane.showMessageDialog(frame, "文件下载完成！", "提示", JOptionPane.PLAIN_MESSAGE);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
+            String Str = "C://Boray/";
+            if (tree.getSelectionPath().toString().contains("工程")) {
+                Str = Str + "个人工程/";
+            } else if (tree.getSelectionPath().toString().contains("素材")) {
+                if (tree.getSelectionPath().toString().contains("场景素材")) {
+                    Str = Str + "个人素材/" + "场景素材/";
+                } else {
+                    Str = Str + "个人素材/" + "声控素材/";
                 }
             }
-        } else if (str.equals("刷新")) {
+
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+            DefaultMutableTreeNode node2 = (DefaultMutableTreeNode) node.getParent();
+            if (node.getUserObject() instanceof ProjectFile && node2.getUserObject() instanceof FileOrFolder) {
+                ProjectFile file = (ProjectFile) node.getUserObject();
+                FileOrFolder fileOrFolder = (FileOrFolder) node2.getUserObject();
+                Str = Str + fileOrFolder.getXmname() + "/";
+                Util.downloadFile(Str,file.getGcname(),false,".xml",Data.ip + file.getGcurl().replace('\\', '/'));
+                JOptionPane.showMessageDialog(frame, "文件下载完成！", "提示", JOptionPane.PLAIN_MESSAGE);
+//                System.out.println(Str);
+//                JFileChooser fileChooser = new JFileChooser();
+//                if (!"".equals(Data.projectFilePath)) {
+//                    fileChooser.setCurrentDirectory(new File(Data.projectFilePath));
+//                }
+//                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//                fileChooser.setSelectedFile(new File(file.getGcname() + ".xml"));
+//                int returnVal = fileChooser.showSaveDialog((JFrame) MainUi.map.get("frame"));
+//                if (returnVal == JFileChooser.APPROVE_OPTION) {
+//                    File selectedFile = fileChooser.getSelectedFile();
+//                    Data.projectFilePath = selectedFile.getParent();
+//                    try {
+//                        URL url = new URL(HttpClientUtil.URLEncode(Data.ip + file.getGcurl().replace('\\', '/')));
+//                        HttpURLConnection urlCon = (HttpURLConnection) url.openConnection();
+//                        urlCon.setConnectTimeout(6000);
+//                        urlCon.setReadTimeout(6000);
+//                        // int code = urlCon.getResponseCode();
+//                     /*   if (code != HttpURLConnection.HTTP_OK) {
+//                            JOptionPane.showMessageDialog(frame, "文件下载失败！", "提示", JOptionPane.PLAIN_MESSAGE);
+//                            return;
+//                        }*/
+//                        DataInputStream in = new DataInputStream(urlCon.getInputStream());
+//                        DataOutputStream out = new DataOutputStream(new FileOutputStream(selectedFile.getAbsoluteFile()));
+//                        byte[] buffer = new byte[2048];
+//                        int count = 0;
+//                        while ((count = in.read(buffer)) > 0) {
+//                            out.write(buffer, 0, count);
+//                        }
+//                        if (out != null) {
+//                            out.close();
+//                        }
+//                        if (in != null) {
+//                            in.close();
+//                        }
+//                        JOptionPane.showMessageDialog(frame, "文件下载完成！", "提示", JOptionPane.PLAIN_MESSAGE);
+//                    } catch (Exception ex) {
+//                        ex.printStackTrace();
+//                    }
+//                }
+            } else if (node.getUserObject() instanceof SuCaiFile) {
+                SuCaiFile file = (SuCaiFile) node.getUserObject();
+                Util.downloadFile(Str,file.getFilename(),false,".xml",Data.ip + file.getShucaifile().replace('\\', '/'));
+                JOptionPane.showMessageDialog(frame, "文件下载完成！", "提示", JOptionPane.PLAIN_MESSAGE);
+            }
+        }else if(str.equals("上传资源到团队")) {
+        	 if (null == tree.getSelectionPath().getLastPathComponent()) {
+                 JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
+                 return;
+             }
+        	   Users users = (Users) MainUi.map.get("Users");
+             Object[] options = {"否", "是"};
+             int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "是否上传？", "警告",
+                     JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                     null, options, options[1]);
+             if(yes==0) {
+             	return;
+             }
+             DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getSelectionPath().getLastPathComponent();
+             if (node.getUserObject() instanceof ProjectFile) {
+                 ProjectFile file = (ProjectFile) node.getUserObject();
+                 Map<String, String> map = new HashMap<>();
+                 map.put("id", file.getId() + "");
+                 map.put("usercode", users.getUsercode());
+                 String request = HttpClientUtil.doGet(Data.ipPort + "/js/a/jk/inserttdgcinfo", map);
+                System.out.println(request);
+                 JOptionPane.showMessageDialog(frame, "上传工程成功", "提示", JOptionPane.PLAIN_MESSAGE);
+                 refresh();
+             } else {
+                 JOptionPane.showMessageDialog(frame, "请选择工程！", "提示", JOptionPane.PLAIN_MESSAGE);
+             }
+        } 
+        
+        else if (str.equals("刷新")) {
             refresh();
-        }else if (str.equals("项目刷新")) {
-        	  refresh2();
+        } else if (str.equals("项目刷新")) {
+            refresh2();
         }
     }
 
@@ -253,7 +303,7 @@ public class MineButtonListener implements ActionListener {
         param.put("gcname", file.getName().substring(0, file.getName().indexOf(".")));
         param.put("usercode", users.getUsercode());
         param.put("xmid", folder.getId() + "");
-      //  param.put("i", "0");
+        //  param.put("i", "0");
         Map<String, Object> resultMap = httpsUtils.uploadFileByHTTP(file, Data.ipPort + "/js/a/jk/insertgrgc", param);
         Message message = JSON.parseObject(resultMap.get("data").toString(), Message.class);
         JOptionPane.showMessageDialog(frame, "添加工程成功", "提示", JOptionPane.PLAIN_MESSAGE);
@@ -268,7 +318,7 @@ public class MineButtonListener implements ActionListener {
      * @param node
      */
     private void renamePrject(final JDialog dialog, final DefaultMutableTreeNode node) {
-    	ProjectFile projectFile = (ProjectFile)node.getUserObject();
+        ProjectFile projectFile = (ProjectFile) node.getUserObject();
         JPanel p1 = new JPanel();
         p1.add(new JLabel("工程名称："));
         final JTextField field = new JTextField(15);
@@ -282,10 +332,10 @@ public class MineButtonListener implements ActionListener {
                 if ("取消".equals(e.getActionCommand())) {
                     dialog.dispose();
                 } else {
-                	 if(field.getText().equals("")) {
-                		 JOptionPane.showMessageDialog(frame, "工程名不能为空！", "提示", JOptionPane.PLAIN_MESSAGE);
-                         return;
-                     }
+                    if (field.getText().equals("")) {
+                        JOptionPane.showMessageDialog(frame, "工程名不能为空！", "提示", JOptionPane.PLAIN_MESSAGE);
+                        return;
+                    }
                     if (field.getText().contains("(") || field.getText().contains("（") || field.getText().contains("）") || field.getText().contains(")")) {
                         JOptionPane.showMessageDialog(frame, "文件名中不能带括号！", "提示", JOptionPane.PLAIN_MESSAGE);
                         return;
@@ -330,15 +380,15 @@ public class MineButtonListener implements ActionListener {
                 if ("取消".equals(e.getActionCommand())) {
                     dialog.dispose();
                 } else {
-                	if(field.getText().equals("")) {
-                		JOptionPane.showMessageDialog(frame, "项目名不能为空", "提示", JOptionPane.PLAIN_MESSAGE);
+                    if (field.getText().equals("")) {
+                        JOptionPane.showMessageDialog(frame, "项目名不能为空", "提示", JOptionPane.PLAIN_MESSAGE);
                         return;
-                	}
+                    }
                     Users users = (Users) MainUi.map.get("Users");
                     Map<String, String> param = new HashMap<>();
                     param.put("xmname", field.getText());
                     param.put("usercode", users.getUsercode());
-                   // param.put("xmtype", "0");
+                    // param.put("xmtype", "0");
                     Message(dialog, "/js/a/jk/insertgrxm", param);
                     refresh();
                 }
@@ -367,7 +417,7 @@ public class MineButtonListener implements ActionListener {
         p1.add(new JLabel("项目名称："));
         final JTextField field = new JTextField(15);
         p1.add(field);
-        FileOrFolder f = (FileOrFolder)node.getUserObject();
+        FileOrFolder f = (FileOrFolder) node.getUserObject();
         field.setText(f.getXmname());
         JPanel p2 = new JPanel();
         JButton btn1 = new JButton("确定");
@@ -377,10 +427,10 @@ public class MineButtonListener implements ActionListener {
                 if ("取消".equals(e.getActionCommand())) {
                     dialog.dispose();
                 } else {
-                	if(field.getText().equals("")) {
-                		JOptionPane.showMessageDialog(frame, "项目名不能为空", "提示", JOptionPane.PLAIN_MESSAGE);
+                    if (field.getText().equals("")) {
+                        JOptionPane.showMessageDialog(frame, "项目名不能为空", "提示", JOptionPane.PLAIN_MESSAGE);
                         return;
-                	}
+                    }
                     FileOrFolder folder = (FileOrFolder) node.getUserObject();
                     Users users = (Users) MainUi.map.get("Users");
                     Map<String, String> param = new HashMap<>();
@@ -409,21 +459,21 @@ public class MineButtonListener implements ActionListener {
      * 刷新列表
      */
     private void refresh() {
-    	
+
         tree.removeAll();
         Users users = (Users) MainUi.map.get("Users");
         Map<String, String> param = new HashMap<>();
         param.put("usercode", users.getUsercode());
         String request = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/getgrxm", param);
         List<FileOrFolder> list = JSON.parseArray(request, FileOrFolder.class);
-        
+
         String requestsucai = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/getgrshucai", param);
         List<SuCaiFile> suCaiFilelist = JSON.parseArray(requestsucai, SuCaiFile.class);
 
         String requestsksucai = HttpClientUtil.doGet(Data.ipPort + "js/a/jk/getgrskshucai", param);
         List<SuCaiFile> sksuCaiFilelist = JSON.parseArray(requestsksucai, SuCaiFile.class);
 
-        
+
         JPanel panel = new JPanel(new BorderLayout());
         panel.setBorder(new LineBorder(Color.gray));
         panel.setPreferredSize(new Dimension(430, 550));
@@ -431,13 +481,13 @@ public class MineButtonListener implements ActionListener {
         // 创建根节点
         CustomTreeNode rootNode = new CustomTreeNode("个人管理");
         rootNode.setLevel(0);
-        
+
         DefaultTreeModel model = new DefaultTreeModel(rootNode);
 
         tree.setModel(model);
         tree.setCellRenderer(new CustomTreeCellRenderer());
 
-        
+
         CustomTreeNode gonCheng = new CustomTreeNode("个人工程");
         gonCheng.setLevel(1);
         CustomTreeNode suCai = new CustomTreeNode("个人素材");
@@ -450,7 +500,7 @@ public class MineButtonListener implements ActionListener {
         suCai.add(ShengKonSuCai);
         rootNode.add(gonCheng);
         rootNode.add(suCai);
-        
+
         for (FileOrFolder folder : list) {
             CustomTreeNode node = new CustomTreeNode(folder);
             node.setLevel(1);
@@ -465,26 +515,26 @@ public class MineButtonListener implements ActionListener {
             }
             gonCheng.add(node);
         }
-        
+
         for (SuCaiFile folder : suCaiFilelist) {
             CustomTreeNode node = new CustomTreeNode(folder);
             node.setLevel(4);
-            
+
             changJingSuCai.add(node);
         }
-        
+
         for (SuCaiFile folder : sksuCaiFilelist) {
             CustomTreeNode node = new CustomTreeNode(folder);
             node.setLevel(4);
-            
+
             ShengKonSuCai.add(node);
         }
-        
+
         //默认展开全部节点
         TreeUtil util = new TreeUtil();
         util.expandAll(tree, new TreePath(rootNode), true);
     }
-    
+
     private void refresh2() {
         tree.removeAll();
         CustomTreeNode root = new CustomTreeNode("团队项目");
@@ -529,12 +579,14 @@ public class MineButtonListener implements ActionListener {
         dialog.dispose();
         JOptionPane.showMessageDialog(frame, "新建项目成功", "提示", JOptionPane.PLAIN_MESSAGE);
     }
+
     private void Message2(JDialog dialog, String code, Map<String, String> param) {
         String request = HttpClientUtil.doGet(Data.ipPort + code, param);
         //Message message = JSON.parseObject(request, Message.class);
         dialog.dispose();
         JOptionPane.showMessageDialog(frame, "重命名成功", "提示", JOptionPane.PLAIN_MESSAGE);
     }
+
     private void Message3(JDialog dialog, String code, Map<String, String> param) {
         String request = HttpClientUtil.doGet(Data.ipPort + code, param);
         //Message message = JSON.parseObject(request, Message.class);

@@ -37,31 +37,52 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                 dialog.setVisible(true);
             }
         } else if ("删除".equals(e.getActionCommand())) {
-            JList dengkuList = (JList) MainUi.map.get("suCaiLightType");//灯库列表
-            JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
-            JList suCaiList = (JList) MainUi.map.get("suCai_list");//素材列表
-            boolean flag = false;
-            int index = 0;
-            for (int i = 0; i < btns.length; i++) {
-                if (btns[i].isSelected()) {
-                    flag = true;
-                    index = i;
+            Object[] options = {"否", "是"};
+            int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "删除素材会清空对应效果灯界面对应灯组的素材，是否继续删除？", "警告",
+                    JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+                    null, options, options[1]);
+            if (yes == 1) {
+                JList suCaiList = (JList) MainUi.map.get("suCai_list");//素材列表
+                int selectIndex = suCaiList.getSelectedIndex();//获得该素材选中的灯库
+                NewJTable table3 = (NewJTable) MainUi.map.get("allLightTable");//所有灯具
+                NewJTable table = (NewJTable) MainUi.map.get("GroupTable");//灯具分组
+                NewJTable table_dengJu = (NewJTable) MainUi.map.get("table_dengJu");//灯具配置
+
+                List<String> list = new ArrayList<>();
+                for (int i = 0; i < table.getRowCount(); i++) {
+                    TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(i);
+                    Iterator iterator = treeSet.iterator();
+                    String s = "";
+                    while (iterator.hasNext()) {
+                        int a = (int) iterator.next();
+                        if (table3.getRowCount() > 0) {
+                            s = table3.getValueAt(a, 0).toString();
+                            Integer s1 = Integer.parseInt(s.split("#")[0].substring(2));//组内灯具的灯具id
+                            String s2 = ((String) table_dengJu.getValueAt(s1 - 1, 3)).split("#")[0];//灯库名称
+                            int c = Integer.parseInt(s2.substring(2)) - 1;
+                            if (selectIndex == c) {
+                                String ss = table.getValueAt(i, 2).toString();
+                                list.add(ss);
+                                break;
+                            }
+                        }
+                    }
+                }
+                for (int n = 0; n < table.getRowCount(); n++) {
+                    for (int i = 1; i <= 24; i++) {
+                        JLabel[] labels = (JLabel[]) MainUi.map.get("labels_group" + i);
+                        JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels_group" + i);
+                        for (int j = 0; j < list.size(); j++) {
+                            if (labels[n + 1].getText().equals(list.get(j))) {
+                                timeBlockPanels[n + 1].removeAll();
+                                timeBlockPanels[n + 1].updateUI();
+                            }
+                        }
+                    }
                 }
             }
-            if (dengkuList.getSelectedValue() != null && suCaiList.getSelectedValue() != null && flag) {
-                Object[] options = {"否", "是"};
-                int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "是否删除？", "警告",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
-                        null, options, options[1]);
-                if (yes == 1) {
-                    String dengkuStr = dengkuList.getSelectedValue().toString();
-                    String sucaiIndex = suCaiList.getSelectedValue().toString().split(">")[1];
-                }
-            } else {
-                JFrame frame = (JFrame) MainUi.map.get("frame");
-                JOptionPane.showMessageDialog(frame, "您未选中数据！", "提示", JOptionPane.ERROR_MESSAGE);
-            }
-            System.out.println("删除");
+
+
         } else if ("重命名".equals(e.getActionCommand())) {
             JList suCaiList = (JList) MainUi.map.get("suCai_list");//素材列表
             String name = suCaiList.getSelectedValue().toString().split("--->")[0];
@@ -109,8 +130,8 @@ public class CreateOrDelSuCaiListener implements ActionListener {
      * 判断用户选择打开个人素材还是团队素材
      */
     public void openGeRenOrTuanDui() {
-        JFrame f = (JFrame) MainUi.map.get("frame");
-        IconJDialog dia = new IconJDialog(f, true);
+        final JFrame f = (JFrame) MainUi.map.get("frame");
+        final IconJDialog dia = new IconJDialog(f, true);
         dia.setResizable(false);
         dia.setTitle("云端素材");
         int w = 380, h = 200;
@@ -119,7 +140,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
         dia.setLayout(new FlowLayout(FlowLayout.CENTER));
         dia.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
-        JRadioButton radioButton = new JRadioButton("个人");
+        final JRadioButton radioButton = new JRadioButton("个人");
         JRadioButton radioButton2 = new JRadioButton("团队");
         ButtonGroup group = new ButtonGroup();
         group.add(radioButton);

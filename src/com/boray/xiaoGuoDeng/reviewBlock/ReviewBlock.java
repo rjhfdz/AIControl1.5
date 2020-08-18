@@ -89,9 +89,9 @@ public class ReviewBlock {
 
 
             //∆Ù∂Ø‘§¿¿
-            Thread.sleep(200);
-            b = TimeBlockReviewData.getStarReview2(model);
-            Socket.SendData(b);
+//            Thread.sleep(200);
+//            b = TimeBlockReviewData.getStarReview2(model);
+//            Socket.SendData(b);
 
         } catch (Exception e2) {
             e2.printStackTrace();
@@ -239,9 +239,9 @@ public class ReviewBlock {
                 }
 
                 //∆Ù∂Ø‘§¿¿
-                Thread.sleep(200);
-                b = TimeBlockReviewData.getStarReview4(model);
-                Socket.SerialPortSendData(b);
+//                Thread.sleep(200);
+//                b = TimeBlockReviewData.getStarReview4(model);
+//                Socket.SerialPortSendData(b);
             } else if (Data.socket != null) {
                 byte[] b = null;
                 Object[] objects = TimeBlockReviewData.getEffectLight4(1280, model, 18, false);
@@ -252,9 +252,9 @@ public class ReviewBlock {
                 }
 
                 //∆Ù∂Ø‘§¿¿
-                Thread.sleep(200);
-                b = TimeBlockReviewData.getStarReview4(model);
-                Socket.UDPSendData(b);
+//                Thread.sleep(200);
+//                b = TimeBlockReviewData.getStarReview4(model);
+//                Socket.UDPSendData(b);
             }
         } catch (Exception e) {
             e.printStackTrace();

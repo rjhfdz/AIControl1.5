@@ -53,6 +53,7 @@ public class OverDmxUI implements ActionListener {
     private JComboBox box;
     private JComboBox box2;
     private int setNo;
+    private JLabel stepLabel;
 
     public void show(int no) {
         setNo = no;
@@ -806,7 +807,9 @@ public class OverDmxUI implements ActionListener {
         final JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem menuItem = new JMenuItem("　复制　　　　　");
         JMenuItem menuItem1 = new JMenuItem("　粘贴　　　　　");
-        CopyToTimeBlockEdit copyListener = new CopyToTimeBlockEdit(runTable);
+        int size = runTable.getRowCount();
+        stepLabel = new JLabel("总步数:" + size);
+        CopyToTimeBlockEdit copyListener = new CopyToTimeBlockEdit(runTable, stepLabel);
         menuItem.addActionListener(copyListener);
         menuItem1.addActionListener(copyListener);
         popupMenu.add(menuItem);
@@ -862,6 +865,8 @@ public class OverDmxUI implements ActionListener {
                     s[1] = "2000";
                     model.addRow(temp);
                     runTable.setRowSelectionInterval(runTable.getRowCount() - 1, runTable.getRowCount() - 1);
+                    int size = runTable.getRowCount();
+                    stepLabel.setText("总步数:" + size);
                 } else {
                     JFrame frame = (JFrame) MainUi.map.get("frame");
                     JOptionPane.showMessageDialog(frame, "添加失败，总步骤数不能超过128步！", "提示", JOptionPane.ERROR_MESSAGE);
@@ -883,11 +888,14 @@ public class OverDmxUI implements ActionListener {
                 if (runTable.getSelectedRow() == -1) {
                     runTable.setRowSelectionInterval(runTable.getRowCount() - 1, runTable.getRowCount() - 1);
                 }
+                int size = runTable.getRowCount();
+                stepLabel.setText("总步数:" + size);
             }
         });
         p5.add(btn);
         p5.add(btn2);
-
+        p5.add(new JLabel("                                                                                                                                                                         "));
+        p5.add(stepLabel);
         pane.add(p4);
         pane.add(p5);
     }
