@@ -30,45 +30,15 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="与死胖子代码对比后，逻辑判断修改">
-      <change afterPath="$PROJECT_DIR$/src/com/boray/main/Util/Util.java" afterDir="false" />
+    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="与死胖子的代码进行整合，声控素材导出增加新变量。">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadProjectFileActionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/LoadProjectFileActionListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/ProjectCreateFileActionListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/beiFen/Listener/ProjectCreateFileActionListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/mainUi/MainUi.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/mainUi/MainUi.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/UI/RightMainUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/reviewCode/ReviewUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/xiaoGuoDeng/reviewCode/ReviewUtils.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/artifacts/AIControl1.5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/AIControl1.5.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/LoadProjectFileActionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/LoadProjectFileActionListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/ProjectCreateFileActionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/beiFen/Listener/ProjectCreateFileActionListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/Listener/DataWriteListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/DataWriteListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/Listener/MineButtonListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/Listener/MineButtonListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/BorayMainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/BorayMainUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/main/UI/MineUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/main/UI/MineUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/mainUi/MainUi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/mainUi/MainUi.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/Listener/CreateOrDelSuCaiListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/Listener/CreateOrDelSuCaiListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/Listener/UpLoadOrLoadShengKonSuCaiListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/Listener/UpLoadOrLoadShengKonSuCaiListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/UI/ShengKonSuCaiEditUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/UI/ShengKonSuCaiEditUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/UI/YunShengKonSuCaiDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/UI/YunShengKonSuCaiDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/Listener/CreateOrDelSuCaiListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/Listener/CreateOrDelSuCaiListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/UI/SuCaiUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/UI/SuCaiUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/UI/YunChangJingSuCaiDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/UI/YunChangJingSuCaiDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/Listener/SuoYouDengZuLabelMouseListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/Listener/SuoYouDengZuLabelMouseListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/DefineJLable3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/DefineJLable3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/OverDmxUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/OverDmxUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/RightMainUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/UI/RightMainUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/reviewBlock/ReviewBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/reviewBlock/ReviewBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/reviewCode/ReviewUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/xiaoGuoDeng/reviewCode/ReviewUtils.java" afterDir="false" />
     </list>
     <list id="8e2f3826-f652-4540-934c-0fbbebdda1b0" name="Revert: " comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -645,14 +615,8 @@
       <workItem from="1597449409763" duration="21868000" />
       <workItem from="1597622229170" duration="29774000" />
       <workItem from="1597708627448" duration="18687000" />
-      <workItem from="1597736993170" duration="6597000" />
-    </task>
-    <task id="LOCAL-00035" summary="控制文件格式修改，右侧添加数据写入功能">
-      <created>1576493551639</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1576493551639</updated>
+      <workItem from="1597736993170" duration="12312000" />
+      <workItem from="1597794997009" duration="2982000" />
     </task>
     <task id="LOCAL-00036" summary="效果灯素材打包异常修改，主窗口界面逻辑修改（暂未完成），右侧网络连接UDP发送数据">
       <created>1576719708233</created>
@@ -990,7 +954,14 @@
       <option name="project" value="LOCAL" />
       <updated>1596763557856</updated>
     </task>
-    <option name="localTasksCounter" value="84" />
+    <task id="LOCAL-00084" summary="与死胖子的代码进行整合，声控素材导出增加新变量。">
+      <created>1597746264499</created>
+      <option name="number" value="00084" />
+      <option name="presentableId" value="LOCAL-00084" />
+      <option name="project" value="LOCAL" />
+      <updated>1597746264499</updated>
+    </task>
+    <option name="localTasksCounter" value="85" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1061,7 +1032,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="效果灯素材编辑解码的拆分下拉框修改&#10;灯具管理界面添加RDM功能&#10;RDM管理界面添加DMX排序，以及拖动排序&#10;以及添加DMX起始地址是否重复校验" />
     <MESSAGE value="RDM管理界面添加自动生成DMX地址功能，以及切换界面时，自动发码进入或退出RDM模式&#10;灯库管理界面添加自定义通道功能&#10;效果灯编程界面添加所有灯组功能，以及多灯页面调整" />
     <MESSAGE value="保存工程文件中增加场景多灯，场景界面发送数据预览时，展示等待框&#10;生成控制器文件时增加场景多灯数据" />
     <MESSAGE value="场景多灯通道勾选异常修改，界面添加全部清零以及全部满值按钮。&#10;保存工程文件格式修改，添加多灯场景是否启用&#10;效果灯编程界面步预览添加artnet协议发送&#10;右侧边栏IP地址输入框自定义&#10;效果灯素材编辑界面隐藏多灯设置" />
@@ -1086,7 +1056,8 @@
     <MESSAGE value="跟死胖子的代码进行整合" />
     <MESSAGE value="登录时，判断用户是否是管理员。如果是显示成员管理界面，否则不显示。" />
     <MESSAGE value="与死胖子代码对比后，逻辑判断修改" />
-    <option name="LAST_COMMIT_MESSAGE" value="与死胖子代码对比后，逻辑判断修改" />
+    <MESSAGE value="与死胖子的代码进行整合，声控素材导出增加新变量。" />
+    <option name="LAST_COMMIT_MESSAGE" value="与死胖子的代码进行整合，声控素材导出增加新变量。" />
   </component>
   <component name="WindowStateProjectService">
     <state x="679" y="111" key="#Custom_Plugin_Repositories" timestamp="1596672231491">
@@ -1113,10 +1084,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="715" y="222" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1597106712105" />
-    <state x="575" y="176" width="936" height="792" key="CommitChangelistDialog2" timestamp="1596763554539">
+    <state x="575" y="176" width="936" height="792" key="CommitChangelistDialog2" timestamp="1597746260545">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="575" y="176" width="936" height="792" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1596763554539" />
+    <state x="575" y="176" width="936" height="792" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1597746260545" />
     <state width="540" height="466" key="DebuggerActiveHint" timestamp="1592880192209">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -1129,38 +1100,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="761" y="342" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1596705922318" />
-    <state width="1877" height="213" key="GridCell.Tab.0.bottom" timestamp="1597742347466">
+    <state width="1877" height="213" key="GridCell.Tab.0.bottom" timestamp="1597797664330">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597742347466" />
-    <state width="1877" height="213" key="GridCell.Tab.0.center" timestamp="1597742347466">
+    <state width="1877" height="213" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597797664330" />
+    <state width="1877" height="213" key="GridCell.Tab.0.center" timestamp="1597797664330">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597742347466" />
-    <state width="1877" height="213" key="GridCell.Tab.0.left" timestamp="1597742347465">
+    <state width="1877" height="213" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597797664330" />
+    <state width="1877" height="213" key="GridCell.Tab.0.left" timestamp="1597797664330">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597742347465" />
-    <state width="1877" height="213" key="GridCell.Tab.0.right" timestamp="1597742347466">
+    <state width="1877" height="213" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597797664330" />
+    <state width="1877" height="213" key="GridCell.Tab.0.right" timestamp="1597797664330">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597742347466" />
-    <state width="1877" height="213" key="GridCell.Tab.1.bottom" timestamp="1597742347277">
+    <state width="1877" height="213" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597797664330" />
+    <state width="1877" height="213" key="GridCell.Tab.1.bottom" timestamp="1597797664142">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597742347277" />
-    <state width="1877" height="213" key="GridCell.Tab.1.center" timestamp="1597742347277">
+    <state width="1877" height="213" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597797664142" />
+    <state width="1877" height="213" key="GridCell.Tab.1.center" timestamp="1597797664142">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597742347277" />
-    <state width="1877" height="213" key="GridCell.Tab.1.left" timestamp="1597742347277">
+    <state width="1877" height="213" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597797664142" />
+    <state width="1877" height="213" key="GridCell.Tab.1.left" timestamp="1597797664142">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597742347277" />
-    <state width="1877" height="213" key="GridCell.Tab.1.right" timestamp="1597742347277">
+    <state width="1877" height="213" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597797664142" />
+    <state width="1877" height="213" key="GridCell.Tab.1.right" timestamp="1597797664142">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597742347277" />
+    <state width="1877" height="213" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597797664142" />
     <state x="540" y="254" width="1225" height="609" key="IDE.errors.dialog" timestamp="1596674497976">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -1173,10 +1144,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="521" y="161" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1596872696857" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1596763641434">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1597746280374">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1596763641434" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1597746280374" />
     <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1597229910859">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

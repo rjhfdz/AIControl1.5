@@ -165,7 +165,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                     IconJDialog dialog = new IconJDialog(f, true);
                     dialog.setTitle("ÔÆ¶ËËØ²Ä");
                     dialog.setResizable(false);
-                    int width = 720, height = 620;
+                    int width = 750, height = 620;
                     dialog.setSize(width, height);
                     dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - width / 2, f.getLocation().y + f.getSize().height / 2 - height / 2);
                     dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

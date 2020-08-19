@@ -58,7 +58,7 @@ public class YunShengKonSuCaiDialog implements ActionListener {
         JPanel p3 = new JPanel();
         TitledBorder titledBorder1 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "素材列表", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         p3.setBorder(titledBorder1);
-        p3.setPreferredSize(new Dimension(330, 594));
+        p3.setPreferredSize(new Dimension(350, 594));
         setP3(p3);
 
         JList listFile = (JList) MainUi.map.get("shengKonSuCaiDengZuYun");
@@ -71,7 +71,7 @@ public class YunShengKonSuCaiDialog implements ActionListener {
 
     private void setP3(JPanel p3) {
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setPreferredSize(new Dimension(330, 520));
+        scrollPane.setPreferredSize(new Dimension(350, 520));
 
         //素材列表
         final JList list = new JList();
@@ -90,7 +90,7 @@ public class YunShengKonSuCaiDialog implements ActionListener {
         p3.add(scrollPane);
 
         JPanel bottomPanel = new JPanel();
-        bottomPanel.setPreferredSize(new Dimension(300, 40));
+        bottomPanel.setPreferredSize(new Dimension(340, 40));
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
         flowLayout.setVgap(-2);
         flowLayout.setHgap(-2);
