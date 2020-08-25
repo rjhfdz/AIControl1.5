@@ -48,7 +48,7 @@ public class SuCaiUI {
         JPanel p3 = new JPanel();
         TitledBorder titledBorder1 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "素材列表", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         p3.setBorder(titledBorder1);
-        p3.setPreferredSize(new Dimension(280, 594));
+        p3.setPreferredSize(new Dimension(350, 594));
         setP3(p3);
 
 //        JPanel p4 = new JPanel();
@@ -73,7 +73,7 @@ public class SuCaiUI {
 
     private void setP3(JPanel p3) {
         JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setPreferredSize(new Dimension(270, 520));
+        scrollPane.setPreferredSize(new Dimension(350, 520));
 
         //素材列表
         final JList list = new JList();
@@ -95,7 +95,7 @@ public class SuCaiUI {
         p3.add(scrollPane);
 
         JPanel bottomPanel = new JPanel();
-        bottomPanel.setPreferredSize(new Dimension(280, 40));
+        bottomPanel.setPreferredSize(new Dimension(340, 40));
         //bottomPanel.setBorder(new LineBorder(Color.black));
         FlowLayout flowLayout = new FlowLayout(FlowLayout.LEFT);
         flowLayout.setVgap(-2);
@@ -128,7 +128,7 @@ public class SuCaiUI {
         bottomPanel.add(reNameBtn);
         bottomPanel.add(upLoadBtn);
         bottomPanel.add(reviewBtn);
-//        bottomPanel.add(removeBtn);
+        bottomPanel.add(removeBtn);
         p3.add(bottomPanel);
 
         //添加右键菜单

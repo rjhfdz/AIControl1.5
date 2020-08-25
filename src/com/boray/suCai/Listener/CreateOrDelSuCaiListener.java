@@ -42,6 +42,7 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                     JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                     null, options, options[1]);
             if (yes == 1) {
+                JList suCaiLightType = (JList) MainUi.map.get("suCaiLightType");
                 JList suCaiList = (JList) MainUi.map.get("suCai_list");//素材列表
                 int selectIndex = suCaiList.getSelectedIndex();//获得该素材选中的灯库
                 NewJTable table3 = (NewJTable) MainUi.map.get("allLightTable");//所有灯具
@@ -79,6 +80,58 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                             }
                         }
                     }
+                }
+                int num = Integer.parseInt(suCaiList.getSelectedValue().toString().split("--->")[1]);
+                Map map = (Map) Data.suCaiMap.get(suCaiLightType.getSelectedValue().toString());
+                Map nameMap = (Map) Data.suCaiNameMap.get(suCaiLightType.getSelectedValue().toString());
+                JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
+                for (int i = 0; i < btns.length; i++) {
+                    List tmp = (List) map.get("" + i);
+                    List nameList = (List) nameMap.get("" + i);
+                    int index2 = -1;
+                    if (nameList != null) {
+                        for (int j = 0; j < nameList.size(); j++) {
+                            String str = nameList.get(j).toString();
+                            int index = Integer.parseInt(str.split("--->")[1]);
+                            if (index == num) {
+                                index2 = j;
+                            }
+                        }
+                        if (index2 != -1) {
+                            nameList.remove(index2);
+                            tmp.remove(index2);
+                        }
+                        for (int j = 0; j < nameList.size(); j++) {
+                            String[] str = nameList.get(j).toString().split("--->");
+                            int index = Integer.parseInt(str[1]);
+                            if (index > num) {
+                                nameList.set(j, str[0] + "--->" + (index - 1));
+                            }
+                        }
+                    }
+                }
+                for (int i = 0; i < Data.SuCaiObjects[suCaiLightType.getSelectedIndex()].length; i++) {
+                    if (i == (num - 1)) {
+                        Data.SuCaiObjects[suCaiLightType.getSelectedIndex()][i] = null;
+                    }
+                    if (i >= (num - 1)) {
+                        if (i < 49)
+                            Data.SuCaiObjects[suCaiLightType.getSelectedIndex()][i] = Data.SuCaiObjects[suCaiLightType.getSelectedIndex()][i + 1];
+                    }
+                }
+                btns[0].doClick();
+                JLabel alone = (JLabel) MainUi.map.get("alone");
+                alone.setText(new SuCaiUI().getAlone(suCaiLightType.getSelectedValue().toString()));
+                JLabel count = (JLabel) MainUi.map.get("count");
+                count.setText(new SuCaiUI().getCount());
+                String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
+                for (int i = 0; i < btns.length; i++) {
+                    List abc = (List) map.get("" + i);
+                    int size = 0;
+                    if (abc != null) {
+                        size = abc.size();
+                    }
+                    btns[i].setText(name[i] + "(" + size + ")");
                 }
             }
 

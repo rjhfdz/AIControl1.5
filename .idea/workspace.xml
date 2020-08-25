@@ -30,15 +30,16 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="与死胖子的代码进行整合，声控素材导出增加新变量。">
+    <list default="true" id="fc98a4be-edf5-452a-95f4-d0ee8fbbec0b" name="Default Changelist" comment="云端效果灯素材跟声控素材界面调整">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/com/boray/mainUi/MainUi.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/mainUi/MainUi.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/Listener/CreateOrDelSuCaiListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/com/boray/suCai/UI/SuCaiUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/artifacts/AIControl1.5.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/AIControl1.5.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/mainUi/MainUi.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/mainUi/MainUi.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/Listener/CreateOrDelSuCaiListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/Listener/CreateOrDelSuCaiListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/UI/YunShengKonSuCaiDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/shengKonSuCai/UI/YunShengKonSuCaiDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/Listener/CreateOrDelSuCaiListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/Listener/CreateOrDelSuCaiListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/UI/YunChangJingSuCaiDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/UI/YunChangJingSuCaiDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/boray/suCai/UI/SuCaiUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/boray/suCai/UI/SuCaiUI.java" afterDir="false" />
     </list>
     <list id="8e2f3826-f652-4540-934c-0fbbebdda1b0" name="Revert: " comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -616,14 +617,13 @@
       <workItem from="1597622229170" duration="29774000" />
       <workItem from="1597708627448" duration="18687000" />
       <workItem from="1597736993170" duration="12312000" />
-      <workItem from="1597794997009" duration="2982000" />
-    </task>
-    <task id="LOCAL-00036" summary="效果灯素材打包异常修改，主窗口界面逻辑修改（暂未完成），右侧网络连接UDP发送数据">
-      <created>1576719708233</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1576719708233</updated>
+      <workItem from="1597794997009" duration="13169000" />
+      <workItem from="1597881841527" duration="11049000" />
+      <workItem from="1597967737989" duration="3081000" />
+      <workItem from="1598054089207" duration="15377000" />
+      <workItem from="1598080370203" duration="3987000" />
+      <workItem from="1598227227154" duration="16250000" />
+      <workItem from="1598313441139" duration="8530000" />
     </task>
     <task id="LOCAL-00037" summary="摇麦数据打包异常，数据存储格式修改为40场景31字符，灯库通道异常导致的步数异常，灯库新建、导入异常。&#10;效果灯界面预览功能添加网络发送">
       <created>1576915945847</created>
@@ -961,7 +961,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597746264499</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="云端效果灯素材跟声控素材界面调整">
+      <created>1597798050941</created>
+      <option name="number" value="00085" />
+      <option name="presentableId" value="LOCAL-00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1597798050942</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -1032,7 +1039,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="RDM管理界面添加自动生成DMX地址功能，以及切换界面时，自动发码进入或退出RDM模式&#10;灯库管理界面添加自定义通道功能&#10;效果灯编程界面添加所有灯组功能，以及多灯页面调整" />
     <MESSAGE value="保存工程文件中增加场景多灯，场景界面发送数据预览时，展示等待框&#10;生成控制器文件时增加场景多灯数据" />
     <MESSAGE value="场景多灯通道勾选异常修改，界面添加全部清零以及全部满值按钮。&#10;保存工程文件格式修改，添加多灯场景是否启用&#10;效果灯编程界面步预览添加artnet协议发送&#10;右侧边栏IP地址输入框自定义&#10;效果灯素材编辑界面隐藏多灯设置" />
     <MESSAGE value="art-net连接界面修改，加载工程时同时处理所有灯组的启用或禁用。&#10;场景块预览art-net预览协议增加。" />
@@ -1057,17 +1063,14 @@
     <MESSAGE value="登录时，判断用户是否是管理员。如果是显示成员管理界面，否则不显示。" />
     <MESSAGE value="与死胖子代码对比后，逻辑判断修改" />
     <MESSAGE value="与死胖子的代码进行整合，声控素材导出增加新变量。" />
-    <option name="LAST_COMMIT_MESSAGE" value="与死胖子的代码进行整合，声控素材导出增加新变量。" />
+    <MESSAGE value="云端效果灯素材跟声控素材界面调整" />
+    <option name="LAST_COMMIT_MESSAGE" value="云端效果灯素材跟声控素材界面调整" />
   </component>
   <component name="WindowStateProjectService">
     <state x="679" y="111" key="#Custom_Plugin_Repositories" timestamp="1596672231491">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="679" y="111" key="#Custom_Plugin_Repositories/0.0.1920.1040@0.0.1920.1040" timestamp="1596672231491" />
-    <state x="533" y="52" key="#Java" timestamp="1589194194872">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="533" y="52" key="#Java/0.0.1920.1040@0.0.1920.1040" timestamp="1589194194872" />
     <state x="742" y="204" key="#Plugins" timestamp="1590108000616">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -1084,10 +1087,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="715" y="222" key="#xdebugger.evaluate/0.0.1920.1040@0.0.1920.1040" timestamp="1597106712105" />
-    <state x="575" y="176" width="936" height="792" key="CommitChangelistDialog2" timestamp="1597746260545">
+    <state x="575" y="176" width="936" height="792" key="CommitChangelistDialog2" timestamp="1597798047014">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="575" y="176" width="936" height="792" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1597746260545" />
+    <state x="575" y="176" width="936" height="792" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1597798047014" />
     <state width="540" height="466" key="DebuggerActiveHint" timestamp="1592880192209">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -1100,38 +1103,38 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="761" y="342" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1596705922318" />
-    <state width="1877" height="213" key="GridCell.Tab.0.bottom" timestamp="1597797664330">
+    <state width="1877" height="213" key="GridCell.Tab.0.bottom" timestamp="1598314851937">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597797664330" />
-    <state width="1877" height="213" key="GridCell.Tab.0.center" timestamp="1597797664330">
+    <state width="1877" height="213" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1598314851937" />
+    <state width="1877" height="213" key="GridCell.Tab.0.center" timestamp="1598314851937">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597797664330" />
-    <state width="1877" height="213" key="GridCell.Tab.0.left" timestamp="1597797664330">
+    <state width="1877" height="213" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1598314851937" />
+    <state width="1877" height="213" key="GridCell.Tab.0.left" timestamp="1598314851937">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597797664330" />
-    <state width="1877" height="213" key="GridCell.Tab.0.right" timestamp="1597797664330">
+    <state width="1877" height="213" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1598314851937" />
+    <state width="1877" height="213" key="GridCell.Tab.0.right" timestamp="1598314851937">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597797664330" />
-    <state width="1877" height="213" key="GridCell.Tab.1.bottom" timestamp="1597797664142">
+    <state width="1877" height="213" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1598314851937" />
+    <state width="1877" height="213" key="GridCell.Tab.1.bottom" timestamp="1598088607332">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1597797664142" />
-    <state width="1877" height="213" key="GridCell.Tab.1.center" timestamp="1597797664142">
+    <state width="1877" height="213" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1598088607332" />
+    <state width="1877" height="213" key="GridCell.Tab.1.center" timestamp="1598088607331">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1597797664142" />
-    <state width="1877" height="213" key="GridCell.Tab.1.left" timestamp="1597797664142">
+    <state width="1877" height="213" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1598088607331" />
+    <state width="1877" height="213" key="GridCell.Tab.1.left" timestamp="1598088607330">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1597797664142" />
-    <state width="1877" height="213" key="GridCell.Tab.1.right" timestamp="1597797664142">
+    <state width="1877" height="213" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1598088607330" />
+    <state width="1877" height="213" key="GridCell.Tab.1.right" timestamp="1598088607332">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="213" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1597797664142" />
+    <state width="1877" height="213" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1598088607332" />
     <state x="540" y="254" width="1225" height="609" key="IDE.errors.dialog" timestamp="1596674497976">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -1144,10 +1147,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="521" y="161" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1596872696857" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1597746280374">
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1597798059276">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1597746280374" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1597798059276" />
     <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1597229910859">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
