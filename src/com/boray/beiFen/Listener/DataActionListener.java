@@ -299,7 +299,7 @@ public class DataActionListener {
             b5[459 + i * 10] = (byte) Integer.valueOf(list.get(23).toString()).intValue();
             b5[460 + i * 10] = (byte) Integer.valueOf(list.get(24).toString()).intValue();
             b5[461 + i * 10] = (byte) Integer.valueOf(list.get(25).toString()).intValue();
-            if (list.get(26).toString().equals("0")) {
+            if (list.get(29).toString().equals("0")) {
                 b5[462 + i * 10] = 2;
             } else {
                 b5[462 + i * 10] = 1;
@@ -309,7 +309,7 @@ public class DataActionListener {
             } else if (list.get(30).toString().equals("1")) {
                 b5[463 + i * 10] = (byte) 0xAC;
             } else {
-                b5[463 + i * 10] = (byte) Integer.valueOf(list.get(30).toString()).intValue();
+                b5[463 + i * 10] = (byte) (Integer.valueOf(list.get(30).toString()) - 1);
             }
         }
         //////////////Éù¿Ø°ó¶¨20181126/////

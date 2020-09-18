@@ -1,14 +1,11 @@
 package com.boray.suCai.UI;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,12 +18,8 @@ import javax.swing.event.ListSelectionListener;
 import com.boray.Data.Data;
 import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
-import com.boray.suCai.Listener.CreateOrDelSuCaiListener;
-import com.boray.suCai.Listener.EditListener;
-import com.boray.suCai.Listener.ShangchuanListener;
-import com.boray.suCai.Listener.SuCaiTypeListener;
-import com.boray.suCai.Listener.UpLoadOrLoadSuCaiMouseListener;
-import com.boray.suCai.Listener.YundelListener;
+import com.boray.suCai.Listener.*;
+import com.boray.Utils.SuCaiUtil;
 
 public class SuCaiUI {
     public void show(JPanel pane) {
@@ -34,7 +27,7 @@ public class SuCaiUI {
         pane.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         JScrollPane p1 = new JScrollPane();
-        TitledBorder titledBorder2 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "灯库名称", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
+        TitledBorder titledBorder2 = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "灯组名称", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
         p1.setBorder(titledBorder2);
         p1.setPreferredSize(new Dimension(200, 594));
         setP1(p1);
@@ -51,25 +44,12 @@ public class SuCaiUI {
         p3.setPreferredSize(new Dimension(350, 594));
         setP3(p3);
 
-//        JPanel p4 = new JPanel();
-//        TitledBorder tb = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.gray), "云端素材", TitledBorder.LEFT, TitledBorder.TOP, new Font(Font.SERIF, Font.BOLD, 12));
-//        p4.setBorder(tb);
-//        p4.setPreferredSize(new Dimension(280, 592));
-//        setP4(p4);
 
         pane.add(p1);
         pane.add(p2);
         pane.add(p3);
-//        pane.add(p4);
     }
 
-    private void setP4(JPanel pane) {
-    	 JButton newBtn = new JButton("云端素材");
-    	 
-    	 newBtn.addActionListener(new YundelListener());
-    	 
-    	 pane.add(newBtn);
-    }
 
     private void setP3(JPanel p3) {
         JScrollPane scrollPane = new JScrollPane();
@@ -105,14 +85,13 @@ public class SuCaiUI {
         JButton editBtn = new JButton("编辑");
         JButton reNameBtn = new JButton("重命名");
         JButton upLoadBtn = new JButton("云端");
-        JButton reviewBtn = new JButton("预览");
         JButton removeBtn = new JButton("删除");
+        MainUi.map.put("XiaoGuoDengSuCaiUpLoadBtn", upLoadBtn);
         CreateOrDelSuCaiListener listener = new CreateOrDelSuCaiListener();
         EditListener listener2 = new EditListener();
         editBtn.addActionListener(listener2);
         newBtn.addActionListener(listener);
         reNameBtn.addActionListener(listener);
-        reviewBtn.addActionListener(listener);
         removeBtn.addActionListener(listener);
 //        ShangchuanListener shangchuang = new ShangchuanListener();
         upLoadBtn.addActionListener(listener);
@@ -121,13 +100,11 @@ public class SuCaiUI {
         editBtn.setPreferredSize(dimension);
         reNameBtn.setPreferredSize(new Dimension(68, 34));
         upLoadBtn.setPreferredSize(dimension);
-        reviewBtn.setPreferredSize(dimension);
         removeBtn.setPreferredSize(dimension);
         bottomPanel.add(newBtn);
         bottomPanel.add(editBtn);
         bottomPanel.add(reNameBtn);
         bottomPanel.add(upLoadBtn);
-        bottomPanel.add(reviewBtn);
         bottomPanel.add(removeBtn);
         p3.add(bottomPanel);
 
@@ -147,56 +124,34 @@ public class SuCaiUI {
         list.addListSelectionListener(new ListSelectionListener() {
             public void valueChanged(ListSelectionEvent listSelectionEvent) {
                 if (list.getSelectedValue() != null) {
+                    JRadioButton radioButton = (JRadioButton) MainUi.map.get("xiaoGuoDengSuCaiTypeButton");
+                    if (!radioButton.isSelected()) {
+                        return;
+                    }
 
-					String aloneCount = getAlone(list.getSelectedValue().toString());//当前灯库的素材数量
-					JLabel alone = (JLabel) MainUi.map.get("alone");
-					alone.setText(aloneCount);
-
-					String count = getCount();//所有灯库的素材数量
-					JLabel countLabel = (JLabel) MainUi.map.get("count");
-					countLabel.setText(count);
-
-                    Map map = (Map) Data.suCaiMap.get(list.getSelectedValue().toString());
-                    JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
-                    String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
-                    if (map != null) {
-                        for (int i = 0; i < btns.length; i++) {
-                            List abc = (List) map.get("" + i);
-                            int size = 0;
-                            if (abc != null) {
-                                size = abc.size();
-                            }
-                            btns[i].setText(name[i] + "(" + size + ")");
-                        }
+                    Map map = (Map) Data.suCaiNameMap.get(list.getSelectedIndex());
+                    String selectedName = SuCaiUtil.getXiaoGuoDengType();
+                    List<String> suCaiNameList = null;
+                    if (map == null) {
+                        map = new HashMap();
+                        suCaiNameList = new ArrayList<>();
+                        map.put(selectedName, suCaiNameList);
                     } else {
-                        for (int i = 0; i < btns.length; i++) {
-                            btns[i].setText(name[i] + "(0)");
+                        suCaiNameList = (List<String>) map.get(selectedName);
+                    }
+                    if (suCaiNameList != null) {
+                        suCaiNameList = (List<String>) map.get(selectedName);
+                        JList list = (JList) MainUi.map.get("suCai_list");
+                        DefaultListModel model = (DefaultListModel) list.getModel();
+                        model.removeAllElements();
+                        for (int i = 0; i < suCaiNameList.size(); i++) {
+                            model.addElement(suCaiNameList.get(i));
+                        }
+                        if (suCaiNameList.size() > 0) {
+                            list.setSelectedIndex(0);
                         }
                     }
-                    //
-                    int selected = 0;
-                    for (int i = 0; i < btns.length; i++) {
-                        if (btns[i].isSelected()) {
-                            selected = i;
-                            break;
-                        }
-                    }
-
-                    Map nameMap = (Map) Data.suCaiNameMap.get(list.getSelectedValue().toString());
-                    JList list = (JList) MainUi.map.get("suCai_list");
-                    DefaultListModel model = (DefaultListModel) list.getModel();
-                    model.removeAllElements();
-                    if (nameMap != null) {
-                        List tmp = (List) nameMap.get("" + selected);
-                        if (tmp != null) {
-                            for (int i = 0; i < tmp.size(); i++) {
-                                model.addElement(tmp.get(i).toString());
-                            }
-                            if (tmp.size() > 0) {
-                                list.setSelectedIndex(0);
-                            }
-                        }
-                    }
+                    SuCaiUtil.neatenSuCaiTypeBtns();
                 }
             }
         });
@@ -212,6 +167,20 @@ public class SuCaiUI {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER);
         flowLayout.setVgap(-2);
         pane.setLayout(flowLayout);
+
+        JRadioButton radioButton = new JRadioButton("通道");
+        JRadioButton radioButton2 = new JRadioButton("动作");
+        ButtonGroup groups = new ButtonGroup();
+        groups.add(radioButton);
+        groups.add(radioButton2);
+        radioButton.setSelected(true);
+        TonDaoOrDongZuoSuCaiTypeListener typeListener = new TonDaoOrDongZuoSuCaiTypeListener();
+        radioButton.addActionListener(typeListener);
+        radioButton2.addActionListener(typeListener);
+        pane.add(radioButton);
+        pane.add(radioButton2);
+        MainUi.map.put("xiaoGuoDengSuCaiTypeButton", radioButton);
+
         String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
         JToggleButton[] btns = new JToggleButton[name.length];
         SuCaiTypeListener listener = new SuCaiTypeListener();
@@ -241,41 +210,38 @@ public class SuCaiUI {
 
         pane.add(jPanel);
         pane.add(jPanel2);
-
     }
 
     public String getCount() {
-        NewJTable table = (NewJTable) MainUi.map.get("table_DkGl");//灯库
-        String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
         int count = 0;
+        NewJTable table = (NewJTable) MainUi.map.get("GroupTable");
         for (int i = 0; i < table.getRowCount(); i++) {
-            Map map = (Map) Data.suCaiMap.get(table.getValueAt(i, 1).toString());
-            if (map != null) {
-                for (int j = 0; j < name.length; j++) {
-                    List abc = (List) map.get("" + j);
-                    int size = 0;
-                    if (abc != null) {
-                        size = abc.size();
-                    }
-                    count += size;
+            Map map = (Map) Data.suCaiNameMap.get(i);
+            JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
+            String selectedName = "";
+            for (int j = 0; j < btns.length; j++) {
+                selectedName = btns[j].getText().substring(0, 2);
+                if (map != null) {
+                    List<String> suCaiNameList = (List<String>) map.get(selectedName);
+                    if (suCaiNameList != null)
+                        count += suCaiNameList.size();
                 }
             }
         }
         return count + "";
     }
 
-    public String getAlone(String selectVlaue) {
-        String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
+    public String getAlone(int selectIndex) {
         int count = 0;
-        Map map = (Map) Data.suCaiMap.get(selectVlaue);
-        if (map != null) {
-            for (int j = 0; j < name.length; j++) {
-                List abc = (List) map.get("" + j);
-                int size = 0;
-                if (abc != null) {
-                    size = abc.size();
-                }
-                count += size;
+        Map map = (Map) Data.suCaiNameMap.get(selectIndex);
+        JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
+        String selectedName = "";
+        for (int i = 0; i < btns.length; i++) {
+            selectedName = btns[i].getText().substring(0, 2);
+            if (map != null) {
+                List<String> suCaiNameList = (List<String>) map.get(selectedName);
+                if (suCaiNameList != null)
+                    count += suCaiNameList.size();
             }
         }
         return count + "";

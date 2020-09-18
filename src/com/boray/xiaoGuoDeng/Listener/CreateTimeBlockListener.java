@@ -17,13 +17,10 @@ public class CreateTimeBlockListener implements MouseListener {
             JPopupMenu popupMenu = new JPopupMenu();
             JMenuItem menuItem = new JMenuItem("　新建");
             JMenuItem menuItem1 = new JMenuItem("　删除全部");
-//            JMenuItem menuItem2 = new JMenuItem("　粘贴");
             TimeBlockActionListener listener = new TimeBlockActionListener(pane);
             menuItem.addActionListener(listener);
             menuItem1.addActionListener(listener);
-//            menuItem2.addActionListener(listener);
             popupMenu.add(menuItem);
-//            popupMenu.add(menuItem2);
             popupMenu.add(menuItem1);
             if (pane.isEnabled())
                 popupMenu.show(pane, e.getX(), e.getY());

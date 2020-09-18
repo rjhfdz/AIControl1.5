@@ -36,11 +36,13 @@ public class SwitchListener implements ActionListener {
                     JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels_group" + i);
                     JLabel[] labels = (JLabel[]) MainUi.map.get("labels_group" + i);
                     if (b) {
-                        timeBlockPanels[n + 1].setVisible(true);
+                        timeBlockPanels[(n * 2)].setVisible(true);
+                        timeBlockPanels[(n * 2) + 1].setVisible(true);
                         labels[n + 1].setVisible(true);
                         labels[n + 1].setText(table.getValueAt(n, 2).toString());
                     } else {
-                        timeBlockPanels[n + 1].setVisible(false);
+                        timeBlockPanels[(n * 2)].setVisible(false);
+                        timeBlockPanels[(n * 2) + 1].setVisible(false);
                         labels[n + 1].setVisible(false);
                     }
                 }
@@ -50,23 +52,14 @@ public class SwitchListener implements ActionListener {
                     JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels_group" + i);
                     JLabel[] labels = (JLabel[]) MainUi.map.get("labels_group" + i);
                     for (int j = table.getRowCount(); j < labels.length - 1; j++) {
-                        timeBlockPanels[j + 1].setVisible(false);
+                        timeBlockPanels[(j * 2)].setVisible(false);
+                        timeBlockPanels[(j * 2) + 1].setVisible(false);
                         labels[j + 1].setVisible(false);
                     }
                 }
             }
             DMXModelListener listener = new DMXModelListener();
-            if (Data.serialPort != null) {
-                try {
-                    OutputStream os = Data.serialPort.getOutputStream();
-                    os.write(listener.queryLuZhi());
-                    os.flush();
-                } catch (Exception e1) {
-                    e1.printStackTrace();
-                }
-            } else if (Data.socket != null) {
-                Socket.UDPSendData(listener.queryLuZhi());
-            }
+            Socket.SendData(listener.queryLuZhi());
         } else if (btn.getName().equals("4")) {
 
             NewJTable table = (NewJTable) MainUi.map.get("GroupTable");
@@ -124,12 +117,12 @@ public class SwitchListener implements ActionListener {
         }
         if (btn.getName().equals("9")) {
             JList list = (JList) MainUi.map.get("suCaiLightType");
-            NewJTable table = (NewJTable) MainUi.map.get("table_DkGl");
+            NewJTable table = (NewJTable) MainUi.map.get("GroupTable");
             String[] s = {};
             if (table.getRowCount() != 0) {
                 s = new String[table.getRowCount()];
                 for (int i = 0; i < s.length; i++) {
-                    s[i] = table.getValueAt(i, 1).toString();
+                    s[i] = table.getValueAt(i, 2).toString();
                 }
             }
             list.setListData(s);
@@ -158,14 +151,8 @@ public class SwitchListener implements ActionListener {
         if (btn.getName().equals("8")) {
             try {
                 Thread.sleep(500);
-                if (Data.serialPort != null) {
-                    //UÅÌ×´Ì¬²éÑ¯
-                    OutputStream os = Data.serialPort.getOutputStream();
-                    os.write(ZhiLingJi.queryUSBFlashDiskState());
-                    os.flush();
-                } else if (Data.socket != null) {
-                    Socket.UDPSendData(ZhiLingJi.queryUSBFlashDiskState());
-                }
+                //UÅÌ×´Ì¬²éÑ¯
+                Socket.SendData(ZhiLingJi.queryUSBFlashDiskState());
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
@@ -188,7 +175,7 @@ public class SwitchListener implements ActionListener {
             } else {
                 Socket.SendData(RdmData.access());
             }
-        }catch (Exception e1){
+        } catch (Exception e1) {
             e1.printStackTrace();
         }
         selected = btn.getName();

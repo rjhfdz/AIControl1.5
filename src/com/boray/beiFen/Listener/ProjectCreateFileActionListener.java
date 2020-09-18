@@ -1,6 +1,5 @@
 package com.boray.beiFen.Listener;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.XMLEncoder;
@@ -203,10 +202,12 @@ public class ProjectCreateFileActionListener implements ActionListener {
             xmlEncoder.writeObject(model.getDataVector());
             xmlEncoder.writeObject(Data.GroupOfLightList);
             //////////////////素材管理//////////////////
-            xmlEncoder.writeObject(Data.suCaiMap);
-            xmlEncoder.writeObject(Data.SuCaiObjects);
+            //通道素材
             xmlEncoder.writeObject(Data.suCaiNameMap);
-//			xmlEncoder.writeObject(Data.AddSuCaiOrder);
+            xmlEncoder.writeObject(Data.SuCaiObjects);
+            //动作素材
+            xmlEncoder.writeObject(Data.SuCaiDongZuoName);
+            xmlEncoder.writeObject(Data.SuCaiDongZuoObject);
             ///////////////////////////////////////////
             /////////////效果灯编程-雾机//////////////////
             xmlEncoder.writeObject(Data.wuJiMap);
@@ -214,19 +215,20 @@ public class ProjectCreateFileActionListener implements ActionListener {
             xmlEncoder.writeObject(Data.YaoMaiMap);
             ////////////////////效果灯编程-DMX模式
             xmlEncoder.writeObject(Data.XiaoGuoDengObjects);
-            Object[][][] objects = new Object[24][30][20];
+            Object[][][] objects = new Object[24][60][20];
             for (int j = 1; j <= 24; j++) {
                 JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels_group" + j);
-                for (int k = 1; k < 31; k++) {
+                for (int k = 0; k < 60; k++) {
                     for (int i = 0; i < timeBlockPanels[k].getComponentCount(); i++) {
                         DefineJLable lable = (DefineJLable) timeBlockPanels[k].getComponent(i);
-                        String[] strings = new String[5];
+                        String[] strings = new String[6];
                         strings[0] = lable.getLocation().x + "";
                         strings[1] = lable.getLocation().y + "";
                         strings[2] = lable.getWidth() + "";
                         strings[3] = lable.getHeight() + "";
                         strings[4] = lable.getText();
-                        objects[j - 1][k - 1][i] = strings;
+                        strings[5] = lable.getName();
+                        objects[j - 1][k][i] = strings;
                     }
                 }
             }

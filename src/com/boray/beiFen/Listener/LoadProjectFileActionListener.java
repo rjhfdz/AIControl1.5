@@ -24,7 +24,6 @@ import javax.swing.table.DefaultTableModel;
 import com.boray.Data.ChannelName;
 import com.boray.Data.Data;
 import com.boray.Data.MyColor;
-import com.boray.Data.XiaoGuoDengModel;
 import com.boray.Utils.IconJDialog;
 import com.boray.Utils.Util;
 import com.boray.changJing.Data.DataOfChangJing;
@@ -33,6 +32,7 @@ import com.boray.dengKu.UI.NewJTable;
 import com.boray.mainUi.MainUi;
 import com.boray.shengKon.UI.DefineJLable_shengKon;
 import com.boray.shengKon.UI.DefineJLable_shengKon2;
+import com.boray.Utils.SuCaiUtil;
 import com.boray.xiaoGuoDeng.UI.DefineJLable;
 import com.boray.xiaoGuoDeng.UI.DefineJLable3;
 import com.boray.zhongKon.Data.DataOfZhongKon;
@@ -343,56 +343,44 @@ public class LoadProjectFileActionListener implements ActionListener {
                 }
                 ////////////////////////////////////////////////
                 ///////////////素材管理///////////////////////
-                Data.suCaiMap = (Map) xmlDecoder.readObject();
-                Data.SuCaiObjects = (Object[][]) xmlDecoder.readObject();
+                //通道素材
                 Data.suCaiNameMap = (Map) xmlDecoder.readObject();
-//				Data.AddSuCaiOrder = (List<String>) xmlDecoder.readObject();
+                Data.SuCaiObjects = (Object[][]) xmlDecoder.readObject();
+                //动作素材
+                Data.SuCaiDongZuoName = (Map) xmlDecoder.readObject();
+                Data.SuCaiDongZuoObject = (Object[]) xmlDecoder.readObject();
                 JList suCaiList = (JList) MainUi.map.get("suCaiLightType");
                 if (suCaiList.getSelectedValue() != null) {
-                    {
-                        Map map = (Map) Data.suCaiMap.get(suCaiList.getSelectedValue().toString());
-                        JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
-                        String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
-                        if (map != null) {
-                            for (int i = 0; i < btns.length; i++) {
-                                List abc = (List) map.get("" + i);
-                                int size = 0;
-                                if (abc != null) {
-                                    size = abc.size();
-                                }
-                                btns[i].setText(name[i] + "(" + size + ")");
-                            }
-                        } else {
-                            for (int i = 0; i < btns.length; i++) {
-                                btns[i].setText(name[i] + "(0)");
-                            }
-                        }
-                        //
-                        int selected = 0;
-                        for (int i = 0; i < btns.length; i++) {
-                            if (btns[i].isSelected()) {
-                                selected = i;
-                                break;
-                            }
-                        }
+                    JRadioButton radioButton3 = (JRadioButton) MainUi.map.get("xiaoGuoDengSuCaiTypeButton");
+                    if (!radioButton3.isSelected()) {
+                        return;
+                    }
 
-                        Map nameMap = (Map) Data.suCaiNameMap.get(suCaiList.getSelectedValue().toString());
+                    Map map = (Map) Data.suCaiNameMap.get(suCaiList.getSelectedIndex());
+                    String selectedName = SuCaiUtil.getXiaoGuoDengType();
+                    List<String> suCaiNameList = null;
+                    if (map == null) {
+                        map = new HashMap();
+                        suCaiNameList = new ArrayList<>();
+                        map.put(selectedName, suCaiNameList);
+                    } else {
+                        suCaiNameList = (List<String>) map.get(selectedName);
+                    }
+                    if (suCaiNameList != null) {
+                        suCaiNameList = (List<String>) map.get(selectedName);
                         JList suCai_list = (JList) MainUi.map.get("suCai_list");
                         DefaultListModel suCai_list_model = (DefaultListModel) suCai_list.getModel();
                         suCai_list_model.removeAllElements();
-                        if (nameMap != null) {
-                            List tmp = (List) nameMap.get("" + selected);
-                            if (tmp != null) {
-                                for (int i = 0; i < tmp.size(); i++) {
-                                    suCai_list_model.addElement(tmp.get(i).toString());
-                                }
-                                if (tmp.size() > 0) {
-                                    suCai_list.setSelectedIndex(0);
-                                }
-                            }
+                        for (int i = 0; i < suCaiNameList.size(); i++) {
+                            suCai_list_model.addElement(suCaiNameList.get(i));
+                        }
+                        if (suCaiNameList.size() > 0) {
+                            suCai_list.setSelectedIndex(0);
                         }
                     }
+                    SuCaiUtil.neatenSuCaiTypeBtns();
                 }
+
                 /////////////效果灯编程-雾机//////////////////
                 Data.wuJiMap = (Map) xmlDecoder.readObject();
                 //////效果灯编程-摇麦
@@ -402,20 +390,21 @@ public class LoadProjectFileActionListener implements ActionListener {
                 Object[][][] objects = (Object[][][]) xmlDecoder.readObject();
                 for (int j = 1; j <= 24; j++) {
                     JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels_group" + j);
-                    for (int k = 1; k < 31; k++) {
+                    for (int k = 0; k < 60; k++) {
                         timeBlockPanels[k].removeAll();
                         for (int i = 0; i < 20; i++) {
-                            if (objects[j - 1][k - 1][i] != null) {
-                                String[] strings = (String[]) objects[j - 1][k - 1][i];
+                            if (objects[j - 1][k][i] != null) {
+                                String[] strings = (String[]) objects[j - 1][k][i];
                                 DefineJLable lable = new DefineJLable(strings[4].substring(0, strings[4].length() - 1), timeBlockPanels[k]);
                                 lable.setText(strings[4]);
                                 lable.setLocation(new Point(Integer.valueOf(strings[0]).intValue(), Integer.valueOf(strings[1]).intValue()));
                                 lable.setSize(Integer.valueOf(strings[2]).intValue(), Integer.valueOf(strings[3]).intValue());
-                                int c = Integer.valueOf(strings[4].substring(0, strings[4].indexOf("("))) - 1;
-                                if (c >= 10) {
-                                    c = c - 10;
+                                if(strings[5].equals("TonDao")){
+                                    lable.setBackground(Color.green);
+                                }else{
+                                    lable.setBackground(Color.red);
                                 }
-                                lable.setBackground(MyColor.colors[c]);
+                                lable.setName(strings[5]);
                                 timeBlockPanels[k].add(lable);
                             }
                         }

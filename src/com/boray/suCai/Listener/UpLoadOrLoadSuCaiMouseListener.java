@@ -1,6 +1,7 @@
 package com.boray.suCai.Listener;
 
 import com.boray.mainUi.MainUi;
+import com.boray.suCai.UI.DongZuoSuCaiEditUI;
 import com.boray.suCai.UI.SuCaiEditUI;
 
 import javax.swing.*;
@@ -13,12 +14,17 @@ public class UpLoadOrLoadSuCaiMouseListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         JList list = (JList) e.getSource();
+        JRadioButton radioButton = (JRadioButton) MainUi.map.get("xiaoGuoDengSuCaiTypeButton");
+        JList suCaiLightType = (JList) MainUi.map.get("suCaiLightType");
         if (list.getSelectedIndex() != -1) {
+            String suCaiName = list.getSelectedValue().toString();
+            int suCaiNum = Integer.valueOf(suCaiName.split("--->")[1]).intValue();
             if (e.getClickCount() == 2) {
-                JList suCaiLightType = (JList) MainUi.map.get("suCaiLightType");
-                String suCaiName = list.getSelectedValue().toString();
-                int suCaiNum = Integer.valueOf(suCaiName.split("--->")[1]).intValue();
-                new SuCaiEditUI().show(suCaiName, suCaiNum, suCaiLightType.getSelectedIndex());
+                if(!radioButton.isSelected()){
+                    new DongZuoSuCaiEditUI().show(suCaiName, suCaiNum);
+                }else {
+                    new SuCaiEditUI().show(suCaiName, suCaiNum, suCaiLightType.getSelectedIndex());
+                }
             }
         }
     }

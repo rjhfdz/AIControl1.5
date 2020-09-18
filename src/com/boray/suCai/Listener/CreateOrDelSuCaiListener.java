@@ -15,26 +15,33 @@ import com.boray.entity.Users;
 import com.boray.mainUi.MainUi;
 import com.boray.suCai.UI.SuCaiUI;
 import com.boray.suCai.UI.YunChangJingSuCaiDialog;
-import com.boray.xiaoGuoDeng.UI.DefineJLable;
+import com.boray.Utils.SuCaiUtil;
 import com.boray.xiaoGuoDeng.reviewBlock.TimeBlockReviewActionListener;
 import com.boray.xiaoGuoDeng.reviewBlock.TimeBlockStopReviewActionListener;
 
 public class CreateOrDelSuCaiListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
+        JRadioButton radioButton = (JRadioButton) MainUi.map.get("xiaoGuoDengSuCaiTypeButton");
         if ("新建".equals(e.getActionCommand())) {
-            JList suCaiLightType = (JList) MainUi.map.get("suCaiLightType");
-            if (suCaiLightType.getSelectedValue() != null) {
-                JFrame f = (JFrame) MainUi.map.get("frame");
-                IconJDialog dialog = new IconJDialog(f, true);
-                dialog.setResizable(false);
-                dialog.setTitle("新建素材");
-                int w = 380, h = 180;
-                dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - w / 2, f.getLocation().y + f.getSize().height / 2 - h / 2);
-                dialog.setSize(w, h);
-                dialog.setLayout(new FlowLayout(FlowLayout.CENTER));
-                dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-                init(dialog);
+            JFrame f = (JFrame) MainUi.map.get("frame");
+            IconJDialog dialog = new IconJDialog(f, true);
+            dialog.setResizable(false);
+            int w = 380, h = 180;
+            dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - w / 2, f.getLocation().y + f.getSize().height / 2 - h / 2);
+            dialog.setSize(w, h);
+            dialog.setLayout(new FlowLayout(FlowLayout.CENTER));
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            if (!radioButton.isSelected()) {//判断是否选中动作按钮，选中新建动作素材，未选中新建效果灯素材
+                dialog.setTitle("新建动作素材");
+                init2(dialog);
                 dialog.setVisible(true);
+            } else {
+                JList suCaiLightType = (JList) MainUi.map.get("suCaiLightType");
+                if (suCaiLightType.getSelectedValue() != null) {
+                    dialog.setTitle("新建素材");
+                    init(dialog);
+                    dialog.setVisible(true);
+                }
             }
         } else if ("删除".equals(e.getActionCommand())) {
             Object[] options = {"否", "是"};
@@ -42,100 +49,8 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                     JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
                     null, options, options[1]);
             if (yes == 1) {
-                JList suCaiLightType = (JList) MainUi.map.get("suCaiLightType");
-                JList suCaiList = (JList) MainUi.map.get("suCai_list");//素材列表
-                int selectIndex = suCaiList.getSelectedIndex();//获得该素材选中的灯库
-                NewJTable table3 = (NewJTable) MainUi.map.get("allLightTable");//所有灯具
-                NewJTable table = (NewJTable) MainUi.map.get("GroupTable");//灯具分组
-                NewJTable table_dengJu = (NewJTable) MainUi.map.get("table_dengJu");//灯具配置
 
-                List<String> list = new ArrayList<>();
-                for (int i = 0; i < table.getRowCount(); i++) {
-                    TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(i);
-                    Iterator iterator = treeSet.iterator();
-                    String s = "";
-                    while (iterator.hasNext()) {
-                        int a = (int) iterator.next();
-                        if (table3.getRowCount() > 0) {
-                            s = table3.getValueAt(a, 0).toString();
-                            Integer s1 = Integer.parseInt(s.split("#")[0].substring(2));//组内灯具的灯具id
-                            String s2 = ((String) table_dengJu.getValueAt(s1 - 1, 3)).split("#")[0];//灯库名称
-                            int c = Integer.parseInt(s2.substring(2)) - 1;
-                            if (selectIndex == c) {
-                                String ss = table.getValueAt(i, 2).toString();
-                                list.add(ss);
-                                break;
-                            }
-                        }
-                    }
-                }
-                for (int n = 0; n < table.getRowCount(); n++) {
-                    for (int i = 1; i <= 24; i++) {
-                        JLabel[] labels = (JLabel[]) MainUi.map.get("labels_group" + i);
-                        JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels_group" + i);
-                        for (int j = 0; j < list.size(); j++) {
-                            if (labels[n + 1].getText().equals(list.get(j))) {
-                                timeBlockPanels[n + 1].removeAll();
-                                timeBlockPanels[n + 1].updateUI();
-                            }
-                        }
-                    }
-                }
-                int num = Integer.parseInt(suCaiList.getSelectedValue().toString().split("--->")[1]);
-                Map map = (Map) Data.suCaiMap.get(suCaiLightType.getSelectedValue().toString());
-                Map nameMap = (Map) Data.suCaiNameMap.get(suCaiLightType.getSelectedValue().toString());
-                JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
-                for (int i = 0; i < btns.length; i++) {
-                    List tmp = (List) map.get("" + i);
-                    List nameList = (List) nameMap.get("" + i);
-                    int index2 = -1;
-                    if (nameList != null) {
-                        for (int j = 0; j < nameList.size(); j++) {
-                            String str = nameList.get(j).toString();
-                            int index = Integer.parseInt(str.split("--->")[1]);
-                            if (index == num) {
-                                index2 = j;
-                            }
-                        }
-                        if (index2 != -1) {
-                            nameList.remove(index2);
-                            tmp.remove(index2);
-                        }
-                        for (int j = 0; j < nameList.size(); j++) {
-                            String[] str = nameList.get(j).toString().split("--->");
-                            int index = Integer.parseInt(str[1]);
-                            if (index > num) {
-                                nameList.set(j, str[0] + "--->" + (index - 1));
-                            }
-                        }
-                    }
-                }
-                for (int i = 0; i < Data.SuCaiObjects[suCaiLightType.getSelectedIndex()].length; i++) {
-                    if (i == (num - 1)) {
-                        Data.SuCaiObjects[suCaiLightType.getSelectedIndex()][i] = null;
-                    }
-                    if (i >= (num - 1)) {
-                        if (i < 49)
-                            Data.SuCaiObjects[suCaiLightType.getSelectedIndex()][i] = Data.SuCaiObjects[suCaiLightType.getSelectedIndex()][i + 1];
-                    }
-                }
-                btns[0].doClick();
-                JLabel alone = (JLabel) MainUi.map.get("alone");
-                alone.setText(new SuCaiUI().getAlone(suCaiLightType.getSelectedValue().toString()));
-                JLabel count = (JLabel) MainUi.map.get("count");
-                count.setText(new SuCaiUI().getCount());
-                String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
-                for (int i = 0; i < btns.length; i++) {
-                    List abc = (List) map.get("" + i);
-                    int size = 0;
-                    if (abc != null) {
-                        size = abc.size();
-                    }
-                    btns[i].setText(name[i] + "(" + size + ")");
-                }
             }
-
-
         } else if ("重命名".equals(e.getActionCommand())) {
             JList suCaiList = (JList) MainUi.map.get("suCai_list");//素材列表
             String name = suCaiList.getSelectedValue().toString().split("--->")[0];
@@ -148,7 +63,11 @@ public class CreateOrDelSuCaiListener implements ActionListener {
             dialog.setSize(w, h);
             dialog.setLayout(new FlowLayout(FlowLayout.CENTER));
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            reName(dialog, name);
+            if (!radioButton.isSelected()) {
+                reName2(dialog, name);
+            } else {
+                reName(dialog, name);
+            }
             dialog.setVisible(true);
         } else if ("云端".equals(e.getActionCommand())) {
             Users users = (Users) MainUi.map.get("Users");
@@ -158,25 +77,57 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                 JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "请登录", "警告", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-        } else if ("预览".equals(e.getActionCommand())) {
-            JList suCaiList = (JList) MainUi.map.get("suCai_list");//素材列表
-//            String name = suCaiList.getSelectedValue().toString().split("--->")[0];
-            if (suCaiList.getSelectedIndex() < 0) {
-                JOptionPane.showMessageDialog((JFrame) MainUi.map.get("frame"), "未选中素材！", "警告", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-            JFrame f = (JFrame) MainUi.map.get("frame");
-            IconJDialog dialog = new IconJDialog(f, true);
-            dialog.setResizable(false);
-            dialog.setTitle("预览");
-            int w = 380, h = 180;
-            dialog.setLocation(f.getLocation().x + f.getSize().width / 2 - w / 2, f.getLocation().y + f.getSize().height / 2 - h / 2);
-            dialog.setSize(w, h);
-            dialog.setLayout(new FlowLayout(FlowLayout.CENTER));
-            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-            reViewsDialog(dialog);
-            dialog.setVisible(true);
         }
+    }
+
+    private void reName2(IconJDialog dialog, String name) {
+        JPanel p1 = new JPanel();
+        p1.add(new JLabel("素材名称："));
+        final JTextField field = new JTextField(15);
+        field.setText(name);
+        p1.add(field);
+        JPanel p2 = new JPanel();
+        JButton btn1 = new JButton("确定");
+        JButton btn2 = new JButton("取消");
+
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if ("取消".equals(e.getActionCommand())) {
+                    dialog.dispose();
+                } else {
+                    if(field.getText().trim()!=null&&field.getText().trim()!="") {
+                        JList suCaiList = (JList) MainUi.map.get("suCai_list");
+                        int number = Integer.parseInt(suCaiList.getSelectedValue().toString().split("--->")[1]);//获得对应素材的编号
+                        String name = SuCaiUtil.getXiaoGuoDengType();
+                        List<String> suCaiNameList = (List<String>) Data.SuCaiDongZuoName.get(name);
+                        suCaiNameList.set(suCaiList.getSelectedIndex(),field.getText()+"--->"+number);
+                        Data.SuCaiDongZuoName.put(name,suCaiNameList);
+                        DefaultListModel model = new DefaultListModel();
+                        for (int i = 0;i<suCaiNameList.size();i++){
+                            model.addElement(suCaiNameList.get(i));
+                        }
+                        suCaiList.setModel(model);
+                        suCaiList.setSelectedIndex(0);
+                        SuCaiUtil.neatenXiaoGuoDeng(field.getText(), number);
+                        dialog.dispose();
+                    }
+                }
+            }
+        };
+
+        btn1.addActionListener(listener);
+        btn2.addActionListener(listener);
+
+        p2.add(btn1);
+        p2.add(new JLabel("     "));
+        p2.add(btn2);
+
+        JPanel n1 = new JPanel();
+        n1.setPreferredSize(new Dimension(350, 20));
+        dialog.add(n1);
+        dialog.add(p1);
+        dialog.add(p2);
     }
 
     /**
@@ -334,29 +285,23 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                 if ("取消".equals(e.getActionCommand())) {
                     dialog.dispose();
                 } else {
-                    JList dengkuList = (JList) MainUi.map.get("suCaiLightType");//灯库列表
+                    JList dengkuList = (JList) MainUi.map.get("suCaiLightType");//灯组列表
                     JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
                     JList suCaiList = (JList) MainUi.map.get("suCai_list");//素材列表
-                    Map nameMap = (Map) Data.suCaiNameMap.get(dengkuList.getSelectedValue().toString());
+                    Map map = (Map) Data.suCaiNameMap.get(dengkuList.getSelectedIndex());
                     int number = Integer.parseInt(suCaiList.getSelectedValue().toString().split("--->")[1]);//获得对应素材的编号
                     int index = suCaiList.getSelectedIndex();//获得对应下标
-                    int btnIndex = 0;
-                    for (int i = 0; i < btns.length; i++) {
-                        if (btns[i].isSelected()) {
-                            btnIndex = i;
-                            break;
-                        }
-                    }
-                    List nameList = (List) nameMap.get("" + btnIndex);
-                    nameList.set(index, field.getText() + "--->" + number);
+                    String selectedName = SuCaiUtil.getXiaoGuoDengType();
+                    List<String> suCaiNameList = (List<String>) map.get(selectedName);
+                    suCaiNameList.set(index, field.getText() + "--->" + number);
                     suCaiList.removeAll();
                     DefaultListModel model = new DefaultListModel();
-                    for (int i = 0; i < nameList.size(); i++) {
-                        model.addElement(nameList.get(i));
+                    for (int i = 0; i < suCaiNameList.size(); i++) {
+                        model.addElement(suCaiNameList.get(i));
                     }
                     suCaiList.setModel(model);
                     suCaiList.setSelectedIndex(0);
-                    neatenXiaoGuoDeng(field.getText(), number);
+                    SuCaiUtil.neatenXiaoGuoDeng(field.getText(), number);
                     dialog.dispose();
                 }
             }
@@ -377,77 +322,10 @@ public class CreateOrDelSuCaiListener implements ActionListener {
     }
 
     /**
-     * 整理效果灯编程界面原有的素材名称
+     * 显示效果灯新建素材界面
      *
-     * @param str
+     * @param dialog
      */
-    private void neatenXiaoGuoDeng(String str, int num) {
-        JList dengkuList = (JList) MainUi.map.get("suCaiLightType");//灯库列表
-        NewJTable table = (NewJTable) MainUi.map.get("GroupTable");
-        List<String> list = getDengZuComBox(dengkuList.getSelectedIndex());
-        for (int n = 0; n < table.getRowCount(); n++) {
-            boolean b = (boolean) table.getValueAt(n, 0);
-            for (int i = 1; i <= 24; i++) {
-                JPanel[] timeBlockPanels = (JPanel[]) MainUi.map.get("timeBlockPanels_group" + i);
-                JLabel[] labels = (JLabel[]) MainUi.map.get("labels_group" + i);
-                if (b) {
-                    if (list.contains(labels[n + 1].getText())) {
-                        JPanel panel = timeBlockPanels[n + 1];
-                        for (int k = 0; k < panel.getComponentCount(); k++) {
-                            DefineJLable lable = (DefineJLable) panel.getComponent(k);
-                            if (lable.getText().contains("(" + num + ")")) {
-                                String s = lable.getText().substring(0, lable.getText().indexOf("("));
-                                String s1 = "";
-                                if (lable.getText().contains("√")) {
-                                    s1 = "√";
-                                } else {
-                                    s1 = "×";
-                                }
-                                lable.setText(s + "(" + num + ")  " + str + " " + s1);
-                            }
-                        }
-                        panel.updateUI();
-                    }
-                }
-            }
-        }
-
-    }
-
-    /**
-     * 获得引用了该灯库的灯组
-     *
-     * @param dengKuNumber
-     */
-    public List<String> getDengZuComBox(int dengKuNumber) {
-        int selectIndex = dengKuNumber;//获得该素材选中的灯库
-        NewJTable table3 = (NewJTable) MainUi.map.get("allLightTable");//所有灯具
-        NewJTable table = (NewJTable) MainUi.map.get("GroupTable");//灯具分组
-        NewJTable table_dengJu = (NewJTable) MainUi.map.get("table_dengJu");//灯具配置
-
-        List<String> list = new ArrayList<>();
-        for (int i = 0; i < table.getRowCount(); i++) {
-            TreeSet treeSet = (TreeSet) Data.GroupOfLightList.get(i);
-            Iterator iterator = treeSet.iterator();
-            String s = "";
-            while (iterator.hasNext()) {
-                int a = (int) iterator.next();
-                if (table3.getRowCount() > 0) {
-                    s = table3.getValueAt(a, 0).toString();
-                    Integer s1 = Integer.parseInt(s.split("#")[0].substring(2));//组内灯具的灯具id
-                    String s2 = ((String) table_dengJu.getValueAt(s1 - 1, 3)).split("#")[0];//灯库名称
-                    int c = Integer.parseInt(s2.substring(2)) - 1;
-                    if (selectIndex == c) {
-                        String ss = table.getValueAt(i, 2).toString();
-                        list.add(ss);
-                        break;
-                    }
-                }
-            }
-        }
-        return list;
-    }
-
     private void init(final JDialog dialog) {
         JPanel p1 = new JPanel();
         p1.add(new JLabel("素材名称："));
@@ -463,76 +341,49 @@ public class CreateOrDelSuCaiListener implements ActionListener {
                     dialog.dispose();
                 } else {
                     if (!"".equals(field.getText().trim())) {
-                        JList list = (JList) MainUi.map.get("suCai_list");
+                        JList list = (JList) MainUi.map.get("suCai_list");//素材列表
                         DefaultListModel model = (DefaultListModel) list.getModel();
 
                         //////////////////获取素材数量
-                        JList suCaiLightType = (JList) MainUi.map.get("suCaiLightType");
-                        Map map2 = (Map) Data.suCaiMap.get(suCaiLightType.getSelectedValue().toString());
-                        JToggleButton[] btns = (JToggleButton[]) MainUi.map.get("suCaiTypeBtns");
-                        String[] name = {"动感", "慢摇", "抒情", "柔和", "浪漫", "温馨", "炫丽", "梦幻", "其他"};
-                        int cnt = 0;
-                        if (map2 != null) {
-                            for (int i = 0; i < btns.length; i++) {
-                                List abc = (List) map2.get("" + i);
-                                if (abc != null) {
-                                    cnt = cnt + abc.size();
-                                }
-                            }
-                        }
-                        if (cnt == 50) {
-                            JFrame frame = (JFrame) MainUi.map.get("frame");
-                            JOptionPane.showMessageDialog(frame, "最多只能创建50个素材！", "提示", JOptionPane.ERROR_MESSAGE);
-                            return;
-                        }
-                        String suCaiNameAndNumber = field.getText() + "--->" + (cnt + 1);
-//                        Data.AddSuCaiOrder.add((suCaiLightType.getSelectedIndex()) + "#" + cnt);
-                        //////////////////
-
-                        if (model == null) {
-                            model = new DefaultListModel();
-                            model.addElement(suCaiNameAndNumber);
-                            list.setModel(model);
-                        } else {
-                            model.addElement(suCaiNameAndNumber);
-                        }
-                        list.setSelectedIndex(model.getSize() - 1);
-                        //JList suCaiLightType = (JList)MainUi.map.get("suCaiLightType");
-                        Map map = (Map) Data.suCaiMap.get(suCaiLightType.getSelectedValue().toString());
-                        Map nameMap = (Map) Data.suCaiNameMap.get(suCaiLightType.getSelectedValue().toString());
-                        if (map == null) {
-                            map = new HashMap<>();
-                            Data.suCaiMap.put(suCaiLightType.getSelectedValue().toString(), map);
-                        }
-                        if (nameMap == null) {
-                            nameMap = new HashMap<>();
-                            Data.suCaiNameMap.put(suCaiLightType.getSelectedValue().toString(), nameMap);
-                        }
-                        //JToggleButton[] btns = (JToggleButton[])MainUi.map.get("suCaiTypeBtns");
-                        //String[] name = {"默认","动感","抒情","柔和","浪漫"};
-                        for (int i = 0; i < btns.length; i++) {
-                            if (btns[i].isSelected()) {
-                                List tmp = (List) map.get("" + i);
-                                List nameList = (List) nameMap.get("" + i);
-                                if (nameList != null) {
-                                    nameList.add(suCaiNameAndNumber);
-                                } else {
-                                    nameList = new ArrayList<>();
-                                    nameList.add(suCaiNameAndNumber);
-                                    nameMap.put("" + i, nameList);
-                                }
-                                if (tmp == null) {
-                                    tmp = new ArrayList<>();
-                                }
-                                tmp.add(new HashMap<>());
-                                btns[i].setText(name[i] + "(" + tmp.size() + ")");
-                                map.put("" + i, tmp);
-                            }
-                        }
-
+                        JList suCaiLightType = (JList) MainUi.map.get("suCaiLightType");//左侧灯组列表
+                        Map map = (Map) Data.suCaiNameMap.get(suCaiLightType.getSelectedIndex());
+                        String selectedName = SuCaiUtil.getXiaoGuoDengType();
                         SuCaiUI suCaiUI = new SuCaiUI();
+                        List<String> suCaiNameList = null;
+                        if (map == null) {
+                            map = new HashMap();
+                            suCaiNameList = new ArrayList<>();
+                            map.put(selectedName, suCaiNameList);
+                        } else {
+                            suCaiNameList = (List<String>) map.get(selectedName);
+                            if (suCaiNameList == null)
+                                suCaiNameList = new ArrayList<>();
+                        }
+                        int cnt = Integer.parseInt(suCaiUI.getAlone(suCaiLightType.getSelectedIndex()));
+                        if (suCaiNameList != null) {
+                            if (cnt == 50) {
+                                JFrame frame = (JFrame) MainUi.map.get("frame");
+                                JOptionPane.showMessageDialog(frame, "最多只能创建50个素材！", "提示", JOptionPane.ERROR_MESSAGE);
+                                return;
+                            }
+                            String suCaiNameAndNumber = field.getText() + "--->" + (cnt + 1);
+                            suCaiNameList.add(suCaiNameAndNumber);
+                            map.put(selectedName, suCaiNameList);
+                            Data.suCaiNameMap.put(suCaiLightType.getSelectedIndex(), map);
+                            if (model == null) {
+                                model = new DefaultListModel();
+                                model.addElement(suCaiNameAndNumber);
+                                list.setModel(model);
+                            } else {
+                                model.addElement(suCaiNameAndNumber);
+                            }
+                            if (suCaiNameList.size() > 0) {
+                                list.setSelectedIndex(0);
+                            }
+                        }
+                        SuCaiUtil.neatenSuCaiTypeBtns();
 
-                        String aloneCount = suCaiUI.getAlone(suCaiLightType.getSelectedValue().toString());//当前灯库的素材数量
+                        String aloneCount = suCaiUI.getAlone(suCaiLightType.getSelectedIndex());//当前灯库的素材数量
                         JLabel alone = (JLabel) MainUi.map.get("alone");
                         alone.setText(aloneCount);
 
@@ -559,18 +410,68 @@ public class CreateOrDelSuCaiListener implements ActionListener {
     }
 
     /**
-     * 判断该素材是否被引用
+     * 显示效果灯新建动作素材界面
      *
-     * @return
+     * @param dialog
      */
-    public Boolean suCaiIsQuote(String dengkuName) {
-        Boolean flag = false;
-        NewJTable table = (NewJTable) MainUi.map.get("GroupTable");//获得分组列表
-        for (int i = 0; i < 24; i++) {//循环所有效果灯模式
-            for (int j = 0; j < table.getRowCount(); j++) {
-                MainUi.map.get("timeBlockPanels_group" + j);
+    private void init2(final JDialog dialog) {
+        JPanel p1 = new JPanel();
+        p1.add(new JLabel("动作名称："));
+        final JTextField field = new JTextField(15);
+        p1.add(field);
+        JPanel p2 = new JPanel();
+        JButton btn1 = new JButton("确定");
+        JButton btn2 = new JButton("取消");
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if ("取消".equals(e.getActionCommand())) {
+                    dialog.dispose();
+                } else {
+                    if (!"".equals(field.getText().trim())) {
+                        JList list = (JList) MainUi.map.get("suCai_list");
+                        DefaultListModel model = (DefaultListModel) list.getModel();
+                        int cnt = Integer.valueOf(SuCaiUtil.getCount());
+                        if (cnt == 255) {
+                            JFrame frame = (JFrame) MainUi.map.get("frame");
+                            JOptionPane.showMessageDialog(frame, "最多只能创建255个素材！", "提示", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                        String suCaiNameAndNumber = field.getText() + "--->" + (cnt + 1);
+                        String name = SuCaiUtil.getXiaoGuoDengType();
+                        List<String> suCaiNameList = (List<String>) Data.SuCaiDongZuoName.get(name);
+                        if(suCaiNameList!=null){
+                            suCaiNameList.add(suCaiNameAndNumber);
+                        }else{
+                            suCaiNameList = new ArrayList<>();
+                            suCaiNameList.add(suCaiNameAndNumber);
+                            Data.SuCaiDongZuoName.put(name,suCaiNameList);
+                        }
+                        if (model == null) {
+                            model = new DefaultListModel();
+                            model.addElement(suCaiNameAndNumber);
+                            list.setModel(model);
+                        } else {
+                            model.addElement(suCaiNameAndNumber);
+                        }
+                        list.setSelectedIndex(model.getSize() - 1);
+                        SuCaiUtil.neatenSuCaiTypeBtns();
+                        dialog.dispose();
+                    }
+                }
             }
-        }
-        return flag;
+        };
+        btn1.addActionListener(listener);
+        btn2.addActionListener(listener);
+        p2.add(btn1);
+        p2.add(new JLabel("     "));
+        p2.add(btn2);
+
+        JPanel n1 = new JPanel();
+        n1.setPreferredSize(new Dimension(350, 20));
+        dialog.add(n1);
+        dialog.add(p1);
+        dialog.add(p2);
     }
+
 }

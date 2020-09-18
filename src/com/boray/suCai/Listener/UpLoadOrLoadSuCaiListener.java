@@ -429,7 +429,7 @@ public class UpLoadOrLoadSuCaiListener implements ActionListener {
 
                         SuCaiUI suCaiUI = new SuCaiUI();
 
-                        String aloneCount = suCaiUI.getAlone(suCaiLightType.getSelectedValue().toString());//当前灯库的素材数量
+                        String aloneCount = suCaiUI.getAlone(suCaiLightType.getSelectedIndex());//当前灯库的素材数量
                         JLabel alone = (JLabel) MainUi.map.get("alone");
                         alone.setText(aloneCount);
 

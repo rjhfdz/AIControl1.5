@@ -170,7 +170,7 @@ public class ChangJingSelectItemListener implements ItemListener {
             //摇麦触发间隔
 			/*JComboBox box2 = (JComboBox)MainUi.map.get("yaoMaiJianGeBox");
 			box2.setSelectedIndex(Integer.valueOf(list.get(28).toString()));
-
+            */
 			//摇麦延续开关
 			JRadioButton radioButton5 = (JRadioButton)MainUi.map.get("yaoMaiKaiGuangBtn1");
 			JRadioButton radioButton8 = (JRadioButton)MainUi.map.get("yaoMaiKaiGuangBtn2");
@@ -178,7 +178,11 @@ public class ChangJingSelectItemListener implements ItemListener {
 				radioButton5.setSelected(true);
 			} else {
 				radioButton8.setSelected(true);
-			}*/
+			}
+
+            //雾机模式
+            JComboBox boxes = (JComboBox) MainUi.map.get("wuJiModelBox");
+            boxes.setSelectedIndex(Integer.parseInt(list.get(30).toString()));
 
             Data.serialPort = serialPort;
         }

@@ -41,7 +41,7 @@ public class MainUi {
             e.printStackTrace();
         }
         map = new HashMap();
-        frame = new JFrame("X-Series智能灯光控制器系统V1.0(测试2020-8-22)");
+        frame = new JFrame("X-Series智能灯光控制器系统V1.0(测试2020-9-18)");
         map.put("frame", frame);
 
         int screenWidth = ((int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().width);
@@ -81,11 +81,7 @@ public class MainUi {
 //                } catch (Exception e1) {
 //                    e1.printStackTrace();
 //                }
-                if (Data.serialPort != null) {
-                    Socket.SerialPortSendData(ZhiLingJi.setBackBaut());
-                } else if (Data.socket != null) {
-                    Socket.UDPSendData(ZhiLingJi.setBackBaut());
-                }
+                Socket.SendData(ZhiLingJi.setBackBaut());
                 Object[] options = {"否", "是"};
                 int yes = JOptionPane.showOptionDialog((JFrame) MainUi.map.get("frame"), "是否要保存工程？", "警告",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
