@@ -41,7 +41,7 @@ public class Data {
 	 * 素材数据
 	 * 20表示20个灯库，50表示50个素材  2020-4-27 08:50:05  素材个数由30个修改为50个
 	 */
-	public static Object[][] SuCaiObjects = new Object[20][50];
+	public static Object[][] SuCaiObjects = new Object[30][50];
 
 	public static Map SuCaiDongZuoName = new HashMap();
 

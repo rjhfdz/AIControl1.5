@@ -10,6 +10,7 @@ import com.boray.Data.Data;
 import com.boray.Data.XiaoGuoDengModel;
 import com.boray.Utils.CloneUtils;
 import com.boray.mainUi.MainUi;
+import com.boray.suCai.UI.DongZuoSuCaiEditUI;
 import com.boray.xiaoGuoDeng.UI.DefineJLable;
 import com.boray.xiaoGuoDeng.UI.SelectSuCaiUI;
 import com.boray.xiaoGuoDeng.UI.TimeBlockEditUI;
@@ -27,15 +28,24 @@ public class PopMenuListener implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if ("¡¡±à¼­".equals(e.getActionCommand())) {
-            DefineJLable lable = (DefineJLable) pane.getComponent(blockNum-1);
+            DefineJLable lable = (DefineJLable) pane.getComponent(blockNum - 1);
             ss = lable.getText();
-            new TimeBlockEditUI().show(Integer.parseInt(ss.substring(ss.indexOf("(") + 1, ss.indexOf(")"))), pane.getName(), ss.substring(0, ss.indexOf("(")));
+            if(lable.getName().equals("TonDao")){
+                int dengZuNum = Integer.valueOf(pane.getName());
+                if (dengZuNum % 2 == 0) {
+                    dengZuNum = dengZuNum / 2;
+                } else {
+                    dengZuNum = (dengZuNum + 1) / 2;
+                }
+                int suCaiNum = Integer.valueOf(ss.substring(ss.indexOf("(")+1, ss.indexOf(")")));
+                new TimeBlockEditUI().show(ss, dengZuNum, suCaiNum);
+            }else{
+                int suCaiNum = Integer.valueOf(ss.substring(ss.indexOf("(")+1, ss.indexOf(")")));
+                new DongZuoSuCaiEditUI().show(ss, suCaiNum);
+            }
+
         } else if ("¡¡É¾³ý".equals(e.getActionCommand())) {
             if (blockNum == pane.getComponentCount()) {
-                int model = Integer.valueOf(XiaoGuoDengModel.model) - 1;
-                int grpN = Integer.valueOf(pane.getName()).intValue() - 1;
-                int blkN = Integer.valueOf(blockNum).intValue() - 1;
-//				Data.XiaoGuoDengObjects[model][grpN][blkN] = null;
                 pane.remove(blockNum - 1);
                 pane.repaint();
             } else {

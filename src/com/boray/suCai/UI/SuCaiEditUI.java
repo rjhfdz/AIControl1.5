@@ -43,7 +43,7 @@ public class SuCaiEditUI {
     boolean[][] bn2 = null;
     private HashMap hashMap = null;
     private int tt;//通道数
-    String preSelect = "0";
+    private String preSelect = "0";
 
     //////预览使用的参数
     private int channelCount = 0;//通道数量
@@ -63,6 +63,12 @@ public class SuCaiEditUI {
 
     private String typeString = "";
 
+    /**
+     * 素材编辑界面展示
+     * @param suCaiName 素材名称
+     * @param suCaiNum  素材下标
+     * @param dengZuNum 灯组下标
+     */
     public void show(String suCaiName, int suCaiNum, int dengZuNum) {
         dialog = new IconJDialog();
         JFrame f = (JFrame) MainUi.map.get("frame");
